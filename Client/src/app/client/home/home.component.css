@@ -1,20 +1,30 @@
 .header {
-    height: 6vh;
+  height: 8vh;
 }
 
-.header, .menu {
-    display: flex;
-    align-items: center;
+.header,
+.menu {
+  display: flex;
+  align-items: center;
 }
 
 .menu {
-    flex-direction: row-reverse;
-    cursor: pointer;
+  flex-direction: row-reverse;
+  cursor: pointer;
 }
 
 .logo {
-    font-family: Raleway;
-    font-weight: 600;
-    font-size: 1.5rem;
-    letter-spacing: 0.2rem;
+  font-family: Raleway;
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: 0.2rem;
+}
+
+.item {
+  font-weight: 600;
+}
+
+.item:hover {
+  background-color: cornflowerblue;
+  cursor: pointer;
 }
