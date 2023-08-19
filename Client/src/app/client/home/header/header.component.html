@@ -1,0 +1,26 @@
+<div class="header border-bottom">
+    <div class="row w-100 m-0">
+        <div class="logo col-4 p-0 ps-3">MARKI</div>
+        <div class="menu col-8 pe-4">
+            <span class="fa fa-solid fa-bars" (click)="menuOpen = !menuOpen"></span>
+            <span class="fa fa-solid fa-user me-3"></span>
+            <span class="fa fa-solid fa-cart-plus me-3"></span>
+        </div>
+    </div>
+    <div *ngIf="menuOpen" class="menu-items w-100 border-bottom">
+        <div class="item ps-3 pt-3 pb-3 border-bottom text-center">Hàng mới về</div>
+        <div class="item ps-3 pt-3 pb-3 border-bottom text-center">
+            Áo
+        </div>
+        <div class="item ps-3 pt-3 pb-3 border-bottom text-center">
+            Quần
+        </div>
+        <div class="item ps-3 pt-3 pb-3 border-bottom text-center">
+            Váy
+        </div>
+        <div class="item ps-3 pt-3 pb-3 border-bottom text-center">
+            Phụ kiện
+        </div>
+        <div class="item ps-3 pt-3 pb-3 text-center">About us</div>
+    </div>
+</div>

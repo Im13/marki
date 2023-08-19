@@ -1,0 +1,43 @@
+.header {
+    height: 8vh;
+    position: fixed;
+    width: 100%;
+    background-color: white;
+}
+
+.header,
+.menu {
+    display: flex;
+    align-items: center;
+}
+
+.menu {
+    flex-direction: row-reverse;
+    cursor: pointer;
+}
+
+.logo {
+    font-family: Raleway;
+    font-weight: 600;
+    font-size: 1.5rem;
+    letter-spacing: 0.2rem;
+}
+
+.menu-items {
+    position: absolute;
+    top: 8vh;
+    z-index: 100;
+    background-color: white;
+    transition: 1s;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, .1);
+}
+
+.item {
+    font-weight: 600;
+    font-size: .8rem;
+}
+
+.item:hover {
+    background-color:#e8e8ea;
+    cursor: pointer;
+}

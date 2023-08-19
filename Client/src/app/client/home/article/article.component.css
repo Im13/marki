@@ -1,0 +1,23 @@
+.article {
+    position: absolute;
+    top: 8vh;
+    z-index: -1;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.explore-btn {
+    background-color: #212529;
+    color: #FFFFFF;
+    font-size: .8rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 3px;
+}
+
+.even-section {
+    background-color: #e8e8ea;
+}
