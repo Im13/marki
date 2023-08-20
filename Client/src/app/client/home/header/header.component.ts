@@ -16,6 +16,14 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  openMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  clickUser() {
+
+  }
+
   // Remove menu items when click outside
   onClick(event) {
     if(!this._eref.nativeElement.contains(event.target)) {
