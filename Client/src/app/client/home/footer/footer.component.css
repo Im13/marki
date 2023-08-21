@@ -4,7 +4,7 @@
 }
 
 .title, .desc, .connect-text {
-  font-family: Raleway;
+  font-family: 'Raleway', sans-serif;
 }
 
 .title, .connect-text {
@@ -39,7 +39,7 @@
 .accordion {
 	--bs-accordion-bg: #000000;
   --bs-accordion-border-color: #000000;
-  font-family: Raleway;
+  font-family: 'Raleway', sans-serif;
 }
 
 .accordion-button {
