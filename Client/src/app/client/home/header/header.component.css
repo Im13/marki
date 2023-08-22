@@ -6,12 +6,59 @@
 }
 
 .header,
-.menu {
+.menu-collapse {
     display: flex;
     align-items: center;
 }
 
-.menu {
+@media screen and (min-width: 768px) {
+  .header {
+    width: 100%;
+    padding: 0 var(--fs-container-margin);
+  }
+
+  .menu-collapse {
+    display: none;
+  }
+
+  .menu, .fs-menu-items {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .menu {
+    align-items: center;
+  }
+
+  .fs-menu-items {
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  .fs-item {
+    list-style-type: none;
+  }
+
+  .fs-item>a {
+    text-decoration: none;
+    color: #292a2c;
+    font-weight: 500;
+    font-size: 1rem;
+  }
+
+  .fs-item>a:hover {
+    text-decoration: underline;
+    text-underline-offset: .5rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .menu {
+    display: none;
+  }
+}
+
+.menu-collapse {
     flex-direction: row-reverse;
     cursor: pointer;
 }
@@ -41,3 +88,30 @@
     background-color:#e8e8ea;
     cursor: pointer;
 }
+
+/* Setup if using bootstrap navbar */
+
+/* .navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.container-fluid {
+  background-color: white;
+}
+
+.navbar-brand {
+  font-family: 'Raleway', sans-serif;
+  letter-spacing: 0.2rem;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.navbar-toggler {
+  border: none;
+}
+
+.navbar-toggle:focusr {
+  box-shadow: none;
+} */

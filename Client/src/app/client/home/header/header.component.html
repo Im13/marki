@@ -1,10 +1,19 @@
 <div class="header border-bottom">
   <div class="row w-100 m-0">
     <div class="logo col-4 p-0 ps-3">MARKI</div>
-    <div class="menu col-8 pe-4">
-      <span class="fa fa-solid fa-bars border" (click)="openMenu()"></span>
+    <div class="menu-collapse col-8 pe-4">
+      <span class="fa fa-solid fa-bars" (click)="openMenu()"></span>
       <span class="fa fa-solid fa-user me-3" (click)="clickUser()"></span>
       <span class="fa fa-solid fa-cart-plus me-3"></span>
+    </div>
+    <div class="menu col-8">
+      <ul class="fs-menu-items m-0 w-100">
+        <li class="fs-item me-5"><a href="#">Hàng mới về</a></li>
+        <li class="fs-item me-5"><a href="#">Áo</a></li>
+        <li class="fs-item me-5"><a href="#">Quần</a></li>
+        <li class="fs-item me-5"><a href="#">Váy</a></li>
+        <li class="fs-item"><a href="#">About us</a></li>
+      </ul>
     </div>
   </div>
   <div *ngIf="menuOpen" class="menu-items w-100 border-bottom">
