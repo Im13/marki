@@ -5,6 +5,7 @@ import { ClientRoutingModule } from './client-routing.module';
 import { HeaderComponent } from './home/header/header.component';
 import { ArticleComponent } from './home/article/article.component';
 import { FooterComponent } from './home/footer/footer.component';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { FooterComponent } from './home/footer/footer.component';
   ],
   imports: [
     CommonModule,
-    ClientRoutingModule
+    ClientRoutingModule,
+    CarouselModule.forRoot()
   ]
 })
 export class ClientModule { }

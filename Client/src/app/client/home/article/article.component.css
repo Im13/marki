@@ -1,7 +1,6 @@
 .article {
-  position: absolute;
-  top: 7vh;
-  z-index: -1;
+  z-index: 1;
+  position: relative;
 }
 
 .section-title {
@@ -22,20 +21,131 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem 0;
-  height: 100%;
+  gap: 0.1rem 0;
+  height: 92vh;
 }
 
-@media screen and (min-width: 768px) {
+.section-img-only {
+  min-height: 90vh;
+  display: flex;
+}
+
+.section-img-btn {
+  bottom: 3rem;
+  background-color: var(--white-button-color);
+  color: var(--black-button-color);
+  font-size: .95rem;
+}
+
+.section-img-text, .section-img-btn {
+  position: absolute;
+  right: 0;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-img-text {
+  bottom: 7.2rem;
+  color: var(--white-button-color);
+  font-size: 2rem;
+  letter-spacing: .15rem;
+  font-weight: 300;
+}
+
+@media screen and (min-width: 1025px) {
   .article {
+    min-height: 92vh;
+    top: 8vh;
+  }
+
+  .section-start, .section-collections {
     padding: 0 var(--fs-container-margin);
   }
 
-  .mb-image {
+  .section-start, .section-img-only {
+    margin-bottom: 8rem;
+  }
+
+  .section-img,
+  .section-title {
+    margin-bottom: 1rem;
+  }
+
+  #mb-section-start-carousel {
     display: none;
   }
 
-  .fs-image {
+  .collections {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .collection-item {
+    max-width: 32%;
+  }
+
+  .section-img-only {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+  
+  .first-img,
+  .second-img {
+    width: 49%;
+    position: relative;
+  }
+
+  .section-img-btn {
+    width: 13rem;
+    padding: 1rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .article {
+    min-height: 90vh;
+    top: 10vh;
+  }
+
+  #fs-section-start-carousel {
+    display: none;
+  }
+
+  .section-start {
+    min-height: 92vh;
+    padding-top: 3rem;
+  }
+
+  .section-title {
+    padding-top: 4rem;
+  }
+
+  .section-start-explore-btn {
+    margin-top: 1rem;
+  }
+
+  .section-img-only {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem 0;
+  }
+
+  .first-img,
+  .second-img {
     width: 100%;
+    position: relative;
+  }
+
+  .section-start {
+    margin-bottom: 30px;
+  }
+
+  .section-img-btn {
+    width: 12rem;
+    padding: .6rem;
   }
 }

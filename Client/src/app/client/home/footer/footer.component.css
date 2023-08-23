@@ -72,3 +72,9 @@
 .social-icon {
   color: white;
 }
+
+@media screen and (min-width: 1025px) {
+  .footer {
+    padding: 0 var(--fs-container-margin);
+  }
+}

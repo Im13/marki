@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
-  --fs-container-margin: 66px;
+  --fs-container-margin: 200px;
+  --black-button-color: #212529;
+  --secondary-black-button-color: #363333;
+  --white-button-color: #ffffff;
 }
