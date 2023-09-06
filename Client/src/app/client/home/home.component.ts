@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,8 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   menuOpen = false;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.http.get('https://localhost:5001/api/products?sort=priceAsc').subscribe({
+      next: val => console.log(val),
+      error: err => console.log(err)
+    });
   }
 }

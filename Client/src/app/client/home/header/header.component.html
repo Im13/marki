@@ -1,26 +1,17 @@
-<div class="header border-bottom">
-  <div class="row w-100 m-0">
-    <div class="logo col-4 p-0 ps-3">MARKI</div>
-    <div class="menu-collapse col-8 pe-4">
-      <span class="fa fa-solid fa-bars" (click)="openMenu()"></span>
-      <span class="fa fa-solid fa-user me-3" (click)="clickUser()"></span>
-      <span class="fa fa-solid fa-cart-plus me-3"></span>
-    </div>
-    <div class="menu col-8">
-      <ul class="fs-menu-items m-0 w-100">
-        <li class="fs-item me-5"><a href="#">Hàng mới về</a></li>
-        <li class="fs-item me-5"><a href="#">Áo</a></li>
-        <li class="fs-item me-5"><a href="#">Quần</a></li>
-        <li class="fs-item me-5"><a href="#">Váy</a></li>
-        <li class="fs-item"><a href="#">Liên hệ</a></li>
-      </ul>
-    </div>
+<header class="header d-flex flex-row align-items-center justify-content-between py-2 mb-3 bg-white border-bottom fixed-top shadow-sm">
+  <div class="logo">MARKI</div>
+  <nav class="my-2">
+    <a href="#" class="p-4 text-dark text-decoration-none">Features</a>
+    <a href="#" class="p-4 text-dark text-decoration-none">Enterprise</a>
+    <a href="#" class="p-4 text-dark text-decoration-none">Support</a>
+    <a href="#" class="p-4 text-dark text-decoration-none">Pricing</a>
+  </nav>
+  <div class="d-flex align-items-center">
+    <a class="position-relative">
+      <i class="fa fa-shopping-cart fa-lg me-5 text-dark"></i>
+      <div class="cart-no">15</div>
+    </a>
+    <a href="" class="btn btn-sm btn-outline-secondary me-2">Login</a>
+    <a href="" class="btn btn-sm btn-outline-secondary me-2">Sign Up</a>
   </div>
-  <div *ngIf="menuOpen" class="menu-items w-100 border-bottom">
-    <div class="item ps-3 pt-3 pb-3 border-bottom text-center">Hàng mới về</div>
-    <div class="item ps-3 pt-3 pb-3 border-bottom text-center">Áo</div>
-    <div class="item ps-3 pt-3 pb-3 border-bottom text-center">Quần</div>
-    <div class="item ps-3 pt-3 pb-3 border-bottom text-center">Váy</div>
-    <div class="item ps-3 pt-3 pb-3 text-center">Liên hệ</div>
-  </div>
-</div>
+</header>

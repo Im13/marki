@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+@import "../node_modules/ngx-bootstrap/datepicker/bs-datepicker.scss";
+
 :root {
-  --fs-container-margin: 200px;
+  --fs-container-margin: 150px;
   --black-button-color: #212529;
   --secondary-black-button-color: #363333;
   --white-button-color: #ffffff;

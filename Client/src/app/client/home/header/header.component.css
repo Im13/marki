@@ -1,4 +1,31 @@
-.header {
+.logo {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+  font-size: 2rem;
+  letter-spacing: 0.2rem;
+}
+
+.cart-no {
+  position: absolute;
+  min-width: 25px;
+  min-height: 25px;
+  line-height: 25px;
+  font-size: 12px;
+  background: black;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  top: -12px;
+  right: 32px;
+}
+
+@media screen and (min-width: 1025px) {
+  header {
+    padding: 0 var(--fs-container-margin);
+  }
+}
+
+/* .header {
     min-height: 8vh;
     width: 100%;
     background-color: white;
@@ -17,12 +44,6 @@
   cursor: pointer;
 }
 
-.logo {
-  font-family: 'Raleway', sans-serif;
-  font-weight: 600;
-  font-size: 1.5rem;
-  letter-spacing: 0.2rem;
-}
 
 .menu-items {
   position: absolute;
