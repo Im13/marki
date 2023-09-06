@@ -1,23 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ShopComponent } from './shop.component';
 import { HomeComponent } from './home/home.component';
-import { ClientRoutingModule } from './client-routing.module';
-import { HeaderComponent } from './home/header/header.component';
 import { ArticleComponent } from './home/article/article.component';
 import { FooterComponent } from './home/footer/footer.component';
-import { CarouselModule } from 'ngx-bootstrap/carousel';
+
+
 
 @NgModule({
   declarations: [
-    HomeComponent,
-    HeaderComponent,
+    ShopComponent,
     ArticleComponent,
-    FooterComponent
+    FooterComponent,
+    HomeComponent
   ],
   imports: [
-    CommonModule,
-    ClientRoutingModule,
-    CarouselModule.forRoot()
+    CommonModule
+  ],
+  exports: [
+    ShopComponent,
+    HomeComponent
   ]
 })
-export class ClientModule { }
+export class ShopModule { }

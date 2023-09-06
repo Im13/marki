@@ -1,0 +1,26 @@
+.logo {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+  font-size: 2rem;
+  letter-spacing: 0.2rem;
+}
+
+.cart-no {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  font-size: 11px;
+  background: black;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  top: -10px;
+  right: 13px;
+}
+
+@media screen and (min-width: 1025px) {
+  header {
+    padding: 0 var(--fs-container-margin);
+  }
+}
