@@ -1,3 +1,5 @@
+
+
 .logo {
   font-family: 'Raleway', sans-serif;
   font-weight: 500;
@@ -19,8 +21,20 @@
   right: 13px;
 }
 
+.my-2>a:hover {
+  text-decoration: underline !important;
+  text-underline-offset: .5rem;
+}
+
 @media screen and (min-width: 1025px) {
   header {
     padding: 0 var(--fs-container-margin);
+    height: 8vh;
+  }
+}
+
+@media screen and (max-width: 1025px) {
+  header {
+    height: 10vh;
   }
 }

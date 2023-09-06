@@ -7,7 +7,7 @@ import { Pagination } from '../shared/models/pagination';
   providedIn: 'root'
 })
 export class ShopService {
-  baseUrl = 'https://localhost:5001/'
+  baseUrl = 'https://localhost:5001/api/'
 
   constructor(private http: HttpClient) { }
 

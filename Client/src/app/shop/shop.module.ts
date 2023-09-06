@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShopComponent } from './shop.component';
-import { HomeComponent } from './home/home.component';
-import { ArticleComponent } from './home/article/article.component';
-import { FooterComponent } from './home/footer/footer.component';
+import { ArticleComponent } from './article/article.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -11,15 +10,13 @@ import { FooterComponent } from './home/footer/footer.component';
   declarations: [
     ShopComponent,
     ArticleComponent,
-    FooterComponent,
-    HomeComponent
+    FooterComponent
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    ShopComponent,
-    HomeComponent
+    ShopComponent
   ]
 })
 export class ShopModule { }

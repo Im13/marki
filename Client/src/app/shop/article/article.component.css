@@ -22,7 +22,7 @@
   flex-direction: column;
   align-items: center;
   gap: 0.1rem 0;
-  height: 92vh;
+  height: 94vh;
 }
 
 .section-img-only {
@@ -55,8 +55,11 @@
 
 @media screen and (min-width: 1025px) {
   .article {
-    min-height: 92vh;
     top: 8vh;
+  }
+
+  .section-start {
+    height: 92vh;
   }
 
   .section-start, .section-collections {
@@ -69,7 +72,7 @@
 
   .section-img,
   .section-title {
-    margin-bottom: 1rem;
+    margin-bottom: .5rem;
   }
 
   #mb-section-start-carousel {
@@ -106,7 +109,6 @@
 
 @media screen and (max-width: 1024px) {
   .article {
-    min-height: 90vh;
     top: 10vh;
   }
 
@@ -115,8 +117,7 @@
   }
 
   .section-start {
-    min-height: 92vh;
-    padding-top: 3rem;
+    height: 90vh;
   }
 
   .section-title {
