@@ -10,7 +10,7 @@ const routes: Routes = [
   {
     // path: '',
     // loadChildren: () => import('src/app/client/client.module').then(m => m.ClientModule)
-    path: '', component: AppComponent
+    path: '', component: ShopComponent
   },
   { path: 'shop', component: ShopComponent },
   { path: 'test-error', component: TestErrorComponent },
