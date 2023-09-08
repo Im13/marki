@@ -1,10 +1,9 @@
-
-
-.logo {
+.logo>a {
   font-family: 'Raleway', sans-serif;
   font-weight: 500;
   font-size: 2rem;
   letter-spacing: 0.2rem;
+  color: var(--black-button-color);
 }
 
 .cart-no {
@@ -30,6 +29,11 @@
   header {
     padding: 0 var(--fs-container-margin);
     height: 8vh;
+  }
+
+  .active {
+    text-decoration: underline !important;
+    text-underline-offset: .5rem;
   }
 }
 
