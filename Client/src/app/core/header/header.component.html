@@ -1,19 +1,19 @@
-<header class="header d-flex flex-row align-items-center justify-content-between py-2 mb-3 bg-white border-bottom fixed-top shadow-sm">
-  <div class="logo"><a class="text-decoration-none" routerLink="/shop">MARKI</a></div>
-  <nav class="my-2">
-    <a class="p-4 text-dark text-decoration-none">Tất cả</a>
-    <a class="p-4 text-dark text-decoration-none">Hàng mới về</a>
-    <a class="p-4 text-dark text-decoration-none">Áo</a>
-    <a class="p-4 text-dark text-decoration-none">Quần</a>
-    <a class="p-4 text-dark text-decoration-none">Váy</a>
-    <a class="p-4 text-dark text-decoration-none" routerLink="/test-error" routerLinkActive="active" >Test Error</a>
+<header class="header mb-3 bg-white border-bottom fixed-top shadow-sm">
+  <div class="menu-icon d-flex align-items-center ps-3" (click)="openMenu()"><i class="fa fa-bars fa-lg"></i></div>
+  <div class="logo"><a class="text-decoration-none" routerLink="/">MARKI</a></div>
+  <nav class="my-2" [ngClass]="{'show-menu': menuOpen}">
+    <a class="text-dark text-decoration-none">Tất cả</a>
+    <a class="text-dark text-decoration-none">Hàng mới về</a>
+    <a class="text-dark text-decoration-none">Áo</a>
+    <a class="text-dark text-decoration-none">Quần</a>
+    <a class="text-dark text-decoration-none">Váy</a>
   </nav>
-  <div class="d-flex align-items-center">
-    <a routerLink="/basket" class="position-relative me-2">
+  <div class="d-flex align-items-center usr-action">
+    <a routerLink="/basket" class="position-relative">
       <i class="fa fa-shopping-cart fa-lg me-4 text-dark"></i>
       <div class="cart-no">15</div>
     </a>
-    <a href="" class="btn btn-sm btn-outline-dark me-3">Đăng nhập</a>
-    <a href="" class="btn btn-sm btn-outline-dark me-2">Đăng ký</a>
+    <a href="" class="btn btn-sm btn-outline-dark btn-sign-in">Đăng nhập / Đăng ký</a>
+    <i class="fa fa-user fa-lg pe-3"></i>
   </div>
 </header>
