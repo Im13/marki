@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { TestErrorComponent } from './core/test-error/test-error.component';
-import { ShopComponent } from './shop/shop.component';
+import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { ServerErrorComponent } from './core/server-error/server-error.component';
 
@@ -10,9 +9,10 @@ const routes: Routes = [
   {
     // path: '',
     // loadChildren: () => import('src/app/client/client.module').then(m => m.ClientModule)
-    path: '', component: ShopComponent
+    path: '', component: HomeComponent
   },
-  { path: 'shop', component: ShopComponent },
+  { path: 'shop', loadChildren: () => import('./home/home.module').then(m => m.ShopModule) },
+  { path: 'basket', loadChildren: () => import('./basket/basket.module').then(m => m.BasketModule) },
   { path: 'test-error', component: TestErrorComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: 'server-error', component: ServerErrorComponent },

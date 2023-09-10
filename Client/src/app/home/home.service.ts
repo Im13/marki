@@ -6,7 +6,7 @@ import { Pagination } from '../shared/models/pagination';
 @Injectable({
   providedIn: 'root'
 })
-export class ShopService {
+export class HomeService {
   baseUrl = 'https://localhost:5001/api/'
 
   constructor(private http: HttpClient) { }

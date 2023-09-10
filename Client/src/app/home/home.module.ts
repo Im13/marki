@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ShopComponent } from './shop.component';
 import { ArticleComponent } from './article/article.component';
 import { FooterComponent } from './footer/footer.component';
+import { HomeComponent } from './home.component';
 
 
 
 @NgModule({
   declarations: [
-    ShopComponent,
+    HomeComponent,
     ArticleComponent,
     FooterComponent
   ],
@@ -16,7 +16,7 @@ import { FooterComponent } from './footer/footer.component';
     CommonModule
   ],
   exports: [
-    ShopComponent
+    HomeComponent
   ]
 })
 export class ShopModule { }
