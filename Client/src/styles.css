@@ -7,3 +7,32 @@
   --secondary-black-button-color: #363333;
   --white-button-color: #ffffff;
 }
+
+/* CSS for carousel next and prev buttons */
+.swiper-button-next, .swiper-button-prev {
+  color: white !important;
+  background: black !important;
+  border-radius: 100% !important;
+  opacity: 50% !important;
+}
+
+.swiper-button-disabled {
+  background-color: #f1f1f1 !important;
+  color: rgb(167, 168, 167) !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: var(--black-button-color) !important;
+}
+
+@media screen and (max-width: 768px) {
+  .swiper-button-prev, .swiper-button-next {
+    width: 30px !important;
+    height: 30px !important;
+    top: 40% !important;
+  }
+  
+  .swiper-button-prev::after, .swiper-button-next::after {
+    font-size: 12px !important;
+  }
+}

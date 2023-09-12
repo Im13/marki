@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ArticleComponent } from './article/article.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home.component';
+import { SwiperModule } from 'swiper/angular';
 
 
 
@@ -13,7 +14,8 @@ import { HomeComponent } from './home.component';
     FooterComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SwiperModule
   ],
   exports: [
     HomeComponent
