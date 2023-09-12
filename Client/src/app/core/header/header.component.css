@@ -26,6 +26,7 @@
 
   .my-2>a {
     padding-right: 30px;
+    border-bottom: 0px !important;
   }
   .my-2>a:last-child {
     padding-right: 0px;
@@ -70,19 +71,20 @@
   }
 
   .my-2 {
+    z-index: -1 !important; 
     position: fixed;
     top: -100%;
     display: flex;
     flex-direction: column;
     margin-top: 0px !important;
     width: 100%;
-    transition: .2s;
+    transition: .3s;
     background-color: var(--white-button-color);
   }
 
   .my-2 > a {
     width: 100%;
-    padding: .9rem !important;
+    padding: 1rem !important;
     text-align: center;
   }
 

@@ -53,6 +53,10 @@
   font-weight: 300;
 }
 
+.category-section {
+  background-color: #F1F1F1;
+}
+
 @media screen and (min-width: 1025px) {
   .article {
     top: 8vh;
@@ -107,7 +111,7 @@
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 768px) {
   .article {
     top: 10vh;
   }
@@ -148,5 +152,30 @@
   .section-img-btn {
     width: 12rem;
     padding: .6rem;
+  }
+
+  .sci-card {
+    height: 21rem;
+    position: relative;
+  }
+
+  .sci-card-text {
+    font-size: .85rem;
+    height: 2.4rem;
+  }
+
+  .sci-card-price {
+    font-size: .9rem;
+    font-weight: 700;
+  }
+
+  .btn-atc {
+    position: absolute;
+    top: 12rem;
+    right: .5rem;
+    width: 1.8rem;
+    height: 1.8rem;
+    background-color: var(--white-button-color);
+    border-radius: 50%;
   }
 }
