@@ -71,7 +71,6 @@
     </div>
   </div>
 
-  <!-- NEED UPDATE -->
   <div class="special-category">
     <div class="special-category-button d-flex flex-row justify-content-end mb-3 pe-2">
       <button class="btn btn-light me-1">New Arrivals</button>
@@ -81,103 +80,12 @@
 
     <div class="special-category-items">
       <div class="row m-0">
-        <div class="col-6 p-2">
+        <div *ngFor="let product of products" class="col-6 p-2">
           <div class="card sci-card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
+            <img [src]="product.pictureUrl" class="card-img-top" alt="sss">
             <div class="card-body">
-              <p class="sci-card-text m-0 mb-2">Túi đeo chéo ICONDENIM Box Crossbody Bag</p>
-              <p class="sci-card-price">500,000<u>đ</u></p>
-            </div>
-            <div class="btn-atc d-flex align-items-center justify-content-center">
-              <i class="fa fa-shopping-cart"></i>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-6 p-2">
-          <div class="card sci-card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
-            <div class="card-body">
-              <p class="sci-card-text m-0 mb-2">Túi đeo chéo ICONDENIM Box Crossbody Bag</p>
-              <p class="sci-card-price">500,000<u>đ</u></p>
-            </div>
-            <div class="btn-atc d-flex align-items-center justify-content-center">
-              <i class="fa fa-shopping-cart"></i>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-6 p-2">
-          <div class="card sci-card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
-            <div class="card-body">
-              <p class="sci-card-text m-0 mb-2">Túi đeo chéo ICONDENIM Box Crossbody Bag</p>
-              <p class="sci-card-price">500,000<u>đ</u></p>
-            </div>
-            <div class="btn-atc d-flex align-items-center justify-content-center">
-              <i class="fa fa-shopping-cart"></i>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-6 p-2">
-          <div class="card sci-card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
-            <div class="card-body">
-              <p class="sci-card-text m-0 mb-2">Túi đeo chéo ICONDENIM Box Crossbody Bag</p>
-              <p class="sci-card-price">500,000<u>đ</u></p>
-            </div>
-            <div class="btn-atc d-flex align-items-center justify-content-center">
-              <i class="fa fa-shopping-cart"></i>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-6 p-2">
-          <div class="card sci-card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
-            <div class="card-body">
-              <p class="sci-card-text m-0 mb-2">Túi đeo chéo ICONDENIM Box Crossbody Bag</p>
-              <p class="sci-card-price">500,000<u>đ</u></p>
-            </div>
-            <div class="btn-atc d-flex align-items-center justify-content-center">
-              <i class="fa fa-shopping-cart"></i>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-6 p-2">
-          <div class="card sci-card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
-            <div class="card-body">
-              <p class="sci-card-text m-0 mb-2">Túi đeo chéo ICONDENIM Box Crossbody Bag</p>
-              <p class="sci-card-price">500,000<u>đ</u></p>
-            </div>
-            <div class="btn-atc d-flex align-items-center justify-content-center">
-              <i class="fa fa-shopping-cart"></i>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-6 p-2">
-          <div class="card sci-card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
-            <div class="card-body">
-              <p class="sci-card-text m-0 mb-2">Túi đeo chéo ICONDENIM Box Crossbody Bag</p>
-              <p class="sci-card-price">500,000<u>đ</u></p>
-            </div>
-            <div class="btn-atc d-flex align-items-center justify-content-center">
-              <i class="fa fa-shopping-cart"></i>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-6 p-2">
-          <div class="card sci-card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
-            <div class="card-body">
-              <p class="sci-card-text m-0 mb-2">Túi đeo chéo </p>
-              <p class="sci-card-price">500,000<u>đ</u></p>
+              <p class="sci-card-text m-0 mb-2">{{ product.name }}</p>
+              <p class="sci-card-price">{{ product.price | number }}<u>đ</u></p>
             </div>
             <div class="btn-atc d-flex align-items-center justify-content-center">
               <i class="fa fa-shopping-cart"></i>
@@ -191,7 +99,6 @@
       </div>
     </div>
   </div>
-  <!-- NEED UPDATE -->
 
   <div class="category-section my-4 p-3 rounded mx-2">
     <div class="section-header border-start d-flex justify-content-between align-items-center mb-3 mt-1">
@@ -204,92 +111,14 @@
 
     <div class="section-body">
       <swiper class="pb-5" [slidesPerView]="2" [spaceBetween]="10" [navigation]="true" [pagination]="{ clickable: true }">
-        <ng-template swiperSlide>
+        <ng-template *ngFor="let product of products" swiperSlide>
           <div class="card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
+            <img [src]="product.pictureUrl" class="card-img-top" alt="sss">
             <div class="card-body">
-              <p class="carousel-card-text m-0 mb-2">Túi đeo chéo hiệu gì đó đéo biết được</p>
-              <p class="carousel-card-price m-0 pt-2">500,000<u>đ</u></p>
+              <p class="carousel-card-text m-0 mb-2">{{ product.name }}</p>
+              <p class="carousel-card-price m-0 pt-2">{{ product.price | number }}<u>đ</u></p>
             </div>
             <div class="carousel-atc-btn d-flex align-items-center justify-content-center">
-              <i class="fa fa-shopping-cart"></i>
-            </div>
-          </div>
-        </ng-template>
-
-        <ng-template swiperSlide>
-          <div class="card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
-            <div class="card-body">
-              <p class="carousel-card-text m-0 mb-2">Túi đeo chéo </p>
-              <p class="carousel-card-price m-0 pt-2">500,000<u>đ</u></p>
-            </div>
-            <div class="carousel-atc-btn d-flex align-items-center justify-content-center">
-              <i class="fa fa-shopping-cart"></i>
-            </div>
-          </div>
-        </ng-template>
-
-        <ng-template swiperSlide>
-          <div class="card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
-            <div class="card-body">
-              <p class="carousel-card-text m-0 mb-2">Túi đeo chéo </p>
-              <p class="carousel-card-price m-0 pt-2">500,000<u>đ</u></p>
-            </div>
-            <div class="carousel-atc-btn d-flex align-items-center justify-content-center">
-              <i class="fa fa-shopping-cart"></i>
-            </div>
-          </div>
-        </ng-template>
-
-        <ng-template swiperSlide>
-          <div class="card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
-            <div class="card-body">
-              <p class="carousel-card-text m-0 mb-2">Túi đeo chéo </p>
-              <p class="carousel-card-price m-0">500,000<u>đ</u></p>
-            </div>
-            <div class="btn-atc d-flex align-items-center justify-content-center">
-              <i class="fa fa-shopping-cart"></i>
-            </div>
-          </div>
-        </ng-template>
-
-        <ng-template swiperSlide>
-          <div class="card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
-            <div class="card-body">
-              <p class="carousel-card-text m-0 mb-2">Túi đeo chéo </p>
-              <p class="carousel-card-price m-0">500,000<u>đ</u></p>
-            </div>
-            <div class="btn-atc d-flex align-items-center justify-content-center">
-              <i class="fa fa-shopping-cart"></i>
-            </div>
-          </div>
-        </ng-template>
-
-        <ng-template swiperSlide>
-          <div class="card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
-            <div class="card-body">
-              <p class="carousel-card-text m-0 mb-2">Túi đeo chéo </p>
-              <p class="carousel-card-price">500,000<u>đ</u></p>
-            </div>
-            <div class="btn-atc d-flex align-items-center justify-content-center">
-              <i class="fa fa-shopping-cart"></i>
-            </div>
-          </div>
-        </ng-template>
-
-        <ng-template swiperSlide>
-          <div class="card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
-            <div class="card-body">
-              <p class="carousel-card-text m-0 mb-2">Túi đeo chéo hiệu gì đó</p>
-              <p class="carousel-card-price">500,000<u>đ</u></p>
-            </div>
-            <div class="btn-atc d-flex align-items-center justify-content-center">
               <i class="fa fa-shopping-cart"></i>
             </div>
           </div>
@@ -309,92 +138,14 @@
 
     <div class="section-body">
       <swiper class="pb-5" [slidesPerView]="2" [spaceBetween]="10" [navigation]="true" [pagination]="{ clickable: true }">
-        <ng-template swiperSlide>
+        <ng-template *ngFor="let product of products" swiperSlide>
           <div class="card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
+            <img [src]="product.pictureUrl" class="card-img-top" alt="sss">
             <div class="card-body">
-              <p class="carousel-card-text m-0 mb-2">Túi đeo chéo hiệu gì đó đéo biết được</p>
-              <p class="carousel-card-price m-0 pt-2">500,000<u>đ</u></p>
+              <p class="carousel-card-text m-0 mb-2">{{ product.name }}</p>
+              <p class="carousel-card-price m-0 pt-2">{{ product.price | number }}<u>đ</u></p>
             </div>
             <div class="carousel-atc-btn d-flex align-items-center justify-content-center">
-              <i class="fa fa-shopping-cart"></i>
-            </div>
-          </div>
-        </ng-template>
-
-        <ng-template swiperSlide>
-          <div class="card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
-            <div class="card-body">
-              <p class="carousel-card-text m-0 mb-2">Túi đeo chéo </p>
-              <p class="carousel-card-price m-0 pt-2">500,000<u>đ</u></p>
-            </div>
-            <div class="carousel-atc-btn d-flex align-items-center justify-content-center">
-              <i class="fa fa-shopping-cart"></i>
-            </div>
-          </div>
-        </ng-template>
-
-        <ng-template swiperSlide>
-          <div class="card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
-            <div class="card-body">
-              <p class="carousel-card-text m-0 mb-2">Túi đeo chéo </p>
-              <p class="carousel-card-price m-0 pt-2">500,000<u>đ</u></p>
-            </div>
-            <div class="carousel-atc-btn d-flex align-items-center justify-content-center">
-              <i class="fa fa-shopping-cart"></i>
-            </div>
-          </div>
-        </ng-template>
-
-        <ng-template swiperSlide>
-          <div class="card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
-            <div class="card-body">
-              <p class="carousel-card-text m-0 mb-2">Túi đeo chéo </p>
-              <p class="carousel-card-price m-0">500,000<u>đ</u></p>
-            </div>
-            <div class="btn-atc d-flex align-items-center justify-content-center">
-              <i class="fa fa-shopping-cart"></i>
-            </div>
-          </div>
-        </ng-template>
-
-        <ng-template swiperSlide>
-          <div class="card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
-            <div class="card-body">
-              <p class="carousel-card-text m-0 mb-2">Túi đeo chéo </p>
-              <p class="carousel-card-price m-0">500,000<u>đ</u></p>
-            </div>
-            <div class="btn-atc d-flex align-items-center justify-content-center">
-              <i class="fa fa-shopping-cart"></i>
-            </div>
-          </div>
-        </ng-template>
-
-        <ng-template swiperSlide>
-          <div class="card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
-            <div class="card-body">
-              <p class="carousel-card-text m-0 mb-2">Túi đeo chéo </p>
-              <p class="carousel-card-price">500,000<u>đ</u></p>
-            </div>
-            <div class="btn-atc d-flex align-items-center justify-content-center">
-              <i class="fa fa-shopping-cart"></i>
-            </div>
-          </div>
-        </ng-template>
-
-        <ng-template swiperSlide>
-          <div class="card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
-            <div class="card-body">
-              <p class="carousel-card-text m-0 mb-2">Túi đeo chéo hiệu gì đó</p>
-              <p class="carousel-card-price">500,000<u>đ</u></p>
-            </div>
-            <div class="btn-atc d-flex align-items-center justify-content-center">
               <i class="fa fa-shopping-cart"></i>
             </div>
           </div>
@@ -414,92 +165,14 @@
 
     <div class="section-body">
       <swiper class="pb-5" [slidesPerView]="2" [spaceBetween]="10" [navigation]="true" [pagination]="{ clickable: true }">
-        <ng-template swiperSlide>
+        <ng-template *ngFor="let product of products" swiperSlide>
           <div class="card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
+            <img [src]="product.pictureUrl" class="card-img-top" alt="sss">
             <div class="card-body">
-              <p class="carousel-card-text m-0 mb-2">Túi đeo chéo hiệu gì đó đéo biết được</p>
-              <p class="carousel-card-price m-0 pt-2">500,000<u>đ</u></p>
+              <p class="carousel-card-text m-0 mb-2">{{ product.name }}</p>
+              <p class="carousel-card-price m-0 pt-2">{{ product.price | number }}<u>đ</u></p>
             </div>
             <div class="carousel-atc-btn d-flex align-items-center justify-content-center">
-              <i class="fa fa-shopping-cart"></i>
-            </div>
-          </div>
-        </ng-template>
-
-        <ng-template swiperSlide>
-          <div class="card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
-            <div class="card-body">
-              <p class="carousel-card-text m-0 mb-2">Túi đeo chéo </p>
-              <p class="carousel-card-price m-0 pt-2">500,000<u>đ</u></p>
-            </div>
-            <div class="carousel-atc-btn d-flex align-items-center justify-content-center">
-              <i class="fa fa-shopping-cart"></i>
-            </div>
-          </div>
-        </ng-template>
-
-        <ng-template swiperSlide>
-          <div class="card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
-            <div class="card-body">
-              <p class="carousel-card-text m-0 mb-2">Túi đeo chéo </p>
-              <p class="carousel-card-price m-0 pt-2">500,000<u>đ</u></p>
-            </div>
-            <div class="carousel-atc-btn d-flex align-items-center justify-content-center">
-              <i class="fa fa-shopping-cart"></i>
-            </div>
-          </div>
-        </ng-template>
-
-        <ng-template swiperSlide>
-          <div class="card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
-            <div class="card-body">
-              <p class="carousel-card-text m-0 mb-2">Túi đeo chéo </p>
-              <p class="carousel-card-price m-0">500,000<u>đ</u></p>
-            </div>
-            <div class="btn-atc d-flex align-items-center justify-content-center">
-              <i class="fa fa-shopping-cart"></i>
-            </div>
-          </div>
-        </ng-template>
-
-        <ng-template swiperSlide>
-          <div class="card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
-            <div class="card-body">
-              <p class="carousel-card-text m-0 mb-2">Túi đeo chéo </p>
-              <p class="carousel-card-price m-0">500,000<u>đ</u></p>
-            </div>
-            <div class="btn-atc d-flex align-items-center justify-content-center">
-              <i class="fa fa-shopping-cart"></i>
-            </div>
-          </div>
-        </ng-template>
-
-        <ng-template swiperSlide>
-          <div class="card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
-            <div class="card-body">
-              <p class="carousel-card-text m-0 mb-2">Túi đeo chéo </p>
-              <p class="carousel-card-price">500,000<u>đ</u></p>
-            </div>
-            <div class="btn-atc d-flex align-items-center justify-content-center">
-              <i class="fa fa-shopping-cart"></i>
-            </div>
-          </div>
-        </ng-template>
-
-        <ng-template swiperSlide>
-          <div class="card">
-            <img src="../../../assets/homeimg/IMG_2724.jpg" class="card-img-top" alt="sss">
-            <div class="card-body">
-              <p class="carousel-card-text m-0 mb-2">Túi đeo chéo hiệu gì đó</p>
-              <p class="carousel-card-price">500,000<u>đ</u></p>
-            </div>
-            <div class="btn-atc d-flex align-items-center justify-content-center">
               <i class="fa fa-shopping-cart"></i>
             </div>
           </div>

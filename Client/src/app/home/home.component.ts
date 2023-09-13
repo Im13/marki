@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.homeService.getProducts().subscribe({
-      next: response => console.log(response.data),
+      next: response => this.products.push(...response.data),
       error: err => console.log(err)
     });
   }
