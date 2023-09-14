@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { BasketService } from 'src/app/basket/basket.service';
 import { Product } from 'src/app/shared/models/product';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 
@@ -13,17 +14,12 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 export class ArticleComponent implements OnInit {
   @Input('all-products') products: Product[];
 
-  constructor() { }
+  constructor(private basketService: BasketService) { }
 
   ngOnInit(): void {
-    console.log(this.products);
   }
 
-  onSwiper([swiper]) {
-    console.log(swiper);
-  }
-  
-  onSlideChange() {
-    console.log('slide change');
+  addItemToBasket(product: Product) {
+    this.basketService.addItemToBasket(product);
   }
 }
