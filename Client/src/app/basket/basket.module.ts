@@ -11,7 +11,7 @@ import { BasketRoutingModule } from './basket-routing.module';
   ],
   imports: [
     CommonModule,
-    BasketRoutingModule
+    BasketRoutingModule,
   ]
 })
 export class BasketModule { }

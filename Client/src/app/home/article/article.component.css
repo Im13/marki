@@ -32,8 +32,8 @@
 
 .section-img-btn {
   bottom: 3rem;
-  background-color: var(--white-button-color);
-  color: var(--black-button-color);
+  background-color: var(--white-color);
+  color: var(--black-color);
   font-size: .95rem;
 }
 
@@ -48,14 +48,14 @@
 
 .section-img-text {
   bottom: 7.2rem;
-  color: var(--white-button-color);
+  color: var(--white-color);
   font-size: 2rem;
   letter-spacing: .15rem;
   font-weight: 300;
 }
 
 .category-section {
-  background-color: #F1F1F1;
+  background-color: var(--secondary-white-color);
 }
 
 @media screen and (min-width: 1025px) {
@@ -164,7 +164,7 @@
 
   .btn-atc, .carousel-atc-btn {
     position: absolute;
-    background-color: var(--white-button-color);
+    background-color: var(--white-color);
     border-radius: 50%;
     width: 1.8rem;
     right: .5rem;

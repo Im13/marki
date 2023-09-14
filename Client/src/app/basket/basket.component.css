@@ -1,3 +1,30 @@
-.container {
-    margin-top: 8vh;
+.cart, .order-total {
+    background-color: var(--white-color);
+}
+
+@media screen and (min-width: 768px) {
+    .container {
+        margin-top: 8vh;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        margin-top: 5vh;
+        background-color: var(--secondary-white-color);
+    }
+
+    textarea {
+        resize: none;
+    }
+
+    .item-info>img {
+        width: 5rem;
+        height: 5rem;
+    }
+
+    .info>p {
+        font-weight: 400;
+        font-size: .8rem;
+    }
 }

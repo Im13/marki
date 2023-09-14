@@ -3,7 +3,7 @@
   font-weight: 500;
   font-size: 2rem;
   letter-spacing: 0.2rem;
-  color: var(--black-button-color);
+  color: var(--black-color);
 }
 
 .cart-no {
@@ -79,7 +79,7 @@
     margin-top: 0px !important;
     width: 100%;
     transition: .3s;
-    background-color: var(--white-button-color);
+    background-color: var(--white-color);
   }
 
   .my-2 > a {

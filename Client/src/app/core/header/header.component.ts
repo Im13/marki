@@ -1,4 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
+import { BasketService } from 'src/app/basket/basket.service';
+import { BasketItem } from 'src/app/shared/models/basket';
 
 @Component({
   selector: 'app-header',
@@ -8,12 +10,13 @@ import { Component, ElementRef, OnInit } from '@angular/core';
     '(document:click)' : 'onClick($event)',
   }
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   menuOpen = false;
 
-  constructor(private _eref: ElementRef) { }
+  constructor(private _eref: ElementRef, public basketService: BasketService) { }
 
-  ngOnInit(): void {
+  getCount(items: BasketItem[]) {
+    return items.reduce((sum, item) => sum + item.quantity, 0);
   }
 
   openMenu() {

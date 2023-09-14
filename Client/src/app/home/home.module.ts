@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ArticleComponent } from './article/article.component';
-import { FooterComponent } from './footer/footer.component';
+import { FooterComponent } from '../core/footer/footer.component';
 import { HomeComponent } from './home.component';
 import { SwiperModule } from 'swiper/angular';
 
@@ -18,7 +18,8 @@ import { SwiperModule } from 'swiper/angular';
     SwiperModule
   ],
   exports: [
-    HomeComponent
+    HomeComponent,
+    FooterComponent
   ]
 })
 export class ShopModule { }
