@@ -27,4 +27,8 @@
         font-weight: 400;
         font-size: .8rem;
     }
+
+    u {
+        text-underline-offset: .3rem;
+    }
 }
