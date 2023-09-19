@@ -71,7 +71,7 @@
   }
 
   .my-2 {
-    z-index: -1 !important; 
+    z-index: -1 !important;
     position: fixed;
     top: -100%;
     display: flex;
@@ -125,5 +125,12 @@
     font-size: 10px;
     top: -6px;
     right: 13px;
+  }
+
+  .account-collapse {
+    position: absolute;
+    top: 5vh;
+    left: 0;
+    background-color: var(--secondary-white-color);
   }
 }
