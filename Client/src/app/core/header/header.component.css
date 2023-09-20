@@ -133,4 +133,12 @@
     left: 0;
     background-color: var(--secondary-white-color);
   }
+
+  .account-collapse>p {
+    font-size: .77rem;
+  }
+
+  .account-collapse>form>input {
+    font-size: .85rem;
+  }
 }
