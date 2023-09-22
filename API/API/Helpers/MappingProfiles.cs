@@ -1,7 +1,7 @@
 using API.DTOs;
 using AutoMapper;
 using Core.Entities;
-using Core.Entities.Entity;
+using Core.Entities.Identity;
 
 namespace API.Helpers
 {
