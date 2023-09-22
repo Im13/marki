@@ -20,6 +20,9 @@
             <div *ngIf="registerForm.get('email')?.errors?.['required']" class="mb-2 invalid-feedback">
                 Nhập email của bạn.
             </div>
+            <div *ngIf="registerForm.get('email')?.errors?.['emailExists']" class="mb-2 invalid-feedback">
+                Email đã được sử dụng!
+            </div>
         </div>
         <div class="form-group w-100 mb-3">
             <input 

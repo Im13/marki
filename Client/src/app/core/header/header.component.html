@@ -9,8 +9,8 @@
     <a class="text-dark text-decoration-none border-bottom">Váy</a>
   </nav>
   <div class="d-flex align-items-center usr-action">
-    <a class="position-relative">
-      <i routerLink="/basket" class="fa fa-shopping-cart fa-lg me-4 text-dark"></i>
+    <a routerLink="/basket" class="position-relative" style="cursor: pointer;">
+      <i class="fa fa-shopping-cart fa-lg me-4 text-dark"></i>
       <div *ngIf="(basketService.basketSource$ | async) as basket" class="cart-no">
         {{ getCount(basket.items) }}
       </div>
