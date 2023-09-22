@@ -1,6 +1,6 @@
 @media screen and (max-width: 768px) {
     .container {
-        margin-top: 5vh;
+        margin-top: var(--mobile-header-height);
         min-height: 40vh;
     }
 

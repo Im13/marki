@@ -1,0 +1,9 @@
+@media screen and (max-width: 768px) {
+    .login-container>p, .invalid-feedback {
+        font-size: .77rem;
+    }
+
+    .login-container>form>form-group>input, .is-invalid, .is-valid, .ng-dirty {
+        font-size: .85rem;
+    }
+}

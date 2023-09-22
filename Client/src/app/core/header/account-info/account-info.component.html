@@ -1,0 +1,10 @@
+<div *ngIf="accountService.currentUser$ | async as user" class="account-info-container d-flex flex-column align-items-center ">
+    <h6 class="mb-2">ĐĂNG NHẬP VÀ TÀI KHOẢN</h6>
+    <p class="mb-1">Tên: {{ user.displayName }}</p>
+    <p class="mb-3">Email: {{ user.email }}</p>
+
+    <div class="buttons w-100 d-flex flex-row align-items-center justify-content-between gap-2 mb-2 px-2">
+        <button class="btn btn-dark w-50 rounded-0">Xem chi tiết</button>
+        <button class="btn btn-dark w-50 rounded-0" (click)="logout()">Đăng xuất</button>
+    </div>
+</div>

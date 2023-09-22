@@ -1,0 +1,39 @@
+<div class="login-container d-flex flex-column align-items-center ">
+    <h6 class="mb-1">ĐĂNG NHẬP VÀ TÀI KHOẢN</h6>
+    <p class="mb-3">Nhập email và mật khẩu của bạn</p>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="w-100 px-3">
+        <div class="form-group">
+            <input 
+                [class.is-invalid]="loginForm.get('email')?.touched && loginForm.get('email')?.invalid"
+                type="text" 
+                formControlName="email" 
+                class="form-control mb-2" 
+                placeholder="Nhập email hoặc số điện thoại">
+            <div *ngIf="loginForm.get('email')?.errors?.['required']" class="mb-2 invalid-feedback">Please fill in your email</div>
+        </div>
+
+        <div class="form-group">
+            <input 
+                [class.is-invalid]="loginForm.get('password')?.touched && loginForm.get('password')?.invalid"
+                type="password" 
+                formControlName="password" 
+                class="form-control mb-2" 
+                placeholder="Mật khẩu">
+            <div *ngIf="loginForm.get('password')?.errors?.['required']" class="mb-2 invalid-feedback">Please fill in your password</div>
+        </div>
+        
+        <button class="btn btn-dark w-100 mb-2" type="submit">Đăng nhập</button>
+    </form>
+    <p class="m-1">
+        Khách hàng mới? 
+        <a class="text-decoration-none text-dark" routerLink="/account/register">
+            <b>Tạo tài khoản</b>
+        </a>
+    </p>
+    <p class="mt-1 mb-3">
+        Quên mật khẩu? 
+        <a class="text-decoration-none text-dark" href="#">
+            <b>Khôi phục mật khẩu</b>
+        </a>
+    </p>
+</div>

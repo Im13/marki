@@ -60,7 +60,7 @@
 
 @media screen and (min-width: 1025px) {
   .article {
-    top: 8vh;
+    top: var(--desktop-header-height);
   }
 
   .section-start {
@@ -116,7 +116,7 @@
 
 @media screen and (max-width: 768px) {
   .article {
-    top: 10vh;
+    top: var(--mobile-header-height);
   }
 
   #fs-section-start-carousel {
