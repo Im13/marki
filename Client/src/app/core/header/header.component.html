@@ -9,24 +9,17 @@
     <a class="text-dark text-decoration-none border-bottom">Váy</a>
   </nav>
   <div class="d-flex align-items-center usr-action">
-    <a class="position-relative">
-      <i routerLink="/basket" class="fa fa-shopping-cart fa-lg me-4 text-dark"></i>
+    <a routerLink="/basket" class="position-relative" style="cursor: pointer;">
+      <i class="fa fa-shopping-cart fa-lg me-4 text-dark"></i>
       <div *ngIf="(basketService.basketSource$ | async) as basket" class="cart-no">
         {{ getCount(basket.items) }}
       </div>
     </a>
     <a href="" class="btn btn-sm btn-outline-dark btn-sign-in">Đăng nhập / Đăng ký</a>
-    <i class="fa fa-user fa-lg pe-3"></i>
-    <div class="account-collapse border w-100 d-flex flex-column align-items-center pt-2">
-      <h6 class="mb-1">ĐĂNG NHẬP VÀ TÀI KHOẢN</h6>
-      <p class="mb-3">Nhập email và mật khẩu của bạn</p>
-      <form action="#" class="w-100 px-2">
-        <input type="text" class="form-control mb-1" placeholder="Nhập email hoặc số điện thoại">
-        <input type="password" class="form-control mb-2" placeholder="Mật khẩu">
-        <button class="btn btn-dark w-100 mb-2" type="button">Đăng nhập</button>
-      </form>
-      <p class="m-0">Khách hàng mới? Tạo tài khoản</p>
-      <p>Quên mật khẩu? Khôi phục mật khẩu</p>
+    <i class="fa fa-user fa-lg pe-3" style="cursor: pointer;" (click)="toggleAccountBtn()"></i>
+    <div *ngIf="accountFormOpen" class="account-collapse w-100 pt-3">
+      <app-login *ngIf="(accountService.currentUser$ | async) === null"></app-login>
+      <app-account-info *ngIf="accountService.currentUser$ | async"></app-account-info>
     </div>
   </div>
 </header>
