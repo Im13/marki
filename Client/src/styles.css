@@ -7,8 +7,8 @@
   --secondary-black-color: #363333;
   --white-color: #ffffff;
   --secondary-white-color: #F1F1F1;
-  --mobile-header-height: 8vh;
-  --non-mobile-header-height: 10vh;
+  --mobile-header-height: 5vh;
+  --desktop-header-height: 8vh;
 }
 
 /* CSS for carousel next and prev buttons */

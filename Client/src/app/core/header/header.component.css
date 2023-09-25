@@ -14,10 +14,10 @@
   text-align: center;
 }
 
-@media screen and (min-width: 768px) {
+@media (min-width: 768px) {
   header {
-    padding: 0px 10px;
-    height: var(--mobile-header-height);
+    padding: 0px  var(--fs-container-margin);
+    height: var(--desktop-header-height);
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -56,9 +56,8 @@
   }
 
   .account-collapse {
-    display: none;
     position: absolute;
-    top: var(--mobile-header-height);
+    top: var(--desktop-header-height);
     right: 10px;
     background-color: var(--white-color);
     width: 25rem !important;
@@ -67,7 +66,7 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   header {
     height: 5vh;
     display: flex;

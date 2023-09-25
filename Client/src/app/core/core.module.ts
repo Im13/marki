@@ -7,6 +7,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ServerErrorComponent } from './server-error/server-error.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BasketModule } from '../basket/basket.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './header/login/login.component';
+import { AccountInfoComponent } from './header/account-info/account-info.component';
 
 
 
@@ -15,7 +18,9 @@ import { BasketModule } from '../basket/basket.module';
     HeaderComponent,
     TestErrorComponent,
     NotFoundComponent,
-    ServerErrorComponent
+    ServerErrorComponent,
+    LoginComponent,
+    AccountInfoComponent
   ],
   imports: [
     CommonModule,
@@ -24,10 +29,12 @@ import { BasketModule } from '../basket/basket.module';
       positionClass: 'toast-bottom-right',
       preventDuplicates: true
     }),
-    BasketModule
+    BasketModule,
+    ReactiveFormsModule
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    ReactiveFormsModule
   ]
 })
 export class CoreModule { }
