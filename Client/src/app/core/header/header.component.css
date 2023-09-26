@@ -14,51 +14,75 @@
   text-align: center;
 }
 
-@media (min-width: 768px) {
-  header {
-    padding: 0px  var(--fs-container-margin);
-    height: var(--desktop-header-height);
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: space-between;
-  }
+/* CSS for desktop */
+header {
+  height: var(--desktop-header-height);
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
-  .my-2>a {
-    padding-right: 30px;
-    border-bottom: 0px !important;
-  }
-  .my-2>a:last-child {
-    padding-right: 0px;
+.my-2>a {
+  padding-right: 30px;
+  border-bottom: 0px !important;
+}
+.my-2>a:last-child {
+  padding-right: 0px;
+}
+
+.active {
+  text-decoration: underline !important;
+  text-underline-offset: .5rem;
+}
+
+.my-2>a:hover {
+  text-decoration: underline !important;
+  text-underline-offset: .5rem;
+}
+
+.cart-no {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  font-size: 11px;
+  top: -10px;
+  right: 13px;
+}
+
+@media (min-width: 1200px) {
+  header {
+    padding: 0px var(--fs-container-margin);
   }
 
   .menu-icon, .fa-user {
     display: none !important;
   }
 
-  .active {
-    text-decoration: underline !important;
-    text-underline-offset: .5rem;
+  .account-collapse {
+    position: absolute;
+    top: var(--desktop-header-height);
+    right: var(--fs-container-margin);
+    background-color: var(--white-color);
+    width: 25rem !important;
+    padding: 10px;
+    padding-top: 10px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+  header {
+    padding: 0px 40px;
   }
 
-  .my-2>a:hover {
-    text-decoration: underline !important;
-    text-underline-offset: .5rem;
-  }
-
-  .cart-no {
-    width: 20px;
-    height: 20px;
-    line-height: 20px;
-    font-size: 11px;
-    top: -10px;
-    right: 13px;
+  .menu-icon, .fa-user {
+    display: none !important;
   }
 
   .account-collapse {
     position: absolute;
     top: var(--desktop-header-height);
-    right: 10px;
+    right: 40px;
     background-color: var(--white-color);
     width: 25rem !important;
     padding: 10px;
