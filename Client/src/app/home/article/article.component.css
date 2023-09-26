@@ -58,6 +58,25 @@
   background-color: var(--secondary-white-color);
 }
 
+.sci-card-price, .carousel-card-price {
+  font-size: .9rem;
+  font-weight: 700;
+}
+
+.sci-card-img {
+  position: relative;
+}
+
+.btn-atc {
+  position: absolute;
+  bottom: 2%;
+  right: 5%;
+  font-size: 1.3rem;
+  background-color: var(--secondary-white-color);
+}
+/* END GENERAL CSS SETTTINGS */
+
+/* BEGIN SETTINGS FOR BIGGEST MONITOR SIZE */
 @media (min-width: 1400px) {
   .article {
     top: var(--desktop-header-height);
@@ -86,6 +105,10 @@
     display: none;
   }
 
+  .special-category {
+    padding: 0 var(--fs-container-margin);
+  }
+
   .collections {
     display: flex;
     flex-direction: row;
@@ -112,8 +135,14 @@
     width: 13rem;
     padding: 1rem;
   }
-}
 
+  .btn-atc {
+    padding: .5rem;
+  }
+}
+/* END SETTINGS FOR BIGGEST MONITOR SIZE */
+
+/* SETTINGS FOR IPAD SIZE */
 @media (min-width: 768px) and (max-width: 1400px) {
   .article {
     top: var(--desktop-header-height);
@@ -168,8 +197,38 @@
     width: 13rem;
     padding: 1rem;
   }
-}
 
+  .carousel-atc-btn {
+    position: absolute;
+    background-color: var(--white-color);
+    border-radius: 50%;
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  .btn-atc {
+    padding: .5rem;
+  }
+}
+/* END SETTINGS FOR MEDIUM SIZE */
+
+/* SETTINGS FOR 992px - 1200px */
+@media (min-width: 992px) and (max-width: 1200px) {
+  .btn-atc {
+    padding: .65rem;
+  }
+}
+/* END SETTINGS FOR 992px - 1200px */
+
+/* SETTINGS FOR MEDIUM SIZE */
+@media (min-width: 768px) and (max-width: 992px) {
+  .btn-atc {
+    padding: .5rem;
+  }
+}
+/* END SETTINGS FOR MEDIUM SIZE */
+
+/* SETTINGS FOR SMALL SIZE */
 @media screen and (max-width: 768px) {
   .article {
     margin-top: var(--mobile-header-height);
@@ -198,37 +257,30 @@
   .special-category-button>button {
     font-size: .85rem;
   }
-
+  
   .sci-card {
-    height: 21rem;
     position: relative;
   }
-
+  
   .sci-card-text {
     font-size: .85rem;
     height: 2.4rem;
   }
-
-  .sci-card-price, .carousel-card-price {
-    font-size: .9rem;
-    font-weight: 700;
-  }
-
+  
   .view-all-arrow {
     font-size: .7rem;
   }
-
-  .btn-atc, .carousel-atc-btn {
+  
+  .carousel-atc-btn {
     position: absolute;
     background-color: var(--white-color);
     border-radius: 50%;
     width: 1.8rem;
-    right: .5rem;
     height: 1.8rem;
   }
 
   .btn-atc {
-    top: 12rem;
+    padding: .5rem;
   }
 
   .carousel-atc-btn {
@@ -254,3 +306,4 @@
     font-size: .5rem;
   }
 }
+/* END SETTINGS FOR SMALL SIZE */

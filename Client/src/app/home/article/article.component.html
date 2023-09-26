@@ -1,4 +1,4 @@
-<div class="article w-100 pb-5 mb-5">
+<div class="article w-100 mb-5">
   <div class="section-start d-flex flex-column justify-content-center">
     <div class="section-img">
       <div id="fs-section-start-carousel" class="carousel slide" data-bs-ride="carousel">
@@ -71,6 +71,7 @@
     </div>
   </div>
 
+  <!-- SPECIAL CATEGORY -->
   <div class="special-category">
     <div class="special-category-button d-flex flex-row justify-content-end mb-3 pe-2">
       <button class="btn btn-light me-1">New Arrivals</button>
@@ -80,25 +81,33 @@
 
     <div class="special-category-items">
       <div class="row m-0">
-        <div *ngFor="let product of products" class="col-6 p-2">
+        <div *ngFor="let product of products" class="col-6 col-md-4 col-lg-3 col-xl-2 p-2">
           <div class="card sci-card">
-            <img [src]="product.pictureUrl" class="card-img-top" alt="sss">
+            <div class="sci-card-img">
+              <img [src]="product.pictureUrl" class="card-img-top" alt="sss">
+              <div class="btn-atc d-flex align-items-center justify-content-center border rounded-circle" style="cursor: pointer;" (click)="addItemToBasket(product)">
+                <i class="fa fa-shopping-cart"></i>
+              </div>
+            </div>
             <div class="card-body">
               <p class="sci-card-text m-0 mb-2">{{ product.name }}</p>
-              <p class="sci-card-price">{{ product.price | number }}<u>đ</u></p>
-            </div>
-            <div class="btn-atc d-flex align-items-center justify-content-center" style="cursor: pointer;" (click)="addItemToBasket(product)">
-              <i class="fa fa-shopping-cart"></i>
+              <p class="sci-card-price mb-0">{{ product.price | number }}<u>đ</u></p>
             </div>
           </div>
         </div>
 
-        <div class="col-12 p-2 d-flex align-items-center justify-content-center mt-4">
-          <button class="btn btn-light w-50 d-flex justify-content-center align-items-center">Xem tất cả <i class="fa fa-arrow-right fa-2xs ms-2 view-all-arrow"></i></button>
+        <div class="col-12 p-2 d-flex mt-3">
+          <div class="row w-100 d-flex align-items-center justify-content-center m-0 p-0">
+            <button class="btn col-6 col-md-5 col-lg-4 col-xl-3 btn-dark d-flex justify-content-center align-items-center rounded-0">
+              Xem tất cả
+              <i class="fa fa-arrow-right fa-2xs ms-2 view-all-arrow"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <!-- END SPECIAL CATEGORY -->
 
   <div class="category-section my-4 p-3 rounded mx-2">
     <div class="section-header border-start d-flex justify-content-between align-items-center mb-3 mt-1">

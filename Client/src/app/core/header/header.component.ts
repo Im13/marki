@@ -16,13 +16,9 @@ export class HeaderComponent {
   menuOpen = false;
   accountFormOpen = false;
 
-  
-
   constructor(private _eref: ElementRef, 
     public basketService: BasketService,
     public accountService: AccountService) { }
-
-  
 
   getCount(items: BasketItem[]) {
     return items.reduce((sum, item) => sum + item.quantity, 0);

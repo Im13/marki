@@ -37,5 +37,44 @@
         "PictureUrl": "images/products/sb-ang1.png",
         "ProductTypeId": 1,
         "ProductBrandId": 1
+    },
+    {
+        "Name": "a2",
+        "Description": "Desc for a",
+        "Price": 189000,
+        "PictureUrl": "images/products/sb-ang1.png",
+        "ProductTypeId": 1,
+        "ProductBrandId": 1
+    },
+    {
+        "Name": "b2",
+        "Description": "Desc for b",
+        "Price": 189000,
+        "PictureUrl": "images/products/sb-ang1.png",
+        "ProductTypeId": 1,
+        "ProductBrandId": 1
+    },
+    {
+        "Name": "c2",
+        "Description": "Desc for c",
+        "Price": 189000,
+        "PictureUrl": "images/products/sb-ang1.png",
+        "ProductTypeId": 1,
+        "ProductBrandId": 1
+    },
+    {
+        "Name": "d2",
+        "Description": "Desc for d",
+        "Price": 189000,
+        "PictureUrl": "images/products/sb-ang1.png",
+        "ProductTypeId": 1,
+        "ProductBrandId": 1
+    },{
+        "Name": "e2",
+        "Description": "Desc for e",
+        "Price": 189000,
+        "PictureUrl": "images/products/sb-ang1.png",
+        "ProductTypeId": 1,
+        "ProductBrandId": 1
     }
 ]
