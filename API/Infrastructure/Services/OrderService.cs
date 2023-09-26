@@ -49,6 +49,7 @@ namespace Infrastructure.Services
             var order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, subTotal);
 
             // Save to db
+            
 
             // Return order
             return order;
