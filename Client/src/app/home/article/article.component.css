@@ -139,6 +139,13 @@
   .btn-atc {
     padding: .5rem;
   }
+
+  .category-row {
+    padding: 0 var(--fs-container-margin) !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
 /* END SETTINGS FOR BIGGEST MONITOR SIZE */
 

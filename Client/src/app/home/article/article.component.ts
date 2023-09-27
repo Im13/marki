@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BasketService } from 'src/app/basket/basket.service';
 import { Product } from 'src/app/shared/models/product';
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, SwiperOptions } from 'swiper';
 
 //install Swiper modules
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
@@ -13,6 +13,17 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 })
 export class ArticleComponent implements OnInit {
   @Input('all-products') products: Product[];
+  swiperConfig: SwiperOptions = {
+    spaceBetween: 10,
+    navigation: true,
+    pagination: { clickable: true},
+    breakpoints: {
+      768: {
+        slidesPerView: 3,
+        spaceBetween: 15
+      }
+    }
+  }
 
   constructor(private basketService: BasketService) { }
 

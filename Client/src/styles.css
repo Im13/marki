@@ -39,3 +39,15 @@
     font-size: 12px !important;
   }
 }
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .swiper-button-prev, .swiper-button-next {
+    width: 45px !important;
+    height: 45px !important;
+    top: 40% !important;
+  }
+  
+  .swiper-button-prev::after, .swiper-button-next::after {
+    font-size: 18px !important;
+  }
+}
