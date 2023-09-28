@@ -1,4 +1,4 @@
-using Core.Entities.Entity;
+using Core.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 
 namespace Infrastructure.Identity
