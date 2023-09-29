@@ -63,11 +63,11 @@
   font-weight: 700;
 }
 
-.sci-card-img {
+.sci-card-img, .category-card-img {
   position: relative;
 }
 
-.btn-atc {
+.btn-atc, .cat-btn-atc {
   position: absolute;
   bottom: 2%;
   right: 5%;
@@ -236,7 +236,7 @@
 /* END SETTINGS FOR MEDIUM SIZE */
 
 /* SETTINGS FOR SMALL SIZE */
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .article {
     margin-top: var(--mobile-header-height);
   }

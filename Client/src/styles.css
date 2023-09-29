@@ -51,3 +51,29 @@
     font-size: 18px !important;
   }
 }
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  .swiper-button-prev, .swiper-button-next {
+    width: 30px !important;
+    height: 30px !important;
+    top: 96% !important;
+    z-index: 100 !important;
+  }
+  
+  .swiper-button-prev::after, .swiper-button-next::after {
+    font-size: 18px !important;
+  }
+}
+
+@media (min-width: 1200px){
+  .swiper-button-prev, .swiper-button-next {
+    width: 30px !important;
+    height: 30px !important;
+    top: 96% !important;
+    z-index: 100 !important;
+  }
+  
+  .swiper-button-prev::after, .swiper-button-next::after {
+    font-size: 18px !important;
+  }
+}

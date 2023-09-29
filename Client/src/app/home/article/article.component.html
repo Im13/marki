@@ -85,7 +85,8 @@
           <div class="card sci-card">
             <div class="sci-card-img">
               <img [src]="product.pictureUrl" class="card-img-top" alt="sss">
-              <div class="btn-atc d-flex align-items-center justify-content-center border rounded-circle" style="cursor: pointer;" (click)="addItemToBasket(product)">
+              <div class="btn-atc d-flex align-items-center justify-content-center border rounded-circle"
+                style="cursor: pointer;" (click)="addItemToBasket(product)">
                 <i class="fa fa-shopping-cart"></i>
               </div>
             </div>
@@ -98,7 +99,8 @@
 
         <div class="col-12 p-2 d-flex mt-3">
           <div class="row w-100 d-flex align-items-center justify-content-center m-0 p-0">
-            <button class="btn col-6 col-md-5 col-lg-4 col-xl-3 btn-dark d-flex justify-content-center align-items-center rounded-0">
+            <button
+              class="btn col-6 col-md-5 col-lg-4 col-xl-3 btn-dark d-flex justify-content-center align-items-center rounded-0">
               Xem tất cả
               <i class="fa fa-arrow-right fa-2xs ms-2 view-all-arrow"></i>
             </button>
@@ -110,114 +112,165 @@
   <!-- END SPECIAL CATEGORY -->
 
   <!-- BEGIN CATEGORY -->
-  <div class="row category-row m-0 p-0">
-    <div class="category-section col-12 col-lg-6 my-4 p-3 rounded">
-      <div class="section-header border-start d-flex justify-content-between align-items-center mb-3 mt-1">
-        <h5 class="m-0 ps-2">Chân váy</h5>
-        <a href="#" class="p-0 text-dark text-decoration-none d-flex align-items-center">
-          Xem tất cả
-          <span class="ms-1">></span>
-        </a>
-      </div>
-  
-      <div class="section-body">
-        <swiper class="pb-5" [config]="swiperConfig">
-          <ng-template *ngFor="let product of products" swiperSlide>
-            <div class="card">
-              <img [src]="product.pictureUrl" class="card-img-top" alt="sss">
-              <div class="card-body">
-                <p class="carousel-card-text m-0 mb-2">{{ product.name }}</p>
-                <p class="carousel-card-price m-0 pt-2">{{ product.price | number }}<u>đ</u></p>
+  <div class="row category-row m-0 p-0 mt-5">
+    <div class="category-container col-12 col-lg-6">
+      <div class="category-section my-4 p-3 rounded">
+        <div class="section-header border-start d-flex justify-content-between align-items-center mb-3 mt-1">
+          <h5 class="m-0 ps-2">Chân váy</h5>
+          <a href="#" class="p-0 text-dark text-decoration-none d-flex align-items-center">
+            Xem tất cả
+            <span class="ms-1">></span>
+          </a>
+        </div>
+
+        <div class="section-body">
+          <swiper class="pb-5" [config]="swiperConfig">
+            <ng-template *ngFor="let product of products" swiperSlide>
+              <div class="card">
+                <div class="category-card-img">
+                  <img [src]="product.pictureUrl" class="card-img-top" alt="sss">
+                  <div class="cat-btn-atc d-flex align-items-center justify-content-center border rounded-circle p-md-2 p-sm-2 p-lg-1"
+                    style="cursor: pointer;" (click)="addItemToBasket(product)">
+                    <i class="fa fa-shopping-cart"></i>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p class="carousel-card-text m-0 mb-2">{{ product.name }}</p>
+                  <p class="carousel-card-price m-0 pt-2">{{ product.price | number }}<u>đ</u></p>
+                </div>
               </div>
-              <div class="carousel-atc-btn d-flex align-items-center justify-content-center">
-                <i class="fa fa-shopping-cart"></i>
-              </div>
-            </div>
-          </ng-template>
-        </swiper>
+            </ng-template>
+          </swiper>
+        </div>
       </div>
     </div>
 
-    <div class="category-section col-12 col-lg-6 my-4 p-3 rounded">
-      <div class="section-header border-start d-flex justify-content-between align-items-center mb-3 mt-1">
-        <h5 class="m-0 ps-2">Chân váy</h5>
-        <a href="#" class="p-0 text-dark text-decoration-none d-flex align-items-center">
-          Xem tất cả
-          <span class="ms-1">></span>
-        </a>
-      </div>
-  
-      <div class="section-body">
-        <swiper class="pb-5" [config]="swiperConfig">
-          <ng-template *ngFor="let product of products" swiperSlide>
-            <div class="card">
-              <img [src]="product.pictureUrl" class="card-img-top" alt="sss">
-              <div class="card-body">
-                <p class="carousel-card-text m-0 mb-2">{{ product.name }}</p>
-                <p class="carousel-card-price m-0 pt-2">{{ product.price | number }}<u>đ</u></p>
+    <div class="category-container col-12 col-lg-6">
+      <div class="category-section my-4 p-3 rounded">
+        <div class="section-header border-start d-flex justify-content-between align-items-center mb-3 mt-1">
+          <h5 class="m-0 ps-2">Chân váy</h5>
+          <a href="#" class="p-0 text-dark text-decoration-none d-flex align-items-center">
+            Xem tất cả
+            <span class="ms-1">></span>
+          </a>
+        </div>
+
+        <div class="section-body">
+          <swiper class="pb-5" [config]="swiperConfig">
+            <ng-template *ngFor="let product of products" swiperSlide>
+              <div class="card">
+                <div class="category-card-img">
+                  <img [src]="product.pictureUrl" class="card-img-top" alt="sss">
+                  <div class="cat-btn-atc d-flex align-items-center justify-content-center border rounded-circle p-md-2 p-sm-2 p-lg-1"
+                    style="cursor: pointer;" (click)="addItemToBasket(product)">
+                    <i class="fa fa-shopping-cart"></i>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p class="carousel-card-text m-0 mb-2">{{ product.name }}</p>
+                  <p class="carousel-card-price m-0 pt-2">{{ product.price | number }}<u>đ</u></p>
+                </div>
               </div>
-              <div class="carousel-atc-btn d-flex align-items-center justify-content-center">
-                <i class="fa fa-shopping-cart"></i>
-              </div>
-            </div>
-          </ng-template>
-        </swiper>
+            </ng-template>
+          </swiper>
+        </div>
       </div>
     </div>
 
-    <div class="category-section col-12 col-lg-6 my-4 p-3 rounded">
-      <div class="section-header border-start d-flex justify-content-between align-items-center mb-3 mt-1">
-        <h5 class="m-0 ps-2">Chân váy</h5>
-        <a href="#" class="p-0 text-dark text-decoration-none d-flex align-items-center">
-          Xem tất cả
-          <span class="ms-1">></span>
-        </a>
-      </div>
-  
-      <div class="section-body">
-        <swiper class="pb-5" [config]="swiperConfig">
-          <ng-template *ngFor="let product of products" swiperSlide>
-            <div class="card">
-              <img [src]="product.pictureUrl" class="card-img-top" alt="sss">
-              <div class="card-body">
-                <p class="carousel-card-text m-0 mb-2">{{ product.name }}</p>
-                <p class="carousel-card-price m-0 pt-2">{{ product.price | number }}<u>đ</u></p>
+    <div class="category-container col-12 col-lg-6">
+      <div class="category-section my-4 p-3 rounded">
+        <div class="section-header border-start d-flex justify-content-between align-items-center mb-3 mt-1">
+          <h5 class="m-0 ps-2">Chân váy</h5>
+          <a href="#" class="p-0 text-dark text-decoration-none d-flex align-items-center">
+            Xem tất cả
+            <span class="ms-1">></span>
+          </a>
+        </div>
+
+        <div class="section-body">
+          <swiper class="pb-5" [config]="swiperConfig">
+            <ng-template *ngFor="let product of products" swiperSlide>
+              <div class="card">
+                <div class="category-card-img">
+                  <img [src]="product.pictureUrl" class="card-img-top" alt="sss">
+                  <div class="cat-btn-atc d-flex align-items-center justify-content-center border rounded-circle p-md-2 p-sm-2 p-lg-1"
+                    style="cursor: pointer;" (click)="addItemToBasket(product)">
+                    <i class="fa fa-shopping-cart"></i>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p class="carousel-card-text m-0 mb-2">{{ product.name }}</p>
+                  <p class="carousel-card-price m-0 pt-2">{{ product.price | number }}<u>đ</u></p>
+                </div>
               </div>
-              <div class="carousel-atc-btn d-flex align-items-center justify-content-center">
-                <i class="fa fa-shopping-cart"></i>
-              </div>
-            </div>
-          </ng-template>
-        </swiper>
+            </ng-template>
+          </swiper>
+        </div>
       </div>
     </div>
 
-    <div class="category-section col-12 col-lg-6 my-4 p-3 rounded">
-      <div class="section-header border-start d-flex justify-content-between align-items-center mb-3 mt-1">
-        <h5 class="m-0 ps-2">Chân váy</h5>
-        <a href="#" class="p-0 text-dark text-decoration-none d-flex align-items-center">
-          Xem tất cả
-          <span class="ms-1">></span>
-        </a>
-      </div>
-  
-      <div class="section-body">
-        <swiper class="pb-5" [config]="swiperConfig">
-          <ng-template *ngFor="let product of products" swiperSlide>
-            <div class="card">
-              <img [src]="product.pictureUrl" class="card-img-top" alt="sss">
-              <div class="card-body">
-                <p class="carousel-card-text m-0 mb-2">{{ product.name }}</p>
-                <p class="carousel-card-price m-0 pt-2">{{ product.price | number }}<u>đ</u></p>
+    <div class="category-container col-12 col-lg-6">
+      <div class="category-section my-4 p-3 rounded">
+        <div class="section-header border-start d-flex justify-content-between align-items-center mb-3 mt-1">
+          <h5 class="m-0 ps-2">Chân váy</h5>
+          <a href="#" class="p-0 text-dark text-decoration-none d-flex align-items-center">
+            Xem tất cả
+            <span class="ms-1">></span>
+          </a>
+        </div>
+
+        <div class="section-body">
+          <swiper class="pb-5" [config]="swiperConfig">
+            <ng-template *ngFor="let product of products" swiperSlide>
+              <div class="card">
+                <div class="category-card-img">
+                  <img [src]="product.pictureUrl" class="card-img-top" alt="sss">
+                  <div class="cat-btn-atc d-flex align-items-center justify-content-center border rounded-circle p-md-2 p-sm-2 p-lg-1"
+                    style="cursor: pointer;" (click)="addItemToBasket(product)">
+                    <i class="fa fa-shopping-cart"></i>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p class="carousel-card-text m-0 mb-2">{{ product.name }}</p>
+                  <p class="carousel-card-price m-0 pt-2">{{ product.price | number }}<u>đ</u></p>
+                </div>
               </div>
-              <div class="carousel-atc-btn d-flex align-items-center justify-content-center">
-                <i class="fa fa-shopping-cart"></i>
-              </div>
-            </div>
-          </ng-template>
-        </swiper>
+            </ng-template>
+          </swiper>
+        </div>
       </div>
     </div>
-  </div>
+
+    <div class="category-container col-12 col-lg-6 mb-5">
+      <div class="category-section my-4 p-3 rounded">
+        <div class="section-header border-start d-flex justify-content-between align-items-center mb-3 mt-1">
+          <h5 class="m-0 ps-2">Chân váy</h5>
+          <a href="#" class="p-0 text-dark text-decoration-none d-flex align-items-center">
+            Xem tất cả
+            <span class="ms-1">></span>
+          </a>
+        </div>
+
+        <div class="section-body">
+          <swiper class="pb-5" [config]="swiperConfig">
+            <ng-template *ngFor="let product of products" swiperSlide>
+              <div class="card">
+                <div class="category-card-img">
+                  <img [src]="product.pictureUrl" class="card-img-top" alt="sss">
+                  <div class="cat-btn-atc d-flex align-items-center justify-content-center border rounded-circle p-md-2 p-sm-2 p-lg-1"
+                    style="cursor: pointer;" (click)="addItemToBasket(product)">
+                    <i class="fa fa-shopping-cart"></i>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p class="carousel-card-text m-0 mb-2">{{ product.name }}</p>
+                  <p class="carousel-card-price m-0 pt-2">{{ product.price | number }}<u>đ</u></p>
+                </div>
+              </div>
+            </ng-template>
+          </swiper>
+        </div>
+      </div>
+    </div>
   <!-- END CATEGORY -->
 </div>

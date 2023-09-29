@@ -18,6 +18,10 @@ export class ArticleComponent implements OnInit {
     navigation: true,
     pagination: { clickable: true},
     breakpoints: {
+      0: {
+        slidesPerView: 2,
+        spaceBetween: 10
+      },
       768: {
         slidesPerView: 3,
         spaceBetween: 15
