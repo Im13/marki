@@ -6,15 +6,12 @@ import { NotFoundComponent } from './core/not-found/not-found.component';
 import { ServerErrorComponent } from './core/server-error/server-error.component';
 
 const routes: Routes = [
-  {
-    // path: '',
-    // loadChildren: () => import('src/app/client/client.module').then(m => m.ClientModule)
-    path: '', component: HomeComponent
-  },
+  { path: '', component: HomeComponent },
   { path: 'shop', loadChildren: () => import('./home/home.module').then(m => m.ShopModule) },
   { path: 'basket', loadChildren: () => import('./basket/basket.module').then(m => m.BasketModule) },
   { path: 'checkout', loadChildren: () => import('./checkout/checkout.module').then(m => m.CheckoutModule) },
   { path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule) },
+  { path: 'products', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule) },
   { path: 'test-error', component: TestErrorComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: 'server-error', component: ServerErrorComponent },
