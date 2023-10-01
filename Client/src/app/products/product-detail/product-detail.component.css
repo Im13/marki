@@ -1,0 +1,12 @@
+@media (max-width: 768px) {
+    .pd-container {
+        margin-top: var(--mobile-header-height);
+    }
+}
+
+@media (min-width: 768px) {
+    .pd-container {
+        margin-top: var(--desktop-header-height);
+        padding: 0 var(--fs-container-margin);
+    }
+}
