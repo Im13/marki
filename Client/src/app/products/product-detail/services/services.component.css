@@ -1,0 +1,10 @@
+@media (min-width: 768px) {
+  .service-img>img {
+    width: 4rem;
+  }
+
+  .service-description {
+    font-size: .8rem;
+    text-align: center;
+  }
+}

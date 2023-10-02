@@ -1,7 +1,7 @@
 <div class="pd-container border">
   <div class="row my-3">
     <div class="col-5 p-2 p-image border">
-      <gallery [items]="images"></gallery>
+      <gallery class="w-100" [items]="images"></gallery>
     </div>
 
     <div class="col-7 py-2 px-3 p-detail border">
@@ -56,64 +56,12 @@
       </div>
 
       <div class="services border p-3 mt-3">
-        <div class="row m-0 p-0">
-          <div class="col-4 d-flex flex-column">
-            <div class="service-img">
-              <img src="../../../assets/product-image/7-days-return.png" alt="">
-            </div>
-            <div class="service-description">
-              Đổi trả tận nhà trong vòng 7 ngày
-            </div>
-          </div>
-
-          <div class="col-4 d-flex flex-column">
-            <div class="service-img">
-              <img src="../../../assets/product-image/7-days-return.png" alt="">
-            </div>
-            <div class="service-description">
-              Miễn phí vận chuyển đơn từ 700k
-            </div>
-          </div>
-
-          <div class="col-4 d-flex flex-column">
-            <div class="service-img">
-              <img src="../../../assets/product-image/7-days-return.png" alt="">
-            </div>
-            <div class="service-description">
-              Bảo hành trong vòng 30 ngày
-            </div>
-          </div>
-        </div>
-
-        <div class="row mt-3 m-0 p-0">
-          <div class="col-4 d-flex flex-column">
-            <div class="service-img">
-              <img src="../../../assets/product-image/7-days-return.png" alt="">
-            </div>
-            <div class="service-description">
-              Hotline 0848666765 hỗ trợ từ 8h30-22h
-            </div>
-          </div>
-
-          <div class="col-4 d-flex flex-column">
-            <div class="service-img">
-              <img src="../../../assets/product-image/7-days-return.png" alt="">
-            </div>
-            <div class="service-description">
-              Giao hàng toàn quốc
-            </div>
-          </div>
-
-          <div class="col-4 d-flex flex-column">
-            <div class="service-img">
-              <img src="../../../assets/product-image/7-days-return.png" alt="">
-            </div>
-            <div class="service-description">
-              Có cộng dồn ưu đãi KHTT
-            </div>
-          </div>
-        </div>
+        <app-services></app-services>
       </div>
     </div>
+  </div>
+
+  <div class="row border py-3">
+    <app-product-description></app-product-description>
   </div>
 </div>
