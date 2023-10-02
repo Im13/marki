@@ -34,7 +34,7 @@
     height: 30px !important;
     top: 40% !important;
   }
-  
+
   .swiper-button-prev::after, .swiper-button-next::after {
     font-size: 12px !important;
   }
@@ -46,7 +46,7 @@
     height: 45px !important;
     top: 40% !important;
   }
-  
+
   .swiper-button-prev::after, .swiper-button-next::after {
     font-size: 18px !important;
   }
@@ -59,7 +59,7 @@
     top: 96% !important;
     z-index: 100 !important;
   }
-  
+
   .swiper-button-prev::after, .swiper-button-next::after {
     font-size: 18px !important;
   }
@@ -72,8 +72,17 @@
     top: 96% !important;
     z-index: 100 !important;
   }
-  
+
   .swiper-button-prev::after, .swiper-button-next::after {
     font-size: 18px !important;
+  }
+
+  gallery>thumbs>ul>li {
+    height: 120px !important;
+    padding: 5px;
+  }
+
+  gallery>thumbs>ul>.thumbs-item--selected {
+    border: 1px black solid !important;
   }
 }
