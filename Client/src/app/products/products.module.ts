@@ -6,9 +6,9 @@ import { ProductsRoutingModule } from './products-routing.module';
 import { GalleryModule } from '@daelmaak/ngx-gallery';
 import { ProductSizeComponent } from './product-detail/product-size/product-size.component';
 import { ProductColorComponent } from './product-detail/product-color/product-color.component';
-import { ServicesComponent } from './product-detail/services/services.component';
 import { ProductDescriptionComponent } from './product-detail/product-description/product-description.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { ProductServicesComponent } from './product-detail/product-services/product-services.component';
 
 @NgModule({
   declarations: [
@@ -16,8 +16,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     ProductDetailComponent,
     ProductSizeComponent,
     ProductColorComponent,
-    ServicesComponent,
-    ProductDescriptionComponent
+    ProductDescriptionComponent,
+    ProductServicesComponent
   ],
   imports: [
     CommonModule,

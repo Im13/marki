@@ -1,0 +1,32 @@
+@media (min-width: 992px) {
+    .service-img>img {
+        width: 4rem;
+    }
+
+    .service-description {
+        font-size: .8rem;
+        text-align: center;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .service-img>img {
+        width: 3rem;
+    }
+
+    .service-description {
+        font-size: .7rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .service-img>img {
+        width: 3.5rem;
+    }
+
+    .service-description {
+        font-size: .8rem;
+        text-align: center;
+    }
+}
