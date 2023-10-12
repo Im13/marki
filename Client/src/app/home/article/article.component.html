@@ -1,5 +1,5 @@
 <div class="article w-100 mb-5">
-  <div class="section-start d-flex flex-column justify-content-center">
+  <div class="section-start border d-flex flex-column justify-content-center">
     <div class="section-img">
       <div id="fs-section-start-carousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
@@ -82,15 +82,15 @@
     <div class="special-category-items">
       <div class="row m-0">
         <div *ngFor="let product of products" class="col-6 col-md-4 col-lg-3 col-xl-2 p-2">
-          <div class="card sci-card" routerLink="products/{{product.id}}" style="cursor: pointer;">
+          <div class="card sci-card" style="cursor: pointer;">
             <div class="sci-card-img">
-              <img [src]="product.pictureUrl" class="card-img-top" alt="sss">
+              <img [src]="product.pictureUrl" class="card-img-top" alt="sss" routerLink="products/{{product.id}}">
               <div class="btn-atc d-flex align-items-center justify-content-center border rounded-circle"
                 style="cursor: pointer;" (click)="addItemToBasket(product)">
                 <i class="fa fa-shopping-cart"></i>
               </div>
             </div>
-            <div class="card-body">
+            <div class="card-body" routerLink="products/{{product.id}}">
               <p class="sci-card-text m-0 mb-2">{{ product.name }}</p>
               <p class="sci-card-price mb-0">{{ product.price | number }}<u>đ</u></p>
             </div>

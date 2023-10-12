@@ -20,9 +20,9 @@
         <div class="row" *ngIf="products">
             <div *ngFor="let product of products" class="col-6 col-lg-4 col-xl-3 mb-3">
                 <div class="card" routerLink="/products/{{product.id}}" style="cursor: pointer;">
-                    <div class="category-card-img">
+                    <div class="product-card-img">
                       <img [src]="product.pictureUrl" class="card-img-top" alt="sss">
-                      <div class="cat-btn-atc d-flex align-items-center justify-content-center border rounded-circle p-md-2 p-sm-2 p-lg-1"
+                      <div class="btn-atc d-flex align-items-center justify-content-center border rounded-circle p-md-2 p-sm-2 p-lg-1"
                         style="cursor: pointer;">
                         <i class="fa fa-shopping-cart"></i>
                       </div>

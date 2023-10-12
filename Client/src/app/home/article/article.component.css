@@ -83,7 +83,7 @@
   }
 
   .section-start {
-    height: 85vh; 
+    height: calc(100vh - var(--desktop-header-height));
   }
 
   .section-start,
@@ -156,7 +156,7 @@
   }
 
   .section-start {
-    height: 92vh;
+    height: calc(100vh - var(--desktop-header-height));
   }
 
   .section-start,
@@ -264,20 +264,20 @@
   .special-category-button>button {
     font-size: .85rem;
   }
-  
+
   .sci-card {
     position: relative;
   }
-  
+
   .sci-card-text {
     font-size: .85rem;
     height: 2.4rem;
   }
-  
+
   .view-all-arrow {
     font-size: .7rem;
   }
-  
+
   .carousel-atc-btn {
     position: absolute;
     background-color: var(--white-color);
@@ -293,7 +293,7 @@
   .carousel-atc-btn {
     top: 11rem;
   }
-  
+
   .carousel-card-text {
     font-size: .8rem;
     height: 1.8rem;
@@ -301,7 +301,7 @@
 
   .category-section>.section-header>a {
     font-size: .85rem;
-    color: #8d8d8d !important; 
+    color: #8d8d8d !important;
   }
 
   .category-section>.section-header>h5 {

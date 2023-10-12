@@ -2,7 +2,7 @@
 @import "../node_modules/ngx-bootstrap/datepicker/bs-datepicker.scss";
 
 :root {
-  --fs-container-margin: 150px;
+  --fs-container-margin: 200px;
   --black-color: #212529;
   --secondary-black-color: #363333;
   --white-color: #ffffff;

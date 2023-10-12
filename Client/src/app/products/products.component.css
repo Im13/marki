@@ -1,6 +1,30 @@
+.product-card-img {
+  position: relative;
+}
+
+.btn-atc {
+  position: absolute;
+  bottom: 2%;
+  right: 5%;
+  font-size: 1.3rem;
+  background-color: var(--secondary-white-color);
+}
+
+.carousel-card-price {
+  font-size: .9rem;
+  font-weight: 700;
+}
+
 @media (min-width: 768px) {
     .products-container {
         margin-top: var(--desktop-header-height);
         padding: 0 var(--fs-container-margin);
     }
+}
+
+@media (max-width: 768px) {
+  .carousel-card-text {
+    font-size: .8rem;
+    height: 1.8rem;
+  }
 }

@@ -1,137 +1,138 @@
-<div class="container pt-3 pb-3">
-  <div class="cart p-3 rounded">
-    <div class="cart-header d-flex align-items-center justify-content-between">
-      <h5 class="cart-header-tittle m-0">Giỏ hàng:</h5>
-      <span *ngIf="basketService.basketSource$ | async as basket">
-        <u>{{ getCount(basket.items) }} sản phẩm</u>
-      </span>
-    </div>
-
-    <div class="cart-body">
-      <hr *ngIf="(basketService.basketSource$ | async) === null" class="my-3" />
-      <div
-        *ngIf="(basketService.basketSource$ | async) === null"
-        class="empty-cart text-center p-3"
-      >
-        <p class="mb-1">
-          Giỏ hàng của bạn đang trống. Mời bạn mua thêm sản phẩm
-          <u class="text-dark" routerLink="/" style="cursor: pointer"
-            >tại đây</u
-          >
-          .
-        </p>
+<div class="basket-container py-3">
+  <div class="row w-100 m-0 p-0">
+    <div class="cart col-12 col-sm-8 border p-3">
+      <div class="cart-header d-flex align-items-center justify-content-between">
+        <h5 class="cart-header-tittle m-0">Giỏ hàng:</h5>
+        <span *ngIf="basketService.basketSource$ | async as basket">
+          <u>{{ getCount(basket.items) }} sản phẩm</u>
+        </span>
       </div>
 
-      <div *ngIf="basketService.basketSource$ | async as basket" class="items">
-        <div *ngFor="let item of basket.items" class="item">
-          <hr class="my-3" />
-          <div class="item-info d-flex">
-            <img [src]="item.pictureUrl" />
-            <div class="info">
-              <h6 class="m-0">
-                <b>{{ item.productName }}</b>
-              </h6>
-              <p class="my-2">Light Blue-0125 / 29</p>
-              <h6 class="m-0 text-danger">{{ item.price | number }}đ</h6>
-            </div>
-          </div>
-          <div class="item-price mt-3 d-flex align-items-center">
-            <div class="row p-0 m-0 w-100">
-              <div class="col-3 d-flex align-items-center">
-                <div
-                  class="w-100 d-flex justify-content-between align-items-center px-2 py-1 border quantity"
-                >
-                  <h5
-                    class="m-0 p-0"
-                    style="cursor: pointer"
-                    (click)="removeItem(item.id, 1)"
-                  >
-                    -
-                  </h5>
-                  <span>{{ item.quantity }}</span>
-                  <h5
-                    class="m-0 p-0"
-                    style="cursor: pointer"
-                    (click)="incrementQuantity(item)"
-                  >
-                    +
-                  </h5>
+      <div class="cart-body">
+        <hr *ngIf="(basketService.basketSource$ | async) === null" class="my-3" />
+        <div *ngIf="(basketService.basketSource$ | async) === null" class="empty-cart text-center p-3">
+          <p class="mb-1">
+            Giỏ hàng của bạn đang trống. Mời bạn mua thêm sản phẩm
+            <u class="text-dark" routerLink="/" style="cursor: pointer"
+              >tại đây</u
+            >
+            .
+          </p>
+        </div>
+
+        <div *ngIf="basketService.basketSource$ | async as basket" class="items">
+          <div *ngFor="let item of basket.items" class="item">
+            <hr class="my-3" />
+
+            <div class="item-container d-flex flex-sm-column flex-xl-row justify-content-md-between align-items-center">
+              <div class="item-info d-flex">
+                <img [src]="item.pictureUrl" />
+                <div class="info">
+                  <h6 class="m-0">
+                    <b>{{ item.productName }}</b>
+                  </h6>
+                  <p class="my-2">Light Blue-0125 / 29</p>
+                  <h6 class="m-0 text-danger">{{ item.price | number }}đ</h6>
                 </div>
               </div>
 
-              <div class="col-1 d-flex align-items-center p-0">
-                <u
-                  style="cursor: pointer"
-                  (click)="removeItem(item.id, item.quantity)"
-                  >Xoá</u
-                >
-              </div>
+              <div class="item-price mt-3 d-flex align-items-center w-50">
+                <div class="row p-0 m-0 w-100 d-flex">
+                  <div class="col-3 col-md-4 d-flex align-items-center">
+                    <div class="w-100 d-flex justify-content-between align-items-center px-2 py-1 border quantity">
+                      <h5 class="m-0 p-0" style="cursor: pointer" (click)="removeItem(item.id, 1)">
+                        -
+                      </h5>
+                      <span>{{ item.quantity }}</span>
+                      <h5 class="m-0 p-0" style="cursor: pointer" (click)="incrementQuantity(item)">
+                        +
+                      </h5>
+                    </div>
+                  </div>
 
-              <h6
-                class="m-0 col-8 d-flex align-items-center justify-content-end text-danger"
-              >
-                {{ item.price * item.quantity | number }}đ
-              </h6>
+                  <div class="col-1 d-flex align-items-center p-0">
+                    <u
+                      style="cursor: pointer"
+                      (click)="removeItem(item.id, item.quantity)"
+                      >Xoá</u
+                    >
+                  </div>
+
+                  <h6
+                    class="m-0 col-8 col-md-5 d-flex align-items-center justify-content-end text-danger"
+                  >
+                    {{ item.price * item.quantity | number }}đ
+                  </h6>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div
-    class="order-total p-3 rounded mt-3"
-    *ngIf="basketService.basketTotalSource$ | async as total"
-  >
-    <div class="order-total-header">
-      <h5>Thông tin đơn hàng</h5>
-    </div>
-    <hr class="my-3" />
-    <div class="order-total-details">
-      <div class="d-flex align-items-center justify-content-between">
-        <h6>Tạm tính:</h6>
-        <h6>{{ total.subtotal | number }}đ</h6>
-      </div>
-      <div class="d-flex align-items-center justify-content-between mt-1">
-        <h6>Phí vận chuyển:</h6>
-        <h6 class="text-danger">{{ total.shipping | number }}đ</h6>
-      </div>
-      <div class="d-flex align-items-center justify-content-between mt-1">
-        <h6>Giảm giá:</h6>
-        <h6 class="text-danger">0đ</h6>
-      </div>
-      <div class="d-flex align-items-center justify-content-between mt-1">
-        <h6>Tổng tiền:</h6>
-        <h6 class="text-danger">{{ total.total | number }}đ</h6>
-      </div>
-    </div>
-    <hr class="my-3" />
-    <div class="order-note">
-      <h6>Ghi chú đơn hàng</h6>
-      <div class="form-group pt-2">
-        <textarea
-          class="form-control"
-          rows="4"
-          placeholder="Ghi chú"
-        ></textarea>
-      </div>
+    <div
+      class="order-total col-12 col-sm-4 p-3 py-md-0 pe-md-0 rounded mt-3 mt-md-0"
+      *ngIf="basketService.basketTotalSource$ | async as total"
+    >
+      <div class="border p-3">
+        <div class="order-total-header">
+          <h5>Thông tin đơn hàng</h5>
+        </div>
+        <hr class="my-3" />
+        <div class="order-total-details">
+          <div class="d-flex align-items-center justify-content-between">
+            <h6>Tạm tính:</h6>
+            <h6>{{ total.subtotal | number }}đ</h6>
+          </div>
+          <div class="d-flex align-items-center justify-content-between mt-1">
+            <h6>Phí vận chuyển:</h6>
+            <h6 class="text-danger">{{ total.shipping | number }}đ</h6>
+          </div>
+          <div class="d-flex align-items-center justify-content-between mt-1">
+            <h6>Giảm giá:</h6>
+            <h6 class="text-danger">0đ</h6>
+          </div>
+          <div class="d-flex align-items-center justify-content-between mt-1">
+            <h6>Tổng tiền:</h6>
+            <h6 class="text-danger">{{ total.total | number }}đ</h6>
+          </div>
+        </div>
+        <hr class="my-3" />
+        <div class="order-note">
+          <h6>Ghi chú đơn hàng</h6>
+          <div class="form-group pt-2">
+            <textarea
+              class="form-control"
+              rows="4"
+              placeholder="Ghi chú"
+            ></textarea>
+          </div>
 
-      <div class="form-group pt-3">
-        <input
-          class="form-control"
-          type="text"
-          placeholder="Nhập mã khuyến mãi (nếu có)"
-        />
-      </div>
+          <div class="form-group pt-3">
+            <input
+              class="form-control"
+              type="text"
+              placeholder="Nhập mã khuyến mãi (nếu có)"
+            />
+          </div>
 
-      <button type="button" class="btn btn-dark rounded-0 w-100 mt-4 mb-2">
-        THANH TOÁN NGAY
-      </button>
-      <div
-        class="back-to-home d-flex align-items-center justify-content-center mt-0 pt-0"
-      >
-        <i class="fa fa-arrow-left"></i>
-        <button type="button" class="btn">Tiếp tục mua hàng</button>
+          <button
+            type="button"
+            class="btn btn-dark rounded-0 w-100 mt-4 mb-2"
+            routerLink="/checkout"
+          >
+            THANH TOÁN NGAY
+          </button>
+          <div
+            class="back-to-home d-flex align-items-center justify-content-center mt-0 pt-0"
+          >
+            <i class="fa fa-arrow-left"></i>
+            <button type="button" class="btn" routerLink="/products">
+              Tiếp tục mua hàng
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
