@@ -1,20 +1,38 @@
-<p>products works!</p>
-<p>products works!</p>
-<p>products works!</p>
-<p>products works!</p>
-<p>products works!</p>
-<p>products works!</p>
-<p>products works!</p>
-<p>products works!</p>
-<p>products works!</p>
-<p>products works!</p>
-<p>products works!</p>
-<p>products works!</p>
-<p>products works!</p>
-<p>products works!</p>
-<p>products works!</p>
-<p>products works!</p>
-<p>products works!</p>
-<p>products works!</p>
-<p>products works!</p>
-<p>products works!</p>
+<div class="products-container">
+    <div class="filter d-flex flex-row justify-content-between py-3 align-items-center">
+        <div><b>Tất cả sản phẩm</b></div>
+
+        <div class="filter-select d-flex flex-row align-items-center">
+            <b class="text-nowrap me-2">Sắp xếp: </b>
+            <select class="form-select rounded-0" style="cursor: pointer;">
+                <option value="1">Giá: Tăng dần</option>
+                <option value="2">Giá: Giảm dần</option>
+                <option value="3">Tên: A-Z</option>
+                <option value="4">Tên: Z-A</option>
+                <option value="0" selected>Mới nhất</option>
+                <option value="5">Cũ nhất</option>
+                <option value="6">Bán chạy nhất</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="products">
+        <div class="row" *ngIf="products">
+            <div *ngFor="let product of products" class="col-6 col-lg-4 col-xl-3 mb-3">
+                <div class="card" routerLink="/products/{{product.id}}" style="cursor: pointer;">
+                    <div class="category-card-img">
+                      <img [src]="product.pictureUrl" class="card-img-top" alt="sss">
+                      <div class="cat-btn-atc d-flex align-items-center justify-content-center border rounded-circle p-md-2 p-sm-2 p-lg-1"
+                        style="cursor: pointer;">
+                        <i class="fa fa-shopping-cart"></i>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <p class="carousel-card-text m-0 mb-2">{{ product.name }}</p>
+                      <p class="carousel-card-price m-0 pt-2">{{ product.price | number }}<u>đ</u></p>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,8 +1,8 @@
-<header class="header mb-3 bg-white border-bottom fixed-top shadow-sm">
+<header class="header bg-white border-bottom fixed-top shadow-sm">
   <div class="menu-icon d-flex align-items-center ps-3" (click)="openMenu()"><i class="fa fa-bars fa-lg"></i></div>
   <div class="logo"><a class="text-decoration-none" routerLink="/">MARKI</a></div>
   <nav class="my-2" [ngClass]="{'show-menu': menuOpen}">
-    <a class="text-dark text-decoration-none border-bottom">Tất cả</a>
+    <a class="text-dark text-decoration-none border-bottom" routerLink="/products">Tất cả</a>
     <a class="text-dark text-decoration-none border-bottom">Hàng mới về</a>
     <a class="text-dark text-decoration-none border-bottom">Áo</a>
     <a class="text-dark text-decoration-none border-bottom">Quần</a>

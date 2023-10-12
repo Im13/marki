@@ -79,7 +79,7 @@
 /* BEGIN SETTINGS FOR BIGGEST MONITOR SIZE */
 @media (min-width: 1400px) {
   .article {
-    top: var(--desktop-header-height);
+    margin-top: var(--desktop-header-height);
   }
 
   .section-start {

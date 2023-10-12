@@ -5,6 +5,7 @@ import { FooterComponent } from '../core/footer/footer.component';
 import { HomeComponent } from './home.component';
 import { SwiperModule } from 'swiper/angular';
 import { CategorySectionComponent } from './article/category-section/category-section.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { CategorySectionComponent } from './article/category-section/category-se
   ],
   imports: [
     CommonModule,
-    SwiperModule
+    SwiperModule,
+    RouterModule
   ],
   exports: [
     HomeComponent,

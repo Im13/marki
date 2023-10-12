@@ -9,6 +9,7 @@ import { ProductColorComponent } from './product-detail/product-color/product-co
 import { ProductDescriptionComponent } from './product-detail/product-description/product-description.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ProductServicesComponent } from './product-detail/product-services/product-services.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ProductServicesComponent } from './product-detail/product-services/prod
     CommonModule,
     ProductsRoutingModule,
     GalleryModule,
+    RouterModule,
     TabsModule.forRoot()
   ]
 })
