@@ -9,7 +9,7 @@
     padding: 0 var(--fs-container-margin);
   }
 
-  .item-info > img {
+  .item-info>img {
     width: 4rem;
   }
 }
@@ -17,6 +17,10 @@
 @media (min-width: 768px) and (max-width: 1200px) {
   .basket-container {
     margin-top: var(--desktop-header-height);
+  }
+
+  .item-info>img {
+    width: 4rem;
   }
 }
 
@@ -30,17 +34,23 @@
     resize: none;
   }
 
-  .item-info > img {
+  .item-info>img {
     width: 5rem;
     height: 5rem;
   }
 
-  .info > p {
+  .info>p {
     font-weight: 400;
     font-size: 0.8rem;
   }
 
   u {
     text-underline-offset: 0.3rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .w-md-50 {
+    width: 50% !important;
   }
 }
