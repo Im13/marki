@@ -1,136 +1,146 @@
-<div class="container p-0" *ngIf="(basketService.basketTotalSource$ | async) as basketTotal">
-    <div class="order-short-info d-flex align-items-center justify-content-between p-3 border-bottom"
-        style="cursor: pointer;" (click)="toggleDisplayOrder()">
-        <div class="display-order-button d-flex align-items-center">
-            <i class="fa fa-shopping-cart me-2"></i>
-            <span *ngIf="!isDisplayingOrder" class="mx-2">Hiển thị thông tin đơn hàng</span>
-            <i *ngIf="!isDisplayingOrder" class="fa fa-chevron-down"></i>
-            <span *ngIf="isDisplayingOrder" class="mx-2">Ẩn thông tin đơn hàng</span>
-            <i *ngIf="isDisplayingOrder" class="fa fa-chevron-up"></i>
-        </div>
-
-        <h6 class="m-0">
-            {{ basketTotal.total | number }}đ
-        </h6>
-    </div>
-
-    <div class="order-items ps-2 border-bottom"
-        *ngIf="isDisplayingOrder && (basketService.basketSource$ | async) as basket">
-        <div class="items">
-            <div *ngFor="let item of basket.items"
-                class="border-bottom item p-3 d-flex align-items-center justify-content-between">
-                <div class="d-flex align-items-center">
-                    <img [src]="item.pictureUrl" class="border rounded">
-                    <span class="item-no border d-flex align-items-center justify-content-center">{{ item.quantity
-                        }}</span>
-                    <div class="ms-3 d-flex flex-column item-description">
-                        <h6 class="mb-1">{{ item.productName }}</h6>
-                        <span>This is thuoc tinh</span>
+<div class="checkout-container" *ngIf="(basketService.basketTotalSource$ | async) as basketTotal">
+    <div class="row flex-md-row-reverse">
+        <div class="order-info col-12 col-md-5 col-md-push-7 p-md-0">
+            <div class="border border-md-none">
+                <div class="order-short-info d-flex align-items-center justify-content-between p-3 border-bottom"
+                    style="cursor: pointer;" (click)="toggleDisplayOrder()">
+                    <div class="display-order-button d-flex align-items-center">
+                        <i class="fa fa-shopping-cart me-2"></i>
+                        <span *ngIf="!isDisplayingOrder" class="mx-2">Hiển thị thông tin đơn hàng</span>
+                        <i *ngIf="!isDisplayingOrder" class="fa fa-chevron-down"></i>
+                        <span *ngIf="isDisplayingOrder" class="mx-2">Ẩn thông tin đơn hàng</span>
+                        <i *ngIf="isDisplayingOrder" class="fa fa-chevron-up"></i>
                     </div>
+
+                    <h6 class="m-0">
+                        {{ basketTotal.total | number }}đ
+                    </h6>
                 </div>
 
-                <h6>{{ item.price * item.quantity| number }}đ</h6>
-            </div>
-        </div>
+                <div class="order-items ps-2"
+                    *ngIf="isDisplayingOrder && (basketService.basketSource$ | async) as basket">
+                    <div class="items">
+                        <div *ngFor="let item of basket.items"
+                            class="border-bottom item p-3 d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <img [src]="item.pictureUrl" class="border rounded">
+                                <span class="item-no border d-flex align-items-center justify-content-center">{{
+                                    item.quantity
+                                    }}</span>
+                                <div class="ms-3 d-flex flex-column item-description">
+                                    <h6 class="mb-1">{{ item.productName }}</h6>
+                                    <span>This is thuoc tinh</span>
+                                </div>
+                            </div>
 
-        <div class="order-total-pre-calculate p-3 border-bottom">
-            <div class="d-flex justify-content-between">
-                <span class="pre-cal-title">Tạm tính:</span>
-                <span class="pre-cal-title">{{ basketTotal.subtotal | number}}đ</span>
-            </div>
-            <div class="d-flex justify-content-between mt-2">
-                <span class="pre-cal-title">Phí vận chuyển:</span>
-                <span class="pre-cal-title">{{ basketTotal.shipping | number}}đ</span>
-            </div>
-        </div>
+                            <h6>{{ item.price * item.quantity| number }}đ</h6>
+                        </div>
+                    </div>
 
-        <div class="order-total p-3 d-flex justify-content-between align-items-center">
-            <span>Tổng cộng</span>
-            <h3>{{ basketTotal.total | number }}đ</h3>
-        </div>
-    </div>
+                    <div class="order-total-pre-calculate p-3 border-bottom">
+                        <div class="d-flex justify-content-between">
+                            <span class="pre-cal-title">Tạm tính:</span>
+                            <span class="pre-cal-title">{{ basketTotal.subtotal | number}}đ</span>
+                        </div>
+                        <div class="d-flex justify-content-between mt-2">
+                            <span class="pre-cal-title">Phí vận chuyển:</span>
+                            <span class="pre-cal-title">{{ basketTotal.shipping | number}}đ</span>
+                        </div>
+                    </div>
 
-    <div class="shipping-details p-3">
-        <h6 class="my-2">Thông tin giao hàng</h6>
-        <span>Bạn đã có tài khoản? <a href="#" class="text-decoration-none">Đăng nhập</a></span>
-
-        <div class="form-group pt-1">
-            <input type="text" class="form-control my-2" placeholder="Họ và tên">
-        </div>
-
-        <div class="form-group">
-            <input type="text" class="form-control my-2" placeholder="Số điện thoại">
-        </div>
-
-        <div class="form-group">
-            <input type="text" class="form-control my-2" placeholder="Địa chỉ">
-        </div>
-
-        <div class="input-group my-2">
-            <select class="form-select" id="inputGroupSelect01">
-                <option selected value="0">Hà Nội</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-            <label class="input-group-text d-flex align-items-center justify-content-center" style="width: 25%;"
-                for="inputGroupSelect01">Tỉnh/Thành</label>
-        </div>
-
-        <div class="input-group my-2">
-            <select class="form-select" id="inputGroupSelect01">
-                <option selected value="0">Hà Nội</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-            <label class="input-group-text d-flex align-items-center justify-content-center" style="width: 25%;"
-                for="inputGroupSelect01">Quận/Huyện</label>
-        </div>
-
-        <div class="input-group my-2">
-            <select class="form-select" id="inputGroupSelect01">
-                <option selected value="0">Hà Nội</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-            <label class="input-group-text d-flex align-items-center justify-content-center" style="width: 25%;"
-                for="inputGroupSelect01">Phường/Xã</label>
-        </div>
-
-        <h6 class="mt-4 mb-3">Phương thức thanh toán</h6>
-        <div class="select-payment-method border rounded">
-            <div class="cod-method d-flex align-items-center">
-                <input class="form-check-input m-0 p-0 mx-3" type="radio" name="codRadio" id="codRadio">
-                <label class="form-check-label w-100 py-3" for="codRadio">
-                    <img class="cod-img me-2" src="../../assets/icons/delivery.png">
-                    <span>Thanh toán khi giao hàng (COD)</span>
-                </label>
+                    <div class="order-total p-3 d-flex justify-content-between align-items-center">
+                        <span>Tổng cộng</span>
+                        <h3>{{ basketTotal.total | number }}đ</h3>
+                    </div>
+                </div>
             </div>
 
-            <div class="cod-method border-top d-flex align-items-center">
-                <input class="form-check-input m-0 p-0 mx-3" type="radio" name="codRadio" id="codRadio">
-                <label class="form-check-label w-100 py-3" for="codRadio">
-                    <img class="cod-img me-2" src="../../assets/icons/give-money.png">
-                    <span>Chuyển khoản ngân hàng</span>
-                </label>
-            </div>
-
-            <div class="cod-method border-top d-flex align-items-center">
-                <input class="form-check-input m-0 p-0 mx-3" type="radio" name="codRadio" id="codRadio">
-                <label class="form-check-label w-100 py-3" for="codRadio">
-                    <img class="cod-img me-2" src="../../assets/icons/vnpay.png">
-                    <span>Thanh toán VNPAY</span>
-                </label>
-            </div>
         </div>
-    </div>
 
-    <div class="complete-buttons p-3">
-        <button type="button" class="btn btn-dark w-100 p-2">Hoàn tất đơn hàng</button>
-        <div class="back-to-cart mt-3 d-flex justify-content-center">
-            <a href="#" class="text-decoration-none">Giỏ hàng</a>
+        <div class="col-12 col-md-7 p-md-0 border-end">
+            <div class="shipping-details p-3 px-md-3 pe-lg-3 pt-md-2 p-md-0">
+                <h6 class="my-2">Thông tin giao hàng</h6>
+                <span>Bạn đã có tài khoản? <a href="#" class="text-decoration-none">Đăng nhập</a></span>
+
+                <div class="form-group pt-1">
+                    <input type="text" class="form-control my-2" placeholder="Họ và tên">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control my-2" placeholder="Số điện thoại">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control my-2" placeholder="Địa chỉ">
+                </div>
+
+                <div class="input-group my-2">
+                    <select class="form-select" id="inputGroupSelect01">
+                        <option selected value="0">Hà Nội</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                    <label class="input-group-text d-flex align-items-center justify-content-center" style="width: 25%;"
+                        for="inputGroupSelect01">Tỉnh/Thành</label>
+                </div>
+
+                <div class="input-group my-2">
+                    <select class="form-select" id="inputGroupSelect01">
+                        <option selected value="0">Hà Nội</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                    <label class="input-group-text d-flex align-items-center justify-content-center" style="width: 25%;"
+                        for="inputGroupSelect01">Quận/Huyện</label>
+                </div>
+
+                <div class="input-group my-2">
+                    <select class="form-select" id="inputGroupSelect01">
+                        <option selected value="0">Hà Nội</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                    <label class="input-group-text d-flex align-items-center justify-content-center" style="width: 25%;"
+                        for="inputGroupSelect01">Phường/Xã</label>
+                </div>
+
+                <h6 class="mt-4 mb-3">Phương thức thanh toán</h6>
+                <div class="select-payment-method border rounded">
+                    <div class="cod-method d-flex align-items-center">
+                        <input class="form-check-input m-0 p-0 mx-3" type="radio" name="codRadio" id="codRadio">
+                        <label class="form-check-label w-100 py-3" for="codRadio">
+                            <img class="cod-img me-2" src="../../assets/icons/delivery.png">
+                            <span>Thanh toán khi giao hàng (COD)</span>
+                        </label>
+                    </div>
+
+                    <div class="cod-method border-top d-flex align-items-center">
+                        <input class="form-check-input m-0 p-0 mx-3" type="radio" name="codRadio" id="codRadio">
+                        <label class="form-check-label w-100 py-3" for="codRadio">
+                            <img class="cod-img me-2" src="../../assets/icons/give-money.png">
+                            <span>Chuyển khoản ngân hàng</span>
+                        </label>
+                    </div>
+
+                    <div class="cod-method border-top d-flex align-items-center">
+                        <input class="form-check-input m-0 p-0 mx-3" type="radio" name="codRadio" id="codRadio">
+                        <label class="form-check-label w-100 py-3" for="codRadio">
+                            <img class="cod-img me-2" src="../../assets/icons/vnpay.png">
+                            <span>Thanh toán VNPAY</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="complete-buttons p-3 px-md-3 pe-lg-3">
+                <button type="button" class="btn btn-dark w-100 p-2">Hoàn tất đơn hàng</button>
+                <div class="back-to-cart mt-3 d-flex justify-content-center">
+                    <a href="#" class="text-decoration-none">Giỏ hàng</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

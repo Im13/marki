@@ -1,5 +1,49 @@
-@media screen and (max-width: 768px) {
-    .container {
+.item {
+    position: relative;
+}
+
+.item>div>img {
+    width: 4rem;
+    height: 4rem;
+}
+
+.item-no {
+    position: absolute;
+    top: .5rem;
+    left: 4.3rem;
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 50%;
+}
+
+.cod-img {
+    width: 2rem;
+    height: 2rem;
+}
+
+.item-description>span {
+    font-size: .8rem;
+}
+
+.shipping-details>span {
+    font-size: .8rem;
+    color: rgb(120, 120, 120);
+}
+
+.item>h6, .pre-cal-title, input, .input-group-text, select {
+    font-size: .85rem;
+}
+
+.display-order-button>span {
+    font-size: .95rem;
+}
+
+.display-order-button>i {
+    font-size: .7rem;
+}
+
+@media (max-width: 768px) {
+    .checkout-container {
         margin-top: var(--mobile-header-height);
         min-height: 40vh;
     }
@@ -8,50 +52,37 @@
         background-color: var(--secondary-white-color);
     }
 
-    .display-order-button>span {
-        font-size: .95rem;
-    }
-
-    .display-order-button>i {
-        font-size: .7rem;
-    }
-
-    .item {
-        position: relative;
-    }
-
-    .item>div>img {
-        width: 4rem;
-        height: 4rem;
-    }
-
-    .item>h6, .pre-cal-title, input, .input-group-text, select {
-        font-size: .85rem;
-    }
-
     .item-no {
-        position: absolute;
-        top: .5rem;
-        left: 4.3rem;
-        width: 1.4rem;
-        height: 1.4rem;
         background-color: var(--black-color);
         color: var(--white-color);
-        border-radius: 50%;
         font-size: .6rem;
     }
+}
 
-    .item-description>span {
-        font-size: .8rem;
+@media (min-width: 768px) {
+    .checkout-container {
+        margin-top: var(--desktop-header-height);
+        padding: 0 var(--fs-container-margin) !important;
+    }
+    
+    .item-no {
+        background-color: var(--secondary-white-color);
+        color: var(--black-color);
+        font-size: .7rem;
+        font-weight: 700;
     }
 
-    .shipping-details>span {
-        font-size: .8rem;
-        color: rgb(120, 120, 120);
+    .border-md-none {
+        border: none !important;
     }
 
-    .cod-img {
-        width: 2rem;
-        height: 2rem;
+    .order-info {
+        background-color: #FAFAFA;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+    .checkout-container {
+        padding: 0 40px !important;
     }
 }
