@@ -1,10 +1,12 @@
+import { Address } from "./Address";
+
 export interface OrderToCreate {
   basketId: string;
   deliveryMethodId: number;
   shipToAddress: Address;
 }
 
-export interface Root {
+export interface Order {
   id: number
   buyerEmail: string
   orderDate: string
@@ -15,14 +17,6 @@ export interface Root {
   subtotal: number
   total: number
   status: string
-}
-
-export interface Address {
-  fullname: string
-  cityOrProvinceId: number
-  districtId: number
-  wardId: number
-  street: string
 }
 
 export interface OrderItem {

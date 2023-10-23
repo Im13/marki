@@ -108,9 +108,9 @@
                 </div>
 
                 <h6 class="mt-4 mb-3">Phương thức thanh toán</h6>
-                <div class="select-payment-method border rounded">
+                <div class="select-payment-method border rounded form-group">
                     <div class="cod-method d-flex align-items-center">
-                        <input class="form-check-input m-0 p-0 mx-3" type="radio" name="codRadio" id="codRadio">
+                        <input class="form-check-input m-0 p-0 mx-3" type="radio" name="deliveryRadio" id="codRadio">
                         <label class="form-check-label w-100 py-3" for="codRadio">
                             <img class="cod-img me-2" src="../../assets/icons/delivery.png">
                             <span>Thanh toán khi giao hàng (COD)</span>
@@ -118,16 +118,16 @@
                     </div>
 
                     <div class="cod-method border-top d-flex align-items-center">
-                        <input class="form-check-input m-0 p-0 mx-3" type="radio" name="codRadio" id="codRadio">
-                        <label class="form-check-label w-100 py-3" for="codRadio">
+                        <input class="form-check-input m-0 p-0 mx-3" type="radio" name="deliveryRadio" id="bankRadio">
+                        <label class="form-check-label w-100 py-3" for="bankRadio">
                             <img class="cod-img me-2" src="../../assets/icons/give-money.png">
                             <span>Chuyển khoản ngân hàng</span>
                         </label>
                     </div>
 
                     <div class="cod-method border-top d-flex align-items-center">
-                        <input class="form-check-input m-0 p-0 mx-3" type="radio" name="codRadio" id="codRadio">
-                        <label class="form-check-label w-100 py-3" for="codRadio">
+                        <input class="form-check-input m-0 p-0 mx-3" type="radio" name="deliveryRadio" id="vnpayRadio">
+                        <label class="form-check-label w-100 py-3" for="vnpayRadio">
                             <img class="cod-img me-2" src="../../assets/icons/vnpay.png">
                             <span>Thanh toán VNPAY</span>
                         </label>
@@ -136,7 +136,7 @@
             </div>
 
             <div class="complete-buttons p-3 px-md-3 pe-lg-3">
-                <button type="button" class="btn btn-dark w-100 p-2">Hoàn tất đơn hàng</button>
+                <button type="button" class="btn btn-dark w-100 p-2" (click)="submitOrder()">Hoàn tất đơn hàng</button>
                 <div class="back-to-cart mt-3 d-flex justify-content-center">
                     <a href="#" class="text-decoration-none">Giỏ hàng</a>
                 </div>

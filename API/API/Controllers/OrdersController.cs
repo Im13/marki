@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [Authorize]
     public class OrdersController : BaseApiController
     {
         private readonly IOrderService _orderService;
@@ -33,6 +32,7 @@ namespace API.Controllers
             return Ok(order);
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IReadOnlyList<OrderToReturnDTO>>> GetOrdersForUser()
         {
@@ -43,6 +43,7 @@ namespace API.Controllers
             return Ok(_mapper.Map<IReadOnlyList<OrderToReturnDTO>>(orders));
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<OrderToReturnDTO>> GetOrderByIdForUser(int id)
         {
@@ -55,6 +56,7 @@ namespace API.Controllers
             return _mapper.Map<OrderToReturnDTO>(order);
         }
 
+        [Authorize]
         [HttpGet("deliveryMethods")]
         public async Task<ActionResult<IReadOnlyList<DeliveryMethod>>> GetDeliveryMethods()
         {
