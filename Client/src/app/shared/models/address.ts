@@ -1,4 +1,3 @@
-
 export interface Address {
     fullName: string;
     cityOrProvinceId: number;

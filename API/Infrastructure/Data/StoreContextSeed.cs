@@ -36,6 +36,27 @@ namespace Infrastructure.Data
                 context.DeliveryMethods.AddRange(methods);
             }
 
+            if(!context.Provinces.Any())
+            {
+                var provinceData = File.ReadAllText("../Infrastructure/Data/SeedData/province.json");
+                var provinces = JsonSerializer.Deserialize<List<Province>>(provinceData);;
+                context.Provinces.AddRange(provinces);
+            }
+
+            if(!context.Districts.Any())
+            {
+                var districtData = File.ReadAllText("../Infrastructure/Data/SeedData/district.json");
+                var districts = JsonSerializer.Deserialize<List<District>>(districtData);;
+                context.Districts.AddRange(districts);
+            }
+
+            if(!context.Wards.Any())
+            {
+                var wardData = File.ReadAllText("../Infrastructure/Data/SeedData/ward.json");
+                var wards = JsonSerializer.Deserialize<List<Ward>>(wardData);;
+                context.Wards.AddRange(wards);
+            }
+
             if (context.ChangeTracker.HasChanges()) await context.SaveChangesAsync();
         }
     }

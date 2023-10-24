@@ -3,7 +3,7 @@ import { BasketService } from '../basket/basket.service';
 import { CheckoutService } from './checkout.service';
 import { ToastrService } from 'ngx-toastr';
 import { Basket } from '../shared/models/basket';
-import { Address } from '../shared/models/Address';
+import { Address } from '../shared/models/address';
 import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
