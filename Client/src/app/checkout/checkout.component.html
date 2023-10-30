@@ -58,50 +58,50 @@
         </div>
 
         <div class="col-12 col-md-7 p-md-0 border-end">
-            <div class="shipping-details p-3 px-md-3 pe-lg-3 pt-md-2 p-md-0">
+            <form class="shipping-details p-3 px-md-3 pe-lg-3 pt-md-2 p-md-0" (ngSubmit)="onSubmit()" [formGroup]="checkoutFrm">
                 <h6 class="my-2">Thông tin giao hàng</h6>
                 <span>Bạn đã có tài khoản? <a href="#" class="text-decoration-none">Đăng nhập</a></span>
 
                 <div class="form-group pt-1">
-                    <input type="text" class="form-control my-2" placeholder="Họ và tên">
+                    <input type="text" class="form-control my-2" placeholder="Họ và tên" formControlName="fullName">
                 </div>
 
                 <div class="form-group">
-                    <input type="text" class="form-control my-2" placeholder="Số điện thoại">
+                    <input type="text" class="form-control my-2" placeholder="Số điện thoại" formControlName="phone">
                 </div>
 
                 <div class="form-group">
-                    <input type="text" class="form-control my-2" placeholder="Địa chỉ">
+                    <input type="text" class="form-control my-2" placeholder="Địa chỉ" formControlName="street">
                 </div>
 
                 <div class="input-group my-2">
-                    <select class="form-select" id="inputGroupSelect01">
-                        <option selected value="0">Hà Nội</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select" formControlName="province" (ngModelChange)="onProvinceChange($event)" id="provinces">
+                        <option [ngValue]="0">Chọn tỉnh / thành</option>
+                        <option *ngFor="let province of provinces" [ngValue]="province.id">
+                            {{ province.name }}
+                        </option>
                     </select>
                     <label class="input-group-text d-flex align-items-center justify-content-center" style="width: 25%;"
                         for="inputGroupSelect01">Tỉnh/Thành</label>
                 </div>
 
                 <div class="input-group my-2">
-                    <select class="form-select" id="inputGroupSelect01">
-                        <option selected value="0">Hà Nội</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select" formControlName="district" (ngModelChange)="onDistrictChange($event)" id="districts">
+                        <option selected value="0">Chọn quận / huyện</option>
+                        <option *ngFor="let district of districts" [ngValue]="district.id">
+                            {{ district.name }}
+                        </option>
                     </select>
                     <label class="input-group-text d-flex align-items-center justify-content-center" style="width: 25%;"
                         for="inputGroupSelect01">Quận/Huyện</label>
                 </div>
 
                 <div class="input-group my-2">
-                    <select class="form-select" id="inputGroupSelect01">
-                        <option selected value="0">Hà Nội</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select" formControlName="ward" id="wards">
+                        <option selected value="0">Chọn phường / xã</option>
+                        <option *ngFor="let ward of wards" [ngValue]="ward.id">
+                            {{ ward.name }}
+                        </option>
                     </select>
                     <label class="input-group-text d-flex align-items-center justify-content-center" style="width: 25%;"
                         for="inputGroupSelect01">Phường/Xã</label>
@@ -110,7 +110,7 @@
                 <h6 class="mt-4 mb-3">Phương thức thanh toán</h6>
                 <div class="select-payment-method border rounded form-group">
                     <div class="cod-method d-flex align-items-center">
-                        <input class="form-check-input m-0 p-0 mx-3" type="radio" name="deliveryRadio" id="codRadio">
+                        <input class="form-check-input m-0 p-0 mx-3" type="radio" name="deliveryRadio" id="codRadio" checked>
                         <label class="form-check-label w-100 py-3" for="codRadio">
                             <img class="cod-img me-2" src="../../assets/icons/delivery.png">
                             <span>Thanh toán khi giao hàng (COD)</span>
@@ -126,21 +126,21 @@
                     </div>
 
                     <div class="cod-method border-top d-flex align-items-center">
-                        <input class="form-check-input m-0 p-0 mx-3" type="radio" name="deliveryRadio" id="vnpayRadio">
+                        <input class="form-check-input m-0 p-0 mx-3" type="radio" name="deliveryRadio" id="vnpayRadio" disabled>
                         <label class="form-check-label w-100 py-3" for="vnpayRadio">
                             <img class="cod-img me-2" src="../../assets/icons/vnpay.png">
                             <span>Thanh toán VNPAY</span>
                         </label>
                     </div>
                 </div>
-            </div>
 
-            <div class="complete-buttons p-3 px-md-3 pe-lg-3">
-                <button type="button" class="btn btn-dark w-100 p-2" (click)="submitOrder()">Hoàn tất đơn hàng</button>
-                <div class="back-to-cart mt-3 d-flex justify-content-center">
-                    <a href="#" class="text-decoration-none">Giỏ hàng</a>
+                <div class="complete-buttons py-3">
+                    <button type="submit" class="btn btn-dark w-100 p-2">Hoàn tất đơn hàng</button>
+                    <div class="back-to-cart mt-3 d-flex justify-content-center">
+                        <a href="#" class="text-decoration-none">Giỏ hàng</a>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>

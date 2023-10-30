@@ -14,5 +14,7 @@ namespace API.DTOs
         public int WardId { get; set; }
         [Required]
         public string Street { get; set; }
+        [Required]
+        public string PhoneNumber { get; set; }
     }
 }

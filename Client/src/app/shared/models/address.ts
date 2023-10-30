@@ -4,4 +4,5 @@ export interface Address {
     districtId: number;
     wardId: number;
     street: string;
+    phoneNumber: string;
 }
