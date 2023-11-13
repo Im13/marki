@@ -1,5 +1,15 @@
 <div class="basket-container py-3">
-  <div class="row w-100 m-0 p-0 px-md-3 px-lg-4 px-xl-0">
+  <div *ngIf="(basketService.basketSource$ | async) === null" class="empty-cart text-center my-5 py-5">
+    <p class="my-5">
+      Giỏ hàng của bạn đang trống. Mời bạn mua thêm sản phẩm
+      <u class="text-dark" routerLink="/products" style="cursor: pointer"
+        >tại đây</u
+      >
+      .
+    </p>
+  </div>
+
+  <div *ngIf="basketService.basketSource$ | async as basket" class="row w-100 m-0 p-0 px-md-3 px-lg-4 px-xl-0">
     <div class="cart col-12 col-md-8 border p-3">
       <div class="cart-header d-flex align-items-center justify-content-between">
         <h5 class="cart-header-tittle m-0">Giỏ hàng:</h5>
@@ -9,18 +19,7 @@
       </div>
 
       <div class="cart-body">
-        <hr *ngIf="(basketService.basketSource$ | async) === null" class="my-3" />
-        <div *ngIf="(basketService.basketSource$ | async) === null" class="empty-cart text-center p-3">
-          <p class="mb-1">
-            Giỏ hàng của bạn đang trống. Mời bạn mua thêm sản phẩm
-            <u class="text-dark" routerLink="/" style="cursor: pointer"
-              >tại đây</u
-            >
-            .
-          </p>
-        </div>
-
-        <div *ngIf="basketService.basketSource$ | async as basket" class="items">
+        <div class="items">
           <div *ngFor="let item of basket.items" class="item">
             <hr class="my-3" />
 

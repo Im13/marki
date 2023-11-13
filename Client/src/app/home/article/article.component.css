@@ -91,14 +91,8 @@
     padding: 0 var(--fs-container-margin);
   }
 
-  .section-start,
   .section-img-only {
     margin-bottom: 8rem;
-  }
-
-  .section-img,
-  .section-title {
-    margin-bottom: .5rem;
   }
 
   #mb-section-start-carousel {
