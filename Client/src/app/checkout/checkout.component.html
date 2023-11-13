@@ -64,47 +64,68 @@
 
                 <div class="form-group pt-1">
                     <input type="text" class="form-control my-2" placeholder="Họ và tên" formControlName="fullName">
+                    <span *ngIf="!checkoutFrm.get('fullName').valid && checkoutFrm.get('fullName').touched" class="invalid-text">Vui lòng nhập họ tên</span>
                 </div>
 
                 <div class="form-group">
                     <input type="text" class="form-control my-2" placeholder="Số điện thoại" formControlName="phone">
+                    <span *ngIf="!checkoutFrm.get('phone').valid && checkoutFrm.get('phone').touched" class="invalid-text">Vui lòng nhập số điện thoại</span>
                 </div>
 
                 <div class="form-group">
                     <input type="text" class="form-control my-2" placeholder="Địa chỉ" formControlName="street">
+                    <span *ngIf="!checkoutFrm.get('street').valid && checkoutFrm.get('street').touched" class="invalid-text">Vui lòng nhập địa chỉ</span>
                 </div>
 
-                <div class="input-group my-2">
-                    <select class="form-select" formControlName="province" (ngModelChange)="onProvinceChange($event)" id="provinces">
-                        <option [ngValue]="0">Chọn tỉnh / thành</option>
-                        <option *ngFor="let province of provinces" [ngValue]="province.id">
-                            {{ province.name }}
-                        </option>
-                    </select>
-                    <label class="input-group-text d-flex align-items-center justify-content-center" style="width: 25%;"
-                        for="inputGroupSelect01">Tỉnh/Thành</label>
+                <div class="my-2">
+                    <div class="input-group">
+                        <select class="form-select" formControlName="province" (ngModelChange)="onProvinceChange($event)" id="provinces">
+                            <option [ngValue]="0">Chọn tỉnh / thành</option>
+                            <option *ngFor="let province of provinces" [ngValue]="province.id">
+                                {{ province.name }}
+                            </option>
+                        </select>
+                        <label class="input-group-text d-flex align-items-center justify-content-center" style="width: 25%;"
+                            for="inputGroupSelect01">Tỉnh/Thành</label>
+                    </div>
+
+                    <div>
+                        <span *ngIf="checkoutFrm.get('province').touched && checkoutFrm.get('province').value == 0" class="invalid-text">Vui lòng chọn tỉnh / thành</span>
+                    </div>
                 </div>
 
-                <div class="input-group my-2">
-                    <select class="form-select" formControlName="district" (ngModelChange)="onDistrictChange($event)" id="districts">
-                        <option selected value="0">Chọn quận / huyện</option>
-                        <option *ngFor="let district of districts" [ngValue]="district.id">
-                            {{ district.name }}
-                        </option>
-                    </select>
-                    <label class="input-group-text d-flex align-items-center justify-content-center" style="width: 25%;"
-                        for="inputGroupSelect01">Quận/Huyện</label>
-                </div>
+                <div class="my-2">
+                    <div class="input-group">
+                        <select class="form-select" formControlName="district" (ngModelChange)="onDistrictChange($event)" id="districts">
+                            <option selected value="0">Chọn quận / huyện</option>
+                            <option *ngFor="let district of districts" [ngValue]="district.id">
+                                {{ district.name }}
+                            </option>
+                        </select>
+                        <label class="input-group-text d-flex align-items-center justify-content-center" style="width: 25%;"
+                            for="inputGroupSelect01">Quận/Huyện</label>
+                    </div>
 
-                <div class="input-group my-2">
-                    <select class="form-select" formControlName="ward" id="wards">
-                        <option selected value="0">Chọn phường / xã</option>
-                        <option *ngFor="let ward of wards" [ngValue]="ward.id">
-                            {{ ward.name }}
-                        </option>
-                    </select>
-                    <label class="input-group-text d-flex align-items-center justify-content-center" style="width: 25%;"
-                        for="inputGroupSelect01">Phường/Xã</label>
+                    <div>
+                        <span *ngIf="checkoutFrm.get('district').touched && checkoutFrm.get('district').value == 0" class="invalid-text">Vui lòng chọn quận / huyện</span>
+                    </div>
+                </div>
+                
+                <div class="my-2">
+                    <div class="input-group">
+                        <select class="form-select" formControlName="ward" id="wards">
+                            <option selected value="0">Chọn phường / xã</option>
+                            <option *ngFor="let ward of wards" [ngValue]="ward.id">
+                                {{ ward.name }}
+                            </option>
+                        </select>
+                        <label class="input-group-text d-flex align-items-center justify-content-center" style="width: 25%;"
+                            for="inputGroupSelect01">Phường/Xã</label>
+                    </div>
+
+                    <div>
+                        <span *ngIf="checkoutFrm.get('ward').touched && checkoutFrm.get('ward').value == 0" class="invalid-text">Vui lòng chọn phường / xã</span>
+                    </div>
                 </div>
 
                 <h6 class="mt-4 mb-3">Phương thức thanh toán</h6>
@@ -135,7 +156,7 @@
                 </div>
 
                 <div class="complete-buttons py-3">
-                    <button type="submit" class="btn btn-dark w-100 p-2">Hoàn tất đơn hàng</button>
+                    <button type="submit" class="btn btn-dark w-100 p-2" [disabled]="!checkoutFrm.valid">Hoàn tất đơn hàng</button>
                     <div class="back-to-cart mt-3 d-flex justify-content-center">
                         <a href="#" class="text-decoration-none">Giỏ hàng</a>
                     </div>

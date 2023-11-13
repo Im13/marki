@@ -32,9 +32,9 @@ export class CheckoutComponent implements OnInit {
       fullName: new FormControl('', Validators.required),
       phone: new FormControl('', Validators.required),
       street: new FormControl('', Validators.required),
-      province: new FormControl(0),
-      district: new FormControl(0),
-      ward: new FormControl(0)
+      province: new FormControl(0, [Validators.required, this.forbiddenSelect.bind(this)]),
+      district: new FormControl(0, [Validators.required, this.forbiddenSelect.bind(this)]),
+      ward: new FormControl(0, [Validators.required, this.forbiddenSelect.bind(this)])
     })
 
     this.checkoutService.getProvinces().subscribe({
@@ -108,7 +108,6 @@ export class CheckoutComponent implements OnInit {
     if(!basket) return;
 
     const orderToCreate = this.getOrderToCreate(basket);
-    console.log(orderToCreate);
 
     if(!orderToCreate) return;
 
@@ -120,5 +119,13 @@ export class CheckoutComponent implements OnInit {
         this.router.navigate(['checkout/success'], navigationExtras);
       }
     });
+  }
+
+  forbiddenSelect(control: FormControl): {[s: string] : boolean} {
+    if(control.value == 0) {
+      return {control: false};
+    }
+
+    return null;
   }
 }
