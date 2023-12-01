@@ -1,0 +1,13 @@
+.article {
+  height: 93vh;
+}
+
+.sidebar {
+  width: 16%;
+  height: 100%;
+  background-color: #ffffff;
+}
+
+.content {
+  width: 84%;
+}
