@@ -1,0 +1,12 @@
+@media (min-width: 768px) {
+    .chechout-success-container {
+        margin-top: var(--desktop-header-height);
+        padding: 0 0 0 var(--fs-container-margin);
+        height: 80vh;
+    }
+
+    .right-section {
+        background-color: var(--secondary-white-color);
+        padding-right: var(--fs-container-margin);
+    }
+}
