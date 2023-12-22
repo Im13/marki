@@ -29,7 +29,7 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkoutFrm = new FormGroup({
-      fullName: new FormControl('', Validators.required),
+      fullname: new FormControl('', Validators.required),
       phone: new FormControl('', Validators.required),
       street: new FormControl('', Validators.required),
       province: new FormControl(0, [Validators.required, this.forbiddenSelect.bind(this)]),
@@ -66,7 +66,7 @@ export class CheckoutComponent implements OnInit {
   private getOrderToCreate(basket: Basket) {
     const deliveryMethodId = 1;
     const shipToAddress: Address = {
-      fullName: this.checkoutFrm.value.fullName,
+      fullname: this.checkoutFrm.value.fullName,
       cityOrProvinceId: this.checkoutFrm.value.province,
       districtId: this.checkoutFrm.value.district,
       street: this.checkoutFrm.value.street,

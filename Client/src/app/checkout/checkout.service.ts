@@ -30,4 +30,8 @@ export class CheckoutService {
   getWardsByDistrictId(districtId: number) {
     return this.http.get<Ward[]>(this.baseUrl + 'address/wards/' + districtId);
   }
+
+  getOrderByIdOnly(orderId: number) {
+    return this.http.get<Order>(this.baseUrl + 'orders/orderOnly/' + orderId);
+  }
 }

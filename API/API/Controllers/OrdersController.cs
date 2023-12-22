@@ -1,4 +1,3 @@
-using System.Security.Claims;
 using API.DTOs;
 using API.Errors;
 using API.Extensions;
@@ -30,6 +29,18 @@ namespace API.Controllers
             if(order == null) return BadRequest(new ApiResponse(400, "Problem creating order")); 
 
             return Ok(order);
+        }
+
+        [HttpGet("orderOnly/{id}")]
+        public async Task<ActionResult<OrderToReturnDTO>> GetOrderById(int id)
+        {
+            var order = await _orderService.GetOrderByOrderIdAsync(id);
+
+            if(order == null) return NotFound(new ApiResponse(404));
+
+            var ordToReturn = _mapper.Map<OrderToReturnDTO>(order);
+
+            return ordToReturn;
         }
 
         [Authorize]

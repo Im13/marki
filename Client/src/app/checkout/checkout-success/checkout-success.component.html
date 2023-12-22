@@ -1,8 +1,8 @@
-<div class="chechout-success-container">
+<div *ngIf="order" class="chechout-success-container">
     <div class="row h-100">
         <div class="col-6 border-end d-flex flex-column">
-            <h5 class="mt-4 mb-4">Đặt hàng thành công</h5>
-            <p class="mb-3">Mã đơn hàng: #SAMPLE</p>
+            <h5 class="mt-4 mb-4">Đặt hàng thành công!</h5>
+            <p class="mb-3">Mã đơn hàng: {{ order.id }}</p>
             <p class="mb-3">Cảm ơn bạn đã mua hàng tại Marki!</p>
             <p class="mb-3">Nhân viên bán hàng của Marki sẽ liên hệ với quý khách sớm, bằng số điện thoại 0848.666.765.</p>
             <p class="mb-3">Quý khách vui lòng nghe máy để được xác nhận đơn hàng! Marki xin cảm ơn!</p>
@@ -14,9 +14,9 @@
             <div class="border p-2">
                 <p class="mb-1 fs-3">Thông tin đơn hàng</p>
                 <p class="mb-1 fs-5">Thông tin giao hàng</p>
-                <p class="mb-1">Name</p>
-                <p class="mb-1">0988220012</p>
-                <p class="mb-1">24 Hàng Rươi</p>
+                <p class="mb-1">{{ order.shipToAddress.fullname }}</p>
+                <p class="mb-1">{{ order.shipToAddress.phoneNumber }}</p>
+                <p class="mb-1">{{ order.shipToAddress.street }}</p>
                 <p class="mb-1">Phường</p>
                 <p class="mb-1">Quận</p>
                 <p class="mb-1">Thành phố</p>
@@ -31,18 +31,18 @@
             </div>
         </div>
         <div class="col-6 right-section">
-            <div class="items">
+            <div *ngFor="let item of order.orderItems" class="items">
                 <div class="border-bottom item p-3 d-flex align-items-center justify-content-between">
                     <div class="d-flex align-items-center">
-                        <img src="../../../assets/product-image/COD.png" class="border rounded">
-                        <span class="item-no border d-flex align-items-center justify-content-center">1</span>
+                        <img [src]="item.pictureUrl" class="border rounded">
+                        <span class="item-no border d-flex align-items-center justify-content-center">{{ item.quantity }}</span>
                         <div class="ms-3 d-flex flex-column item-description">
-                            <h6 class="mb-1">b</h6>
+                            <h6 class="mb-1">{{ item.productName }}</h6>
                             <span>This is thuoc tinh</span>
                         </div>
                     </div>
 
-                    <h6>100.000đ</h6>
+                    <h6>{{ item.price | number }}</h6>
                 </div>
             </div>
 

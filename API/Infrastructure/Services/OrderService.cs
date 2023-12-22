@@ -75,5 +75,12 @@ namespace Infrastructure.Services
 
             return await _unitOfWork.Repository<Order>().ListAsync(spec);
         }
+
+        public async Task<Order> GetOrderByOrderIdAsync(int id) 
+        {
+            var spec = new OrdersWithItemsAndOrderingSpecification(id);
+
+            return await _unitOfWork.Repository<Order>().GetEntityWithSpec(spec);
+        }
     }
 }

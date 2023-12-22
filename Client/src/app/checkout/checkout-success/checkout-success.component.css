@@ -1,3 +1,16 @@
+.item {
+    position: relative;
+}
+
+.item-no {
+    position: absolute;
+    top: .5rem;
+    left: 4.3rem;
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 50%;
+}
+
 @media (min-width: 768px) {
     .chechout-success-container {
         margin-top: var(--desktop-header-height);
@@ -8,5 +21,17 @@
     .right-section {
         background-color: var(--secondary-white-color);
         padding-right: var(--fs-container-margin);
+    }
+
+    .item>div>img {
+        width: 4rem;
+        height: 4rem;
+    }
+
+    .item-no {
+        background-color: var(--secondary-white-color);
+        color: var(--black-color);
+        font-size: .7rem;
+        font-weight: 700;
     }
 }

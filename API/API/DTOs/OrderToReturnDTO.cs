@@ -15,5 +15,8 @@ namespace API.DTOs
         public decimal Subtotal { get; set; }
         public decimal Total { get; set; }
         public string Status { get; set; }
+        public string Province { get; set; }
+        public string Ward { get; set; }
+        public string District { get; set; }
     }
 }
