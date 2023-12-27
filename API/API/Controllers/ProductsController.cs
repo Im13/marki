@@ -5,6 +5,7 @@ using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specification;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -15,15 +16,18 @@ namespace API.Controllers
         private readonly IGenericRepository<ProductType> _productTypeRepo;
         private readonly IMapper _mapper;
         private readonly IGenericRepository<ProductBrand> _productBrandRepo;
+        private readonly IProductService _productService;
         public ProductsController(IGenericRepository<Product> productRepo,
         IGenericRepository<ProductBrand> productBrandRepo,
         IGenericRepository<ProductType> productTypeRepo,
-        IMapper mapper)
+        IMapper mapper,
+        IProductService productService)
         {
             _productBrandRepo = productBrandRepo;
             _productTypeRepo = productTypeRepo;
             _mapper = mapper;
             _productRepo = productRepo;
+            _productService = productService;
         }
 
         [HttpGet]
@@ -68,6 +72,18 @@ namespace API.Controllers
         {
             var types = await _productTypeRepo.ListAllAsync();
             return Ok(types);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<ProductToReturnDTO>> CreateProduct(ProductDTO productDTO) 
+        {
+            var product = _mapper.Map<ProductDTO,Product>(productDTO);
+
+            var resProduct = await _productService.CreateProduct(product);
+
+            if(resProduct == null) return BadRequest(new ApiResponse(400, "Problem creating product")); 
+
+            return Ok(resProduct);
         }
     }
 }
