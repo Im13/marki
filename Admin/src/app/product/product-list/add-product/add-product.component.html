@@ -1,4 +1,4 @@
-<form [formGroup]="addForm" >
+<form [formGroup]="addForm" (ngSubmit)="onSubmit()">
     <div class="modal-header">
         <h5 class="modal-title pull-left">{{ title }}</h5>
         <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
@@ -11,22 +11,22 @@
                 <div class="product-details p-2">
                     <div class="mb-3">
                         <label for="productName" class="form-label m-0 mb-1">Tên sản phẩm</label>
-                        <input type="text" class="form-control form-control-sm rounded-0" id="productName" placeholder="Tên sản phẩm">
+                        <input type="text" class="form-control form-control-sm rounded-0" id="productName" placeholder="Tên sản phẩm" formControlName="productName">
                     </div>
-    
+
                     <div class="mb-3">
                         <label for="productSKU" class="form-label m-0 mb-1">SKU sản phẩm</label>
-                        <input type="text" class="form-control form-control-sm rounded-0" id="productSKU" placeholder="SKU sản phẩm">
+                        <input type="text" class="form-control form-control-sm rounded-0" id="productSKU" placeholder="SKU sản phẩm" formControlName="productSKU">
                     </div>
-    
+
                     <div class="mb-3">
                         <label for="importPrice" class="form-label m-0 mb-1">Giá nhập</label>
-                        <input type="text" class="form-control form-control-sm rounded-0" id="importPrice" placeholder="Giá nhập">
+                        <input type="text" class="form-control form-control-sm rounded-0" id="importPrice" placeholder="Giá nhập" formControlName="importPrice">
                     </div>
-    
+
                     <div>
                         <label for="price" class="form-label m-0 mb-1">Giá bán</label>
-                        <input type="text" class="form-control form-control-sm rounded-0" id="price" placeholder="Giá bán">
+                        <input type="text" class="form-control form-control-sm rounded-0" id="price" placeholder="Giá bán" formControlName="price">
                     </div>
                 </div>
             </div>
@@ -34,28 +34,28 @@
                 <div class="supplier p-2">
                     <div class="mb-3">
                         <label for="productType" class="form-label m-0 mb-1">Danh mục</label>
-                        <input type="text" class="form-control form-control-sm rounded-0" id="productType" placeholder="Danh mục">
+                        <input type="text" class="form-control form-control-sm rounded-0" id="productType" placeholder="Danh mục" formControlName="productTypeId">
                     </div>
-    
+
                     <div class="mb-3">
                         <label for="productBrand" class="form-label m-0 mb-1">Thương hiệu</label>
-                        <input type="text" class="form-control form-control-sm rounded-0" id="productBrand" placeholder="Thương hiệu">
+                        <input type="text" class="form-control form-control-sm rounded-0" id="productBrand" placeholder="Thương hiệu" formControlName="productBrandId">
                     </div>
-    
+
                     <div class="mb-3">
                         <label for="pictureUrl" class="form-label m-0 mb-1">Ảnh sản phẩm</label>
-                        <input type="text" class="form-control form-control-sm rounded-0" id="pictureUrl" placeholder="Ảnh sản phẩm">
+                        <input type="text" class="form-control form-control-sm rounded-0" id="pictureUrl" placeholder="Ảnh sản phẩm" formControlName="pictureUrl">
                     </div>
-    
+
                     <div class="mb-3">
                         <label for="description" class="form-label m-0 mb-1">Mô tả sản phẩm</label>
-                        <textarea class="form-control form-control-sm rounded-0" id="description" placeholder="Mô tả sản phẩm" rows="4"></textarea>
+                        <textarea class="form-control form-control-sm rounded-0" id="description" placeholder="Mô tả sản phẩm" rows="4" formControlName="productDescription"></textarea>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-primary btn-sm rounded-0">Lưu</button>
+        <button type="submit" class="btn btn-primary btn-sm rounded-0">Lưu</button>
     </div>
 </form>

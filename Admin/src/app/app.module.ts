@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { OrderModule } from './order/order.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { ToastrModule } from 'ngx-toastr';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,12 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     BrowserAnimationsModule,
     CoreModule,
     OrderModule,
-    ModalModule.forRoot()
+    HttpClientModule,
+    ModalModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
