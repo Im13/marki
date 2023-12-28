@@ -1,0 +1,11 @@
+.modal-body {
+    background-color: #EDEDED;
+}
+
+.modal-body > div > div > div {
+    background-color: #FFFFFF;
+}
+
+label {
+    font-size: .8rem;
+}
