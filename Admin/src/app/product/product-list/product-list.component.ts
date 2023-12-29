@@ -14,7 +14,6 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.openAddProductModal();
   }
 
   openAddProductModal() {
