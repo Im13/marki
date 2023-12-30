@@ -1,7 +1,12 @@
 <div class="product-list-container">
   <div class="control-bar d-flex flex-row px-2">
-    <button class="btn btn-sm fa fa-plus btn-outline-primary rounded-0 me-2" (click)="openAddProductModal()"></button>
-    <button class="btn btn-sm fa fa-plus btn-outline-primary rounded-0 me-2"></button>
+    <button
+      class="btn btn-sm fa fa-plus btn-outline-primary rounded-0 me-2"
+      (click)="openAddProductModal()"
+    ></button>
+    <button
+      class="btn btn-sm fa fa-plus btn-outline-primary rounded-0 me-2"
+    ></button>
   </div>
 
   <div class="list-products border mt-3 px-2">
@@ -9,7 +14,7 @@
       <thead>
         <tr>
           <th scope="col">
-            <input type="checkbox">
+            <input type="checkbox" />
           </th>
           <th scope="col">SKU sản phẩm</th>
           <th scope="col">Tên sản phẩm</th>
@@ -24,7 +29,7 @@
       <tbody>
         <tr>
           <th>
-            <input type="checkbox">
+            <input type="checkbox" />
           </th>
           <th scope="row">1</th>
           <td>Shopee</td>
@@ -37,7 +42,7 @@
         </tr>
         <tr>
           <th>
-            <input type="checkbox">
+            <input type="checkbox" />
           </th>
           <th scope="row">1</th>
           <td>Shopee</td>
@@ -50,7 +55,7 @@
         </tr>
         <tr>
           <th>
-            <input type="checkbox">
+            <input type="checkbox" />
           </th>
           <th scope="row">1</th>
           <td>Shopee</td>
@@ -63,5 +68,17 @@
         </tr>
       </tbody>
     </table>
+
+    <div class="d-flex justify-content-center">
+      <pagination
+        [boundaryLinks]="true"
+        [totalItems]="77"
+        previousText="&lsaquo;"
+        nextText="&rsaquo;"
+        firstText="&laquo;"
+        lastText="&raquo;"
+      >
+      </pagination>
+    </div>
   </div>
 </div>

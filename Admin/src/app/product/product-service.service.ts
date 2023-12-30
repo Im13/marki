@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Product } from '../shared/models/products';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { ProductParams } from '../shared/models/productParams';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,15 @@ import { environment } from 'src/environments/environment';
 
 export class ProductService {
   baseUrl = environment.apiUrl;
+  productParams: ProductParams;
 
   constructor(private http: HttpClient) { }
 
   addProduct(product: Product) {
     return this.http.post(this.baseUrl + 'products', product);
+  }
+
+  setProductParams(params) {
+    this.productParams = params;
   }
 }
