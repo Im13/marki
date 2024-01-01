@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../shared/models/products';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ProductParams } from '../shared/models/productParams';
+import { Pagination } from '../shared/models/pagination';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,6 @@ import { ProductParams } from '../shared/models/productParams';
 
 export class ProductService {
   baseUrl = environment.apiUrl;
-  productParams: ProductParams;
 
   constructor(private http: HttpClient) { }
 
@@ -18,7 +18,12 @@ export class ProductService {
     return this.http.post(this.baseUrl + 'products', product);
   }
 
-  setProductParams(params) {
-    this.productParams = params;
+  getProducts(productParams: ProductParams) {
+    let params = new HttpParams();
+
+    params = params.append('pageSize', productParams.pageSize);
+    params = params.append('pageIndex', productParams.pageIndex);
+
+    return this.http.get<Pagination<Product[]>>(this.baseUrl + 'admin/products', { params });
   }
 }

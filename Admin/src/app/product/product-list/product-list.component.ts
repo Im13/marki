@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { AddProductComponent } from './add-product/add-product.component';
+import { ProductParams } from 'src/app/shared/models/productParams';
+import { ProductService } from '../product-service.service';
+import { Product } from 'src/app/shared/models/products';
 
 @Component({
   selector: 'app-product-list',
@@ -8,12 +11,17 @@ import { AddProductComponent } from './add-product/add-product.component';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
+  products: Product[] = [];
   bsModalRef?: BsModalRef;
-  
-  constructor(private modalService: BsModalService) {
+  productParams = new ProductParams();
+
+  totalCount = 0;
+
+  constructor(private modalService: BsModalService, private productService: ProductService) {
   }
 
   ngOnInit(): void {
+    this.getProducts();
   }
 
   openAddProductModal() {
@@ -26,5 +34,27 @@ export class ProductListComponent implements OnInit {
 
     this.bsModalRef = this.modalService.show(AddProductComponent, initialState);
     this.bsModalRef.content.closeBtnName = 'Close';
+  }
+
+  onPageChanged(event: any) {
+    console.log(event.page);
+    if(this.productParams.pageIndex !== event.page) {
+      this.productParams.pageIndex = event.page;
+      this.getProducts();
+    }
+  }
+
+  getProducts() {
+    this.productService.getProducts(this.productParams).subscribe({
+      next: response => {
+        this.products = response.data;
+        this.productParams.pageIndex = response.pageIndex;
+        this.productParams.pageSize = response.pageSize;
+        this.totalCount = response.count;
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
   }
 }
