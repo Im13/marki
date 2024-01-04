@@ -27,7 +27,8 @@ export class ProductListComponent implements OnInit {
   openAddProductModal() {
     const initialState: ModalOptions = {
       initialState: {
-        title: 'Thiết lập sản phẩm'
+        title: 'Thiết lập sản phẩm',
+        isEdit: false
       },
       class: 'modal-xl'
     }
@@ -56,5 +57,19 @@ export class ProductListComponent implements OnInit {
         console.log(err);
       }
     });
+  }
+
+  editProduct(product: Product) {
+    const initialState: ModalOptions = {
+      initialState: {
+        title: 'Thiết lập sản phẩm',
+        product: product,
+        isEdit: true
+      },
+      class: 'modal-xl'
+    }
+
+    this.bsModalRef = this.modalService.show(AddProductComponent, initialState);
+    this.bsModalRef.content.closeBtnName = 'Close';
   }
 }

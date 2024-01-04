@@ -13,25 +13,30 @@ import { ToastrService } from 'ngx-toastr';
 
 export class AddProductComponent implements OnInit {
   title?: string;
+  product?: Product;
+  isEdit?: boolean;
   closeBtnName?: string;
   addForm: FormGroup;
-  product = {} as Product;
 
   constructor(public bsModalRef: BsModalRef,
     private productService: ProductService,
     private toastrService: ToastrService) {}
 
   ngOnInit() {
+    if(this.product == null) this.product = {} as Product;
+
     this.addForm = new FormGroup({
-      'productName': new FormControl(),
-      'productDescription': new FormControl(),
-      'price': new FormControl(),
-      'pictureUrl': new FormControl(),
-      'productTypeId': new FormControl(),
-      'productBrandId': new FormControl(),
-      'productSKU': new FormControl(),
-      'importPrice': new FormControl()
+      'productName': new FormControl(this.product.name),
+      'productDescription': new FormControl(this.product.description),
+      'price': new FormControl(this.product.price),
+      'pictureUrl': new FormControl(this.product.pictureUrl),
+      'productTypeId': new FormControl(this.product.productTypeId),
+      'productBrandId': new FormControl(this.product.productBrandId),
+      'productSKU': new FormControl(this.product.productSKU),
+      'importPrice': new FormControl(this.product.importPrice)
     })
+
+    console.log(this.product);
   }
 
   onSubmit() {
