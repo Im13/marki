@@ -12,10 +12,12 @@ namespace API.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IGenericRepository<Product> _productRepo;
-        public AdminController(IGenericRepository<Product> productRepo, IMapper mapper)
+        private readonly IProductService _productService;
+        public AdminController(IGenericRepository<Product> productRepo, IMapper mapper, IProductService productService)
         {
             _productRepo = productRepo;
             _mapper = mapper;
+            _productService = productService;
         }
 
         [HttpGet("products")]
@@ -32,6 +34,29 @@ namespace API.Controllers
             var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductDTO>>(products);
 
             return Ok(new Pagination<ProductDTO>(productParams.PageIndex, productParams.PageSize, totalItems, data));
+        }
+
+        [HttpPut("product")]
+        public async Task<ActionResult> EditProduct(ProductDTO productDTO)
+        {
+            //Check if product with SKU exists
+            var product = await _productService.GetProductBySKUAsync(productDTO.ProductSKU);
+
+            if(product == null) return BadRequest("Product not exists!");
+
+            //Update product by productDTO
+            product.PictureUrl = productDTO.PictureUrl;
+            product.ProductBrandId = productDTO.ProductBrandId;
+            product.Price = productDTO.Price;
+            product.ImportPrice = productDTO.ImportPrice;
+            product.ProductTypeId = productDTO.ProductTypeId;
+            product.Description = productDTO.Description;
+
+            var productUpdatedResult = await _productService.UpdateProduct(product);
+
+            if(productUpdatedResult == null) return BadRequest("Error update product.");
+
+            return Ok(productUpdatedResult);
         }
     }
 }

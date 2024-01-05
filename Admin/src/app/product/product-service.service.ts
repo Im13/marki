@@ -18,6 +18,10 @@ export class ProductService {
     return this.http.post(this.baseUrl + 'products', product);
   }
 
+  editProduct(product: Product) {
+    return this.http.put(this.baseUrl + 'admin/product', product);
+  }
+
   getProducts(productParams: ProductParams) {
     let params = new HttpParams();
 

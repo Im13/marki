@@ -23,5 +23,23 @@ namespace Infrastructure.Services
 
             return prod;
         }
+
+        public async Task<Product> GetProductBySKUAsync(string productSKU)
+        {
+            var products = await _unitOfWork.Repository<Product>().ListAllAsync();
+
+            return products.SingleOrDefault(p => p.ProductSKU == productSKU);
+        }
+
+        public async Task<Product> UpdateProduct(Product product) 
+        {
+            _unitOfWork.Repository<Product>().Update(product);
+
+            var result = await _unitOfWork.Complete();
+
+            if(result <= 0) return null;
+
+            return product;
+        }
     }
 }
