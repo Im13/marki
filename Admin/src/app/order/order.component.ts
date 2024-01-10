@@ -8,7 +8,6 @@ import { Component, OnInit } from '@angular/core';
 export class OrderComponent implements OnInit {
 
   ngOnInit(): void {
-    console.log('order loaded!')
   }
 
 }

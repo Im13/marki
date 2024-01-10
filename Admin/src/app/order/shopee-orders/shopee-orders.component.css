@@ -1,0 +1,7 @@
+input[type="file"] {
+    display: none;
+}
+
+.input-file-btn {
+    cursor: pointer;
+}
