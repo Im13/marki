@@ -31,7 +31,10 @@
               "src/styles.css",
               "./node_modules/ngx-toastr/toastr.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "ts-xlsx"
+            ]
           },
           "configurations": {
             "production": {

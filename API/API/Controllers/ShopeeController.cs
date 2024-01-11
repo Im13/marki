@@ -9,11 +9,11 @@ namespace API.Controllers
             
         }
 
-        [HttpPost("create-orders"), DisableRequestSizeLimit]
-        public async Task<IActionResult> CreateOrders(IFormFile formFile)
+        [HttpPost("create-orders")]
+        public async Task<IActionResult> CreateOrders(IFormFile file)
         {
             try {
-                var name = formFile.FileName;
+                var name = file.FileName;
                 return Ok();
             } catch (Exception e) 
             {
