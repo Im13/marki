@@ -19,7 +19,7 @@ export class ShopeeOrdersComponent implements OnInit {
     const file: File = event.target.files[0];
 
     if(file) {
-      this.orderService.handleExcelFile(file);
+      this.orderService.readExcelFile(file);
     }
   }
 

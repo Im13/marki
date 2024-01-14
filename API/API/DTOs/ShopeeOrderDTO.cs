@@ -12,14 +12,14 @@ namespace API.DTOs
         public string ProductName { get; set; }
         public string ProductPropertySKU { get; set; }
         public string ProductProperty { get; set; }
-        public decimal MainPrice { get; set; }
+        public decimal Cost { get; set; }
         public decimal ShopDiscount { get; set; }
         public decimal ShopeeSale { get; set; }
         public decimal TotalShopSale { get; set; }
         public decimal SalePrice { get; set; }
         public int Quantity { get; set; }
         public int ReturnedQuantity { get; set; }
-        public decimal PureTotal { get; set; }
+        public decimal TotalSellingPrice { get; set; }
         public decimal TotalOrderValue { get; set; }
         public decimal ShopVoucher { get; set; }
         public decimal ShopeeCoinReturn { get; set; }
@@ -31,10 +31,9 @@ namespace API.DTOs
         public decimal EstimatedShoppingFeeShopeeDiscount { get; set; }
         public decimal ReturnOrderFee { get; set; }
         public decimal TotalOrderCustomerPaid { get; set; }
-        public string OrderCompleteDate { get; set; }
+        public string OrderCompletedDate { get; set; }
         public string OrderPaidDate { get; set; }
         public string PaymentMethod { get; set; }
-        public decimal MyProperty { get; set; }
         public decimal FixedFee { get; set; }
         public decimal ServiceFee { get; set; }
         public decimal PaymentFee { get; set; }
