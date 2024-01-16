@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../order.service';
+import { ShopeeOrder } from 'src/app/shared/models/shopeeOrder';
 
 @Component({
   selector: 'app-shopee-orders',
@@ -16,10 +17,15 @@ export class ShopeeOrdersComponent implements OnInit {
   constructor(private orderService: OrderService) {}
 
   onFileSelected(event) {
+    var orders: ShopeeOrder[];
     const file: File = event.target.files[0];
 
     if(file) {
-      this.orderService.readExcelFile(file);
+      orders = this.orderService.readExcelFile(file);
+
+      if(orders) {
+        console.log(orders);
+      }
     }
   }
 
