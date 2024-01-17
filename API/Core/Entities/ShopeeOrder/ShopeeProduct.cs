@@ -1,8 +1,7 @@
 namespace Core.Entities.ShopeeOrder
 {
-    public class ShopeeProduct
+    public class ShopeeProduct : BaseEntity
     {
-        public int Id { get; set; }
         public string SKU { get; set; }
         public string ProductName { get; set; }
         public string ProductPropertySKU { get; set; }

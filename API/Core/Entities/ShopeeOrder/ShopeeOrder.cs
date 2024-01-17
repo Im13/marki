@@ -1,8 +1,7 @@
 namespace Core.Entities.ShopeeOrder
 {
-    public class ShopeeOrder
+    public class ShopeeOrder : BaseEntity
     {
-        public int Id { get; set; }
         public string OrderId { get; set; }
         public string OrderDate { get; set; }
         public string OrderStatus { get; set; }
