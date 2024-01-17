@@ -15,8 +15,9 @@ export class OrderService {
 
   constructor(private http: HttpClient) { }
 
-  uploadShopeeOrdersFile(excelFile: FormData) {
-    return this.http.post(this.baseApiUrl + 'shopee/create-orders', excelFile);
+  uploadShopeeOrdersFile(orders: ShopeeOrder[]) {
+    console.log(orders)
+    return this.http.post(this.baseApiUrl + 'shopee/create-orders', orders);
   }
 
   readExcelFile(file: File) {
@@ -37,6 +38,15 @@ export class OrderService {
       data = utils.sheet_to_json(ws, {header: 1});
 
       this.parseDataToObject(data, orders);
+
+      this.uploadShopeeOrdersFile(orders).subscribe({
+        next: () => {
+          console.log('done');
+        },
+        error: (e) => {
+          console.log(e);
+        }
+      });
     }
 
     fileReader.readAsArrayBuffer(file);
@@ -79,7 +89,7 @@ export class OrderService {
     var order = orders.find(o => o.orderId === orderId);
 
     if(order) {
-      order.product.push(product);
+      order.products.push(product);
     } else {
       if(orderTableRow[columnDict[OrderConstants.OrderConstants.ORDER_STATUS]] !== OrderConstants.OrderStatusConstants.IS_CANCELED) {
         var shopeeOrder: ShopeeOrder = {
@@ -115,7 +125,7 @@ export class OrderService {
           totalOrderCustomerPaid: orderTableRow[columnDict[OrderConstants.OrderConstants.TOTAL_ORDER_CUSTOMER_PAID]],
           totalOrderValue: orderTableRow[columnDict[OrderConstants.OrderConstants.TOTAL_ORDER_VALUE]],
           ward: orderTableRow[columnDict[OrderConstants.OrderConstants.WARD]],
-          product: [product]
+          products: [product]
         };
 
         orders.push(shopeeOrder);

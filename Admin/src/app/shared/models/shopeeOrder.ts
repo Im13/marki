@@ -33,5 +33,5 @@ export interface ShopeeOrder {
     ward: string;
     addressDetails: string;
     note: string;
-    product: ShopeeProduct[];
+    products: ShopeeProduct[];
 }

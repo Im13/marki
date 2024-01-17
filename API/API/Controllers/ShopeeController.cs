@@ -1,3 +1,4 @@
+using API.DTOs.Shopee;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -10,15 +11,10 @@ namespace API.Controllers
         }
 
         [HttpPost("create-orders")]
-        public async Task<IActionResult> CreateOrders(IFormFile file)
+        public async Task<IActionResult> CreateOrders(List<ShopeeOrderDTO> orders)
         {
-            try {
-                var name = file.FileName;
-                return Ok();
-            } catch (Exception e) 
-            {
-                return StatusCode(500, $"Internal server error: {e}");
-            }
+            var order = orders;
+            return Ok();
         }
     }
 }

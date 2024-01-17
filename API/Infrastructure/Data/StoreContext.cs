@@ -1,6 +1,7 @@
 using System.Reflection;
 using Core.Entities;
 using Core.Entities.OrderAggregate;
+using Core.Entities.ShopeeOrder;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data
@@ -20,6 +21,8 @@ namespace Infrastructure.Data
         public DbSet<Province> Provinces { get; set; }
         public DbSet<District> Districts { get; set; }
         public DbSet<Ward> Wards { get; set; }
+        public DbSet<ShopeeOrder> ShopeeOrders { get; set; }
+        public DbSet<ShopeeProduct> ShopeeProducts { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

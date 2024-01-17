@@ -9,6 +9,6 @@ export interface ShopeeProduct {
     totalShopSale: number;
     salePrice: number;
     quantity: number;
-    returnedQuantity: number;
+    returnedQuantity: string;
     totalSellingPrice: number;
 }

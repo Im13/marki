@@ -1,25 +1,14 @@
-namespace API.DTOs
+namespace Core.Entities.ShopeeOrder
 {
-    public class ShopeeOrderDTO
+    public class ShopeeOrder
     {
+        public int Id { get; set; }
         public string OrderId { get; set; }
         public string OrderDate { get; set; }
         public string OrderStatus { get; set; }
         public string ShipmentCode { get; set; }
         public string ShippingCompany { get; set; }
         public string ReturnStatus { get; set; }
-        public string SKU { get; set; }
-        public string ProductName { get; set; }
-        public string ProductPropertySKU { get; set; }
-        public string ProductProperty { get; set; }
-        public decimal Cost { get; set; }
-        public decimal ShopDiscount { get; set; }
-        public decimal ShopeeSale { get; set; }
-        public decimal TotalShopSale { get; set; }
-        public decimal SalePrice { get; set; }
-        public int Quantity { get; set; }
-        public int ReturnedQuantity { get; set; }
-        public decimal TotalSellingPrice { get; set; }
         public decimal TotalOrderValue { get; set; }
         public decimal ShopVoucher { get; set; }
         public decimal ShopeeCoinReturn { get; set; }
@@ -46,5 +35,6 @@ namespace API.DTOs
         public string Ward { get; set; }
         public string AddressDetails { get; set; }
         public string Note { get; set; }
+        public IReadOnlyList<ShopeeProduct> Products { get; set; }
     }
 }

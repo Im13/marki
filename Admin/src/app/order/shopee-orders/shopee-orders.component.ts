@@ -24,7 +24,11 @@ export class ShopeeOrdersComponent implements OnInit {
       orders = this.orderService.readExcelFile(file);
 
       if(orders) {
-        console.log(orders);
+        // this.orderService.uploadShopeeOrdersFile(orders).subscribe({
+        //   next: () => {
+        //     console.log('done');
+        //   }
+        // });
       }
     }
   }
