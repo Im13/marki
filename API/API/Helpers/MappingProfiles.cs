@@ -1,7 +1,9 @@
 using API.DTOs;
+using API.DTOs.Shopee;
 using AutoMapper;
 using Core.Entities;
 using Core.Entities.OrderAggregate;
+using Core.Entities.ShopeeOrder;
 
 namespace API.Helpers
 {
@@ -30,6 +32,9 @@ namespace API.Helpers
                 .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.ItemOrdered.PictureUrl))
                 .ForMember(d => d.PictureUrl, o => o.MapFrom<OrderItemUrlResolver>());
             CreateMap<ProductDTO, Product>();
+            CreateMap<ShopeeOrderProductDTO,ShopeeProduct>()
+                .ForMember(d => d.SKU, o => o.MapFrom(s => s.ProductSKU));
+            CreateMap<ShopeeOrderDTO,ShopeeOrder>();
         }
     }
 }

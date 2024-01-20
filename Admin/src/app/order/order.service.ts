@@ -16,7 +16,6 @@ export class OrderService {
   constructor(private http: HttpClient) { }
 
   uploadShopeeOrdersFile(orders: ShopeeOrder[]) {
-    console.log(orders)
     return this.http.post(this.baseApiUrl + 'shopee/create-orders', orders);
   }
 
