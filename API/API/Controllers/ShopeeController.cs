@@ -1,4 +1,5 @@
 using API.DTOs.Shopee;
+using API.Errors;
 using AutoMapper;
 using Core.Entities.ShopeeOrder;
 using Core.Interfaces;
@@ -22,12 +23,12 @@ namespace API.Controllers
         {
             var shopeeOrders = _mapper.Map<List<ShopeeOrderDTO>,List<ShopeeOrder>>(orders);
 
-            var updateResult = await _shopeeOrderService.CreateOrdersAsync(shopeeOrders);
+            var addedOrders = await _shopeeOrderService.CreateOrdersAsync(shopeeOrders);
 
-            if(updateResult) 
-                return Ok();
+            if(addedOrders == null) 
+                return BadRequest(new ApiResponse(400, "Problem creating order"));
 
-            return BadRequest("Problem create orders!");
+            return Ok(addedOrders);
         }
     }
 }

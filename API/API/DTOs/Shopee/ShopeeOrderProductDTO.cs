@@ -12,7 +12,7 @@ namespace API.DTOs.Shopee
         public decimal TotalShopSale { get; set; }
         public decimal SalePrice { get; set; }
         public int Quantity { get; set; }
-        public int ReturnedQuantity { get; set; }
+        public string ReturnedQuantity { get; set; }
         public decimal TotalSellingPrice { get; set; }
     }
 }
