@@ -39,8 +39,8 @@ export class OrderService {
       this.parseDataToObject(data, orders);
 
       this.uploadShopeeOrdersFile(orders).subscribe({
-        next: () => {
-          console.log('done');
+        next: (addedOrders: ShopeeOrder[]) => {
+          console.log(addedOrders);
         },
         error: (e) => {
           console.log(e);
@@ -77,7 +77,7 @@ export class OrderService {
       productPropertySKU: orderTableRow[columnDict[OrderConstants.OrderConstants.PRODUCT_PROPERTY_SKU]],
       productSKU: orderTableRow[columnDict[OrderConstants.OrderConstants.SKU]],
       quantity: orderTableRow[columnDict[OrderConstants.OrderConstants.QUANTITY]],
-      returnedQuantity: orderTableRow[columnDict[OrderConstants.OrderConstants.RETURNED_QUANTITY]],
+      returnedQuantity: orderTableRow[columnDict[OrderConstants.OrderConstants.RETURNED_QUANTITY]].toString(),
       salePrice: orderTableRow[columnDict[OrderConstants.OrderConstants.SALE_PRICE]],
       shopDiscount: orderTableRow[columnDict[OrderConstants.OrderConstants.SHOP_DISCOUNT]],
       shopeeSale: orderTableRow[columnDict[OrderConstants.OrderConstants.SHOPEE_SALE]],

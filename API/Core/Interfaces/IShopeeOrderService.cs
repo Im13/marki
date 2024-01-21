@@ -4,6 +4,6 @@ namespace Core.Interfaces
 {
     public interface IShopeeOrderService 
     {
-        Task<bool> CreateOrdersAsync(List<ShopeeOrder> orders);
+        Task<List<ShopeeOrder>> CreateOrdersAsync(List<ShopeeOrder> orders);
     }
 }
