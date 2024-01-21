@@ -3,6 +3,7 @@ using API.Errors;
 using AutoMapper;
 using Core.Entities.ShopeeOrder;
 using Core.Interfaces;
+using Core.Specification;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -29,6 +30,12 @@ namespace API.Controllers
                 return BadRequest(new ApiResponse(400, "Problem creating order"));
 
             return Ok(addedOrders);
+        }
+
+        [HttpGet("get-orders")]
+        public async Task<IActionResult> GetOrders([FromQuery]ShopeeOrderSpecParams productParams)
+        {
+            return Ok();
         }
     }
 }
