@@ -4,6 +4,7 @@ namespace Core.Specification
 {
     public interface ISpecification<T>
     {
+        //Create generic expression, taking function as param, return bool
         Expression<Func<T, bool>> Criteria { get; }
         List<Expression<Func<T, object>>> Includes { get; }
         Expression<Func<T, object>> OrderBy { get; }

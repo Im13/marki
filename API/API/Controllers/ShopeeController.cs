@@ -1,5 +1,6 @@
 using API.DTOs.Shopee;
 using API.Errors;
+using API.Helpers;
 using AutoMapper;
 using Core.Entities.ShopeeOrder;
 using Core.Interfaces;
@@ -12,11 +13,13 @@ namespace API.Controllers
     {
         private readonly IShopeeOrderService _shopeeOrderService;
         private readonly IMapper _mapper;
+        private readonly IGenericRepository<ShopeeOrder> _shopeeOrderRepo;
 
-        public ShopeeController(IShopeeOrderService shopeeOrderService, IMapper mapper)
+        public ShopeeController(IShopeeOrderService shopeeOrderService, IMapper mapper, IGenericRepository<ShopeeOrder> shopeeOrderRepo)
         {
             _shopeeOrderService = shopeeOrderService;
             _mapper = mapper;
+            _shopeeOrderRepo = shopeeOrderRepo;
         }
 
         [HttpPost("create-orders")]
@@ -33,9 +36,17 @@ namespace API.Controllers
         }
 
         [HttpGet("get-orders")]
-        public async Task<IActionResult> GetOrders([FromQuery]ShopeeOrderSpecParams productParams)
+        public async Task<IActionResult> GetOrders([FromQuery]ShopeeOrderSpecParams shopeeOrderSpecParams)
         {
-            return Ok();
+            var spec = new ShopeeOrderSpecification(shopeeOrderSpecParams);
+
+            var totalItems = await _shopeeOrderRepo.CountAsync(spec);
+
+            var shopeOrders = await _shopeeOrderRepo.ListAsync(spec);
+
+            var data = _mapper.Map<IReadOnlyList<ShopeeOrder>,IReadOnlyList<ShopeeOrderDTO>>(shopeOrders);
+            
+            return Ok(new Pagination<ShopeeOrderDTO>(shopeeOrderSpecParams.PageIndex, shopeeOrderSpecParams.PageSize, totalItems, data));
         }
     }
 }
