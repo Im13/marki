@@ -40,7 +40,9 @@ namespace API.Controllers
         {
             var spec = new ShopeeOrderSpecification(shopeeOrderSpecParams);
 
-            var totalItems = await _shopeeOrderRepo.CountAsync(spec);
+            var countSpec = new ShopeeOrderWithFilterForCountSpecification(shopeeOrderSpecParams);
+
+            var totalItems = await _shopeeOrderRepo.CountAsync(countSpec);
 
             var shopeOrders = await _shopeeOrderRepo.ListAsync(spec);
 

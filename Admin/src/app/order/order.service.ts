@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { read, utils } from "xlsx";
@@ -6,6 +6,8 @@ import * as XLSX from 'xlsx';
 import * as OrderConstants from './order.constants';
 import { ShopeeOrder } from '../shared/models/shopeeOrder';
 import { ShopeeProduct } from '../shared/models/shopeeProduct';
+import { ShopeeOrderParams } from '../shared/models/shopeeOrderParams';
+import { Pagination } from '../shared/models/pagination';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +19,15 @@ export class OrderService {
 
   uploadShopeeOrdersFile(orders: ShopeeOrder[]) {
     return this.http.post(this.baseApiUrl + 'shopee/create-orders', orders);
+  }
+
+  getShopeeOrdersPagination(shopeeOrderParams: ShopeeOrderParams) {
+    let params = new HttpParams();
+
+    params = params.append('pageSize', shopeeOrderParams.pageSize);
+    params = params.append('pageIndex', shopeeOrderParams.pageIndex);
+
+    return this.http.get<Pagination<ShopeeOrder[]>>(this.baseApiUrl + 'shopee/get-orders', { params });
   }
 
   readExcelFile(file: File) {

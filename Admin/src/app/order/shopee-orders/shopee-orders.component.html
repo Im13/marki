@@ -10,7 +10,7 @@
     <input type="file" accept=".xlsx" class="file-input" (change)="onFileSelected($event)" #fileUpload>
   </div>
 
-  <div class="data mt-3 px-2">
+  <div class="data mt-3 px-2" *ngIf="shopeeOrders.length > 0">
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -24,34 +24,31 @@
         </tr>
       </thead>
       <tbody class="table-group-divider">
-        <tr>
-          <th scope="row">1</th>
-          <td>Shopee</td>
-          <td>Marki</td>
-          <td>100,000</td>
-          <td>Hà Nội</td>
-          <td>12/01/2023</td>
-          <td>Chờ xác nhận</td>
-        </tr>
-        <tr>
-          <th scope="row">1</th>
-          <td>Shopee</td>
-          <td>Mark</td>
-          <td>100,000</td>
-          <td>Hà Nội</td>
-          <td>12/01/2023</td>
-          <td>Chờ xác nhận</td>
-        </tr>
-        <tr>
-          <th scope="row">1</th>
-          <td>Shopee</td>
-          <td>Mark</td>
-          <td>100,000</td>
-          <td>Hà Nội</td>
-          <td>12/01/2023</td>
-          <td>Chờ xác nhận</td>
+        <tr *ngFor="let order of shopeeOrders">
+          <th scope="row">{{ order.orderId }}</th>
+          <td>{{ order.shipmentCode }}</td>
+          <td>{{ order.customerUsername }}</td>
+          <td>{{ order.totalOrderValue }}</td>
+          <td>{{ order.province }}</td>
+          <td>{{ order.orderDate }}</td>
+          <td>{{ order.orderStatus }}</td>
         </tr>
       </tbody>
     </table>
+
+    <div class="d-flex justify-content-center">
+      <pagination
+        [boundaryLinks]="true"
+        [totalItems]="totalCount"
+        [itemsPerPage]="orderParams.pageSize"
+        [maxSize]="10"
+        (pageChanged)="onPageChanged($event)"
+        previousText="&lsaquo;"
+        nextText="&rsaquo;"
+        firstText="&laquo;"
+        lastText="&raquo;"
+      >
+      </pagination>
+    </div>
   </div>
 </div>

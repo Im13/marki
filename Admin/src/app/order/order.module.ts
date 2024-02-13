@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { OrderRoutingModule } from './order-routing.module';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ShopeeOrdersComponent } from './shopee-orders/shopee-orders.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ShopeeOrdersComponent } from './shopee-orders/shopee-orders.component';
     CommonModule,
     RouterModule,
     OrderRoutingModule,
-    TabsModule.forRoot()
+    TabsModule.forRoot(),
+    SharedModule
   ],
   exports: [
     OrderComponent
