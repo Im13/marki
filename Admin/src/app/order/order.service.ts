@@ -8,12 +8,14 @@ import { ShopeeOrder } from '../shared/models/shopeeOrder';
 import { ShopeeProduct } from '../shared/models/shopeeProduct';
 import { ShopeeOrderParams } from '../shared/models/shopeeOrderParams';
 import { Pagination } from '../shared/models/pagination';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
   baseApiUrl = environment.apiUrl;
+  addedOrders = new Subject<ShopeeOrder[]>();
 
   constructor(private http: HttpClient) { }
 
@@ -51,10 +53,10 @@ export class OrderService {
 
       this.uploadShopeeOrdersFile(orders).subscribe({
         next: (addedOrders: ShopeeOrder[]) => {
-          console.log(addedOrders);
+          this.addedOrders.next(addedOrders);
         },
         error: (e) => {
-          console.log(e);
+          this.addedOrders.next(null);;
         }
       });
     }
@@ -114,7 +116,7 @@ export class OrderService {
           fixedFee: orderTableRow[columnDict[OrderConstants.OrderConstants.FIXED_FEE]],
           note: orderTableRow[columnDict[OrderConstants.OrderConstants.NOTE]],
           orderCompletedDate: orderTableRow[columnDict[OrderConstants.OrderConstants.ORDER_COMPLETED_DATE]],
-          orderDate: orderTableRow[columnDict[OrderConstants.OrderConstants.ORDER_DATE]],
+          orderDate: new Date(String(orderTableRow[columnDict[OrderConstants.OrderConstants.ORDER_DATE]])) ,
           orderId: orderTableRow[columnDict[OrderConstants.OrderConstants.ORDER_ID]],
           orderPaidDate: orderTableRow[columnDict[OrderConstants.OrderConstants.ORDER_PAID_DATE]],
           orderStatus: orderTableRow[columnDict[OrderConstants.OrderConstants.ORDER_STATUS]],

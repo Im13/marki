@@ -5,3 +5,7 @@ input[type="file"] {
 .input-file-btn {
     cursor: pointer;
 }
+
+.data {
+    font-size: .95rem;
+}

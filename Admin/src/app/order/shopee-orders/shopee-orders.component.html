@@ -28,9 +28,9 @@
           <th scope="row">{{ order.orderId }}</th>
           <td>{{ order.shipmentCode }}</td>
           <td>{{ order.customerUsername }}</td>
-          <td>{{ order.totalOrderValue }}</td>
+          <td>{{ order.totalOrderValue | number }}</td>
           <td>{{ order.province }}</td>
-          <td>{{ order.orderDate }}</td>
+          <td>{{ order.orderDate | date : 'dd/MM/yyyy, HH:mm' }}</td>
           <td>{{ order.orderStatus }}</td>
         </tr>
       </tbody>

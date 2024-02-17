@@ -1,24 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { OrderService } from '../order.service';
 import { ShopeeOrder } from 'src/app/shared/models/shopeeOrder';
 import { ShopeeOrderParams } from 'src/app/shared/models/shopeeOrderParams';
+import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-shopee-orders',
   templateUrl: './shopee-orders.component.html',
   styleUrls: ['./shopee-orders.component.css']
 })
-export class ShopeeOrdersComponent implements OnInit {
+export class ShopeeOrdersComponent implements OnInit, OnDestroy {
   fileName = '';
   shopeeOrders: ShopeeOrder[] = [];
   orderParams = new ShopeeOrderParams();
   totalCount = 0;
 
+  private orderSubscription: Subscription;
+  
+  constructor(private orderService: OrderService, private toastrService: ToastrService) {}
+
   ngOnInit(): void {
     this.getOrders();
+
+    this.orderSubscription = this.orderService.addedOrders.subscribe(
+      (shopeeOrders: ShopeeOrder[]) => {
+        if(shopeeOrders !== null) {
+          this.getOrders();
+          this.toastrService.success('Cập nhật đơn Shopee thành công!');
+        } else {
+          this.toastrService.error('Lỗi! Không có đơn hàng nào được cập nhật.')
+        }
+      }
+    );
   }
 
-  constructor(private orderService: OrderService) {}
+  ngOnDestroy(): void {
+    this.orderSubscription.unsubscribe();
+  }
 
   onFileSelected(event) {
     var orders: ShopeeOrder[];
@@ -26,10 +45,6 @@ export class ShopeeOrdersComponent implements OnInit {
 
     if(file) {
       orders = this.orderService.readExcelFile(file);
-
-      if(orders) {
-        this.getOrders();
-      }
     }
   }
 
