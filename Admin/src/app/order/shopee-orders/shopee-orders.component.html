@@ -17,9 +17,11 @@
           <th scope="col">Mã đơn hàng</th>
           <th scope="col">Mã vận đơn</th>
           <th scope="col">Tên người mua</th>
+          <th scope="col">Số lượng SP</th>
+          <!-- Doanh thu chưa trừ chi phí -->
           <th scope="col">Doanh thu</th>
-          <th scope="col">Tỉnh/Thành</th>
           <th scope="col">Ngày đặt hàng</th>
+          <th scope="col">Tỉnh/Thành</th>
           <th scope="col">Trạng thái</th>
         </tr>
       </thead>
@@ -28,9 +30,10 @@
           <th scope="row">{{ order.orderId }}</th>
           <td>{{ order.shipmentCode }}</td>
           <td>{{ order.customerUsername }}</td>
+          <td>{{ order.products.length }}</td>
           <td>{{ order.totalOrderValue | number }}</td>
-          <td>{{ order.province }}</td>
           <td>{{ order.orderDate | date : 'dd/MM/yyyy, HH:mm' }}</td>
+          <td>{{ order.province }}</td>
           <td>{{ order.orderStatus }}</td>
         </tr>
       </tbody>
