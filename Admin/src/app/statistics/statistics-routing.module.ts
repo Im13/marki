@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { StatisticsComponent } from './statistics.component';
 import { ShopeeRevenueComponent } from './shopee-revenue/shopee-revenue.component';
 
@@ -12,7 +11,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    RouterModule.forChild(routes)
   ]
 })
 export class StatisticsRoutingModule { }

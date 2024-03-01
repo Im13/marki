@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StatisticsComponent } from './statistics.component';
 import { ShopeeRevenueComponent } from './shopee-revenue/shopee-revenue.component';
+import { StatisticsRoutingModule } from './statistics-routing.module';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -11,7 +13,9 @@ import { ShopeeRevenueComponent } from './shopee-revenue/shopee-revenue.componen
     ShopeeRevenueComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule,
+    StatisticsRoutingModule
   ]
 })
 export class StatisticsModule { }
