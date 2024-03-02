@@ -3,9 +3,8 @@
     <button
       class="btn btn-sm fa fa-plus btn-outline-primary rounded-0 me-2"
       (click)="openAddProductModal()"
-    ></button>
-    <button
-      class="btn btn-sm fa fa-plus btn-outline-primary rounded-0 me-2"
+      [popover]="'Thêm mới sản phẩm'"
+      triggers="mouseenter:mouseleave"
     ></button>
   </div>
 

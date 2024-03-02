@@ -4,7 +4,7 @@ import { StatisticsComponent } from './statistics.component';
 import { ShopeeRevenueComponent } from './shopee-revenue/shopee-revenue.component';
 import { StatisticsRoutingModule } from './statistics-routing.module';
 import { RouterModule } from '@angular/router';
-
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 @NgModule({
@@ -15,7 +15,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     RouterModule,
-    StatisticsRoutingModule
+    StatisticsRoutingModule,
+    BsDatepickerModule.forRoot()
   ]
 })
 export class StatisticsModule { }

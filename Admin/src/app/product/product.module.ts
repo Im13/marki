@@ -6,6 +6,7 @@ import { ProductRoutingModule } from './product-routing.module';
 import { AddProductComponent } from './product-list/add-product/add-product.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { PopoverModule } from 'ngx-bootstrap/popover';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SharedModule } from '../shared/shared.module';
     RouterModule,
     ProductRoutingModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    PopoverModule.forRoot()
   ],
   exports: [
     ProductListComponent

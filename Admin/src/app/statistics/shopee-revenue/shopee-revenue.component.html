@@ -1,1 +1,44 @@
-<p>shopee-revenue works!</p>
+<div class="shopee-revenue-container border border-warning h-100 m-0 px-2 d-flex flex-column">
+    <div class="control-bar d-flex row m-0">
+        <div class="col-3 p-0 d-flex flex-row">
+            <div class="d-flex align-items-center px-2 w-25">Thời gian</div>
+            <div class="w-50">
+                <input type="text" placeholder="Hôm nay" class="form-control form-control-sm rounded-0" bsDatepicker
+                    [bsValue]="today" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', adaptivePosition: true }">
+            </div>
+        </div>
+    </div>
+
+    <div class="data mt-3 border border-danger h-100 d-flex flex-column justify-content-between">
+        <div class="table-content border border-warning">
+            <table class="table table-bordered" *ngIf="shopeeOrders.length <= 0">
+                <thead>
+                    <tr>
+                        <th scope="col">Mã đơn hàng</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col">Sản phẩm</th>
+                        <th scope="col">Số lượng</th>
+                        <th scope="col">Doanh thu</th>
+                        <th scope="col">Giá nhập</th>
+                        <th scope="col">Lợi nhuận</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr *ngFor="let order of shopeeOrders">
+                        <th scope="row">{{ order.orderId }}</th>
+                        <td>{{ order.shipmentCode }}</td>
+                        <td>{{ order.customerUsername }}</td>
+                        <td>{{ order.products.length }}</td>
+                        <td>{{ order.totalOrderValue | number }}</td>
+                        <td>{{ order.orderDate | date : 'dd/MM/yyyy, HH:mm' }}</td>
+                        <td>{{ order.province }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-footer border d-flex align-items-center px-2">
+            <div>Doanh thu: </div>
+        </div>
+    </div>
+</div>
