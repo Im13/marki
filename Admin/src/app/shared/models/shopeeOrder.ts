@@ -1,6 +1,6 @@
 import { ShopeeProduct } from "./shopeeProduct";
 
-export interface ShopeeOrder {
+export class ShopeeOrder {
     orderId: string;
     orderDate: Date;
     orderStatus: string;

@@ -50,5 +50,19 @@ namespace API.Controllers
             
             return Ok(new Pagination<ShopeeOrderDTO>(shopeeOrderSpecParams.PageIndex, shopeeOrderSpecParams.PageSize, totalItems, data));
         }
+
+        [HttpGet("statistic/get-orders")]
+        public async Task<IActionResult> GetOrdersStatistic([FromQuery]ShopeeOrderSpecParams shopeeOrderSpecParams)
+        {
+            var spec = new ShopeeOrderSpecification(shopeeOrderSpecParams);
+
+            var countSpec = new ShopeeOrderWithFilterForCountSpecification(shopeeOrderSpecParams);
+
+            var totalItems = await _shopeeOrderRepo.CountAsync(countSpec);
+
+            var shopeOrders = await _shopeeOrderRepo.ListAsync(spec);
+
+            return Ok();
+        }
     }
 }

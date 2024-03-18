@@ -9,6 +9,7 @@ import { OrderModule } from './order/order.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
       preventDuplicates: true
     })
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

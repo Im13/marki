@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { read, utils } from "xlsx";
 import * as XLSX from 'xlsx';
@@ -17,7 +18,7 @@ export class OrderService {
   baseApiUrl = environment.apiUrl;
   addedOrders = new Subject<ShopeeOrder[]>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private datePipe: DatePipe) { }
 
   uploadShopeeOrdersFile(orders: ShopeeOrder[]) {
     return this.http.post(this.baseApiUrl + 'shopee/create-orders', orders);
@@ -28,7 +29,13 @@ export class OrderService {
 
     params = params.append('pageSize', shopeeOrderParams.pageSize);
     params = params.append('pageIndex', shopeeOrderParams.pageIndex);
+    
+    if(shopeeOrderParams.date) {
+      shopeeOrderParams.date = this.datePipe.transform(shopeeOrderParams.date, "dd/MM/yyyy");
 
+      params = params.append('date', shopeeOrderParams.date);
+    }
+    
     return this.http.get<Pagination<ShopeeOrder[]>>(this.baseApiUrl + 'shopee/get-orders', { params });
   }
 

@@ -11,6 +11,7 @@ namespace Core.Specification
         }
         public string Sort {get; set;}
         private string _search;
+        public string Date { get; set; }
         public string Search { 
             get => _search; 
             set => _search = value.ToLower(); 
