@@ -34,7 +34,8 @@ namespace API.Helpers
             CreateMap<ProductDTO, Product>();
             CreateMap<ShopeeOrderProductDTO,ShopeeProduct>()
                 .ForMember(d => d.SKU, o => o.MapFrom(s => s.ProductSKU));
-            CreateMap<ShopeeOrderDTO,ShopeeOrder>();
+            CreateMap<ShopeeOrderDTO,ShopeeOrder>()
+                .ForMember(d => d.OrderDate, o => o.MapFrom(s => DateTime.ParseExact(s.OrderDate, "dd/MM/yyyy H:mm", null)));
             CreateMap<ShopeeOrder,ShopeeOrderDTO>();
             CreateMap<ShopeeProduct,ShopeeOrderProductDTO>()
                 .ForMember(d => d.ProductSKU, o => o.MapFrom(s => s.SKU));

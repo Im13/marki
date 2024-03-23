@@ -123,7 +123,7 @@ export class OrderService {
           fixedFee: orderTableRow[columnDict[OrderConstants.OrderConstants.FIXED_FEE]],
           note: orderTableRow[columnDict[OrderConstants.OrderConstants.NOTE]],
           orderCompletedDate: orderTableRow[columnDict[OrderConstants.OrderConstants.ORDER_COMPLETED_DATE]],
-          orderDate: new Date(String(orderTableRow[columnDict[OrderConstants.OrderConstants.ORDER_DATE]])) ,
+          orderDate: this.datePipe.transform(String(orderTableRow[columnDict[OrderConstants.OrderConstants.ORDER_DATE]]), 'dd/MM/yyyy H:mm') ,
           orderId: orderTableRow[columnDict[OrderConstants.OrderConstants.ORDER_ID]],
           orderPaidDate: orderTableRow[columnDict[OrderConstants.OrderConstants.ORDER_PAID_DATE]],
           orderStatus: orderTableRow[columnDict[OrderConstants.OrderConstants.ORDER_STATUS]],

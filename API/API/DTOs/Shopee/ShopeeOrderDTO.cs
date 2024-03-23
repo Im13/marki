@@ -3,7 +3,7 @@ namespace API.DTOs.Shopee
     public class ShopeeOrderDTO
     {
         public string OrderId { get; set; }
-        public DateTime OrderDate { get; set; }
+        public string OrderDate { get; set; }
         public string OrderStatus { get; set; }
         public string ShipmentCode { get; set; }
         public string ShippingCompany { get; set; }

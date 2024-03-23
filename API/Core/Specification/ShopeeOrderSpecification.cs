@@ -5,8 +5,7 @@ namespace Core.Specification
     public class ShopeeOrderSpecification : BaseSpecification<ShopeeOrder>
     {
         public ShopeeOrderSpecification(ShopeeOrderSpecParams shopeeOrderParams) : base(x => 
-            (string.IsNullOrEmpty(shopeeOrderParams.Search) || x.OrderId.Contains(shopeeOrderParams.Search)) &&
-            (string.IsNullOrEmpty(shopeeOrderParams.Date) || x.OrderDate.Date == DateTime.ParseExact(shopeeOrderParams.Date, "dd/MM/yyyy", null).Date))
+            (string.IsNullOrEmpty(shopeeOrderParams.Search) || x.OrderId.Contains(shopeeOrderParams.Search)))
         {
             AddInclude(x => x.Products);
             AddOrderByDescending(x => x.OrderDate);

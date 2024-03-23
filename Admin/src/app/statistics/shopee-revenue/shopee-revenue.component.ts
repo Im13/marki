@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { OrderService } from 'src/app/order/order.service';
-import { ShopeeOrder } from 'src/app/shared/models/shopeeOrder';
 import { ShopeeOrderParams } from 'src/app/shared/models/shopeeOrderParams';
+import { ShopeeOrderProducts } from 'src/app/shared/models/shopeeOrderProducts';
+import { StatisticsService } from '../statistics.service';
 
 @Component({
   selector: 'app-shopee-revenue',
@@ -10,28 +11,39 @@ import { ShopeeOrderParams } from 'src/app/shared/models/shopeeOrderParams';
 })
 export class ShopeeRevenueComponent {
   today: Date;
-  shopeeOrders: ShopeeOrder[] = [];
+  shopeeOrderProducts: ShopeeOrderProducts[] = [];
   orderParams = new ShopeeOrderParams();
-  totalCount = 0;
+  totalRevenue = 0;
 
-  constructor(private orderService: OrderService) {
+  constructor(private statisticService: StatisticsService) {
     this.today = new Date();
     this.orderParams.date = this.today.toString();
-
-    this.getOrders();
   }
 
   getOrders() {
-    this.orderService.getShopeeOrdersPagination(this.orderParams).subscribe({
+    this.totalRevenue = 0;
+
+    this.statisticService.getShopeeOrdersStatistics(this.orderParams).subscribe({
       next: response => {
-        this.shopeeOrders = response.data;
-        this.orderParams.pageIndex = response.pageIndex;
-        this.orderParams.pageSize = response.pageSize;
-        this.totalCount = response.count;
+        this.shopeeOrderProducts = response;
+        this.shopeeOrderProducts.forEach(prod => {
+          this.totalRevenue += prod.revenue;
+        });
+        console.log(this.shopeeOrderProducts);
+        // this.orderParams.pageIndex = response.pageIndex;
+        // this.orderParams.pageSize = response.pageSize;
+        // this.totalCount = response.count;
       },
       error: err => {
         console.log(err);
       }
     });
+  }
+
+  onDateChange(value: Date) {
+    console.log(value);
+    this.totalRevenue = 0;
+    this.orderParams.date = value.toString();
+    this.getOrders();
   }
 }

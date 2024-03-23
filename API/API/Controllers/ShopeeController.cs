@@ -52,17 +52,15 @@ namespace API.Controllers
         }
 
         [HttpGet("statistic/get-orders")]
-        public async Task<IActionResult> GetOrdersStatistic([FromQuery]ShopeeOrderSpecParams shopeeOrderSpecParams)
+        public async Task<List<ShopeeOrderProducts>> GetOrdersStatistic([FromQuery]ShopeeOrderSpecParams shopeeOrderSpecParams)
         {
-            var spec = new ShopeeOrderSpecification(shopeeOrderSpecParams);
+            var spec = new ShopeeProductsInOrdersSpecification(shopeeOrderSpecParams);
 
-            var countSpec = new ShopeeOrderWithFilterForCountSpecification(shopeeOrderSpecParams);
+            var shopeeOrders = await _shopeeOrderRepo.ListAsync(spec);
 
-            var totalItems = await _shopeeOrderRepo.CountAsync(countSpec);
+            var orderProducts = await _shopeeOrderService.GetOrderProductsStatistic(shopeeOrders.ToList());
 
-            var shopeOrders = await _shopeeOrderRepo.ListAsync(spec);
-
-            return Ok();
+            return orderProducts;
         }
     }
 }

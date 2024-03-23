@@ -2,7 +2,7 @@ import { ShopeeProduct } from "./shopeeProduct";
 
 export class ShopeeOrder {
     orderId: string;
-    orderDate: Date;
+    orderDate: string;
     orderStatus: string;
     shipmentCode: string;
     shippingCompany: string;

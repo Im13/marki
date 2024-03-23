@@ -3,14 +3,17 @@
         <div class="col-3 p-0 d-flex flex-row">
             <div class="d-flex align-items-center justify-content-start px-2 w-25 border">Thời gian</div>
             <div class="w-50">
-                <input type="text" placeholder="Hôm nay" class="form-control form-control-sm rounded-0" bsDatepicker
-                    [bsValue]="today" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', adaptivePosition: true }">
+                <input type="text" placeholder="Hôm nay" class="form-control form-control-sm rounded-0" 
+                    bsDatepicker
+                    [bsValue]="today" 
+                    [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', adaptivePosition: true }"
+                    (bsValueChange)="onDateChange($event)">
             </div>
         </div>
     </div>
 
-    <div class="data mt-3 border border-danger h-100 d-flex flex-column justify-content-between">
-        <div class="table-content border border-warning">
+    <div class="data mt-3 border border-danger h-100 d-flex flex-column justify-content-between overflow-y-auto">
+        <div class="table-content border border-warning overflow-y-auto">
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -24,25 +27,25 @@
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                    <tr *ngFor="let order of shopeeOrders">
+                    <tr *ngFor="let order of shopeeOrderProducts">
                         <th scope="row">{{ order.orderId }}</th>
                         <td>{{ order.orderStatus }}</td>
-                        <td>{{ order.products }}</td>
-                        <td>{{ order.products.length }}</td>
-                        <td>{{ order.totalOrderValue | number }}</td>
-                        <td>{{ order.orderDate | date : 'dd/MM/yyyy, HH:mm' }}</td>
-                        <td>{{ order.province }}</td>
+                        <td>{{ order.productName }}</td>
+                        <td>{{ order.productQuantity }}</td>
+                        <td>{{ order.revenue | number }}</td>
+                        <td>{{ order.importPrice | number }}</td>
+                        <td>{{ order.orderProfit | number }}</td>
                     </tr>
                 </tbody>
             </table>
 
-            <div class="empty-table mt-3 border d-flex justify-content-center" *ngIf="shopeeOrders.length <= 0">
+            <div class="empty-table mt-3 border d-flex justify-content-center" *ngIf="shopeeOrderProducts.length <= 0">
                 <span>Không có đơn hàng</span>
             </div>
         </div>
 
         <div class="table-footer border d-flex align-items-center px-2">
-            <div>Doanh thu: </div>
+            <div>Doanh thu: {{ totalRevenue | number}}</div>
         </div>
     </div>
 </div>
