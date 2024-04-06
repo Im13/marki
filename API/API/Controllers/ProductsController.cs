@@ -79,6 +79,10 @@ namespace API.Controllers
         {
             var product = _mapper.Map<ProductDTO,Product>(productDTO);
 
+            var productWithSKUExists = await _productService.GetProductBySKUAsync(productDTO.ProductSKU);
+
+            if (productWithSKUExists != null) return BadRequest("Product with this SKU has exists!");
+
             var resProduct = await _productService.CreateProduct(product);
 
             if(resProduct == null) return BadRequest(new ApiResponse(400, "Problem creating product")); 

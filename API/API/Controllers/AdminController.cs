@@ -21,7 +21,7 @@ namespace API.Controllers
         }
 
         [HttpGet("products")]
-        public async Task<ActionResult<Pagination<ProductDTO>>> GetProducts([FromQuery]ProductSpecParams productParams)
+        public async Task<ActionResult<Pagination<ProductDTO>>> GetProducts([FromQuery] ProductSpecParams productParams)
         {
             var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
 
@@ -39,22 +39,31 @@ namespace API.Controllers
         [HttpPut("product")]
         public async Task<ActionResult> EditProduct(ProductDTO productDTO)
         {
-            //Check if product with SKU exists
-            var product = await _productService.GetProductBySKUAsync(productDTO.ProductSKU);
+            //Find product by Id
+            var product = await _productRepo.GetByIdAsync(productDTO.Id);
 
-            if(product == null) return BadRequest("Product not exists!");
+            if (product == null) return BadRequest("Product not exists!");
+
+            //Check if product with SKU exists
+            if (product.ProductSKU != productDTO.ProductSKU)
+            {
+                var productWithSKUExists = await _productService.GetProductBySKUAsync(productDTO.ProductSKU);
+
+                if (productWithSKUExists != null) return BadRequest("Product with this SKU has exists!");
+            }
 
             //Update product by productDTO
-            product.PictureUrl = productDTO.PictureUrl;
             product.ProductBrandId = productDTO.ProductBrandId;
             product.Price = productDTO.Price;
             product.ImportPrice = productDTO.ImportPrice;
             product.ProductTypeId = productDTO.ProductTypeId;
             product.Description = productDTO.Description;
+            product.Name = productDTO.Name;
+            product.ProductSKU = productDTO.ProductSKU;
 
             var productUpdatedResult = await _productService.UpdateProduct(product);
 
-            if(productUpdatedResult == null) return BadRequest("Error update product.");
+            if (productUpdatedResult == null) return BadRequest("Error update product.");
 
             return Ok(productUpdatedResult);
         }

@@ -79,7 +79,8 @@ namespace Infrastructure.Services
                         OrderStatus = order.OrderStatus,
                         ProductName = product.ProductName,
                         ProductQuantity = product.Quantity,
-                        Revenue = revenue
+                        Revenue = revenue,
+                        ProductSKU = product.SKU
                     });
                 }
             }

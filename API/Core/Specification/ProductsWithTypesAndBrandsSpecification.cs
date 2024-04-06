@@ -12,7 +12,7 @@ namespace Core.Specification
         {
             AddInclude(x => x.ProductType);
             AddInclude(x => x.ProductBrand);
-            AddOrderBy(x => x.Name);
+            AddOrderByDescending(x => x.Id);
             ApplyPaging(productParams.PageSize * (productParams.PageIndex - 1), productParams.PageSize);
 
             if(!string.IsNullOrEmpty(productParams.Sort))

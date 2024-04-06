@@ -9,5 +9,6 @@ namespace Core.Entities.ShopeeOrder
         public decimal Revenue { get; set; }
         public decimal ImportPrice { get; set; }
         public decimal OrderProfit { get; set; }
+        public string ProductSKU { get; set; }
     }
 }
