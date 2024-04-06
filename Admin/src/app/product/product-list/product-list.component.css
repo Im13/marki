@@ -1,3 +1,12 @@
 .table-edit-button:hover {
     cursor: pointer;
 }
+
+.product-picture {
+    width: 35px;
+    height: 35px;
+}
+
+.data {
+    font-size: .95rem;
+}

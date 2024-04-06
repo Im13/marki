@@ -11,3 +11,7 @@ thead {
     position: sticky; 
     top: 0;
 }
+
+.data {
+    font-size: .95rem;
+}

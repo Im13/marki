@@ -46,7 +46,8 @@ export class AddProductComponent implements OnInit {
     this.product.pictureUrl = "images/products/sb-ang1.png";
     this.product.price = +this.addForm.value.price;
     this.product.productBrandId = 1;
-    this.product.description = this.addForm.value.productDescription;
+    this.product.description = "sample";
+    // this.product.description = this.addForm.value.productDescription;
     this.product.productSKU = this.addForm.value.productSKU;
     this.product.productTypeId = 1;
 

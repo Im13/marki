@@ -20,6 +20,7 @@
                         <th scope="col">Mã đơn hàng</th>
                         <th scope="col">Trạng thái</th>
                         <th scope="col">Sản phẩm</th>
+                        <th scope="col">SKU</th>
                         <th scope="col">Số lượng</th>
                         <th scope="col">Doanh thu</th>
                         <th scope="col">Giá nhập</th>
@@ -31,6 +32,7 @@
                         <th scope="row">{{ order.orderId }}</th>
                         <td>{{ order.orderStatus }}</td>
                         <td>{{ order.productName }}</td>
+                        <td>{{ order.productSKU }}</td>
                         <td>{{ order.productQuantity }}</td>
                         <td>{{ order.revenue | number }}</td>
                         <td>{{ order.importPrice | number }}</td>

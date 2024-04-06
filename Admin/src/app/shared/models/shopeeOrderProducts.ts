@@ -6,4 +6,5 @@ export class ShopeeOrderProducts {
     revenue: number;
     importPrice: number;
     orderProfit: number;
+    productSKU: string;
 }

@@ -1,5 +1,5 @@
-<div class="product-list-container">
-  <div class="control-bar d-flex flex-row px-2">
+<div class="product-list-container border border-warning h-100 m-0 px-2 ">
+  <div class="control-bar d-flex flex-row py-1">
     <button
       class="btn btn-sm fa fa-plus btn-outline-primary rounded-0 me-2"
       (click)="openAddProductModal()"
@@ -8,8 +8,8 @@
     ></button>
   </div>
 
-  <div class="list-products border mt-3 px-2">
-    <table class="table table-light table-striped">
+  <div class="data list-products border mt-3">
+    <table class="table table-light table-hover">
       <thead>
         <tr>
           <th scope="col">
@@ -17,23 +17,21 @@
           </th>
           <th scope="col">SKU sản phẩm</th>
           <th scope="col">Tên sản phẩm</th>
+          <th scope="col">Hình ảnh</th>
           <th scope="col">Giá nhập</th>
           <th scope="col">Giá bán</th>
-          <th scope="col">Hình ảnh</th>
-          <th scope="col">Thao tác</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of products">
-          <th>
+        <tr *ngFor="let product of products" role="button">
+          <th class="align-middle">
             <input type="checkbox" />
           </th>
-          <th scope="row">{{ product.productSKU }}</th>
-          <td>{{ product.name }}</td>
-          <td>{{ product.importPrice }}</td>
-          <td>{{ product.price }}</td>
-          <td>{{ product.pictureUrl }}</td>
-          <td><a class="table-edit-button" (click)="editProduct(product)">Sửa</a></td>
+          <th class="align-middle" scope="row" (click)="editProduct(product)">{{ product.productSKU }}</th>
+          <td class="align-middle" (click)="editProduct(product)">{{ product.name }}</td>
+          <td class="align-middle" (click)="editProduct(product)"><img [src]="product.pictureUrl" alt="product picture" class="product-picture"></td>
+          <td class="align-middle" (click)="editProduct(product)">{{ product.importPrice | number }}</td>
+          <td class="align-middle" (click)="editProduct(product)">{{ product.price | number }}</td>
         </tr>
       </tbody>
     </table>

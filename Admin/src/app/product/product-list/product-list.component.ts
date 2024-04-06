@@ -4,6 +4,7 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { ProductParams } from 'src/app/shared/models/productParams';
 import { ProductService } from '../product-service.service';
 import { Product } from 'src/app/shared/models/products';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -14,6 +15,7 @@ export class ProductListComponent implements OnInit {
   products: Product[] = [];
   bsModalRef?: BsModalRef;
   productParams = new ProductParams();
+  subscriptions: Subscription = new Subscription();
 
   totalCount = 0;
 
@@ -35,6 +37,12 @@ export class ProductListComponent implements OnInit {
 
     this.bsModalRef = this.modalService.show(AddProductComponent, initialState);
     this.bsModalRef.content.closeBtnName = 'Close';
+
+    this.subscriptions.add(
+      this.modalService.onHide.subscribe((reason: string | any) => {
+        this.getProducts();
+      })
+    );
   }
 
   onPageChanged(event: any) {
@@ -71,5 +79,11 @@ export class ProductListComponent implements OnInit {
 
     this.bsModalRef = this.modalService.show(AddProductComponent, initialState);
     this.bsModalRef.content.closeBtnName = 'Close';
+
+    this.subscriptions.add(
+      this.modalService.onHide.subscribe((reason: string | any) => {
+        this.getProducts();
+      })
+    );
   }
 }
