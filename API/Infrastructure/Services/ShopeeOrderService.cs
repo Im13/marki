@@ -64,7 +64,7 @@ namespace Infrastructure.Services
                     {
                         orderId = order.OrderId;
                         revenue = orderRevenueDict[order.OrderId] - order.ServiceFee - order.PaymentFee - order.ShopVoucher;
-                        profit = revenue - productDetails.ImportPrice * product.Quantity;
+                        profit = revenue - importPrice * product.Quantity;
                     }
                     else
                     {

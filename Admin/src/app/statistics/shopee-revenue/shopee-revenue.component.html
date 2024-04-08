@@ -3,9 +3,9 @@
         <div class="col-3 p-0 d-flex flex-row">
             <div class="d-flex align-items-center justify-content-start px-2 w-25 border">Thời gian</div>
             <div class="w-50">
-                <input type="text" placeholder="Hôm nay" class="form-control form-control-sm rounded-0" 
+                <input type="text" placeholder="Hôm nay" class="form-control form-control-sm rounded-0"
                     bsDatepicker
-                    [bsValue]="today" 
+                    [bsValue]="today"
                     [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', adaptivePosition: true }"
                     (bsValueChange)="onDateChange($event)">
             </div>
@@ -34,9 +34,9 @@
                         <td>{{ order.productName }}</td>
                         <td>{{ order.productSKU }}</td>
                         <td>{{ order.productQuantity }}</td>
-                        <td>{{ order.revenue | number }}</td>
-                        <td>{{ order.importPrice | number }}</td>
-                        <td>{{ order.orderProfit | number }}</td>
+                        <td>{{ order.revenue }}</td>
+                        <td>{{ order.importPrice }}</td>
+                        <td>{{ order.orderProfit }}</td>
                     </tr>
                 </tbody>
             </table>
