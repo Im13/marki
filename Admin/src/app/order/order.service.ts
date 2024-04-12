@@ -29,13 +29,13 @@ export class OrderService {
 
     params = params.append('pageSize', shopeeOrderParams.pageSize);
     params = params.append('pageIndex', shopeeOrderParams.pageIndex);
-    
+
     if(shopeeOrderParams.date) {
       shopeeOrderParams.date = this.datePipe.transform(shopeeOrderParams.date, "dd/MM/yyyy");
 
       params = params.append('date', shopeeOrderParams.date);
     }
-    
+
     return this.http.get<Pagination<ShopeeOrder[]>>(this.baseApiUrl + 'shopee/get-orders', { params });
   }
 
@@ -110,45 +110,43 @@ export class OrderService {
     if(order) {
       order.products.push(product);
     } else {
-      if(orderTableRow[columnDict[OrderConstants.OrderConstants.ORDER_STATUS]] !== OrderConstants.OrderStatusConstants.IS_CANCELED) {
-        var shopeeOrder: ShopeeOrder = {
-          addressDetails: orderTableRow[columnDict[OrderConstants.OrderConstants.ADDRESS_DETAIL]],
-          customerName: orderTableRow[columnDict[OrderConstants.OrderConstants.CUSTOMER_NAME]],
-          customerShippingFee: orderTableRow[columnDict[OrderConstants.OrderConstants.CUSTOMER_SHIPPING_FEE]],
-          customerUsername: orderTableRow[columnDict[OrderConstants.OrderConstants.CUSTOMER_USERNAME]],
-          deposit: orderTableRow[columnDict[OrderConstants.OrderConstants.DEPOSIT]],
-          district: orderTableRow[columnDict[OrderConstants.OrderConstants.DISTRICT]],
-          estimatedShippingFee: orderTableRow[columnDict[OrderConstants.OrderConstants.ESTIMATED_SHIPPING_FEE]],
-          estimatedShoppingFeeShopeeDiscount: orderTableRow[columnDict[OrderConstants.OrderConstants.ESTIMATED_SHOPEE_DISCOUNT_SHIPPING_FEE]],
-          fixedFee: orderTableRow[columnDict[OrderConstants.OrderConstants.FIXED_FEE]],
-          note: orderTableRow[columnDict[OrderConstants.OrderConstants.NOTE]],
-          orderCompletedDate: orderTableRow[columnDict[OrderConstants.OrderConstants.ORDER_COMPLETED_DATE]],
-          orderDate: this.datePipe.transform(String(orderTableRow[columnDict[OrderConstants.OrderConstants.ORDER_DATE]]), 'dd/MM/yyyy H:mm') ,
-          orderId: orderTableRow[columnDict[OrderConstants.OrderConstants.ORDER_ID]],
-          orderPaidDate: orderTableRow[columnDict[OrderConstants.OrderConstants.ORDER_PAID_DATE]],
-          orderStatus: orderTableRow[columnDict[OrderConstants.OrderConstants.ORDER_STATUS]],
-          paymentFee: orderTableRow[columnDict[OrderConstants.OrderConstants.PAYMENT_FEE]],
-          paymentMethod: orderTableRow[columnDict[OrderConstants.OrderConstants.PAYMENT_METHOD]],
-          phoneNumber: orderTableRow[columnDict[OrderConstants.OrderConstants.PHONE_NUMBER]],
-          province: orderTableRow[columnDict[OrderConstants.OrderConstants.PROVINCE]],
-          returnOrderFee: orderTableRow[columnDict[OrderConstants.OrderConstants.RETURN_ORDER_FEE]],
-          returnStatus: orderTableRow[columnDict[OrderConstants.OrderConstants.RETURN_STATUS]],
-          serviceFee: orderTableRow[columnDict[OrderConstants.OrderConstants.SERVICE_FEE]],
-          shipmentCode: orderTableRow[columnDict[OrderConstants.OrderConstants.SHIPMENT_CODE]],
-          shippingCompany: orderTableRow[columnDict[OrderConstants.OrderConstants.SHIPPING_COMPANY]],
-          shopComboDiscount: orderTableRow[columnDict[OrderConstants.OrderConstants.SHOP_COMBO_DISCOUNT]],
-          shopeeCoinReturn: orderTableRow[columnDict[OrderConstants.OrderConstants.SHOPEE_COIN_RETURN]],
-          shopeeComboDiscount: orderTableRow[columnDict[OrderConstants.OrderConstants.SHOPEE_COMBO_DISCOUNT]],
-          shopeeVoucher: orderTableRow[columnDict[OrderConstants.OrderConstants.SHOPEE_VOUCHER]],
-          shopVoucher: orderTableRow[columnDict[OrderConstants.OrderConstants.SHOP_VOUCHER]],
-          totalOrderCustomerPaid: orderTableRow[columnDict[OrderConstants.OrderConstants.TOTAL_ORDER_CUSTOMER_PAID]],
-          totalOrderValue: orderTableRow[columnDict[OrderConstants.OrderConstants.TOTAL_ORDER_VALUE]],
-          ward: orderTableRow[columnDict[OrderConstants.OrderConstants.WARD]],
-          products: [product]
-        };
+      var shopeeOrder: ShopeeOrder = {
+        addressDetails: orderTableRow[columnDict[OrderConstants.OrderConstants.ADDRESS_DETAIL]],
+        customerName: orderTableRow[columnDict[OrderConstants.OrderConstants.CUSTOMER_NAME]],
+        customerShippingFee: orderTableRow[columnDict[OrderConstants.OrderConstants.CUSTOMER_SHIPPING_FEE]],
+        customerUsername: orderTableRow[columnDict[OrderConstants.OrderConstants.CUSTOMER_USERNAME]],
+        deposit: orderTableRow[columnDict[OrderConstants.OrderConstants.DEPOSIT]],
+        district: orderTableRow[columnDict[OrderConstants.OrderConstants.DISTRICT]],
+        estimatedShippingFee: orderTableRow[columnDict[OrderConstants.OrderConstants.ESTIMATED_SHIPPING_FEE]],
+        estimatedShoppingFeeShopeeDiscount: orderTableRow[columnDict[OrderConstants.OrderConstants.ESTIMATED_SHOPEE_DISCOUNT_SHIPPING_FEE]],
+        fixedFee: orderTableRow[columnDict[OrderConstants.OrderConstants.FIXED_FEE]],
+        note: orderTableRow[columnDict[OrderConstants.OrderConstants.NOTE]],
+        orderCompletedDate: orderTableRow[columnDict[OrderConstants.OrderConstants.ORDER_COMPLETED_DATE]],
+        orderDate: this.datePipe.transform(String(orderTableRow[columnDict[OrderConstants.OrderConstants.ORDER_DATE]]), 'dd/MM/yyyy H:mm') ,
+        orderId: orderTableRow[columnDict[OrderConstants.OrderConstants.ORDER_ID]],
+        orderPaidDate: orderTableRow[columnDict[OrderConstants.OrderConstants.ORDER_PAID_DATE]],
+        orderStatus: orderTableRow[columnDict[OrderConstants.OrderConstants.ORDER_STATUS]],
+        paymentFee: orderTableRow[columnDict[OrderConstants.OrderConstants.PAYMENT_FEE]],
+        paymentMethod: orderTableRow[columnDict[OrderConstants.OrderConstants.PAYMENT_METHOD]],
+        phoneNumber: orderTableRow[columnDict[OrderConstants.OrderConstants.PHONE_NUMBER]],
+        province: orderTableRow[columnDict[OrderConstants.OrderConstants.PROVINCE]],
+        returnOrderFee: orderTableRow[columnDict[OrderConstants.OrderConstants.RETURN_ORDER_FEE]],
+        returnStatus: orderTableRow[columnDict[OrderConstants.OrderConstants.RETURN_STATUS]],
+        serviceFee: orderTableRow[columnDict[OrderConstants.OrderConstants.SERVICE_FEE]],
+        shipmentCode: orderTableRow[columnDict[OrderConstants.OrderConstants.SHIPMENT_CODE]],
+        shippingCompany: orderTableRow[columnDict[OrderConstants.OrderConstants.SHIPPING_COMPANY]],
+        shopComboDiscount: orderTableRow[columnDict[OrderConstants.OrderConstants.SHOP_COMBO_DISCOUNT]],
+        shopeeCoinReturn: orderTableRow[columnDict[OrderConstants.OrderConstants.SHOPEE_COIN_RETURN]],
+        shopeeComboDiscount: orderTableRow[columnDict[OrderConstants.OrderConstants.SHOPEE_COMBO_DISCOUNT]],
+        shopeeVoucher: orderTableRow[columnDict[OrderConstants.OrderConstants.SHOPEE_VOUCHER]],
+        shopVoucher: orderTableRow[columnDict[OrderConstants.OrderConstants.SHOP_VOUCHER]],
+        totalOrderCustomerPaid: orderTableRow[columnDict[OrderConstants.OrderConstants.TOTAL_ORDER_CUSTOMER_PAID]],
+        totalOrderValue: orderTableRow[columnDict[OrderConstants.OrderConstants.TOTAL_ORDER_VALUE]],
+        ward: orderTableRow[columnDict[OrderConstants.OrderConstants.WARD]],
+        products: [product]
+      };
 
-        orders.push(shopeeOrder);
-      }
+      orders.push(shopeeOrder);
     }
   }
 }

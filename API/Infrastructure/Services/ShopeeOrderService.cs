@@ -1,6 +1,7 @@
 using Core.Entities;
 using Core.Entities.ShopeeOrder;
 using Core.Interfaces;
+using Infrastructure.Const;
 
 namespace Infrastructure.Services
 {
@@ -24,10 +25,19 @@ namespace Infrastructure.Services
 
             foreach (var order in orders)
             {
-                if (allOrders.FirstOrDefault(o => o.OrderId == order.OrderId) == null)
+                var tempOrd = allOrders.SingleOrDefault(o => o.OrderId == order.OrderId);
+
+                if (tempOrd == null)
                 {
                     _unitOfWork.Repository<ShopeeOrder>().Add(order);
                     addedList.Add(order);
+                }
+                else
+                {
+                    //Edit shopee order
+                    tempOrd.ShipmentCode = order.ShipmentCode;
+                    tempOrd.OrderStatus = order.OrderStatus;
+                    _unitOfWork.Repository<ShopeeOrder>().Update(tempOrd);
                 }
             }
 
@@ -50,38 +60,41 @@ namespace Infrastructure.Services
 
             foreach (var order in orders)
             {
-                foreach (var product in order.Products)
+                if (order.OrderStatus != OrderStatusConst.IS_CANCELED)
                 {
-                    string orderId = "";
-                    decimal revenue = 0;
-                    decimal importPrice = 0;
-                    decimal profit = 0;
-
-                    if (products.Count(p => p.ProductSKU == product.SKU) > 0)
-                        importPrice = products.Where(p => p.ProductSKU == product.SKU).FirstOrDefault().ImportPrice;
-
-                    if (!ordProducts.Any(o => o.OrderId == order.OrderId))
+                    foreach (var product in order.Products)
                     {
-                        orderId = order.OrderId;
-                        revenue = orderRevenueDict[order.OrderId] - order.ServiceFee - order.PaymentFee - order.ShopVoucher;
-                        profit = revenue - importPrice * product.Quantity;
+                        string orderId = "";
+                        decimal revenue = 0;
+                        decimal importPrice = 0;
+                        decimal profit = 0;
+
+                        if (products.Count(p => p.ProductSKU == product.SKU) > 0)
+                            importPrice = products.Where(p => p.ProductSKU == product.SKU).FirstOrDefault().ImportPrice;
+
+                        if (!ordProducts.Any(o => o.OrderId == order.OrderId))
+                        {
+                            orderId = order.OrderId;
+                            revenue = orderRevenueDict[order.OrderId] - order.ServiceFee - order.PaymentFee - order.ShopVoucher;
+                            profit = revenue - importPrice * product.Quantity;
+                        }
+                        else
+                        {
+                            profit = 0 - importPrice * product.Quantity;
+                        }
+
+                        ordProducts.Add(new ShopeeOrderProducts()
+                        {
+                            ImportPrice = importPrice,
+                            OrderId = orderId,
+                            OrderProfit = profit,
+                            OrderStatus = order.OrderStatus,
+                            ProductName = product.ProductName,
+                            ProductQuantity = product.Quantity,
+                            Revenue = revenue,
+                            ProductSKU = product.SKU
+                        });
                     }
-                    else
-                    {
-                        profit = 0 - importPrice * product.Quantity;
-                    }
-
-                    ordProducts.Add(new ShopeeOrderProducts()
-                    {
-                        ImportPrice = importPrice,
-                        OrderId = orderId,
-                        OrderProfit = profit,
-                        OrderStatus = order.OrderStatus,
-                        ProductName = product.ProductName,
-                        ProductQuantity = product.Quantity,
-                        Revenue = revenue,
-                        ProductSKU = product.SKU
-                    });
                 }
             }
 
