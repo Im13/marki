@@ -1,5 +1,5 @@
-<div class="order-container">
-  <div class="control-bar d-flex flex-row px-2">
+<div class="order-container px-2">
+  <div class="control-bar d-flex flex-row py-1">
     <button class="btn btn-sm fa fa-plus btn-outline-primary rounded-0 me-2"></button>
 
     <button class="btn btn-sm btn-outline-secondary rounded-0" (click)="fileUpload.click()">
@@ -10,7 +10,7 @@
     <input type="file" accept=".xlsx" class="file-input" (change)="onFileSelected($event)" #fileUpload>
   </div>
 
-  <div class="data mt-3 px-2" *ngIf="shopeeOrders.length > 0">
+  <div class="data mt-3" *ngIf="shopeeOrders.length > 0">
     <table class="table table-bordered">
       <thead>
         <tr>

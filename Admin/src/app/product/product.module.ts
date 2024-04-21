@@ -19,7 +19,7 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
     ProductRoutingModule,
     ReactiveFormsModule,
     SharedModule,
-    PopoverModule.forRoot()
+    PopoverModule.forRoot(),
   ],
   exports: [
     ProductListComponent

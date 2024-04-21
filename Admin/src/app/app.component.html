@@ -1,11 +1,13 @@
 <app-header></app-header>
 
-<div class="article">
+<div class="article d-flex">
   <div class="sidebar h-100">
     <app-sidebar></app-sidebar>
   </div>
 
-  <div class="content py-2">
+  <div class="content py-2 border border-danger">
+    <ngx-spinner></ngx-spinner>
+
     <router-outlet></router-outlet>
   </div>
 </div>

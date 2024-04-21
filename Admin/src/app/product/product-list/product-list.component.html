@@ -1,4 +1,4 @@
-<div class="product-list-container border border-warning h-100 m-0 px-2 ">
+<div class="product-list-container px-2">
   <div class="control-bar d-flex flex-row py-1">
     <button
       class="btn btn-sm fa fa-plus btn-outline-primary rounded-0 me-2"
@@ -6,9 +6,14 @@
       [popover]="'Thêm mới sản phẩm'"
       triggers="mouseenter:mouseleave"
     ></button>
+
+    <button class="btn btn-sm btn-outline-secondary rounded-0 me-2">
+      <span class="fa fa-download me-1"></span>
+      <span>Xuất excel</span>
+    </button>
   </div>
 
-  <div class="data list-products border mt-3">
+  <div class="data list-products border mt-3" *ngIf="products.length > 0">
     <table class="table table-light table-hover">
       <thead>
         <tr>

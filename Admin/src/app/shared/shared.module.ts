@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-
-
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    PaginationModule.forRoot()
+    PaginationModule.forRoot(),
+    NgxSpinnerModule.forRoot()
   ],
   exports: [
-    PaginationModule
+    PaginationModule,
+    NgxSpinnerModule
   ]
 })
 export class SharedModule { }
