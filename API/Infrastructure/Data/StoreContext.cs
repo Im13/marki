@@ -1,4 +1,5 @@
 using System.Reflection;
+using Core;
 using Core.Entities;
 using Core.Entities.OrderAggregate;
 using Core.Entities.ShopeeOrder;
@@ -23,6 +24,10 @@ namespace Infrastructure.Data
         public DbSet<Ward> Wards { get; set; }
         public DbSet<ShopeeOrder> ShopeeOrders { get; set; }
         public DbSet<ShopeeProduct> ShopeeProducts { get; set; }
+        public DbSet<ProductOptions> ProductOptions { get; set; }
+        public DbSet<ProductOptionValues> ProductOptionValues { get; set; }
+        public DbSet<ProductSKUs> ProductSKUs { get; set; }
+        public DbSet<ProductSKUValues> ProductSKUValues { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
