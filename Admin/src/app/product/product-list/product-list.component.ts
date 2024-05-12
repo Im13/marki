@@ -19,11 +19,27 @@ export class ProductListComponent implements OnInit {
 
   totalCount = 0;
 
+  isVisible = false;
+
   constructor(private modalService: BsModalService, private productService: ProductService) {
   }
 
   ngOnInit(): void {
     this.getProducts();
+  }
+
+  showModal(): void {
+    this.isVisible = true;
+  }
+
+  handleOk(): void {
+    console.log('Button ok clicked!');
+    this.isVisible = false;
+  }
+
+  handleCancel(): void {
+    console.log('Button cancel clicked!');
+    this.isVisible = false;
   }
 
   openAddProductModal() {

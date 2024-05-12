@@ -9,9 +9,15 @@ import { OrderModule } from './order/order.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { DatePipe } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
+
+import en from '@angular/common/locales/en';
+
+registerLocaleData(en);
 
 @NgModule({
   declarations: [
@@ -29,11 +35,12 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true
-    })
+    }),
   ],
   providers: [
     DatePipe,
-    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
+    { provide: NZ_I18N, useValue: en_US }
   ],
   bootstrap: [AppComponent]
 })

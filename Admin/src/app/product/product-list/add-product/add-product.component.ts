@@ -20,11 +20,11 @@ export class AddProductComponent implements OnInit {
 
   constructor(public bsModalRef: BsModalRef,
     private productService: ProductService,
-    private toastrService: ToastrService) {}
+    private toastrService: ToastrService) { }
 
   ngOnInit() {
-    if(this.product == null) this.product = {} as Product;
-    if(this.isEdit == null) this.isEdit = false;
+    if (this.product == null) this.product = {} as Product;
+    if (this.isEdit == null) this.isEdit = false;
 
     this.addForm = new FormGroup({
       'productName': new FormControl(this.product.name),
@@ -51,7 +51,7 @@ export class AddProductComponent implements OnInit {
     this.product.productSKU = this.addForm.value.productSKU;
     this.product.productTypeId = 1;
 
-    if(!this.isEdit) {
+    if (!this.isEdit) {
       this.productService.addProduct(this.product).subscribe({
         next: () => {
           this.toastrService.success("Thêm sản phẩm thành công!")
@@ -74,6 +74,6 @@ export class AddProductComponent implements OnInit {
       })
     }
 
-    
+
   }
 }
