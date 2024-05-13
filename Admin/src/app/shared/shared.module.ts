@@ -4,7 +4,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { NgxSpinnerModule } from 'ngx-spinner';
 // import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @NgModule({
   declarations: [],
@@ -12,12 +13,16 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     CommonModule,
     PaginationModule.forRoot(),
     NgxSpinnerModule.forRoot(),
-    NzSelectModule
+    NzSelectModule,
+    NzModalModule,
+    NzButtonModule
   ],
   exports: [
     PaginationModule,
     NgxSpinnerModule,
-    NzSelectModule
+    NzSelectModule,
+    NzModalModule,
+    NzButtonModule
   ]
 })
 export class SharedModule { }

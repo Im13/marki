@@ -2,7 +2,7 @@
   <div class="control-bar d-flex flex-row py-1">
     <button
       class="btn btn-sm fa fa-plus btn-outline-primary rounded-0 me-2"
-      (click)="openAddProductModal()"
+      (click)="showModal1()"
       [popover]="'Thêm mới sản phẩm'"
       triggers="mouseenter:mouseleave"
     ></button>
@@ -58,21 +58,3 @@
   </div>
 </div>
 
-<nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-  <ng-container *nzModalContent>
-    <nz-select ngModel="lucy">
-      <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-      <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-      <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
-    </nz-select>
-    <nz-select ngModel="lucy" nzDisabled>
-      <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-    </nz-select>
-    <nz-select ngModel="lucy" nzLoading>
-      <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-    </nz-select>
-    <nz-select ngModel="lucy" nzAllowClear nzPlaceHolder="Choose">
-      <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-    </nz-select>
-  </ng-container>
-</nz-modal>

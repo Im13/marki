@@ -7,12 +7,13 @@ import { AddProductComponent } from './product-list/add-product/add-product.comp
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { PopoverModule } from 'ngx-bootstrap/popover';
-import { NzModalModule } from 'ng-zorro-antd/modal';
+import { AddProductModalComponent } from './product-list/add-product-modal/add-product-modal.component';
 
 @NgModule({
   declarations: [
     ProductListComponent,
-    AddProductComponent
+    AddProductComponent,
+    AddProductModalComponent
   ],
   imports: [
     CommonModule,
@@ -21,8 +22,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     ReactiveFormsModule,
     SharedModule,
     PopoverModule.forRoot(),
-    FormsModule,
-    NzModalModule
+    FormsModule
   ],
   exports: [
     ProductListComponent

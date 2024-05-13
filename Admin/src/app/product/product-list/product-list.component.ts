@@ -5,6 +5,8 @@ import { ProductParams } from 'src/app/shared/models/productParams';
 import { ProductService } from '../product-service.service';
 import { Product } from 'src/app/shared/models/products';
 import { Subscription } from 'rxjs';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { AddProductModalComponent } from './add-product-modal/add-product-modal.component';
 
 @Component({
   selector: 'app-product-list',
@@ -19,27 +21,21 @@ export class ProductListComponent implements OnInit {
 
   totalCount = 0;
 
-  isVisible = false;
-
-  constructor(private modalService: BsModalService, private productService: ProductService) {
+  constructor(private modalService: BsModalService, private productService: ProductService, private modalServices: NzModalService) {
   }
 
   ngOnInit(): void {
     this.getProducts();
   }
 
-  showModal(): void {
-    this.isVisible = true;
-  }
-
-  handleOk(): void {
-    console.log('Button ok clicked!');
-    this.isVisible = false;
-  }
-
-  handleCancel(): void {
-    console.log('Button cancel clicked!');
-    this.isVisible = false;
+  showModal1() {
+    this.modalServices.create({
+      nzTitle: 'Thiết lập sản phẩm',
+      nzContent: AddProductModalComponent,
+      nzOnOk: () => {
+        this.getProducts();
+      }
+    });
   }
 
   openAddProductModal() {
