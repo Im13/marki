@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { Product } from 'src/app/shared/models/products';
 import { ProductService } from '../../product-service.service';
 import { ToastrService } from 'ngx-toastr';
+import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-add-product-modal',
@@ -11,13 +12,14 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./add-product-modal.component.css']
 })
 export class AddProductModalComponent implements OnInit {
+  @Input() product ?: Product = inject(NZ_MODAL_DATA);;
   addForm: FormGroup;
-  product?: Product;
   isEdit?: boolean;
 
   constructor(private modal: NzModalRef,
     private productService: ProductService,
-    private toastrService: ToastrService) {}
+    private toastrService: ToastrService
+  ) {}
 
   ngOnInit(): void {
     if (this.product == null) this.product = {} as Product;

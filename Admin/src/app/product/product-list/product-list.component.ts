@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { AddProductComponent } from './add-product/add-product.component';
 import { ProductParams } from 'src/app/shared/models/productParams';
@@ -13,6 +13,7 @@ import { AddProductModalComponent } from './add-product-modal/add-product-modal.
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
+
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
   bsModalRef?: BsModalRef;
@@ -21,42 +22,40 @@ export class ProductListComponent implements OnInit {
 
   totalCount = 0;
 
-  constructor(private modalService: BsModalService, private productService: ProductService, private modalServices: NzModalService) {
+  constructor(private modalService: BsModalService,
+    private productService: ProductService,
+    private modalServices: NzModalService,
+    private viewContainerRef: ViewContainerRef) {
   }
 
   ngOnInit(): void {
     this.getProducts();
   }
 
-  showModal1() {
-    this.modalServices.create({
+  displayCreateModal() {
+    const modal = this.modalServices.create<AddProductModalComponent>({
       nzTitle: 'Thiết lập sản phẩm',
       nzContent: AddProductModalComponent,
-      nzOnCancel: () => console.log('Cancel')
+      nzCentered: true,
+      nzWidth: '160vh'
     });
+
+    modal.afterClose.subscribe(() => this.getProducts());
   }
 
-  openAddProductModal() {
-    const initialState: ModalOptions = {
-      initialState: {
-        title: 'Thiết lập sản phẩm',
-        isEdit: false
-      },
-      class: 'modal-xl'
-    }
+  displayEditModal(product: Product) {
+    const modal = this.modalServices.create<AddProductModalComponent,Product>({
+      nzTitle: 'Thiết lập sản phẩm',
+      nzContent: AddProductModalComponent,
+      nzCentered: true,
+      nzWidth: '160vh',
+      nzData: product
+    });
 
-    this.bsModalRef = this.modalService.show(AddProductComponent, initialState);
-    this.bsModalRef.content.closeBtnName = 'Close';
-
-    this.subscriptions.add(
-      this.modalService.onHide.subscribe((reason: string | any) => {
-        this.getProducts();
-      })
-    );
+    modal.afterClose.subscribe(() => this.getProducts());
   }
 
   onPageChanged(event: any) {
-    console.log(event.page);
     if(this.productParams.pageIndex !== event.page) {
       this.productParams.pageIndex = event.page;
       this.getProducts();

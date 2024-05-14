@@ -2,7 +2,7 @@
   <div class="control-bar d-flex flex-row py-1">
     <button
       class="btn btn-sm fa fa-plus btn-outline-primary rounded-0 me-2"
-      (click)="showModal1()"
+      (click)="displayCreateModal()"
       [popover]="'Thêm mới sản phẩm'"
       triggers="mouseenter:mouseleave"
     ></button>
@@ -32,11 +32,11 @@
           <th class="align-middle">
             <input type="checkbox" />
           </th>
-          <th class="align-middle" scope="row" (click)="editProduct(product)">{{ product.productSKU }}</th>
-          <td class="align-middle" (click)="editProduct(product)">{{ product.name }}</td>
-          <td class="align-middle" (click)="editProduct(product)"><img [src]="product.pictureUrl" alt="product picture" class="product-picture"></td>
-          <td class="align-middle" (click)="editProduct(product)">{{ product.importPrice | number }}</td>
-          <td class="align-middle" (click)="editProduct(product)">{{ product.price | number }}</td>
+          <th class="align-middle" scope="row" (click)="displayEditModal(product)">{{ product.productSKU }}</th>
+          <td class="align-middle" (click)="displayEditModal(product)">{{ product.name }}</td>
+          <td class="align-middle" (click)="displayEditModal(product)"><img [src]="product.pictureUrl" alt="product picture" class="product-picture"></td>
+          <td class="align-middle" (click)="displayEditModal(product)">{{ product.importPrice | number }}</td>
+          <td class="align-middle" (click)="displayEditModal(product)">{{ product.price | number }}</td>
         </tr>
       </tbody>
     </table>
