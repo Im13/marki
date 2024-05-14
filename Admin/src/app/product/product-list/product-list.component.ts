@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
-import { AddProductComponent } from './add-product/add-product.component';
 import { ProductParams } from 'src/app/shared/models/productParams';
 import { ProductService } from '../product-service.service';
 import { Product } from 'src/app/shared/models/products';
 import { Subscription } from 'rxjs';
-import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { AddProductModalComponent } from './add-product-modal/add-product-modal.component';
 
 @Component({
@@ -24,8 +23,7 @@ export class ProductListComponent implements OnInit {
 
   constructor(private modalService: BsModalService,
     private productService: ProductService,
-    private modalServices: NzModalService,
-    private viewContainerRef: ViewContainerRef) {
+    private modalServices: NzModalService) {
   }
 
   ngOnInit(): void {
@@ -74,25 +72,5 @@ export class ProductListComponent implements OnInit {
         console.log(err);
       }
     });
-  }
-
-  editProduct(product: Product) {
-    const initialState: ModalOptions = {
-      initialState: {
-        title: 'Thiết lập sản phẩm',
-        product: product,
-        isEdit: true
-      },
-      class: 'modal-xl'
-    }
-
-    this.bsModalRef = this.modalService.show(AddProductComponent, initialState);
-    this.bsModalRef.content.closeBtnName = 'Close';
-
-    this.subscriptions.add(
-      this.modalService.onHide.subscribe((reason: string | any) => {
-        this.getProducts();
-      })
-    );
   }
 }
