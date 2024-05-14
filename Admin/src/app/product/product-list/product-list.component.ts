@@ -32,9 +32,7 @@ export class ProductListComponent implements OnInit {
     this.modalServices.create({
       nzTitle: 'Thiết lập sản phẩm',
       nzContent: AddProductModalComponent,
-      nzOnOk: () => {
-        this.getProducts();
-      }
+      nzOnCancel: () => console.log('Cancel')
     });
   }
 
