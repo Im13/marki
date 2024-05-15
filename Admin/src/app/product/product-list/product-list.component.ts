@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { Component, OnInit } from '@angular/core';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ProductParams } from 'src/app/shared/models/productParams';
 import { ProductService } from '../product-service.service';
 import { Product } from 'src/app/shared/models/products';
@@ -21,13 +21,14 @@ export class ProductListComponent implements OnInit {
 
   totalCount = 0;
 
-  constructor(private modalService: BsModalService,
+  constructor(
     private productService: ProductService,
     private modalServices: NzModalService) {
   }
 
   ngOnInit(): void {
     this.getProducts();
+    this.displayCreateModal();
   }
 
   displayCreateModal() {

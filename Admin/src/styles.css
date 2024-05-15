@@ -7,3 +7,7 @@ body {
   background-color: #f2f6fc;
   font-family: Helvetica, Arial, sans-serif;
 }
+
+.hide-dropdown {
+  display: none !important;
+}

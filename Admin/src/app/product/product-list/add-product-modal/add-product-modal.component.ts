@@ -5,6 +5,7 @@ import { Product } from 'src/app/shared/models/products';
 import { ProductService } from '../../product-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-add-product-modal',
@@ -15,6 +16,27 @@ export class AddProductModalComponent implements OnInit {
   @Input() product ?: Product = inject(NZ_MODAL_DATA);;
   addForm: FormGroup;
   isEdit?: boolean;
+
+  // Fake data
+  listOfData = [
+    {
+      key: '1',
+      name: 'John Brown',
+      age: 32
+    },
+    {
+      key: '2',
+      name: 'Jim Green',
+      age: 42
+    },
+    {
+      key: '3',
+      name: 'Joe Black',
+      age: 32
+    }
+  ];
+  multipleValue = ['a10', 'c12'];
+  listOfOption: Array<{ label: string; value: string }> = [];
 
   constructor(private modal: NzModalRef,
     private productService: ProductService,
@@ -33,8 +55,29 @@ export class AddProductModalComponent implements OnInit {
       'productTypeId': new FormControl(this.product.productTypeId),
       'productBrandId': new FormControl(this.product.productBrandId),
       'productSKU': new FormControl(this.product.productSKU),
-      'importPrice': new FormControl(this.product.importPrice)
+      'importPrice': new FormControl(this.product.importPrice),
+      // Fake Data
+      'multipleValue': new FormControl(this.multipleValue)
     })
+
+    const children: Array<{ label: string; value: string }> = [];
+    for (let i = 10; i < 36; i++) {
+      children.push({ label: i.toString(36) + i, value: i.toString(36) + i });
+    }
+    this.listOfOption = children;
+  }
+
+  handleKeydown(event:any) {
+    if (event.key == 'Tab') {
+      event.preventDefault();
+      console.log('tab pressed');
+    }
+
+    if (event.key == 'Enter') {
+      event.preventDefault();
+      console.log('Enter pressed');
+      console.log(this.listOfOption);
+    }
   }
 
   destroyModal(): void {
@@ -74,5 +117,13 @@ export class AddProductModalComponent implements OnInit {
         }
       })
     }
+  }
+
+  onCreateVariants() {
+    console.log('Create variants pressed!');
+  }
+
+  drop(event: CdkDragDrop<string[]>): void {
+    moveItemInArray(this.listOfData, event.previousIndex, event.currentIndex);
   }
 }
