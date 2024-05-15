@@ -142,18 +142,13 @@
                 </td>
                 <td>
                   <nz-select
-                    formControlName="multipleValue"
+                    [(ngModel)]="data.name"
                     nzMode="tags"
                     nzPlaceHolder="Please select"
                     nzDropdownClassName="hide-dropdown"
                     class="w-100"
                     (keydown)="handleKeydown($event)"
                   >
-                    <nz-option
-                      *ngFor="let option of listOfOption"
-                      [nzLabel]="option.label"
-                      [nzValue]="option.value"
-                    ></nz-option>
                   </nz-select>
                 </td>
               </tr>

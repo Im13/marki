@@ -59,12 +59,6 @@ export class AddProductModalComponent implements OnInit {
       // Fake Data
       'multipleValue': new FormControl(this.multipleValue)
     })
-
-    const children: Array<{ label: string; value: string }> = [];
-    for (let i = 10; i < 36; i++) {
-      children.push({ label: i.toString(36) + i, value: i.toString(36) + i });
-    }
-    this.listOfOption = children;
   }
 
   handleKeydown(event:any) {
@@ -75,8 +69,8 @@ export class AddProductModalComponent implements OnInit {
 
     if (event.key == 'Enter') {
       event.preventDefault();
-      console.log('Enter pressed');
-      console.log(this.listOfOption);
+      this.multipleValue = this.addForm.controls['multipleValue'].value;      
+      console.log(this.multipleValue);
     }
   }
 
@@ -125,5 +119,6 @@ export class AddProductModalComponent implements OnInit {
 
   drop(event: CdkDragDrop<string[]>): void {
     moveItemInArray(this.listOfData, event.previousIndex, event.currentIndex);
+    console.log(this.listOfData);
   }
 }
