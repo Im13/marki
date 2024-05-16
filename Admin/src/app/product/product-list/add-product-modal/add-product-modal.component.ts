@@ -6,6 +6,7 @@ import { ProductService } from '../../product-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { ProductOptions } from 'src/app/shared/models/productOptions';
 
 @Component({
   selector: 'app-add-product-modal',
@@ -16,27 +17,8 @@ export class AddProductModalComponent implements OnInit {
   @Input() product ?: Product = inject(NZ_MODAL_DATA);;
   addForm: FormGroup;
   isEdit?: boolean;
-
-  // Fake data
-  listOfData = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      age: 42
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      age: 32
-    }
-  ];
-  multipleValue = ['a10', 'c12'];
-  listOfOption: Array<{ label: string; value: string }> = [];
+  productOptions: ProductOptions[] = [];
+  productOptionId: number = 0;
 
   constructor(private modal: NzModalRef,
     private productService: ProductService,
@@ -56,12 +38,10 @@ export class AddProductModalComponent implements OnInit {
       'productBrandId': new FormControl(this.product.productBrandId),
       'productSKU': new FormControl(this.product.productSKU),
       'importPrice': new FormControl(this.product.importPrice),
-      // Fake Data
-      'multipleValue': new FormControl(this.multipleValue)
     })
   }
 
-  handleKeydown(event:any) {
+  handleOptionValueKeydown(event:any, data: ProductOptions) {
     if (event.key == 'Tab') {
       event.preventDefault();
       console.log('tab pressed');
@@ -69,8 +49,16 @@ export class AddProductModalComponent implements OnInit {
 
     if (event.key == 'Enter') {
       event.preventDefault();
-      this.multipleValue = this.addForm.controls['multipleValue'].value;      
-      console.log(this.multipleValue);
+    }
+  }
+
+  handleOptionKeydown(event:any, data: ProductOptions) {
+    if (event.key == 'Tab' || event.key == 'Enter') {
+      event.preventDefault();
+      let index = this.productOptions.findIndex(o => o.productOptionId == data.productOptionId);
+      this.productOptions[index].optionName = data.optionName;
+
+      console.log(this.productOptions);
     }
   }
 
@@ -114,11 +102,16 @@ export class AddProductModalComponent implements OnInit {
   }
 
   onCreateVariants() {
-    console.log('Create variants pressed!');
+    this.productOptions.push({
+      optionName: '',
+      optionValues: [],
+      productOptionId: this.productOptionId
+    });
+
+    this.productOptionId++;
   }
 
   drop(event: CdkDragDrop<string[]>): void {
-    moveItemInArray(this.listOfData, event.previousIndex, event.currentIndex);
-    console.log(this.listOfData);
+    moveItemInArray(this.productOptions, event.previousIndex, event.currentIndex);
   }
 }
