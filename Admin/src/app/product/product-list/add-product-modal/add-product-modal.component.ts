@@ -14,16 +14,18 @@ import { ProductOptions } from 'src/app/shared/models/productOptions';
   styleUrls: ['./add-product-modal.component.css']
 })
 export class AddProductModalComponent implements OnInit {
-  @Input() product ?: Product = inject(NZ_MODAL_DATA);;
+  @Input() product?: Product = inject(NZ_MODAL_DATA);;
+
   addForm: FormGroup;
   isEdit?: boolean;
   productOptions: ProductOptions[] = [];
   productOptionId: number = 0;
+  currentOptionValueText = '';
 
   constructor(private modal: NzModalRef,
     private productService: ProductService,
     private toastrService: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (this.product == null) this.product = {} as Product;
@@ -41,25 +43,28 @@ export class AddProductModalComponent implements OnInit {
     })
   }
 
-  handleOptionValueKeydown(event:any, data: ProductOptions) {
+  handleOptionValueKeydown(event: any, data: ProductOptions) {
     if (event.key == 'Tab') {
       event.preventDefault();
       console.log('tab pressed');
+      console.log(data.optionValues);
     }
 
     if (event.key == 'Enter') {
       event.preventDefault();
+      this.productOptions.find(o => o.productOptionId === data.productOptionId).optionValues = data.optionValues;
+      console.log(this.productOptions);
     }
   }
 
-  handleOptionKeydown(event:any, data: ProductOptions) {
-    if (event.key == 'Tab' || event.key == 'Enter') {
+  handleOptionKeydown(event: any, data: ProductOptions) {
+    if(event.key == 'Enter')
       event.preventDefault();
-      let index = this.productOptions.findIndex(o => o.productOptionId == data.productOptionId);
-      this.productOptions[index].optionName = data.optionName;
 
-      console.log(this.productOptions);
-    }
+    let index = this.productOptions.findIndex(o => o.productOptionId == data.productOptionId);
+    this.productOptions[index].optionName = data.optionName;
+
+    console.log(this.productOptions);
   }
 
   destroyModal(): void {
