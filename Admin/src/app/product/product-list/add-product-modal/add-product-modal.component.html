@@ -4,63 +4,123 @@
       <div class="col-6 px-2 border rounded">
         <div class="product-details p-2">
           <div class="mb-3">
-            <label for="productName" class="form-label m-0 mb-1">Tên sản phẩm</label>
-            <input type="text" class="form-control form-control-sm rounded-0" id="productName"
-              placeholder="Tên sản phẩm" formControlName="productName" />
+            <label for="productName" class="form-label m-0 mb-1"
+              >Tên sản phẩm</label
+            >
+            <input
+              type="text"
+              class="form-control form-control-sm rounded-0"
+              id="productName"
+              placeholder="Tên sản phẩm"
+              formControlName="productName"
+            />
           </div>
 
           <div class="mb-3">
-            <label for="productSKU" class="form-label m-0 mb-1">SKU sản phẩm</label>
-            <input type="text" class="form-control form-control-sm rounded-0" id="productSKU" placeholder="SKU sản phẩm"
-              formControlName="productSKU" />
+            <label for="productSKU" class="form-label m-0 mb-1"
+              >SKU sản phẩm</label
+            >
+            <input
+              type="text"
+              class="form-control form-control-sm rounded-0"
+              id="productSKU"
+              placeholder="SKU sản phẩm"
+              formControlName="productSKU"
+            />
           </div>
 
           <div class="mb-3">
-            <label for="importPrice" class="form-label m-0 mb-1">Giá nhập</label>
-            <input type="text" class="form-control form-control-sm rounded-0" id="importPrice" placeholder="Giá nhập"
-              formControlName="importPrice" />
+            <label for="importPrice" class="form-label m-0 mb-1"
+              >Giá nhập</label
+            >
+            <input
+              type="text"
+              class="form-control form-control-sm rounded-0"
+              id="importPrice"
+              placeholder="Giá nhập"
+              formControlName="importPrice"
+            />
           </div>
 
           <div class="mb-3">
             <label for="price" class="form-label m-0 mb-1">Giá bán</label>
-            <input type="text" class="form-control form-control-sm rounded-0" id="price" placeholder="Giá bán"
-              formControlName="price" />
+            <input
+              type="text"
+              class="form-control form-control-sm rounded-0"
+              id="price"
+              placeholder="Giá bán"
+              formControlName="price"
+            />
           </div>
 
           <div>
-            <label for="description" class="form-label m-0 mb-1">Mô tả sản phẩm</label>
-            <textarea class="form-control form-control-sm rounded-0" id="description" placeholder="Mô tả sản phẩm"
-              rows="4" formControlName="productDescription"></textarea>
+            <label for="description" class="form-label m-0 mb-1"
+              >Mô tả sản phẩm</label
+            >
+            <textarea
+              class="form-control form-control-sm rounded-0"
+              id="description"
+              placeholder="Mô tả sản phẩm"
+              rows="4"
+              formControlName="productDescription"
+            ></textarea>
           </div>
         </div>
       </div>
       <div class="col-6 px-2">
         <div class="supplier p-2 border rounded">
           <div class="mb-3">
-            <label for="productType" class="form-label m-0 mb-1">Danh mục</label>
-            <input type="text" class="form-control form-control-sm rounded-0" id="productType" placeholder="Danh mục"
-              formControlName="productTypeId" />
+            <label for="productType" class="form-label m-0 mb-1"
+              >Danh mục</label
+            >
+            <input
+              type="text"
+              class="form-control form-control-sm rounded-0"
+              id="productType"
+              placeholder="Danh mục"
+              formControlName="productTypeId"
+            />
           </div>
 
           <div class="mb-3">
-            <label for="productBrand" class="form-label m-0 mb-1">Thương hiệu</label>
-            <input type="text" class="form-control form-control-sm rounded-0" id="productBrand"
-              placeholder="Thương hiệu" formControlName="productBrandId" />
+            <label for="productBrand" class="form-label m-0 mb-1"
+              >Thương hiệu</label
+            >
+            <input
+              type="text"
+              class="form-control form-control-sm rounded-0"
+              id="productBrand"
+              placeholder="Thương hiệu"
+              formControlName="productBrandId"
+            />
           </div>
         </div>
 
         <div class="variants p-2 mt-3 border rounded">
-          <div class="product-variants-label d-flex flex-row justify-content-between align-items-center">
+          <div
+            class="product-variants-label d-flex flex-row justify-content-between align-items-center"
+          >
             <div class="fs-6 fw-semibold">Thuộc tính sản phẩm</div>
 
-            <button nz-button nzType="primary" class="d-flex flex-row align-items-center" (click)="onCreateVariants()">
+            <button
+              nz-button
+              nzType="primary"
+              class="d-flex flex-row align-items-center"
+              (click)="onCreateVariants()"
+            >
               <span nz-icon nzType="plus"></span>
               Thêm thuộc tính
             </button>
           </div>
 
-          <nz-table [nzData]="productOptions" [nzFrontPagination]="false" [nzShowPagination]="false" nzBordered
-            class="mt-3" *ngIf="productOptions.length > 0">
+          <nz-table
+            [nzData]="productOptions"
+            [nzFrontPagination]="false"
+            [nzShowPagination]="false"
+            nzBordered
+            class="mt-3"
+            *ngIf="productOptions.length > 0"
+          >
             <thead>
               <tr>
                 <th class="p-2"></th>
@@ -74,13 +134,26 @@
                   <h5 nz-icon nzType="more"></h5>
                 </td>
                 <td class="p-2">
-                  <input nz-input placeholder="Basic usage" type="text" [(ngModel)]="option.optionName"
-                    [ngModelOptions]="{standalone: true}" (keydown)="handleOptionKeydown($event, option)" />
+                  <input
+                    nz-input
+                    placeholder="Basic usage"
+                    type="text"
+                    [(ngModel)]="option.optionName"
+                    [ngModelOptions]="{ standalone: true }"
+                    (keydown)="handleOptionKeydown($event, option)"
+                  />
                 </td>
                 <td class="p-2">
-                  <nz-select [(ngModel)]="option.optionValues" [ngModelOptions]="{standalone: true}" nzMode="tags"
-                    nzPlaceHolder="Please select" nzDropdownClassName="hide-dropdown" class="w-100"
-                    (keydown)="handleOptionValueKeydown($event, option)" [nzMaxTagCount]="1000">
+                  <nz-select
+                    [(ngModel)]="option.optionValues"
+                    [ngModelOptions]="{ standalone: true }"
+                    nzMode="tags"
+                    nzPlaceHolder="Please select"
+                    nzDropdownClassName="hide-dropdown"
+                    class="w-100"
+                    (keydown)="handleOptionValueKeydown($event, option)"
+                    [nzMaxTagCount]="1000"
+                  >
                   </nz-select>
                 </td>
               </tr>
@@ -90,8 +163,10 @@
       </div>
 
       <div class="col-12 mt-3 px-2 border rounded">
-        <div class="product-variant-list-control border border-danger d-flex flex-row justify-content-between p-2">
-          <div class="">
+        <div
+          class="product-variant-list-control d-flex flex-row justify-content-between p-2"
+        >
+          <div>
             <nz-input-group [nzSuffix]="suffixIconSearch">
               <input type="text" nz-input placeholder="Nhập mã mẫu mã" />
             </nz-input-group>
@@ -101,16 +176,81 @@
           </div>
 
           <div class="border d-flex flex-row">
-            <button nz-button nzType="default" class="me-2 d-flex align-items-center">
+            <button
+              nz-button
+              nzType="default"
+              class="me-2 d-flex align-items-center"
+            >
               <span nz-icon nzType="thunderbolt"></span>
               Thêm nhanh theo thuộc tính
             </button>
 
-            <button nz-button nzType="primary" class="d-flex align-items-center">
+            <button
+              nz-button
+              nzType="primary"
+              class="d-flex align-items-center"
+            >
               <span nz-icon nzType="plus"></span>
               Thêm mẫu mã
             </button>
           </div>
+        </div>
+
+        <div class="w-100">
+          <nz-table
+            [nzData]="productOptions"
+            [nzFrontPagination]="false"
+            [nzShowPagination]="false"
+            nzBordered
+            class="mb-3 mt-2"
+          >
+            <thead>
+              <tr>
+                <th class="p-2"></th>
+                <th class="p-2">Hình ảnh</th>
+                <th class="p-2">SKU phân loại</th>
+                <th class="p-2">Mã vạch</th>
+                <th class="p-2">Giá nhập cuối</th>
+                <th class="p-2">Giá bán</th>
+                <th class="p-2">Thuộc tính</th>
+                <th class="p-2">Trọng lượng</th>
+                <th class="p-2">Tổng nhập</th>
+                <th class="p-2">Có thể bán</th>
+                <th class="p-2">Tồn kho</th>
+                <th class="p-2">D x R x C</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let option of productOptions">
+                <td class="text-center p-2">
+                  <h5 nz-icon nzType="more"></h5>
+                </td>
+                <td class="p-2">
+                  <input
+                    nz-input
+                    placeholder="Basic usage"
+                    type="text"
+                    [(ngModel)]="option.optionName"
+                    [ngModelOptions]="{ standalone: true }"
+                    (keydown)="handleOptionKeydown($event, option)"
+                  />
+                </td>
+                <td class="p-2">
+                  <nz-select
+                    [(ngModel)]="option.optionValues"
+                    [ngModelOptions]="{ standalone: true }"
+                    nzMode="tags"
+                    nzPlaceHolder="Please select"
+                    nzDropdownClassName="hide-dropdown"
+                    class="w-100"
+                    (keydown)="handleOptionValueKeydown($event, option)"
+                    [nzMaxTagCount]="1000"
+                  >
+                  </nz-select>
+                </td>
+              </tr>
+            </tbody>
+          </nz-table>
         </div>
       </div>
     </div>
