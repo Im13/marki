@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ProductOptions } from 'src/app/shared/models/productOptions';
+import { ProductVariant } from 'src/app/shared/models/productVariant';
 
 @Component({
   selector: 'app-add-product-modal',
@@ -21,6 +22,7 @@ export class AddProductModalComponent implements OnInit {
   productOptions: ProductOptions[] = [];
   productOptionId: number = 0;
   currentOptionValueText = '';
+  productVariants: ProductVariant[] = [];
 
   constructor(private modal: NzModalRef,
     private productService: ProductService,
@@ -40,6 +42,18 @@ export class AddProductModalComponent implements OnInit {
       'productBrandId': new FormControl(this.product.productBrandId),
       'productSKU': new FormControl(this.product.productSKU),
       'importPrice': new FormControl(this.product.importPrice),
+    })
+
+    //Fake data
+    this.productVariants.push({
+      variantImageUrl: 'ddfd',
+      variantBarcode: 'barcode',
+      variantImportPrice: 100000,
+      variantInventoryQuantity: 10,
+      variantName: 'Test variant',
+      variantPrice: 250000,
+      variantSKU: 'Test 01',
+      variantWeight: 100
     })
   }
 
