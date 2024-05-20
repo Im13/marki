@@ -198,53 +198,112 @@
 
         <div class="w-100 p-2">
           <nz-table
-            [nzData]="productOptions"
+            #editRowTable
+            [nzData]="productVariants"
             [nzFrontPagination]="false"
             [nzShowPagination]="false"
-            nzBordered
+            [nzBordered]="true"
             class="mb-3 mt-2"
           >
             <thead>
               <tr>
-                <th class="p-2"></th>
-                <th class="p-2">Hình ảnh</th>
-                <th class="p-2">SKU phân loại</th>
-                <th class="p-2">Mã vạch</th>
-                <th class="p-2">Giá nhập cuối</th>
-                <th class="p-2">Giá bán</th>
+                <th class="p-2" nzWidth="3%" nzLeft></th>
+                <th class="p-2" nzWidth="7%">Hình ảnh</th>
+                <th class="p-2" nzWidth="10%">SKU phân loại</th>
+                <th class="p-2" nzWidth="10%">Mã vạch</th>
+                <th class="p-2" nzWidth="7%">Giá nhập cuối</th>
+                <th class="p-2" nzWidth="7%">Giá bán</th>
                 <th class="p-2">Thuộc tính</th>
-                <th class="p-2">Trọng lượng</th>
-                <th class="p-2">Tồn kho</th>
-                <th class="p-2">D x R x C</th>
+                <th class="p-2" nzWidth="8%">Trọng lượng (g)</th>
+                <th class="p-2" nzWidth="5%">Tồn kho</th>
+                <th class="p-2" nzWidth="7%">D x R x C</th>
+                <th class="p-2" nzWidth="2%"></th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let option of productOptions">
+              <tr *ngFor="let variant of productVariants" class="editable-row">
                 <td class="text-center p-2">
-                  <h5 nz-icon nzType="more"></h5>
+                  <nz-switch [(ngModel)]="isEdit" nzSize="small" [ngModelOptions]="{ standalone: true }"></nz-switch>
+                </td>
+                <td class="p-2">
+                  <div class="editable-cell" [hidden]="editId === variant.id" (click)="startEdit(variant.id)">
+                    {{ variant.variantImageUrl }}
+                  </div>
+                  <input [hidden]="editId !== variant.id" type="text" nz-input [(ngModel)]="variant.variantImageUrl" [ngModelOptions]="{ standalone: true }" (blur)="stopEdit()" />
                 </td>
                 <td class="p-2">
                   <input
                     nz-input
-                    placeholder="Basic usage"
-                    type="text"
-                    [(ngModel)]="option.optionName"
+                    [(ngModel)]="variant.variantSKU"
                     [ngModelOptions]="{ standalone: true }"
-                    (keydown)="handleOptionKeydown($event, option)"
-                  />
-                </td>
-                <td class="p-2">
-                  <nz-select
-                    [(ngModel)]="option.optionValues"
-                    [ngModelOptions]="{ standalone: true }"
-                    nzMode="tags"
                     nzPlaceHolder="Please select"
                     nzDropdownClassName="hide-dropdown"
                     class="w-100"
-                    (keydown)="handleOptionValueKeydown($event, option)"
-                    [nzMaxTagCount]="1000"
-                  >
-                  </nz-select>
+                  />
+                </td>
+                <td class="p-2">
+                  <input
+                    nz-input
+                    [(ngModel)]="variant.variantBarcode"
+                    [ngModelOptions]="{ standalone: true }"
+                    nzPlaceHolder="Please select"
+                    nzDropdownClassName="hide-dropdown"
+                    class="w-100"
+                  />
+                </td>
+                <td class="p-2">
+                  <input
+                    nz-input
+                    [(ngModel)]="variant.variantImportPrice"
+                    [ngModelOptions]="{ standalone: true }"
+                    nzPlaceHolder="Please select"
+                    nzDropdownClassName="hide-dropdown"
+                    class="w-100"
+                  />
+                </td>
+                <td class="p-2">
+                  <input
+                    nz-input
+                    [(ngModel)]="variant.variantPrice"
+                    [ngModelOptions]="{ standalone: true }"
+                    nzPlaceHolder="Please select"
+                    nzDropdownClassName="hide-dropdown"
+                    class="w-100"
+                  />
+                </td>
+                <td class="p-2">
+                  {{ variant.variantName }}
+                </td>
+                <td class="p-2">
+                  <input
+                    nz-input
+                    [(ngModel)]="variant.variantWeight"
+                    [ngModelOptions]="{ standalone: true }"
+                    nzPlaceHolder="Please select"
+                    nzDropdownClassName="hide-dropdown"
+                    class="w-100"
+                  />
+                </td>
+                <td class="p-2">
+                  <input
+                    nz-input
+                    [(ngModel)]="variant.variantInventoryQuantity"
+                    [ngModelOptions]="{ standalone: true }"
+                    class="w-100"
+                  />
+                </td>
+                <td class="p-2">
+                  <input
+                    nz-input
+                    [(ngModel)]="variant.variantPrice"
+                    [ngModelOptions]="{ standalone: true }"
+                    nzPlaceHolder="Please select"
+                    nzDropdownClassName="hide-dropdown"
+                    class="w-100"
+                  />
+                </td>
+                <td class="text-center p-2">
+                  <h5 type="button" nz-icon nzType="delete" [nzTheme]="'twotone'" [nzTwotoneColor]="'#eb2f96'"></h5>
                 </td>
               </tr>
             </tbody>

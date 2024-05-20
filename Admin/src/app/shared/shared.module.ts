@@ -9,6 +9,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
 
 @NgModule({
   declarations: [],
@@ -22,7 +23,8 @@ import { NzTableModule } from 'ng-zorro-antd/table';
     NzInputModule,
     NzIconModule,
     DragDropModule,
-    NzTableModule
+    NzTableModule,
+    NzSwitchModule
   ],
   exports: [
     PaginationModule,
@@ -33,7 +35,8 @@ import { NzTableModule } from 'ng-zorro-antd/table';
     NzInputModule,
     NzIconModule,
     DragDropModule,
-    NzTableModule
+    NzTableModule,
+    NzSwitchModule
   ]
 })
 export class SharedModule { }

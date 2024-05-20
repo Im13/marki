@@ -12,10 +12,10 @@ import { ProductVariant } from 'src/app/shared/models/productVariant';
 @Component({
   selector: 'app-add-product-modal',
   templateUrl: './add-product-modal.component.html',
-  styleUrls: ['./add-product-modal.component.css']
+  styleUrls: ['./add-product-modal.component.css'],
 })
 export class AddProductModalComponent implements OnInit {
-  @Input() product?: Product = inject(NZ_MODAL_DATA);;
+  @Input() product?: Product = inject(NZ_MODAL_DATA);
 
   addForm: FormGroup;
   isEdit?: boolean;
@@ -23,38 +23,51 @@ export class AddProductModalComponent implements OnInit {
   productOptionId: number = 0;
   currentOptionValueText = '';
   productVariants: ProductVariant[] = [];
+  editId: string | null = null;
 
-  constructor(private modal: NzModalRef,
+  constructor(
+    private modal: NzModalRef,
     private productService: ProductService,
     private toastrService: ToastrService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     if (this.product == null) this.product = {} as Product;
     if (this.isEdit == null) this.isEdit = false;
 
     this.addForm = new FormGroup({
-      'productName': new FormControl(this.product.name),
-      'productDescription': new FormControl(this.product.description),
-      'price': new FormControl(this.product.price),
-      'pictureUrl': new FormControl(this.product.pictureUrl),
-      'productTypeId': new FormControl(this.product.productTypeId),
-      'productBrandId': new FormControl(this.product.productBrandId),
-      'productSKU': new FormControl(this.product.productSKU),
-      'importPrice': new FormControl(this.product.importPrice),
-    })
+      productName: new FormControl(this.product.name),
+      productDescription: new FormControl(this.product.description),
+      price: new FormControl(this.product.price),
+      pictureUrl: new FormControl(this.product.pictureUrl),
+      productTypeId: new FormControl(this.product.productTypeId),
+      productBrandId: new FormControl(this.product.productBrandId),
+      productSKU: new FormControl(this.product.productSKU),
+      importPrice: new FormControl(this.product.importPrice),
+    });
 
     //Fake data
-    this.productVariants.push({
-      variantImageUrl: 'ddfd',
-      variantBarcode: 'barcode',
-      variantImportPrice: 100000,
-      variantInventoryQuantity: 10,
-      variantName: 'Test variant',
-      variantPrice: 250000,
-      variantSKU: 'Test 01',
-      variantWeight: 100
-    })
+    for(var i = 0; i < 10; i++) {
+      this.productVariants.push({
+        id: i.toString(),
+        variantImageUrl: 'ddfd',
+        variantBarcode: 'barcode',
+        variantImportPrice: 100000,
+        variantInventoryQuantity: 10,
+        variantName: 'Màu sắc: Trắng Size M',
+        variantPrice: 250000,
+        variantSKU: 'sku',
+        variantWeight: 100,
+      });
+    }
+  }
+
+  startEdit(id: string): void {
+    this.editId = id;
+  }
+
+  stopEdit() {
+    this.editId = null;
   }
 
   handleOptionValueKeydown(event: any, data: ProductOptions) {
@@ -66,16 +79,19 @@ export class AddProductModalComponent implements OnInit {
 
     if (event.key == 'Enter') {
       event.preventDefault();
-      this.productOptions.find(o => o.productOptionId === data.productOptionId).optionValues = data.optionValues;
+      this.productOptions.find(
+        (o) => o.productOptionId === data.productOptionId
+      ).optionValues = data.optionValues;
       console.log(this.productOptions);
     }
   }
 
   handleOptionKeydown(event: any, data: ProductOptions) {
-    if(event.key == 'Enter')
-      event.preventDefault();
+    if (event.key == 'Enter') event.preventDefault();
 
-    let index = this.productOptions.findIndex(o => o.productOptionId == data.productOptionId);
+    let index = this.productOptions.findIndex(
+      (o) => o.productOptionId == data.productOptionId
+    );
     this.productOptions[index].optionName = data.optionName;
 
     console.log(this.productOptions);
@@ -88,10 +104,10 @@ export class AddProductModalComponent implements OnInit {
   onSubmit() {
     this.product.name = this.addForm.value.productName;
     this.product.importPrice = +this.addForm.value.importPrice;
-    this.product.pictureUrl = "images/products/sb-ang1.png";
+    this.product.pictureUrl = 'images/products/sb-ang1.png';
     this.product.price = +this.addForm.value.price;
     this.product.productBrandId = 1;
-    this.product.description = "sample";
+    this.product.description = 'sample';
     // this.product.description = this.addForm.value.productDescription;
     this.product.productSKU = this.addForm.value.productSKU;
     this.product.productTypeId = 1;
@@ -99,24 +115,24 @@ export class AddProductModalComponent implements OnInit {
     if (!this.isEdit) {
       this.productService.addProduct(this.product).subscribe({
         next: () => {
-          this.toastrService.success("Thêm sản phẩm thành công!")
+          this.toastrService.success('Thêm sản phẩm thành công!');
           this.destroyModal();
         },
-        error: err => {
-          this.toastrService.error(err)
-        }
-      })
+        error: (err) => {
+          this.toastrService.error(err);
+        },
+      });
     } else {
       this.productService.editProduct(this.product).subscribe({
         next: () => {
-          this.toastrService.success("Sửa sản phẩm thành công!");
+          this.toastrService.success('Sửa sản phẩm thành công!');
           this.destroyModal();
         },
-        error: err => {
+        error: (err) => {
           console.log(err);
           this.toastrService.error(err);
-        }
-      })
+        },
+      });
     }
   }
 
@@ -124,13 +140,17 @@ export class AddProductModalComponent implements OnInit {
     this.productOptions.push({
       optionName: '',
       optionValues: [],
-      productOptionId: this.productOptionId
+      productOptionId: this.productOptionId,
     });
 
     this.productOptionId++;
   }
 
   drop(event: CdkDragDrop<string[]>): void {
-    moveItemInArray(this.productOptions, event.previousIndex, event.currentIndex);
+    moveItemInArray(
+      this.productOptions,
+      event.previousIndex,
+      event.currentIndex
+    );
   }
 }
