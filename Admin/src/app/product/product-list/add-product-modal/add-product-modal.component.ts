@@ -47,7 +47,7 @@ export class AddProductModalComponent implements OnInit {
     });
 
     //Fake data
-    for(var i = 0; i < 10; i++) {
+    for(var i = 0; i < 5; i++) {
       this.productVariants.push({
         id: i.toString(),
         variantImageUrl: 'ddfd',
@@ -62,6 +62,21 @@ export class AddProductModalComponent implements OnInit {
     }
   }
 
+  quickAddVariants() {
+    var multiD: number|string[][] = [];
+    var index = 0;
+    console.log(this.productOptions);
+    while(index < this.productOptions.length) {
+      for (let i = 0; i < this.productOptions[index].optionValues.length; i++) {
+        multiD.push([index.toString(),this.productOptions[index].optionValues[i]]);
+      }
+
+      index++;
+    }
+
+    console.log(multiD);
+  }
+
   startEdit(id: string): void {
     this.editId = id;
   }
@@ -73,8 +88,6 @@ export class AddProductModalComponent implements OnInit {
   handleOptionValueKeydown(event: any, data: ProductOptions) {
     if (event.key == 'Tab') {
       event.preventDefault();
-      console.log('tab pressed');
-      console.log(data.optionValues);
     }
 
     if (event.key == 'Enter') {
@@ -82,7 +95,6 @@ export class AddProductModalComponent implements OnInit {
       this.productOptions.find(
         (o) => o.productOptionId === data.productOptionId
       ).optionValues = data.optionValues;
-      console.log(this.productOptions);
     }
   }
 
@@ -93,8 +105,6 @@ export class AddProductModalComponent implements OnInit {
       (o) => o.productOptionId == data.productOptionId
     );
     this.productOptions[index].optionName = data.optionName;
-
-    console.log(this.productOptions);
   }
 
   destroyModal(): void {
