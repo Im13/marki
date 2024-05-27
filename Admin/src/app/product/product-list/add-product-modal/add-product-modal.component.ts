@@ -9,6 +9,37 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ProductOptions } from 'src/app/shared/models/productOptions';
 import { ProductVariant } from 'src/app/shared/models/productVariant';
 
+// Định nghĩa kiểu cho biến thể và giá trị của chúng
+interface Variant {
+  name: string;
+  values: string[];
+}
+
+// Định nghĩa kiểu cho sản phẩm
+interface Productt {
+  name: string;
+  variants: Variant[];
+}
+
+// Ví dụ sử dụng
+const product: Productt = {
+  name: "T-Shirt",
+  variants: [
+    {
+      name: "Color",
+      values: ["Black", "Red", "Yellow"]
+    },
+    {
+      name: "Size",
+      values: ["S", "M", "L"]
+    },
+    {
+      name: "Length",
+      values: ["Short", "Long"]
+    }
+  ]
+};
+
 @Component({
   selector: 'app-add-product-modal',
   templateUrl: './add-product-modal.component.html',
@@ -29,7 +60,7 @@ export class AddProductModalComponent implements OnInit {
     private modal: NzModalRef,
     private productService: ProductService,
     private toastrService: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (this.product == null) this.product = {} as Product;
@@ -47,7 +78,7 @@ export class AddProductModalComponent implements OnInit {
     });
 
     //Fake data
-    for(var i = 0; i < 5; i++) {
+    for (var i = 0; i < 5; i++) {
       this.productVariants.push({
         id: i.toString(),
         variantImageUrl: 'ddfd',
@@ -63,18 +94,21 @@ export class AddProductModalComponent implements OnInit {
   }
 
   quickAddVariants() {
-    var multiD: number|string[][] = [];
-    var index = 0;
-    console.log(this.productOptions);
-    while(index < this.productOptions.length) {
-      for (let i = 0; i < this.productOptions[index].optionValues.length; i++) {
-        multiD.push([index.toString(),this.productOptions[index].optionValues[i]]);
-      }
+    // var multiD: number | string[][] = [];
+    // var index = 0;
+    // console.log(this.productOptions);
+    // while (index < this.productOptions.length) {
+    //   for (let i = 0; i < this.productOptions[index].optionValues.length; i++) {
+    //     multiD.push([index.toString(), this.productOptions[index].optionValues[i]]);
+    //   }
 
-      index++;
-    }
+    //   index++;
+    // }
 
-    console.log(multiD);
+    // console.log(multiD);
+    const skus = this.generateSKUs(product);
+    console.log(skus); // Output các SKUs
+
   }
 
   startEdit(id: string): void {
@@ -162,5 +196,27 @@ export class AddProductModalComponent implements OnInit {
       event.previousIndex,
       event.currentIndex
     );
+  }
+
+  // Hàm tạo các SKUs từ các biến thể của sản phẩm
+  generateSKUs(product: Productt): string[] {
+    // Lấy tất cả các giá trị của các biến thể
+    const variantValues = product.variants.map(variant => variant.values);
+
+    // Hàm đệ quy để kết hợp các giá trị của các biến thể
+    const combine = (values: string[][], index: number, current: string[]): string[] => {
+      if (index === values.length) {
+        current.unshift(product.name);
+        return [current.join('')];
+      }
+
+      let result: string[] = [];
+      for (let value of values[index]) {
+        result = result.concat(combine(values, index + 1, current.concat(value)));
+      }
+      return result;
+    };
+
+    return combine(variantValues, 0, []);
   }
 }
