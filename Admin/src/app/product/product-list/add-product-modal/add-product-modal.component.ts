@@ -55,6 +55,7 @@ export class AddProductModalComponent implements OnInit {
   currentOptionValueText = '';
   productVariants: ProductVariant[] = [];
   editId: string | null = null;
+  variantValues: string[][] = [];
 
   constructor(
     private modal: NzModalRef,
@@ -63,7 +64,19 @@ export class AddProductModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (this.product == null) this.product = {} as Product;
+    if (this.product == null) {
+      this.product = {
+        name: '',
+        description: '',
+        importPrice: null,
+        pictureUrl: '',
+        price: null,
+        productBrandId: null,
+        productOptions: [],
+        productSKU: '',
+        productTypeId: null
+      };
+    }
     if (this.isEdit == null) this.isEdit = false;
 
     this.addForm = new FormGroup({
@@ -77,38 +90,63 @@ export class AddProductModalComponent implements OnInit {
       importPrice: new FormControl(this.product.importPrice),
     });
 
-    //Fake data
-    for (var i = 0; i < 5; i++) {
-      this.productVariants.push({
-        id: i.toString(),
-        variantImageUrl: 'ddfd',
-        variantBarcode: 'barcode',
-        variantImportPrice: 100000,
-        variantInventoryQuantity: 10,
-        variantName: 'Màu sắc: Trắng Size M',
-        variantPrice: 250000,
-        variantSKU: 'sku',
-        variantWeight: 100,
-      });
-    }
+    //Temp data
+    this.productOptions = [
+      {
+        optionName: 'Màu sắc',
+        optionValues: ['Đen', 'Đỏ', 'Vàng'],
+        productOptionId: 1
+      },
+      {
+        optionName: 'Size',
+        optionValues: ['S', 'M', 'L'],
+        productOptionId: 2
+      }
+    ];
   }
 
   quickAddVariants() {
-    // var multiD: number | string[][] = [];
-    // var index = 0;
-    // console.log(this.productOptions);
-    // while (index < this.productOptions.length) {
-    //   for (let i = 0; i < this.productOptions[index].optionValues.length; i++) {
-    //     multiD.push([index.toString(), this.productOptions[index].optionValues[i]]);
-    //   }
-
-    //   index++;
-    // }
-
-    // console.log(multiD);
-    const skus = this.generateSKUs(product);
+    // this.bindDataToProductObject();
+    this.product.productOptions = this.productOptions;
+    const skus = this.generateSKUs(this.product);
+    for(let i = 0; i < skus.length; i++) {
+      this.productVariants.push({
+        id: i.toString(),
+        variantImageUrl: '',
+        variantBarcode: '',
+        variantImportPrice: 0,
+        variantInventoryQuantity: 10,
+        variantName: skus[i],
+        variantPrice: 0,
+        variantSKU: skus[i],
+        variantWeight: 0,
+      });
+    }
     console.log(skus); // Output các SKUs
+  }
 
+  // Hàm tạo các SKUs từ các biến thể của sản phẩm
+  generateSKUs(product: Product): string[] {
+    // Lấy tất cả các giá trị của các biến thể
+    this.variantValues = product.productOptions.map(option => option.optionValues);
+    console.log('Variant values:' + this.variantValues)
+
+    // Hàm đệ quy để kết hợp các giá trị của các biến thể
+    const combine = (values: string[][], index: number, current: string[]): string[] => {
+      if (index === values.length) {
+        current.unshift(product.name);
+        return [current.join('')];
+      }
+
+      let result: string[] = [];
+      for (let value of values[index]) {
+        result = result.concat(combine(values, index + 1, current.concat(value)));
+        console.log(result);
+      }
+      return result;
+    };
+
+    return combine(this.variantValues, 0, []);
   }
 
   startEdit(id: string): void {
@@ -146,15 +184,7 @@ export class AddProductModalComponent implements OnInit {
   }
 
   onSubmit() {
-    this.product.name = this.addForm.value.productName;
-    this.product.importPrice = +this.addForm.value.importPrice;
-    this.product.pictureUrl = 'images/products/sb-ang1.png';
-    this.product.price = +this.addForm.value.price;
-    this.product.productBrandId = 1;
-    this.product.description = 'sample';
-    // this.product.description = this.addForm.value.productDescription;
-    this.product.productSKU = this.addForm.value.productSKU;
-    this.product.productTypeId = 1;
+    this.bindDataToProductObject();
 
     if (!this.isEdit) {
       this.productService.addProduct(this.product).subscribe({
@@ -180,6 +210,18 @@ export class AddProductModalComponent implements OnInit {
     }
   }
 
+  bindDataToProductObject() {
+    this.product.name = this.addForm.value.productName;
+    this.product.importPrice = +this.addForm.value.importPrice;
+    this.product.pictureUrl = 'images/products/sb-ang1.png';
+    this.product.price = +this.addForm.value.price;
+    this.product.productBrandId = 1;
+    this.product.description = 'sample';
+    // this.product.description = this.addForm.value.productDescription;
+    this.product.productSKU = this.addForm.value.productSKU;
+    this.product.productTypeId = 1;
+  }
+
   onCreateVariants() {
     this.productOptions.push({
       optionName: '',
@@ -196,27 +238,5 @@ export class AddProductModalComponent implements OnInit {
       event.previousIndex,
       event.currentIndex
     );
-  }
-
-  // Hàm tạo các SKUs từ các biến thể của sản phẩm
-  generateSKUs(product: Productt): string[] {
-    // Lấy tất cả các giá trị của các biến thể
-    const variantValues = product.variants.map(variant => variant.values);
-
-    // Hàm đệ quy để kết hợp các giá trị của các biến thể
-    const combine = (values: string[][], index: number, current: string[]): string[] => {
-      if (index === values.length) {
-        current.unshift(product.name);
-        return [current.join('')];
-      }
-
-      let result: string[] = [];
-      for (let value of values[index]) {
-        result = result.concat(combine(values, index + 1, current.concat(value)));
-      }
-      return result;
-    };
-
-    return combine(variantValues, 0, []);
   }
 }

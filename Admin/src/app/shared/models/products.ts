@@ -1,3 +1,5 @@
+import { ProductOptions } from "./productOptions";
+
 export interface Product {
   name: string;
   productSKU: string;
@@ -7,4 +9,5 @@ export interface Product {
   productTypeId: number;
   productBrandId: number;
   importPrice: number;
+  productOptions: ProductOptions[];
 }
