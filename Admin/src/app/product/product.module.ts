@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { AddProductModalComponent } from './product-list/add-product-modal/add-product-modal.component';
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AddProductModalComponent } from './product-list/add-product-modal/add-p
     ReactiveFormsModule,
     SharedModule,
     PopoverModule.forRoot(),
-    FormsModule
+    FormsModule,
+    CoreModule
   ],
   exports: [
     ProductListComponent

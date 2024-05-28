@@ -200,7 +200,7 @@
         <div class="w-100 p-2">
           <nz-table
             #editRowTable
-            [nzData]="productVariants"
+            [nzData]="productSKUs"
             [nzFrontPagination]="false"
             [nzShowPagination]="false"
             [nzBordered]="true"
@@ -222,20 +222,20 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let variant of productVariants" class="editable-row">
+              <tr *ngFor="let sku of productSKUs" class="editable-row">
                 <td class="text-center p-2">
                   <nz-switch [(ngModel)]="isEdit" nzSize="small" [ngModelOptions]="{ standalone: true }"></nz-switch>
                 </td>
                 <td class="p-2">
-                  <div class="editable-cell" [hidden]="editId === variant.id" (click)="startEdit(variant.id)">
-                    {{ variant.variantImageUrl }}
+                  <div class="editable-cell" [hidden]="editId === sku.id" (click)="startEdit(sku.id)">
+                    {{ sku.imageUrl }}
                   </div>
-                  <input [hidden]="editId !== variant.id" type="text" nz-input [(ngModel)]="variant.variantImageUrl" [ngModelOptions]="{ standalone: true }" (blur)="stopEdit()" />
+                  <input [hidden]="editId !== sku.id" type="text" nz-input [(ngModel)]="sku.imageUrl" [ngModelOptions]="{ standalone: true }" (blur)="stopEdit()" />
                 </td>
                 <td class="p-2">
                   <input
                     nz-input
-                    [(ngModel)]="variant.variantSKU"
+                    [(ngModel)]="sku.sku"
                     [ngModelOptions]="{ standalone: true }"
                     nzPlaceHolder="Please select"
                     nzDropdownClassName="hide-dropdown"
@@ -245,7 +245,7 @@
                 <td class="p-2">
                   <input
                     nz-input
-                    [(ngModel)]="variant.variantBarcode"
+                    [(ngModel)]="sku.barcode"
                     [ngModelOptions]="{ standalone: true }"
                     nzPlaceHolder="Please select"
                     nzDropdownClassName="hide-dropdown"
@@ -255,7 +255,7 @@
                 <td class="p-2">
                   <input
                     nz-input
-                    [(ngModel)]="variant.variantImportPrice"
+                    [(ngModel)]="sku.importPrice"
                     [ngModelOptions]="{ standalone: true }"
                     nzPlaceHolder="Please select"
                     nzDropdownClassName="hide-dropdown"
@@ -265,7 +265,7 @@
                 <td class="p-2">
                   <input
                     nz-input
-                    [(ngModel)]="variant.variantPrice"
+                    [(ngModel)]="sku.price"
                     [ngModelOptions]="{ standalone: true }"
                     nzPlaceHolder="Please select"
                     nzDropdownClassName="hide-dropdown"
@@ -273,12 +273,15 @@
                   />
                 </td>
                 <td class="p-2">
-                  {{ variant.variantName }}
+                  <span *ngFor="let option of sku.options">
+                    <span class="variant-name fw-bold">{{ option.name }}: </span>
+                    <span class="fst-italic">{{ option.value }} </span>
+                  </span>
                 </td>
                 <td class="p-2">
                   <input
                     nz-input
-                    [(ngModel)]="variant.variantWeight"
+                    [(ngModel)]="sku.weight"
                     [ngModelOptions]="{ standalone: true }"
                     nzPlaceHolder="Please select"
                     nzDropdownClassName="hide-dropdown"
@@ -288,7 +291,7 @@
                 <td class="p-2">
                   <input
                     nz-input
-                    [(ngModel)]="variant.variantInventoryQuantity"
+                    [(ngModel)]="sku.quantity"
                     [ngModelOptions]="{ standalone: true }"
                     class="w-100"
                   />
@@ -296,7 +299,7 @@
                 <td class="p-2">
                   <input
                     nz-input
-                    [(ngModel)]="variant.variantPrice"
+                    [(ngModel)]="sku.price"
                     [ngModelOptions]="{ standalone: true }"
                     nzPlaceHolder="Please select"
                     nzDropdownClassName="hide-dropdown"

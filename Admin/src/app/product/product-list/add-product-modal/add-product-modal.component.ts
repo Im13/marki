@@ -7,38 +7,18 @@ import { ToastrService } from 'ngx-toastr';
 import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ProductOptions } from 'src/app/shared/models/productOptions';
-import { ProductVariant } from 'src/app/shared/models/productVariant';
+import { ProductSKUs } from 'src/app/shared/models/productSKUs';
+import { ProductOption } from 'src/app/shared/models/productOption';
+import { ConvertVieService } from 'src/app/core/services/convert-vie.service';
 
-// Định nghĩa kiểu cho biến thể và giá trị của chúng
-interface Variant {
-  name: string;
-  values: string[];
+// Định nghĩa kiểu cho SKU với các thuộc tính bổ sung
+interface SKU {
+  id: number;
+  sku: string;
+  quantity: number;
+  price: number;
+  weight: number;
 }
-
-// Định nghĩa kiểu cho sản phẩm
-interface Productt {
-  name: string;
-  variants: Variant[];
-}
-
-// Ví dụ sử dụng
-const product: Productt = {
-  name: "T-Shirt",
-  variants: [
-    {
-      name: "Color",
-      values: ["Black", "Red", "Yellow"]
-    },
-    {
-      name: "Size",
-      values: ["S", "M", "L"]
-    },
-    {
-      name: "Length",
-      values: ["Short", "Long"]
-    }
-  ]
-};
 
 @Component({
   selector: 'app-add-product-modal',
@@ -53,15 +33,16 @@ export class AddProductModalComponent implements OnInit {
   productOptions: ProductOptions[] = [];
   productOptionId: number = 0;
   currentOptionValueText = '';
-  productVariants: ProductVariant[] = [];
-  editId: string | null = null;
+  productSKUs: ProductSKUs[] = [];
+  editId: number | null = null;
   variantValues: string[][] = [];
 
   constructor(
     private modal: NzModalRef,
     private productService: ProductService,
-    private toastrService: ToastrService
-  ) { }
+    private toastrService: ToastrService,
+    private convertVieService: ConvertVieService
+  ) {}
 
   ngOnInit(): void {
     if (this.product == null) {
@@ -74,7 +55,7 @@ export class AddProductModalComponent implements OnInit {
         productBrandId: null,
         productOptions: [],
         productSKU: '',
-        productTypeId: null
+        productTypeId: null,
       };
     }
     if (this.isEdit == null) this.isEdit = false;
@@ -89,67 +70,69 @@ export class AddProductModalComponent implements OnInit {
       productSKU: new FormControl(this.product.productSKU),
       importPrice: new FormControl(this.product.importPrice),
     });
-
-    //Temp data
-    this.productOptions = [
-      {
-        optionName: 'Màu sắc',
-        optionValues: ['Đen', 'Đỏ', 'Vàng'],
-        productOptionId: 1
-      },
-      {
-        optionName: 'Size',
-        optionValues: ['S', 'M', 'L'],
-        productOptionId: 2
-      }
-    ];
   }
 
   quickAddVariants() {
-    // this.bindDataToProductObject();
+    this.bindDataToProductObject();
     this.product.productOptions = this.productOptions;
-    const skus = this.generateSKUs(this.product);
-    for(let i = 0; i < skus.length; i++) {
-      this.productVariants.push({
-        id: i.toString(),
-        variantImageUrl: '',
-        variantBarcode: '',
-        variantImportPrice: 0,
-        variantInventoryQuantity: 10,
-        variantName: skus[i],
-        variantPrice: 0,
-        variantSKU: skus[i],
-        variantWeight: 0,
-      });
-    }
-    console.log(skus); // Output các SKUs
+    this.productSKUs = this.generateSKUs(this.product);
+    console.log(this.productSKUs); // Output các SKUs
   }
 
   // Hàm tạo các SKUs từ các biến thể của sản phẩm
-  generateSKUs(product: Product): string[] {
+  generateSKUs(product: Product): ProductSKUs[] {
     // Lấy tất cả các giá trị của các biến thể
-    this.variantValues = product.productOptions.map(option => option.optionValues);
-    console.log('Variant values:' + this.variantValues)
+    this.variantValues = product.productOptions.map(
+      (option) => option.optionValues
+    );
 
     // Hàm đệ quy để kết hợp các giá trị của các biến thể
-    const combine = (values: string[][], index: number, current: string[]): string[] => {
+    const combine = (
+      values: string[][],
+      index: number,
+      current: string[]
+    ): string[][] => {
       if (index === values.length) {
-        current.unshift(product.name);
-        return [current.join('')];
+        return [current];
       }
 
-      let result: string[] = [];
+      let result: string[][] = [];
       for (let value of values[index]) {
-        result = result.concat(combine(values, index + 1, current.concat(value)));
-        console.log(result);
+        result = result.concat(
+          combine(values, index + 1, current.concat(value))
+        );
       }
       return result;
     };
 
-    return combine(this.variantValues, 0, []);
+    const combinations = combine(this.variantValues, 0, []);
+
+    const skus: ProductSKUs[] = combinations.map((values, skuIndex) => {
+      const opt: ProductOption[] = [];
+      this.productOptions.forEach((option, index) => {
+        opt.push({
+          name: option.optionName,
+          value: values[index]
+        })
+      });
+
+      return {
+        id: skuIndex + 1,
+        barcode: '',
+        imageUrl: '',
+        importPrice: null,
+        sku: this.product.name + this.convertVieService.removeVietnameseTones(values.join('').replace(/\s/g, "")),
+        quantity: 1,
+        price: 1,
+        weight: 1,
+        options: opt,
+      };
+    });
+
+    return skus;
   }
 
-  startEdit(id: string): void {
+  startEdit(id: number): void {
     this.editId = id;
   }
 
