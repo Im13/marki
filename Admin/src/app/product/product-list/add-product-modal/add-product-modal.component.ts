@@ -11,15 +11,6 @@ import { ProductSKUs } from 'src/app/shared/models/productSKUs';
 import { ProductOption } from 'src/app/shared/models/productOption';
 import { ConvertVieService } from 'src/app/core/services/convert-vie.service';
 
-// Định nghĩa kiểu cho SKU với các thuộc tính bổ sung
-interface SKU {
-  id: number;
-  sku: string;
-  quantity: number;
-  price: number;
-  weight: number;
-}
-
 @Component({
   selector: 'app-add-product-modal',
   templateUrl: './add-product-modal.component.html',
