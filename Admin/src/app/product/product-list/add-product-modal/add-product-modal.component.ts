@@ -61,6 +61,20 @@ export class AddProductModalComponent implements OnInit {
       productSKU: new FormControl(this.product.productSKU),
       importPrice: new FormControl(this.product.importPrice),
     });
+
+    //Fake data
+    this.productOptions = [
+      {
+        optionName: 'Size',
+        productOptionId: 0,
+        optionValues: ['S', 'M', 'L']
+      },
+      {
+        optionName: 'Color',
+        productOptionId: 0,
+        optionValues: ['White', 'Red', 'Blue']
+      }
+    ]
   }
 
   quickAddVariants() {
