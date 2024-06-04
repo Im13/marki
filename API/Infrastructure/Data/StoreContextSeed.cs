@@ -22,12 +22,12 @@ namespace Infrastructure.Data
                 context.ProductTypes.AddRange(types);
             }
 
-            if (!context.Products.Any())
-            {
-                var productsData = File.ReadAllText("../Infrastructure/Data/SeedData/products.json");
-                var products = JsonSerializer.Deserialize<List<Product>>(productsData);
-                context.Products.AddRange(products);
-            }
+            // if (!context.Products.Any())
+            // {
+            //     var productsData = File.ReadAllText("../Infrastructure/Data/SeedData/products.json");
+            //     var products = JsonSerializer.Deserialize<List<Product>>(productsData);
+            //     context.Products.AddRange(products);
+            // }
 
             if (!context.DeliveryMethods.Any())
             {

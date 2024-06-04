@@ -86,5 +86,33 @@
         "ImportPrice": 130000,
         "ProductTypeId": 1,
         "ProductBrandId": 1
+    },{
+        "Name": "MARKI/ ÁO POLO BASIC KHOÁ KÉO CỘC TAY A397",
+        "Description": "MARKI/ ÁO POLO BASIC KHOÁ KÉO CỘC TAY A397",
+        "Price": 290000,
+        "PictureUrl": "images/products/sb-ang1.png",
+        "ProductSKU": "A397",
+        "ImportPrice": 110000,
+        "ProductTypeId": 1,
+        "ProductBrandId": 1
+    }
+    ,{
+        "Name": "MARKI / QUẦN CULOTTES ỐNG RỘNG DÁNG DÀI KÈM BELT Q398",
+        "Description": "MARKI / QUẦN CULOTTES ỐNG RỘNG DÁNG DÀI KÈM BELT Q398",
+        "Price": 490000,
+        "PictureUrl": "images/products/sb-ang1.png",
+        "ProductSKU": "Q398",
+        "ImportPrice": 205000,
+        "ProductTypeId": 1,
+        "ProductBrandId": 1
+    },{
+        "Name": "MARKI/ ÁO POLO TAY HẾN BASIC A399",
+        "Description": "MARKI/ ÁO POLO TAY HẾN BASIC A399",
+        "Price": 290000,
+        "PictureUrl": "images/products/sb-ang1.png",
+        "ProductSKU": "A399",
+        "ImportPrice": 105000,
+        "ProductTypeId": 1,
+        "ProductBrandId": 1
     }
 ]
