@@ -4,6 +4,12 @@ namespace Core.Entities
     {
         public string Name { get; set; }
         public string Description { get; set; }
+        //Need remove
+        public decimal Price { get; set; }
+        public string ProductSKU { get; set; }
+        public string PictureUrl { get; set; }
+        public decimal ImportPrice { get; set; }
+        //
         public ProductType ProductType { get; set; }
         public int ProductTypeId { get; set; }
         public ProductBrand ProductBrand { get; set; }

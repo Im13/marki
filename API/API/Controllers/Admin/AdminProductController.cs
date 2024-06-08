@@ -1,4 +1,5 @@
 using API.DTOs;
+using API.DTOs.Product;
 using API.Errors;
 using AutoMapper;
 using Core.Entities;
@@ -31,6 +32,16 @@ namespace API.Controllers.Admin
             if(resProduct == null) return BadRequest(new ApiResponse(400, "Problem creating product")); 
 
             return Ok(resProduct);
+        }
+
+        [HttpPost("create")]
+        public async Task<ActionResult<ProductToReturnDTO>> CreateProducts(ProductDTOs productDTO) 
+        {
+            var z = productDTO; 
+
+            var d = productDTO.Description;
+
+            return Ok("Hey we're here");
         }
     }
 }

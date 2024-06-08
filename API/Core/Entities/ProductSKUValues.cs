@@ -2,7 +2,6 @@ namespace Core.Entities
 {
     public class ProductSKUValues : BaseEntity 
     {
-        public int ProductId { get; set; }
         public int OptionId { get; set; }
         public int ProductSKUId { get; set; }
         public ProductSKUs ProductSKU { get; set; }

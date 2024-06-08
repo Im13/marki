@@ -10,6 +10,7 @@ import { ProductOptions } from 'src/app/shared/models/productOptions';
 import { ProductSKUs } from 'src/app/shared/models/productSKUs';
 import { ProductOption } from 'src/app/shared/models/productOption';
 import { ConvertVieService } from 'src/app/core/services/convert-vie.service';
+import { ProductOptionValue } from 'src/app/shared/models/productOptionValues';
 
 @Component({
   selector: 'app-add-product-modal',
@@ -26,7 +27,7 @@ export class AddProductModalComponent implements OnInit {
   currentOptionValueText = '';
   productSKUs: ProductSKUs[] = [];
   editId: number | null = null;
-  variantValues: string[][] = [];
+  variantValues: ProductOptionValue[][] = [];
 
   constructor(
     private modal: NzModalRef,
@@ -67,12 +68,40 @@ export class AddProductModalComponent implements OnInit {
       {
         optionName: 'Size',
         productOptionId: 0,
-        optionValues: ['S', 'M', 'L']
+        optionValues: [
+          {
+            valueTempId: 1,
+            value: 'S'
+          },
+          {
+            valueTempId: 2,
+            value: 'M'
+          },
+          {
+            valueTempId: 3,
+            value: 'L'
+          }
+        ],
+        displayedValues: ['S', 'M', 'L']
       },
       {
         optionName: 'Color',
-        productOptionId: 0,
-        optionValues: ['White', 'Red', 'Blue']
+        productOptionId: 1,
+        optionValues: [
+          {
+            valueTempId: 4,
+            value: 'White'
+          },
+          {
+            valueTempId: 5,
+            value: 'Red'
+          },
+          {
+            valueTempId: 6,
+            value: 'Blue'
+          }
+        ],
+        displayedValues: ['White', 'Red', 'Blue']
       }
     ]
   }
@@ -93,15 +122,15 @@ export class AddProductModalComponent implements OnInit {
 
     // Hàm đệ quy để kết hợp các giá trị của các biến thể
     const combine = (
-      values: string[][],
+      values: ProductOptionValue[][],
       index: number,
-      current: string[]
-    ): string[][] => {
+      current: ProductOptionValue[]
+    ): ProductOptionValue[][] => {
       if (index === values.length) {
         return [current];
       }
 
-      let result: string[][] = [];
+      let result: ProductOptionValue[][] = [];
       for (let value of values[index]) {
         result = result.concat(
           combine(values, index + 1, current.concat(value))
@@ -114,19 +143,23 @@ export class AddProductModalComponent implements OnInit {
 
     const skus: ProductSKUs[] = combinations.map((values, skuIndex) => {
       const opt: ProductOption[] = [];
+      let skuName: string = '';
+
       this.productOptions.forEach((option, index) => {
         opt.push({
+          valueTempId: values[index].valueTempId,
           name: option.optionName,
-          value: values[index]
-        })
-      });
+          value: values[index].value
+        });
+        skuName += values[index].value;
+      });      
 
       return {
         id: skuIndex + 1,
         barcode: '',
         imageUrl: '',
         importPrice: null,
-        sku: this.product.name + this.convertVieService.removeVietnameseTones(values.join('').replace(/\s/g, "")),
+        sku: this.product.name + this.convertVieService.removeVietnameseTones(skuName.replace(/\s/g, "")),
         quantity: 1,
         price: 1,
         weight: 1,
@@ -215,6 +248,7 @@ export class AddProductModalComponent implements OnInit {
       optionName: '',
       optionValues: [],
       productOptionId: this.productOptionId,
+      displayedValues: []
     });
 
     this.productOptionId++;

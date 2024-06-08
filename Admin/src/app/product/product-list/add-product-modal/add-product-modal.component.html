@@ -136,7 +136,6 @@
                 <td class="p-2">
                   <input
                     nz-input
-                    placeholder="Basic usage"
                     type="text"
                     [(ngModel)]="option.optionName"
                     [ngModelOptions]="{ standalone: true }"
@@ -145,13 +144,12 @@
                 </td>
                 <td class="p-2">
                   <nz-select
-                    [(ngModel)]="option.optionValues"
+                    [(ngModel)]="option.displayedValues"
                     [ngModelOptions]="{ standalone: true }"
                     nzMode="tags"
                     nzPlaceHolder="Please select"
                     nzDropdownClassName="hide-dropdown"
                     class="w-100"
-                    (keydown)="handleOptionValueKeydown($event, option)"
                     [nzMaxTagCount]="1000"
                   >
                   </nz-select>
