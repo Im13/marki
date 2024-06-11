@@ -4,7 +4,7 @@ namespace Core.Entities
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        //Need remove
+        //Need remove after done another stuffs
         public decimal Price { get; set; }
         public string ProductSKU { get; set; }
         public string PictureUrl { get; set; }
