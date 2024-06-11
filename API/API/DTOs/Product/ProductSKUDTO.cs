@@ -9,6 +9,6 @@ namespace API.DTOs.Product
         public string Barcode { get; set; }
         public int Weight { get; set; }
         public int Quantity { get; set; }
-        public ICollection<ProductOptionValueDTO> ProductOptionValue { get; set; }
+        public List<ProductOptionValueDTO> ProductOptionValue { get; set; }
     }
 }

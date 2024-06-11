@@ -74,20 +74,20 @@ namespace API.Controllers
             return Ok(types);
         }
 
-        [HttpPost]
-        public async Task<ActionResult<ProductToReturnDTO>> CreateProduct(ProductDTO productDTO) 
-        {
-            var product = _mapper.Map<ProductDTO,Product>(productDTO);
+        // [HttpPost]
+        // public async Task<ActionResult<ProductToReturnDTO>> CreateProduct(ProductDTO productDTO) 
+        // {
+        //     var product = _mapper.Map<ProductDTO,Product>(productDTO);
 
-            var productWithSKUExists = await _productService.GetProductBySKUAsync(productDTO.ProductSKU);
+        //     var productWithSKUExists = await _productService.GetProductBySKUAsync(productDTO.ProductSKU);
 
-            if (productWithSKUExists != null) return BadRequest("Product with this SKU has exists!");
+        //     if (productWithSKUExists != null) return BadRequest("Product with this SKU has exists!");
 
-            var resProduct = await _productService.CreateProduct(product);
+        //     var resProduct = await _productService.CreateProduct(product);
 
-            if(resProduct == null) return BadRequest(new ApiResponse(400, "Problem creating product")); 
+        //     if(resProduct == null) return BadRequest(new ApiResponse(400, "Problem creating product")); 
 
-            return Ok(resProduct);
-        }
+        //     return Ok(resProduct);
+        // }
     }
 }

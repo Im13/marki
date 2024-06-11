@@ -10,19 +10,19 @@ namespace Infrastructure.Services
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task<Product> CreateProduct(Product prod)
-        {
-            prod.ProductType = await _unitOfWork.Repository<ProductType>().GetByIdAsync(prod.ProductTypeId);
-            prod.ProductBrand = await _unitOfWork.Repository<ProductBrand>().GetByIdAsync(prod.ProductBrandId);
+        // public async Task<Product> CreateProduct(Product prod)
+        // {
+        //     prod.ProductType = await _unitOfWork.Repository<ProductType>().GetByIdAsync(prod.ProductTypeId);
+        //     prod.ProductBrand = await _unitOfWork.Repository<ProductBrand>().GetByIdAsync(prod.ProductBrandId);
 
-            _unitOfWork.Repository<Product>().Add(prod);
+        //     _unitOfWork.Repository<Product>().Add(prod);
 
-            var result = await _unitOfWork.Complete();
+        //     var result = await _unitOfWork.Complete();
 
-            if(result <= 0) return null;
+        //     if(result <= 0) return null;
 
-            return prod;
-        }
+        //     return prod;
+        // }
 
         public async Task<Product> GetProductBySKUAsync(string productSKU)
         {
@@ -40,6 +40,28 @@ namespace Infrastructure.Services
             if(result <= 0) return null;
 
             return product;
+        }
+
+        public async Task<Product> CreateProduct(Product prod , List<ProductOptions> options)
+        {
+            prod.ProductType = await _unitOfWork.Repository<ProductType>().GetByIdAsync(prod.ProductTypeId);
+            prod.ProductBrand = await _unitOfWork.Repository<ProductBrand>().GetByIdAsync(prod.ProductBrandId);
+
+            foreach(var option in options)
+                _unitOfWork.Repository<ProductOptions>().Add(option);
+
+            var saveOptionResult = await _unitOfWork.Complete();
+
+            if(saveOptionResult <= 0) return null;
+
+            // From this line, create products
+            _unitOfWork.Repository<Product>().Add(prod);
+
+            var result = await _unitOfWork.Complete();
+
+            if(result <= 0) return null;
+
+            return prod;
         }
     }
 }
