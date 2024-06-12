@@ -38,6 +38,7 @@ namespace API.Helpers
             CreateMap<ProductOptionDTO, ProductOptions>();
             CreateMap<ProductOptionValueDTO, ProductOptionValues>();
             CreateMap<ProductSKUDTO, ProductSKUs>();
+            CreateMap<ProductSKUValuesDTO, ProductSKUValues>();
             CreateMap<ShopeeOrderProductDTO,ShopeeProduct>()
                 .ForMember(d => d.SKU, o => o.MapFrom(s => s.ProductSKU));
             CreateMap<ShopeeOrderDTO,ShopeeOrder>()

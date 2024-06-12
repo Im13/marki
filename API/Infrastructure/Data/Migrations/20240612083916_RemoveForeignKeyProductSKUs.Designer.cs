@@ -3,6 +3,7 @@ using System;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20240612083916_RemoveForeignKeyProductSKUs")]
+    partial class RemoveForeignKeyProductSKUs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.12");
@@ -226,12 +229,7 @@ namespace Infrastructure.Data.Migrations
                     b.Property<int>("OptionValueId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ProductSKUsId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ProductSKUsId");
 
                     b.ToTable("ProductSKUValues");
                 });
@@ -618,13 +616,6 @@ namespace Infrastructure.Data.Migrations
                         .HasForeignKey("ProductId");
                 });
 
-            modelBuilder.Entity("Core.Entities.ProductSKUValues", b =>
-                {
-                    b.HasOne("Core.ProductSKUs", null)
-                        .WithMany("ProductSKUValues")
-                        .HasForeignKey("ProductSKUsId");
-                });
-
             modelBuilder.Entity("Core.Entities.ShopeeOrder.ShopeeProduct", b =>
                 {
                     b.HasOne("Core.Entities.ShopeeOrder.ShopeeOrder", null)
@@ -670,11 +661,6 @@ namespace Infrastructure.Data.Migrations
             modelBuilder.Entity("Core.Entities.ShopeeOrder.ShopeeOrder", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("Core.ProductSKUs", b =>
-                {
-                    b.Navigation("ProductSKUValues");
                 });
 #pragma warning restore 612, 618
         }

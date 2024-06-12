@@ -11,8 +11,6 @@ namespace Core
         public string Barcode { get; set; }
         public string ImageUrl { get; set; }
         public float Weight { get; set; }
-        public int ProductId { get; set; }
-        public Product Product { get; set; }
-        public ICollection<ProductSKUValues> ProductSKUValues { get; set; }
+        public List<ProductSKUValues> ProductSKUValues { get; set; }
     }
 }

@@ -49,20 +49,19 @@ namespace Infrastructure.Services
             prod.ProductType = await _unitOfWork.Repository<ProductType>().GetByIdAsync(prod.ProductTypeId);
             prod.ProductBrand = await _unitOfWork.Repository<ProductBrand>().GetByIdAsync(prod.ProductBrandId);
 
-            foreach(var option in options)
-            {
-                // var valuesToAdd = new List<ProductOptionValues>();
-
-                // foreach(var value in option.ProductOptionValues)
-                // {
-                //     _unitOfWork.Repository<ProductOptionValues>().Add(value);
-                // }
-                _unitOfWork.Repository<ProductOptions>().Add(option);
-            }
+            _unitOfWork.Repository<Product>().Add(prod);
 
             var saveOptionResult = await _unitOfWork.Complete();
 
-            // if(saveOptionResult <= 0) return null;
+            if(saveOptionResult <= 0) return null;
+
+            foreach(var sku in prod.ProductSKUs)
+            {
+                foreach(var productOptionValue in sku.ProductSKUValues)
+                {
+
+                }
+            }
 
             // // From this line, create products
             // foreach(var sku in prod.ProductSKUs) {
