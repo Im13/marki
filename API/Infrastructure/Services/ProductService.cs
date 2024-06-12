@@ -1,3 +1,4 @@
+using Core;
 using Core.Entities;
 using Core.Interfaces;
 
@@ -44,22 +45,40 @@ namespace Infrastructure.Services
 
         public async Task<Product> CreateProduct(Product prod , List<ProductOptions> options)
         {
+            List<ProductSKUs> skus = new List<ProductSKUs>();
             prod.ProductType = await _unitOfWork.Repository<ProductType>().GetByIdAsync(prod.ProductTypeId);
             prod.ProductBrand = await _unitOfWork.Repository<ProductBrand>().GetByIdAsync(prod.ProductBrandId);
 
             foreach(var option in options)
+            {
+                // var valuesToAdd = new List<ProductOptionValues>();
+
+                // foreach(var value in option.ProductOptionValues)
+                // {
+                //     _unitOfWork.Repository<ProductOptionValues>().Add(value);
+                // }
                 _unitOfWork.Repository<ProductOptions>().Add(option);
+            }
 
             var saveOptionResult = await _unitOfWork.Complete();
 
-            if(saveOptionResult <= 0) return null;
+            // if(saveOptionResult <= 0) return null;
 
-            // From this line, create products
-            _unitOfWork.Repository<Product>().Add(prod);
+            // // From this line, create products
+            // foreach(var sku in prod.ProductSKUs) {
+            //     var skuOptions = new List<ProductOptions>();
 
-            var result = await _unitOfWork.Complete();
+            //     foreach(var option in sku.ProductSKUValues) {
+            //         skuOptions.Add(options.Where(o => o.));
+            //     }
+            //     skus.Add()
+            // }
 
-            if(result <= 0) return null;
+            // _unitOfWork.Repository<Product>().Add(prod);
+
+            // var result = await _unitOfWork.Complete();
+
+            // if(result <= 0) return null;
 
             return prod;
         }
