@@ -45,9 +45,9 @@ namespace API.Controllers.Admin
             // if (productWithSKUExists != null) return BadRequest("Product with this SKU has exists!");
 
             // var savedOptions = _productService.CreateProductOptions(options);
-            var createdProduct = await _productService.CreateProduct(product, options);
+            // var createdProduct = await _productService.CreateProduct(product, options);
 
-            return Ok("Hey we're here");
+            return Ok(product);
         }
     }
 }

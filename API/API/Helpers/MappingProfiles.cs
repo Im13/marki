@@ -34,11 +34,14 @@ namespace API.Helpers
                 .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.ItemOrdered.PictureUrl))
                 .ForMember(d => d.PictureUrl, o => o.MapFrom<OrderItemUrlResolver>());
             CreateMap<ProductDTO, Product>();
+            
             CreateMap<ProductDTOs, Product>();
             CreateMap<ProductOptionDTO, ProductOptions>();
             CreateMap<ProductOptionValueDTO, ProductOptionValues>();
             CreateMap<ProductSKUDTO, ProductSKUs>();
-            CreateMap<ProductSKUValuesDTO, ProductSKUValues>();
+            // CreateMap<ProductSKUValuesDTO, ProductSKUValues>();
+            CreateMap<ProductOptionValueDTO, ProductSKUValues>();
+
             CreateMap<ShopeeOrderProductDTO,ShopeeProduct>()
                 .ForMember(d => d.SKU, o => o.MapFrom(s => s.ProductSKU));
             CreateMap<ShopeeOrderDTO,ShopeeOrder>()

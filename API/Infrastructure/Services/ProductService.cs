@@ -45,7 +45,6 @@ namespace Infrastructure.Services
 
         public async Task<Product> CreateProduct(Product prod , List<ProductOptions> options)
         {
-            List<ProductSKUs> skus = new List<ProductSKUs>();
             prod.ProductType = await _unitOfWork.Repository<ProductType>().GetByIdAsync(prod.ProductTypeId);
             prod.ProductBrand = await _unitOfWork.Repository<ProductBrand>().GetByIdAsync(prod.ProductBrandId);
 
