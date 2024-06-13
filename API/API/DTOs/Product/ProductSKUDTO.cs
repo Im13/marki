@@ -9,7 +9,7 @@ namespace API.DTOs.Product
         public string Barcode { get; set; }
         public int Weight { get; set; }
         public int Quantity { get; set; }
-        // public List<ProductSKUValuesDTO> ProductSKUValues { get; set; }
+        public List<ProductSKUValuesDTO> ProductSKUValues { get; set; }
         public List<ProductOptionValueDTO> ProductOptionValue { get; set; }
     }
 }

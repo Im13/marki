@@ -56,9 +56,9 @@ namespace Infrastructure.Services
 
             foreach(var sku in prod.ProductSKUs)
             {
-                foreach(var productOptionValue in sku.ProductSKUValues)
+                foreach(var value in sku.ProductSKUValues)
                 {
-
+                    
                 }
             }
 
