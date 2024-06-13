@@ -32,19 +32,20 @@ namespace Infrastructure.Services
             return products.SingleOrDefault(p => p.ProductSKU == productSKU);
         }
 
-        public async Task<Product> UpdateProduct(Product product) 
+        public async Task<Product> UpdateProduct(Product product)
         {
             _unitOfWork.Repository<Product>().Update(product);
 
             var result = await _unitOfWork.Complete();
 
-            if(result <= 0) return null;
+            if (result <= 0) return null;
 
             return product;
         }
 
-        public async Task<Product> CreateProduct(Product prod , List<ProductOptions> options)
+        public async Task<Product> CreateProduct(Product prod, List<ProductOptions> options)
         {
+            var listOptionValue = new List<ProductOptionValues>();
             prod.ProductType = await _unitOfWork.Repository<ProductType>().GetByIdAsync(prod.ProductTypeId);
             prod.ProductBrand = await _unitOfWork.Repository<ProductBrand>().GetByIdAsync(prod.ProductBrandId);
 
@@ -52,31 +53,29 @@ namespace Infrastructure.Services
 
             var saveOptionResult = await _unitOfWork.Complete();
 
-            if(saveOptionResult <= 0) return null;
+            if (saveOptionResult <= 0) return null;
 
-            foreach(var sku in prod.ProductSKUs)
+            foreach (var option in prod.ProductOptions)
             {
-                foreach(var value in sku.ProductSKUValues)
+                foreach (var value in option.ProductOptionValues)
                 {
-                    
+                    listOptionValue.Add(value);
                 }
             }
 
-            // // From this line, create products
-            // foreach(var sku in prod.ProductSKUs) {
-            //     var skuOptions = new List<ProductOptions>();
+            foreach (var sku in prod.ProductSKUs)
+            {
+                foreach (var value in sku.ProductSKUValues)
+                {
+                    value.OptionValueId = listOptionValue.FirstOrDefault(ov => ov.ValueTempId == value.ValueTempId)?.Id;
+                }
+            }
 
-            //     foreach(var option in sku.ProductSKUValues) {
-            //         skuOptions.Add(options.Where(o => o.));
-            //     }
-            //     skus.Add()
-            // }
+            _unitOfWork.Repository<Product>().Update(prod);
 
-            // _unitOfWork.Repository<Product>().Add(prod);
+            var result = await _unitOfWork.Complete();
 
-            // var result = await _unitOfWork.Complete();
-
-            // if(result <= 0) return null;
+            if (result <= 0) return null;
 
             return prod;
         }
