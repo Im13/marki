@@ -70,7 +70,9 @@ namespace Infrastructure.Services
                         decimal profit = 0;
 
                         if (products.Count(p => p.ProductSKU == product.SKU) > 0)
-                            importPrice = products.Where(p => p.ProductSKU == product.SKU).FirstOrDefault().ImportPrice;
+                            importPrice = products
+                                .Where(p => p.ProductSKU == product.SKU)
+                                .FirstOrDefault().ProductSKUs.First().ImportPrice;
 
                         if (!ordProducts.Any(o => o.OrderId == order.OrderId))
                         {

@@ -40,9 +40,9 @@ namespace API.Controllers.Admin
             var options = _mapper.Map<List<ProductOptionDTO>,List<ProductOptions>>(productDTO.ProductOptions);
             var product = _mapper.Map<ProductDTOs,Product>(productDTO);
 
-            // var productWithSKUExists = await _productService.GetProductBySKUAsync(productDTO.ProductSKU);
+            var productWithSKUExists = await _productService.GetProductBySKUAsync(productDTO.ProductSKU);
 
-            // if (productWithSKUExists != null) return BadRequest("Product with this SKU has exists!");
+            if (productWithSKUExists != null) return BadRequest("Product with this SKU has exists!");
 
             // var savedOptions = _productService.CreateProductOptions(options);
             var createdProduct = await _productService.CreateProduct(product, options);
