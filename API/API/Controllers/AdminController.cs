@@ -54,8 +54,8 @@ namespace API.Controllers
 
             //Update product by productDTO
             product.ProductBrandId = productDTO.ProductBrandId;
-            product.Price = productDTO.Price;
-            product.ImportPrice = productDTO.ImportPrice;
+            product.ProductSKUs.First().Price = productDTO.Price;
+            product.ProductSKUs.First().ImportPrice = productDTO.ImportPrice;
             product.ProductTypeId = productDTO.ProductTypeId;
             product.Description = productDTO.Description;
             product.Name = productDTO.Name;
