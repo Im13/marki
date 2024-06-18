@@ -18,22 +18,6 @@ namespace API.Controllers.Admin
             _mapper = mapper;
         }
 
-        // [HttpPost]
-        // public async Task<ActionResult<ProductToReturnDTO>> CreateProduct(ProductDTO productDTO) 
-        // {
-        //     var product = _mapper.Map<ProductDTO,Product>(productDTO);
-
-        //     var productWithSKUExists = await _productService.GetProductBySKUAsync(productDTO.ProductSKU);
-
-        //     if (productWithSKUExists != null) return BadRequest("Product with this SKU has exists!");
-
-        //     var resProduct = await _productService.CreateProduct(product);
-
-        //     if(resProduct == null) return BadRequest(new ApiResponse(400, "Problem creating product")); 
-
-        //     return Ok(resProduct);
-        // }
-
         [HttpPost("create")]
         public async Task<ActionResult<ProductToReturnDTO>> CreateProducts(ProductDTOs productDTOs) 
         {
