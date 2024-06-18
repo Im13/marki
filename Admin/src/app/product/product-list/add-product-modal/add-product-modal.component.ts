@@ -11,6 +11,7 @@ import { ProductSKUs } from 'src/app/shared/models/productSKUs';
 import { ProductOption } from 'src/app/shared/models/productOption';
 import { ConvertVieService } from 'src/app/core/services/convert-vie.service';
 import { ProductOptionValue } from 'src/app/shared/models/productOptionValues';
+import { ProductSKUValue } from 'src/app/shared/models/productSKUValue';
 
 @Component({
   selector: 'app-add-product-modal',
@@ -39,15 +40,14 @@ export class AddProductModalComponent implements OnInit {
   ngOnInit(): void {
     if (this.product == null) {
       this.product = {
-        name: '',
-        description: '',
-        importPrice: null,
-        pictureUrl: '',
-        price: null,
+        name: 'tensp',
+        description: 'mota',
+        importPrice: 100000,
         productBrandId: null,
         productOptions: [],
-        productSKU: '',
+        productSKU: 'sku001',
         productTypeId: null,
+        productSKUs: []
       };
     }
     if (this.isEdit == null) this.isEdit = false;
@@ -55,8 +55,6 @@ export class AddProductModalComponent implements OnInit {
     this.addForm = new FormGroup({
       productName: new FormControl(this.product.name),
       productDescription: new FormControl(this.product.description),
-      price: new FormControl(this.product.price),
-      pictureUrl: new FormControl(this.product.pictureUrl),
       productTypeId: new FormControl(this.product.productTypeId),
       productBrandId: new FormControl(this.product.productBrandId),
       productSKU: new FormControl(this.product.productSKU),
@@ -68,7 +66,7 @@ export class AddProductModalComponent implements OnInit {
       {
         optionName: 'Size',
         productOptionId: 0,
-        optionValues: [
+        productOptionValues: [
           {
             valueTempId: 1,
             value: 'S'
@@ -87,7 +85,7 @@ export class AddProductModalComponent implements OnInit {
       {
         optionName: 'Color',
         productOptionId: 1,
-        optionValues: [
+        productOptionValues: [
           {
             valueTempId: 4,
             value: 'White'
@@ -117,7 +115,7 @@ export class AddProductModalComponent implements OnInit {
   generateSKUs(product: Product): ProductSKUs[] {
     // Lấy tất cả các giá trị của các biến thể
     this.variantValues = product.productOptions.map(
-      (option) => option.optionValues
+      (option) => option.productOptionValues
     );
 
     // Hàm đệ quy để kết hợp các giá trị của các biến thể
@@ -143,6 +141,7 @@ export class AddProductModalComponent implements OnInit {
 
     const skus: ProductSKUs[] = combinations.map((values, skuIndex) => {
       const opt: ProductOption[] = [];
+      const productSkuValues: ProductSKUValue[] = [];
       let skuName: string = '';
 
       this.productOptions.forEach((option, index) => {
@@ -151,19 +150,24 @@ export class AddProductModalComponent implements OnInit {
           name: option.optionName,
           value: values[index].value
         });
+        productSkuValues.push({
+          valueTempId: values[index].valueTempId
+        })
+
         skuName += values[index].value;
-      });      
+      });
 
       return {
         id: skuIndex + 1,
         barcode: '',
         imageUrl: '',
         importPrice: null,
-        sku: this.product.name + this.convertVieService.removeVietnameseTones(skuName.replace(/\s/g, "")),
+        sku: this.product.productSKU + this.convertVieService.removeVietnameseTones(skuName.replace(/\s/g, "")),
         quantity: 1,
         price: 1,
         weight: 1,
-        options: opt,
+        productOptionValue: opt,
+        productSKUValues: productSkuValues
       };
     });
 
@@ -187,7 +191,7 @@ export class AddProductModalComponent implements OnInit {
       event.preventDefault();
       this.productOptions.find(
         (o) => o.productOptionId === data.productOptionId
-      ).optionValues = data.optionValues;
+      ).productOptionValues = data.productOptionValues;
     }
   }
 
@@ -207,46 +211,47 @@ export class AddProductModalComponent implements OnInit {
   onSubmit() {
     this.bindDataToProductObject();
 
-    if (!this.isEdit) {
-      this.productService.addProduct(this.product).subscribe({
-        next: () => {
-          this.toastrService.success('Thêm sản phẩm thành công!');
-          this.destroyModal();
-        },
-        error: (err) => {
-          this.toastrService.error(err);
-        },
-      });
-    } else {
-      this.productService.editProduct(this.product).subscribe({
-        next: () => {
-          this.toastrService.success('Sửa sản phẩm thành công!');
-          this.destroyModal();
-        },
-        error: (err) => {
-          console.log(err);
-          this.toastrService.error(err);
-        },
-      });
-    }
+    console.log(this.product);
+
+    // if (!this.isEdit) {
+    //   this.productService.addProduct(this.product).subscribe({
+    //     next: () => {
+    //       this.toastrService.success('Thêm sản phẩm thành công!');
+    //       this.destroyModal();
+    //     },
+    //     error: (err) => {
+    //       this.toastrService.error(err);
+    //     },
+    //   });
+    // } else {
+    //   this.productService.editProduct(this.product).subscribe({
+    //     next: () => {
+    //       this.toastrService.success('Sửa sản phẩm thành công!');
+    //       this.destroyModal();
+    //     },
+    //     error: (err) => {
+    //       console.log(err);
+    //       this.toastrService.error(err);
+    //     },
+    //   });
+    // }
   }
 
   bindDataToProductObject() {
     this.product.name = this.addForm.value.productName;
     this.product.importPrice = +this.addForm.value.importPrice;
-    this.product.pictureUrl = 'images/products/sb-ang1.png';
-    this.product.price = +this.addForm.value.price;
     this.product.productBrandId = 1;
     this.product.description = 'sample';
     // this.product.description = this.addForm.value.productDescription;
     this.product.productSKU = this.addForm.value.productSKU;
     this.product.productTypeId = 1;
+    this.product.productSKUs = this.productSKUs;
   }
 
   onCreateVariants() {
     this.productOptions.push({
       optionName: '',
-      optionValues: [],
+      productOptionValues: [],
       productOptionId: this.productOptionId,
       displayedValues: []
     });

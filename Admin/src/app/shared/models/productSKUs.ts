@@ -1,4 +1,5 @@
 import { ProductOption } from "./productOption";
+import { ProductSKUValue } from "./productSKUValue";
 
 export interface ProductSKUs {
     id: number;
@@ -9,5 +10,6 @@ export interface ProductSKUs {
     price: number;
     weight: number;
     quantity: number;
-    options: ProductOption[];
+    productOptionValue: ProductOption[];
+    productSKUValues: ProductSKUValue[];
 }

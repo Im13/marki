@@ -42,17 +42,6 @@
             />
           </div>
 
-          <div class="mb-3">
-            <label for="price" class="form-label m-0 mb-1">Giá bán</label>
-            <input
-              type="text"
-              class="form-control form-control-sm rounded-0"
-              id="price"
-              placeholder="Giá bán"
-              formControlName="price"
-            />
-          </div>
-
           <div>
             <label for="description" class="form-label m-0 mb-1"
               >Mô tả sản phẩm</label
@@ -271,7 +260,7 @@
                   />
                 </td>
                 <td class="p-2">
-                  <span *ngFor="let option of sku.options">
+                  <span *ngFor="let option of sku.productOptionValue">
                     <span class="variant-name fw-bold">{{ option.name }}: </span>
                     <span class="fst-italic">{{ option.value }} </span>
                   </span>
