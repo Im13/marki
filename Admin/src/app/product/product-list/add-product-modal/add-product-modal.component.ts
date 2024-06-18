@@ -47,7 +47,7 @@ export class AddProductModalComponent implements OnInit {
         productOptions: [],
         productSKU: 'sku001',
         productTypeId: null,
-        productSKUs: []
+        productSkus: []
       };
     }
     if (this.isEdit == null) this.isEdit = false;
@@ -160,8 +160,8 @@ export class AddProductModalComponent implements OnInit {
       return {
         id: skuIndex + 1,
         barcode: '',
-        imageUrl: '',
-        importPrice: null,
+        imageUrl: 'thisisimageurl',
+        importPrice: 0,
         sku: this.product.productSKU + this.convertVieService.removeVietnameseTones(skuName.replace(/\s/g, "")),
         quantity: 1,
         price: 1,
@@ -213,28 +213,28 @@ export class AddProductModalComponent implements OnInit {
 
     console.log(this.product);
 
-    // if (!this.isEdit) {
-    //   this.productService.addProduct(this.product).subscribe({
-    //     next: () => {
-    //       this.toastrService.success('Thêm sản phẩm thành công!');
-    //       this.destroyModal();
-    //     },
-    //     error: (err) => {
-    //       this.toastrService.error(err);
-    //     },
-    //   });
-    // } else {
-    //   this.productService.editProduct(this.product).subscribe({
-    //     next: () => {
-    //       this.toastrService.success('Sửa sản phẩm thành công!');
-    //       this.destroyModal();
-    //     },
-    //     error: (err) => {
-    //       console.log(err);
-    //       this.toastrService.error(err);
-    //     },
-    //   });
-    // }
+    if (!this.isEdit) {
+      this.productService.addProduct(this.product).subscribe({
+        next: () => {
+          this.toastrService.success('Thêm sản phẩm thành công!');
+          this.destroyModal();
+        },
+        error: (err) => {
+          this.toastrService.error(err);
+        },
+      });
+    } else {
+      this.productService.editProduct(this.product).subscribe({
+        next: () => {
+          this.toastrService.success('Sửa sản phẩm thành công!');
+          this.destroyModal();
+        },
+        error: (err) => {
+          console.log(err);
+          this.toastrService.error(err);
+        },
+      });
+    }
   }
 
   bindDataToProductObject() {
@@ -245,7 +245,7 @@ export class AddProductModalComponent implements OnInit {
     // this.product.description = this.addForm.value.productDescription;
     this.product.productSKU = this.addForm.value.productSKU;
     this.product.productTypeId = 1;
-    this.product.productSKUs = this.productSKUs;
+    this.product.productSkus = this.productSKUs;
   }
 
   onCreateVariants() {

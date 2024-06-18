@@ -34,9 +34,9 @@
           </th>
           <th class="align-middle" scope="row" (click)="displayEditModal(product)">{{ product.productSKU }}</th>
           <td class="align-middle" (click)="displayEditModal(product)">{{ product.name }}</td>
-          <td class="align-middle" (click)="displayEditModal(product)"><img [src]="product.productSKUs[0].imageUrl" alt="product picture" class="product-picture"></td>
+          <td class="align-middle" (click)="displayEditModal(product)"><img [src]="product.productSkus[0].imageUrl" alt="product picture" class="product-picture"></td>
           <td class="align-middle" (click)="displayEditModal(product)">{{ product.importPrice | number }}</td>
-          <td class="align-middle" (click)="displayEditModal(product)">{{ product.productSKUs[0].price| number }}</td>
+          <td class="align-middle" (click)="displayEditModal(product)">{{ product.productSkus[0].price| number }}</td>
         </tr>
       </tbody>
     </table>

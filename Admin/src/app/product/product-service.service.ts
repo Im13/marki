@@ -15,7 +15,7 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   addProduct(product: Product) {
-    return this.http.post(this.baseUrl + 'products', product);
+    return this.http.post(this.baseUrl + 'adminproduct/create', product);
   }
 
   editProduct(product: Product) {

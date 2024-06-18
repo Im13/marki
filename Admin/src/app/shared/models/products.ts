@@ -3,11 +3,11 @@ import { ProductSKUs } from "./productSKUs";
 
 export interface Product {
   name: string;
-  productSKU: string;
   description: string;
-  productTypeId: number;
   productBrandId: number;
+  productTypeId: number;
+  productSKU: string;
   importPrice: number;
   productOptions: ProductOptions[];
-  productSKUs: ProductSKUs[];
+  productSkus: ProductSKUs[];
 }
