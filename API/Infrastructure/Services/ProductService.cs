@@ -67,7 +67,7 @@ namespace Infrastructure.Services
             {
                 foreach (var value in sku.ProductSKUValues)
                 {
-                    value.OptionValueId = listOptionValue.FirstOrDefault(ov => ov.ValueTempId == value.ValueTempId)?.Id;
+                    value.ProductOptionValue = listOptionValue.FirstOrDefault(ov => ov.ValueTempId == value.ValueTempId);
                 }
             }
 
