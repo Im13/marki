@@ -1,4 +1,5 @@
 using Core.Entities;
+using Core.Specification;
 
 namespace Core.Interfaces
 {
@@ -8,6 +9,7 @@ namespace Core.Interfaces
         Task<IReadOnlyList<Product>> GetProductsAsync();
         Task<IReadOnlyList<ProductBrand>> GetProductBrandsAsync();
         Task<IReadOnlyList<ProductType>> GetProductTypesAsync();
+        Task<List<Product>> GetProductsWithSpec(ISpecification<Product> spec);
         
     }
 }

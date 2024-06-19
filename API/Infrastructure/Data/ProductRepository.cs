@@ -1,5 +1,6 @@
 using Core.Entities;
 using Core.Interfaces;
+using Core.Specification;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data
@@ -30,6 +31,16 @@ namespace Infrastructure.Data
         public async Task<IReadOnlyList<ProductType>> GetProductTypesAsync()
         {
             return await _context.ProductTypes.ToListAsync();
+        }
+
+        public async Task<List<Product>> GetProductsWithSpec(ISpecification<Product> spec)
+        {
+            var products = await SpecificationEvaluator<Product>.GetQuery(_context.Set<Product>().AsQueryable(), spec)
+                .Include(p => p.ProductSKUs).ThenInclude(ps => ps.ProductSKUValues)
+                .Include(p => p.ProductOptions).ThenInclude(po => po.ProductOptionValues)
+                .ToListAsync();
+
+            return products;
         }
     }
 }

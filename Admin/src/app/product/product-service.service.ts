@@ -28,6 +28,6 @@ export class ProductService {
     params = params.append('pageSize', productParams.pageSize);
     params = params.append('pageIndex', productParams.pageIndex);
 
-    return this.http.get<Pagination<Product[]>>(this.baseUrl + 'admin/products', { params });
+    return this.http.get<Pagination<Product[]>>(this.baseUrl + 'adminproduct/products', { params });
   }
 }

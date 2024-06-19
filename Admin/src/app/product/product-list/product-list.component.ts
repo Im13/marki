@@ -68,6 +68,8 @@ export class ProductListComponent implements OnInit {
         this.productParams.pageIndex = response.pageIndex;
         this.productParams.pageSize = response.pageSize;
         this.totalCount = response.count;
+
+        console.log(this.products);
       },
       error: err => {
         console.log(err);

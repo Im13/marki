@@ -33,24 +33,28 @@ namespace API.Helpers
                 .ForMember(d => d.ProductName, o => o.MapFrom(s => s.ItemOrdered.ProductName))
                 .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.ItemOrdered.PictureUrl))
                 .ForMember(d => d.PictureUrl, o => o.MapFrom<OrderItemUrlResolver>());
-            CreateMap<ProductDTO, Product>();
-            
-            CreateMap<ProductDTOs, Product>();
-            CreateMap<ProductOptionDTO, ProductOptions>();
-            CreateMap<ProductOptionValueDTO, ProductOptionValues>();
-            CreateMap<ProductSKUDTO, ProductSKUs>();
-            // CreateMap<ProductSKUValuesDTO, ProductSKUValues>();
-            CreateMap<ProductSKUValuesDTO, ProductSKUValues>()
-                .ForMember(d => d.ValueTempId, o => o.MapFrom(s => s.ValueTempId));
 
-            CreateMap<ShopeeOrderProductDTO,ShopeeProduct>()
+            CreateMap<ProductDTOs, Product>();
+            CreateMap<Product, ProductDTOs>()
+                .ForMember(d => d.ProductBrand, o => o.MapFrom(s => s.ProductBrand.Name))
+                .ForMember(d => d.ProductType, o => o.MapFrom(s => s.ProductType.Name));
+            CreateMap<ProductOptionDTO, ProductOptions>();
+            CreateMap<ProductOptions, ProductOptionDTO>();
+            CreateMap<ProductOptionValueDTO, ProductOptionValues>();
+            CreateMap<ProductOptionValues, ProductOptionValueDTO>();
+            CreateMap<ProductSKUDTO, ProductSKUs>();
+            CreateMap<ProductSKUs, ProductSKUDTO>();
+            CreateMap<ProductSKUValuesDTO, ProductSKUValues>();
+            CreateMap<ProductSKUValues, ProductSKUValuesDTO>()
+                .ForMember(d => d.OptionValueId, o => o.MapFrom(s => s.OptionValueId));
+
+            CreateMap<ShopeeOrderProductDTO, ShopeeProduct>()
                 .ForMember(d => d.SKU, o => o.MapFrom(s => s.ProductSKU));
-            CreateMap<ShopeeOrderDTO,ShopeeOrder>()
+            CreateMap<ShopeeOrderDTO, ShopeeOrder>()
                 .ForMember(d => d.OrderDate, o => o.MapFrom(s => DateTime.ParseExact(s.OrderDate, "dd/MM/yyyy H:mm", null)));
-            CreateMap<ShopeeOrder,ShopeeOrderDTO>();
-            CreateMap<ShopeeProduct,ShopeeOrderProductDTO>()
+            CreateMap<ShopeeOrder, ShopeeOrderDTO>();
+            CreateMap<ShopeeProduct, ShopeeOrderProductDTO>()
                 .ForMember(d => d.ProductSKU, o => o.MapFrom(s => s.SKU));
-            // CreateMap<IReadOnlyList<ShopeeOrder>,IReadOnlyList<ShopeeOrderDTO>>();
         }
     }
 }
