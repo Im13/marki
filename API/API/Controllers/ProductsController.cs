@@ -30,22 +30,6 @@ namespace API.Controllers
             _productService = productService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<Pagination<ProductToReturnDTO>>> GetProducts([FromQuery]ProductSpecParams productParams)
-        {
-            var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
-
-            var countSpec = new ProductWithFiltersForCountSpecification(productParams);
-
-            var totalItems = await _productRepo.CountAsync(countSpec);
-
-            var products = await _productRepo.ListAsync(spec);
-
-            var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDTO>>(products);
-
-            return Ok(new Pagination<ProductToReturnDTO>(productParams.PageIndex, productParams.PageSize, totalItems, data));
-        }
-
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
@@ -73,21 +57,5 @@ namespace API.Controllers
             var types = await _productTypeRepo.ListAllAsync();
             return Ok(types);
         }
-
-        // [HttpPost]
-        // public async Task<ActionResult<ProductToReturnDTO>> CreateProduct(ProductDTO productDTO) 
-        // {
-        //     var product = _mapper.Map<ProductDTO,Product>(productDTO);
-
-        //     var productWithSKUExists = await _productService.GetProductBySKUAsync(productDTO.ProductSKU);
-
-        //     if (productWithSKUExists != null) return BadRequest("Product with this SKU has exists!");
-
-        //     var resProduct = await _productService.CreateProduct(product);
-
-        //     if(resProduct == null) return BadRequest(new ApiResponse(400, "Problem creating product")); 
-
-        //     return Ok(resProduct);
-        // }
     }
 }

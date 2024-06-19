@@ -79,12 +79,5 @@ namespace Infrastructure.Services
 
             return prod;
         }
-
-        // public async Task<List<Product>> GetProductListAsync()
-        // {
-        //     var products = new List<Product>();
-
-            
-        // }
     }
 }
