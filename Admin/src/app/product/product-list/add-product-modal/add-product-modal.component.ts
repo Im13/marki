@@ -38,18 +38,41 @@ export class AddProductModalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log(this.product);
     if (this.product == null) {
       this.product = {
-        name: 'tensp',
-        description: 'mota',
-        importPrice: 100000,
+        name: '',
+        description: '',
+        importPrice: null,
         productBrandId: null,
         productOptions: [],
-        productSKU: 'sku001',
+        productSKU: '',
         productTypeId: null,
         productSkus: []
       };
+    } else {
+      this.product.productOptions.forEach(option => {
+        const productOption = {
+          optionName: option.optionName,
+          displayedValues: [],
+          productOptionId: option.productOptionId,
+          productOptionValues: option.productOptionValues
+        }
+
+        productOption.productOptionValues.forEach(value => {
+          productOption.displayedValues.push(value.valueName);
+        });
+
+        this.productOptions.push(productOption);
+      });
+
+      this.productSKUs = this.product.productSkus;
+      
+      console.log(this.productOptions);
+
+      console.log(this.productSKUs);
     }
+
     if (this.isEdit == null) this.isEdit = false;
 
     this.addForm = new FormGroup({
@@ -60,55 +83,12 @@ export class AddProductModalComponent implements OnInit {
       productSKU: new FormControl(this.product.productSKU),
       importPrice: new FormControl(this.product.importPrice),
     });
-
-    //Fake data
-    this.productOptions = [
-      {
-        optionName: 'Size',
-        productOptionId: 0,
-        productOptionValues: [
-          {
-            valueTempId: 1,
-            value: 'S'
-          },
-          {
-            valueTempId: 2,
-            value: 'M'
-          },
-          {
-            valueTempId: 3,
-            value: 'L'
-          }
-        ],
-        displayedValues: ['S', 'M', 'L']
-      },
-      {
-        optionName: 'Color',
-        productOptionId: 1,
-        productOptionValues: [
-          {
-            valueTempId: 4,
-            value: 'White'
-          },
-          {
-            valueTempId: 5,
-            value: 'Red'
-          },
-          {
-            valueTempId: 6,
-            value: 'Blue'
-          }
-        ],
-        displayedValues: ['White', 'Red', 'Blue']
-      }
-    ]
   }
 
   quickAddVariants() {
     this.bindDataToProductObject();
     this.product.productOptions = this.productOptions;
     this.productSKUs = this.generateSKUs(this.product);
-    console.log(this.productSKUs); // Output các SKUs
   }
 
   // Hàm tạo các SKUs từ các biến thể của sản phẩm
