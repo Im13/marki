@@ -4,6 +4,7 @@ namespace API.DTOs.Product
     {
         public int Id { get; set; }
         public string ValueName { get; set; }
+        public string Value { get; set; }
         public int ValueTempId { get; set; }
     }
 }

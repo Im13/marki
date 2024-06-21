@@ -40,7 +40,8 @@ namespace API.Helpers
                 .ForMember(d => d.ProductType, o => o.MapFrom(s => s.ProductType.Name));
             CreateMap<ProductOptionDTO, ProductOptions>();
             CreateMap<ProductOptions, ProductOptionDTO>();
-            CreateMap<ProductOptionValueDTO, ProductOptionValues>();
+            CreateMap<ProductOptionValueDTO, ProductOptionValues>()
+                .ForMember(d => d.ValueName, o => o.MapFrom(s => s.Value));
             CreateMap<ProductOptionValues, ProductOptionValueDTO>();
             CreateMap<ProductSKUDTO, ProductSKUs>();
             CreateMap<ProductSKUs, ProductSKUDTO>();
