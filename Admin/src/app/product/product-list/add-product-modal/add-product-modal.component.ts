@@ -8,7 +8,6 @@ import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ProductOptions } from 'src/app/shared/models/productOptions';
 import { ProductSKUs } from 'src/app/shared/models/productSKUs';
-import { ProductOption } from 'src/app/shared/models/productOption';
 import { ConvertVieService } from 'src/app/core/services/convert-vie.service';
 import { ProductOptionValue } from 'src/app/shared/models/productOptionValues';
 import { ProductSKUValue } from 'src/app/shared/models/productSKUValue';
@@ -29,16 +28,16 @@ export class AddProductModalComponent implements OnInit {
   productSKUs: ProductSKUs[] = [];
   editId: number | null = null;
   variantValues: ProductOptionValue[][] = [];
+  valueTempId: number = 0;
 
   constructor(
     private modal: NzModalRef,
     private productService: ProductService,
     private toastrService: ToastrService,
     private convertVieService: ConvertVieService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    console.log(this.product);
     if (this.product == null) {
       this.product = {
         name: '',
@@ -54,23 +53,19 @@ export class AddProductModalComponent implements OnInit {
       this.product.productOptions.forEach(option => {
         const productOption = {
           optionName: option.optionName,
-          displayedValues: [],
+          valuesToDisplay: [],
           productOptionId: option.productOptionId,
           productOptionValues: option.productOptionValues
         }
 
         productOption.productOptionValues.forEach(value => {
-          productOption.displayedValues.push(value.valueName);
+          productOption.valuesToDisplay.push(value.valueName);
         });
 
         this.productOptions.push(productOption);
       });
 
       this.productSKUs = this.product.productSkus;
-      
-      console.log(this.productOptions);
-
-      console.log(this.productSKUs);
     }
 
     if (this.isEdit == null) this.isEdit = false;
@@ -83,12 +78,77 @@ export class AddProductModalComponent implements OnInit {
       productSKU: new FormControl(this.product.productSKU),
       importPrice: new FormControl(this.product.importPrice),
     });
+
+    // //Fake data
+    // this.productOptions = [
+    //   {
+    //     optionName: 'Size',
+    //     productOptionId: 0,
+    //     productOptionValues: [
+    //       {
+    //         valueTempId: 1,
+    //         value: 'S',
+    //         valueName: 'Size'
+    //       },
+    //       {
+    //         valueTempId: 2,
+    //         value: 'M',
+    //         valueName: 'Size'
+    //       },
+    //       {
+    //         valueTempId: 3,
+    //         value: 'L',
+    //         valueName: 'Size'
+    //       }
+    //     ]
+    //   },
+    //   {
+    //     optionName: 'Color',
+    //     productOptionId: 1,
+    //     productOptionValues: [
+    //       {
+    //         valueTempId: 4,
+    //         value: 'White',
+    //         valueName: 'Mau sac'
+    //       },
+    //       {
+    //         valueTempId: 5,
+    //         value: 'Red',
+    //         valueName: 'Mau sac'
+    //       },
+    //       {
+    //         valueTempId: 6,
+    //         value: 'Blue',
+    //         valueName: 'Mau sac'
+    //       }
+    //     ]
+    //   }
+    // ];
   }
 
   quickAddVariants() {
     this.bindDataToProductObject();
+    this.convertValuesToDisplayToProductOptionValues();
     this.product.productOptions = this.productOptions;
     this.productSKUs = this.generateSKUs(this.product);
+  }
+
+  convertValuesToDisplayToProductOptionValues() {
+    this.productOptions.forEach(option => {
+      const optionValues: ProductOptionValue[] = [];
+
+      option.valuesToDisplay.forEach(value => {
+        optionValues.push({
+          value: value,
+          valueName: option.optionName,
+          valueTempId: this.valueTempId
+        })
+
+        this.valueTempId++;
+      })
+
+      option.productOptionValues = optionValues;
+    });
   }
 
   // Hàm tạo các SKUs từ các biến thể của sản phẩm
@@ -97,6 +157,8 @@ export class AddProductModalComponent implements OnInit {
     this.variantValues = product.productOptions.map(
       (option) => option.productOptionValues
     );
+
+    // console.log(this.variantValues)
 
     // Hàm đệ quy để kết hợp các giá trị của các biến thể
     const combine = (
@@ -118,20 +180,17 @@ export class AddProductModalComponent implements OnInit {
     };
 
     const combinations = combine(this.variantValues, 0, []);
+    console.log(combinations);
 
     const skus: ProductSKUs[] = combinations.map((values, skuIndex) => {
-      const opt: ProductOption[] = [];
       const productSkuValues: ProductSKUValue[] = [];
       let skuName: string = '';
 
       this.productOptions.forEach((option, index) => {
-        opt.push({
-          valueTempId: values[index].valueTempId,
-          name: option.optionName,
-          value: values[index].value
-        });
         productSkuValues.push({
-          valueTempId: values[index].valueTempId
+          valueTempId: values[index].valueTempId,
+          optionName: option.optionName,
+          optionValue: values[index].value
         })
 
         skuName += values[index].value;
@@ -146,7 +205,6 @@ export class AddProductModalComponent implements OnInit {
         quantity: 1,
         price: 1,
         weight: 1,
-        productOptionValue: opt,
         productSKUValues: productSkuValues
       };
     });
@@ -169,9 +227,6 @@ export class AddProductModalComponent implements OnInit {
 
     if (event.key == 'Enter') {
       event.preventDefault();
-      this.productOptions.find(
-        (o) => o.productOptionId === data.productOptionId
-      ).productOptionValues = data.productOptionValues;
     }
   }
 
@@ -232,8 +287,8 @@ export class AddProductModalComponent implements OnInit {
     this.productOptions.push({
       optionName: '',
       productOptionValues: [],
+      valuesToDisplay: [],
       productOptionId: this.productOptionId,
-      displayedValues: []
     });
 
     this.productOptionId++;

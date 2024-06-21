@@ -10,6 +10,5 @@ export interface ProductSKUs {
     price: number;
     weight: number;
     quantity: number;
-    productOptionValue: ProductOption[];
     productSKUValues: ProductSKUValue[];
 }

@@ -133,13 +133,14 @@
                 </td>
                 <td class="p-2">
                   <nz-select
-                    [(ngModel)]="option.displayedValues"
+                    [(ngModel)]="option.valuesToDisplay"
                     [ngModelOptions]="{ standalone: true }"
                     nzMode="tags"
                     nzPlaceHolder="Please select"
                     nzDropdownClassName="hide-dropdown"
                     class="w-100"
                     [nzMaxTagCount]="1000"
+                    (keydown)="handleOptionValueKeydown($event, option)"
                   >
                   </nz-select>
                 </td>
@@ -260,9 +261,9 @@
                   />
                 </td>
                 <td class="p-2">
-                  <span *ngFor="let option of sku.productOptionValue">
-                    <span class="variant-name fw-bold">{{ option.name }}: </span>
-                    <span class="fst-italic">{{ option.value }} </span>
+                  <span *ngFor="let option of sku.productSKUValues">
+                    <span class="variant-name fw-bold">{{ option.optionName }}: </span>
+                    <span class="fst-italic">{{ option.optionValue }} </span>
                   </span>
                 </td>
                 <td class="p-2">
