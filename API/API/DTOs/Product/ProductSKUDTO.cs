@@ -2,6 +2,8 @@ namespace API.DTOs.Product
 {
     public class ProductSKUDTO
     {
+        public int? Id { get; set; }
+        public int LocalId { get; set; }
         public string Sku { get; set; }
         public decimal ImportPrice { get; set; }
         public decimal Price { get; set; }

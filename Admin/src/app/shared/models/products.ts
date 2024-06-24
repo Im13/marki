@@ -2,6 +2,7 @@ import { ProductOptions } from "./productOptions";
 import { ProductSKUs } from "./productSKUs";
 
 export interface Product {
+  id: number;
   name: string;
   description: string;
   productBrandId: number;

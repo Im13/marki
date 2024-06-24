@@ -11,19 +11,6 @@ namespace Infrastructure.Services
         {
             _unitOfWork = unitOfWork;
         }
-        // public async Task<Product> CreateProduct(Product prod)
-        // {
-        //     prod.ProductType = await _unitOfWork.Repository<ProductType>().GetByIdAsync(prod.ProductTypeId);
-        //     prod.ProductBrand = await _unitOfWork.Repository<ProductBrand>().GetByIdAsync(prod.ProductBrandId);
-
-        //     _unitOfWork.Repository<Product>().Add(prod);
-
-        //     var result = await _unitOfWork.Complete();
-
-        //     if(result <= 0) return null;
-
-        //     return prod;
-        // }
 
         public async Task<Product> GetProductBySKUAsync(string productSKU)
         {
@@ -79,5 +66,10 @@ namespace Infrastructure.Services
 
             return prod;
         }
+
+        // public async Task<Product> UpdateProduct()
+        // {
+
+        // }
     }
 }

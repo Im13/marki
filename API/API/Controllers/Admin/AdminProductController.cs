@@ -2,6 +2,7 @@ using API.DTOs;
 using API.DTOs.Product;
 using API.Helpers;
 using AutoMapper;
+using Core;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specification;
@@ -53,6 +54,49 @@ namespace API.Controllers.Admin
             var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductDTOs>>(products);
 
             return Ok(new Pagination<ProductDTOs>(productParams.PageIndex, productParams.PageSize, totalItems, data));
+        }
+
+        [HttpPut("product")]
+        public async Task<ActionResult> EditProduct(ProductDTOs productDTO)
+        {
+            var product = new Product();
+            // int productId = 0;
+            
+            // if(productDTO.Id != null) 
+            //     productId = product.Id;
+            // else 
+            //     return BadRequest("Error update product");
+
+            // //Find product by Id
+            // product = await _genericProductRepo.GetByIdAsync(productId);
+
+            // if (product == null) return BadRequest("Product not exists!");
+
+            // //Check if product with SKU exists
+            // if (product.ProductSKU != productDTO.ProductSKU)
+            // {
+            //     var productWithSKUExists = await _productService.GetProductBySKUAsync(productDTO.ProductSKU);
+
+            //     if (productWithSKUExists != null) return BadRequest("Product with this SKU has exists!");
+            // }
+
+            // var data = _mapper.Map<ProductDTOs, Product>(productDTO);
+
+            // // Update product by productDTO
+            // product.ProductBrandId = productDTO.ProductBrandId;
+            // product.ProductSKUs = _mapper.Map<ProductDTOs, Product>(productDTO).ProductSKUs;
+            // product.ProductOptions = _mapper.Map<ProductDTOs, Product>(productDTO).ProductOptions;
+            // product.ProductTypeId = productDTO.ProductTypeId;
+            // product.Description = productDTO.Description;
+            // product.Name = productDTO.Name;
+            // product.ProductSKU = productDTO.ProductSKU;
+            // product.ImportPrice = productDTO.ImportPrice;
+
+            // var productUpdatedResult = await _productService.UpdateProduct(product);
+
+            // if (productUpdatedResult == null) return BadRequest("Error update product.");
+
+            return Ok(product);
         }
     }
 }

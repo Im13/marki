@@ -19,7 +19,7 @@ export class ProductService {
   }
 
   editProduct(product: Product) {
-    return this.http.put(this.baseUrl + 'admin/product', product);
+    return this.http.put(this.baseUrl + 'adminproduct/product', product);
   }
 
   getProducts(productParams: ProductParams) {

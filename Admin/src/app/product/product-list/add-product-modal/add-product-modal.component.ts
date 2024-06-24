@@ -40,6 +40,7 @@ export class AddProductModalComponent implements OnInit {
   ngOnInit(): void {
     if (this.product == null) {
       this.product = {
+        id: null,
         name: '',
         description: '',
         importPrice: null,
@@ -50,8 +51,11 @@ export class AddProductModalComponent implements OnInit {
         productSkus: []
       };
     } else {
+      this.isEdit = true; 
+
       this.product.productOptions.forEach(option => {
         const productOption = {
+          id: null,
           optionName: option.optionName,
           valuesToDisplay: [],
           productOptionId: option.productOptionId,
@@ -67,6 +71,8 @@ export class AddProductModalComponent implements OnInit {
 
       this.productSKUs = this.product.productSkus;
     }
+
+    console.log(this.isEdit);
 
     if (this.isEdit == null) this.isEdit = false;
 
@@ -188,6 +194,7 @@ export class AddProductModalComponent implements OnInit {
 
       this.productOptions.forEach((option, index) => {
         productSkuValues.push({
+          id: null,
           valueTempId: values[index].valueTempId,
           optionName: option.optionName,
           optionValue: values[index].value
@@ -197,7 +204,8 @@ export class AddProductModalComponent implements OnInit {
       });
 
       return {
-        id: skuIndex + 1,
+        id: null,
+        localId: skuIndex + 1,
         barcode: '',
         imageUrl: 'thisisimageurl',
         importPrice: 0,
@@ -285,6 +293,7 @@ export class AddProductModalComponent implements OnInit {
 
   onCreateVariants() {
     this.productOptions.push({
+      id: null,
       optionName: '',
       productOptionValues: [],
       valuesToDisplay: [],

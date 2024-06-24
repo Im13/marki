@@ -13,14 +13,9 @@ namespace API.Helpers
     {
         public MappingProfiles()
         {
-            CreateMap<Product, ProductToReturnDTO>()
-                .ForMember(d => d.ProductBrand, o => o.MapFrom(s => s.ProductBrand.Name))
-                .ForMember(d => d.ProductType, o => o.MapFrom(s => s.ProductType.Name))
-                .ForMember(d => d.PictureUrl, o => o.MapFrom<ProductUrlResolver>());
-            CreateMap<Product, ProductDTO>()
-                .ForMember(d => d.ProductBrand, o => o.MapFrom(s => s.ProductBrand.Name))
-                .ForMember(d => d.ProductType, o => o.MapFrom(s => s.ProductType.Name))
-                .ForMember(d => d.PictureUrl, o => o.MapFrom<ProductUrlResolver>());
+            CreateMap<Product, ProductToReturnDTO>();
+                // .ForMember(d => d.PictureUrl, o => o.MapFrom<ProductUrlResolver>());
+            CreateMap<Product, ProductDTO>();
             CreateMap<Core.Entities.Identity.Address, AddressDTO>().ReverseMap();
             CreateMap<CustomerBasketDTO, CustomerBasket>();
             CreateMap<BasketItemDTO, BasketItem>();
@@ -35,9 +30,7 @@ namespace API.Helpers
                 .ForMember(d => d.PictureUrl, o => o.MapFrom<OrderItemUrlResolver>());
 
             CreateMap<ProductDTOs, Product>();
-            CreateMap<Product, ProductDTOs>()
-                .ForMember(d => d.ProductBrand, o => o.MapFrom(s => s.ProductBrand.Name))
-                .ForMember(d => d.ProductType, o => o.MapFrom(s => s.ProductType.Name));
+            CreateMap<Product, ProductDTOs>();
             CreateMap<ProductOptionDTO, ProductOptions>();
             CreateMap<ProductOptions, ProductOptionDTO>();
             CreateMap<ProductOptionValueDTO, ProductOptionValues>()

@@ -1,8 +1,8 @@
-import { ProductOption } from "./productOption";
 import { ProductSKUValue } from "./productSKUValue";
 
 export interface ProductSKUs {
     id: number;
+    localId: number;
     imageUrl: string;
     sku: string;
     barcode: string;
