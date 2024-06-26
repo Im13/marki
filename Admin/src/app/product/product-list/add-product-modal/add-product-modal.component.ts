@@ -10,7 +10,7 @@ import { ProductOptions } from 'src/app/shared/models/productOptions';
 import { ProductSKUs } from 'src/app/shared/models/productSKUs';
 import { ConvertVieService } from 'src/app/core/services/convert-vie.service';
 import { ProductOptionValue } from 'src/app/shared/models/productOptionValues';
-import { ProductSKUValue } from 'src/app/shared/models/productSKUValue';
+import { ProductSKUValues } from 'src/app/shared/models/productSKUValues';
 
 @Component({
   selector: 'app-add-product-modal',
@@ -38,6 +38,7 @@ export class AddProductModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(this.product);
     if (this.product == null) {
       this.product = {
         id: null,
@@ -71,8 +72,6 @@ export class AddProductModalComponent implements OnInit {
 
       this.productSKUs = this.product.productSkus;
     }
-
-    console.log(this.isEdit);
 
     if (this.isEdit == null) this.isEdit = false;
 
@@ -186,10 +185,9 @@ export class AddProductModalComponent implements OnInit {
     };
 
     const combinations = combine(this.variantValues, 0, []);
-    console.log(combinations);
 
     const skus: ProductSKUs[] = combinations.map((values, skuIndex) => {
-      const productSkuValues: ProductSKUValue[] = [];
+      const productSkuValues: ProductSKUValues[] = [];
       let skuName: string = '';
 
       this.productOptions.forEach((option, index) => {

@@ -59,42 +59,34 @@ namespace API.Controllers.Admin
         [HttpPut("product")]
         public async Task<ActionResult> EditProduct(ProductDTOs productDTO)
         {
-            var product = new Product();
-            // int productId = 0;
-            
-            // if(productDTO.Id != null) 
-            //     productId = product.Id;
-            // else 
-            //     return BadRequest("Error update product");
+            if(productDTO.Id == null) return BadRequest("Error update product!");
 
-            // //Find product by Id
-            // product = await _genericProductRepo.GetByIdAsync(productId);
+            //Find product by Id
+            var product = await _genericProductRepo.GetByIdAsync((int)productDTO.Id);
 
-            // if (product == null) return BadRequest("Product not exists!");
+            if (product == null) return BadRequest("Product not exists!");
 
-            // //Check if product with SKU exists
-            // if (product.ProductSKU != productDTO.ProductSKU)
-            // {
-            //     var productWithSKUExists = await _productService.GetProductBySKUAsync(productDTO.ProductSKU);
+            //Check if product with SKU exists
+            if (product.ProductSKU != productDTO.ProductSKU)
+            {
+                var productWithSKUExists = await _productService.GetProductBySKUAsync(productDTO.ProductSKU);
 
-            //     if (productWithSKUExists != null) return BadRequest("Product with this SKU has exists!");
-            // }
+                if (productWithSKUExists != null) return BadRequest("Product with this SKU has exists!");
+            }
 
-            // var data = _mapper.Map<ProductDTOs, Product>(productDTO);
+            // product = _mapper.Map<ProductDTOs, Product>(productDTO);
 
-            // // Update product by productDTO
-            // product.ProductBrandId = productDTO.ProductBrandId;
-            // product.ProductSKUs = _mapper.Map<ProductDTOs, Product>(productDTO).ProductSKUs;
-            // product.ProductOptions = _mapper.Map<ProductDTOs, Product>(productDTO).ProductOptions;
-            // product.ProductTypeId = productDTO.ProductTypeId;
-            // product.Description = productDTO.Description;
-            // product.Name = productDTO.Name;
-            // product.ProductSKU = productDTO.ProductSKU;
-            // product.ImportPrice = productDTO.ImportPrice;
+            // Update product by productDTO
+            product.ProductBrandId = productDTO.ProductBrandId;
+            product.ProductTypeId = productDTO.ProductTypeId;
+            product.Description = productDTO.Description;
+            product.Name = productDTO.Name;
+            product.ProductSKU = productDTO.ProductSKU;
+            product.ImportPrice = productDTO.ImportPrice;
 
-            // var productUpdatedResult = await _productService.UpdateProduct(product);
+            var productUpdatedResult = await _productService.UpdateProduct(product);
 
-            // if (productUpdatedResult == null) return BadRequest("Error update product.");
+            if (productUpdatedResult == null) return BadRequest("Error update product.");
 
             return Ok(product);
         }

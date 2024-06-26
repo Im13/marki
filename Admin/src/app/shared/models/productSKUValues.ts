@@ -1,4 +1,4 @@
-export class ProductSKUValue {
+export class ProductSKUValues {
   id: number;
   valueTempId: number;
   optionName: string;

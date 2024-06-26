@@ -1,4 +1,4 @@
-import { ProductSKUValue } from "./productSKUValue";
+import { ProductSKUValues } from "./productSKUValues";
 
 export interface ProductSKUs {
     id: number;
@@ -10,5 +10,5 @@ export interface ProductSKUs {
     price: number;
     weight: number;
     quantity: number;
-    productSKUValues: ProductSKUValue[];
+    productSKUValues: ProductSKUValues[];
 }
