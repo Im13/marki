@@ -57,12 +57,12 @@ namespace API.Controllers.Admin
         }
 
         [HttpPut("product")]
-        public async Task<ActionResult> EditProduct(ProductDTOs productDTO)
+        public async Task<ActionResult> UpdateProduct(ProductDTOs productDTO)
         {
             if(productDTO.Id == null) return BadRequest("Error update product!");
 
-            //Find product by Id
-            var product = await _genericProductRepo.GetByIdAsync((int)productDTO.Id);
+            // Find product by Id
+            var product = await _productService.GetProductAsync((int)productDTO.Id);
 
             if (product == null) return BadRequest("Product not exists!");
 
@@ -74,21 +74,21 @@ namespace API.Controllers.Admin
                 if (productWithSKUExists != null) return BadRequest("Product with this SKU has exists!");
             }
 
-            // product = _mapper.Map<ProductDTOs, Product>(productDTO);
+            var mappedProduct = _mapper.Map<ProductDTOs, Product>(productDTO);
 
             // Update product by productDTO
-            product.ProductBrandId = productDTO.ProductBrandId;
-            product.ProductTypeId = productDTO.ProductTypeId;
-            product.Description = productDTO.Description;
-            product.Name = productDTO.Name;
-            product.ProductSKU = productDTO.ProductSKU;
-            product.ImportPrice = productDTO.ImportPrice;
+            // product.ProductBrandId = productDTO.ProductBrandId;
+            // product.ProductTypeId = productDTO.ProductTypeId;
+            // product.Description = productDTO.Description;
+            // product.Name = productDTO.Name;
+            // product.ProductSKU = productDTO.ProductSKU;
+            // product.ImportPrice = productDTO.ImportPrice;
 
-            var productUpdatedResult = await _productService.UpdateProduct(product);
+            var productUpdatedResult = await _productService.UpdateProduct(mappedProduct);
 
             if (productUpdatedResult == null) return BadRequest("Error update product.");
 
-            return Ok(product);
+            return Ok(productUpdatedResult);
         }
     }
 }

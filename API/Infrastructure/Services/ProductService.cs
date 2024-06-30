@@ -12,9 +12,19 @@ namespace Infrastructure.Services
             _unitOfWork = unitOfWork;
         }
 
+        public async Task<Product> GetProductAsync(int id)
+        {
+            var product = await _unitOfWork.Repository<Product>().GetByIdAsync(id);
+            _unitOfWork.ClearTracker();
+            
+            return product;
+        }
+
+        //Using only for edit product because of ClearTracker
         public async Task<Product> GetProductBySKUAsync(string productSKU)
         {
             var products = await _unitOfWork.Repository<Product>().ListAllAsync();
+            _unitOfWork.ClearTracker();
 
             return products.SingleOrDefault(p => p.ProductSKU == productSKU);
         }
@@ -22,6 +32,15 @@ namespace Infrastructure.Services
         public async Task<Product> UpdateProduct(Product product)
         {
             _unitOfWork.Repository<Product>().Update(product);
+            foreach(var sku in product.ProductSKUs)
+            {
+                foreach(var skuValue in sku.ProductSKUValues)
+                {
+                    _unitOfWork.Repository<ProductSKUValues>().Update(skuValue);
+                }
+                
+                _unitOfWork.Repository<ProductSKUs>().Update(sku);
+            }
 
             var result = await _unitOfWork.Complete();
 

@@ -10,12 +10,17 @@ namespace Infrastructure.Data
         private Hashtable _repositories;
         public UnitOfWork(StoreContext context)
         {
-            this._context = context;
+            _context = context;
         }
 
         public async Task<int> Complete()
         {
             return await _context.SaveChangesAsync();
+        }
+
+        public void ClearTracker()
+        {
+            _context.ChangeTracker.Clear();
         }
 
         public void Dispose()
