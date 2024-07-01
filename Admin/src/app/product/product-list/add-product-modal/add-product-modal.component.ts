@@ -38,7 +38,6 @@ export class AddProductModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.product);
     if (this.product == null) {
       this.product = {
         id: null,
@@ -52,7 +51,7 @@ export class AddProductModalComponent implements OnInit {
         productSkus: []
       };
     } else {
-      this.isEdit = true; 
+      this.isEdit = true;
 
       this.product.productOptions.forEach(option => {
         const productOption = {
@@ -282,8 +281,7 @@ export class AddProductModalComponent implements OnInit {
     this.product.name = this.addForm.value.productName;
     this.product.importPrice = +this.addForm.value.importPrice;
     this.product.productBrandId = 1;
-    this.product.description = 'sample';
-    // this.product.description = this.addForm.value.productDescription;
+    this.product.description = this.addForm.value.productDescription;
     this.product.productSKU = this.addForm.value.productSKU;
     this.product.productTypeId = 1;
     this.product.productSkus = this.productSKUs;
