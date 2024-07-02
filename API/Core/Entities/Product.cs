@@ -6,6 +6,7 @@ namespace Core.Entities
         public string Description { get; set; }
         public string ProductSKU { get; set; }
         public decimal ImportPrice { get; set; }
+        public bool IsDeleted { get; set; }
         public ProductType ProductType { get; set; }
         public int ProductTypeId { get; set; }
         public ProductBrand ProductBrand { get; set; }

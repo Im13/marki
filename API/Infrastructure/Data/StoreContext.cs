@@ -31,7 +31,10 @@ namespace Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            modelBuilder.Entity<Product>().Property(p => p.IsDeleted).HasDefaultValue(false);
 
             if(Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite")
             {

@@ -3,10 +3,10 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ProductParams } from 'src/app/shared/models/productParams';
 import { ProductService } from '../product-service.service';
 import { Product } from 'src/app/shared/models/products';
-import { Subscription } from 'rxjs';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { AddProductModalComponent } from './add-product-modal/add-product-modal.component';
-import { NzTableModule, NzTableQueryParams } from 'ng-zorro-antd/table';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-list',
@@ -29,7 +29,8 @@ export class ProductListComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private modalServices: NzModalService) {
+    private modalServices: NzModalService,
+    private toastrService: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -74,9 +75,30 @@ export class ProductListComponent implements OnInit {
   }
 
   deleteSelectedProducts() {
-    this.loading = true; 
+    this.loading = true;
     const seletedProduct = this.products.filter(data => this.setOfCheckedId.has(data.id));
-    console.log(seletedProduct);
+
+    this.modalServices.confirm({
+      nzTitle: 'Bạn muốn xoá các sản phẩm đang chọn?',
+      nzOkText: 'Yes',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: () => {
+        this.productService.deleteProducts(seletedProduct).subscribe({
+          next: () => {
+            this.getProducts();
+            this.toastrService.success('Remove items success!');
+          },
+          error: err => {
+            console.log(err);
+          }
+        });
+      },
+      nzCancelText: 'No',
+      nzOnCancel: () => {
+        this.loading = false;
+      }
+    });
   }
 
   displayCreateModal() {

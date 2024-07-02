@@ -30,4 +30,8 @@ export class ProductService {
 
     return this.http.get<Pagination<Product[]>>(this.baseUrl + 'adminproduct/products', { params });
   }
+
+  deleteProducts(products: Product[]) {
+    return this.http.post(this.baseUrl + 'adminproduct/delete-products', products);
+  }
 }

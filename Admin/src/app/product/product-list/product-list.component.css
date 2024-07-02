@@ -11,12 +11,11 @@
     height: 100%;
 }
 
-.control-bar {
-    height: 5%;
-    border: 1px peru solid;
-}
 
 .list-products {
     height: 94%;
-    
+}
+
+td:hover {
+  cursor: pointer;
 }

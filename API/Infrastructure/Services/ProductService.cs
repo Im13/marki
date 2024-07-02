@@ -86,9 +86,23 @@ namespace Infrastructure.Services
             return prod;
         }
 
-        // public async Task<Product> UpdateProduct()
-        // {
+        public async Task<bool> DeleteProducts(List<Product> products)
+        {
+            if(products.Count == 0) return false;
 
-        // }
+            foreach(var product in products)
+            {
+                if(product.Id == 0) return false;
+                
+                product.IsDeleted = true;
+                _unitOfWork.Repository<Product>().Update(product);
+            }
+
+            var result = await _unitOfWork.Complete();
+
+            if(result <= 0) return false;
+
+            return true;
+        }
     }
 }

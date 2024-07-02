@@ -12,10 +12,12 @@
       <span>Xuất excel</span>
     </button>
 
-    <button class="btn btn-sm btn-outline-secondary rounded-0 me-2" (click)="deleteSelectedProducts()">
+    <button class="btn btn-sm btn-outline-danger rounded-0 me-2" (click)="deleteSelectedProducts()" [disabled]="setOfCheckedId.size === 0">
       <span class="fa fa-trash me-1"></span>
       <span>Xoá sản phẩm</span>
     </button>
+
+    <span class="d-flex align-items-center text-secondary">({{ setOfCheckedId.size }} sản phẩm đã chọn)</span>
   </div>
 
   <div class="data list-products border border-danger mt-3" *ngIf="products.length > 0">
@@ -28,7 +30,7 @@
       [nzTotal]="totalCount"
       [nzPageSize]="productParams.pageSize"
       [nzPageIndex]="productParams.pageIndex"
-      [nzScroll]="{ y: '500px' }"
+      [nzScroll]="{ y: '720px' }"
       (nzQueryParams)="onQueryParamsChange($event)"
       (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
     >
@@ -53,7 +55,7 @@
           <td (click)="displayEditModal(data)">{{ data.name }}</td>
           <td (click)="displayEditModal(data)">{{ data.productSKU }}</td>
           <td (click)="displayEditModal(data)"> Ảnh sản phẩm </td>
-          <td (click)="displayEditModal(data)">{{ data.importPrice | currency}}</td>
+          <td (click)="displayEditModal(data)">{{ data.importPrice | thousandSeparator}}đ</td>
           <td (click)="displayEditModal(data)">{{ data.importPrice }}</td>
         </tr>
       </tbody>

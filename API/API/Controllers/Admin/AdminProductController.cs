@@ -41,7 +41,7 @@ namespace API.Controllers.Admin
         }
 
         [HttpGet("products")]
-        public async Task<ActionResult<Pagination<ProductDTO>>> GetProducts([FromQuery] ProductSpecParams productParams)
+        public async Task<ActionResult<Pagination<ProductDTOs>>> GetProducts([FromQuery] ProductSpecParams productParams)
         {
             var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
 
@@ -83,13 +83,17 @@ namespace API.Controllers.Admin
             return Ok(productUpdatedResult);
         }
 
-        [HttpDelete("products")]
-        public async Task<ActionResult> DeleteProduct(List<int> productDTOs)
+        [HttpPost("delete-products")]
+        public async Task<ActionResult> DeleteProduct(List<ProductDTOs> productDTOs)
         {
             if(productDTOs.Count <= 0)
                 return BadRequest("No data received!");
 
-            // var products = _mapper.Map<List<ProductDTOs, Product>>    
+            var products = _mapper.Map<List<ProductDTOs>, List<Product>>(productDTOs);
+            
+            var deletedResult = await _productService.DeleteProducts(products);
+
+            if(!deletedResult) return BadRequest("Failed to delete!");
         
             return Ok();
         }
