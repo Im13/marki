@@ -76,19 +76,22 @@ namespace API.Controllers.Admin
 
             var mappedProduct = _mapper.Map<ProductDTOs, Product>(productDTO);
 
-            // Update product by productDTO
-            // product.ProductBrandId = productDTO.ProductBrandId;
-            // product.ProductTypeId = productDTO.ProductTypeId;
-            // product.Description = productDTO.Description;
-            // product.Name = productDTO.Name;
-            // product.ProductSKU = productDTO.ProductSKU;
-            // product.ImportPrice = productDTO.ImportPrice;
-
             var productUpdatedResult = await _productService.UpdateProduct(mappedProduct);
 
             if (productUpdatedResult == null) return BadRequest("Error update product.");
 
             return Ok(productUpdatedResult);
+        }
+
+        [HttpDelete("products")]
+        public async Task<ActionResult> DeleteProduct(List<int> productDTOs)
+        {
+            if(productDTOs.Count <= 0)
+                return BadRequest("No data received!");
+
+            // var products = _mapper.Map<List<ProductDTOs, Product>>    
+        
+            return Ok();
         }
     }
 }

@@ -11,50 +11,53 @@
       <span class="fa fa-download me-1"></span>
       <span>Xuất excel</span>
     </button>
+
+    <button class="btn btn-sm btn-outline-secondary rounded-0 me-2" (click)="deleteSelectedProducts()">
+      <span class="fa fa-trash me-1"></span>
+      <span>Xoá sản phẩm</span>
+    </button>
   </div>
 
-  <div class="data list-products border mt-3" *ngIf="products.length > 0">
-    <table class="table table-light table-hover">
+  <div class="data list-products border border-danger mt-3" *ngIf="products.length > 0">
+    <nz-table
+      #rowSelectionTable
+      nzShowSizeChanger
+      [nzFrontPagination]="false"
+      [nzLoading]="loading"
+      [nzData]="products"
+      [nzTotal]="totalCount"
+      [nzPageSize]="productParams.pageSize"
+      [nzPageIndex]="productParams.pageIndex"
+      [nzScroll]="{ y: '500px' }"
+      (nzQueryParams)="onQueryParamsChange($event)"
+      (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
+    >
       <thead>
         <tr>
-          <th scope="col">
-            <input type="checkbox" />
-          </th>
-          <th scope="col">SKU sản phẩm</th>
-          <th scope="col">Tên sản phẩm</th>
-          <th scope="col">Hình ảnh</th>
-          <th scope="col">Giá nhập</th>
-          <th scope="col">Giá bán</th>
+          <th
+            [(nzChecked)]="checked"
+            [nzWidth]="'40px'"
+            [nzIndeterminate]="indeterminate"
+            (nzCheckedChange)="onAllChecked($event)"
+          ></th>
+          <th>Tên sản phẩm</th>
+          <th>SKU sản phẩm</th>
+          <th>Hình ảnh</th>
+          <th>Giá bán</th>
+          <th>Hình ảnh</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of products" role="button">
-          <th class="align-middle">
-            <input type="checkbox" />
-          </th>
-          <th class="align-middle" scope="row" (click)="displayEditModal(product)">{{ product.productSKU }}</th>
-          <td class="align-middle" (click)="displayEditModal(product)">{{ product.name }}</td>
-          <td class="align-middle" (click)="displayEditModal(product)"><img [src]="product.productSkus[0].imageUrl" alt="product picture" class="product-picture"></td>
-          <td class="align-middle" (click)="displayEditModal(product)">{{ product.importPrice | number }}</td>
-          <td class="align-middle" (click)="displayEditModal(product)">{{ product.productSkus[0].price| number }}</td>
+        <tr *ngFor="let data of rowSelectionTable.data">
+          <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td>
+          <td (click)="displayEditModal(data)">{{ data.name }}</td>
+          <td (click)="displayEditModal(data)">{{ data.productSKU }}</td>
+          <td (click)="displayEditModal(data)"> Ảnh sản phẩm </td>
+          <td (click)="displayEditModal(data)">{{ data.importPrice | currency}}</td>
+          <td (click)="displayEditModal(data)">{{ data.importPrice }}</td>
         </tr>
       </tbody>
-    </table>
-
-    <div class="d-flex justify-content-center">
-      <pagination
-        [boundaryLinks]="true"
-        [totalItems]="totalCount"
-        [itemsPerPage]="productParams.pageSize"
-        [maxSize]="10"
-        (pageChanged)="onPageChanged($event)"
-        previousText="&lsaquo;"
-        nextText="&rsaquo;"
-        firstText="&laquo;"
-        lastText="&raquo;"
-      >
-      </pagination>
-    </div>
+    </nz-table>
   </div>
 </div>
 

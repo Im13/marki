@@ -7,6 +7,16 @@
     height: 35px;
 }
 
-.data {
-    font-size: .95rem;
+.product-list-container {
+    height: 100%;
+}
+
+.control-bar {
+    height: 5%;
+    border: 1px peru solid;
+}
+
+.list-products {
+    height: 94%;
+    
 }
