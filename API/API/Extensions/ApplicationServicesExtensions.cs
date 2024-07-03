@@ -1,4 +1,5 @@
 using API.Errors;
+using API.Helpers;
 using Core.Entities;
 using Core.Interfaces;
 using Infrastructure.Data;
@@ -34,6 +35,7 @@ namespace API.Extensions
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IShopeeOrderService, ShopeeOrderService>();
+            services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.InvalidModelStateResponseFactory = actionContext =>
