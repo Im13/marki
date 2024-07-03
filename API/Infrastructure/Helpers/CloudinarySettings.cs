@@ -1,4 +1,4 @@
-namespace API.Helpers
+namespace Infrastructure.Helpers
 {
     public class CloudinarySettings
     {
