@@ -13,5 +13,6 @@ namespace API.DTOs.Product
         public int Quantity { get; set; }
         public List<ProductSKUValuesDTO> ProductSKUValues { get; set; }
         public List<ProductOptionValueDTO> ProductOptionValue { get; set; }
+        public List<PhotoDTO> Photos { get; set; }
     }
 }

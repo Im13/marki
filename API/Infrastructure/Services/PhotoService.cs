@@ -1,5 +1,6 @@
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
+using Core.Entities;
 using Core.Interfaces;
 using Infrastructure.Helpers;
 using Microsoft.AspNetCore.Http;
@@ -9,9 +10,11 @@ namespace Infrastructure.Services
 {
     public class PhotoService : IPhotoService
     {
+        private readonly IUnitOfWork _unitOfWork;
         private readonly Cloudinary _cloudinary;
-        public PhotoService(IOptions<CloudinarySettings> config)
+        public PhotoService(IOptions<CloudinarySettings> config, IUnitOfWork unitOfWork)
         {
+            _unitOfWork = unitOfWork;
             var acc = new Account
             (
                 config.Value.CloudName,
@@ -40,6 +43,17 @@ namespace Infrastructure.Services
             }
 
             return uploadResults;
+        }
+
+        public async Task<Photo> CreatePhotoAsync(Photo photo)
+        {
+            _unitOfWork.Repository<Photo>().Add(photo);
+
+            var result = await _unitOfWork.Complete();
+
+            if(result <= 0) return null;
+
+            return photo;
         }
 
         public async Task<DeletionResult> DeletePhotoAsync(string publicId)

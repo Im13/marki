@@ -2,7 +2,6 @@ using API.DTOs;
 using API.DTOs.Product;
 using API.Helpers;
 using AutoMapper;
-using Core;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specification;
@@ -111,14 +110,14 @@ namespace API.Controllers.Admin
 
             if(result.Error != null) return BadRequest(result.Error.Message);
 
-            var photoDTo = new PhotoDTO
+            var photoDTO = new PhotoDTO
             {
                 Url = result.SecureUrl.AbsoluteUri,
                 PublicId = result.PublicId,
                 IsMain = false
             };
 
-            return Ok(photoDTo);
+            return Ok(_mapper.Map<PhotoDTO>(photoDTO));
         }
     }
 }

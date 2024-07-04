@@ -11,8 +11,8 @@ import { ProductSKUs } from 'src/app/shared/models/productSKUs';
 import { ConvertVieService } from 'src/app/core/services/convert-vie.service';
 import { ProductOptionValue } from 'src/app/shared/models/productOptionValues';
 import { ProductSKUValues } from 'src/app/shared/models/productSKUValues';
-import { NzUploadFile, NzUploadXHRArgs } from 'ng-zorro-antd/upload';
-import { HttpClient, HttpRequest, HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
+import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { Photo } from 'src/app/shared/models/photo';
 
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
@@ -56,8 +56,7 @@ export class AddProductModalComponent implements OnInit {
     private modal: NzModalRef,
     private productService: ProductService,
     private toastrService: ToastrService,
-    private convertVieService: ConvertVieService,
-    private http: HttpClient
+    private convertVieService: ConvertVieService
   ) {}
 
   ngOnInit(): void {
@@ -74,6 +73,7 @@ export class AddProductModalComponent implements OnInit {
         productSkus: [],
       };
     } else {
+      console.log(this.product);
       this.isEdit = true;
 
       this.product.productOptions.forEach((option) => {
@@ -165,11 +165,6 @@ export class AddProductModalComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', item.file as any, item.name);
 
-    const req = new HttpRequest('POST', item.action, formData, {
-      reportProgress : true,
-      withCredentials: false
-    });
-
     // return this.http.request(req).subscribe((event: HttpEvent<{}>) => {
     //   if (event.type === HttpEventType.UploadProgress) {
     //     if (event.total > 0) {
@@ -187,9 +182,12 @@ export class AddProductModalComponent implements OnInit {
 
 
     return this.productService.productImageUpload(formData).subscribe({
-      next: (photo) => {
+      next: (photo: Photo) => {
         console.log(photo);
         item.onSuccess(item.file);
+        this.product.productSkus.forEach(sku => {
+          sku.photos.push(photo);
+        });
       },
       error: err => {
         console.log(err);
@@ -271,7 +269,7 @@ export class AddProductModalComponent implements OnInit {
         id: null,
         localId: skuIndex + 1,
         barcode: '',
-        imageUrl: 'thisisimageurl',
+        imageUrl: '',
         importPrice: 0,
         sku:
           this.product.productSKU +
@@ -282,6 +280,7 @@ export class AddProductModalComponent implements OnInit {
         price: 1,
         weight: 1,
         productSKUValues: productSkuValues,
+        photos: []
       };
     });
 

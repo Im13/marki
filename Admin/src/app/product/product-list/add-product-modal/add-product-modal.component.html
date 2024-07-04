@@ -224,17 +224,25 @@
                     [hidden]="editId === sku.id"
                   >
                     <img
-                      nz-image
+                      *ngIf="sku.photos.length <= 0"
+                      nz-popover
+                      width="40px"
+                      height="40px"
+                      src="../../../../assets/images/no_image.jpg"
+                      [nzPopoverContent]="uploadImageTemplate"
+                      nzPopoverPlacement="right"
+                      [nzPopoverTrigger]="'click'"
+                    />
+                    <img
+                      *ngIf="sku.photos.length > 0"
                       nz-popover
                       [nzPopoverContent]="uploadImageTemplate"
                       nzPopoverPlacement="right"
                       [nzPopoverTrigger]="'click'"
                       width="40px"
                       height="40px"
-                      nzSrc="previewImage"
-                      [nzFallback]="fallback"
                       alt=""
-                      [src]="previewImage"
+                      [src]="sku.photos[0].url"
                     />
 
                     <ng-template #uploadImageTemplate class="clearfix">
@@ -243,7 +251,9 @@
                         [(nzFileList)]="fileList"
                         [nzShowButton]="fileList.length < 1"
                         [nzPreview]="handlePreview"
-                        [nzFileType]="'image/png,image/jpeg,image/gif,image/bmp'"
+                        [nzFileType]="
+                          'image/png,image/jpeg,image/gif,image/bmp'
+                        "
                         [nzCustomRequest]="handleUpload"
                       >
                         <div>

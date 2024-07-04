@@ -31,13 +31,34 @@ namespace Infrastructure.Services
 
         public async Task<Product> UpdateProduct(Product product)
         {
+            Photo photoToFind = new Photo();
+
             _unitOfWork.Repository<Product>().Update(product);
+            
+            if(product.ProductSKUs.Count > 0)
+            {
+                photoToFind = await _unitOfWork.Repository<Photo>().GetByIdAsync(product.ProductSKUs.First().Photos.First().Id);
+
+                if(photoToFind == null) {
+                    photoToFind = new Photo() 
+                    {
+                        IsMain = product.ProductSKUs.First().Photos.First().IsMain,
+                        PublicId = product.ProductSKUs.First().Photos.First().PublicId,
+                        Url = product.ProductSKUs.First().Photos.First().Url
+                    };
+
+                    _unitOfWork.Repository<Photo>().Add(photoToFind);
+                }
+            }
+
             foreach(var sku in product.ProductSKUs)
             {
                 foreach(var skuValue in sku.ProductSKUValues)
                 {
                     _unitOfWork.Repository<ProductSKUValues>().Update(skuValue);
                 }
+
+                sku.Photos.Add(photoToFind);
                 
                 _unitOfWork.Repository<ProductSKUs>().Update(sku);
             }

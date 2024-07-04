@@ -37,6 +37,7 @@ namespace Infrastructure.Data
         {
             var products = await SpecificationEvaluator<Product>.GetQuery(_context.Set<Product>().AsQueryable(), spec)
                 .Include(p => p.ProductSKUs).ThenInclude(ps => ps.ProductSKUValues)
+                .Include(p => p.ProductSKUs).ThenInclude(ps => ps.Photos)
                 .Include(p => p.ProductOptions).ThenInclude(po => po.ProductOptionValues)
                 .ToListAsync();
 
