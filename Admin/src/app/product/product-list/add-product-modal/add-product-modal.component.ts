@@ -12,6 +12,7 @@ import { ConvertVieService } from 'src/app/core/services/convert-vie.service';
 import { ProductOptionValue } from 'src/app/shared/models/productOptionValues';
 import { ProductSKUValues } from 'src/app/shared/models/productSKUValues';
 import { NzUploadFile, NzUploadXHRArgs } from 'ng-zorro-antd/upload';
+import { HttpClient, HttpRequest, HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
 
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
@@ -55,7 +56,8 @@ export class AddProductModalComponent implements OnInit {
     private modal: NzModalRef,
     private productService: ProductService,
     private toastrService: ToastrService,
-    private convertVieService: ConvertVieService
+    private convertVieService: ConvertVieService,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -159,37 +161,40 @@ export class AddProductModalComponent implements OnInit {
     this.previewVisible = true;
   };
 
-  handleUploadChange({file, fileList}): void {
-    const status = file.status;
-
-    if(status != 'uploading') {
-      console.log(file, fileList);
-    }
-
-    if(status === 'done') {
-      console.log(file);
-    }
-
-    if(status === 'error') {
-      console.log('Error');
-      console.log(file);
-    }
-  }
-
-  handleUpload = (item: NzUploadXHRArgs) => {
-    console.log('uploading image...');
-    console.log(item);
+  handleUpload = (item: any) => {
     const formData = new FormData();
     formData.append('file', item.file as any, item.name);
 
+    const req = new HttpRequest('POST', item.action, formData, {
+      reportProgress : true,
+      withCredentials: false
+    });
+
+    // return this.http.request(req).subscribe((event: HttpEvent<{}>) => {
+    //   if (event.type === HttpEventType.UploadProgress) {
+    //     if (event.total > 0) {
+    //       (event as any).percent = event.loaded / event.total * 100; // tslint:disable-next-line:no-any
+    //     }
+    //     // To process the upload progress bar, you must specify the `percent` attribute to indicate progress.
+    //     item.onProgress(event, item.file);
+    //   } else if (event instanceof HttpResponse) { /* success */
+    //     item.onSuccess(event.body, item.file, event);
+    //   }
+    // },(err) => { /* error */
+    //   item.onError(err, item.file);
+    //   console.log(err)
+    // });
+
+
     return this.productService.productImageUpload(formData).subscribe({
-      next: () => {
-        console.log('uploaded');
+      next: (photo) => {
+        console.log(photo);
+        item.onSuccess(item.file);
       },
       error: err => {
         console.log(err);
       }
-    })
+    });
   }
 
   quickAddVariants() {
