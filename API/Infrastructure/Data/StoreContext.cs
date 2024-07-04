@@ -28,6 +28,7 @@ namespace Infrastructure.Data
         public DbSet<ProductOptionValues> ProductOptionValues { get; set; }
         public DbSet<ProductSKUs> ProductSKUs { get; set; }
         public DbSet<ProductSKUValues> ProductSKUValues { get; set; }
+        public DbSet<Photo> Photos { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

@@ -12,5 +12,6 @@ namespace Core
         public string ImageUrl { get; set; }
         public float Weight { get; set; }
         public List<ProductSKUValues> ProductSKUValues { get; set; }
+        public List<Photo> Photos { get; set; }
     }
 }

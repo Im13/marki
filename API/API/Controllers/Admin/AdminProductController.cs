@@ -105,12 +105,20 @@ namespace API.Controllers.Admin
         }
 
         [HttpPost("image-upload")]
-        public async Task<IActionResult> UploadImage(IFormFile file)
+        public async Task<ActionResult<PhotoDTO>> UploadImage(IFormFile file)
         {
             var result = await _photoService.AddPhotoAsync(file);
 
+            if(result.Error != null) return BadRequest(result.Error.Message);
 
-            return Ok();
+            var photoDTo = new PhotoDTO
+            {
+                Url = result.SecureUrl.AbsoluteUri,
+                PublicId = result.PublicId,
+                IsMain = false
+            };
+
+            return Ok(photoDTo);
         }
     }
 }
