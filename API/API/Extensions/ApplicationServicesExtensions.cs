@@ -27,6 +27,7 @@ namespace API.Extensions
             });
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAddressService, AddressService>();
             services.AddScoped<IProductRepository, ProductRepository>();

@@ -8,6 +8,8 @@ import { SharedModule } from '../shared/shared.module';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { AddProductModalComponent } from './product-list/add-product-modal/add-product-modal.component';
 import { CoreModule } from '../core/core.module';
+import { NzImageModule } from 'ng-zorro-antd/image';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { CoreModule } from '../core/core.module';
     SharedModule,
     PopoverModule.forRoot(),
     FormsModule,
-    CoreModule
+    CoreModule,
+    NzImageModule
   ],
   exports: [
     ProductListComponent

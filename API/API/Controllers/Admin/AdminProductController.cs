@@ -14,15 +14,21 @@ namespace API.Controllers.Admin
     {
         private readonly IMapper _mapper;
         private readonly IProductService _productService;
+        private readonly IPhotoService _photoService;
         private readonly IGenericRepository<Product> _genericProductRepo;
         private readonly IProductRepository _productRepo;
 
-        public AdminProductController(IProductService productService, IMapper mapper, IGenericRepository<Product> genericProductRepo, IProductRepository productRepo)
+        public AdminProductController(IProductService productService, 
+            IMapper mapper, 
+            IGenericRepository<Product> genericProductRepo, 
+            IProductRepository productRepo,
+            IPhotoService photoService)
         {
             _productRepo = productRepo;
             _productService = productService;
             _mapper = mapper;
             _genericProductRepo = genericProductRepo;
+            _photoService = photoService;
         }
 
         [HttpPost("create")]
@@ -59,7 +65,7 @@ namespace API.Controllers.Admin
         [HttpPut("product")]
         public async Task<ActionResult> UpdateProduct(ProductDTOs productDTO)
         {
-            if(productDTO.Id == null) return BadRequest("Error update product!");
+            if (productDTO.Id == null) return BadRequest("Error update product!");
 
             // Find product by Id
             var product = await _productService.GetProductAsync((int)productDTO.Id);
@@ -86,15 +92,24 @@ namespace API.Controllers.Admin
         [HttpPost("delete-products")]
         public async Task<ActionResult> DeleteProduct(List<ProductDTOs> productDTOs)
         {
-            if(productDTOs.Count <= 0)
+            if (productDTOs.Count <= 0)
                 return BadRequest("No data received!");
 
             var products = _mapper.Map<List<ProductDTOs>, List<Product>>(productDTOs);
-            
+
             var deletedResult = await _productService.DeleteProducts(products);
 
-            if(!deletedResult) return BadRequest("Failed to delete!");
-        
+            if (!deletedResult) return BadRequest("Failed to delete!");
+
+            return Ok();
+        }
+
+        [HttpPost("image-upload")]
+        public async Task<IActionResult> UploadImage(IFormFile file)
+        {
+            var result = await _photoService.AddPhotoAsync(file);
+
+
             return Ok();
         }
     }

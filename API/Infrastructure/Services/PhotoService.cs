@@ -32,7 +32,7 @@ namespace Infrastructure.Services
                 var uploadParams = new ImageUploadParams
                 {
                     File = new FileDescription(file.FileName, stream),
-                    Transformation = new Transformation().Height(500).Width(500).Crop("Fill"),
+                    Transformation = new Transformation().Height(500).Width(500).Crop("fill"),
                     Folder = "marki"
                 };
 
@@ -42,9 +42,11 @@ namespace Infrastructure.Services
             return uploadResults;
         }
 
-        public Task<DeletionResult> DeletePhotoAsync(string publicId)
+        public async Task<DeletionResult> DeletePhotoAsync(string publicId)
         {
-            throw new NotImplementedException();
+            var deleteParams = new DeletionParams(publicId);
+
+            return await _cloudinary.DestroyAsync(deleteParams);
         }
     }
 }

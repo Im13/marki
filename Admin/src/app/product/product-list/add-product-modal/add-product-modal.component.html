@@ -212,13 +212,70 @@
             <tbody>
               <tr *ngFor="let sku of productSKUs" class="editable-row">
                 <td class="text-center p-2">
-                  <nz-switch [(ngModel)]="isEdit" nzSize="small" [ngModelOptions]="{ standalone: true }"></nz-switch>
+                  <nz-switch
+                    [(ngModel)]="isEdit"
+                    nzSize="small"
+                    [ngModelOptions]="{ standalone: true }"
+                  ></nz-switch>
                 </td>
                 <td class="p-2">
-                  <div class="editable-cell" [hidden]="editId === sku.id" (click)="startEdit(sku.id)">
-                    {{ sku.imageUrl }}
+                  <div
+                    class="editable-cell p-0 align-items-center justify-content-center text-center"
+                    [hidden]="editId === sku.id"
+                  >
+                    <img
+                      nz-image
+                      nz-popover
+                      [nzPopoverContent]="uploadImageTemplate"
+                      nzPopoverPlacement="right"
+                      [nzPopoverTrigger]="'click'"
+                      width="40px"
+                      height="40px"
+                      nzSrc="previewImage"
+                      [nzFallback]="fallback"
+                      alt=""
+                      [src]="previewImage"
+                    />
+
+                    <ng-template #uploadImageTemplate class="clearfix">
+                      <nz-upload
+                        nzListType="picture-card"
+                        [(nzFileList)]="fileList"
+                        [nzShowButton]="fileList.length < 1"
+                        [nzPreview]="handlePreview"
+                        [nzFileType]="'image/png,image/jpeg,image/gif,image/bmp'"
+                        (nzChange)="handleUploadChange"
+                        [nzCustomRequest]="handleUpload"
+                      >
+                        <div>
+                          <span nz-icon nzType="plus"></span>
+                          <div style="margin-top: 8px">Upload hình ảnh</div>
+                        </div>
+                      </nz-upload>
+
+                      <!-- <nz-modal
+                        [nzVisible]="previewVisible"
+                        [nzContent]="modalContent"
+                        [nzFooter]="null"
+                        (nzOnCancel)="previewVisible = false"
+                      >
+                        <ng-template #modalContent>
+                          <img
+                            [src]="previewImage"
+                            [ngStyle]="{ width: '100%' }"
+                          />
+                        </ng-template>
+                      </nz-modal> -->
+                    </ng-template>
                   </div>
-                  <input [hidden]="editId !== sku.id" type="text" nz-input [(ngModel)]="sku.imageUrl" [ngModelOptions]="{ standalone: true }" (blur)="stopEdit()" />
+                  <input
+                    [hidden]="editId !== sku.id"
+                    type="text"
+                    nz-input
+                    [(ngModel)]="sku.imageUrl"
+                    [ngModelOptions]="{ standalone: true }"
+                    (blur)="stopEdit()"
+                  />
                 </td>
                 <td class="p-2">
                   <input
@@ -262,7 +319,9 @@
                 </td>
                 <td class="p-2">
                   <span *ngFor="let option of sku.productSKUValues">
-                    <span class="variant-name fw-bold">{{ option.optionName }}: </span>
+                    <span class="variant-name fw-bold"
+                      >{{ option.optionName }}:
+                    </span>
                     <span class="fst-italic">{{ option.optionValue }} </span>
                   </span>
                 </td>
@@ -295,7 +354,13 @@
                   />
                 </td>
                 <td class="text-center p-2">
-                  <h5 type="button" nz-icon nzType="delete" [nzTheme]="'twotone'" [nzTwotoneColor]="'#eb2f96'"></h5>
+                  <h5
+                    type="button"
+                    nz-icon
+                    nzType="delete"
+                    [nzTheme]="'twotone'"
+                    [nzTwotoneColor]="'#eb2f96'"
+                  ></h5>
                 </td>
               </tr>
             </tbody>
