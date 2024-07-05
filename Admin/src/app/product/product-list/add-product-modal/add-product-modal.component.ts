@@ -323,28 +323,28 @@ export class AddProductModalComponent implements OnInit {
 
     console.log(this.product);
 
-    if (!this.isEdit) {
-      this.productService.addProduct(this.product).subscribe({
-        next: () => {
-          this.toastrService.success('Thêm sản phẩm thành công!');
-          this.destroyModal();
-        },
-        error: (err) => {
-          this.toastrService.error(err);
-        },
-      });
-    } else {
-      this.productService.editProduct(this.product).subscribe({
-        next: () => {
-          this.toastrService.success('Sửa sản phẩm thành công!');
-          this.destroyModal();
-        },
-        error: (err) => {
-          console.log(err);
-          this.toastrService.error(err);
-        },
-      });
-    }
+    // if (!this.isEdit) {
+    //   this.productService.addProduct(this.product).subscribe({
+    //     next: () => {
+    //       this.toastrService.success('Thêm sản phẩm thành công!');
+    //       this.destroyModal();
+    //     },
+    //     error: (err) => {
+    //       this.toastrService.error(err);
+    //     },
+    //   });
+    // } else {
+    //   this.productService.editProduct(this.product).subscribe({
+    //     next: () => {
+    //       this.toastrService.success('Sửa sản phẩm thành công!');
+    //       this.destroyModal();
+    //     },
+    //     error: (err) => {
+    //       console.log(err);
+    //       this.toastrService.error(err);
+    //     },
+    //   });
+    // }
   }
 
   bindDataToProductObject() {

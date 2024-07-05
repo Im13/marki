@@ -221,7 +221,6 @@
                 <td class="p-2">
                   <div
                     class="editable-cell p-0 align-items-center justify-content-center text-center"
-                    [hidden]="editId === sku.id"
                   >
                     <img
                       *ngIf="sku.photos.length <= 0"
@@ -277,14 +276,6 @@
                       </nz-modal> -->
                     </ng-template>
                   </div>
-                  <input
-                    [hidden]="editId !== sku.id"
-                    type="text"
-                    nz-input
-                    [(ngModel)]="sku.imageUrl"
-                    [ngModelOptions]="{ standalone: true }"
-                    (blur)="stopEdit()"
-                  />
                 </td>
                 <td class="p-2">
                   <input
