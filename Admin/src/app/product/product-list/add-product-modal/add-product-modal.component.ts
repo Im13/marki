@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { Product } from 'src/app/shared/models/products';
 import { ProductService } from '../../product-service.service';
@@ -73,7 +73,6 @@ export class AddProductModalComponent implements OnInit {
         productSkus: [],
       };
     } else {
-      console.log(this.product);
       this.isEdit = true;
 
       this.product.productOptions.forEach((option) => {
@@ -98,7 +97,7 @@ export class AddProductModalComponent implements OnInit {
     if (this.isEdit == null) this.isEdit = false;
 
     this.addForm = new FormGroup({
-      productName: new FormControl(this.product.name),
+      productName: new FormControl(this.product.name, [Validators.required]),
       productDescription: new FormControl(this.product.description),
       productTypeId: new FormControl(this.product.productTypeId),
       productBrandId: new FormControl(this.product.productBrandId),
@@ -184,6 +183,7 @@ export class AddProductModalComponent implements OnInit {
     return this.productService.productImageUpload(formData).subscribe({
       next: (photo: Photo) => {
         console.log(photo);
+        console.log(this.product);
         item.onSuccess(item.file);
         this.product.productSkus.forEach(sku => {
           sku.photos.push(photo);
@@ -200,6 +200,7 @@ export class AddProductModalComponent implements OnInit {
     this.convertValuesToDisplayToProductOptionValues();
     this.product.productOptions = this.productOptions;
     this.productSKUs = this.generateSKUs(this.product);
+    this.bindDataToProductObject();
   }
 
   convertValuesToDisplayToProductOptionValues() {
@@ -323,28 +324,28 @@ export class AddProductModalComponent implements OnInit {
 
     console.log(this.product);
 
-    // if (!this.isEdit) {
-    //   this.productService.addProduct(this.product).subscribe({
-    //     next: () => {
-    //       this.toastrService.success('Thêm sản phẩm thành công!');
-    //       this.destroyModal();
-    //     },
-    //     error: (err) => {
-    //       this.toastrService.error(err);
-    //     },
-    //   });
-    // } else {
-    //   this.productService.editProduct(this.product).subscribe({
-    //     next: () => {
-    //       this.toastrService.success('Sửa sản phẩm thành công!');
-    //       this.destroyModal();
-    //     },
-    //     error: (err) => {
-    //       console.log(err);
-    //       this.toastrService.error(err);
-    //     },
-    //   });
-    // }
+    if (!this.isEdit) {
+      this.productService.addProduct(this.product).subscribe({
+        next: () => {
+          this.toastrService.success('Thêm sản phẩm thành công!');
+          this.destroyModal();
+        },
+        error: (err) => {
+          this.toastrService.error(err);
+        },
+      });
+    } else {
+      this.productService.editProduct(this.product).subscribe({
+        next: () => {
+          this.toastrService.success('Sửa sản phẩm thành công!');
+          this.destroyModal();
+        },
+        error: (err) => {
+          console.log(err);
+          this.toastrService.error(err);
+        },
+      });
+    }
   }
 
   bindDataToProductObject() {
