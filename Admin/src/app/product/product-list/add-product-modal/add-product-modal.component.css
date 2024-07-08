@@ -22,3 +22,11 @@
   font-size: 14px;
   color: #458490;
 }
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.help-block {
+  color: red;
+}

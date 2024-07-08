@@ -9,6 +9,7 @@ export interface Product {
   productTypeId: number;
   productSKU: string;
   importPrice: number;
+  imageUrl: string;
   productOptions: ProductOptions[];
   productSkus: ProductSKUs[];
 }

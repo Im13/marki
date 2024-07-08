@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { ThousandSeparatorPipe } from './pipes/thousand-separator.pipe';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzFormModule } from 'ng-zorro-antd/form';
 
 @NgModule({
   declarations: [
@@ -17,14 +18,16 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
     CommonModule,
     RouterModule,
     NzPopoverModule,
-    NzUploadModule
+    NzUploadModule,
+    NzFormModule
   ],
   exports: [
     HeaderComponent,
     SidebarComponent,
     ThousandSeparatorPipe,
     NzPopoverModule,
-    NzUploadModule
+    NzUploadModule,
+    NzFormModule
   ]
 })
 export class CoreModule { }

@@ -133,6 +133,13 @@ export class ProductListComponent implements OnInit {
         this.productParams.pageSize = response.pageSize;
         this.totalCount = response.count;
         this.loading = false;
+
+        this.products.forEach(product => {
+          if(product.productSkus.length > 0) {
+            if(product.productSkus[0].photos.length > 0)
+              product.imageUrl = product.productSkus[0].photos[0].url;
+          }
+        });
       },
       error: err => {
         console.log(err);

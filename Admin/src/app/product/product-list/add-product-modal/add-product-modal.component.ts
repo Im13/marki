@@ -71,6 +71,7 @@ export class AddProductModalComponent implements OnInit {
         productSKU: '',
         productTypeId: null,
         productSkus: [],
+        imageUrl: ''
       };
     } else {
       this.isEdit = true;
@@ -99,9 +100,9 @@ export class AddProductModalComponent implements OnInit {
     this.addForm = new FormGroup({
       productName: new FormControl(this.product.name, [Validators.required]),
       productDescription: new FormControl(this.product.description),
-      productTypeId: new FormControl(this.product.productTypeId),
-      productBrandId: new FormControl(this.product.productBrandId),
-      productSKU: new FormControl(this.product.productSKU),
+      productTypeId: new FormControl(this.product.productTypeId, [Validators.required]),
+      productBrandId: new FormControl(this.product.productBrandId, [Validators.required]),
+      productSKU: new FormControl(this.product.productSKU, [Validators.required]),
       importPrice: new FormControl(this.product.importPrice),
     });
 
@@ -178,7 +179,6 @@ export class AddProductModalComponent implements OnInit {
     //   item.onError(err, item.file);
     //   console.log(err)
     // });
-
 
     return this.productService.productImageUpload(formData).subscribe({
       next: (photo: Photo) => {
@@ -322,29 +322,31 @@ export class AddProductModalComponent implements OnInit {
   onSubmit() {
     this.bindDataToProductObject();
 
-    console.log(this.product);
+    console.log(this.addForm);
 
-    if (!this.isEdit) {
-      this.productService.addProduct(this.product).subscribe({
-        next: () => {
-          this.toastrService.success('Thêm sản phẩm thành công!');
-          this.destroyModal();
-        },
-        error: (err) => {
-          this.toastrService.error(err);
-        },
-      });
-    } else {
-      this.productService.editProduct(this.product).subscribe({
-        next: () => {
-          this.toastrService.success('Sửa sản phẩm thành công!');
-          this.destroyModal();
-        },
-        error: (err) => {
-          console.log(err);
-          this.toastrService.error(err);
-        },
-      });
+    if(this.addForm.valid) {
+      if (!this.isEdit) {
+        this.productService.addProduct(this.product).subscribe({
+          next: () => {
+            this.toastrService.success('Thêm sản phẩm thành công!');
+            this.destroyModal();
+          },
+          error: (err) => {
+            this.toastrService.error(err);
+          },
+        });
+      } else {
+        this.productService.editProduct(this.product).subscribe({
+          next: () => {
+            this.toastrService.success('Sửa sản phẩm thành công!');
+            this.destroyModal();
+          },
+          error: (err) => {
+            console.log(err);
+            this.toastrService.error(err);
+          },
+        });
+      }
     }
   }
 
