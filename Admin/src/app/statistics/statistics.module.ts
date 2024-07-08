@@ -5,6 +5,7 @@ import { ShopeeRevenueComponent } from './shopee-revenue/shopee-revenue.componen
 import { StatisticsRoutingModule } from './statistics-routing.module';
 import { RouterModule } from '@angular/router';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { CoreModule } from '../core/core.module';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     CommonModule,
     RouterModule,
     StatisticsRoutingModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    CoreModule
   ]
 })
 export class StatisticsModule { }

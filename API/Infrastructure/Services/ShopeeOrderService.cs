@@ -72,12 +72,12 @@ namespace Infrastructure.Services
                         if (products.Count(p => p.ProductSKU == product.SKU) > 0)
                             importPrice = products
                                 .Where(p => p.ProductSKU == product.SKU)
-                                .FirstOrDefault().ProductSKUs.First().ImportPrice;
+                                .FirstOrDefault().ImportPrice;
 
                         if (!ordProducts.Any(o => o.OrderId == order.OrderId))
                         {
                             orderId = order.OrderId;
-                            revenue = orderRevenueDict[order.OrderId] - order.ServiceFee - order.PaymentFee - order.ShopVoucher;
+                            revenue = orderRevenueDict[order.OrderId] - order.ServiceFee - order.PaymentFee - order.ShopVoucher - order.FixedFee;
                             profit = revenue - importPrice * product.Quantity;
                         }
                         else

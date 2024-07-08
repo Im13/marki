@@ -34,9 +34,9 @@
                         <td>{{ order.productName }}</td>
                         <td>{{ order.productSKU }}</td>
                         <td>{{ order.productQuantity }}</td>
-                        <td>{{ order.revenue }}</td>
-                        <td>{{ order.importPrice }}</td>
-                        <td>{{ order.orderProfit }}</td>
+                        <td>{{ order.revenue | thousandSeparator }}</td>
+                        <td>{{ order.importPrice | thousandSeparator }}</td>
+                        <td>{{ order.orderProfit | thousandSeparator }}</td>
                     </tr>
                 </tbody>
             </table>
