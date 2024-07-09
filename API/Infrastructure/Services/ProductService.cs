@@ -74,7 +74,6 @@ namespace Infrastructure.Services
         {
             var listOptionValue = new List<ProductOptionValues>();
             prod.ProductType = await _unitOfWork.Repository<ProductType>().GetByIdAsync(prod.ProductTypeId);
-            prod.ProductBrand = await _unitOfWork.Repository<ProductBrand>().GetByIdAsync(prod.ProductBrandId);
 
             _unitOfWork.Repository<Product>().Add(prod);
 

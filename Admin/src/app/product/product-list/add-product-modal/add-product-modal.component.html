@@ -73,20 +73,6 @@
             />
             <span *ngIf="!addForm.get('productTypeId').valid && addForm.get('productTypeId').touched" class="help-block">Danh mục không được bỏ trống</span>
           </div>
-
-          <div class="mb-3">
-            <label for="productBrand" class="form-label m-0 mb-1"
-              >Thương hiệu <span class="help-block">*</span></label
-            >
-            <input
-              type="text"
-              class="form-control form-control-sm rounded-0"
-              id="productBrand"
-              placeholder="Thương hiệu"
-              formControlName="productBrandId"
-            />
-            <span *ngIf="!addForm.get('productBrandId').valid && addForm.get('productBrandId').touched" class="help-block">Thương hiệu không được bỏ trống</span>
-          </div>
         </div>
 
         <div class="variants p-2 mt-3 border rounded">

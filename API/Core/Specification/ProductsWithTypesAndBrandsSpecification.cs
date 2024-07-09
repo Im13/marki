@@ -2,17 +2,15 @@ using Core.Entities;
 
 namespace Core.Specification
 {
-    public class ProductsWithTypesAndBrandsSpecification : BaseSpecification<Product>
+    public class ProductsWithTypesSpecification : BaseSpecification<Product>
     {
-        public ProductsWithTypesAndBrandsSpecification(ProductSpecParams productParams) : base(x => 
+        public ProductsWithTypesSpecification(ProductSpecParams productParams) : base(x => 
             (string.IsNullOrEmpty(productParams.Search) || x.Name.ToLower().Contains(productParams.Search)) &&
             (x.IsDeleted == false) &&
-            (!productParams.BrandId.HasValue || x.ProductBrandId == productParams.BrandId) &&
             (!productParams.TypeId.HasValue || x.ProductTypeId == productParams.TypeId)
         )
         {
             AddInclude(x => x.ProductType);
-            AddInclude(x => x.ProductBrand);
             AddOrderByDescending(x => x.Id);
             ApplyPaging(productParams.PageSize * (productParams.PageIndex - 1), productParams.PageSize);
 
@@ -33,10 +31,9 @@ namespace Core.Specification
             // }
         }
 
-        public ProductsWithTypesAndBrandsSpecification(int id) : base(x => x.Id == id)
+        public ProductsWithTypesSpecification(int id) : base(x => x.Id == id)
         {
             AddInclude(x => x.ProductType);
-            AddInclude(x => x.ProductBrand);
         }
     }
 }

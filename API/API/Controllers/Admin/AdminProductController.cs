@@ -48,7 +48,7 @@ namespace API.Controllers.Admin
         [HttpGet("products")]
         public async Task<ActionResult<Pagination<ProductDTOs>>> GetProducts([FromQuery] ProductSpecParams productParams)
         {
-            var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
+            var spec = new ProductsWithTypesSpecification(productParams);
 
             var countSpec = new ProductWithFiltersForCountSpecification(productParams);
 

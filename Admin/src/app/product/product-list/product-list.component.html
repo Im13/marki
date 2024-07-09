@@ -55,7 +55,8 @@
           <th>SKU sản phẩm</th>
           <th>Hình ảnh</th>
           <th>Giá bán</th>
-          <th>Hình ảnh</th>
+          <th>Tồn kho</th>
+          <th>Tổng tiền còn lại</th>
         </tr>
       </thead>
       <tbody>
@@ -86,7 +87,8 @@
           <td (click)="displayEditModal(data)">
             {{ data.importPrice | thousandSeparator }}đ
           </td>
-          <td (click)="displayEditModal(data)">{{ data.importPrice }}</td>
+          <td (click)="displayEditModal(data)">{{ data.totalQuantity }}</td>
+          <td (click)="displayEditModal(data)">{{ data.totalQuantity * data.importPrice | thousandSeparator }}</td>
         </tr>
       </tbody>
     </nz-table>

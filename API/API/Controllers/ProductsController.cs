@@ -15,15 +15,12 @@ namespace API.Controllers
         private readonly IGenericRepository<Product> _productRepo;
         private readonly IGenericRepository<ProductType> _productTypeRepo;
         private readonly IMapper _mapper;
-        private readonly IGenericRepository<ProductBrand> _productBrandRepo;
         private readonly IProductService _productService;
         public ProductsController(IGenericRepository<Product> productRepo,
-        IGenericRepository<ProductBrand> productBrandRepo,
         IGenericRepository<ProductType> productTypeRepo,
         IMapper mapper,
         IProductService productService)
         {
-            _productBrandRepo = productBrandRepo;
             _productTypeRepo = productTypeRepo;
             _mapper = mapper;
             _productRepo = productRepo;
@@ -35,20 +32,13 @@ namespace API.Controllers
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ProductToReturnDTO>> GetProduct(int id)
         {
-            var spec = new ProductsWithTypesAndBrandsSpecification(id);
+            var spec = new ProductsWithTypesSpecification(id);
 
             var product = await _productRepo.GetEntityWithSpec(spec);
 
             if(product == null) return NotFound(new ApiResponse(404));
 
             return _mapper.Map<Product,ProductToReturnDTO>(product);
-        }
-
-        [HttpGet("brands")]
-        public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands()
-        {
-            var brands = await _productBrandRepo.ListAllAsync();
-            return Ok(brands);
         }
 
         [HttpGet("types")]

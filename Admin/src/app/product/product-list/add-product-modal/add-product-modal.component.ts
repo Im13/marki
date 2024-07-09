@@ -66,7 +66,6 @@ export class AddProductModalComponent implements OnInit {
         name: '',
         description: '',
         importPrice: null,
-        productBrandId: null,
         productOptions: [],
         productSKU: '',
         productTypeId: null,
@@ -101,7 +100,6 @@ export class AddProductModalComponent implements OnInit {
       productName: new FormControl(this.product.name, [Validators.required]),
       productDescription: new FormControl(this.product.description),
       productTypeId: new FormControl(this.product.productTypeId, [Validators.required]),
-      productBrandId: new FormControl(this.product.productBrandId, [Validators.required]),
       productSKU: new FormControl(this.product.productSKU, [Validators.required]),
       importPrice: new FormControl(this.product.importPrice),
     });
@@ -353,7 +351,6 @@ export class AddProductModalComponent implements OnInit {
   bindDataToProductObject() {
     this.product.name = this.addForm.value.productName;
     this.product.importPrice = +this.addForm.value.importPrice;
-    this.product.productBrandId = 1;
     this.product.description = this.addForm.value.productDescription;
     this.product.productSKU = this.addForm.value.productSKU;
     this.product.productTypeId = 1;

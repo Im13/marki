@@ -8,13 +8,6 @@ namespace Infrastructure.Data
     {
         public static async Task SeedAsync(StoreContext context)
         {
-            if (!context.ProductBrands.Any())
-            {
-                var brandsData = File.ReadAllText("../Infrastructure/Data/SeedData/brands.json");
-                var brands = JsonSerializer.Deserialize<List<ProductBrand>>(brandsData);
-                context.ProductBrands.AddRange(brands);
-            }
-
             if (!context.ProductTypes.Any())
             {
                 var typesData = File.ReadAllText("../Infrastructure/Data/SeedData/types.json");
