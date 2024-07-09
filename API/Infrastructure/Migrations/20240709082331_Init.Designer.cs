@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Infrastructure.Data.Migrations
+namespace Infrastructure.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20240612185218_AddValueTempIdToProductSKUValues")]
-    partial class AddValueTempIdToProductSKUValues
+    [Migration("20240709082331_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -122,6 +122,31 @@ namespace Infrastructure.Data.Migrations
                     b.ToTable("OrderItems");
                 });
 
+            modelBuilder.Entity("Core.Entities.Photo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("ProductSKUsId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PublicId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductSKUsId");
+
+                    b.ToTable("Photos");
+                });
+
             modelBuilder.Entity("Core.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -136,19 +161,15 @@ namespace Infrastructure.Data.Migrations
                     b.Property<double>("ImportPrice")
                         .HasColumnType("REAL");
 
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValue(false);
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
-
-                    b.Property<string>("PictureUrl")
-                        .HasColumnType("TEXT");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("REAL");
-
-                    b.Property<int>("ProductBrandId")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ProductSKU")
                         .HasColumnType("TEXT");
@@ -158,25 +179,9 @@ namespace Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductBrandId");
-
                     b.HasIndex("ProductTypeId");
 
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("Core.Entities.ProductBrand", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ProductBrands");
                 });
 
             modelBuilder.Entity("Core.Entities.ProductOptionValues", b =>
@@ -226,7 +231,7 @@ namespace Infrastructure.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("OptionValueId")
+                    b.Property<int?>("ProductOptionValueId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("ProductSKUsId")
@@ -236,6 +241,8 @@ namespace Infrastructure.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductOptionValueId");
 
                     b.HasIndex("ProductSKUsId");
 
@@ -589,21 +596,20 @@ namespace Infrastructure.Data.Migrations
                     b.Navigation("ItemOrdered");
                 });
 
+            modelBuilder.Entity("Core.Entities.Photo", b =>
+                {
+                    b.HasOne("Core.ProductSKUs", null)
+                        .WithMany("Photos")
+                        .HasForeignKey("ProductSKUsId");
+                });
+
             modelBuilder.Entity("Core.Entities.Product", b =>
                 {
-                    b.HasOne("Core.Entities.ProductBrand", "ProductBrand")
-                        .WithMany()
-                        .HasForeignKey("ProductBrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Core.Entities.ProductType", "ProductType")
                         .WithMany()
                         .HasForeignKey("ProductTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("ProductBrand");
 
                     b.Navigation("ProductType");
                 });
@@ -626,9 +632,15 @@ namespace Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Core.Entities.ProductSKUValues", b =>
                 {
+                    b.HasOne("Core.Entities.ProductOptionValues", "ProductOptionValue")
+                        .WithMany()
+                        .HasForeignKey("ProductOptionValueId");
+
                     b.HasOne("Core.ProductSKUs", null)
                         .WithMany("ProductSKUValues")
                         .HasForeignKey("ProductSKUsId");
+
+                    b.Navigation("ProductOptionValue");
                 });
 
             modelBuilder.Entity("Core.Entities.ShopeeOrder.ShopeeProduct", b =>
@@ -680,6 +692,8 @@ namespace Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Core.ProductSKUs", b =>
                 {
+                    b.Navigation("Photos");
+
                     b.Navigation("ProductSKUValues");
                 });
 #pragma warning restore 612, 618

@@ -2,262 +2,391 @@
     {
         "Name": "MARKI / CHÂN VÁY KAKI CẠP CHUN SAU CO GIÃN (KÈM BELT) CV365",
         "Description": "MARKI / CHÂN VÁY KAKI CẠP CHUN SAU CO GIÃN (KÈM BELT) CV365",
-        "Price": 450000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "CV365",
         "ImportPrice": 180000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
+    },
+    {
+        "Name": "QUẦN ỐNG SUÔNG NỮ DẬP LY THUN LỤA MÁT Q381",
+        "Description": "QUẦN ỐNG SUÔNG NỮ DẬP LY THUN LỤA MÁT Q381",
+        "ProductSKU": "Q8003",
+        "ImportPrice": 100000,
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
+    },
+    {
+        "Name": "(VIDEO) CHÂN VÁY XẾP LY MẶT TRƯỚC KÈM BELT CV352",
+        "Description": "(VIDEO) CHÂN VÁY XẾP LY MẶT TRƯỚC KÈM BELT CV352",
+        "ProductSKU": "352",
+        "ImportPrice": 180000,
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
+    },
+    {
+        "Name": "ÁO SƠ MI CỘC TAY PHỐI TÚI BASIC THÔ LỤA HÀN A358",
+        "Description": "ÁO SƠ MI CỘC TAY PHỐI TÚI BASIC THÔ LỤA HÀN A358",
+        "ProductSKU": "A358",
+        "ImportPrice": 100000,
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
+    },
+    {
+        "Name": "ÁO SƠ MI THÔ BOIL THÊU REN SM341",
+        "Description": "ÁO SƠ MI THÔ BOIL THÊU REN SM341",
+        "ProductSKU": "SM341",
+        "ImportPrice": 160000,
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
+    },
+    {
+        "Name": "MARKI/ CHÂN VÁY XẾP LY GIỮA DÁNG A DÀI KÈM BELT CV385",
+        "Description": "MARKI/ CHÂN VÁY XẾP LY GIỮA DÁNG A DÀI KÈM BELT CV385",
+        "ProductSKU": "CV385",
+        "ImportPrice": 170000,
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
+    },
+    {
+        "Name": "ÁO THUN TĂM NỮ BASIC DÁNG ÔM 7 MÀU A333",
+        "Description": "ÁO THUN TĂM NỮ BASIC DÁNG ÔM 7 MÀU A333",
+        "ProductSKU": "A333",
+        "ImportPrice": 80000,
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
+    },
+    {
+        "Name": "MARKI / ÁO LEN MỊN CỔ POLO CỘC TAY",
+        "Description": "MARKI / ÁO LEN MỊN CỔ POLO CỘC TAY",
+        "ProductSKU": "350",
+        "ImportPrice": 105000,
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
+    },
+    {
+        "Name": "QUẦN CULOTTES ỐNG SUÔNG DÁNG LỬNG KÈM BELT Q353",
+        "Description": "QUẦN CULOTTES ỐNG SUÔNG DÁNG LỬNG KÈM BELT Q353",
+        "ProductSKU": "Q353",
+        "ImportPrice": 175000,
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
+    },
+    {
+        "Name": "MARKI / CHÂN VÁY THÔ CẠP CHUN SAU CO GIÃN CV348",
+        "Description": "MARKI / CHÂN VÁY THÔ CẠP CHUN SAU CO GIÃN CV348",
+        "ProductSKU": "CV348",
+        "ImportPrice": 125000,
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
+    },
+    {
+        "Name": "MARKI / CHÂN VÁY JEANS MỀM DÁNG A CV351",
+        "Description": "MARKI / CHÂN VÁY JEANS MỀM DÁNG A CV351",
+        "ProductSKU": "351",
+        "ImportPrice": 130000,
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "CHÂN VÁY MIDI DÁNG A CẠP CHUN SAU CO GIÃN CV354",
         "Description": "CHÂN VÁY MIDI DÁNG A CẠP CHUN SAU CO GIÃN CV354",
-        "Price": 350000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "CV354",
         "ImportPrice": 150000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "ÁO SƠ MI LỤA PHỐI NẮP TÚI DÀI TAY A396",
         "Description": "ÁO SƠ MI LỤA PHỐI NẮP TÚI DÀI TAY A396",
-        "Price": 430000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "A396",
         "ImportPrice": 170000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "ÁO GILE VEST CỔ V A394",
         "Description": "ÁO GILE VEST CỔ V A394",
-        "Price": 490000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "A394",
         "ImportPrice": 220000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "ÁO GILE VEST CỔ TRÒN A393",
         "Description": "ÁO GILE VEST CỔ TRÒN A393",
-        "Price": 490000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "A393",
         "ImportPrice": 220000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "CHÂN VÁY XẾP LY ĐỐI XỨNG MẶT TRƯỚC CV392",
         "Description": "CHÂN VÁY XẾP LY ĐỐI XỨNG MẶT TRƯỚC CV392",
-        "Price": 450000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "CV392",
         "ImportPrice": 190000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "CHÂN VÁY XẾP LY ĐÔI DÁNG A DÀI KÈM BELT CV391",
         "Description": "CHÂN VÁY XẾP LY ĐÔI DÁNG A DÀI KÈM BELT CV391",
-        "Price": 190000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "CV391",
-        "ImportPrice": 450000,
-        "ProductTypeId": 1
+        "ImportPrice": 190000,
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "ÁO POLO KẺ NGANG CỘC TAY CỘC TAY A390",
         "Description": "ÁO POLO KẺ NGANG CỘC TAY CỘC TAY A390",
-        "Price": 290000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "A390",
         "ImportPrice": 110000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "ÁO PHÔNG BASIC IN CHỮ STRONGER LEMON A389",
         "Description": "ÁO PHÔNG BASIC IN CHỮ STRONGER LEMON A389",
-        "Price": 280000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "A389",
         "ImportPrice": 110000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "ÁO PHÔNG BASIC IN CHỮ GRATEFUL A388",
         "Description": "ÁO PHÔNG BASIC IN CHỮ GRATEFUL A388",
-        "Price": 280000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "A388",
         "ImportPrice": 110000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "ÁO POLO CỘC TAY PHỐI VIỀN A395",
         "Description": "ÁO POLO CỘC TAY PHỐI VIỀN A395",
-        "Price": 320000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "A395",
         "ImportPrice": 130000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "MARKI/ ÁO POLO BASIC KHOÁ KÉO CỘC TAY A397",
         "Description": "MARKI/ ÁO POLO BASIC KHOÁ KÉO CỘC TAY A397",
-        "Price": 290000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "A397",
         "ImportPrice": 110000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "MARKI / QUẦN CULOTTES ỐNG RỘNG DÁNG DÀI KÈM BELT Q398",
         "Description": "MARKI / QUẦN CULOTTES ỐNG RỘNG DÁNG DÀI KÈM BELT Q398",
-        "Price": 490000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "Q398",
         "ImportPrice": 205000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "MARKI/ ÁO POLO TAY HẾN BASIC A399",
         "Description": "MARKI/ ÁO POLO TAY HẾN BASIC A399",
-        "Price": 290000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "A399",
         "ImportPrice": 105000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "MARKI/ ÁO SƠ MI TƠ PHỐI CỔ REN THÊU HOA SM400",
         "Description": "MARKI/ ÁO SƠ MI TƠ PHỐI CỔ REN THÊU HOA SM400",
-        "Price": 390000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "SM400",
         "ImportPrice": 165000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "MARKI / ÁO SƠ MI OVERSIZE DÀI TAY SM401",
         "Description": "MARKI / ÁO SƠ MI OVERSIZE DÀI TAY SM401",
-        "Price": 290000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "SM401",
         "ImportPrice": 110000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "MARKI/ QUẦN CULOTTES DÁNG DÀI ỐNG RỘNG KÈM BELT Q402",
         "Description": "MARKI/ QUẦN CULOTTES DÁNG DÀI ỐNG RỘNG KÈM BELT Q402",
-        "Price": 490000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "Q402",
         "ImportPrice": 190000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "MARKI/ QUẦN CULOTTES DÁNG DÀI ỐNG SUÔNG RỘNG KÈM BELT Q403",
         "Description": "MARKI/ QUẦN CULOTTES DÁNG DÀI ỐNG SUÔNG RỘNG KÈM BELT Q403",
-        "Price": 490000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "Q403",
         "ImportPrice": 210000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "MARKI/ QUẦN CULOTTES DÁNG DÀI ỐNG SUÔNG KÈM BELT Q404",
         "Description": "MARKI/ QUẦN CULOTTES DÁNG DÀI ỐNG SUÔNG KÈM BELT Q404",
-        "Price": 490000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "Q404",
         "ImportPrice": 190000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "MARKI/ ÁO SƠ MI OVERSIZED KẺ SỌC XANH TRẮNG DÀI TAY SM405",
         "Description": "MARKI/ ÁO SƠ MI OVERSIZED KẺ SỌC XANH TRẮNG DÀI TAY SM405",
-        "Price": 350000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "SM405",
         "ImportPrice": 150000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "MARKI/ ÁO SƠ MI THÔ MỀM PHỐI TÚI CỘC TAY SM406",
         "Description": "MARKI/ ÁO SƠ MI THÔ MỀM PHỐI TÚI CỘC TAY SM406",
-        "Price": 280000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "SM406",
         "ImportPrice": 110000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "MARKI/ SƠ MI TƠ CỔ TRÒN PHỐI REN SM408",
         "Description": "MARKI/ SƠ MI TƠ CỔ TRÒN PHỐI REN SM408",
-        "Price": 170000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "SM408",
-        "ImportPrice": 390000,
-        "ProductTypeId": 1
+        "ImportPrice": 170000,
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "MARKI/ ÁO SÁT NÁCH CỔ TRÒN XẾP LY A409",
         "Description": "MARKI/ ÁO SÁT NÁCH CỔ TRÒN XẾP LY A409",
-        "Price": 320000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "A409",
         "ImportPrice": 130000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "MARKI/ ÁO QUÂY 2 DÂY CHUN NGỰC A410",
         "Description": "MARKI/ ÁO QUÂY 2 DÂY CHUN NGỰC A410",
-        "Price": 250000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "A410",
         "ImportPrice": 110000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "MARKI/ ÁO SƠ MI TƠ CỔ SEN TAY BỒNG SM411",
         "Description": "MARKI/ ÁO SƠ MI TƠ CỔ SEN TAY BỒNG SM411",
-        "Price": 390000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "SM411",
         "ImportPrice": 155000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "MARKI/ CHÂN VÁY DENIM XẾP LY MẶT TRƯỚC DÁNG A DÀI CV412",
         "Description": "MARKI/ CHÂN VÁY DENIM XẾP LY MẶT TRƯỚC DÁNG A DÀI CV412",
-        "Price": 450000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "CV412",
         "ImportPrice": 180000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "MARKI/ CHÂN VÁY DENIM DÁNG A CẠP CHUN SAU CO GIÃN CV414",
         "Description": "MARKI/ CHÂN VÁY DENIM DÁNG A CẠP CHUN SAU CO GIÃN CV414",
-        "Price": 450000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "CV414",
         "ImportPrice": 180000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "MARKI/ ÁO THUN TĂM KẺ NGANG CỔ POLO DÁNG LỬNG A415",
         "Description": "MARKI/ ÁO THUN TĂM KẺ NGANG CỔ POLO DÁNG LỬNG A415",
-        "Price": 250000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "A415",
         "ImportPrice": 80000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     },
     {
         "Name": "MARKI / ÁO POLO THUN TĂM KẺ NGANG A416",
         "Description": "MARKI / ÁO POLO THUN TĂM KẺ NGANG A416",
-        "Price": 280000,
-        "PictureUrl": "images/products/sb-ang1.png",
         "ProductSKU": "A416",
         "ImportPrice": 100000,
-        "ProductTypeId": 1
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     }
 ]
