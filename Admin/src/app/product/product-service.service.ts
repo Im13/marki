@@ -4,7 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ProductParams } from '../shared/models/productParams';
 import { Pagination } from '../shared/models/pagination';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { ProductType } from '../shared/models/productTypes';
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +39,9 @@ export class ProductService {
   productImageUpload(file: FormData) {
     console.log(typeof(file));
     return this.http.post(this.baseUrl + 'adminproduct/image-upload', file);
+  }
+
+  getAllProductTypes() {
+    return this.http.get<ProductType[]>(this.baseUrl + 'products/types')
   }
 }

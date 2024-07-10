@@ -13,6 +13,7 @@ import { ProductOptionValue } from 'src/app/shared/models/productOptionValues';
 import { ProductSKUValues } from 'src/app/shared/models/productSKUValues';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { Photo } from 'src/app/shared/models/photo';
+import { ProductType } from 'src/app/shared/models/productTypes';
 
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
@@ -42,7 +43,9 @@ export class AddProductModalComponent implements OnInit {
   editId: number | null = null;
   variantValues: ProductOptionValue[][] = [];
   valueTempId: number = 0;
-  popoverVisible = false
+  popoverVisible = false;
+  productTypes: ProductType[];
+  selectedProductTypeId: number;
 
   fileList: NzUploadFile[] = [
   ];
@@ -57,6 +60,11 @@ export class AddProductModalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if (this.isEdit == null) this.isEdit = false;
+    console.log(this.product)
+
+    this.getProductTypes();
+
     if (this.product == null) {
       this.product = {
         id: null,
@@ -71,6 +79,7 @@ export class AddProductModalComponent implements OnInit {
       };
     } else {
       this.isEdit = true;
+      this.selectedProductTypeId = this.product.productTypeId;
 
       this.product.productOptions.forEach((option) => {
         const productOption = {
@@ -91,7 +100,6 @@ export class AddProductModalComponent implements OnInit {
       this.productSKUs = this.product.productSkus;
     }
 
-    if (this.isEdit == null) this.isEdit = false;
 
     this.addForm = new FormGroup({
       productName: new FormControl(this.product.name, [Validators.required]),
@@ -146,6 +154,18 @@ export class AddProductModalComponent implements OnInit {
     //     ]
     //   }
     // ];
+  }
+
+  getProductTypes() {
+    this.productService.getAllProductTypes().subscribe({
+      next: types => {
+        this.productTypes = types;
+        console.log(this.productTypes)
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
   }
 
   handlePreview = async (file: NzUploadFile): Promise<void> => {

@@ -14,21 +14,35 @@
               placeholder="Tên sản phẩm"
               formControlName="productName"
             />
-            <span *ngIf="!addForm.get('productName').valid && addForm.get('productName').touched" class="help-block">Tên sản phẩm không được bỏ trống</span>
+            <span
+              *ngIf="
+                !addForm.get('productName').valid &&
+                addForm.get('productName').touched
+              "
+              class="help-block"
+              >Tên sản phẩm không được bỏ trống</span
+            >
           </div>
 
           <div class="mb-3">
             <label for="productSKU" class="form-label m-0 mb-1"
-            >SKU sản phẩm <span class="help-block">*</span></label
+              >SKU sản phẩm <span class="help-block">*</span></label
             >
             <input
-            type="text"
-            class="form-control form-control-sm rounded-0"
-            id="productSKU"
-            placeholder="SKU sản phẩm"
-            formControlName="productSKU"
+              type="text"
+              class="form-control form-control-sm rounded-0"
+              id="productSKU"
+              placeholder="SKU sản phẩm"
+              formControlName="productSKU"
             />
-            <span *ngIf="!addForm.get('productSKU').valid && addForm.get('productSKU').touched" class="help-block">SKU sản phẩm không được bỏ trống</span>
+            <span
+              *ngIf="
+                !addForm.get('productSKU').valid &&
+                addForm.get('productSKU').touched
+              "
+              class="help-block"
+              >SKU sản phẩm không được bỏ trống</span
+            >
           </div>
 
           <div class="mb-3">
@@ -62,16 +76,30 @@
         <div class="supplier p-2 border rounded">
           <div class="mb-3">
             <label for="productType" class="form-label m-0 mb-1"
-              >Danh mục <span class="help-block">*</span></label
-            >
-            <input
-              type="text"
-              class="form-control form-control-sm rounded-0"
-              id="productType"
-              placeholder="Danh mục"
+              >Danh mục <span class="help-block">*</span>
+            </label>
+            <nz-select
+              *ngIf="productTypes.length > 0"
+              nzShowSearch
+              nzAllowClear
+              nzPlaceHolder="Danh mục"
               formControlName="productTypeId"
-            />
-            <span *ngIf="!addForm.get('productTypeId').valid && addForm.get('productTypeId').touched" class="help-block">Danh mục không được bỏ trống</span>
+            >
+              <nz-option
+                *ngFor="let type of productTypes"
+                [nzLabel]="type.name"
+                [nzValue]="type.id"
+              ></nz-option>
+            </nz-select>
+
+            <span
+              *ngIf="
+                !addForm.get('productTypeId').valid &&
+                addForm.get('productTypeId').touched
+              "
+              class="help-block"
+              >Danh mục không được bỏ trống</span
+            >
           </div>
         </div>
 
@@ -346,7 +374,13 @@
     </div>
   </div>
   <div *nzModalFooter>
-    <button [disabled]="!addForm.valid" nz-button nzType="primary" type="submit" (click)="onSubmit()">
+    <button
+      [disabled]="!addForm.valid"
+      nz-button
+      nzType="primary"
+      type="submit"
+      (click)="onSubmit()"
+    >
       Lưu
     </button>
   </div>

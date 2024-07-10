@@ -1,14 +1,18 @@
 [
     {
         "Id": 1,
-        "Name": "Dress"
+        "Name": "Áo"
     },
     {
         "Id": 2,
-        "Name": "Pants"
+        "Name": "Quần"
     },
     {
         "Id": 3,
-        "Name": "Clothes"
+        "Name": "Váy / Chân váy"
+    },
+    {
+        "Id": 4,
+        "Name": "Áo khoác"
     }
 ]

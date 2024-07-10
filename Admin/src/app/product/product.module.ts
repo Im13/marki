@@ -9,14 +9,12 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
 import { AddProductModalComponent } from './product-list/add-product-modal/add-product-modal.component';
 import { CoreModule } from '../core/core.module';
 import { NzImageModule } from 'ng-zorro-antd/image';
-import { ProductTypeComponent } from './product-type/product-type.component';
 
 
 @NgModule({
   declarations: [
     ProductListComponent,
-    AddProductModalComponent,
-    ProductTypeComponent
+    AddProductModalComponent
   ],
   imports: [
     CommonModule,

@@ -2,7 +2,6 @@ namespace API.DTOs.Product
 {
     public class ProductDTOs : ProductToReturnDTO
     {
-        public int ProductBrandId { get; set; }
         public int ProductTypeId { get; set; }
         public string ProductSKU { get; set; }
         public decimal ImportPrice { get; set; }
