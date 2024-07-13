@@ -30,3 +30,12 @@ input.ng-invalid.ng-touched {
 .help-block {
   color: red;
 }
+
+nz-select {
+  width: 100%;
+}
+
+.loading-icon {
+  margin-right: 8px;
+}
+

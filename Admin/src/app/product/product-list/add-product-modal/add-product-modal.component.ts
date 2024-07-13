@@ -46,6 +46,7 @@ export class AddProductModalComponent implements OnInit {
   popoverVisible = false;
   productTypes: ProductType[];
   selectedProductTypeId: number;
+  isProductTypeLoading = false;
 
   fileList: NzUploadFile[] = [
   ];
@@ -61,8 +62,6 @@ export class AddProductModalComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.isEdit == null) this.isEdit = false;
-    console.log(this.product)
-
     this.getProductTypes();
 
     if (this.product == null) {
@@ -99,7 +98,6 @@ export class AddProductModalComponent implements OnInit {
 
       this.productSKUs = this.product.productSkus;
     }
-
 
     this.addForm = new FormGroup({
       productName: new FormControl(this.product.name, [Validators.required]),
@@ -160,7 +158,6 @@ export class AddProductModalComponent implements OnInit {
     this.productService.getAllProductTypes().subscribe({
       next: types => {
         this.productTypes = types;
-        console.log(this.productTypes)
       },
       error: err => {
         console.log(err);
@@ -179,21 +176,6 @@ export class AddProductModalComponent implements OnInit {
   handleUpload = (item: any) => {
     const formData = new FormData();
     formData.append('file', item.file as any, item.name);
-
-    // return this.http.request(req).subscribe((event: HttpEvent<{}>) => {
-    //   if (event.type === HttpEventType.UploadProgress) {
-    //     if (event.total > 0) {
-    //       (event as any).percent = event.loaded / event.total * 100; // tslint:disable-next-line:no-any
-    //     }
-    //     // To process the upload progress bar, you must specify the `percent` attribute to indicate progress.
-    //     item.onProgress(event, item.file);
-    //   } else if (event instanceof HttpResponse) { /* success */
-    //     item.onSuccess(event.body, item.file, event);
-    //   }
-    // },(err) => { /* error */
-    //   item.onError(err, item.file);
-    //   console.log(err)
-    // });
 
     return this.productService.productImageUpload(formData).subscribe({
       next: (photo: Photo) => {
@@ -364,7 +346,7 @@ export class AddProductModalComponent implements OnInit {
     this.product.importPrice = +this.addForm.value.importPrice;
     this.product.description = this.addForm.value.productDescription;
     this.product.productSKU = this.addForm.value.productSKU;
-    this.product.productTypeId = 1;
+    this.product.productTypeId = this.addForm.value.productTypeId;
     this.product.productSkus = this.productSKUs;
   }
 
