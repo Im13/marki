@@ -27,12 +27,11 @@
   </div>
 
   <div
-    class="data list-products border border-danger mt-3"
+    class="data list-products mt-3"
     *ngIf="products.length > 0"
   >
     <nz-table
       #rowSelectionTable
-      nzShowSizeChanger
       [nzFrontPagination]="false"
       [nzLoading]="loading"
       [nzData]="products"
