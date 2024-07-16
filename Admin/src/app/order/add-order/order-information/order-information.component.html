@@ -1,0 +1,39 @@
+<div nz-row class="border border-primary">
+  <div class="border p-2" nz-col nzSpan="15">
+    <div class="product-section p-3">
+      <p class="fs-6 fw-semibold m-0 ps-1">Sản phẩm</p>
+
+      <div class="product-search mt-3">
+        <div nz-row>
+          <div nz-col class="d-flex align-items-center" nzSpan="4">
+            <nz-segmented
+              [nzOptions]="options"
+              (nzValueChange)="handleIndexChange($event)"
+            ></nz-segmented>
+          </div>
+
+          <div nz-col class="d-flex align-items-center" nzSpan="20">
+            <nz-select
+              nzShowSearch
+              nzServerSearch
+              nzPlaceHolder="Nhập mã, tên sản phẩm hoặc barcode"
+              [(ngModel)]="selectedProduct"
+              (ngModelChange)="selectProduct($event)"
+              [nzShowArrow]="false"
+              [nzFilterOption]="nzFilterOption"
+              (nzOnSearch)="search($event)"
+              class="w-100"
+            >
+              <nz-option
+                *ngFor="let p of listFilteredProduct"
+                [nzLabel]="p.name"
+                [nzValue]="p"
+              ></nz-option>
+            </nz-select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div nz-col nzSpan="9" class="border">c</div>
+</div>

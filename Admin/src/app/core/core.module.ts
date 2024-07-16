@@ -7,6 +7,14 @@ import { ThousandSeparatorPipe } from './pipes/thousand-separator.pipe';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzSegmentedModule } from 'ng-zorro-antd/segmented';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +27,16 @@ import { NzFormModule } from 'ng-zorro-antd/form';
     RouterModule,
     NzPopoverModule,
     NzUploadModule,
-    NzFormModule
+    NzFormModule,
+    NzToolTipModule,
+    NzSpaceModule,
+    NzLayoutModule,
+    NzTabsModule,
+    NzGridModule,
+    NzSegmentedModule,
+    NzSelectModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     HeaderComponent,
@@ -27,7 +44,16 @@ import { NzFormModule } from 'ng-zorro-antd/form';
     ThousandSeparatorPipe,
     NzPopoverModule,
     NzUploadModule,
-    NzFormModule
+    NzFormModule,
+    NzToolTipModule,
+    NzSpaceModule,
+    NzLayoutModule,
+    NzTabsModule,
+    NzGridModule,
+    NzSegmentedModule,
+    NzSelectModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class CoreModule { }

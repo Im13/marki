@@ -1,16 +1,39 @@
 <div class="order-container">
-  <div class="control-bar d-flex flex-row px-2">
-    <button class="btn btn-sm fa fa-plus btn-outline-primary rounded-0 me-2"></button>
+  <div class="px-2">
+    <nz-space class="control-bar d-flex flex-row">
+      <button
+        nz-button
+        *nzSpaceItem
+        nzType="primary"
+        nzSize="default"
+        (click)="addOrder()"
+        nz-tooltip
+        nzTooltipTitle="Thêm đơn hàng mới"
+        nzTooltipPlacement="bottom"
+      >
+        <span nz-icon nzType="plus"></span>
+      </button>
 
-    <button class="btn btn-sm btn-outline-secondary rounded-0 me-2">
-      <span class="fa fa-print me-1"></span>
-      <span>In đơn</span>
-    </button>
+      <button
+        *nzSpaceItem
+        nz-button
+        nzType="default"
+        class="d-flex align-items-center"
+      >
+        <span nz-icon nzType="printer"></span>
+        In đơn
+      </button>
 
-    <button class="btn btn-sm btn-outline-secondary rounded-0 me-2">
-      <span class="fa fa-download me-1"></span>
-      <span>Xuất excel</span>
-    </button>
+      <button
+        *nzSpaceItem
+        nz-button
+        nzType="default"
+        class="d-flex align-items-center"
+      >
+        <span nz-icon nzType="download"></span>
+        Xuất excel
+      </button>
+    </nz-space>
   </div>
 
   <div class="data mt-3 px-2">
@@ -18,7 +41,7 @@
       <thead>
         <tr>
           <th scope="col">
-            <input type="checkbox">
+            <input type="checkbox" />
           </th>
           <th scope="col">Mã đơn hàng</th>
           <th scope="col">Mã vận đơn</th>
@@ -33,7 +56,7 @@
       <tbody>
         <tr>
           <th>
-            <input type="checkbox">
+            <input type="checkbox" />
           </th>
           <th scope="row">1</th>
           <td>Shopee</td>
@@ -46,7 +69,7 @@
         </tr>
         <tr>
           <th>
-            <input type="checkbox">
+            <input type="checkbox" />
           </th>
           <th scope="row">1</th>
           <td>Shopee</td>
@@ -59,7 +82,7 @@
         </tr>
         <tr>
           <th>
-            <input type="checkbox">
+            <input type="checkbox" />
           </th>
           <th scope="row">1</th>
           <td>Shopee</td>

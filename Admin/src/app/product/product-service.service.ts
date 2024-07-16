@@ -26,6 +26,7 @@ export class ProductService {
   getProducts(productParams: ProductParams) {
     let params = new HttpParams();
 
+    params = params.append('search', productParams.search);
     params = params.append('pageSize', productParams.pageSize);
     params = params.append('pageIndex', productParams.pageIndex);
 
