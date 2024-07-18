@@ -29,16 +29,13 @@ export class OrderInformationComponent {
     this.productService.getProducts(this.productParams).subscribe({
       next: response => {
         this.listFilteredProduct = response.data;
-
-        console.log(response);
       }
     });
   }
 
   selectProduct(data: any) {
-    // this.listSelectedProducts.push(data);
-    // this.selectProduct = null;
-    // console.log(this.listSelectedProducts);
+    this.listSelectedProducts.push(data);
+    console.log(this.listSelectedProducts);
   }
 
 }

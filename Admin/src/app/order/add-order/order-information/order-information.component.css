@@ -1,3 +1,11 @@
-.product-section {
+.product-section, .list-products {
   background-color: #ffffff;
+}
+
+.product-weight, .product-price {
+  color: #0f53a4;
+}
+
+.selected-product-list {
+  background-color: #ebecef;
 }

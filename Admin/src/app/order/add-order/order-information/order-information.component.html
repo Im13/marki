@@ -32,6 +32,39 @@
             </nz-select>
           </div>
         </div>
+
+        <div class="selected-product-list border mt-3 p-2">
+          <nz-empty *ngIf="listSelectedProducts.length <= 0; else listSelectedProductsBlock" nzNotFoundContent="Giỏ hàng trống"></nz-empty>
+
+          <ng-template #listSelectedProductsBlock>
+            <div class="product-control d-flex align-items-center" nz-row>
+              <div nz-col nzSpan="5" class="fw-semibold">Số lượng sản phẩm: {{ listSelectedProducts.length }}</div>
+            </div>
+
+            <div class="list-products mt-2 p-1">
+              <div *ngFor="let product of listSelectedProducts" class="product py-2" nz-row>
+                <div nz-col nzSpan="2" class="d-flex justify-content-center">
+                  <img *ngIf="product.imageUrl != null; else noImageBlock" nz-image width="60px" height="60px" [src]="product.imageUrl">
+
+                  <ng-template #noImageBlock>
+                    <img nz-image width="60px" height="60px" src="../../../../assets/images/no_image.jpg">
+                  </ng-template>
+                </div>
+
+                <div nz-col nzSpan="22" class="ps-2 p-1 d-flex flex-column justify-content-between">
+                  <div class="product-name fw-semibold">{{product.name}}</div>
+                  <div class="product-info d-flex justify-content-between mb-1">
+                    <div class="product-sku-name">
+                      <span class="me-2">Den-M</span>
+                      <span class="product-weight" nz-typography><strong>{{product.productSkus[0].weight}}</strong></span>
+                    </div>
+                    <div class="product-price m-0" nz-typography><strong>{{product.productSkus[0].price}}</strong></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </div>
       </div>
     </div>
   </div>

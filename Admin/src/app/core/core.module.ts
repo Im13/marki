@@ -15,6 +15,8 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzSegmentedModule } from 'ng-zorro-antd/segmented';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NzSegmentedModule,
     NzSelectModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NzEmptyModule,
+    NzTypographyModule
   ],
   exports: [
     HeaderComponent,
@@ -53,7 +57,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NzSegmentedModule,
     NzSelectModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NzEmptyModule,
+    NzTypographyModule
   ]
 })
 export class CoreModule { }
