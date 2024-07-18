@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { ProductParams } from '../shared/models/productParams';
 import { Pagination } from '../shared/models/pagination';
 import { ProductType } from '../shared/models/productTypes';
+import { ProductSKUDetails } from '../shared/models/productSKUDetails';
 
 @Injectable({
   providedIn: 'root'
@@ -44,5 +45,13 @@ export class ProductService {
 
   getAllProductTypes() {
     return this.http.get<ProductType[]>(this.baseUrl + 'products/types')
+  }
+
+  getProductSKUDetails(productParams: ProductParams) {
+    let params = new HttpParams();
+
+    params = params.append('search', productParams.search);
+
+    return this.http.get<ProductSKUDetails[]>(this.baseUrl + 'adminproduct/skus', { params })
   }
 }

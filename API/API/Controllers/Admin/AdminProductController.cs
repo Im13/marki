@@ -18,9 +18,9 @@ namespace API.Controllers.Admin
         private readonly IGenericRepository<Product> _genericProductRepo;
         private readonly IProductRepository _productRepo;
 
-        public AdminProductController(IProductService productService, 
-            IMapper mapper, 
-            IGenericRepository<Product> genericProductRepo, 
+        public AdminProductController(IProductService productService,
+            IMapper mapper,
+            IGenericRepository<Product> genericProductRepo,
             IProductRepository productRepo,
             IPhotoService photoService)
         {
@@ -109,7 +109,7 @@ namespace API.Controllers.Admin
         {
             var result = await _photoService.AddPhotoAsync(file);
 
-            if(result.Error != null) return BadRequest(result.Error.Message);
+            if (result.Error != null) return BadRequest(result.Error.Message);
 
             var photoDTO = new PhotoDTO
             {
@@ -127,6 +127,25 @@ namespace API.Controllers.Admin
             var returnedSKU = await _productService.GetProductSKU(id);
 
             return Ok(_mapper.Map<ProductSKUDetailDTO>(returnedSKU));
+        }
+
+        [HttpGet("skus")]
+        public async Task<ActionResult<ProductSKUDetailDTO[]>> GetAllSkus([FromQuery] ProductSpecParams productParams)
+        {
+            var productSkuList = new List<ProductSKUs>();
+
+            var spec = new ProductsWithTypesSpecification(productParams);
+
+            var products = await _productRepo.GetProductsWithSpec(spec);
+
+            foreach(var product in products)
+            {
+                productSkuList.AddRange(product.ProductSKUs);
+            }
+
+            var productSkus = _mapper.Map<IReadOnlyList<ProductSKUs>, IReadOnlyList<ProductSKUDetailDTO>>(productSkuList);
+
+            return Ok(productSkus);
         }
     }
 }

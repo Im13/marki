@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ProductService } from 'src/app/product/product-service.service';
 import { ProductParams } from 'src/app/shared/models/productParams';
 import { Product } from 'src/app/shared/models/products';
+import { ProductSKUDetails } from 'src/app/shared/models/productSKUDetails';
 
 @Component({
   selector: 'app-order-information',
@@ -11,9 +12,9 @@ import { Product } from 'src/app/shared/models/products';
 export class OrderInformationComponent {
   options = ['Sản phẩm', 'Combo'];
   selectedProduct: Product = null;
-  listSelectedProducts: Product[] = [];
+  listSelectedSkus: ProductSKUDetails[] = [];
   nzFilterOption = (): boolean => true;
-  listFilteredProduct: Product[] = [];
+  listFilterSkus: ProductSKUDetails[] = [];
   productParams = new ProductParams();
 
   constructor(private productService: ProductService) {}
@@ -24,18 +25,17 @@ export class OrderInformationComponent {
 
   search(value: string): void {
     this.productParams.search = value;
-    this.productParams.pageSize = 100;
 
-    this.productService.getProducts(this.productParams).subscribe({
-      next: response => {
-        this.listFilteredProduct = response.data;
+    this.productService.getProductSKUDetails(this.productParams).subscribe({
+      next: skus => {
+        this.listFilterSkus = skus;
       }
     });
   }
 
   selectProduct(data: any) {
-    this.listSelectedProducts.push(data);
-    console.log(this.listSelectedProducts);
+    this.listSelectedSkus.push(data);
+    console.log(this.listSelectedSkus);
   }
 
 }

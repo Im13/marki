@@ -1,3 +1,4 @@
+using Core;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specification;
@@ -31,12 +32,25 @@ namespace Infrastructure.Data
         public async Task<List<Product>> GetProductsWithSpec(ISpecification<Product> spec)
         {
             var products = await SpecificationEvaluator<Product>.GetQuery(_context.Set<Product>().AsQueryable(), spec)
-                .Include(p => p.ProductSKUs).ThenInclude(ps => ps.ProductSKUValues)
+                .Include(p => p.ProductSKUs)
+                .ThenInclude(ps => ps.ProductSKUValues)
+                .ThenInclude(psv => psv.ProductOptionValue)
+                .ThenInclude(pov => pov.ProductOption)
                 .Include(p => p.ProductSKUs).ThenInclude(ps => ps.Photos)
                 .Include(p => p.ProductOptions).ThenInclude(po => po.ProductOptionValues)
                 .ToListAsync();
 
             return products;
+        }
+
+        public async Task<List<ProductSKUs>> GetProductSKUsWithSpec(ISpecification<ProductSKUs> spec)
+        {
+            var productSkus = await SpecificationEvaluator<ProductSKUs>.GetQuery(_context.Set<ProductSKUs>().AsQueryable(), spec)
+                .Include(p => p.Product)
+                .Include(p => p.ProductSKUValues).ThenInclude(ps => ps.ProductOptionValue).ThenInclude(pov => pov.ProductOption)
+                .ToListAsync();
+
+            return productSkus;
         }
     }
 }

@@ -10,6 +10,5 @@ namespace Core.Interfaces
         Task<Product> GetProductAsync(int id);
         Task<bool> DeleteProducts(List<Product> products);
         Task<ProductSKUs> GetProductSKU(int skuId);
-
     }
 }
