@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Core.Entities;
 
 namespace Core
@@ -13,5 +14,8 @@ namespace Core
         public float Weight { get; set; }
         public List<ProductSKUValues> ProductSKUValues { get; set; }
         public List<Photo> Photos { get; set; }
+        [JsonIgnore]
+        public Product Product { get; set; }
+        public int ProductId { get; set; }
     }
 }

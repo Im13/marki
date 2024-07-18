@@ -9,5 +9,7 @@ namespace Core.Interfaces
         Task<Product> UpdateProduct(Product product);
         Task<Product> GetProductAsync(int id);
         Task<bool> DeleteProducts(List<Product> products);
+        Task<ProductSKUs> GetProductSKU(int skuId);
+
     }
 }

@@ -2,6 +2,7 @@ using API.DTOs;
 using API.DTOs.Product;
 using API.Helpers;
 using AutoMapper;
+using Core;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specification;
@@ -118,6 +119,14 @@ namespace API.Controllers.Admin
             };
 
             return Ok(_mapper.Map<PhotoDTO>(photoDTO));
+        }
+
+        [HttpGet("sku/{id}")]
+        public async Task<ActionResult<ProductSKUDetailDTO>> GetSku(int id)
+        {
+            var returnedSKU = await _productService.GetProductSKU(id);
+
+            return Ok(_mapper.Map<ProductSKUDetailDTO>(returnedSKU));
         }
     }
 }

@@ -1,14 +1,18 @@
 using Core;
 using Core.Entities;
 using Core.Interfaces;
+using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Services
 {
     public class ProductService : IProductService
     {
         private readonly IUnitOfWork _unitOfWork;
-        public ProductService(IUnitOfWork unitOfWork)
+        private StoreContext _context;
+        public ProductService(IUnitOfWork unitOfWork, StoreContext context)
         {
+            _context = context;
             _unitOfWork = unitOfWork;
         }
 
@@ -123,6 +127,20 @@ namespace Infrastructure.Services
             if(result <= 0) return false;
 
             return true;
+        }
+
+        public async Task<ProductSKUs> GetProductSKU(int skuId)
+        {
+            var productSku = await _context.ProductSKUs
+                .Include(x => x.Product)
+                .Include(x => x.ProductSKUValues)
+                .ThenInclude(c => c.ProductOptionValue)
+                .ThenInclude(pov => pov.ProductOption)
+                .SingleOrDefaultAsync(p => p.Id == skuId);
+
+            if(productSku == null || productSku.Product == null || productSku.Product.IsDeleted == true) return null;
+
+            return productSku;
         }
     }
 }
