@@ -1,4 +1,4 @@
-.product-section, .list-products {
+.product-section, .list-products, .checkout-card {
   background-color: #ffffff;
 }
 
@@ -6,6 +6,10 @@
   color: #0f53a4;
 }
 
-.selected-product-list {
+.selected-product-list, .total-info {
   background-color: #ebecef;
+}
+
+hr.dashed {
+  border-top: 1px dashed #bbb;
 }

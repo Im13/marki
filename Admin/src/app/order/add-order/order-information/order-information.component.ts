@@ -16,6 +16,12 @@ export class OrderInformationComponent {
   nzFilterOption = (): boolean => true;
   listFilterSkus: ProductSKUDetails[] = [];
   productParams = new ProductParams();
+  freeShippingChecked = false;
+
+  //Checkout variables
+  shippingFee = 0;
+  orderDiscount = 0;
+  pa
 
   constructor(private productService: ProductService) {}
 
@@ -35,7 +41,5 @@ export class OrderInformationComponent {
 
   selectProduct(data: any) {
     this.listSelectedSkus.push(data);
-    console.log(this.listSelectedSkus);
   }
-
 }

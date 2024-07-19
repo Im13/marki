@@ -17,6 +17,8 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
     FormsModule,
     ReactiveFormsModule,
     NzEmptyModule,
-    NzTypographyModule
+    NzTypographyModule,
+    NzCardModule,
+    NzCheckboxModule
   ],
   exports: [
     HeaderComponent,
@@ -59,7 +63,9 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
     FormsModule,
     ReactiveFormsModule,
     NzEmptyModule,
-    NzTypographyModule
+    NzTypographyModule,
+    NzCardModule,
+    NzCheckboxModule
   ]
 })
 export class CoreModule { }
