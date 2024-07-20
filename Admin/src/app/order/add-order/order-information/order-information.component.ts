@@ -21,7 +21,8 @@ export class OrderInformationComponent {
   //Checkout variables
   shippingFee = 0;
   orderDiscount = 0;
-  pa
+  orderNote = '';
+  orderCreatedDate = null;
 
   constructor(private productService: ProductService) {}
 
@@ -42,4 +43,9 @@ export class OrderInformationComponent {
   selectProduct(data: any) {
     this.listSelectedSkus.push(data);
   }
+
+  onDateChange(result: Date) {
+    console.log('onChange: ', result);
+  }
+
 }
