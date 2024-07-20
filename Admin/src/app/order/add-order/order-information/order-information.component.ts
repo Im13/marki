@@ -22,7 +22,9 @@ export class OrderInformationComponent {
   shippingFee = 0;
   orderDiscount = 0;
   orderNote = '';
-  orderCreatedDate = null;
+  orderCreatedDate = new Date();
+  orderCareStaff = null;
+  customerCareStaff = null;
 
   constructor(private productService: ProductService) {}
 
@@ -45,6 +47,10 @@ export class OrderInformationComponent {
   }
 
   onDateChange(result: Date) {
+    console.log('onChange: ', result);
+  }
+
+  onBirthdayChange(result: Date) {
     console.log('onChange: ', result);
   }
 

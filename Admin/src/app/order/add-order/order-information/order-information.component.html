@@ -34,31 +34,65 @@
         </div>
 
         <div class="selected-product-list mt-3 p-2">
-          <nz-empty *ngIf="listSelectedSkus.length <= 0; else listSelectedProductsBlock" nzNotFoundContent="Giỏ hàng trống"></nz-empty>
+          <nz-empty
+            *ngIf="listSelectedSkus.length <= 0; else listSelectedProductsBlock"
+            nzNotFoundContent="Giỏ hàng trống"
+          ></nz-empty>
 
           <ng-template #listSelectedProductsBlock>
             <div class="product-control d-flex align-items-center" nz-row>
-              <div nz-col nzSpan="5" class="fw-semibold">Số lượng sản phẩm: {{ listSelectedSkus.length }}</div>
+              <div nz-col nzSpan="5" class="fw-semibold">
+                Số lượng sản phẩm: {{ listSelectedSkus.length }}
+              </div>
             </div>
 
             <div class="list-products mt-2 p-1">
-              <div *ngFor="let sku of listSelectedSkus" class="product py-2" nz-row>
+              <div
+                *ngFor="let sku of listSelectedSkus"
+                class="product py-2 bg-white mb-2"
+                nz-row
+              >
                 <div nz-col nzSpan="2" class="d-flex justify-content-center">
-                  <img *ngIf="sku.imageUrl !== ''; else noImageBlock" nz-image width="60px" height="60px" [src]="sku.imageUrl">
+                  <img
+                    *ngIf="sku.imageUrl !== ''; else noImageBlock"
+                    nz-image
+                    width="60px"
+                    height="60px"
+                    [src]="sku.imageUrl"
+                  />
 
                   <ng-template #noImageBlock>
-                    <img nz-image width="60px" height="60px" src="../../../../assets/images/no_image.jpg">
+                    <img
+                      nz-image
+                      width="60px"
+                      height="60px"
+                      src="../../../../assets/images/no_image.jpg"
+                    />
                   </ng-template>
                 </div>
 
-                <div nz-col nzSpan="22" class="ps-2 p-1 d-flex flex-column justify-content-between">
-                  <div class="product-name fw-semibold">{{ sku.productName }}</div>
+                <div
+                  nz-col
+                  nzSpan="22"
+                  class="ps-2 p-1 d-flex flex-column justify-content-between"
+                >
+                  <div class="product-name fw-semibold">
+                    {{ sku.productName }}
+                  </div>
                   <div class="product-info d-flex justify-content-between mb-1">
                     <div class="product-sku-name">
-                      <span class="me-1" *ngFor="let value of sku.productSKUValues">{{value.optionName}}: {{ value.optionValue }}</span>
-                      <span class="product-weight" nz-typography><strong>{{ sku.weight }}g</strong></span>
+                      <span
+                        class="me-1"
+                        *ngFor="let value of sku.productSKUValues"
+                        >{{ value.optionName }}: {{ value.optionValue }}</span
+                      >
+                      <span class="product-weight" nz-typography
+                        ><strong>{{ sku.weight }}g</strong></span
+                      >
                     </div>
-                    <div class="product-price m-0" nz-typography><strong>{{ sku.price | thousandSeparator }} x 1</strong></div>
+                    <div class="product-price m-0" nz-typography>
+                      <strong>{{ sku.price | thousandSeparator }} x 1</strong>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -72,7 +106,9 @@
       <div class="checkout-info pe-2" nz-col nzSpan="14">
         <div class="checkout-card bg-white p-3">
           <p class="fs-6 fw-semibold mb-3">Thanh toán</p>
-          <label class="mb-3" nz-checkbox [(ngModel)]="freeShippingChecked">Miễn phí giao hàng</label>
+          <label class="mb-3" nz-checkbox [(ngModel)]="freeShippingChecked"
+            >Miễn phí giao hàng</label
+          >
 
           <div nz-row>
             <div nz-col class="d-flex align-items-center" nzSpan="16">
@@ -80,7 +116,12 @@
             </div>
             <div nz-col nzSpan="8">
               <nz-input-group nzSuffix="đ">
-                <input class="text-end" [(ngModel)]="shippingFee" type="text" nz-input />
+                <input
+                  class="text-end"
+                  [(ngModel)]="shippingFee"
+                  type="text"
+                  nz-input
+                />
               </nz-input-group>
             </div>
           </div>
@@ -91,7 +132,12 @@
             </div>
             <div nz-col nzSpan="8">
               <nz-input-group nzSuffix="đ">
-                <input class="text-end" [(ngModel)]="orderDiscount" type="text" nz-input />
+                <input
+                  class="text-end"
+                  [(ngModel)]="orderDiscount"
+                  type="text"
+                  nz-input
+                />
               </nz-input-group>
             </div>
           </div>
@@ -102,7 +148,12 @@
             </div>
             <div nz-col nzSpan="8">
               <nz-input-group nzSuffix="đ">
-                <input class="text-end" [(ngModel)]="shippingFee" type="number" nz-input />
+                <input
+                  class="text-end"
+                  [(ngModel)]="shippingFee"
+                  type="number"
+                  nz-input
+                />
               </nz-input-group>
             </div>
           </div>
@@ -113,7 +164,12 @@
             </div>
             <div nz-col nzSpan="8">
               <nz-input-group nzSuffix="đ">
-                <input class="text-end" [(ngModel)]="shippingFee" type="number" nz-input />
+                <input
+                  class="text-end"
+                  [(ngModel)]="shippingFee"
+                  type="number"
+                  nz-input
+                />
               </nz-input-group>
             </div>
           </div>
@@ -126,10 +182,12 @@
 
             <div class="d-flex justify-content-between">
               <span>Giảm giá</span>
-              <span nz-typography nzType="success" class="fw-semibold">10.000đ</span>
+              <span nz-typography nzType="success" class="fw-semibold"
+                >10.000đ</span
+              >
             </div>
 
-            <hr class="dashed">
+            <hr class="dashed" />
 
             <div class="d-flex justify-content-between">
               <span>Sau giảm giá</span>
@@ -146,7 +204,7 @@
               <span class="fw-semibold">90.000đ</span>
             </div>
 
-            <hr class="dashed">
+            <hr class="dashed" />
 
             <div class="d-flex justify-content-between">
               <span>Còn thiếu</span>
@@ -160,22 +218,221 @@
         <div class="checkout-card bg-white p-3">
           <p class="fs-6 fw-semibold">Ghi chú</p>
 
-          <textarea rows="4" nz-input [(ngModel)]="orderNote"></textarea>
+          <textarea class="input-bg" nzBorderless rows="4" nz-input [(ngModel)]="orderNote"></textarea>
         </div>
       </div>
     </div>
   </div>
 
   <div nz-col nzSpan="9" class="border p-2">
-    <div class="bg-white p-3">
+    <div class="bg-white p-3 rounded">
       <p class="fs-6 fw-semibold">Thông tin</p>
 
       <div nz-row>
-        <div nz-col nzSpan="18" class="d-flex align-items-center">
+        <div nz-col nzSpan="16" class="d-flex align-items-center">
           <span>Tạo lúc</span>
         </div>
-        <div nz-col nzSpan="6">
-          <nz-date-picker [(ngModel)]="orderCreatedDate" (ngModelChange)="onDateChange($event)"></nz-date-picker>
+        <div nz-col class="d-flex justify-content-end" nzSpan="8">
+          <nz-date-picker
+            class="w-100"
+            nzShowTime
+            [(ngModel)]="orderCreatedDate"
+            nzPlaceHolder="Chọn thời điểm"
+            (ngModelChange)="onDateChange($event)"
+          ></nz-date-picker>
+        </div>
+      </div>
+
+      <div nz-row class="mt-2">
+        <div nz-col nzSpan="16" class="d-flex align-items-center">
+          <span>NV xử lý</span>
+        </div>
+        <div nz-col class="d-flex justify-content-end" nzSpan="8">
+          <nz-select
+            class="w-100"
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Chọn NV xử lý"
+            [(ngModel)]="orderCareStaff"
+          >
+            <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+            <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+          </nz-select>
+        </div>
+      </div>
+
+      <div nz-row class="mt-2">
+        <div nz-col nzSpan="16" class="d-flex align-items-center">
+          <span>NV chăm sóc</span>
+        </div>
+        <div nz-col class="d-flex justify-content-end" nzSpan="8">
+          <nz-select
+            class="w-100"
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Chọn NV chăm sóc"
+            [(ngModel)]="customerCareStaff"
+          >
+            <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+            <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+          </nz-select>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white p-3 mt-2 rounded">
+      <p class="fs-6 fw-semibold">Khách hàng</p>
+
+      <div nz-row>
+        <div nz-col nzSpan="12" class="pe-1">
+          <input
+            nz-input
+            placeholder="Tên khách hàng"
+            [(ngModel)]="customerCareStaff"
+            type="text"
+            class="input-bg"
+            nzBorderless
+          />
+        </div>
+        <div nz-col nzSpan="12" class="ps-1">
+          <input
+            nz-input
+            placeholder="Số điện thoại"
+            [(ngModel)]="customerCareStaff"
+            type="text"
+            class="input-bg"
+            nzBorderless
+          />
+        </div>
+      </div>
+
+      <div nz-row class="mt-2">
+        <div nz-col nzSpan="12" class="pe-1">
+          <input
+            nz-input
+            placeholder="Địa chỉ email"
+            [(ngModel)]="customerCareStaff"
+            type="text"
+            class="input-bg"
+            nzBorderless
+          />
+        </div>
+        <div nz-col nzSpan="12" class="ps-1">
+          <nz-date-picker class="w-100 input-bg" nzBorderless [(ngModel)]="customerCareStaff" (ngModelChange)="onBirthdayChange($event)"></nz-date-picker>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white p-3 mt-2 rounded">
+      <p class="fs-6 fw-semibold">Nhận hàng</p>
+
+      <div nz-row>
+        <div nz-col nzSpan="12" class="pe-1">
+          <input
+            nz-input
+            placeholder="Tên khách hàng"
+            [(ngModel)]="customerCareStaff"
+            type="number"
+            class="input-bg"
+            nzBorderless
+          />
+        </div>
+        <div nz-col nzSpan="12" class="ps-1">
+          <input
+            nz-input
+            placeholder="Số điện thoại"
+            [(ngModel)]="customerCareStaff"
+            class="input-bg"
+            type="number"
+            nzBorderless
+          />
+        </div>
+      </div>
+
+      <div nz-row class="mt-2">
+        <input
+          class="w-100"
+          nz-input
+          placeholder="Địa chỉ"
+          [(ngModel)]="customerCareStaff"
+          type="number"
+          class="input-bg"
+          nzBorderless
+          />
+      </div>
+
+      <div nz-row class="mt-2">
+        <div nz-col nzSpan="8" class="pe-1">
+          <input
+            nz-input
+            placeholder="Tỉnh thành phố"
+            [(ngModel)]="customerCareStaff"
+            type="number"
+            class="input-bg"
+            nzBorderless
+          />
+        </div>
+        <div nz-col nzSpan="8" class="ps-1">
+          <input
+            nz-input
+            placeholder="Quận huyện"
+            [(ngModel)]="customerCareStaff"
+            type="number"
+            class="input-bg"
+            nzBorderless
+          />
+        </div>
+        <div nz-col nzSpan="8" class="ps-1">
+          <input
+            nz-input
+            placeholder="Phường xã"
+            [(ngModel)]="customerCareStaff"
+            type="number"
+            class="input-bg"
+            nzBorderless
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white p-3 mt-2 rounded">
+      <div class="d-flex justify-content-between">
+        <span class="fs-6 fw-semibold">Vận chuyển</span>
+        <nz-select
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Đơn vị VC"
+            [(ngModel)]="customerCareStaff"
+          >
+            <nz-option nzLabel="VTP" nzValue="vtp"></nz-option>
+            <nz-option nzLabel="GHTK" nzValue="ghtk"></nz-option>
+            <nz-option nzLabel="GHN" nzValue="ghn"></nz-option>
+          </nz-select>
+      </div>
+
+
+      <div nz-row class="mt-2">
+        <div nz-col nzSpan="12" class="pe-1">
+          <input
+            nz-input
+            placeholder="Mã vận đơn"
+            [(ngModel)]="customerCareStaff"
+            type="number"
+            nzBorderless
+            class="input-bg"
+          />
+        </div>
+        <div nz-col nzSpan="12" class="ps-1">
+          <input
+            nz-input
+            placeholder="Phí vận chuyển"
+            [(ngModel)]="customerCareStaff"
+            type="number"
+            nzBorderless
+            class="input-bg"
+          />
         </div>
       </div>
     </div>

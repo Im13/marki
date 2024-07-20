@@ -13,3 +13,7 @@
 hr.dashed {
   border-top: 1px dashed #bbb;
 }
+
+.input-bg {
+  background-color: #f3f4f8 !important;
+}
