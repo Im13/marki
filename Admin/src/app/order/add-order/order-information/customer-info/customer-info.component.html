@@ -1,0 +1,23 @@
+<p class="fs-6 fw-semibold">Khách hàng</p>
+
+<div nz-row>
+    <div nz-col nzSpan="12" class="pe-1">
+        <input nz-input placeholder="Tên khách hàng" [(ngModel)]="customerName" type="text" class="input-bg"
+            nzBorderless />
+    </div>
+    <div nz-col nzSpan="12" class="ps-1">
+        <input nz-input placeholder="Số điện thoại" [(ngModel)]="customerPhoneNumber" type="text" class="input-bg"
+            nzBorderless />
+    </div>
+</div>
+
+<div nz-row class="mt-2">
+    <div nz-col nzSpan="12" class="pe-1">
+        <input nz-input placeholder="Địa chỉ email" [(ngModel)]="customerEmail" type="text" class="input-bg"
+            nzBorderless />
+    </div>
+    <div nz-col nzSpan="12" class="ps-1">
+        <nz-date-picker class="w-100 input-bg" nzBorderless [(ngModel)]="customerBirthday"
+            (ngModelChange)="onBirthdayChange($event)"></nz-date-picker>
+    </div>
+</div>

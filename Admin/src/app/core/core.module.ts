@@ -46,7 +46,9 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
     NzTypographyModule,
     NzCardModule,
     NzCheckboxModule,
-    NzDatePickerModule
+    NzDatePickerModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     HeaderComponent,
@@ -68,7 +70,9 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
     NzTypographyModule,
     NzCardModule,
     NzCheckboxModule,
-    NzDatePickerModule
+    NzDatePickerModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class CoreModule { }

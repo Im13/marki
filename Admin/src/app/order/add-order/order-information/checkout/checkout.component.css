@@ -1,0 +1,15 @@
+hr.dashed {
+    border-top: 1px dashed #bbb;
+}
+
+.bg-white {
+    background-color: #ffffff;
+}
+
+.input-bg {
+    background-color: #f3f4f8 !important;
+}
+
+.total-info {
+    background-color: #ebecef;
+}

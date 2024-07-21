@@ -1,0 +1,32 @@
+<p class="fs-6 fw-semibold">Nhận hàng</p>
+
+<div nz-row>
+    <div nz-col nzSpan="12" class="pe-1">
+        <input nz-input placeholder="Tên khách hàng" [(ngModel)]="receiverName" type="number" class="input-bg"
+            nzBorderless />
+    </div>
+    <div nz-col nzSpan="12" class="ps-1">
+        <input nz-input placeholder="Số điện thoại" [(ngModel)]="receiverPhoneNumber" class="input-bg" type="number"
+            nzBorderless />
+    </div>
+</div>
+
+<div nz-row class="mt-2">
+    <input class="w-100" nz-input placeholder="Địa chỉ" [(ngModel)]="receiverAddress" type="number" class="input-bg"
+        nzBorderless />
+</div>
+
+<div nz-row class="mt-2">
+    <div nz-col nzSpan="8" class="pe-1">
+        <input nz-input placeholder="Tỉnh thành phố" [(ngModel)]="receiverAddress" type="number" class="input-bg"
+            nzBorderless />
+    </div>
+    <div nz-col nzSpan="8" class="ps-1">
+        <input nz-input placeholder="Quận huyện" [(ngModel)]="receiverAddress" type="number" class="input-bg"
+            nzBorderless />
+    </div>
+    <div nz-col nzSpan="8" class="ps-1">
+        <input nz-input placeholder="Phường xã" [(ngModel)]="receiverAddress" type="number" class="input-bg"
+            nzBorderless />
+    </div>
+</div>

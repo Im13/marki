@@ -1,0 +1,99 @@
+<p class="fs-6 fw-semibold m-0 ps-1">Sản phẩm</p>
+
+      <div class="product-search mt-3">
+        <div nz-row>
+          <div nz-col class="d-flex align-items-center w-100" nzSpan="5">
+            <nz-segmented
+              [nzOptions]="options"
+              (nzValueChange)="handleIndexChange($event)"
+            ></nz-segmented>
+          </div>
+
+          <div nz-col class="d-flex align-items-center" nzSpan="19">
+            <nz-select
+              nzShowSearch
+              nzServerSearch
+              nzPlaceHolder="Nhập mã, tên sản phẩm hoặc barcode"
+              [(ngModel)]="selectedProduct"
+              (ngModelChange)="selectProduct($event)"
+              [nzShowArrow]="false"
+              [nzFilterOption]="nzFilterOption"
+              (nzOnSearch)="search($event)"
+              class="w-100"
+            >
+              <nz-option
+                *ngFor="let p of listFilterSkus"
+                [nzLabel]="p.productName"
+                [nzValue]="p"
+              ></nz-option>
+            </nz-select>
+          </div>
+        </div>
+
+        <div class="selected-product-list mt-3 p-2">
+          <nz-empty
+            *ngIf="listSelectedSkus.length <= 0; else listSelectedProductsBlock"
+            nzNotFoundContent="Giỏ hàng trống"
+          ></nz-empty>
+
+          <ng-template #listSelectedProductsBlock>
+            <div class="product-control d-flex align-items-center" nz-row>
+              <div nz-col nzSpan="5" class="fw-semibold">
+                Số lượng sản phẩm: {{ listSelectedSkus.length }}
+              </div>
+            </div>
+
+            <div class="list-products mt-2 p-1">
+              <div
+                *ngFor="let sku of listSelectedSkus"
+                class="product py-2 bg-white mb-2"
+                nz-row
+              >
+                <div nz-col nzSpan="2" class="d-flex justify-content-center">
+                  <img
+                    *ngIf="sku.imageUrl !== ''; else noImageBlock"
+                    nz-image
+                    width="60px"
+                    height="60px"
+                    [src]="sku.imageUrl"
+                  />
+
+                  <ng-template #noImageBlock>
+                    <img
+                      nz-image
+                      width="60px"
+                      height="60px"
+                      src="../../../../assets/images/no_image.jpg"
+                    />
+                  </ng-template>
+                </div>
+
+                <div
+                  nz-col
+                  nzSpan="22"
+                  class="ps-2 p-1 d-flex flex-column justify-content-between"
+                >
+                  <div class="product-name fw-semibold">
+                    {{ sku.productName }}
+                  </div>
+                  <div class="product-info d-flex justify-content-between mb-1">
+                    <div class="product-sku-name">
+                      <span
+                        class="me-1"
+                        *ngFor="let value of sku.productSKUValues"
+                        >{{ value.optionName }}: {{ value.optionValue }}</span
+                      >
+                      <span class="product-weight" nz-typography
+                        ><strong>{{ sku.weight }}g</strong></span
+                      >
+                    </div>
+                    <div class="product-price m-0" nz-typography>
+                      <strong>{{ sku.price | thousandSeparator }} x 1</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </div>

@@ -16,12 +16,13 @@ export class OrderInformationComponent {
   nzFilterOption = (): boolean => true;
   listFilterSkus: ProductSKUDetails[] = [];
   productParams = new ProductParams();
-  freeShippingChecked = false;
-
+  
   //Checkout variables
+  freeShippingChecked = false;
   shippingFee = 0;
   orderDiscount = 0;
   orderNote = '';
+
   orderCreatedDate = new Date();
   orderCareStaff = null;
   customerCareStaff = null;

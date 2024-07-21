@@ -1,0 +1,120 @@
+<div nz-row>
+    <div class="checkout-info pe-2" nz-col nzSpan="14">
+        <div class="checkout-card bg-white p-3">
+          <p class="fs-6 fw-semibold mb-3">Thanh toán</p>
+          <label class="mb-3" nz-checkbox [(ngModel)]="freeShippingChecked"
+            >Miễn phí giao hàng</label
+          >
+
+          <div nz-row>
+            <div nz-col class="d-flex align-items-center" nzSpan="16">
+              <span>Phí vận chuyển</span>
+            </div>
+            <div nz-col nzSpan="8">
+              <nz-input-group nzSuffix="đ">
+                <input
+                  class="text-end"
+                  [(ngModel)]="shippingFee"
+                  type="text"
+                  nz-input
+                />
+              </nz-input-group>
+            </div>
+          </div>
+
+          <div nz-row class="mt-2">
+            <div nz-col class="d-flex align-items-center" nzSpan="16">
+              <span>Giảm giá đơn hàng</span>
+            </div>
+            <div nz-col nzSpan="8">
+              <nz-input-group nzSuffix="đ">
+                <input
+                  class="text-end"
+                  [(ngModel)]="orderDiscount"
+                  type="text"
+                  nz-input
+                />
+              </nz-input-group>
+            </div>
+          </div>
+
+          <div nz-row class="mt-2">
+            <div nz-col class="d-flex align-items-center" nzSpan="16">
+              <span>Tiền chuyển khoản</span>
+            </div>
+            <div nz-col nzSpan="8">
+              <nz-input-group nzSuffix="đ">
+                <input
+                  class="text-end"
+                  [(ngModel)]="shippingFee"
+                  type="number"
+                  nz-input
+                />
+              </nz-input-group>
+            </div>
+          </div>
+
+          <div nz-row class="mt-2">
+            <div nz-col class="d-flex align-items-center" nzSpan="16">
+              <span>Phụ thu</span>
+            </div>
+            <div nz-col nzSpan="8">
+              <nz-input-group nzSuffix="đ">
+                <input
+                  class="text-end"
+                  [(ngModel)]="shippingFee"
+                  type="number"
+                  nz-input
+                />
+              </nz-input-group>
+            </div>
+          </div>
+
+          <div class="total-info mt-3 p-3 rounded">
+            <div class="d-flex justify-content-between">
+              <span>Tổng số tiền</span>
+              <span class="fw-semibold">90.000đ</span>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <span>Giảm giá</span>
+              <span nz-typography nzType="success" class="fw-semibold"
+                >10.000đ</span
+              >
+            </div>
+
+            <hr class="dashed" />
+
+            <div class="d-flex justify-content-between">
+              <span>Sau giảm giá</span>
+              <span class="fw-semibold">90.000đ</span>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <span>Cần thanh toán</span>
+              <span class="fw-semibold text-primary">90.000đ</span>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <span>Đã thanh toán</span>
+              <span class="fw-semibold">90.000đ</span>
+            </div>
+
+            <hr class="dashed" />
+
+            <div class="d-flex justify-content-between">
+              <span>Còn thiếu</span>
+              <span class="fw-semibold text-danger">90.000đ</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="checkout-info" nz-col nzSpan="10">
+        <div class="checkout-card bg-white p-3">
+          <p class="fs-6 fw-semibold">Ghi chú</p>
+
+          <textarea class="input-bg" nzBorderless rows="4" nz-input [(ngModel)]="orderNote"></textarea>
+        </div>
+      </div>
+</div>

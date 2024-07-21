@@ -13,3 +13,15 @@ nz-content {
 nz-header, nz-layout, nz-content {
   background-color: #ebecef;
 }
+
+.product-weight, .product-price {
+  color: #0f53a4;
+}
+
+.selected-product-list, .total-info {
+  background-color: #ebecef;
+}
+
+.input-bg {
+  background-color: #f3f4f8 !important;
+}
