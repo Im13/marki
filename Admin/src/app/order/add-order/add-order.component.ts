@@ -26,6 +26,25 @@ export class AddOrderComponent implements OnInit {
         orderCreatedDate: this.formBuilder.control('', [Validators.required]),
         orderCareStaff: this.formBuilder.control('', [Validators.required]),
         customerCareStaff: this.formBuilder.control('', [Validators.required])
+      }),
+      customerInfo: this.formBuilder.group({
+        customerName: this.formBuilder.control('', [Validators.required]),
+        customerPhoneNumber: this.formBuilder.control('', [Validators.required]),
+        customerEmailAddress: this.formBuilder.control('', [Validators.required]),
+        customerDOB: this.formBuilder.control('', [Validators.required])
+      }),
+      receiverInfo: this.formBuilder.group({
+        receiverName: this.formBuilder.control('', [Validators.required]),
+        receiverPhoneNumber: this.formBuilder.control('', [Validators.required]),
+        receiverAddress: this.formBuilder.control('', [Validators.required]),
+        provinceId: this.formBuilder.control('', [Validators.required]),
+        districtId: this.formBuilder.control('', [Validators.required]),
+        wardId: this.formBuilder.control('', [Validators.required])
+      }),
+      deliveryService: this.formBuilder.group({
+        deliveryCompanyId: this.formBuilder.control('', [Validators.required]),
+        shipmentCode: this.formBuilder.control('', [Validators.required]),
+        shipmentCost: this.formBuilder.control('', [Validators.required]),
       })
     });
   }
@@ -33,14 +52,4 @@ export class AddOrderComponent implements OnInit {
   submitForm() {
     console.log(this.addOrderForm.value);
   }
-
-  closeTab({ index }: { index: number }): void {
-    this.tabs.splice(index, 1);
-  }
-
-  newTab(): void {
-    this.tabs.push('New Tab');
-    this.selectedIndex = this.tabs.length;
-  }
-
 }

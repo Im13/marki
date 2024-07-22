@@ -13,7 +13,7 @@
 
     <nz-content>
       <div nz-row>
-        <div class="p-2" nz-col nzSpan="15">
+        <div class="px-2" nz-col nzSpan="15">
           <div class="product-section bg-white p-3">
             <app-product-skus></app-product-skus>
           </div>
@@ -23,33 +23,32 @@
           </div>
         </div>
 
-        <div nz-col nzSpan="9" class="p-2">
+        <div nz-col nzSpan="9" class="px-2">
           <div class="bg-white p-3 rounded">
             <app-information formGroupName="information"></app-information>
           </div>
 
           <div class="bg-white p-3 rounded mt-2">
-            <app-customer-info></app-customer-info>
+            <app-customer-info formGroupName="customerInfo"></app-customer-info>
           </div>
 
           <div class="bg-white p-3 rounded mt-2">
-            <app-receiver></app-receiver>
+            <app-receiver formGroupName="receiverInfo"></app-receiver>
           </div>
 
           <div class="bg-white p-3 rounded mt-2">
-            <app-delivery></app-delivery>
+            <app-delivery formGroupName="deliveryService"></app-delivery>
           </div>
         </div>
       </div>
     </nz-content>
 
-    <nz-footer class="border p-2 d-flex flex-row-reverse px-3">
+    <nz-footer class="border py-1 px-3 d-flex flex-row-reverse">
       <button
         nz-button
         nzType="primary"
         nzSize="large"
         class="d-flex align-items-center"
-
       >
         <span nz-icon nzType="save"></span>
         Lưu
