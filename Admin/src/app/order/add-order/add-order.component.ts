@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-order',
@@ -15,10 +15,23 @@ export class AddOrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.addOrderForm = this.formBuilder.group({
-      skus: this.formBuilder.group({
-        
+      checkout: this.formBuilder.group({
+        shippingFee: this.formBuilder.control('', [Validators.required]),
+        orderDiscount: this.formBuilder.control('', [Validators.required]),
+        bankTranferedAmount: this.formBuilder.control('', [Validators.required]),
+        extraFee: this.formBuilder.control('', [Validators.required]),
+        orderNote: this.formBuilder.control('')
+      }),
+      information: this.formBuilder.group({
+        orderCreatedDate: this.formBuilder.control('', [Validators.required]),
+        orderCareStaff: this.formBuilder.control('', [Validators.required]),
+        customerCareStaff: this.formBuilder.control('', [Validators.required])
       })
     });
+  }
+
+  submitForm() {
+    console.log(this.addOrderForm.value);
   }
 
   closeTab({ index }: { index: number }): void {

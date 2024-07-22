@@ -1,48 +1,59 @@
-<form [formGroup]="addOrderForm"></form>
-<nz-layout>
-  <nz-header class="d-flex align-items-center px-2">
-    <button nz-button nzType="default" nz-value="large" class="d-flex align-items-center">
-      Đơn mới
-    </button>
-  </nz-header>
+<form [formGroup]="addOrderForm" class="h-100" (ngSubmit)="submitForm()">
+  <nz-layout>
+    <nz-header class="d-flex align-items-center px-2">
+      <button
+        nz-button
+        nzType="default"
+        nz-value="large"
+        class="d-flex align-items-center"
+      >
+        Đơn mới
+      </button>
+    </nz-header>
 
-  <nz-content>
-    <div nz-row class="border border-primary">
-      <div class="border p-2" nz-col nzSpan="15">
-        <div class="product-section bg-white p-3">
-          <app-product-skus></app-product-skus>
+    <nz-content>
+      <div nz-row>
+        <div class="p-2" nz-col nzSpan="15">
+          <div class="product-section bg-white p-3">
+            <app-product-skus></app-product-skus>
+          </div>
+
+          <div class="checkout mt-2">
+            <app-checkout formGroupName="checkout"></app-checkout>
+          </div>
         </div>
 
-        <div class="checkout mt-3">
-          <app-checkout></app-checkout>
+        <div nz-col nzSpan="9" class="p-2">
+          <div class="bg-white p-3 rounded">
+            <app-information formGroupName="information"></app-information>
+          </div>
+
+          <div class="bg-white p-3 rounded mt-2">
+            <app-customer-info></app-customer-info>
+          </div>
+
+          <div class="bg-white p-3 rounded mt-2">
+            <app-receiver></app-receiver>
+          </div>
+
+          <div class="bg-white p-3 rounded mt-2">
+            <app-delivery></app-delivery>
+          </div>
         </div>
       </div>
+    </nz-content>
 
-      <div nz-col nzSpan="9" class="border p-2">
-        <div class="bg-white p-3 rounded">
-          <app-information></app-information>
-        </div>
+    <nz-footer class="border p-2 d-flex flex-row-reverse px-3">
+      <button
+        nz-button
+        nzType="primary"
+        nzSize="large"
+        class="d-flex align-items-center"
 
-        <div class="bg-white p-3 rounded mt-2">
-          <app-customer-info></app-customer-info>
-        </div>
-
-        <div class="bg-white p-3 rounded mt-2">
-          <app-receiver></app-receiver>
-        </div>
-
-        <div class="bg-white p-3 rounded mt-2">
-          <app-delivery></app-delivery>
-        </div>
-      </div>
-    </div>
-    <!-- <app-order-information></app-order-information> -->
-  </nz-content>
-
-  <nz-footer class="border p-2 d-flex flex-row-reverse px-3">
-    <button nz-button nzType="primary" nzSize="large" class="d-flex align-items-center">
-      <span nz-icon nzType="save"></span>
-      Lưu
-    </button>
-  </nz-footer>
-</nz-layout>
+      >
+        <span nz-icon nzType="save"></span>
+        Lưu
+      </button>
+    </nz-footer>
+  </nz-layout>
+</form>

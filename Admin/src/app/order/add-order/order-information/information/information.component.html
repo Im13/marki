@@ -1,54 +1,56 @@
-<p class="fs-6 fw-semibold">Thông tin</p>
+<div [formGroup]="infoForm">
+  <p class="fs-6 fw-semibold">Thông tin</p>
 
-      <div nz-row>
-        <div nz-col nzSpan="16" class="d-flex align-items-center">
-          <span>Tạo lúc</span>
-        </div>
-        <div nz-col class="d-flex justify-content-end" nzSpan="8">
-          <nz-date-picker
-            class="w-100"
-            nzShowTime
-            [(ngModel)]="orderCreatedDate"
-            nzPlaceHolder="Chọn thời điểm"
-            (ngModelChange)="onDateChange($event)"
-          ></nz-date-picker>
-        </div>
-      </div>
+  <div nz-row>
+    <div nz-col nzSpan="16" class="d-flex align-items-center">
+      <span>Tạo lúc</span>
+    </div>
+    <div nz-col class="d-flex justify-content-end" nzSpan="8">
+      <nz-date-picker
+        class="w-100"
+        nzShowTime
+        formControlName="orderCreatedDate"
+        nzPlaceHolder="Chọn thời điểm"
+        (ngModelChange)="onDateChange($event)"
+      ></nz-date-picker>
+    </div>
+  </div>
 
-      <div nz-row class="mt-2">
-        <div nz-col nzSpan="16" class="d-flex align-items-center">
-          <span>NV xử lý</span>
-        </div>
-        <div nz-col class="d-flex justify-content-end" nzSpan="8">
-          <nz-select
-            class="w-100"
-            nzShowSearch
-            nzAllowClear
-            nzPlaceHolder="Chọn NV xử lý"
-            [(ngModel)]="orderCareStaff"
-          >
-            <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-            <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-          </nz-select>
-        </div>
-      </div>
+  <div nz-row class="mt-2">
+    <div nz-col nzSpan="16" class="d-flex align-items-center">
+      <span>NV xử lý</span>
+    </div>
+    <div nz-col class="d-flex justify-content-end" nzSpan="8">
+      <nz-select
+        class="w-100"
+        nzShowSearch
+        nzAllowClear
+        nzPlaceHolder="Chọn NV xử lý"
+        formControlName="orderCareStaff"
+      >
+        <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+        <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+        <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+      </nz-select>
+    </div>
+  </div>
 
-      <div nz-row class="mt-2">
-        <div nz-col nzSpan="16" class="d-flex align-items-center">
-          <span>NV chăm sóc</span>
-        </div>
-        <div nz-col class="d-flex justify-content-end" nzSpan="8">
-          <nz-select
-            class="w-100"
-            nzShowSearch
-            nzAllowClear
-            nzPlaceHolder="Chọn NV chăm sóc"
-            [(ngModel)]="customerCareStaff"
-          >
-            <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-            <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-          </nz-select>
-        </div>
-      </div>
+  <div nz-row class="mt-2">
+    <div nz-col nzSpan="16" class="d-flex align-items-center">
+      <span>NV chăm sóc</span>
+    </div>
+    <div nz-col class="d-flex justify-content-end" nzSpan="8">
+      <nz-select
+        class="w-100"
+        nzShowSearch
+        nzAllowClear
+        nzPlaceHolder="Chọn NV chăm sóc"
+        formControlName="customerCareStaff"
+      >
+        <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+        <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+        <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+      </nz-select>
+    </div>
+  </div>
+</div>
