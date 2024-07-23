@@ -1,10 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
-  ControlValueAccessor,
-  FormControl,
   FormGroup,
   FormGroupDirective,
-  Validators,
 } from '@angular/forms';
 
 @Component({
@@ -13,11 +10,14 @@ import {
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
+  @Input() totalSKUsPrice!: number;
   checkoutForm!: FormGroup;
+  orderTotal: number;
 
   constructor(private rootFormGroup: FormGroupDirective) {}
 
   ngOnInit(): void {
+    this.orderTotal = this.totalSKUsPrice;
     this.checkoutForm = this.rootFormGroup.control.get('checkout') as FormGroup;
 
     this.checkoutForm.setValue({
@@ -28,4 +28,6 @@ export class CheckoutComponent implements OnInit {
       orderNote: ''
     });
   }
+
+  
 }

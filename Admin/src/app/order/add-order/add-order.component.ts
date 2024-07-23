@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ProductSKUDetails } from 'src/app/shared/models/productSKUDetails';
 
 @Component({
   selector: 'app-add-order',
@@ -7,9 +8,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./add-order.component.css']
 })
 export class AddOrderComponent implements OnInit {
-  tabs = ['Tab 1', 'Tab 2'];
-  selectedIndex = 0;
   addOrderForm: FormGroup;
+  listSkus: ProductSKUDetails[] = [];
+  totalSKUsPrice = 0;
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -43,13 +44,24 @@ export class AddOrderComponent implements OnInit {
       }),
       deliveryService: this.formBuilder.group({
         deliveryCompanyId: this.formBuilder.control('', [Validators.required]),
-        shipmentCode: this.formBuilder.control('', [Validators.required]),
-        shipmentCost: this.formBuilder.control('', [Validators.required]),
+        shipmentCode: this.formBuilder.control({value: '', disabled: true}, [Validators.required]),
+        shipmentCost: this.formBuilder.control({value: '', disabled: true}, [Validators.required]),
       })
     });
   }
 
   submitForm() {
+    console.log(this.listSkus);
     console.log(this.addOrderForm.value);
+  }
+
+  handleSelectEvent(productSKUDetails: ProductSKUDetails[]){
+    this.listSkus = productSKUDetails;
+
+    this.listSkus.forEach(sku => {
+      this.totalSKUsPrice += sku.price;
+    });
+
+    console.log(this.totalSKUsPrice);
   }
 }

@@ -15,11 +15,11 @@
       <div nz-row>
         <div class="px-2" nz-col nzSpan="15">
           <div class="product-section bg-white p-3">
-            <app-product-skus></app-product-skus>
+            <app-product-skus [listSkus]="listSkus" (selectProductSkus)="handleSelectEvent($event)"></app-product-skus>
           </div>
 
           <div class="checkout mt-2">
-            <app-checkout formGroupName="checkout"></app-checkout>
+            <app-checkout formGroupName="checkout" [totalSKUsPrice]="totalSKUsPrice"></app-checkout>
           </div>
         </div>
 

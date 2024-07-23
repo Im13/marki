@@ -32,20 +32,20 @@
 
   <div class="selected-product-list mt-3 p-2">
     <nz-empty
-      *ngIf="listSelectedSkus.length <= 0; else listSelectedProductsBlock"
+      *ngIf="listSkus.length <= 0; else listSelectedProductsBlock"
       nzNotFoundContent="Giỏ hàng trống"
     ></nz-empty>
 
     <ng-template #listSelectedProductsBlock>
       <div class="product-control d-flex align-items-center" nz-row>
         <div nz-col nzSpan="5" class="fw-semibold">
-          Số lượng sản phẩm: {{ listSelectedSkus.length }}
+          Số lượng sản phẩm: {{ listSkus.length }}
         </div>
       </div>
 
       <div class="list-products mt-2 p-1">
         <div
-          *ngFor="let sku of listSelectedSkus"
+          *ngFor="let sku of listSkus"
           class="product py-2 bg-white mb-2"
           nz-row
         >

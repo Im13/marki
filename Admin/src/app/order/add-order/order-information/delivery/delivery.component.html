@@ -1,37 +1,35 @@
-<div class="d-flex justify-content-between">
+<div [formGroup]="deliveryForm">
+  <div class="d-flex justify-content-between">
     <span class="fs-6 fw-semibold">Vận chuyển</span>
     <nz-select
-        nzShowSearch
-        nzAllowClear
-        nzPlaceHolder="Đơn vị VC"
-        [(ngModel)]="deliveryCompany"
-      >
-        <nz-option nzLabel="VTP" nzValue="vtp"></nz-option>
-        <nz-option nzLabel="GHTK" nzValue="ghtk"></nz-option>
-        <nz-option nzLabel="GHN" nzValue="ghn"></nz-option>
-      </nz-select>
+      nzShowSearch
+      nzAllowClear
+      nzPlaceHolder="Đơn vị VC"
+      formControlName="deliveryCompanyId"
+    >
+      <nz-option nzLabel="VTP" nzValue="vtp"></nz-option>
+    </nz-select>
   </div>
-
 
   <div nz-row class="mt-2">
     <div nz-col nzSpan="12" class="pe-1">
       <input
         nz-input
         placeholder="Mã vận đơn"
-        [(ngModel)]="shipmentCode"
-        type="number"
-        nzBorderless
+        formControlName="shipmentCode"
+        type="text"
         class="input-bg"
       />
     </div>
     <div nz-col nzSpan="12" class="ps-1">
-      <input
-        nz-input
-        placeholder="Phí vận chuyển"
-        [(ngModel)]="shipmentCost"
-        type="number"
-        nzBorderless
-        class="input-bg"
-      />
+      <nz-input-group nzAddOnBefore="Phí">
+        <input
+          nz-input
+          placeholder="Phí vận chuyển"
+          formControlName="shipmentCost"
+          type="number"
+        />
+      </nz-input-group>
     </div>
   </div>
+</div>

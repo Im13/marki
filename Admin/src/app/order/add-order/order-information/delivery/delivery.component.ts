@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormGroupDirective } from '@angular/forms';
 
 @Component({
   selector: 'app-delivery',
@@ -6,7 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./delivery.component.css']
 })
 export class DeliveryComponent {
-  deliveryCompany: string;
-  shipmentCode: string;
-  shipmentCost: string;
+  deliveryForm!: FormGroup;
+
+  constructor(private rootFormGroup: FormGroupDirective) {}
+
+  ngOnInit(): void {
+    this.deliveryForm = this.rootFormGroup.control.get('deliveryService') as FormGroup;
+
+    this.deliveryForm.setValue({
+      deliveryCompanyId: '',
+      shipmentCode: '',
+      shipmentCost: ''
+    });
+  }
 }
