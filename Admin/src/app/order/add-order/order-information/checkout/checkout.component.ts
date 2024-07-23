@@ -1,16 +1,15 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import {
-  FormGroup,
-  FormGroupDirective,
-} from '@angular/forms';
+import { Component, ElementRef, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { FormGroup, FormGroupDirective } from '@angular/forms';
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.css']
+  styleUrls: ['./checkout.component.css'],
 })
 export class CheckoutComponent implements OnInit {
   @Input() totalSKUsPrice!: number;
+  @ViewChild('discount') discount: ElementRef;
+
   checkoutForm!: FormGroup;
   orderTotal: number;
   shippingFee = 0;
@@ -35,7 +34,7 @@ export class CheckoutComponent implements OnInit {
       orderDiscount: 0,
       bankTranferedAmount: 0,
       extraFee: 0,
-      orderNote: ''
+      orderNote: '',
     });
   }
 
@@ -44,10 +43,10 @@ export class CheckoutComponent implements OnInit {
   }
 
   onFeesChange() {
-    this.shippingFee = this.checkoutForm.value.shippingFee;
-    this.orderDiscount = this.checkoutForm.value.orderDiscount;
-    this.bankTranferedAmount = this.checkoutForm.value.bankTranferedAmount;
-    this.extraFee = this.checkoutForm.value.extraFee;
+    this.shippingFee = +this.checkoutForm.value.shippingFee;
+    this.orderDiscount = +this.checkoutForm.value.orderDiscount;
+    this.bankTranferedAmount = +this.checkoutForm.value.bankTranferedAmount;
+    this.extraFee = +this.checkoutForm.value.extraFee;
     this.calculateOrderTotal();
   }
 
@@ -57,18 +56,34 @@ export class CheckoutComponent implements OnInit {
     this.total = this.afterDiscount - this.bankTranferedAmount;
   }
 
+  // This will be called everytime form's freeshipChecked perform check
   onFreeshipChecked() {
-    this.shippingFee = 0;
-    if(this.checkoutForm.value.freeshipChecked === true) {
-      this.checkoutForm.patchValue({shippingFee: 0})
+    if (this.checkoutForm.value.freeshipChecked === true) {
+      this.checkoutForm.patchValue({
+        shippingFee: 0,
+      });
+
+      this.shippingFee = this.checkoutForm.value.shippingFee;
     }
+
     this.calculateOrderTotal();
   }
 
   onShippingFeesChange() {
-    console.log(this.checkoutForm)
-    // this.checkoutForm.patchValue({freeshipChecked: false});
+    var currentShippingFee = this.checkoutForm.value.shippingFee;
 
-    // this.onFeesChange();
+    // When freeshipChecked changed to false, onFreeshipChecked method will be automatically called
+    this.checkoutForm.patchValue({
+      freeshipChecked: false,
+      shippingFee: currentShippingFee
+    });
+
+    this.onFeesChange();
+  }
+
+  handleKeydown(event: any) {
+    if (event.key == 'Enter') {
+      this.discount.nativeElement.focus();
+    }
   }
 }

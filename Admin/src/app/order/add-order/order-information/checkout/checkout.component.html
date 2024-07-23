@@ -11,7 +11,7 @@
           </div>
           <div nz-col nzSpan="8">
             <nz-input-group nzSuffix="đ">
-              <input class="text-end" formControlName="shippingFee" type="number" nz-input (change)="onShippingFeesChange()" />
+              <input class="text-end" (keydown)="handleKeydown($event)" formControlName="shippingFee" type="number" nz-input (change)="onShippingFeesChange()" />
             </nz-input-group>
           </div>
         </div>
@@ -22,7 +22,7 @@
           </div>
           <div nz-col nzSpan="8">
             <nz-input-group nzSuffix="đ">
-              <input class="text-end" formControlName="orderDiscount" type="number" nz-input
+              <input #discount class="text-end" formControlName="orderDiscount" type="number" nz-input
                 (change)="onFeesChange()" />
             </nz-input-group>
           </div>
