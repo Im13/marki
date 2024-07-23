@@ -3,9 +3,7 @@
     <div class="checkout-info pe-2" nz-col nzSpan="14">
       <div class="checkout-card bg-white p-3">
         <p class="fs-6 fw-semibold mb-3">Thanh toán</p>
-        <label class="mb-3" nz-checkbox
-          >Miễn phí giao hàng</label
-        >
+        <label class="mb-3" formControlName="freeshipChecked" (ngModelChange)="onFreeshipChecked()" nz-checkbox>Miễn phí giao hàng</label>
 
         <div nz-row>
           <div nz-col class="d-flex align-items-center" nzSpan="16">
@@ -13,12 +11,7 @@
           </div>
           <div nz-col nzSpan="8">
             <nz-input-group nzSuffix="đ">
-              <input
-                class="text-end"
-                formControlName="shippingFee"
-                type="text"
-                nz-input
-              />
+              <input class="text-end" formControlName="shippingFee" type="number" nz-input (change)="onShippingFeesChange()" />
             </nz-input-group>
           </div>
         </div>
@@ -29,12 +22,8 @@
           </div>
           <div nz-col nzSpan="8">
             <nz-input-group nzSuffix="đ">
-              <input
-                class="text-end"
-                formControlName="orderDiscount"
-                type="text"
-                nz-input
-              />
+              <input class="text-end" formControlName="orderDiscount" type="number" nz-input
+                (change)="onFeesChange()" />
             </nz-input-group>
           </div>
         </div>
@@ -45,7 +34,7 @@
           </div>
           <div nz-col nzSpan="8">
             <nz-input-group nzSuffix="đ">
-              <input class="text-end" formControlName="bankTranferedAmount" type="number" nz-input />
+              <input class="text-end" formControlName="bankTranferedAmount" type="number" nz-input (change)="onFeesChange()"/>
             </nz-input-group>
           </div>
         </div>
@@ -56,7 +45,7 @@
           </div>
           <div nz-col nzSpan="8">
             <nz-input-group nzSuffix="đ">
-              <input class="text-end" formControlName="extraFee" type="number" nz-input />
+              <input class="text-end" formControlName="extraFee" type="number" nz-input (change)="onFeesChange()"/>
             </nz-input-group>
           </div>
         </div>
@@ -64,38 +53,36 @@
         <div class="total-info mt-3 p-3 rounded">
           <div class="d-flex justify-content-between">
             <span>Tổng số tiền</span>
-            <span class="fw-semibold">{{ orderTotal }}đ</span>
+            <span class="fw-semibold">{{ orderTotal | thousandSeparator }}đ</span>
           </div>
 
-          <div class="d-flex justify-content-between">
+          <div class="d-flex justify-content-between mt-1">
             <span>Giảm giá</span>
-            <span nz-typography nzType="success" class="fw-semibold"
-              >10.000đ</span
-            >
+            <span nz-typography nzType="success" class="fw-semibold">{{ orderDiscount | thousandSeparator }}đ</span>
           </div>
 
           <hr class="dashed" />
 
           <div class="d-flex justify-content-between">
             <span>Sau giảm giá</span>
-            <span class="fw-semibold">{{ orderTotal }}đ</span>
+            <span class="fw-semibold">{{ afterDiscount | thousandSeparator }}đ</span>
           </div>
 
-          <div class="d-flex justify-content-between">
+          <div class="d-flex justify-content-between mt-1">
             <span>Cần thanh toán</span>
-            <span class="fw-semibold text-primary">90.000đ</span>
+            <span class="fw-semibold text-primary">{{ afterDiscount | thousandSeparator }}đ</span>
           </div>
 
-          <div class="d-flex justify-content-between">
+          <div class="d-flex justify-content-between mt-1">
             <span>Đã thanh toán</span>
-            <span class="fw-semibold">90.000đ</span>
+            <span class="fw-semibold">{{ bankTranferedAmount | thousandSeparator }}đ</span>
           </div>
 
           <hr class="dashed" />
 
-          <div class="d-flex justify-content-between">
+          <div class="d-flex justify-content-between mt-1">
             <span>Còn thiếu</span>
-            <span class="fw-semibold text-danger">90.000đ</span>
+            <span class="fw-semibold text-danger">{{ total | thousandSeparator }}đ</span>
           </div>
         </div>
       </div>
@@ -105,13 +92,7 @@
       <div class="checkout-card bg-white p-3">
         <p class="fs-6 fw-semibold">Ghi chú</p>
 
-        <textarea
-          class="input-bg"
-          nzBorderless
-          rows="4"
-          nz-input
-          formControlName="orderNote"
-        ></textarea>
+        <textarea class="input-bg" nzBorderless rows="4" nz-input formControlName="orderNote"></textarea>
       </div>
     </div>
   </div>

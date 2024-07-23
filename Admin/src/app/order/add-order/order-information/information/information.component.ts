@@ -24,6 +24,5 @@ export class InformationComponent implements OnInit {
   }
 
   onDateChange(result: Date) {
-    console.log('onChange: ', result);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import {
   FormGroup,
   FormGroupDirective,
@@ -13,6 +13,15 @@ export class CheckoutComponent implements OnInit {
   @Input() totalSKUsPrice!: number;
   checkoutForm!: FormGroup;
   orderTotal: number;
+  shippingFee = 0;
+  orderDiscount = 0;
+  bankTranferedAmount = 0;
+  extraFee = 0;
+  freeshipChecked = false;
+
+  //After caculated variables
+  afterDiscount = 0;
+  total = 0;
 
   constructor(private rootFormGroup: FormGroupDirective) {}
 
@@ -21,6 +30,7 @@ export class CheckoutComponent implements OnInit {
     this.checkoutForm = this.rootFormGroup.control.get('checkout') as FormGroup;
 
     this.checkoutForm.setValue({
+      freeshipChecked: false,
       shippingFee: 0,
       orderDiscount: 0,
       bankTranferedAmount: 0,
@@ -29,5 +39,36 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
-  
+  ngOnChanges(): void {
+    this.calculateOrderTotal();
+  }
+
+  onFeesChange() {
+    this.shippingFee = this.checkoutForm.value.shippingFee;
+    this.orderDiscount = this.checkoutForm.value.orderDiscount;
+    this.bankTranferedAmount = this.checkoutForm.value.bankTranferedAmount;
+    this.extraFee = this.checkoutForm.value.extraFee;
+    this.calculateOrderTotal();
+  }
+
+  calculateOrderTotal() {
+    this.orderTotal = this.totalSKUsPrice + this.shippingFee + this.extraFee;
+    this.afterDiscount = this.orderTotal - this.orderDiscount;
+    this.total = this.afterDiscount - this.bankTranferedAmount;
+  }
+
+  onFreeshipChecked() {
+    this.shippingFee = 0;
+    if(this.checkoutForm.value.freeshipChecked === true) {
+      this.checkoutForm.patchValue({shippingFee: 0})
+    }
+    this.calculateOrderTotal();
+  }
+
+  onShippingFeesChange() {
+    console.log(this.checkoutForm)
+    // this.checkoutForm.patchValue({freeshipChecked: false});
+
+    // this.onFeesChange();
+  }
 }

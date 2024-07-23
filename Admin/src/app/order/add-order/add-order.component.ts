@@ -17,6 +17,7 @@ export class AddOrderComponent implements OnInit {
   ngOnInit(): void {
     this.addOrderForm = this.formBuilder.group({
       checkout: this.formBuilder.group({
+        freeshipChecked: this.formBuilder.control(false),
         shippingFee: this.formBuilder.control('', [Validators.required]),
         orderDiscount: this.formBuilder.control('', [Validators.required]),
         bankTranferedAmount: this.formBuilder.control('', [Validators.required]),
@@ -57,11 +58,10 @@ export class AddOrderComponent implements OnInit {
 
   handleSelectEvent(productSKUDetails: ProductSKUDetails[]){
     this.listSkus = productSKUDetails;
+    this.totalSKUsPrice = 0;
 
     this.listSkus.forEach(sku => {
       this.totalSKUsPrice += sku.price;
     });
-
-    console.log(this.totalSKUsPrice);
   }
 }
