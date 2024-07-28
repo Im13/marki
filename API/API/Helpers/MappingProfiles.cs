@@ -1,4 +1,5 @@
 using API.DTOs;
+using API.DTOs.AdminOrder;
 using API.DTOs.Product;
 using API.DTOs.Shopee;
 using AutoMapper;
@@ -27,6 +28,14 @@ namespace API.Helpers
                 .ForMember(d => d.ProductName, o => o.MapFrom(s => s.ItemOrdered.ProductName))
                 .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.ItemOrdered.PictureUrl))
                 .ForMember(d => d.PictureUrl, o => o.MapFrom<OrderItemUrlResolver>());
+
+            //Offline order
+            CreateMap<OfflineOrder, OfflineOrderDTO>();
+            CreateMap<OfflineOrderDTO, OfflineOrder>();
+            CreateMap<Customer, CustomerDTO>();
+            CreateMap<CustomerDTO, Customer>();
+            CreateMap<OfflineOrderSKUDTOs, OfflineOrderSKUs>();
+            CreateMap<OfflineOrderSKUs, OfflineOrderSKUDTOs>();
 
             CreateMap<ProductDTOs, Product>();
             CreateMap<Product, ProductDTOs>();

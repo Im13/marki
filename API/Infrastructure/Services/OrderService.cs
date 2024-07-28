@@ -77,5 +77,18 @@ namespace Infrastructure.Services
 
             return await _unitOfWork.Repository<Order>().ListAsync(spec);
         }
+
+        public async Task<OfflineOrder> CreateOfflineOrder(OfflineOrder order)
+        {
+            if(order.Id != 0) return null;
+
+            _unitOfWork.Repository<OfflineOrder>().Add(order);
+
+            var saveOrderResult = await _unitOfWork.Complete(); 
+
+            if (saveOrderResult <= 0) return null;
+
+            return order;
+        }
     }
 }

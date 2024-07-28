@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Customer } from 'src/app/shared/models/cutomer';
+import { Order } from 'src/app/shared/models/order';
 import { ProductSKUDetails } from 'src/app/shared/models/productSKUDetails';
 
 @Component({
@@ -11,6 +13,8 @@ export class AddOrderComponent implements OnInit {
   addOrderForm: FormGroup;
   listSkus: ProductSKUDetails[] = [];
   totalSKUsPrice = 0;
+  order: Order = new Order();
+  customer: Customer = new Customer();
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -52,8 +56,30 @@ export class AddOrderComponent implements OnInit {
   }
 
   submitForm() {
-    console.log(this.listSkus);
-    console.log(this.addOrderForm.value);
+    this.order.address = this.addOrderForm.controls['receiverInfo'].value.receiverAddress;
+    this.order.provinceId = this.addOrderForm.controls['receiverInfo'].value.provinceId;
+    this.order.districtId = this.addOrderForm.controls['receiverInfo'].value.districtId;
+    this.order.wardId = this.addOrderForm.controls['receiverInfo'].value.wardId;
+    this.order.receiverName = this.addOrderForm.controls['receiverInfo'].value.receiverName;
+    this.order.receiverPhoneNumber = this.addOrderForm.controls['receiverInfo'].value.receiverPhoneNumber;
+
+    this.order.shippingFee = this.addOrderForm.controls['checkout'].value.shippingFee;
+    this.order.orderDiscount = this.addOrderForm.controls['checkout'].value.orderDiscount;
+    this.order.bankTransferedAmount = this.addOrderForm.controls['checkout'].value.bankTranferedAmount;
+    this.order.extraFee = this.addOrderForm.controls['checkout'].value.extraFee;
+    this.order.orderNote = this.addOrderForm.controls['checkout'].value.orderNote;
+
+    this.order.dateCreated = this.addOrderForm.controls['information'].value.orderCreatedDate;
+    this.order.orderCareStaffId = this.addOrderForm.controls['information'].value.orderCareStaff;
+    this.order.customerCareStaffId = this.addOrderForm.controls['information'].value.customerCareStaff;
+
+    this.customer.name = this.addOrderForm.controls['customerInfo'].value.customerName;
+    this.customer.phoneNumber = this.addOrderForm.controls['customerInfo'].value.customerPhoneNumber;
+    this.customer.emailAddress = this.addOrderForm.controls['customerInfo'].value.customerEmailAddress;
+    this.customer.dob = this.addOrderForm.controls['customerInfo'].value.customerDOB;
+    this.order.customer = this.customer;
+
+    this.order.skus = this.listSkus;
   }
 
   handleSelectEvent(productSKUDetails: ProductSKUDetails[]){

@@ -28,6 +28,10 @@ namespace Infrastructure.Data
         public DbSet<ProductSKUs> ProductSKUs { get; set; }
         public DbSet<ProductSKUValues> ProductSKUValues { get; set; }
         public DbSet<Photo> Photos { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<OfflineOrder> OfflineOrders { get; set; }
+        public DbSet<OfflineOrderSKUs> OfflineOrderSKUs { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
