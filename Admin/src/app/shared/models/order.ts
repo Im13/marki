@@ -1,5 +1,5 @@
 import { Customer } from "./cutomer";
-import { ProductSKUDetails } from "./productSKUDetails";
+import { OrderSKUItems } from "./orderSKUItems";
 
 export class Order {
   shippingFee: number;
@@ -17,5 +17,5 @@ export class Order {
   districtId: number;
   provinceId: number;
   wardId: number;
-  offlineOrderSKUs: ProductSKUDetails[];
+  offlineOrderSKUs: OrderSKUItems[];
 }

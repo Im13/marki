@@ -14,7 +14,7 @@ export class CheckoutComponent implements OnInit {
   orderTotal: number;
   shippingFee = 0;
   orderDiscount = 0;
-  bankTranferedAmount = 0;
+  bankTransferedAmount = 0;
   extraFee = 0;
   freeshipChecked = false;
 
@@ -32,7 +32,7 @@ export class CheckoutComponent implements OnInit {
       freeshipChecked: false,
       shippingFee: 0,
       orderDiscount: 0,
-      bankTranferedAmount: 0,
+      bankTransferedAmount: 0,
       extraFee: 0,
       orderNote: '',
     });
@@ -45,7 +45,7 @@ export class CheckoutComponent implements OnInit {
   onFeesChange() {
     this.shippingFee = +this.checkoutForm.value.shippingFee;
     this.orderDiscount = +this.checkoutForm.value.orderDiscount;
-    this.bankTranferedAmount = +this.checkoutForm.value.bankTranferedAmount;
+    this.bankTransferedAmount = +this.checkoutForm.value.bankTransferedAmount;
     this.extraFee = +this.checkoutForm.value.extraFee;
     this.calculateOrderTotal();
   }
@@ -53,7 +53,7 @@ export class CheckoutComponent implements OnInit {
   calculateOrderTotal() {
     this.orderTotal = this.totalSKUsPrice + this.shippingFee + this.extraFee;
     this.afterDiscount = this.orderTotal - this.orderDiscount;
-    this.total = this.afterDiscount - this.bankTranferedAmount;
+    this.total = this.afterDiscount - this.bankTransferedAmount;
   }
 
   // This will be called everytime form's freeshipChecked perform check

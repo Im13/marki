@@ -5,7 +5,7 @@ namespace Core.Entities.OrderAggregate
         public ICollection<OfflineOrderSKUs> OfflineOrderSKUs { get; set; }
         public decimal ShippingFee { get; set; }
         public decimal OrderDiscount { get; set; }
-        public decimal BankTranferedAmount { get; set; }
+        public decimal BankTransferedAmount { get; set; }
         public decimal ExtraFee { get; set; }
         public string OrderNote { get; set; }
         public DateTime DateCreated { get; set; }

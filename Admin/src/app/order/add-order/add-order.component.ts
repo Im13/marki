@@ -4,6 +4,8 @@ import { Customer } from 'src/app/shared/models/cutomer';
 import { Order } from 'src/app/shared/models/order';
 import { ProductSKUDetails } from 'src/app/shared/models/productSKUDetails';
 import { OrderService } from '../order.service';
+import { OrderSKUItems } from 'src/app/shared/models/orderSKUItems';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-order',
@@ -16,8 +18,9 @@ export class AddOrderComponent implements OnInit {
   totalSKUsPrice = 0;
   order: Order = new Order();
   customer: Customer = new Customer();
+  skuItems: OrderSKUItems[] = [];
 
-  constructor(private formBuilder: FormBuilder, private orderService: OrderService) { }
+  constructor(private formBuilder: FormBuilder, private orderService: OrderService, private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.addOrderForm = this.formBuilder.group({
@@ -25,7 +28,7 @@ export class AddOrderComponent implements OnInit {
         freeshipChecked: this.formBuilder.control(false),
         shippingFee: this.formBuilder.control('', [Validators.required]),
         orderDiscount: this.formBuilder.control('', [Validators.required]),
-        bankTranferedAmount: this.formBuilder.control('', [Validators.required]),
+        bankTransferedAmount: this.formBuilder.control('', [Validators.required]),
         extraFee: this.formBuilder.control('', [Validators.required]),
         orderNote: this.formBuilder.control('')
       }),
@@ -66,7 +69,7 @@ export class AddOrderComponent implements OnInit {
 
     this.order.shippingFee = this.addOrderForm.controls['checkout'].value.shippingFee;
     this.order.orderDiscount = this.addOrderForm.controls['checkout'].value.orderDiscount;
-    this.order.bankTransferedAmount = this.addOrderForm.controls['checkout'].value.bankTranferedAmount;
+    this.order.bankTransferedAmount = this.addOrderForm.controls['checkout'].value.bankTransferedAmount;
     this.order.extraFee = this.addOrderForm.controls['checkout'].value.extraFee;
     this.order.orderNote = this.addOrderForm.controls['checkout'].value.orderNote;
 
@@ -82,16 +85,36 @@ export class AddOrderComponent implements OnInit {
     this.customer.dob = this.addOrderForm.controls['customerInfo'].value.customerDOB;
     this.order.customer = this.customer;
 
-    this.order.offlineOrderSKUs = this.listSkus;
+    
+
+    this.order.offlineOrderSKUs = this.groupSkuItems();
+
+    console.log(this.order.offlineOrderSKUs);
 
     this.orderService.createOrder(this.order).subscribe({
       next: result => {
-        console.log(result)
+        this.toastrService.success('Tạo mới đơn hàng thành công')
+        this.addOrderForm.reset();
+        this.listSkus = [];
       },
       error: err => {
         console.log(err);
       }
     });
+  }
+
+  groupSkuItems(): OrderSKUItems[] {
+    var skuItems: OrderSKUItems[] = [];
+
+    return this.listSkus.reduce((skuItems, currentSku) => {
+      if(skuItems == null || skuItems.find(item => item.productSKUId === currentSku.id) === undefined) {
+        skuItems.push({productSKUId: currentSku.id, quantity: 1});
+      } else {
+        skuItems.find(x => x.productSKUId === currentSku.id).quantity++;
+      }
+
+      return skuItems;
+    }, skuItems);
   }
 
   handleSelectEvent(productSKUDetails: ProductSKUDetails[]){

@@ -4,7 +4,7 @@ namespace API.DTOs.AdminOrder
 {
     public class OfflineOrderSKUDTOs
     {
-        public ProductSKUDTO ProductSKU { get; set; }
+        public int ProductSKUId { get; set; }
         public int Quantity { get; set; }
     }
 }

@@ -34,7 +34,7 @@
           </div>
           <div nz-col nzSpan="8">
             <nz-input-group nzSuffix="đ">
-              <input class="text-end" formControlName="bankTranferedAmount" type="number" nz-input (change)="onFeesChange()"/>
+              <input class="text-end" formControlName="bankTransferedAmount" type="number" nz-input (change)="onFeesChange()"/>
             </nz-input-group>
           </div>
         </div>
@@ -75,7 +75,7 @@
 
           <div class="d-flex justify-content-between mt-1">
             <span>Đã thanh toán</span>
-            <span class="fw-semibold">{{ bankTranferedAmount | thousandSeparator }}đ</span>
+            <span class="fw-semibold">{{ bankTransferedAmount | thousandSeparator }}đ</span>
           </div>
 
           <hr class="dashed" />
