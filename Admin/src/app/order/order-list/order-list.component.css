@@ -1,4 +1,3 @@
-[nz-button] {
-  margin-right: 8px;
-  margin-bottom: 12px;
+nz-header, nz-layout, nz-content {
+  background-color: #ebecef;
 }

@@ -1,4 +1,20 @@
-<div class="order-container">
+<nz-layout>
+  <nz-header>
+    <button
+        nz-button
+        *nzSpaceItem
+        nzType="primary"
+        nzSize="default"
+        (click)="addOrder()"
+        nz-tooltip
+        nzTooltipTitle="Thêm đơn hàng mới"
+        nzTooltipPlacement="bottom"
+      >
+        <span nz-icon nzType="plus"></span>
+      </button>
+  </nz-header>
+</nz-layout>
+<!-- <div class="order-container">
   <div class="px-2">
     <nz-space class="control-bar d-flex flex-row">
       <button
@@ -96,4 +112,4 @@
       </tbody>
     </table>
   </div>
-</div>
+</div> -->
