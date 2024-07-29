@@ -17,5 +17,5 @@ export class Order {
   districtId: number;
   provinceId: number;
   wardId: number;
-  skus: ProductSKUDetails[];
+  offlineOrderSKUs: ProductSKUDetails[];
 }

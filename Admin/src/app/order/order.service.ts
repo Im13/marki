@@ -10,6 +10,7 @@ import { ShopeeProduct } from '../shared/models/shopeeProduct';
 import { ShopeeOrderParams } from '../shared/models/shopeeOrderParams';
 import { Pagination } from '../shared/models/pagination';
 import { Subject } from 'rxjs';
+import { Order } from '../shared/models/order';
 
 @Injectable({
   providedIn: 'root'
@@ -148,5 +149,9 @@ export class OrderService {
 
       orders.push(shopeeOrder);
     }
+  }
+
+  createOrder(order: Order) {
+    return this.http.post(this.baseApiUrl + 'order/create', order);
   }
 }

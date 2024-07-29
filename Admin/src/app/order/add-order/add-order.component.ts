@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Customer } from 'src/app/shared/models/cutomer';
 import { Order } from 'src/app/shared/models/order';
 import { ProductSKUDetails } from 'src/app/shared/models/productSKUDetails';
+import { OrderService } from '../order.service';
 
 @Component({
   selector: 'app-add-order',
@@ -16,7 +17,7 @@ export class AddOrderComponent implements OnInit {
   order: Order = new Order();
   customer: Customer = new Customer();
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private orderService: OrderService) { }
 
   ngOnInit(): void {
     this.addOrderForm = this.formBuilder.group({
@@ -70,8 +71,10 @@ export class AddOrderComponent implements OnInit {
     this.order.orderNote = this.addOrderForm.controls['checkout'].value.orderNote;
 
     this.order.dateCreated = this.addOrderForm.controls['information'].value.orderCreatedDate;
-    this.order.orderCareStaffId = this.addOrderForm.controls['information'].value.orderCareStaff;
-    this.order.customerCareStaffId = this.addOrderForm.controls['information'].value.customerCareStaff;
+    // this.order.orderCareStaffId = this.addOrderForm.controls['information'].value.orderCareStaff;
+    this.order.orderCareStaffId = 1;
+    // this.order.customerCareStaffId = this.addOrderForm.controls['information'].value.customerCareStaff;
+    this.order.customerCareStaffId = 1;
 
     this.customer.name = this.addOrderForm.controls['customerInfo'].value.customerName;
     this.customer.phoneNumber = this.addOrderForm.controls['customerInfo'].value.customerPhoneNumber;
@@ -79,7 +82,16 @@ export class AddOrderComponent implements OnInit {
     this.customer.dob = this.addOrderForm.controls['customerInfo'].value.customerDOB;
     this.order.customer = this.customer;
 
-    this.order.skus = this.listSkus;
+    this.order.offlineOrderSKUs = this.listSkus;
+
+    this.orderService.createOrder(this.order).subscribe({
+      next: result => {
+        console.log(result)
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
   }
 
   handleSelectEvent(productSKUDetails: ProductSKUDetails[]){

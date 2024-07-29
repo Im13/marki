@@ -1,6 +1,7 @@
 import { ProductSKUValues } from "./productSKUValues";
 
 export interface ProductSKUDetails {
+  id: number;
   sku: string;
   quantity: number;
   price: number;
