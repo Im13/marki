@@ -1,0 +1,20 @@
+::ng-deep .ant-table-wrapper,
+.ant-table-wrapper>.ant-spin-nested-loading,
+.ant-table-wrapper>.ant-spin-container {
+  height: 100%;
+  overflow: auto;
+  background-color: #FFFFFF;
+}
+
+nz-footer {
+  height: 50px;
+  background-color: #FFFFFF;
+}
+
+::ng-deep tbody {
+  overflow: auto;
+}
+
+/* ::ng-deep .ant-table-thead {
+  height: 1rem !important;
+} */

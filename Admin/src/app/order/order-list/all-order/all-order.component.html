@@ -1,0 +1,50 @@
+<nz-layout class="border h-100">
+    <nz-content class="h-100 border-bottom" #content>
+        <nz-table *ngIf="orders.length > 0" #rowSelectionTable nzShowPagination="false" [nzFrontPagination]="false"
+            [nzScroll]="{ x: '1200px', y: '700px' }" [nzData]="orders"
+            (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
+            <thead>
+                <tr>
+                    <th [nzChecked]="checked" [nzIndeterminate]="indeterminate" nzLabel="Select all"
+                        (nzCheckedChange)="onAllChecked($event)" nzWidth="40px"></th>
+                    <th rowSpan="1" nzWidth="100px">Id</th>
+                    <th nzWidth="80px">VC</th>
+                    <th nzWidth="140px">Thẻ</th>
+                    <th nzWidth="150px">Khách hàng</th>
+                    <th nzWidth="150px">SĐT</th>
+                    <th nzWidth="400px">Địa chỉ</th>
+                    <th nzWidth="120px">Tạo lúc</th>
+                    <th nzWidth="150px">Tổng tiền</th>
+                    <th nzRight nzWidth="90px">Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of orders">
+                    <td [nzChecked]="setOfCheckedId.has(order.id)" 
+                        (nzCheckedChange)="onItemChecked(order.id, $event)"></td>
+                    <td>0001</td>
+                    <td><nz-tag [nzColor]="'#016D75'" nz-tooltip nzTooltipTitle="Click để copy mã vận chuyển">VTP</nz-tag></td>
+                    <td><nz-tag [nzColor]="'#016D75'">Đã đối soát</nz-tag></td>
+                    <td>{{ order.customer.name }}</td>
+                    <td>{{ order.customer.phoneNumber }}</td>
+                    <td>{{ order.address }}</td>
+                    <td>{{ order.dateCreated |  date:'hh:mm' }}</td>
+                    <td>1.000.000</td>
+                    <td>OK</td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </nz-content>
+
+    <nz-footer class="d-flex align-items-center justify-content-between px-2">
+        <div class="order-info">
+            <span>COD: <b>1.356.889.221</b></span>
+            <span class="ms-2">Trả trước: <b>1.122.002.881</b></span>
+            <span class="ms-2">Cước VC: <b>63.022.392</b></span>
+        </div>
+        <div class="d-flex align-items-center justify-content-end">
+            <nz-pagination [(nzPageIndex)]="current" [nzTotal]="50" [nzSize]="'small'" nzShowSizeChanger
+                (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
+        </div>
+    </nz-footer>
+</nz-layout>

@@ -16,6 +16,7 @@ import { InformationComponent } from './add-order/order-information/information/
 import { CustomerInfoComponent } from './add-order/order-information/customer-info/customer-info.component';
 import { ReceiverComponent } from './add-order/order-information/receiver/receiver.component';
 import { DeliveryComponent } from './add-order/order-information/delivery/delivery.component';
+import { AllOrderComponent } from './order-list/all-order/all-order.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { DeliveryComponent } from './add-order/order-information/delivery/delive
     InformationComponent,
     CustomerInfoComponent,
     ReceiverComponent,
-    DeliveryComponent
+    DeliveryComponent,
+    AllOrderComponent
   ],
   imports: [
     CommonModule,

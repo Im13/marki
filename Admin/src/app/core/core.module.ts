@@ -20,6 +20,8 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzTagModule } from 'ng-zorro-antd/tag';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
     NzCheckboxModule,
     NzDatePickerModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NzPaginationModule,
+    NzTagModule
   ],
   exports: [
     HeaderComponent,
@@ -72,7 +76,9 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
     NzCheckboxModule,
     NzDatePickerModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NzPaginationModule,
+    NzTagModule
   ]
 })
 export class CoreModule { }

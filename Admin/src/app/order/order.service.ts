@@ -11,6 +11,7 @@ import { ShopeeOrderParams } from '../shared/models/shopeeOrderParams';
 import { Pagination } from '../shared/models/pagination';
 import { Subject } from 'rxjs';
 import { Order } from '../shared/models/order';
+import { OrderParams } from '../shared/models/orderParams';
 
 @Injectable({
   providedIn: 'root'
@@ -153,5 +154,15 @@ export class OrderService {
 
   createOrder(order: Order) {
     return this.http.post(this.baseApiUrl + 'order/create', order);
+  }
+
+  getProducts(productParams: OrderParams) {
+    let params = new HttpParams();
+
+    params = params.append('search', productParams.search);
+    params = params.append('pageSize', productParams.pageSize);
+    params = params.append('pageIndex', productParams.pageIndex);
+
+    return this.http.get<Pagination<Order[]>>(this.baseApiUrl + 'order', { params });
   }
 }

@@ -2,6 +2,7 @@ import { Customer } from "./cutomer";
 import { OrderSKUItems } from "./orderSKUItems";
 
 export class Order {
+  id: number;
   shippingFee: number;
   orderDiscount: number;
   bankTransferedAmount: number;

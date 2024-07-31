@@ -1,8 +1,10 @@
 using API.DTOs.AdminOrder;
 using API.Errors;
+using API.Helpers;
 using AutoMapper;
 using Core.Entities.OrderAggregate;
 using Core.Interfaces;
+using Core.Specification.OfflineOrderSpec;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.Admin.Order
@@ -11,12 +13,13 @@ namespace API.Controllers.Admin.Order
     {
         private readonly IOrderService _orderService;
         private readonly IMapper _mapper;
+        private readonly IGenericRepository<OfflineOrder> _offlineOrderRepo;
         
-        public OrderController(IOrderService orderService, IMapper mapper)
+        public OrderController(IOrderService orderService, IMapper mapper, IGenericRepository<OfflineOrder> offlineOrderRepo)
         {
             _mapper = mapper;
             _orderService = orderService;
-            
+            _offlineOrderRepo = offlineOrderRepo;
         }
 
         [HttpPost("create")]
@@ -31,6 +34,22 @@ namespace API.Controllers.Admin.Order
             if (orderCreated == null) return BadRequest("Error create order");
 
             return Ok(_mapper.Map<OfflineOrder,OfflineOrderDTO>(orderCreated));
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<Pagination<OfflineOrderDTO>>> GetProducts([FromQuery] OrderSpecParams orderParams)
+        {
+            var spec = new OrderSpecification(orderParams);
+
+            var countSpec = new OrdersWithFiltersForCountSpecification(orderParams);
+
+            var totalItems = await _offlineOrderRepo.CountAsync(countSpec);
+
+            var orders = await _offlineOrderRepo.ListAsync(spec);
+
+            var data = _mapper.Map<IReadOnlyList<OfflineOrder>, IReadOnlyList<OfflineOrderDTO>>(orders);
+
+            return Ok(new Pagination<OfflineOrderDTO>(orderParams.PageIndex, orderParams.PageSize, totalItems, data));
         }
     }
 }
