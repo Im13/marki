@@ -20,15 +20,16 @@
             </thead>
             <tbody>
                 <tr *ngFor="let order of orders">
-                    <td [nzChecked]="setOfCheckedId.has(order.id)" 
-                        (nzCheckedChange)="onItemChecked(order.id, $event)"></td>
-                    <td>0001</td>
-                    <td><nz-tag [nzColor]="'#016D75'" nz-tooltip nzTooltipTitle="Click để copy mã vận chuyển">VTP</nz-tag></td>
+                    <td [nzChecked]="setOfCheckedId.has(order.id)" (nzCheckedChange)="onItemChecked(order.id, $event)">
+                    </td>
+                    <td>{{ order.id }}</td>
+                    <td><nz-tag [nzColor]="'#016D75'" nz-tooltip
+                            nzTooltipTitle="Click để copy mã vận chuyển">VTP</nz-tag></td>
                     <td><nz-tag [nzColor]="'#016D75'">Đã đối soát</nz-tag></td>
                     <td>{{ order.customer.name }}</td>
                     <td>{{ order.customer.phoneNumber }}</td>
                     <td>{{ order.address }}</td>
-                    <td>{{ order.dateCreated |  date:'hh:mm' }}</td>
+                    <td>{{ order.dateCreated | date:'hh:mm' }}</td>
                     <td>1.000.000</td>
                     <td>OK</td>
                 </tr>
@@ -43,8 +44,15 @@
             <span class="ms-2">Cước VC: <b>63.022.392</b></span>
         </div>
         <div class="d-flex align-items-center justify-content-end">
-            <nz-pagination [(nzPageIndex)]="current" [nzTotal]="50" [nzSize]="'small'" nzShowSizeChanger
-                (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
+            <nz-pagination 
+                [(nzPageIndex)]="current" 
+                [nzTotal]="totalItems" 
+                [nzSize]="'small'" 
+                nzShowSizeChanger
+                (nzPageIndexChange)="onPageChange($event)" 
+                [nzPageSize]="orderParams.pageSize" 
+                (nzPageSizeChange)="onPageSizeChange($event)">
+            </nz-pagination>
         </div>
     </nz-footer>
 </nz-layout>

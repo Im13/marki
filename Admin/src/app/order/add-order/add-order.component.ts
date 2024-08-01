@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Customer } from 'src/app/shared/models/cutomer';
 import { Order } from 'src/app/shared/models/order';
@@ -6,6 +6,7 @@ import { ProductSKUDetails } from 'src/app/shared/models/productSKUDetails';
 import { OrderService } from '../order.service';
 import { OrderSKUItems } from 'src/app/shared/models/orderSKUItems';
 import { ToastrService } from 'ngx-toastr';
+import { CheckoutComponent } from './order-information/checkout/checkout.component';
 
 @Component({
   selector: 'app-add-order',
@@ -14,6 +15,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AddOrderComponent implements OnInit {
   addOrderForm: FormGroup;
+  @ViewChild(CheckoutComponent) checkoutComponent:CheckoutComponent;
+
   listSkus: ProductSKUDetails[] = [];
   totalSKUsPrice = 0;
   order: Order = new Order();
@@ -85,8 +88,6 @@ export class AddOrderComponent implements OnInit {
     this.customer.dob = this.addOrderForm.controls['customerInfo'].value.customerDOB;
     this.order.customer = this.customer;
 
-    
-
     this.order.offlineOrderSKUs = this.groupSkuItems();
 
     console.log(this.order.offlineOrderSKUs);
@@ -95,6 +96,17 @@ export class AddOrderComponent implements OnInit {
       next: result => {
         this.toastrService.success('Tạo mới đơn hàng thành công')
         this.addOrderForm.reset();
+        this.addOrderForm.controls['checkout'].patchValue({
+          shippingFee: 0,
+          orderDiscount: 0,
+          bankTransferedAmount: 0,
+          extraFee: 0
+        });
+        this.addOrderForm.controls['information'].patchValue({
+          orderCreatedDate: new Date()
+        })
+        this.totalSKUsPrice = 0;
+        this.skuItems = [];
         this.listSkus = [];
       },
       error: err => {
