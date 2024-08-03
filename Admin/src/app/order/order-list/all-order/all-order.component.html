@@ -25,13 +25,26 @@
                     <td nzLeft>{{ order.id }}</td>
                     <td><nz-tag [nzColor]="'#016D75'" nz-tooltip
                             nzTooltipTitle="Click để copy mã vận chuyển">VTP</nz-tag></td>
-                    <td><nz-tag [nzColor]="'#016D75'">Đã đối soát</nz-tag></td>
-                    <td>{{ order.customer.name }}</td>
-                    <td>{{ order.customer.phoneNumber }}</td>
-                    <td>{{ order.address }}</td>
-                    <td>{{ order.dateCreated | date:'hh:mm' }}</td>
-                    <td>1.000.000</td>
-                    <td nzRight>OK</td>
+                    <td><nz-tag [nzColor]="'gold'">Chưa đối soát</nz-tag></td>
+                    <td (click)="onEditOrder(order)">{{ order.customer.name }}</td>
+                    <td (click)="onEditOrder(order)">{{ order.customer.phoneNumber }}</td>
+                    <td (click)="onEditOrder(order)">{{ order.address }}</td>
+                    <td (click)="onEditOrder(order)">{{ order.dateCreated | date:'hh:mm' }}</td>
+                    <td (click)="onEditOrder(order)">1.000.000</td>
+                    <td nzRight>
+                      <div class="order-status-dropdown w-100">
+                        <button class="w-100 d-flex align-items-center justify-content-between" nz-button nz-dropdown [nzDropdownMenu]="dropdownMenu">
+                          Mới
+                          <span nz-icon nzType="down"></span>
+                        </button>
+
+                        <nz-dropdown-menu #dropdownMenu="nzDropdownMenu">
+                          <ul nz-menu *ngFor="let item of dropdownList">
+                            <li nz-menu-item>{{ item }}</li>
+                          </ul>
+                        </nz-dropdown-menu>
+                      </div>
+                    </td>
                 </tr>
             </tbody>
         </nz-table>
@@ -44,13 +57,13 @@
             <span class="ms-2">Cước VC: <b>63.022.392</b></span>
         </div>
         <div class="d-flex align-items-center justify-content-end">
-            <nz-pagination 
-                [(nzPageIndex)]="current" 
-                [nzTotal]="totalItems" 
-                [nzSize]="'small'" 
+            <nz-pagination
+                [(nzPageIndex)]="current"
+                [nzTotal]="totalItems"
+                [nzSize]="'small'"
                 nzShowSizeChanger
-                (nzPageIndexChange)="onPageChange($event)" 
-                [nzPageSize]="orderParams.pageSize" 
+                (nzPageIndexChange)="onPageChange($event)"
+                [nzPageSize]="orderParams.pageSize"
                 (nzPageSizeChange)="onPageSizeChange($event)">
             </nz-pagination>
         </div>

@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Order } from 'src/app/shared/models/order';
 import { OrderParams } from 'src/app/shared/models/orderParams';
 import { OrderService } from '../../order.service';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { UpdateOrderComponent } from '../../update-order/update-order.component';
 
 @Component({
   selector: 'app-all-order',
@@ -14,13 +16,17 @@ export class AllOrderComponent implements OnInit {
   orders: readonly Order[] = [];
   totalItems = 0;
 
+  //Temp dropdown list
+  dropdownList = ['Mới', 'Chờ hàng', 'Ưu tiên xuất đơn', 'Xác nhận đơn hàng', 'Gửi hàng đi', 'Huỷ đơn', 'Xoá đơn']
+
+  //Order selected
   current = 1;
   checked = false;
   loading = false;
   indeterminate = false;
   setOfCheckedId = new Set<number>();
 
-  constructor(private orderService: OrderService) {}
+  constructor(private orderService: OrderService, private modalServices: NzModalService) {}
 
   ngOnInit() {
     this.getOrders();
@@ -80,5 +86,17 @@ export class AllOrderComponent implements OnInit {
   onPageSizeChange(pageSize: number) {
     this.orderParams.pageSize = pageSize;
     this.getOrders();
+  }
+
+  onEditOrder(order: Order) {
+    const modal = this.modalServices.create<UpdateOrderComponent, Order>({
+      nzTitle: '#' + order.id.toString(),
+      nzContent: UpdateOrderComponent,
+      nzCentered: true,
+      nzWidth: '160vh',
+      nzData: order,
+      nzBodyStyle: {overflowY : 'scroll', height: '85vh'}
+    });
+
   }
 }

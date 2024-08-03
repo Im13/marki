@@ -27,6 +27,7 @@ export class CheckoutComponent implements OnInit {
   ngOnInit(): void {
     this.orderTotal = this.totalSKUsPrice;
     this.checkoutForm = this.rootFormGroup.control.get('checkout') as FormGroup;
+    console.log(this.rootFormGroup.control)
 
     this.checkoutForm.setValue({
       freeshipChecked: false,

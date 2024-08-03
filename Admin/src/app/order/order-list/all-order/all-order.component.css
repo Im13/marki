@@ -15,6 +15,10 @@ nz-footer {
   overflow: auto;
 }
 
+td:hover {
+  cursor: pointer;
+}
+
 /* ::ng-deep .ant-table-thead {
   height: 1rem !important;
 } */
