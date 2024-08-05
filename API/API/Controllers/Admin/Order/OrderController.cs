@@ -13,12 +13,14 @@ namespace API.Controllers.Admin.Order
     {
         private readonly IOrderService _orderService;
         private readonly IMapper _mapper;
+        private readonly IOrderRepository _orderRepository;
         private readonly IGenericRepository<OfflineOrder> _offlineOrderRepo;
         
-        public OrderController(IOrderService orderService, IMapper mapper, IGenericRepository<OfflineOrder> offlineOrderRepo)
+        public OrderController(IOrderService orderService, IMapper mapper, IOrderRepository orderRepository, IGenericRepository<OfflineOrder> offlineOrderRepo)
         {
             _mapper = mapper;
             _orderService = orderService;
+            _orderRepository = orderRepository;
             _offlineOrderRepo = offlineOrderRepo;
         }
 
@@ -45,7 +47,7 @@ namespace API.Controllers.Admin.Order
 
             var totalItems = await _offlineOrderRepo.CountAsync(countSpec);
 
-            var orders = await _offlineOrderRepo.ListAsync(spec);
+            var orders = await _orderRepository.GetOrdersWithSpec(spec);
 
             var data = _mapper.Map<IReadOnlyList<OfflineOrder>, IReadOnlyList<OfflineOrderDTO>>(orders);
 
