@@ -15,12 +15,6 @@ export class InformationComponent implements OnInit {
 
   ngOnInit(): void {
     this.infoForm = this.rootFormGroup.control.get('information') as FormGroup;
-
-    this.infoForm.setValue({
-      orderCreatedDate: new Date(),
-      orderCareStaff: '',
-      customerCareStaff: ''
-    });
   }
 
   onDateChange(result: Date) {

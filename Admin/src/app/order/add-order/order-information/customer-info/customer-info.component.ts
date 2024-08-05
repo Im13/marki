@@ -17,15 +17,8 @@ export class CustomerInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.customerInfoForm = this.rootFormGroup.control.get('customerInfo') as FormGroup;
-
-    this.customerInfoForm.setValue({
-      customerName: '',
-      customerPhoneNumber: '',
-      customerEmailAddress: '',
-      customerDOB: '',
-    });
   }
-  
+
   onDOBChange(result: Date) {
     console.log('onChange: ', result);
   }

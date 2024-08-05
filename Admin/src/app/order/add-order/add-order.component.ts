@@ -93,7 +93,7 @@ export class AddOrderComponent implements OnInit {
     console.log(this.order.offlineOrderSKUs);
 
     this.orderService.createOrder(this.order).subscribe({
-      next: result => {
+      next: () => {
         this.toastrService.success('Tạo mới đơn hàng thành công')
         this.addOrderForm.reset();
         this.addOrderForm.controls['checkout'].patchValue({

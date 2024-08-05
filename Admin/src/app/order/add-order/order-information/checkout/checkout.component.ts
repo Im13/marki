@@ -27,16 +27,13 @@ export class CheckoutComponent implements OnInit {
   ngOnInit(): void {
     this.orderTotal = this.totalSKUsPrice;
     this.checkoutForm = this.rootFormGroup.control.get('checkout') as FormGroup;
-    console.log(this.rootFormGroup.control)
 
-    this.checkoutForm.setValue({
-      freeshipChecked: false,
-      shippingFee: 0,
-      orderDiscount: 0,
-      bankTransferedAmount: 0,
-      extraFee: 0,
-      orderNote: '',
-    });
+    this.orderDiscount = this.checkoutForm.value.orderDiscount;
+    this.bankTransferedAmount = this.checkoutForm.value.bankTransferedAmount;
+    this.extraFee = this.checkoutForm.value.extraFee;
+    this.shippingFee = this.checkoutForm.value.shippingFee;
+
+    this.calculateOrderTotal();
   }
 
   ngOnChanges(): void {

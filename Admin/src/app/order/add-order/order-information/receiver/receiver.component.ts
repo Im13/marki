@@ -13,14 +13,5 @@ export class ReceiverComponent {
 
   ngOnInit(): void {
     this.receiverInfoForm = this.rootFormGroup.control.get('receiverInfo') as FormGroup;
-
-    this.receiverInfoForm.setValue({
-      receiverName: '',
-      receiverPhoneNumber: '',
-      receiverAddress: '',
-      provinceId: '',
-      districtId: '',
-      wardId: ''
-    });
   }
 }

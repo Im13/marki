@@ -13,11 +13,5 @@ export class DeliveryComponent {
 
   ngOnInit(): void {
     this.deliveryForm = this.rootFormGroup.control.get('deliveryService') as FormGroup;
-
-    this.deliveryForm.setValue({
-      deliveryCompanyId: '',
-      shipmentCode: '',
-      shipmentCost: ''
-    });
   }
 }

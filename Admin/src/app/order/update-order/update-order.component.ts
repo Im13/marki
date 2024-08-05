@@ -25,7 +25,7 @@ export class UpdateOrderComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private orderService: OrderService, private toastrService: ToastrService){}
 
   ngOnInit(): void {
-    console.log(this.order)
+    console.log(this.order);
     this.addOrderForm = this.formBuilder.group({
       checkout: this.formBuilder.group({
         freeshipChecked: this.formBuilder.control(false),
@@ -93,7 +93,7 @@ export class UpdateOrderComponent implements OnInit {
     console.log(this.order.offlineOrderSKUs);
 
     this.orderService.createOrder(this.order).subscribe({
-      next: result => {
+      next: () => {
         this.toastrService.success('Tạo mới đơn hàng thành công')
         this.addOrderForm.reset();
         this.addOrderForm.controls['checkout'].patchValue({
