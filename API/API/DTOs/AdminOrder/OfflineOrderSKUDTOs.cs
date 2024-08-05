@@ -6,5 +6,6 @@ namespace API.DTOs.AdminOrder
     {
         public int ProductSKUId { get; set; }
         public int Quantity { get; set; }
+        public ProductSKUDetailDTO SkuDetail { get; set; }
     }
 }

@@ -1,3 +1,4 @@
+using Core;
 using Core.Entities;
 using Core.Entities.OrderAggregate;
 using Core.Interfaces;
@@ -26,7 +27,7 @@ namespace Infrastructure.Services
             // Get items from the product repo
             var items = new List<OrderItem>();
 
-            foreach(var item in basket.Items)
+            foreach (var item in basket.Items)
             {
                 var productItem = await _unitOfWork.Repository<Product>().GetByIdAsync(item.Id);
 
@@ -46,11 +47,11 @@ namespace Infrastructure.Services
             var order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, subTotal);
 
             _unitOfWork.Repository<Order>().Add(order);
-            
+
             // Save to db
             var result = await _unitOfWork.Complete();
 
-            if(result <= 0) return null;
+            if (result <= 0) return null;
 
             // Delete basket
             await _basketRepo.DeleteBasketAsync(basketId);
@@ -80,11 +81,21 @@ namespace Infrastructure.Services
 
         public async Task<OfflineOrder> CreateOfflineOrder(OfflineOrder order)
         {
-            if(order.Id != 0) return null;
+            if (order.Id != 0) return null;
+
+            if (order.OfflineOrderSKUs.Count > 0)
+            {
+                foreach (var skuItems in order.OfflineOrderSKUs)
+                {   
+                    //Remove this when edit nullable productskuid
+                    int productSkuId = (int)skuItems.ProductSkuId;
+                    skuItems.ProductSKU = await _unitOfWork.Repository<ProductSKUs>().GetByIdAsync(productSkuId);
+                }
+            }
 
             _unitOfWork.Repository<OfflineOrder>().Add(order);
 
-            var saveOrderResult = await _unitOfWork.Complete(); 
+            var saveOrderResult = await _unitOfWork.Complete();
 
             if (saveOrderResult <= 0) return null;
 

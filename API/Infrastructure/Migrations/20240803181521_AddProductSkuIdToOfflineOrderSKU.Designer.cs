@@ -3,6 +3,7 @@ using System;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20240803181521_AddProductSkuIdToOfflineOrderSKU")]
+    partial class AddProductSkuIdToOfflineOrderSKU
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.12");
@@ -170,8 +173,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("OfflineOrderId");
-
-                    b.HasIndex("ProductSkuId");
 
                     b.ToTable("OfflineOrderSKUs");
                 });
@@ -661,12 +662,6 @@ namespace Infrastructure.Migrations
                     b.HasOne("Core.Entities.OrderAggregate.OfflineOrder", null)
                         .WithMany("OfflineOrderSKUs")
                         .HasForeignKey("OfflineOrderId");
-
-                    b.HasOne("Core.ProductSKUs", "ProductSKU")
-                        .WithMany()
-                        .HasForeignKey("ProductSkuId");
-
-                    b.Navigation("ProductSKU");
                 });
 
             modelBuilder.Entity("Core.Entities.OrderAggregate.Order", b =>

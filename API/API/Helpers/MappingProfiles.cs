@@ -35,7 +35,9 @@ namespace API.Helpers
             CreateMap<Customer, CustomerDTO>();
             CreateMap<CustomerDTO, Customer>();
             CreateMap<OfflineOrderSKUDTOs, OfflineOrderSKUs>();
-            CreateMap<OfflineOrderSKUs, OfflineOrderSKUDTOs>();
+            CreateMap<OfflineOrderSKUs, OfflineOrderSKUDTOs>()
+                .ForMember(d => d.ProductSKUId, o => o.MapFrom(s => s.ProductSkuId))
+                .ForMember(d => d.SkuDetail, o => o.MapFrom(s => s.ProductSKU));
 
             CreateMap<ProductDTOs, Product>();
             CreateMap<Product, ProductDTOs>();
