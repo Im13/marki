@@ -90,8 +90,6 @@ export class AddOrderComponent implements OnInit {
 
     this.order.offlineOrderSKUs = this.groupSkuItems();
 
-    console.log(this.order.offlineOrderSKUs);
-
     this.orderService.createOrder(this.order).subscribe({
       next: () => {
         this.toastrService.success('Tạo mới đơn hàng thành công')
@@ -120,7 +118,7 @@ export class AddOrderComponent implements OnInit {
 
     return this.listSkus.reduce((skuItems, currentSku) => {
       if(skuItems == null || skuItems.find(item => item.productSKUId === currentSku.id) === undefined) {
-        skuItems.push({productSKUId: currentSku.id, quantity: 1, skuDetails: null});
+        skuItems.push({productSKUId: currentSku.id, quantity: 1, skuDetail: null});
       } else {
         skuItems.find(x => x.productSKUId === currentSku.id).quantity++;
       }

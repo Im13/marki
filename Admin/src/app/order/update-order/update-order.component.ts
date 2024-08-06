@@ -28,10 +28,8 @@ export class UpdateOrderComponent implements OnInit {
     console.log(this.order);
 
     this.order.offlineOrderSKUs.forEach(item => {
-      this.listSkus.push(item.skuDetails);
+      this.listSkus.push(item.skuDetail);
     });
-
-    console.log(this.listSkus)
 
     this.addOrderForm = this.formBuilder.group({
       checkout: this.formBuilder.group({
@@ -136,7 +134,7 @@ export class UpdateOrderComponent implements OnInit {
 
     return this.listSkus.reduce((skuItems, currentSku) => {
       if(skuItems == null || skuItems.find(item => item.productSKUId === currentSku.id) === undefined) {
-        skuItems.push({productSKUId: currentSku.id, quantity: 1, skuDetails: null});
+        skuItems.push({productSKUId: currentSku.id, quantity: 1, skuDetail: null});
       } else {
         skuItems.find(x => x.productSKUId === currentSku.id).quantity++;
       }

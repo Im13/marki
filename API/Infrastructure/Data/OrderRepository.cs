@@ -18,6 +18,12 @@ namespace Infrastructure.Data
             var orders = await SpecificationEvaluator<OfflineOrder>.GetQuery(_context.Set<OfflineOrder>().AsQueryable(), spec)
                 .Include(o => o.OfflineOrderSKUs)
                 .ThenInclude(oos => oos.ProductSKU)
+                .ThenInclude(s => s.Product)
+                .Include(o => o.OfflineOrderSKUs)
+                .ThenInclude(oos => oos.ProductSKU)
+                .ThenInclude(s => s.ProductSKUValues)
+                .ThenInclude(sv => sv.ProductOptionValue)
+                .ThenInclude(ov => ov.ProductOption)
                 .ToListAsync();
 
             return orders;
