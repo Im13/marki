@@ -74,8 +74,6 @@ export class AllOrderComponent implements OnInit {
         this.orderParams.pageIndex = response.pageIndex;
         this.orderParams.pageSize = response.pageSize;
         this.totalItems = response.count;
-
-        console.log(this.totalItems);
       },
       error: err => {
         console.log(err);

@@ -120,7 +120,7 @@ export class AddOrderComponent implements OnInit {
 
     return this.listSkus.reduce((skuItems, currentSku) => {
       if(skuItems == null || skuItems.find(item => item.productSKUId === currentSku.id) === undefined) {
-        skuItems.push({productSKUId: currentSku.id, quantity: 1});
+        skuItems.push({productSKUId: currentSku.id, quantity: 1, skuDetails: null});
       } else {
         skuItems.find(x => x.productSKUId === currentSku.id).quantity++;
       }
