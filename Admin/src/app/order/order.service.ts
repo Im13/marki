@@ -12,6 +12,7 @@ import { Pagination } from '../shared/models/pagination';
 import { Subject } from 'rxjs';
 import { Order } from '../shared/models/order';
 import { OrderParams } from '../shared/models/orderParams';
+import { Province } from '../shared/models/address/province';
 
 @Injectable({
   providedIn: 'root'
@@ -168,5 +169,9 @@ export class OrderService {
     params = params.append('pageIndex', productParams.pageIndex);
 
     return this.http.get<Pagination<Order[]>>(this.baseApiUrl + 'order', { params });
+  }
+
+  getProvinces() {
+    return this.http.get<Province[]>(this.baseApiUrl + 'address/provinces');
   }
 }
