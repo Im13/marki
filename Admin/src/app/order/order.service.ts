@@ -156,6 +156,10 @@ export class OrderService {
     return this.http.post(this.baseApiUrl + 'order/create', order);
   }
 
+  updateOrder(order: Order) {
+    return this.http.put(this.baseApiUrl + 'order', order);
+  }
+
   getProducts(productParams: OrderParams) {
     let params = new HttpParams();
 

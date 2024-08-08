@@ -40,4 +40,14 @@ export class ProductSkusComponent {
   handleIndexChange(e: number): void {
     console.log(e);
   }
+
+  onRemoveSKU(sku: ProductSKUDetails) {
+    var index = this.listSkus.findIndex(s => s.id === sku.id);
+
+    if(index > -1) {
+      this.listSkus.splice(index, 1);
+    }
+
+    this.selectProductSkus.emit(this.listSkus);
+  }
 }

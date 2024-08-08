@@ -1,4 +1,4 @@
-<form [formGroup]="addOrderForm" class="h-100" (ngSubmit)="submitForm()">
+<form [formGroup]="updateOrderForm" class="h-100">
   <div nz-row>
     <div class="px-2" nz-col nzSpan="15">
       <div class="product-section bg-white p-3">
@@ -29,9 +29,10 @@
     </div>
   </div>
 
-  <div *nzModalFooter>
-    <button [disabled]="!addOrderForm.valid" nz-button nzType="primary" type="submit">
-      Lưu
+  <div *nzModalFooter class=" d-flex flex-row-reverse">
+    <button [disabled]="!updateOrderForm.valid" nz-button nzType="primary" type="submit" class="d-flex align-items-center" (click)="submitForm()">
+      <span nz-icon nzType="save"></span>
+        <span>Lưu</span>
     </button>
   </div>
 </form>

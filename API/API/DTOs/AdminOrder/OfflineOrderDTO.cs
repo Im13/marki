@@ -5,7 +5,7 @@ namespace API.DTOs.AdminOrder
     public class OfflineOrderDTO
     {
         public int Id { get; set; }
-        public ICollection<OfflineOrderSKUDTOs> OfflineOrderSKUs { get; set; }
+        public List<OfflineOrderSKUDTOs> OfflineOrderSKUs { get; set; }
         public decimal ShippingFee { get; set; }
         public decimal OrderDiscount { get; set; }
         public decimal BankTransferedAmount { get; set; }

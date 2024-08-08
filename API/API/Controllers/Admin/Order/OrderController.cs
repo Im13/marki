@@ -53,5 +53,24 @@ namespace API.Controllers.Admin.Order
 
             return Ok(new Pagination<OfflineOrderDTO>(orderParams.PageIndex, orderParams.PageSize, totalItems, data));
         }
+
+        [HttpPut()]
+        public async Task<ActionResult> UpdateOrder(OfflineOrderDTO orderDTO)
+        {
+            if(orderDTO == null) return BadRequest();
+
+            //Find order by id
+            var order = await _orderService.GetOrderAsync(orderDTO.Id);
+            if(order == null) return BadRequest("Order not exists");
+
+            var orderToUpdate = _mapper.Map<OfflineOrderDTO,OfflineOrder>(orderDTO);
+            var currentListSkus = _mapper.Map<List<OfflineOrderSKUDTOs>,List<OfflineOrderSKUs>>(orderDTO.OfflineOrderSKUs);
+
+            var orderUpdateResult = await _orderService.UpdateOfflineOrder(orderToUpdate, currentListSkus);
+
+            if (orderUpdateResult == null) return BadRequest("Error create order");
+
+            return Ok();
+        }
     }
 }

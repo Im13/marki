@@ -16,7 +16,7 @@ import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 export class UpdateOrderComponent implements OnInit {
   @Input() order?: Order = inject(NZ_MODAL_DATA);
 
-  addOrderForm: FormGroup;
+  updateOrderForm: FormGroup;
   listSkus: ProductSKUDetails[] = [];
   totalSKUsPrice = 0;
   customer: Customer = new Customer();
@@ -29,9 +29,10 @@ export class UpdateOrderComponent implements OnInit {
 
     this.order.offlineOrderSKUs.forEach(item => {
       this.listSkus.push(item.skuDetail);
+      this.totalSKUsPrice += item.skuDetail.price;
     });
 
-    this.addOrderForm = this.formBuilder.group({
+    this.updateOrderForm = this.formBuilder.group({
       checkout: this.formBuilder.group({
         freeshipChecked: this.formBuilder.control(false),
         shippingFee: this.formBuilder.control(this.order.shippingFee, [Validators.required]),
@@ -68,46 +69,47 @@ export class UpdateOrderComponent implements OnInit {
   }
 
   submitForm() {
-    this.order.address = this.addOrderForm.controls['receiverInfo'].value.receiverAddress;
-    this.order.provinceId = this.addOrderForm.controls['receiverInfo'].value.provinceId;
-    this.order.districtId = this.addOrderForm.controls['receiverInfo'].value.districtId;
-    this.order.wardId = this.addOrderForm.controls['receiverInfo'].value.wardId;
-    this.order.receiverName = this.addOrderForm.controls['receiverInfo'].value.receiverName;
-    this.order.receiverPhoneNumber = this.addOrderForm.controls['receiverInfo'].value.receiverPhoneNumber;
+    console.log('clicked')
+    this.order.address = this.updateOrderForm.controls['receiverInfo'].value.receiverAddress;
+    this.order.provinceId = this.updateOrderForm.controls['receiverInfo'].value.provinceId;
+    this.order.districtId = this.updateOrderForm.controls['receiverInfo'].value.districtId;
+    this.order.wardId = this.updateOrderForm.controls['receiverInfo'].value.wardId;
+    this.order.receiverName = this.updateOrderForm.controls['receiverInfo'].value.receiverName;
+    this.order.receiverPhoneNumber = this.updateOrderForm.controls['receiverInfo'].value.receiverPhoneNumber;
 
-    this.order.shippingFee = this.addOrderForm.controls['checkout'].value.shippingFee;
-    this.order.orderDiscount = this.addOrderForm.controls['checkout'].value.orderDiscount;
-    this.order.bankTransferedAmount = this.addOrderForm.controls['checkout'].value.bankTransferedAmount;
-    this.order.extraFee = this.addOrderForm.controls['checkout'].value.extraFee;
-    this.order.orderNote = this.addOrderForm.controls['checkout'].value.orderNote;
+    this.order.shippingFee = this.updateOrderForm.controls['checkout'].value.shippingFee;
+    this.order.orderDiscount = this.updateOrderForm.controls['checkout'].value.orderDiscount;
+    this.order.bankTransferedAmount = this.updateOrderForm.controls['checkout'].value.bankTransferedAmount;
+    this.order.extraFee = this.updateOrderForm.controls['checkout'].value.extraFee;
+    this.order.orderNote = this.updateOrderForm.controls['checkout'].value.orderNote;
 
-    this.order.dateCreated = this.addOrderForm.controls['information'].value.orderCreatedDate;
-    // this.order.orderCareStaffId = this.addOrderForm.controls['information'].value.orderCareStaff;
+    this.order.dateCreated = this.updateOrderForm.controls['information'].value.orderCreatedDate;
+    // this.order.orderCareStaffId = this.updateOrderForm.controls['information'].value.orderCareStaff;
     this.order.orderCareStaffId = 1;
-    // this.order.customerCareStaffId = this.addOrderForm.controls['information'].value.customerCareStaff;
+    // this.order.customerCareStaffId = this.updateOrderForm.controls['information'].value.customerCareStaff;
     this.order.customerCareStaffId = 1;
 
-    this.customer.name = this.addOrderForm.controls['customerInfo'].value.customerName;
-    this.customer.phoneNumber = this.addOrderForm.controls['customerInfo'].value.customerPhoneNumber;
-    this.customer.emailAddress = this.addOrderForm.controls['customerInfo'].value.customerEmailAddress;
-    this.customer.dob = this.addOrderForm.controls['customerInfo'].value.customerDOB;
+    this.customer.name = this.updateOrderForm.controls['customerInfo'].value.customerName;
+    this.customer.phoneNumber = this.updateOrderForm.controls['customerInfo'].value.customerPhoneNumber;
+    this.customer.emailAddress = this.updateOrderForm.controls['customerInfo'].value.customerEmailAddress;
+    this.customer.dob = this.updateOrderForm.controls['customerInfo'].value.customerDOB;
     this.order.customer = this.customer;
 
     this.order.offlineOrderSKUs = this.groupSkuItems();
 
     console.log(this.order.offlineOrderSKUs);
 
-    this.orderService.createOrder(this.order).subscribe({
+    this.orderService.updateOrder(this.order).subscribe({
       next: () => {
-        this.toastrService.success('Tạo mới đơn hàng thành công')
-        this.addOrderForm.reset();
-        this.addOrderForm.controls['checkout'].patchValue({
+        this.toastrService.success('Cập nhật đơn hàng thành công')
+        this.updateOrderForm.reset();
+        this.updateOrderForm.controls['checkout'].patchValue({
           shippingFee: 0,
           orderDiscount: 0,
           bankTransferedAmount: 0,
           extraFee: 0
         });
-        this.addOrderForm.controls['information'].patchValue({
+        this.updateOrderForm.controls['information'].patchValue({
           orderCreatedDate: new Date()
         })
         this.totalSKUsPrice = 0;
