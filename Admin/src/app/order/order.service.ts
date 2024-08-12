@@ -13,6 +13,8 @@ import { Subject } from 'rxjs';
 import { Order } from '../shared/models/order';
 import { OrderParams } from '../shared/models/orderParams';
 import { Province } from '../shared/models/address/province';
+import { District } from '../shared/models/address/district';
+import { Ward } from '../shared/models/address/ward';
 
 @Injectable({
   providedIn: 'root'
@@ -173,5 +175,13 @@ export class OrderService {
 
   getProvinces() {
     return this.http.get<Province[]>(this.baseApiUrl + 'address/provinces');
+  }
+
+  getDistricts(provinceId: number) {
+    return this.http.get<District[]>(this.baseApiUrl + 'address/districts/' + provinceId);
+  }
+
+  getWards(districtId: number) {
+    return this.http.get<Ward[]>(this.baseApiUrl + 'address/wards/' + districtId);
   }
 }

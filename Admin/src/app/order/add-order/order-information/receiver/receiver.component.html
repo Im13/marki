@@ -1,34 +1,88 @@
 <div [formGroup]="receiverInfoForm">
-    <p class="fs-6 fw-semibold">Nhận hàng</p>
+  <p class="fs-6 fw-semibold">Nhận hàng</p>
 
-    <div nz-row>
-        <div nz-col nzSpan="12" class="pe-1">
-            <input nz-input placeholder="Tên người nhận" formControlName="receiverName" type="text" class="input-bg"
-                nzBorderless />
-        </div>
-        <div nz-col nzSpan="12" class="ps-1">
-            <input nz-input placeholder="Số điện thoại" formControlName="receiverPhoneNumber" class="input-bg" type="text"
-                nzBorderless />
-        </div>
+  <div nz-row>
+    <div nz-col nzSpan="12" class="pe-1">
+      <input
+        nz-input
+        placeholder="Tên người nhận"
+        formControlName="receiverName"
+        type="text"
+        class="input-bg"
+        nzBorderless
+      />
     </div>
-    
-    <div nz-row class="mt-2">
-        <input class="w-100" nz-input placeholder="Địa chỉ" formControlName="receiverAddress" type="text" class="input-bg"
-            nzBorderless />
+    <div nz-col nzSpan="12" class="ps-1">
+      <input
+        nz-input
+        placeholder="Số điện thoại"
+        formControlName="receiverPhoneNumber"
+        class="input-bg"
+        type="text"
+        nzBorderless
+      />
     </div>
-    
-    <div nz-row class="mt-2">
-        <div nz-col nzSpan="8" class="pe-1">
-            <input nz-input placeholder="Tỉnh thành phố" formControlName="provinceId" type="text" class="input-bg"
-                nzBorderless />
-        </div>
-        <div nz-col nzSpan="8" class="ps-1">
-            <input nz-input placeholder="Quận huyện" formControlName="districtId" type="text" class="input-bg"
-                nzBorderless />
-        </div>
-        <div nz-col nzSpan="8" class="ps-1">
-            <input nz-input placeholder="Phường xã" formControlName="wardId" type="text" class="input-bg"
-                nzBorderless />
-        </div>
+  </div>
+
+  <div nz-row class="mt-2">
+    <input
+      class="w-100"
+      nz-input
+      placeholder="Địa chỉ"
+      formControlName="receiverAddress"
+      type="text"
+      class="input-bg"
+      nzBorderless
+    />
+  </div>
+
+  <div nz-row class="mt-2">
+    <div nz-col nzSpan="8" class="pe-1">
+      <nz-select
+        nzPlaceHolder="Tỉnh thành phố"
+        formControlName="provinceId"
+        nzBorderless
+        class="input-bg w-100"
+        nzShowSearch
+        (ngModelChange)="provinceChange($event)"
+      >
+        <nz-option
+          *ngFor="let province of provinces"
+          [nzLabel]="province.name"
+          [nzValue]="province.id"
+        ></nz-option>
+      </nz-select>
     </div>
+    <div nz-col nzSpan="8" class="ps-1">
+      <nz-select
+        nzPlaceHolder="Quận huyện"
+        formControlName="districtId"
+        nzBorderless
+        class="input-bg w-100"
+        nzShowSearch
+        (ngModelChange)="districtChange($event)"
+      >
+        <nz-option
+          *ngFor="let district of districts"
+          [nzLabel]="district.name"
+          [nzValue]="district.id"
+        ></nz-option>
+      </nz-select>
+    </div>
+    <div nz-col nzSpan="8" class="ps-1">
+      <nz-select
+        nzPlaceHolder="Phường xã"
+        formControlName="wardId"
+        nzBorderless
+        class="input-bg w-100"
+        nzShowSearch
+      >
+        <nz-option
+          *ngFor="let ward of wards"
+          [nzLabel]="ward.name"
+          [nzValue]="ward.id"
+        ></nz-option>
+      </nz-select>
+    </div>
+  </div>
 </div>

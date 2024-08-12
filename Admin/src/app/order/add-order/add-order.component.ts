@@ -7,6 +7,7 @@ import { OrderService } from '../order.service';
 import { OrderSKUItems } from 'src/app/shared/models/orderSKUItems';
 import { ToastrService } from 'ngx-toastr';
 import { CheckoutComponent } from './order-information/checkout/checkout.component';
+import { Province } from 'src/app/shared/models/address/province';
 
 @Component({
   selector: 'app-add-order',
@@ -22,6 +23,7 @@ export class AddOrderComponent implements OnInit {
   order: Order = new Order();
   customer: Customer = new Customer();
   skuItems: OrderSKUItems[] = [];
+  provinces: Province[] = [];
 
   constructor(private formBuilder: FormBuilder, private orderService: OrderService, private toastrService: ToastrService) { }
 
@@ -60,6 +62,16 @@ export class AddOrderComponent implements OnInit {
         shipmentCost: this.formBuilder.control({value: '', disabled: true}, [Validators.required]),
       })
     });
+
+    this.orderService.getProvinces().subscribe({
+      next: result => {
+        this.provinces = result;
+        console.log(this.provinces);
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
   }
 
   submitForm() {
@@ -89,6 +101,7 @@ export class AddOrderComponent implements OnInit {
     this.order.customer = this.customer;
 
     this.order.offlineOrderSKUs = this.groupSkuItems();
+    console.log(this.order)
 
     this.orderService.createOrder(this.order).subscribe({
       next: () => {

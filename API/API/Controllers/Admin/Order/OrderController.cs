@@ -31,7 +31,7 @@ namespace API.Controllers.Admin.Order
 
             var orderToCreate = _mapper.Map<OfflineOrderDTO,OfflineOrder>(orderDTO);
 
-            var orderCreated = await _orderService.CreateOfflineOrder(orderToCreate);
+            var orderCreated = await _orderService.CreateOfflineOrder(orderToCreate, orderDTO.ProvinceId, orderDTO.WardId, orderDTO.DistrictId);
 
             if (orderCreated == null) return BadRequest("Error create order");
 
@@ -54,7 +54,7 @@ namespace API.Controllers.Admin.Order
             return Ok(new Pagination<OfflineOrderDTO>(orderParams.PageIndex, orderParams.PageSize, totalItems, data));
         }
 
-        [HttpPut()]
+        [HttpPut]
         public async Task<ActionResult> UpdateOrder(OfflineOrderDTO orderDTO)
         {
             if(orderDTO == null) return BadRequest();
@@ -68,7 +68,7 @@ namespace API.Controllers.Admin.Order
 
             var orderUpdateResult = await _orderService.UpdateOfflineOrder(orderToUpdate, currentListSkus);
 
-            if (orderUpdateResult == null) return BadRequest("Error create order");
+            if (orderUpdateResult == null) return BadRequest("Error update order");
 
             return Ok();
         }

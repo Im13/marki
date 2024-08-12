@@ -7,6 +7,7 @@ import { ProductSKUDetails } from 'src/app/shared/models/productSKUDetails';
 import { OrderService } from '../order.service';
 import { ToastrService } from 'ngx-toastr';
 import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
+import { Province } from 'src/app/shared/models/address/province';
 
 @Component({
   selector: 'app-update-order',
@@ -21,6 +22,7 @@ export class UpdateOrderComponent implements OnInit {
   totalSKUsPrice = 0;
   customer: Customer = new Customer();
   skuItems: OrderSKUItems[] = [];
+  provinces: Province[] = [];
 
   constructor(private formBuilder: FormBuilder, private orderService: OrderService, private toastrService: ToastrService){}
 
@@ -66,10 +68,18 @@ export class UpdateOrderComponent implements OnInit {
         shipmentCost: this.formBuilder.control({value: '', disabled: true}, [Validators.required]),
       })
     });
+
+    this.orderService.getProvinces().subscribe({
+      next: result => {
+        this.provinces = result;
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
   }
 
   submitForm() {
-    console.log('clicked')
     this.order.address = this.updateOrderForm.controls['receiverInfo'].value.receiverAddress;
     this.order.provinceId = this.updateOrderForm.controls['receiverInfo'].value.provinceId;
     this.order.districtId = this.updateOrderForm.controls['receiverInfo'].value.districtId;
@@ -96,8 +106,6 @@ export class UpdateOrderComponent implements OnInit {
     this.order.customer = this.customer;
 
     this.order.offlineOrderSKUs = this.groupSkuItems();
-
-    console.log(this.order.offlineOrderSKUs);
 
     this.orderService.updateOrder(this.order).subscribe({
       next: () => {

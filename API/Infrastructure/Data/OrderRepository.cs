@@ -24,6 +24,9 @@ namespace Infrastructure.Data
                 .ThenInclude(s => s.ProductSKUValues)
                 .ThenInclude(sv => sv.ProductOptionValue)
                 .ThenInclude(ov => ov.ProductOption)
+                .Include(o => o.Ward)
+                .Include(o => o.District)
+                .Include(o => o.Province)
                 .ToListAsync();
 
             return orders;

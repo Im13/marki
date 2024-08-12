@@ -30,7 +30,10 @@ namespace API.Helpers
                 .ForMember(d => d.PictureUrl, o => o.MapFrom<OrderItemUrlResolver>());
 
             //Offline order
-            CreateMap<OfflineOrder, OfflineOrderDTO>();
+            CreateMap<OfflineOrder, OfflineOrderDTO>()
+                .ForMember(d => d.DistrictId, o => o.MapFrom(s => s.District.Id))
+                .ForMember(d => d.ProvinceId, o => o.MapFrom(s => s.Province.Id))
+                .ForMember(d => d.WardId, o => o.MapFrom(s => s.Ward.Id));
             CreateMap<OfflineOrderDTO, OfflineOrder>();
             CreateMap<Customer, CustomerDTO>();
             CreateMap<CustomerDTO, Customer>();

@@ -83,7 +83,7 @@ namespace Infrastructure.Services
             return await _unitOfWork.Repository<Order>().ListAsync(spec);
         }
 
-        public async Task<OfflineOrder> CreateOfflineOrder(OfflineOrder order)
+        public async Task<OfflineOrder> CreateOfflineOrder(OfflineOrder order, int provinceId, int wardId, int districtId)
         {
             if (order.Id != 0) return null;
 
@@ -96,6 +96,16 @@ namespace Infrastructure.Services
                     skuItems.ProductSKU = await _unitOfWork.Repository<ProductSKUs>().GetByIdAsync(productSkuId);
                 }
             }
+
+            var province = await _unitOfWork.Repository<Province>().GetByIdAsync(provinceId);
+            var ward = await _unitOfWork.Repository<Ward>().GetByIdAsync(wardId);
+            var district = await _unitOfWork.Repository<District>().GetByIdAsync(districtId);
+
+            if(province == null || ward == null || district == null) return null;
+
+            order.Province = province;
+            order.Ward = ward;
+            order.District = district;
 
             _unitOfWork.Repository<OfflineOrder>().Add(order);
 
