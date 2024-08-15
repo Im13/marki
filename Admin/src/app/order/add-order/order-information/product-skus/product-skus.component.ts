@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { NzSelectComponent } from 'ng-zorro-antd/select';
 import { ProductService } from 'src/app/product/product-service.service';
 import { ProductParams } from 'src/app/shared/models/productParams';
 import { Product } from 'src/app/shared/models/products';
@@ -12,6 +13,7 @@ import { ProductSKUDetails } from 'src/app/shared/models/productSKUDetails';
 export class ProductSkusComponent {
   @Input() listSkus!: ProductSKUDetails[];
   @Output() selectProductSkus = new EventEmitter<ProductSKUDetails[]>();
+  @ViewChild(NzSelectComponent, { static: true }) selectNode: NzSelectComponent;
 
   selectedProduct: Product = null;
   nzFilterOption = (): boolean => true;
@@ -24,6 +26,7 @@ export class ProductSkusComponent {
   selectProduct(data: any) {
     this.listSkus.push(data);
     this.selectProductSkus.emit(this.listSkus);
+    this.selectNode.writeValue(undefined);
   }
 
   search(value: string): void {

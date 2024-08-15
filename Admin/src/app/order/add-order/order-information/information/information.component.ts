@@ -15,6 +15,10 @@ export class InformationComponent implements OnInit {
 
   ngOnInit(): void {
     this.infoForm = this.rootFormGroup.control.get('information') as FormGroup;
+
+    if(this.infoForm.value.orderCreatedDate === '') {
+      this.infoForm.get('orderCreatedDate').patchValue(new Date());
+    }
   }
 
   onDateChange(result: Date) {

@@ -1,4 +1,11 @@
-import { Component, ElementRef, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { FormGroup, FormGroupDirective } from '@angular/forms';
 
 @Component({
@@ -28,10 +35,17 @@ export class CheckoutComponent implements OnInit {
     this.orderTotal = this.totalSKUsPrice;
     this.checkoutForm = this.rootFormGroup.control.get('checkout') as FormGroup;
 
-    this.orderDiscount = this.checkoutForm.value.orderDiscount;
-    this.bankTransferedAmount = this.checkoutForm.value.bankTransferedAmount;
-    this.extraFee = this.checkoutForm.value.extraFee;
-    this.shippingFee = this.checkoutForm.value.shippingFee;
+    if (
+      this.checkoutForm.value.orderDiscount !== '' &&
+      this.checkoutForm.value.bankTransferedAmount !== '' &&
+      this.checkoutForm.value.extraFee !== '' &&
+      this.checkoutForm.value.shippingFee !== ''
+    ) {
+      this.orderDiscount = this.checkoutForm.value.orderDiscount;
+      this.bankTransferedAmount = this.checkoutForm.value.bankTransferedAmount;
+      this.extraFee = this.checkoutForm.value.extraFee;
+      this.shippingFee = this.checkoutForm.value.shippingFee;
+    }
 
     this.calculateOrderTotal();
   }
@@ -45,7 +59,7 @@ export class CheckoutComponent implements OnInit {
     this.orderDiscount = +this.checkoutForm.value.orderDiscount;
     this.bankTransferedAmount = +this.checkoutForm.value.bankTransferedAmount;
     this.extraFee = +this.checkoutForm.value.extraFee;
-    console.log(this.totalSKUsPrice)
+    console.log(this.totalSKUsPrice);
     this.calculateOrderTotal();
   }
 
@@ -74,7 +88,7 @@ export class CheckoutComponent implements OnInit {
     // When freeshipChecked changed to false, onFreeshipChecked method will be automatically called
     this.checkoutForm.patchValue({
       freeshipChecked: false,
-      shippingFee: currentShippingFee
+      shippingFee: currentShippingFee,
     });
 
     this.onFeesChange();

@@ -1,7 +1,7 @@
 <nz-layout class="border h-100">
     <nz-content class="h-100 border-bottom" #content>
-        <nz-table *ngIf="orders.length > 0" nzBordered #rowSelectionTable nzShowPagination="false" [nzFrontPagination]="false"
-            [nzScroll]="{ x: '1200px', y: '700px' }" [nzData]="orders"
+        <nz-table *ngIf="orders.length > 0" nzBordered #rowSelectionTable nzShowPagination="false"
+            [nzFrontPagination]="false" [nzScroll]="{ x: '1200px', y: '700px' }" [nzData]="orders"
             (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
             <thead>
                 <tr>
@@ -12,15 +12,16 @@
                     <th nzWidth="140px">Thẻ</th>
                     <th nzWidth="150px">Khách hàng</th>
                     <th nzWidth="150px">SĐT</th>
-                    <th nzWidth="400px">Địa chỉ</th>
-                    <th nzWidth="120px">Tạo lúc</th>
+                    <th nzWidth="350px">Địa chỉ</th>
+                    <th nzWidth="150px">Tạo lúc</th>
                     <th nzWidth="150px">Tổng tiền</th>
-                    <th nzRight nzWidth="150px">Trạng thái</th>
+                    <th nzRight nzWidth="200px">Trạng thái</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let order of orders">
-                    <td [nzChecked]="setOfCheckedId.has(order.id)" (nzCheckedChange)="onItemChecked(order.id, $event)" nzLeft>
+                    <td [nzChecked]="setOfCheckedId.has(order.id)" (nzCheckedChange)="onItemChecked(order.id, $event)"
+                        nzLeft>
                     </td>
                     <td nzLeft>{{ order.id }}</td>
                     <td><nz-tag [nzColor]="'#016D75'" nz-tooltip
@@ -29,21 +30,15 @@
                     <td (click)="onEditOrder(order)">{{ order.customer.name }}</td>
                     <td (click)="onEditOrder(order)">{{ order.customer.phoneNumber }}</td>
                     <td (click)="onEditOrder(order)">{{ order.address }}</td>
-                    <td (click)="onEditOrder(order)">{{ order.dateCreated | date:'hh:mm' }}</td>
+                    <td (click)="onEditOrder(order)">{{ order.dateCreated | date:'hh:mm dd/MM/YYYY' }}</td>
                     <td (click)="onEditOrder(order)">1.000.000</td>
                     <td nzRight>
-                      <div class="order-status-dropdown w-100">
-                        <button class="w-100 d-flex align-items-center justify-content-between" nz-button nz-dropdown [nzDropdownMenu]="dropdownMenu">
-                          Mới
-                          <span nz-icon nzType="down"></span>
-                        </button>
-
-                        <nz-dropdown-menu #dropdownMenu="nzDropdownMenu">
-                          <ul nz-menu *ngFor="let item of dropdownList">
-                            <li nz-menu-item>{{ item }}</li>
-                          </ul>
-                        </nz-dropdown-menu>
-                      </div>
+                        <div class="order-status-dropdown w-100">
+                            <nz-select class="w-100" nzAllowClear nzPlaceHolder="Trạng thái">
+                                <nz-option *ngFor="let option of dropdownList" [nzLabel]="option"
+                                    [nzValue]="option"></nz-option>
+                            </nz-select>
+                        </div>
                     </td>
                 </tr>
             </tbody>
@@ -57,13 +52,8 @@
             <span class="ms-2">Cước VC: <b>63.022.392</b></span>
         </div>
         <div class="d-flex align-items-center justify-content-end">
-            <nz-pagination
-                [(nzPageIndex)]="current"
-                [nzTotal]="totalItems"
-                [nzSize]="'small'"
-                nzShowSizeChanger
-                (nzPageIndexChange)="onPageChange($event)"
-                [nzPageSize]="orderParams.pageSize"
+            <nz-pagination [(nzPageIndex)]="current" [nzTotal]="totalItems" [nzSize]="'small'" nzShowSizeChanger
+                (nzPageIndexChange)="onPageChange($event)" [nzPageSize]="orderParams.pageSize"
                 (nzPageSizeChange)="onPageSizeChange($event)">
             </nz-pagination>
         </div>

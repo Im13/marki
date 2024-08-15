@@ -20,6 +20,14 @@ export class ReceiverComponent implements OnInit {
 
   ngOnInit(): void {
     this.receiverInfoForm = this.rootFormGroup.control.get('receiverInfo') as FormGroup;
+
+    var provinceId = this.receiverInfoForm.get('provinceId').value;
+    var districtId = this.receiverInfoForm.get('districtId').value;
+
+    if(provinceId !== '' && districtId !== '') {
+      this.provinceChange(provinceId);
+      this.districtChange(districtId);
+    }
   }
 
   provinceChange(provinceId: number): void {

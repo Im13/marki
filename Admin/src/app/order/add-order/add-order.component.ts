@@ -31,10 +31,10 @@ export class AddOrderComponent implements OnInit {
     this.addOrderForm = this.formBuilder.group({
       checkout: this.formBuilder.group({
         freeshipChecked: this.formBuilder.control(false),
-        shippingFee: this.formBuilder.control('', [Validators.required]),
-        orderDiscount: this.formBuilder.control('', [Validators.required]),
-        bankTransferedAmount: this.formBuilder.control('', [Validators.required]),
-        extraFee: this.formBuilder.control('', [Validators.required]),
+        shippingFee: this.formBuilder.control(0, [Validators.required]),
+        orderDiscount: this.formBuilder.control(0, [Validators.required]),
+        bankTransferedAmount: this.formBuilder.control(0, [Validators.required]),
+        extraFee: this.formBuilder.control(0, [Validators.required]),
         orderNote: this.formBuilder.control('')
       }),
       information: this.formBuilder.group({
@@ -101,7 +101,6 @@ export class AddOrderComponent implements OnInit {
     this.order.customer = this.customer;
 
     this.order.offlineOrderSKUs = this.groupSkuItems();
-    console.log(this.order)
 
     this.orderService.createOrder(this.order).subscribe({
       next: () => {
