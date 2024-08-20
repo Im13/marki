@@ -163,11 +163,11 @@ export class OrderService {
     return this.http.put(this.baseApiUrl + 'order', order);
   }
 
-  getProducts(productParams: OrderParams) {
+  getOrders(productParams: OrderParams) {
     let params = new HttpParams();
 
     params = params.append('search', productParams.search);
-    params = params.append('pageSize', productParams.pageSize);
+    params = params.append('pageSize', 1);
     params = params.append('pageIndex', productParams.pageIndex);
 
     return this.http.get<Pagination<Order[]>>(this.baseApiUrl + 'order', { params });

@@ -57,9 +57,9 @@ export class AddOrderComponent implements OnInit {
         wardId: this.formBuilder.control('', [Validators.required])
       }),
       deliveryService: this.formBuilder.group({
-        deliveryCompanyId: this.formBuilder.control('', [Validators.required]),
-        shipmentCode: this.formBuilder.control({value: '', disabled: true}, [Validators.required]),
-        shipmentCost: this.formBuilder.control({value: '', disabled: true}, [Validators.required]),
+        deliveryCompanyId: this.formBuilder.control(''),
+        shipmentCode: this.formBuilder.control({value: '', disabled: true}),
+        shipmentCost: this.formBuilder.control({value: '', disabled: true}),
       })
     });
 

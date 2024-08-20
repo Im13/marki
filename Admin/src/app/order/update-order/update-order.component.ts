@@ -45,14 +45,14 @@ export class UpdateOrderComponent implements OnInit {
       }),
       information: this.formBuilder.group({
         orderCreatedDate: this.formBuilder.control(this.order.dateCreated, [Validators.required]),
-        orderCareStaff: this.formBuilder.control(this.order.orderCareStaffId, [Validators.required]),
-        customerCareStaff: this.formBuilder.control(this.order.customerCareStaffId, [Validators.required])
+        orderCareStaff: this.formBuilder.control(this.order.orderCareStaffId),
+        customerCareStaff: this.formBuilder.control(this.order.customerCareStaffId)
       }),
       customerInfo: this.formBuilder.group({
         customerName: this.formBuilder.control(this.order.customer.name, [Validators.required]),
         customerPhoneNumber: this.formBuilder.control(this.order.customer.phoneNumber, [Validators.required]),
-        customerEmailAddress: this.formBuilder.control(this.order.customer.emailAddress, [Validators.required]),
-        customerDOB: this.formBuilder.control(this.order.customer.dob, [Validators.required])
+        customerEmailAddress: this.formBuilder.control(this.order.customer.emailAddress),
+        customerDOB: this.formBuilder.control(this.order.customer.dob)
       }),
       receiverInfo: this.formBuilder.group({
         receiverName: this.formBuilder.control(this.order.receiverName, [Validators.required]),
@@ -63,9 +63,9 @@ export class UpdateOrderComponent implements OnInit {
         wardId: this.formBuilder.control(this.order.wardId, [Validators.required])
       }),
       deliveryService: this.formBuilder.group({
-        deliveryCompanyId: this.formBuilder.control('', [Validators.required]),
-        shipmentCode: this.formBuilder.control({value: '', disabled: true}, [Validators.required]),
-        shipmentCost: this.formBuilder.control({value: '', disabled: true}, [Validators.required]),
+        deliveryCompanyId: this.formBuilder.control(''),
+        shipmentCode: this.formBuilder.control({value: '', disabled: true}),
+        shipmentCost: this.formBuilder.control({value: '', disabled: true}),
       })
     });
 

@@ -4,6 +4,7 @@ import { OrderParams } from 'src/app/shared/models/orderParams';
 import { OrderService } from '../../order.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { UpdateOrderComponent } from '../../update-order/update-order.component';
+import { OrderStatus } from 'src/app/shared/models/orderStatus';
 
 @Component({
   selector: 'app-all-order',
@@ -16,8 +17,15 @@ export class AllOrderComponent implements OnInit {
   orders: readonly Order[] = [];
   totalItems = 0;
 
-  //Temp dropdown list
-  dropdownList = ['Mới', 'Chờ hàng', 'Ưu tiên xuất đơn', 'Xác nhận đơn hàng', 'Gửi hàng đi', 'Huỷ đơn', 'Xoá đơn']
+  orderStatuses: OrderStatus[] = [
+    { id: 0, status: 'Mới'},
+    { id: 1, status: 'Chờ hàng'},
+    { id: 2, status: 'Ưu tiên xuất đơn'},
+    { id: 3, status: 'Xác nhận đơn hàng'},
+    { id: 4, status: 'Gửi hàng đi'},
+    { id: 5, status: 'Huỷ đơn'},
+    { id: 6, status: 'Xoá đơn'}
+  ];
 
   //Order selected
   current = 1;
@@ -68,8 +76,9 @@ export class AllOrderComponent implements OnInit {
   }
 
   getOrders() {
-    this.orderService.getProducts(this.orderParams).subscribe({
+    this.orderService.getOrders(this.orderParams).subscribe({
       next: response => {
+        console.log(response)
         this.orders = response.data;
         this.orderParams.pageIndex = response.pageIndex;
         this.orderParams.pageSize = response.pageSize;
@@ -95,6 +104,9 @@ export class AllOrderComponent implements OnInit {
       nzData: order,
       nzBodyStyle: {overflowY : 'scroll', height: '85vh'}
     });
+  }
 
+  changeStatus(statusId: number) {
+    console.log(statusId)
   }
 }

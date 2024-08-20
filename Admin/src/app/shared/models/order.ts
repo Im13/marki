@@ -1,5 +1,6 @@
 import { Customer } from "./cutomer";
 import { OrderSKUItems } from "./orderSKUItems";
+import { OrderStatus } from "./orderStatus";
 
 export class Order {
   id: number;
@@ -19,4 +20,6 @@ export class Order {
   provinceId: number;
   wardId: number;
   offlineOrderSKUs: OrderSKUItems[];
+  statusId: number;
+  orderStatus: OrderStatus;
 }

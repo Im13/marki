@@ -3,6 +3,7 @@ using System;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20240816112047_AddOfflineOrderStatus1")]
+    partial class AddOfflineOrderStatus1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.12");
@@ -124,9 +127,6 @@ namespace Infrastructure.Migrations
                     b.Property<string>("OrderNote")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("OrderStatusId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int?>("ProvinceId")
                         .HasColumnType("INTEGER");
 
@@ -139,6 +139,9 @@ namespace Infrastructure.Migrations
                     b.Property<double>("ShippingFee")
                         .HasColumnType("REAL");
 
+                    b.Property<int>("StatusId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int?>("WardId")
                         .HasColumnType("INTEGER");
 
@@ -147,8 +150,6 @@ namespace Infrastructure.Migrations
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("DistrictId");
-
-                    b.HasIndex("OrderStatusId");
 
                     b.HasIndex("ProvinceId");
 
@@ -658,10 +659,6 @@ namespace Infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("DistrictId");
 
-                    b.HasOne("Core.Entities.OrderAggregate.OfflineOrderStatus", "OrderStatus")
-                        .WithMany()
-                        .HasForeignKey("OrderStatusId");
-
                     b.HasOne("Core.Entities.Province", "Province")
                         .WithMany()
                         .HasForeignKey("ProvinceId");
@@ -673,8 +670,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("Customer");
 
                     b.Navigation("District");
-
-                    b.Navigation("OrderStatus");
 
                     b.Navigation("Province");
 

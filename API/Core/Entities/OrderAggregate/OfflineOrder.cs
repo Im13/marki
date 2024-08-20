@@ -18,5 +18,6 @@ namespace Core.Entities.OrderAggregate
         public District District { get; set; }
         public Province Province { get; set; }
         public Ward Ward { get; set; }
+        public OfflineOrderStatus OrderStatus { get; set; }
     }
 }

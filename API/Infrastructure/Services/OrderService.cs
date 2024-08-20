@@ -106,6 +106,10 @@ namespace Infrastructure.Services
             order.Province = province;
             order.Ward = ward;
             order.District = district;
+            
+            //Define orderStatus 
+            var status = await _unitOfWork.Repository<OfflineOrderStatus>().GetByIdAsync(0);
+            order.OrderStatus = status;
 
             _unitOfWork.Repository<OfflineOrder>().Add(order);
 

@@ -27,6 +27,7 @@ namespace Infrastructure.Data
                 .Include(o => o.Ward)
                 .Include(o => o.District)
                 .Include(o => o.Province)
+                .Include(o => o.OrderStatus)
                 .ToListAsync();
 
             return orders;

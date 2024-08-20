@@ -21,5 +21,6 @@ namespace API.DTOs.AdminOrder
         public int DistrictId { get; set; }
         public int ProvinceId { get; set; }
         public int WardId { get; set; }
+        public OfflineOrderStatusDTO OrderStatus { get; set; }
     }
 }

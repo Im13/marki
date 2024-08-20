@@ -39,7 +39,7 @@ namespace API.Controllers.Admin.Order
         }
 
         [HttpGet]
-        public async Task<ActionResult<Pagination<OfflineOrderDTO>>> GetProducts([FromQuery] OrderSpecParams orderParams)
+        public async Task<ActionResult<Pagination<OfflineOrderDTO>>> GetOrders([FromQuery] OrderSpecParams orderParams)
         {
             var spec = new OrderSpecification(orderParams);
 
