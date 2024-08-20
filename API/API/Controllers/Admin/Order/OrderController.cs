@@ -74,14 +74,14 @@ namespace API.Controllers.Admin.Order
         }
 
         [HttpPut("update-status")]
-        public async Task<ActionResult> UpdateOrderStatus(int orderId, int statusId)
+        public async Task<ActionResult> UpdateOrderStatus(UpdateStatusDTO updateStatusDTO)
         {
-            var order = await _orderService.GetOrderAsync(orderId);
+            var order = await _orderService.GetOrderWithStatusAsync(updateStatusDTO.OrderId);
             if(order == null) return BadRequest();
 
-            if(order.OrderStatus.Id == statusId) return BadRequest();
+            if(order.OrderStatus.Id == updateStatusDTO.StatusId) return BadRequest();
 
-            var statusUpdateResult = await _orderService.UpdateStatus(order, statusId);
+            var statusUpdateResult = await _orderService.UpdateStatus(order, updateStatusDTO.StatusId);
 
             if(statusUpdateResult == null) return BadRequest();
 

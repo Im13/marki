@@ -176,5 +176,12 @@ namespace Infrastructure.Services
 
             return order;
         }
+
+        public async Task<OfflineOrder> GetOrderWithStatusAsync(int orderId) 
+        {
+            var order = await _context.OfflineOrders.Include(o => o.OrderStatus).Where(o => o.Id == orderId).SingleOrDefaultAsync();
+
+            return order;
+        }
     }
 }

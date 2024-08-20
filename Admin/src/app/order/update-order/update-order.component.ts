@@ -91,6 +91,7 @@ export class UpdateOrderComponent implements OnInit {
     this.order.orderDiscount = this.updateOrderForm.controls['checkout'].value.orderDiscount;
     this.order.bankTransferedAmount = this.updateOrderForm.controls['checkout'].value.bankTransferedAmount;
     this.order.extraFee = this.updateOrderForm.controls['checkout'].value.extraFee;
+    this.order.total = this.totalSKUsPrice + this.order.shippingFee + this.order.extraFee - this.order.orderDiscount;
     this.order.orderNote = this.updateOrderForm.controls['checkout'].value.orderNote;
 
     this.order.dateCreated = this.updateOrderForm.controls['information'].value.orderCreatedDate;

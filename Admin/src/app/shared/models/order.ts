@@ -8,6 +8,7 @@ export class Order {
   orderDiscount: number;
   bankTransferedAmount: number;
   extraFee: number;
+  total: number;
   orderNote: string;
   dateCreated: Date;
   orderCareStaffId: number;

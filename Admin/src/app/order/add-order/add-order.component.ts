@@ -39,8 +39,8 @@ export class AddOrderComponent implements OnInit {
       }),
       information: this.formBuilder.group({
         orderCreatedDate: this.formBuilder.control('', [Validators.required]),
-        orderCareStaff: this.formBuilder.control('', [Validators.required]),
-        customerCareStaff: this.formBuilder.control('', [Validators.required])
+        orderCareStaff: this.formBuilder.control(1, [Validators.required]),
+        customerCareStaff: this.formBuilder.control(2, [Validators.required])
       }),
       customerInfo: this.formBuilder.group({
         customerName: this.formBuilder.control('', [Validators.required]),
@@ -86,6 +86,7 @@ export class AddOrderComponent implements OnInit {
     this.order.orderDiscount = this.addOrderForm.controls['checkout'].value.orderDiscount;
     this.order.bankTransferedAmount = this.addOrderForm.controls['checkout'].value.bankTransferedAmount;
     this.order.extraFee = this.addOrderForm.controls['checkout'].value.extraFee;
+    this.order.total = this.totalSKUsPrice + this.order.shippingFee + this.order.extraFee - this.order.orderDiscount;
     this.order.orderNote = this.addOrderForm.controls['checkout'].value.orderNote;
 
     this.order.dateCreated = this.addOrderForm.controls['information'].value.orderCreatedDate;

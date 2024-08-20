@@ -5,6 +5,7 @@ import { OrderService } from '../../order.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { UpdateOrderComponent } from '../../update-order/update-order.component';
 import { OrderStatus } from 'src/app/shared/models/orderStatus';
+import { UpdateStatusDTO } from 'src/app/shared/models/order/updateStatusDTO';
 
 @Component({
   selector: 'app-all-order',
@@ -21,7 +22,7 @@ export class AllOrderComponent implements OnInit {
     { id: 0, status: 'Mới'},
     { id: 1, status: 'Chờ hàng'},
     { id: 2, status: 'Ưu tiên xuất đơn'},
-    { id: 3, status: 'Xác nhận đơn hàng'},
+    { id: 3, status: 'Đã xác nhận'},
     { id: 4, status: 'Gửi hàng đi'},
     { id: 5, status: 'Huỷ đơn'},
     { id: 6, status: 'Xoá đơn'}
@@ -106,7 +107,19 @@ export class AllOrderComponent implements OnInit {
     });
   }
 
-  changeStatus(statusId: number) {
-    console.log(statusId)
+  changeStatus(statusId: number, orderId: number) {
+    var updateStatusDTO: UpdateStatusDTO = {
+      orderId: orderId,
+      statusId: statusId
+    };
+
+    this.orderService.updateStatus(updateStatusDTO).subscribe({
+      next: (order) => {
+        console.log(order);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
   }
 }

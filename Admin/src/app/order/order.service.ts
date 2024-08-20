@@ -15,6 +15,7 @@ import { OrderParams } from '../shared/models/orderParams';
 import { Province } from '../shared/models/address/province';
 import { District } from '../shared/models/address/district';
 import { Ward } from '../shared/models/address/ward';
+import { UpdateStatusDTO } from '../shared/models/order/updateStatusDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -167,7 +168,7 @@ export class OrderService {
     let params = new HttpParams();
 
     params = params.append('search', productParams.search);
-    params = params.append('pageSize', 1);
+    params = params.append('pageSize', productParams.pageSize);
     params = params.append('pageIndex', productParams.pageIndex);
 
     return this.http.get<Pagination<Order[]>>(this.baseApiUrl + 'order', { params });
@@ -185,7 +186,7 @@ export class OrderService {
     return this.http.get<Ward[]>(this.baseApiUrl + 'address/wards/' + districtId);
   }
 
-  updateStatus(orderId: number, statusId: number) {
-    return this.http.put<Order>(this.baseApiUrl + 'order/update-status', orderId);
+  updateStatus(updateStatusDTO: UpdateStatusDTO) {
+    return this.http.put<Order>(this.baseApiUrl + 'order/update-status', updateStatusDTO);
   }
 }
