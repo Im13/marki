@@ -72,5 +72,20 @@ namespace API.Controllers.Admin.Order
 
             return Ok();
         }
+
+        [HttpPut("update-status")]
+        public async Task<ActionResult> UpdateOrderStatus(int orderId, int statusId)
+        {
+            var order = await _orderService.GetOrderAsync(orderId);
+            if(order == null) return BadRequest();
+
+            if(order.OrderStatus.Id == statusId) return BadRequest();
+
+            var statusUpdateResult = await _orderService.UpdateStatus(order, statusId);
+
+            if(statusUpdateResult == null) return BadRequest();
+
+            return Ok(statusUpdateResult);
+        }
     }
 }

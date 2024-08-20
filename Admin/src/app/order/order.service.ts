@@ -184,4 +184,8 @@ export class OrderService {
   getWards(districtId: number) {
     return this.http.get<Ward[]>(this.baseApiUrl + 'address/wards/' + districtId);
   }
+
+  updateStatus(orderId: number, statusId: number) {
+    return this.http.put<Order>(this.baseApiUrl + 'order/update-status', orderId);
+  }
 }

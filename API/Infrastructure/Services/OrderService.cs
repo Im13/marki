@@ -161,5 +161,20 @@ namespace Infrastructure.Services
 
             return order;
         }
+
+        public async Task<OfflineOrder> UpdateStatus(OfflineOrder order, int statusId)
+        {
+            var orderStatus = await _unitOfWork.Repository<OfflineOrderStatus>().GetByIdAsync(statusId);
+
+            if(orderStatus == null) return null;
+
+            order.OrderStatus = orderStatus;
+
+            var result = await _unitOfWork.Complete();
+
+            if(result <= 0) return null;
+
+            return order;
+        }
     }
 }
