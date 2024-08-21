@@ -1,20 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Order } from 'src/app/shared/models/order';
-import { OrderParams } from 'src/app/shared/models/order/orderParams';
+import { OrderStatus } from 'src/app/shared/models/orderStatus';
 import { OrderService } from '../../order.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { OrderWithStatusParams } from 'src/app/shared/models/order/orderWithStatusParams';
 import { UpdateOrderComponent } from '../../update-order/update-order.component';
-import { OrderStatus } from 'src/app/shared/models/orderStatus';
 import { UpdateStatusDTO } from 'src/app/shared/models/order/updateStatusDTO';
 
 @Component({
-  selector: 'app-all-order',
-  templateUrl: './all-order.component.html',
-  styleUrls: ['./all-order.component.css']
+  selector: 'app-new-order',
+  templateUrl: './new-order.component.html',
+  styleUrls: ['./new-order.component.css']
 })
-
-export class AllOrderComponent implements OnInit {
-  orderParams = new OrderParams();
+export class NewOrderComponent implements OnInit {
+  orderParams = new OrderWithStatusParams(1);
   orders: readonly Order[] = [];
   totalItems = 0;
 
@@ -41,12 +40,19 @@ export class AllOrderComponent implements OnInit {
     this.getOrders();
   }
 
-  updateCheckedSet(id: number, checked: boolean): void {
-    if (checked) {
-      this.setOfCheckedId.add(id);
-    } else {
-      this.setOfCheckedId.delete(id);
-    }
+  getOrders() {
+    this.orderService.getOrdersWithStatus(this.orderParams).subscribe({
+      next: response => {
+        console.log(response)
+        this.orders = response.data;
+        this.orderParams.pageIndex = response.pageIndex;
+        this.orderParams.pageSize = response.pageSize;
+        this.totalItems = response.count;
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
   }
 
   onCurrentPageDataChange(listOfCurrentPageData: readonly Order[]): void {
@@ -71,29 +77,12 @@ export class AllOrderComponent implements OnInit {
     this.refreshCheckedStatus();
   }
 
-  onPageChange(pageNumber: number) {
-    this.orderParams.pageIndex = pageNumber;
-    this.getOrders();
-  }
-
-  getOrders() {
-    this.orderService.getOrders(this.orderParams).subscribe({
-      next: response => {
-        console.log(response)
-        this.orders = response.data;
-        this.orderParams.pageIndex = response.pageIndex;
-        this.orderParams.pageSize = response.pageSize;
-        this.totalItems = response.count;
-      },
-      error: err => {
-        console.log(err);
-      }
-    });
-  }
-
-  onPageSizeChange(pageSize: number) {
-    this.orderParams.pageSize = pageSize;
-    this.getOrders();
+  updateCheckedSet(id: number, checked: boolean): void {
+    if (checked) {
+      this.setOfCheckedId.add(id);
+    } else {
+      this.setOfCheckedId.delete(id);
+    }
   }
 
   onEditOrder(order: Order) {
@@ -121,5 +110,15 @@ export class AllOrderComponent implements OnInit {
         console.log(err);
       }
     })
+  }
+
+  onPageSizeChange(pageSize: number) {
+    this.orderParams.pageSize = pageSize;
+    this.getOrders();
+  }
+
+  onPageChange(pageNumber: number) {
+    this.orderParams.pageIndex = pageNumber;
+    this.getOrders();
   }
 }

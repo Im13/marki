@@ -36,7 +36,16 @@
           </div>
         </ng-template>
       </nz-tab>
-      <nz-tab nzTitle="Mới">Mới</nz-tab>
+      <nz-tab [nzTitle]="addOrderTitleTemplate">
+        <ng-template nz-tab>
+          <app-new-order class="h-100"></app-new-order>
+        </ng-template>
+        <ng-template #addOrderTitleTemplate>
+          <div class="d-flex align-items-center">
+            Mới <nz-badge nzStandalone [nzCount]="1122" [nzOverflowCount]="99999" class="ms-2" [nzStyle]="{ backgroundColor: '#e8f5fb', color: '#1a57a1' }"></nz-badge>
+          </div>
+        </ng-template>
+      </nz-tab>
       <nz-tab nzTitle="Đã xác nhận">Đã xác nhận</nz-tab>
       <nz-tab nzTitle="Đã gửi hàng">Đã xác nhận</nz-tab>
       <nz-tab nzTitle="Đã nhận">Đã xác nhận</nz-tab>

@@ -46,7 +46,7 @@ export class AddOrderComponent implements OnInit {
         customerName: this.formBuilder.control('', [Validators.required]),
         customerPhoneNumber: this.formBuilder.control('', [Validators.required]),
         customerEmailAddress: this.formBuilder.control('', [Validators.required]),
-        customerDOB: this.formBuilder.control('', [Validators.required])
+        customerDOB: this.formBuilder.control('')
       }),
       receiverInfo: this.formBuilder.group({
         receiverName: this.formBuilder.control('', [Validators.required]),

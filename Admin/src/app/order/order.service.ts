@@ -11,11 +11,12 @@ import { ShopeeOrderParams } from '../shared/models/shopeeOrderParams';
 import { Pagination } from '../shared/models/pagination';
 import { Subject } from 'rxjs';
 import { Order } from '../shared/models/order';
-import { OrderParams } from '../shared/models/orderParams';
+import { OrderParams } from '../shared/models/order/orderParams';
 import { Province } from '../shared/models/address/province';
 import { District } from '../shared/models/address/district';
 import { Ward } from '../shared/models/address/ward';
 import { UpdateStatusDTO } from '../shared/models/order/updateStatusDTO';
+import { OrderWithStatusParams } from '../shared/models/order/orderWithStatusParams';
 
 @Injectable({
   providedIn: 'root'
@@ -188,5 +189,16 @@ export class OrderService {
 
   updateStatus(updateStatusDTO: UpdateStatusDTO) {
     return this.http.put<Order>(this.baseApiUrl + 'order/update-status', updateStatusDTO);
+  }
+
+  getOrdersWithStatus(productParams: OrderWithStatusParams) {
+    let params = new HttpParams();
+
+    params = params.append('search', productParams.search);
+    params = params.append('pageSize', productParams.pageSize);
+    params = params.append('pageIndex', productParams.pageIndex);
+    params = params.append('statusId', productParams.statusId);
+
+    return this.http.get<Pagination<Order[]>>(this.baseApiUrl + 'order/status', { params });
   }
 }
