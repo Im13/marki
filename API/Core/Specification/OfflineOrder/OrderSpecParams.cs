@@ -16,5 +16,6 @@ namespace Core.Specification.OfflineOrderSpec
             get => _search; 
             set => _search = value?.ToLower(); 
         }
+        public int StatusId;
     }
 }

@@ -87,5 +87,21 @@ namespace API.Controllers.Admin.Order
 
             return Ok(statusUpdateResult);
         }
+
+        [HttpGet("status")]
+        public async Task<ActionResult<Pagination<OfflineOrderDTO>>> GetOrderByStatusId([FromQuery] OrderSpecParams orderParams)
+        {
+            var spec = new OrderWithStatusFilterSpecification(orderParams);
+
+            var countSpec = new OrdersWithStatusFilterForCountSpecification(orderParams);
+
+            var totalItems = await _offlineOrderRepo.CountAsync(countSpec);
+
+            var orders = await _orderRepository.GetOrdersWithSpec(spec);
+
+            var data = _mapper.Map<IReadOnlyList<OfflineOrder>, IReadOnlyList<OfflineOrderDTO>>(orders);
+
+            return Ok(new Pagination<OfflineOrderDTO>(orderParams.PageIndex, orderParams.PageSize, totalItems, data));
+        }
     }
 }

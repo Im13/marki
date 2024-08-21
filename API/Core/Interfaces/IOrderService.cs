@@ -13,5 +13,6 @@ namespace Core.Interfaces
         Task<OfflineOrder> GetOrderAsync(int id);
         Task<OfflineOrder> UpdateStatus(OfflineOrder order, int statusId);
         Task<OfflineOrder> GetOrderWithStatusAsync(int orderId);
+        Task<List<OfflineOrder>> GetOrdersByStatusIdAsync(int statusId);
     }
 }
