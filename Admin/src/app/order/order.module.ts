@@ -18,7 +18,6 @@ import { ReceiverComponent } from './add-order/order-information/receiver/receiv
 import { DeliveryComponent } from './add-order/order-information/delivery/delivery.component';
 import { AllOrderComponent } from './order-list/all-order/all-order.component';
 import { UpdateOrderComponent } from './update-order/update-order.component';
-import { NewOrderComponent } from './order-list/new-order/new-order.component';
 
 @NgModule({
   declarations: [
@@ -33,8 +32,7 @@ import { NewOrderComponent } from './order-list/new-order/new-order.component';
     ReceiverComponent,
     DeliveryComponent,
     AllOrderComponent,
-    UpdateOrderComponent,
-    NewOrderComponent
+    UpdateOrderComponent
   ],
   imports: [
     CommonModule,

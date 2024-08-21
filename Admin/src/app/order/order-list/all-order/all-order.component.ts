@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Order } from 'src/app/shared/models/order';
 import { OrderParams } from 'src/app/shared/models/order/orderParams';
 import { OrderService } from '../../order.service';
@@ -6,6 +6,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { UpdateOrderComponent } from '../../update-order/update-order.component';
 import { OrderStatus } from 'src/app/shared/models/orderStatus';
 import { UpdateStatusDTO } from 'src/app/shared/models/order/updateStatusDTO';
+import { OrderWithStatusParams } from 'src/app/shared/models/order/orderWithStatusParams';
 
 @Component({
   selector: 'app-all-order',
@@ -14,6 +15,7 @@ import { UpdateStatusDTO } from 'src/app/shared/models/order/updateStatusDTO';
 })
 
 export class AllOrderComponent implements OnInit {
+  @Input() orderStatus: number;
   orderParams = new OrderParams();
   orders: readonly Order[] = [];
   totalItems = 0;
@@ -38,7 +40,12 @@ export class AllOrderComponent implements OnInit {
   constructor(private orderService: OrderService, private modalServices: NzModalService) {}
 
   ngOnInit() {
-    this.getOrders();
+    this.loading = true;
+    if(this.orderStatus == -1) {
+      this.getOrders();
+    } else {
+      this.getOrderByStatus(this.orderStatus);
+    }
   }
 
   updateCheckedSet(id: number, checked: boolean): void {
@@ -79,14 +86,15 @@ export class AllOrderComponent implements OnInit {
   getOrders() {
     this.orderService.getOrders(this.orderParams).subscribe({
       next: response => {
-        console.log(response)
         this.orders = response.data;
         this.orderParams.pageIndex = response.pageIndex;
         this.orderParams.pageSize = response.pageSize;
         this.totalItems = response.count;
+        this.loading = false;
       },
       error: err => {
         console.log(err);
+        this.loading = false;
       }
     });
   }
@@ -121,5 +129,25 @@ export class AllOrderComponent implements OnInit {
         console.log(err);
       }
     })
+  }
+
+  getOrderByStatus(statusId: number) {
+    this.loading = true;
+
+    var params = new OrderWithStatusParams(statusId);
+
+    this.orderService.getOrdersWithStatus(params).subscribe({
+      next: response => {
+        this.orders = response.data;
+        this.orderParams.pageIndex = response.pageIndex;
+        this.orderParams.pageSize = response.pageSize;
+        this.totalItems = response.count;
+        this.loading = false;
+      },
+      error: err => {
+        console.log(err);
+        this.loading = false;
+      }
+    });
   }
 }

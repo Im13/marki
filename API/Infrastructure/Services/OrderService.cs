@@ -127,6 +127,9 @@ namespace Infrastructure.Services
             var currentOrder = await _context.OfflineOrders.Include(o => o.OfflineOrderSKUs).Where(o => o.Id == order.Id).SingleOrDefaultAsync();
             _unitOfWork.ClearTracker();
 
+            var orderStatus = await _context.OrderStatus.Where(s => s.Id == order.OrderStatus.Id).SingleOrDefaultAsync();
+            order.OrderStatus = orderStatus;
+
             //Delete all childs, need improment later
             foreach(var sku in currentOrder.OfflineOrderSKUs)
             {

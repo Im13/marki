@@ -158,6 +158,7 @@ export class OrderService {
   }
 
   createOrder(order: Order) {
+    console.log(order);
     return this.http.post(this.baseApiUrl + 'order/create', order);
   }
 

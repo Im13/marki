@@ -2,7 +2,7 @@
   <nz-content class="h-100 border-bottom" #content>
     <nz-table *ngIf="orders.length > 0" nzBordered #rowSelectionTable nzShowPagination="false"
       [nzFrontPagination]="false" [nzScroll]="{ x: '1200px', y: '725px' }" [nzData]="orders"
-      (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
+      (nzCurrentPageDataChange)="onCurrentPageDataChange($event)" [nzLoading]="loading">
       <thead>
         <tr>
           <th [nzChecked]="checked" [nzIndeterminate]="indeterminate" nzLabel="Select all"

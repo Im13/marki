@@ -6,8 +6,9 @@ import { OrderSKUItems } from 'src/app/shared/models/orderSKUItems';
 import { ProductSKUDetails } from 'src/app/shared/models/productSKUDetails';
 import { OrderService } from '../order.service';
 import { ToastrService } from 'ngx-toastr';
-import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
+import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
 import { Province } from 'src/app/shared/models/address/province';
+import { OrderStatus } from 'src/app/shared/models/orderStatus';
 
 @Component({
   selector: 'app-update-order',
@@ -23,11 +24,13 @@ export class UpdateOrderComponent implements OnInit {
   customer: Customer = new Customer();
   skuItems: OrderSKUItems[] = [];
   provinces: Province[] = [];
+  orderStatus: OrderStatus;
 
-  constructor(private formBuilder: FormBuilder, private orderService: OrderService, private toastrService: ToastrService){}
+  constructor(private formBuilder: FormBuilder, private orderService: OrderService, private toastrService: ToastrService, private modal: NzModalRef){}
 
   ngOnInit(): void {
     console.log(this.order);
+    this.orderStatus = this.order.orderStatus;
 
     this.order.offlineOrderSKUs.forEach(item => {
       this.listSkus.push(item.skuDetail);
@@ -105,25 +108,14 @@ export class UpdateOrderComponent implements OnInit {
     this.customer.emailAddress = this.updateOrderForm.controls['customerInfo'].value.customerEmailAddress;
     this.customer.dob = this.updateOrderForm.controls['customerInfo'].value.customerDOB;
     this.order.customer = this.customer;
+    this.order.orderStatus = this.orderStatus;
 
     this.order.offlineOrderSKUs = this.groupSkuItems();
 
     this.orderService.updateOrder(this.order).subscribe({
       next: () => {
         this.toastrService.success('Cập nhật đơn hàng thành công')
-        this.updateOrderForm.reset();
-        this.updateOrderForm.controls['checkout'].patchValue({
-          shippingFee: 0,
-          orderDiscount: 0,
-          bankTransferedAmount: 0,
-          extraFee: 0
-        });
-        this.updateOrderForm.controls['information'].patchValue({
-          orderCreatedDate: new Date()
-        })
-        this.totalSKUsPrice = 0;
-        this.skuItems = [];
-        this.listSkus = [];
+        this.modal.destroy();
       },
       error: err => {
         console.log(err);
