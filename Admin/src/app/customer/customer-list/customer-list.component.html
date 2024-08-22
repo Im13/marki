@@ -1,9 +1,9 @@
 <nz-layout>
     <nz-header class="d-flex align-items-center px-2">
-      <button nz-button nzType="primary" nzSize="default" (click)="addCustomer()" nz-tooltip
+      <!-- <button nz-button nzType="primary" nzSize="default" (click)="addCustomer()" nz-tooltip
         nzTooltipTitle="Thêm đơn hàng mới" nzTooltipPlacement="bottom" class="me-2">
         <span nz-icon nzType="plus"></span>
-      </button>
+      </button> -->
   
       <button nz-button nzType="default" nzSize="default" (click)="addCustomer()" nz-tooltip
         nzTooltipTitle="Tải lại" nzTooltipPlacement="bottom" class="me-2 d-flex align-items-center">
@@ -14,18 +14,44 @@
       <button nz-button nzType="default" nzSize="default" (click)="addCustomer()" nz-tooltip
         nzTooltipTitle="In đơn" nzTooltipPlacement="bottom" class="me-2 d-flex align-items-center">
         <span nz-icon nzType="printer"></span>
-        In đơn
+        Nhập excel
       </button>
   
       <button nz-button nzType="default" nzSize="default" (click)="addCustomer()" nz-tooltip
-        nzTooltipTitle="Xuất excel" nzTooltipPlacement="bottom" class="d-flex align-items-center">
+        nzTooltipTitle="Xuất excel" nzTooltipPlacement="bottom" class="me-2 d-flex align-items-center">
         <span nz-icon nzType="download"></span>
         Xuất excel
+      </button>
+
+      <button *ngIf="checkedIds.size > 0" nz-button nz-dropdown [nzDropdownMenu]="menu" class="me-2 d-flex align-items-center">
+        Thao tác
+        <span nz-icon nzType="down"></span>
+      </button>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu>
+          <li nz-menu-item>
+            <a>Xoá</a>
+          </li>
+          <li nz-menu-item>
+            <a>Thêm thẻ khách hàng</a>
+          </li>
+          <li nz-menu-item>
+            <a>Tạo vouchers</a>
+          </li>
+          <li nz-menu-item>
+            <a>Phân công</a>
+          </li>
+        </ul>
+      </nz-dropdown-menu>
+
+      <button *ngIf="checkedIds.size > 0" nz-button nzType="default" nzSize="default" (click)="addCustomer()" nz-tooltip
+        nzTooltipTitle="In đơn" nzTooltipPlacement="bottom" class="me-2 d-flex align-items-center">
+        <span><b>{{ checkedIds.size }}</b> đã chọn</span>
       </button>
     </nz-header>
   
     <nz-content class="px-2">
-      <app-all-customers></app-all-customers>
+      <app-all-customers (checkId)="checkItem($event)"></app-all-customers>
     </nz-content>
   </nz-layout>
   

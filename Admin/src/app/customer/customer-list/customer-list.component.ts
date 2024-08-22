@@ -6,6 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./customer-list.component.css']
 })
 export class CustomerListComponent {
+  checkedIds = new Set<number>();
 
   addCustomer() {}
+
+  checkItem(checkedIds: Set<number>) {
+    this.checkedIds = checkedIds;
+  }
 }

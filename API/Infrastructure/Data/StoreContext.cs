@@ -40,6 +40,7 @@ namespace Infrastructure.Data
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             modelBuilder.Entity<Product>().Property(p => p.IsDeleted).HasDefaultValue(false);
+            modelBuilder.Entity<Customer>().Property(c => c.IsDeleted).HasDefaultValue(false);
 
             if(Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite")
             {

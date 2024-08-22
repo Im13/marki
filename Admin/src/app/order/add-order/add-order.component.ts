@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Customer } from 'src/app/shared/models/cutomer';
+import { Customer } from 'src/app/shared/models/customer';
 import { Order } from 'src/app/shared/models/order';
 import { ProductSKUDetails } from 'src/app/shared/models/productSKUDetails';
 import { OrderService } from '../order.service';

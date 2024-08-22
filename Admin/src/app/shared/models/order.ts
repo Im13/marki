@@ -1,4 +1,4 @@
-import { Customer } from "./cutomer";
+import { Customer } from "./customer";
 import { OrderSKUItems } from "./orderSKUItems";
 import { OrderStatus } from "./orderStatus";
 

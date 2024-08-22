@@ -1,21 +1,19 @@
 <nz-layout class="border h-100">
     <nz-content class="h-100 border-bottom" #content>
       <nz-table nzBordered #rowSelectionTable nzShowPagination="false"
-        [nzFrontPagination]="false" [nzScroll]="{ x: '1200px', y: '725px' }" [nzData]="customers"
+        [nzFrontPagination]="false" [nzScroll]="{ x: '1200px', y: '750px' }" [nzData]="customers"
         (nzCurrentPageDataChange)="onCurrentPageDataChange($event)" [nzLoading]="loading" nzSize="small">
         <thead>
           <tr>
             <th [nzChecked]="checked" [nzIndeterminate]="indeterminate" nzLabel="Select all"
               (nzCheckedChange)="onAllChecked($event)" nzWidth="40px" nzLeft></th>
             <th rowSpan="1" nzWidth="60px" nzLeft>Id</th>
-            <th nzWidth="80px">VC</th>
-            <th nzWidth="140px">Thẻ</th>
-            <th nzWidth="120px">Khách hàng</th>
-            <th nzWidth="120px">SĐT</th>
+            <th nzWidth="140px">Tên khách hàng</th>
+            <th nzWidth="140px">Trạng thái</th>
+            <th nzWidth="120px">Cấp độ khách hàng</th>
+            <th nzWidth="120px">Ngày sinh</th>
             <th nzWidth="300px">Địa chỉ</th>
-            <th nzWidth="200px">Tạo lúc</th>
-            <th nzWidth="150px">Tổng tiền</th>
-            <th nzRight nzWidth="200px">Trạng thái</th>
+            <th nzWidth="200px">Số điện thoại</th>
           </tr>
         </thead>
         <tbody>
@@ -23,28 +21,24 @@
             <td [nzChecked]="setOfCheckedId.has(customer.id)" (nzCheckedChange)="onItemChecked(customer.id, $event)" nzLeft>
             </td>
             <td nzLeft>{{ customer.id }}</td>
-            <td>
-              <nz-tag [nzColor]="'#016D75'" nz-tooltip nzTooltipTitle="Click để copy mã vận chuyển">VTP</nz-tag>
-            </td>
-            <td>
-              <!-- <nz-tag [nzColor]="'gold'">Chưa đối soát</nz-tag> -->
-            </td>
             <td (click)="onEditCustomer(customer)">{{ customer.name }}</td>
+            <td (click)="onEditCustomer(customer)"></td>
+            <td (click)="onEditCustomer(customer)"></td>
+            <td (click)="onEditCustomer(customer)">{{ customer.dob | date : 'dd/MM/yyyy' }}</td>
             <td (click)="onEditCustomer(customer)">{{ customer.name }}</td>
-            <td (click)="onEditCustomer(customer)">{{ customer.name }}</td>
-            <td (click)="onEditCustomer(customer)">{{ customer.name }}</td>
-            <td (click)="onEditCustomer(customer)">{{ customer.name }}</td>
-            <td (click)="onEditCustomer(customer)">{{ customer.name }}</td>
+            <td (click)="onEditCustomer(customer)">{{ customer.phoneNumber }}</td>
           </tr>
         </tbody>
       </nz-table>
     </nz-content>
   
     <nz-footer class="d-flex align-items-center justify-content-between px-2">
+      <div class="customer-info">
+      </div>
       <div class="d-flex align-items-center justify-content-end">
         <nz-pagination [(nzPageIndex)]="current" [nzTotal]="totalItems" [nzSize]="'small'" nzShowSizeChanger
           (nzPageIndexChange)="onPageChange($event)" 
-          nzPageSize="10"
+          [nzPageSize]="customerParams.pageSize"
           (nzPageSizeChange)="onPageSizeChange($event)">
         </nz-pagination>
       </div>

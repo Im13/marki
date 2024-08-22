@@ -1,6 +1,6 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Customer } from 'src/app/shared/models/cutomer';
+import { Customer } from 'src/app/shared/models/customer';
 import { Order } from 'src/app/shared/models/order';
 import { OrderSKUItems } from 'src/app/shared/models/orderSKUItems';
 import { ProductSKUDetails } from 'src/app/shared/models/productSKUDetails';

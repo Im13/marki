@@ -45,6 +45,10 @@ namespace API.Helpers
                 .ForMember(d => d.SkuDetail, o => o.MapFrom(s => s.ProductSKU))
                 .ForMember(d => d.ProductName, o => o.MapFrom(s => s.ProductSKU.Product.Name));
 
+            //Customer
+            CreateMap<CustomerDTO,Customer>();
+            CreateMap<Customer,CustomerDTO>();
+
             CreateMap<ProductDTOs, Product>();
             CreateMap<Product, ProductDTOs>();
             CreateMap<Photo, PhotoDTO>();
