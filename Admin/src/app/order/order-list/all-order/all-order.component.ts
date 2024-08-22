@@ -33,14 +33,13 @@ export class AllOrderComponent implements OnInit {
   //Order selected
   current = 1;
   checked = false;
-  loading = false;
+  loading = true;
   indeterminate = false;
   setOfCheckedId = new Set<number>();
 
   constructor(private orderService: OrderService, private modalServices: NzModalService) {}
 
   ngOnInit() {
-    this.loading = true;
     if(this.orderStatus == -1) {
       this.getOrders();
     } else {
@@ -132,8 +131,6 @@ export class AllOrderComponent implements OnInit {
   }
 
   getOrderByStatus(statusId: number) {
-    this.loading = true;
-
     var params = new OrderWithStatusParams(statusId);
 
     this.orderService.getOrdersWithStatus(params).subscribe({

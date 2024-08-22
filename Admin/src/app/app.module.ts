@@ -8,7 +8,7 @@ import { CoreModule } from './core/core.module';
 import { OrderModule } from './order/order.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';

@@ -1,6 +1,6 @@
 <nz-layout class="border h-100">
   <nz-content class="h-100 border-bottom" #content>
-    <nz-table *ngIf="orders.length > 0" nzBordered #rowSelectionTable nzShowPagination="false"
+    <nz-table nzBordered #rowSelectionTable nzShowPagination="false"
       [nzFrontPagination]="false" [nzScroll]="{ x: '1200px', y: '725px' }" [nzData]="orders"
       (nzCurrentPageDataChange)="onCurrentPageDataChange($event)" [nzLoading]="loading" nzSize="small">
       <thead>

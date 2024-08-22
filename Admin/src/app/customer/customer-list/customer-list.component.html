@@ -1,0 +1,31 @@
+<nz-layout>
+    <nz-header class="d-flex align-items-center px-2">
+      <button nz-button nzType="primary" nzSize="default" (click)="addCustomer()" nz-tooltip
+        nzTooltipTitle="Thêm đơn hàng mới" nzTooltipPlacement="bottom" class="me-2">
+        <span nz-icon nzType="plus"></span>
+      </button>
+  
+      <button nz-button nzType="default" nzSize="default" (click)="addCustomer()" nz-tooltip
+        nzTooltipTitle="Tải lại" nzTooltipPlacement="bottom" class="me-2 d-flex align-items-center">
+        <span nz-icon nzType="sync"></span>
+        Tải lại
+      </button>
+  
+      <button nz-button nzType="default" nzSize="default" (click)="addCustomer()" nz-tooltip
+        nzTooltipTitle="In đơn" nzTooltipPlacement="bottom" class="me-2 d-flex align-items-center">
+        <span nz-icon nzType="printer"></span>
+        In đơn
+      </button>
+  
+      <button nz-button nzType="default" nzSize="default" (click)="addCustomer()" nz-tooltip
+        nzTooltipTitle="Xuất excel" nzTooltipPlacement="bottom" class="d-flex align-items-center">
+        <span nz-icon nzType="download"></span>
+        Xuất excel
+      </button>
+    </nz-header>
+  
+    <nz-content class="px-2">
+      <app-all-customers></app-all-customers>
+    </nz-content>
+  </nz-layout>
+  
