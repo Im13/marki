@@ -8,6 +8,7 @@ import { OrderSKUItems } from 'src/app/shared/models/orderSKUItems';
 import { ToastrService } from 'ngx-toastr';
 import { CheckoutComponent } from './order-information/checkout/checkout.component';
 import { Province } from 'src/app/shared/models/address/province';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-add-order',
@@ -25,7 +26,7 @@ export class AddOrderComponent implements OnInit {
   skuItems: OrderSKUItems[] = [];
   provinces: Province[] = [];
 
-  constructor(private formBuilder: FormBuilder, private orderService: OrderService, private toastrService: ToastrService) { }
+  constructor(private formBuilder: FormBuilder, private orderService: OrderService, private toastrService: ToastrService, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.addOrderForm = this.formBuilder.group({
@@ -66,7 +67,6 @@ export class AddOrderComponent implements OnInit {
     this.orderService.getProvinces().subscribe({
       next: result => {
         this.provinces = result;
-        console.log(this.provinces);
       },
       error: err => {
         console.log(err);

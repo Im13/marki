@@ -84,7 +84,8 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
     NzPaginationModule,
     NzTagModule,
     NzBadgeModule,
-    NzDropDownModule
+    NzDropDownModule,
+    CommonModule
   ]
 })
 export class CoreModule { }
