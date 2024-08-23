@@ -81,6 +81,8 @@ export class AllCustomersComponent implements OnInit {
   }
 
   getCustomers() {
+    this.loading = true;
+    
     this.customerService.getCustomers(this.customerParams).subscribe({
       next: response => {
         this.customers = response.data;

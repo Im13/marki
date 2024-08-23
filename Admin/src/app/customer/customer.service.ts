@@ -22,4 +22,8 @@ export class CustomerService {
 
     return this.http.get<Pagination<Customer[]>>(this.baseApiUrl + 'customer', { params });
   }
+
+  deleteCustomers(ids: number[]) {
+    return this.http.post(this.baseApiUrl + 'customer/delete-customers', ids);
+  }
 }

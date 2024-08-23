@@ -6,6 +6,7 @@ using Core.Entities;
 using Core.Interfaces;
 using Core.Specification.CustomerSpec;
 using Core.Specification.CustomerSpecification;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API
@@ -14,10 +15,12 @@ namespace API
     {
         private readonly IGenericRepository<Customer> _customerRepo;
         private readonly IMapper _mapper;
-        public CustomerController(IGenericRepository<Customer> customerRepo, IMapper mapper)
+        private readonly ICustomerService _customerService;
+        public CustomerController(IGenericRepository<Customer> customerRepo, IMapper mapper, ICustomerService customerService)
         {
             _customerRepo = customerRepo;
             _mapper = mapper;
+            _customerService = customerService;
         }
 
         [HttpGet]
@@ -34,6 +37,19 @@ namespace API
             var data = _mapper.Map<IReadOnlyList<Customer>, IReadOnlyList<CustomerDTO>>(customers);
 
             return Ok(new Pagination<CustomerDTO>(customerParams.PageIndex, customerParams.PageSize, totalItems, data));
+        }
+
+        [HttpPost("delete-customers")]
+        public async Task<ActionResult> DeleteCustomers(List<int> customerIds)
+        {
+            if (customerIds.Count <= 0)
+                return BadRequest("No data received!");
+
+            var deletedResult = await _customerService.DeleteCustomers(customerIds);
+
+            if (!deletedResult) return BadRequest("Failed to delete!");
+
+            return Ok();
         }
     }
 }

@@ -6,9 +6,9 @@ namespace Core.Specification.CustomerSpec
     public class CustomerSpecification : BaseSpecification<Customer>
     {
         public CustomerSpecification(CustomerSpecParams customerParams) : base(x => 
-            string.IsNullOrEmpty(customerParams.Search) 
+            (string.IsNullOrEmpty(customerParams.Search) 
                 || x.Id.ToString().Contains(customerParams.Search) 
-                || x.PhoneNumber.ToString().Contains(customerParams.Search)
+                || x.PhoneNumber.ToString().Contains(customerParams.Search)) && x.IsDeleted == false
         )
         {
             AddOrderByDescending(x => x.Id);
