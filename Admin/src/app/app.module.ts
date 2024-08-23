@@ -34,7 +34,7 @@ registerLocaleData(en);
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true
-    }),
+    })
   ],
   providers: [
     DatePipe,

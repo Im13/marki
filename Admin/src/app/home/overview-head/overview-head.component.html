@@ -1,0 +1,13 @@
+<div class="w-100 h-100 px-2">
+    <div class="h-100" nz-row>
+        <div class="overview-head-date h-100 d-flex align-items-center" nz-col nzSpan="14">
+            <span nz-typography class="me-2"><strong>Khoảng thời gian</strong></span>
+
+            <nz-range-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-range-picker>
+        </div>
+    
+        <div class="overview-head-date h-100 d-flex align-items-center" nz-col nzSpan="10">
+        </div>
+    </div>
+</div>
+
