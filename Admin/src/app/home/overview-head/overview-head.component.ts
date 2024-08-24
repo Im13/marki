@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { endOfMonth } from 'date-fns';
 
 @Component({
   selector: 'app-overview-head',
@@ -7,8 +8,9 @@ import { Component } from '@angular/core';
 })
 export class OverviewHeadComponent {
   date = null;
+  ranges = { 'Hôm nay': [new Date(), new Date()], 'Tháng này': [new Date(), endOfMonth(new Date())] };
 
   onChange(result: Date[]): void {
-    console.log('onChange: ', result);
+    console.log('From: ', result[0], ', to: ', result[1]);
   }
 }

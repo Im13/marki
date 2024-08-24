@@ -3,11 +3,12 @@
         <div class="overview-head-date h-100 d-flex align-items-center" nz-col nzSpan="14">
             <span nz-typography class="me-2"><strong>Khoảng thời gian</strong></span>
 
-            <nz-range-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-range-picker>
+            <nz-range-picker nzSize="small" [(ngModel)]="date" (ngModelChange)="onChange($event)" [nzRanges]="ranges" ngModel></nz-range-picker>
+            <br />
         </div>
-    
-        <div class="overview-head-date h-100 d-flex align-items-center" nz-col nzSpan="10">
+
+        <div class="overview-head-date h-100 d-flex align-items-center justify-content-end" nz-col nzSpan="10">
+
         </div>
     </div>
 </div>
-
