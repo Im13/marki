@@ -7,11 +7,15 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { HomeRoutingModule } from './home-routing.module';
+import { BodyContainerComponent } from './body-container/body-container.component';
+import { OverviewChartComponent } from './body-container/overview-chart/overview-chart.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
-    OverviewHeadComponent
+    OverviewHeadComponent,
+    BodyContainerComponent,
+    OverviewChartComponent
   ],
   imports: [
     CommonModule,

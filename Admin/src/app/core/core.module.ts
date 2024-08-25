@@ -24,6 +24,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
     NzPaginationModule,
     NzTagModule,
     NzBadgeModule,
-    NzDropDownModule
+    NzDropDownModule,
+    NzStatisticModule
   ],
   exports: [
     HeaderComponent,
@@ -85,7 +87,8 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
     NzTagModule,
     NzBadgeModule,
     NzDropDownModule,
-    CommonModule
+    CommonModule,
+    NzStatisticModule
   ]
 })
 export class CoreModule { }
