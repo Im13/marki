@@ -9,13 +9,18 @@ import { RouterModule } from '@angular/router';
 import { HomeRoutingModule } from './home-routing.module';
 import { BodyContainerComponent } from './body-container/body-container.component';
 import { OverviewChartComponent } from './body-container/overview-chart/overview-chart.component';
+import { OrderResourcesComponent } from './body-container/order-resources/order-resources.component';
+import { SideNotificationComponent } from './body-container/side-notification/side-notification.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [
     HomeComponent,
     OverviewHeadComponent,
     BodyContainerComponent,
-    OverviewChartComponent
+    OverviewChartComponent,
+    OrderResourcesComponent,
+    SideNotificationComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +28,8 @@ import { OverviewChartComponent } from './body-container/overview-chart/overview
     CoreModule,
     RouterModule,
     TabsModule.forRoot(),
-    SharedModule
+    SharedModule,
+    BsDatepickerModule.forRoot()
   ]
 })
 export class HomeModule { }

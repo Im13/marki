@@ -1,24 +1,30 @@
 <div class="w-100 h-100">
-    <div class="h-100" nz-row>
-        <div class="overview-head-date h-100 d-flex align-items-center" nz-col nzSpan="14">
-            <span nz-typography class="me-2"><strong>Khoảng thời gian</strong></span>
+  <div class="h-100" nz-row>
+    <div class="overview-head-date h-100 d-flex align-items-center" nz-col nzSpan="14">
+      <span nz-typography class="me-2"><strong>Khoảng thời gian</strong></span>
 
-            <nz-range-picker nzSize="small" [(ngModel)]="date" (ngModelChange)="onChange($event)" [nzRanges]="ranges" ngModel></nz-range-picker>
-            <br />
-        </div>
+      <div class="col-xs-12 col-12 col-md-4 form-group">
+        <input type="text"
+          placeholder="Hôm nay"
+          class="form-control form-control-sm rounded-0"
+          bsDaterangepicker
+          [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', adaptivePosition: true, containerClass: 'theme-default' }"
+          (bsValueChange)="onDateChange($event)">
+      </div>
+    </div>
 
-        <div class="overview-head-date h-100 d-flex align-items-center justify-content-end" nz-col nzSpan="10">
-          <button nz-button nzType="default" nzSize="default"  nz-tooltip
-          nzTooltipTitle="Tải lại" nzTooltipPlacement="bottom" class="me-2 d-flex align-items-center">
-          <span nz-icon nzType="sync"></span>
-          Tải lại
-        </button>
+    <div class="overview-head-date h-100 d-flex align-items-center justify-content-end" nz-col nzSpan="10">
+      <button nz-button nzType="default" nzSize="default" nz-tooltip nzTooltipTitle="Tải lại"
+        nzTooltipPlacement="bottom" class="me-2 d-flex align-items-center">
+        <span nz-icon nzType="sync"></span>
+        Tải lại
+      </button>
 
-        <button nz-button nzType="default" nzSize="default"  nz-tooltip
-        nzTooltipTitle="Tải lại" nzTooltipPlacement="bottom" class="me-2 d-flex align-items-center">
+      <button nz-button nzType="default" nzSize="default" nz-tooltip nzTooltipTitle="Tải lại"
+        nzTooltipPlacement="bottom" class="me-2 d-flex align-items-center">
         <span nz-icon nzType="setting" nzTheme="outline"></span>
         Cấu hình
       </button>
-        </div>
     </div>
+  </div>
 </div>

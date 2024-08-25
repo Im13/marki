@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { OrderService } from 'src/app/order/order.service';
 import { ShopeeOrderParams } from 'src/app/shared/models/shopeeOrderParams';
 import { ShopeeOrderProducts } from 'src/app/shared/models/shopeeOrderProducts';
 import { StatisticsService } from '../statistics.service';
@@ -41,7 +40,6 @@ export class ShopeeRevenueComponent {
   }
 
   onDateChange(value: Date) {
-    console.log(value);
     this.totalRevenue = 0;
     this.orderParams.date = value.toString();
     this.getOrders();

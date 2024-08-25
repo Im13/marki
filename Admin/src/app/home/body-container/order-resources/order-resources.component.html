@@ -1,0 +1,66 @@
+<div class="chart-container p-2">
+  <div>
+    <h5 class="m-0 mb-2" nz-typography>NGUỒN ĐƠN</h5>
+  </div>
+  <nz-table #basicTable [nzData]="listTempData" [nzFrontPagination]="false">
+    <thead>
+      <tr>
+        <th>Nguồn đơn</th>
+        <th>Doanh thu</th>
+        <th>Lợi nhuận</th>
+        <th>Doanh số</th>
+        <th>Chiết khấu</th>
+        <th>Đơn chốt</th>
+        <th>SL hàng chốt</th>
+        <th>GTTB</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="d-flex align-items-center">
+            <span nz-icon nzType="instagram" nzTheme="fill" class="me-2"></span>
+            Instagram
+          </div>
+        </td>
+        <td>12.095.000đ</td>
+        <td>6.703.997đ</td>
+        <td>14.025.000đ</td>
+        <td>1.930.000đ</td>
+        <td>31</td>
+        <td>45</td>
+        <td>390.161đ</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="d-flex align-items-center">
+            <span nz-icon nzType="facebook" nzTheme="fill" class="me-2"></span>
+            Facebook
+          </div>
+        </td>
+        <td>4.540.000đ</td>
+        <td>2.173.999đ</td>
+        <td>5.600.000đ</td>
+        <td>1.060.000đ</td>
+        <td>10</td>
+        <td>21</td>
+        <td>454.000đ</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="d-flex align-items-center">
+            <span nz-icon nzType="home" nzTheme="fill" class="me-2"></span>
+            Trực tiếp
+          </div>
+        </td>
+        <td>4.540.000đ</td>
+        <td>2.173.999đ</td>
+        <td>5.600.000đ</td>
+        <td>1.060.000đ</td>
+        <td>10</td>
+        <td>21</td>
+        <td>454.000đ</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
