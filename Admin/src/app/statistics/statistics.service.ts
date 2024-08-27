@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ShopeeOrderParams } from '../shared/models/shopeeOrderParams';
+import { ShopeeOrderParams } from '../shared/_models/shopeeOrderParams';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { environment } from 'src/environments/environment';
-import { ShopeeOrderProducts } from '../shared/models/shopeeOrderProducts';
+import { ShopeeOrderProducts } from '../shared/_models/shopeeOrderProducts';
 
 @Injectable({
   providedIn: 'root'

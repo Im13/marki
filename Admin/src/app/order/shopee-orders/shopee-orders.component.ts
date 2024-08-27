@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { OrderService } from '../order.service';
-import { ShopeeOrder } from 'src/app/shared/models/shopeeOrder';
-import { ShopeeOrderParams } from 'src/app/shared/models/shopeeOrderParams';
+import { ShopeeOrder } from 'src/app/shared/_models/shopeeOrder';
+import { ShopeeOrderParams } from 'src/app/shared/_models/shopeeOrderParams';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 

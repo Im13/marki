@@ -1,14 +1,14 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Customer } from 'src/app/shared/models/customer';
-import { Order } from 'src/app/shared/models/order';
-import { OrderSKUItems } from 'src/app/shared/models/orderSKUItems';
-import { ProductSKUDetails } from 'src/app/shared/models/productSKUDetails';
+import { Customer } from 'src/app/shared/_models/customer';
+import { Order } from 'src/app/shared/_models/order';
+import { OrderSKUItems } from 'src/app/shared/_models/orderSKUItems';
+import { ProductSKUDetails } from 'src/app/shared/_models/productSKUDetails';
 import { OrderService } from '../order.service';
 import { ToastrService } from 'ngx-toastr';
 import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
-import { Province } from 'src/app/shared/models/address/province';
-import { OrderStatus } from 'src/app/shared/models/orderStatus';
+import { Province } from 'src/app/shared/_models/address/province';
+import { OrderStatus } from 'src/app/shared/_models/orderStatus';
 
 @Component({
   selector: 'app-update-order',

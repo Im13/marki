@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Order } from 'src/app/shared/models/order';
-import { OrderParams } from 'src/app/shared/models/order/orderParams';
+import { Order } from 'src/app/shared/_models/order';
+import { OrderParams } from 'src/app/shared/_models/order/orderParams';
 import { OrderService } from '../../order.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { UpdateOrderComponent } from '../../update-order/update-order.component';
-import { OrderStatus } from 'src/app/shared/models/orderStatus';
-import { UpdateStatusDTO } from 'src/app/shared/models/order/updateStatusDTO';
-import { OrderWithStatusParams } from 'src/app/shared/models/order/orderWithStatusParams';
+import { OrderStatus } from 'src/app/shared/_models/orderStatus';
+import { UpdateStatusDTO } from 'src/app/shared/_models/order/updateStatusDTO';
+import { OrderWithStatusParams } from 'src/app/shared/_models/order/orderWithStatusParams';
 
 @Component({
   selector: 'app-all-order',

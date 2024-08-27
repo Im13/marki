@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { CustomerParams } from '../shared/models/customer/customerParams';
+import { CustomerParams } from '../shared/_models/customer/customerParams';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Pagination } from '../shared/models/pagination';
-import { Customer } from '../shared/models/customer';
+import { Pagination } from '../shared/_models/pagination';
+import { Customer } from '../shared/_models/customer';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

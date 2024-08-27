@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { ProductParams } from 'src/app/shared/models/productParams';
+import { ProductParams } from 'src/app/shared/_models/productParams';
 import { ProductService } from '../product-service.service';
-import { Product } from 'src/app/shared/models/products';
+import { Product } from 'src/app/shared/_models/products';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { AddProductModalComponent } from './add-product-modal/add-product-modal.component';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';

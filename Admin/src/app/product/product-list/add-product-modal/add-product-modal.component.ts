@@ -1,19 +1,19 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
-import { Product } from 'src/app/shared/models/products';
+import { Product } from 'src/app/shared/_models/products';
 import { ProductService } from '../../product-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { ProductOptions } from 'src/app/shared/models/productOptions';
-import { ProductSKUs } from 'src/app/shared/models/productSKUs';
+import { ProductOptions } from 'src/app/shared/_models/productOptions';
+import { ProductSKUs } from 'src/app/shared/_models/productSKUs';
 import { ConvertVieService } from 'src/app/core/services/convert-vie.service';
-import { ProductOptionValue } from 'src/app/shared/models/productOptionValues';
-import { ProductSKUValues } from 'src/app/shared/models/productSKUValues';
+import { ProductOptionValue } from 'src/app/shared/_models/productOptionValues';
+import { ProductSKUValues } from 'src/app/shared/_models/productSKUValues';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
-import { Photo } from 'src/app/shared/models/photo';
-import { ProductType } from 'src/app/shared/models/productTypes';
+import { Photo } from 'src/app/shared/_models/photo';
+import { ProductType } from 'src/app/shared/_models/productTypes';
 
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {

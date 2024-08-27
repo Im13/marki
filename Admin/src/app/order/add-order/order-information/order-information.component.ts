@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ProductService } from 'src/app/product/product-service.service';
-import { ProductParams } from 'src/app/shared/models/productParams';
-import { Product } from 'src/app/shared/models/products';
-import { ProductSKUDetails } from 'src/app/shared/models/productSKUDetails';
+import { ProductParams } from 'src/app/shared/_models/productParams';
+import { Product } from 'src/app/shared/_models/products';
+import { ProductSKUDetails } from 'src/app/shared/_models/productSKUDetails';
 
 @Component({
   selector: 'app-order-information',

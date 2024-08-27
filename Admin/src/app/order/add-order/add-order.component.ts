@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Customer } from 'src/app/shared/models/customer';
-import { Order } from 'src/app/shared/models/order';
-import { ProductSKUDetails } from 'src/app/shared/models/productSKUDetails';
+import { Customer } from 'src/app/shared/_models/customer';
+import { Order } from 'src/app/shared/_models/order';
+import { ProductSKUDetails } from 'src/app/shared/_models/productSKUDetails';
 import { OrderService } from '../order.service';
-import { OrderSKUItems } from 'src/app/shared/models/orderSKUItems';
+import { OrderSKUItems } from 'src/app/shared/_models/orderSKUItems';
 import { ToastrService } from 'ngx-toastr';
 import { CheckoutComponent } from './order-information/checkout/checkout.component';
-import { Province } from 'src/app/shared/models/address/province';
+import { Province } from 'src/app/shared/_models/address/province';
 import { DatePipe } from '@angular/common';
 
 @Component({

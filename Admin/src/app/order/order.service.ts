@@ -5,18 +5,18 @@ import { environment } from 'src/environments/environment';
 import { read, utils } from "xlsx";
 import * as XLSX from 'xlsx';
 import * as OrderConstants from './order.constants';
-import { ShopeeOrder } from '../shared/models/shopeeOrder';
-import { ShopeeProduct } from '../shared/models/shopeeProduct';
-import { ShopeeOrderParams } from '../shared/models/shopeeOrderParams';
-import { Pagination } from '../shared/models/pagination';
+import { ShopeeOrder } from '../shared/_models/shopeeOrder';
+import { ShopeeProduct } from '../shared/_models/shopeeProduct';
+import { ShopeeOrderParams } from '../shared/_models/shopeeOrderParams';
+import { Pagination } from '../shared/_models/pagination';
 import { Subject } from 'rxjs';
-import { Order } from '../shared/models/order';
-import { OrderParams } from '../shared/models/order/orderParams';
-import { Province } from '../shared/models/address/province';
-import { District } from '../shared/models/address/district';
-import { Ward } from '../shared/models/address/ward';
-import { UpdateStatusDTO } from '../shared/models/order/updateStatusDTO';
-import { OrderWithStatusParams } from '../shared/models/order/orderWithStatusParams';
+import { Order } from '../shared/_models/order';
+import { OrderParams } from '../shared/_models/order/orderParams';
+import { Province } from '../shared/_models/address/province';
+import { District } from '../shared/_models/address/district';
+import { Ward } from '../shared/_models/address/ward';
+import { UpdateStatusDTO } from '../shared/_models/order/updateStatusDTO';
+import { OrderWithStatusParams } from '../shared/_models/order/orderWithStatusParams';
 
 @Injectable({
   providedIn: 'root'
