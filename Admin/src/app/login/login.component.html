@@ -18,44 +18,6 @@
             </div>
           </form>
         </div>
-        <div class="card-footer text-center">
-          <a href="#" (click)="toggleForm()">Don't have an account? Register</a>
-        </div>
-      </div>
-
-      <div *ngIf="isRegistering" class="card shadow-sm mt-3">
-        <div class="card-body">
-          <h4 class="card-title text-center">Register</h4>
-          <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
-            <div class="mb-3">
-              <label for="name" class="form-label">Name</label>
-              <input type="text" id="name" class="form-control" formControlName="name" required>
-            </div>
-            <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input type="email" id="email" class="form-control" formControlName="email" required>
-            </div>
-            <div class="mb-3">
-              <label for="reg-username" class="form-label">Username</label>
-              <input type="text" id="reg-username" class="form-control" formControlName="username" required>
-            </div>
-            <div class="mb-3">
-              <label for="reg-password" class="form-label">Password</label>
-              <input type="password" id="reg-password" class="form-control" formControlName="password" required>
-            </div>
-            <div class="mb-3">
-              <label for="confirm-password" class="form-label">Confirm Password</label>
-              <input type="password" id="confirm-password" class="form-control" formControlName="confirmPassword"
-                required>
-            </div>
-            <div class="d-grid">
-              <button type="submit" class="btn btn-primary">Register</button>
-            </div>
-          </form>
-        </div>
-        <div class="card-footer text-center">
-          <a href="#" (click)="toggleForm()">Already have an account? Login</a>
-        </div>
       </div>
     </div>
   </div>

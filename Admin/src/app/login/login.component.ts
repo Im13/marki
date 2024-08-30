@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -7,11 +8,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  isRegistering = false;
   loginForm: FormGroup;
-  registerForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -20,25 +22,12 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  toggleForm() {
-    this.isRegistering = !this.isRegistering;
-  }
-
   onLogin() {
-    // if (this.loginForm.valid) {
-    //     const { username, password } = this.loginForm.value;
-    //     console.log(`Username: ${username}, Password: ${password}`);
-    // }
-  }
-
-  onRegister() {
-    // if (this.registerForm.valid) {
-    //     const { name, email, username, password, confirmPassword } = this.registerForm.value;
-    //     if (password === confirmPassword) {
-    //         console.log(`Name: ${name}, Email: ${email}, Username: ${username}, Password: ${password}`);
-    //     } else {
-    //         alert("Passwords do not match");
-    //     }
-    // }
+    if (this.loginForm.valid) {
+      const { username, password } = this.loginForm.value;
+      console.log(
+        `Username: ${this.loginForm.value.username}, Password: ${password}`
+      );
+    }
   }
 }
