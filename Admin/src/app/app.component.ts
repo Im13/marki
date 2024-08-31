@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { User } from './shared/_models/user';
+import { AccountService } from './_service/account.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,18 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Admin';
+
+  constructor(private accountService: AccountService) {}
+
+  ngOnInit() {
+    this.setCurrentUser();
+  }
+
+  setCurrentUser() {
+    const user : User = JSON.parse(localStorage.getItem('user'));
+    if(user)
+    {
+      this.accountService.setCurrentUser(user);
+    }
+  }
 }

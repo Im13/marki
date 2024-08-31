@@ -1,0 +1,18 @@
+nz-header, app-overview-head {
+    height: 3rem;
+}
+
+nz-layout {
+    height: 100%;
+}
+
+nz-content {
+    overflow: auto;
+}
+
+nz-header,
+nz-layout,
+nz-content {
+    background-color: #ebecef;
+}
+

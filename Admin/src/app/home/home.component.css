@@ -1,17 +1,17 @@
-nz-header, app-overview-head {
-    height: 3rem;
-}
-
-nz-layout {
+.article {
+    height: 93vh;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .sidebar {
+    width: 16%;
     height: 100%;
-}
-
-nz-content {
-    overflow: auto;
-}
-
-nz-header,
-nz-layout,
-nz-content {
-    background-color: #ebecef;
-}
+    background-color: #fefefe;
+  }
+  
+  .content {
+    width: 84%;
+    min-height: 200px;
+  }
+  

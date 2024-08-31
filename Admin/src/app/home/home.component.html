@@ -1,9 +1,11 @@
-<nz-layout>
-    <nz-header class="px-3 d-flex align-items-center">
-        <app-overview-head class="w-100"></app-overview-head>
-    </nz-header>
+<app-header></app-header>
 
-    <nz-content class="px-3 mt-2">
-        <app-body-container></app-body-container>
-    </nz-content>
-</nz-layout>
+<div class="article d-flex">
+  <div class="sidebar h-100">
+    <app-sidebar></app-sidebar>
+  </div>
+
+  <div class="content border border-danger">
+    <router-outlet></router-outlet>
+  </div>
+</div>
