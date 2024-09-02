@@ -2,10 +2,12 @@ using API.DTOs;
 using API.DTOs.Product;
 using API.Helpers;
 using AutoMapper;
+using CloudinaryDotNet.Actions;
 using Core;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specification;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.Admin
@@ -46,6 +48,7 @@ namespace API.Controllers.Admin
             return Ok(createdProduct);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("products")]
         public async Task<ActionResult<Pagination<ProductDTOs>>> GetProducts([FromQuery] ProductSpecParams productParams)
         {
@@ -62,6 +65,7 @@ namespace API.Controllers.Admin
             return Ok(new Pagination<ProductDTOs>(productParams.PageIndex, productParams.PageSize, totalItems, data));
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut("product")]
         public async Task<ActionResult> UpdateProduct(ProductDTOs productDTO)
         {
@@ -89,6 +93,7 @@ namespace API.Controllers.Admin
             return Ok(productUpdatedResult);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("delete-products")]
         public async Task<ActionResult> DeleteProduct(List<ProductDTOs> productDTOs)
         {
@@ -104,6 +109,7 @@ namespace API.Controllers.Admin
             return Ok();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("image-upload")]
         public async Task<ActionResult<PhotoDTO>> UploadImage(IFormFile file)
         {
@@ -121,6 +127,7 @@ namespace API.Controllers.Admin
             return Ok(_mapper.Map<PhotoDTO>(photoDTO));
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("sku/{id}")]
         public async Task<ActionResult<ProductSKUDetailDTO>> GetSku(int id)
         {
@@ -129,6 +136,7 @@ namespace API.Controllers.Admin
             return Ok(_mapper.Map<ProductSKUDetailDTO>(returnedSKU));
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("skus")]
         public async Task<ActionResult<ProductSKUDetailDTO[]>> GetAllSkus([FromQuery] ProductSpecParams productParams)
         {
@@ -138,7 +146,7 @@ namespace API.Controllers.Admin
 
             var products = await _productRepo.GetProductsWithSpec(spec);
 
-            foreach(var product in products)
+            foreach (var product in products)
             {
                 productSkuList.AddRange(product.ProductSKUs);
             }

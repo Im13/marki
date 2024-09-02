@@ -35,7 +35,7 @@ namespace API.Controllers
             {
                 DisplayName = user.DisplayName,
                 Email = user.Email,
-                Token = _tokenService.CreateToken(user)
+                Token = await _tokenService.CreateToken(user)
             };
         }
 
@@ -83,7 +83,7 @@ namespace API.Controllers
             return new UserDTO
             {
                 Email = user.Email,
-                Token = _tokenService.CreateToken(user),
+                Token = await _tokenService.CreateToken(user),
                 DisplayName = user.DisplayName
             };
         }
@@ -107,10 +107,14 @@ namespace API.Controllers
 
             if(!result.Succeeded) return BadRequest(new ApiResponse(400));
 
+            var roleResult = await _userManager.AddToRoleAsync(user, "Customer");
+
+            if(!roleResult.Succeeded) return BadRequest(result.Errors);
+
             return new UserDTO
             {
                 DisplayName = user.DisplayName,
-                Token = _tokenService.CreateToken(user),
+                Token = await _tokenService.CreateToken(user),
                 Email = user.Email
             };
         }
