@@ -388,5 +388,105 @@
         "IsDeleted": false,
         "ProductOptions": [],
         "ProductSKUs": []
+    },
+    {
+        "Name": "MARKI/ ÁO THUN TRỄ VAI NHÚN EO CỘC TAY A417",
+        "Description": "MARKI/ ÁO THUN TRỄ VAI NHÚN EO CỘC TAY A417",
+        "ProductSKU": "A417",
+        "ImportPrice": 80000,
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
+    },
+    {
+        "Name": "MARKI/ CHÂN VÁY THÔ GIÓ CẠP CHUN CO GIÃN CV418",
+        "Description": "MARKI/ CHÂN VÁY THÔ GIÓ CẠP CHUN CO GIÃN CV418",
+        "ProductSKU": "CV418",
+        "ImportPrice": 170000,
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
+    },
+    {
+        "Name": "MARKI/ ÁO LEN MONGTOGHI CỔ POLO KẺ SỌC NGANG A419",
+        "Description": "MARKI/ ÁO LEN MONGTOGHI CỔ POLO KẺ SỌC NGANG A419",
+        "ProductSKU": "A419",
+        "ImportPrice": 90000,
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
+    },
+    {
+        "Name": "MARKI / ÁO LEN MONGTOGHI CỔ POLO KẺ NGANG CỘC TAY A420",
+        "Description": "MARKI / ÁO LEN MONGTOGHI CỔ POLO KẺ NGANG CỘC TAY A420",
+        "ProductSKU": "A420",
+        "ImportPrice": 90000,
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
+    },
+    {
+        "Name": "MARKI / ÁO POLO CỘC TAY PHỐI VIỀN KẺ ĐÔI A421",
+        "Description": "MARKI / ÁO POLO CỘC TAY PHỐI VIỀN KẺ ĐÔI A421",
+        "ProductSKU": "A421",
+        "ImportPrice": 120000,
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
+    },
+    {
+        "Name": "MARKI / ÁO 2 DÂY THUN LẠNH DÁNG NGẮN A422",
+        "Description": "MARKI / ÁO 2 DÂY THUN LẠNH DÁNG NGẮN A422",
+        "ProductSKU": "A422",
+        "ImportPrice": 90000,
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
+    },
+    {
+        "Name": "MARKI/ ÁO SƠ MI TƠ PHỐI TÚI BASIC A423",
+        "Description": "MARKI/ ÁO SƠ MI TƠ PHỐI TÚI BASIC A423",
+        "ProductSKU": "A423",
+        "ImportPrice": 150000,
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
+    },
+    {
+        "Name": "MARKI/ ÁO BLAZER CỔ TRÒN CÚC NGỌC CỘC TAY A424",
+        "Description": "MARKI/ ÁO BLAZER CỔ TRÒN CÚC NGỌC CỘC TAY A424",
+        "ProductSKU": "A424",
+        "ImportPrice": 0,
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
+    },
+    {
+        "Name": "MARKI / CHÂN VÁY THÔ CẠP CHUN SAU (KÈM BELT) CV425",
+        "Description": "MARKI / CHÂN VÁY THÔ CẠP CHUN SAU (KÈM BELT) CV425",
+        "ProductSKU": "CV425",
+        "ImportPrice": 0,
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
+    },
+    {
+        "Name": "MARKI/ ÁO THUN XẾP NẾP CỔ 3P CỘC TAY A426",
+        "Description": "MARKI/ ÁO THUN XẾP NẾP CỔ 3P CỘC TAY A426",
+        "ProductSKU": "A426",
+        "ImportPrice": 120000,
+        "ProductTypeId": 1,
+        "IsDeleted": false,
+        "ProductOptions": [],
+        "ProductSKUs": []
     }
 ]

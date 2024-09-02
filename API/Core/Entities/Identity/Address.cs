@@ -16,7 +16,7 @@ namespace Core.Entities.Identity
         [Required]
         public string Street { get; set; }
         [Required]
-        public string AppUserId { get; set; }
+        public int AppUserId { get; set; }
         public AppUser AppUser { get; set; }
     }
 }

@@ -22,8 +22,10 @@ namespace API.Extensions
             {
                 // Add identity options here
             })
-            .AddEntityFrameworkStores<AppIdentityDbContext>()
-            .AddSignInManager<SignInManager<AppUser>>();
+            .AddRoles<AppRole>()
+            .AddRoleManager<RoleManager<AppRole>>()
+            .AddSignInManager<SignInManager<AppUser>>()
+            .AddEntityFrameworkStores<AppIdentityDbContext>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => 
@@ -38,7 +40,10 @@ namespace API.Extensions
                     };
                 });
 
-            services.AddAuthorization();
+            services.AddAuthorization(opt => {
+                opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+                opt.AddPolicy("ModeratorPhotoRole", policy => policy.RequireRole("Admin","Moderator"));
+            });
 
             return services;
         }
