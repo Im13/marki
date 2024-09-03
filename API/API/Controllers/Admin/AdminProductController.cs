@@ -48,7 +48,6 @@ namespace API.Controllers.Admin
             return Ok(createdProduct);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet("products")]
         public async Task<ActionResult<Pagination<ProductDTOs>>> GetProducts([FromQuery] ProductSpecParams productParams)
         {
@@ -65,7 +64,6 @@ namespace API.Controllers.Admin
             return Ok(new Pagination<ProductDTOs>(productParams.PageIndex, productParams.PageSize, totalItems, data));
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPut("product")]
         public async Task<ActionResult> UpdateProduct(ProductDTOs productDTO)
         {
@@ -93,7 +91,6 @@ namespace API.Controllers.Admin
             return Ok(productUpdatedResult);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost("delete-products")]
         public async Task<ActionResult> DeleteProduct(List<ProductDTOs> productDTOs)
         {
@@ -109,7 +106,6 @@ namespace API.Controllers.Admin
             return Ok();
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost("image-upload")]
         public async Task<ActionResult<PhotoDTO>> UploadImage(IFormFile file)
         {
@@ -127,7 +123,6 @@ namespace API.Controllers.Admin
             return Ok(_mapper.Map<PhotoDTO>(photoDTO));
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet("sku/{id}")]
         public async Task<ActionResult<ProductSKUDetailDTO>> GetSku(int id)
         {
@@ -136,7 +131,6 @@ namespace API.Controllers.Admin
             return Ok(_mapper.Map<ProductSKUDetailDTO>(returnedSKU));
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet("skus")]
         public async Task<ActionResult<ProductSKUDetailDTO[]>> GetAllSkus([FromQuery] ProductSpecParams productParams)
         {

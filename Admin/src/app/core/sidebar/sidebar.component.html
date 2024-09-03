@@ -20,7 +20,7 @@
 
   <div class="menu-title pt-3 pb-2 ps-1">SẢN PHẨM</div>
   <div class="menu">
-    <a class="text-decoration-none text-dark" routerLink="/product">
+    <a *appHasRole="['Admin']" class="text-decoration-none text-dark" routerLink="/product">
       <div class="menu-item border-top py-2 ps-5">Danh sách sản phẩm</div>
     </a>
     <div class="menu-item border-top py-2 ps-5 d-flex">Khuyến mãi</div>

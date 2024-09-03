@@ -25,12 +25,14 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
+import { HasRoleDirective } from './_directives/has-role.directive';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     SidebarComponent,
-    ThousandSeparatorPipe
+    ThousandSeparatorPipe,
+    HasRoleDirective
   ],
   imports: [
     CommonModule,
