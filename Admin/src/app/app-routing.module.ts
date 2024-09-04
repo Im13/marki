@@ -13,6 +13,7 @@ const routes: Routes = [
     { path: 'orders', loadChildren: () => import('./order/order.module').then(m => m.OrderModule) },
     { path: 'product', loadChildren: () => import('./product/product.module').then(m => m.ProductModule), canActivate: [AdminGuard] },
     { path: 'customers', loadChildren: () => import('./customer/customer.module').then(m => m.CustomerModule) },
+    { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
     { path: 'statistics', loadChildren: () => import('./statistics/statistics.module').then(m => m.StatisticsModule) }
   ]}
 ];

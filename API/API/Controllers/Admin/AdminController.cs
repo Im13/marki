@@ -18,7 +18,6 @@ namespace API.Controllers.Admin
             _userManager = userManager;
         }
 
-        [Authorize(Policy = "RequireAdminRole")]
         [HttpGet("users-with-roles")]
         public async Task<ActionResult> GetUsersWithRoles()
         {
@@ -32,7 +31,6 @@ namespace API.Controllers.Admin
             return Ok(users);
         }
 
-        [Authorize(Policy = "RequireAdminRole")]
         [HttpPost("edit-roles/{username}")]
         public async Task<ActionResult> EditRole(string username, [FromQuery] string roles) 
         {
@@ -57,7 +55,6 @@ namespace API.Controllers.Admin
             return Ok(await _userManager.GetRolesAsync(user));
         }
 
-        [Authorize(Policy = "ModeratePhotoRole")]
         [HttpGet("photos-to-moderate")]
         public ActionResult GetPhotosForModeration()
         {
