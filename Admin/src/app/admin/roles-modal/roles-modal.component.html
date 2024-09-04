@@ -1,0 +1,7 @@
+<form #rolesForm="ngForm" id="rolesForm">
+    <div class="form-check" *ngFor="let role of availableRoles">
+        <input type="checkbox" class="form-check-input" [checked]="selectedRoles.includes(role)" value="role"
+            (change)="updateChecked(role)" [disabled]="role === 'Admin' && username === 'marki'">
+        <label>{{role}}</label>
+    </div>
+</form>

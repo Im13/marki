@@ -5,12 +5,14 @@ import { RouterModule } from '@angular/router';
 import { AdminRoutingModule } from './admin-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { CoreModule } from '../core/core.module';
+import { RolesModalComponent } from './roles-modal/roles-modal.component';
 
 
 
 @NgModule({
   declarations: [
-    AdminComponent
+    AdminComponent,
+    RolesModalComponent
   ],
   imports: [
     CommonModule,

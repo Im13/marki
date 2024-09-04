@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../shared/_models/user';
 import { AdminService } from './admin.service';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { RolesModalComponent } from './roles-modal/roles-modal.component';
 
 @Component({
   selector: 'app-admin',
@@ -9,8 +11,13 @@ import { AdminService } from './admin.service';
 })
 export class AdminComponent implements OnInit {
   users: User[] = [];
+  availableRoles = [
+    'SuperAdmin',
+    'Admin',
+    'Customer'
+  ]
 
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService, private modalService: NzModalService) {}
 
   ngOnInit(): void {
     this.getUsersWithRoles();
@@ -19,6 +26,18 @@ export class AdminComponent implements OnInit {
   getUsersWithRoles() {
     this.adminService.getUsersWithRoles().subscribe({
       next: users => this.users = users
+    })
+  }
+
+  showEditRolesModal(user: User) {
+    this.modalService.create({
+      nzTitle: 'Edit Roles for ' + user.username, 
+      nzContent: RolesModalComponent,
+      nzData: {
+        username: user.username,
+        availableRoles: this.availableRoles,
+        selectedRoles: [...user.roles]
+      }
     })
   }
 }
