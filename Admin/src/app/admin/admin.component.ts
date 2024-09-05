@@ -30,14 +30,17 @@ export class AdminComponent implements OnInit {
   }
 
   showEditRolesModal(user: User) {
-    this.modalService.create({
+    const modal = this.modalService.create({
       nzTitle: 'Edit Roles for ' + user.username, 
       nzContent: RolesModalComponent,
       nzData: {
         username: user.username,
         availableRoles: this.availableRoles,
-        selectedRoles: [...user.roles]
+        selectedRoles: [...user.roles],
+        user: user
       }
-    })
+    });
+
+    modal.afterClose.subscribe(() => this.getUsersWithRoles());
   }
 }

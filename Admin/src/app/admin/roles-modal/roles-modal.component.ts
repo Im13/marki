@@ -1,5 +1,8 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
-import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
+import { User } from 'src/app/shared/_models/user';
+import { AdminService } from '../admin.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-roles-modal',
@@ -10,12 +13,17 @@ export class RolesModalComponent implements OnInit {
   username = '';
   availableRoles: any[] = [];
   selectedRoles: any[] = [];
+  user: User;
   @Input() data?: any = inject(NZ_MODAL_DATA);
+  @Output() updateSelectedRoles = new EventEmitter();
+
+  constructor(private adminService: AdminService, private toastrService: ToastrService, private modal: NzModalRef) {}
   
   ngOnInit(): void {
     this.availableRoles = this.data.availableRoles;
     this.selectedRoles = this.data.selectedRoles;
     this.username = this.data.username;
+    this.user = this.data.user;
   }
 
   updateChecked(checkedValue: string) {
@@ -23,4 +31,18 @@ export class RolesModalComponent implements OnInit {
     index !== -1 ? this.selectedRoles.splice(index, 1) : this.selectedRoles.push(checkedValue);
   }
 
+  updateRoles() {
+    if(!this.arrayEqual(this.selectedRoles!, this.user.roles)) {
+      this.adminService.updateUserRoles(this.user.username, this.selectedRoles!).subscribe({
+        next: () => {
+          this.toastrService.success('Cập nhật thành công!');
+          this.modal.destroy();
+        }
+      })
+    }
+  }
+
+  private arrayEqual(arr1: any[], arr2: any[]) {
+    return JSON.stringify(arr1.sort()) === JSON.stringify(arr2.sort());
+  }
 }

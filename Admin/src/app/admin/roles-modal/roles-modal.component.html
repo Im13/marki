@@ -4,4 +4,11 @@
             (change)="updateChecked(role)" [disabled]="role === 'Admin' && username === 'marki'">
         <label>{{role}}</label>
     </div>
+
+    <div *nzModalFooter class=" d-flex flex-row-reverse">
+        <button nz-button nzType="primary" type="submit" class="d-flex align-items-center" (click)="updateRoles()">
+          <span nz-icon nzType="save"></span>
+            <span>Lưu</span>
+        </button>
+      </div>
 </form>
