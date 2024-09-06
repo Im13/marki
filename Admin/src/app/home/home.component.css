@@ -1,4 +1,4 @@
-.article {
+/* .article {
     height: 93vh;
     display: flex;
     flex-direction: row;
@@ -14,4 +14,44 @@
     width: 84%;
     min-height: 200px;
   }
-  
+   */
+
+   .trigger {
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  .trigger:hover {
+    color: #1890ff;
+  }
+
+  .logo {
+    height: 32px;
+    margin: 16px;
+    color: #fff;
+  }
+
+  nz-header {
+    background: #fff;
+    padding: 0;
+  }
+
+  nz-content {
+    margin: 0 16px;
+  }
+
+  nz-breadcrumb {
+    margin: 16px 0;
+  }
+
+  .inner-content {
+    padding: 24px;
+    min-height: 360px;
+  }
+
+  nz-footer {
+    text-align: center;
+  }

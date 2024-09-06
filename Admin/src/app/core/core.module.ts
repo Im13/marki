@@ -26,6 +26,8 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 import { HasRoleDirective } from './_directives/has-role.directive';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import { HasRoleDirective } from './_directives/has-role.directive';
     NzTagModule,
     NzBadgeModule,
     NzDropDownModule,
-    NzStatisticModule
+    NzStatisticModule,
+    NzBreadCrumbModule,
+    NzIconModule
   ],
   exports: [
     HeaderComponent,
@@ -90,7 +94,9 @@ import { HasRoleDirective } from './_directives/has-role.directive';
     NzBadgeModule,
     NzDropDownModule,
     CommonModule,
-    NzStatisticModule
+    NzStatisticModule,
+    NzBreadCrumbModule,
+    NzIconModule
   ]
 })
 export class CoreModule { }

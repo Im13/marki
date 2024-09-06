@@ -1,11 +1,159 @@
-<app-header></app-header>
+<nz-layout class="layout">
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+    <div class="logo fw-bold d-flex align-items-center justify-content-center">
+      Marki
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item>
+        <span nz-icon nzType="pie-chart"></span>
+        <span>Tổng quan</span>
+      </li>
+      <li nz-submenu nzTitle="Đơn hàng" nzIcon="file-text">
+        <ul>
+          <li nz-menu-item>Đơn hàng</li>
+          <li nz-menu-item>Đơn Shopee</li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Sản phẩm" nzIcon="skin">
+        <ul>
+          <li nz-menu-item>Danh sách sản phẩm</li>
+          <li nz-menu-item>Khuyến mãi</li>
+          <li nz-menu-item>Kiểm hàng</li>
+        </ul>
+      </li>
+      <li nz-menu-item>
+        <span nz-icon nzType="user"></span>
+        <span>Khách hàng</span>
+      </li>
+      <li nz-menu-item>
+        <span nz-icon nzType="appstore-o"></span>
+        <span>nav 6</span>
+      </li>
+      <li nz-menu-item>
+        <span nz-icon nzType="team"></span>
+        <span>nav 7</span>
+      </li>
+      <li nz-menu-item>
+        <span nz-icon nzType="shop"></span>
+        <span>nav 8</span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout class="right-layout">
+    <nz-header>
+      <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+        (click)="isCollapsed = !isCollapsed"></span>
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        ...
+        <br />
+        Really
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        long
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        ...
+        <br />
+        content
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>
+
+<!-- <app-header></app-header>
 
 <div class="article d-flex">
     <div class="sidebar h-100">
         <app-sidebar></app-sidebar>
     </div>
 
-    <div class="content border border-danger">
+    <div class="content">
         <router-outlet></router-outlet>
     </div>
-</div>
+</div> -->
