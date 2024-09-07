@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../shared/models/product';
 import { HomeService } from './home.service';
+import { ArticleComponent } from './article/article.component';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css'],
+    standalone: true,
+    imports: [ArticleComponent]
 })
 export class HomeComponent implements OnInit {
   products: Product[] = [];

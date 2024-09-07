@@ -7,13 +7,11 @@ import { RouterModule } from '@angular/router';
 
 
 @NgModule({
-  declarations: [
-    BasketComponent
-  ],
-  imports: [
-    CommonModule,
-    BasketRoutingModule,
-    RouterModule
-  ]
+    imports: [
+        CommonModule,
+        BasketRoutingModule,
+        RouterModule,
+        BasketComponent
+    ]
 })
 export class BasketModule { }

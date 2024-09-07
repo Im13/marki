@@ -14,27 +14,25 @@ import { AccountInfoComponent } from './header/account-info/account-info.compone
 
 
 @NgModule({
-  declarations: [
-    HeaderComponent,
-    TestErrorComponent,
-    NotFoundComponent,
-    ServerErrorComponent,
-    LoginComponent,
-    AccountInfoComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    ToastrModule.forRoot({
-      positionClass: 'toast-bottom-right',
-      preventDuplicates: true
-    }),
-    BasketModule,
-    ReactiveFormsModule
-  ],
-  exports: [
-    HeaderComponent,
-    ReactiveFormsModule
-  ]
+    imports: [
+        CommonModule,
+        RouterModule,
+        ToastrModule.forRoot({
+            positionClass: 'toast-bottom-right',
+            preventDuplicates: true
+        }),
+        BasketModule,
+        ReactiveFormsModule,
+        HeaderComponent,
+        TestErrorComponent,
+        NotFoundComponent,
+        ServerErrorComponent,
+        LoginComponent,
+        AccountInfoComponent
+    ],
+    exports: [
+        HeaderComponent,
+        ReactiveFormsModule
+    ]
 })
 export class CoreModule { }

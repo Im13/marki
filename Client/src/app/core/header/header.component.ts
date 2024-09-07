@@ -3,14 +3,20 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from 'src/app/account/account.service';
 import { BasketService } from 'src/app/basket/basket.service';
 import { BasketItem } from 'src/app/shared/models/basket';
+import { RouterLink } from '@angular/router';
+import { NgClass, NgIf, AsyncPipe } from '@angular/common';
+import { LoginComponent } from './login/login.component';
+import { AccountInfoComponent } from './account-info/account-info.component';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
-  host: {
-    '(document:click)' : 'onClick($event)',
-  }
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.css'],
+    host: {
+        '(document:click)': 'onClick($event)',
+    },
+    standalone: true,
+    imports: [RouterLink, NgClass, NgIf, LoginComponent, AccountInfoComponent, AsyncPipe]
 })
 export class HeaderComponent {
   menuOpen = false;
