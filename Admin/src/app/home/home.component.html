@@ -4,20 +4,21 @@
       Marki
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
-      <li nz-menu-item>
+      <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [nzTooltipTitle]="isCollapsed ? 'Tổng quan' : ''"
+        [nzSelected]="this.isSelected('/dashboard')" routerLink="/">
         <span nz-icon nzType="pie-chart"></span>
-        <span routerLink="/">Tổng quan</span>
+        <span>Tổng quan</span>
       </li>
       <li nz-submenu nzTitle="Bán hàng" nzIcon="shopping-cart">
         <ul>
-          <li nz-menu-item routerLink="/orders/add">Bán hàng</li>
+          <li nz-menu-item routerLink="/orders/add" [nzSelected]="this.isSelected('/orders/add')">Bán hàng</li>
           <li nz-menu-item>Trả hàng</li>
         </ul>
       </li>
       <li nz-submenu nzTitle="Đơn hàng" nzIcon="file-text">
         <ul>
-          <li nz-menu-item routerLink="/orders">Đơn hàng</li>
-          <li nz-menu-item routerLink="/orders/shopee">Đơn Shopee</li>
+          <li nz-menu-item routerLink="/orders" [nzSelected]="this.isSelected('/orders')">Đơn hàng</li>
+          <li nz-menu-item routerLink="/orders/shopee" [nzSelected]="this.isSelected('/orders/shopee')">Đơn Shopee</li>
         </ul>
       </li>
       <li nz-submenu nzTitle="Sản phẩm" nzIcon="skin">
@@ -56,10 +57,25 @@
   </nz-sider>
   <nz-layout class="right-layout">
     <nz-header class="d-flex align-items-center">
-      <span class="trigger h-100 d-flex align-items-center" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-        (click)="isCollapsed = !isCollapsed"></span>
+      <div class="d-flex align-items-center w-50">
+        <span class="trigger h-100 d-flex align-items-center" nz-icon
+          [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed"></span>
 
-      <span nz-typography class="fw-bold fs-5">{{ routeName }}</span>
+        <span nz-typography class="fw-bold fs-5">{{ routeName }}</span>
+      </div>
+
+      <div class="w-50 d-flex align-items-center justify-content-end pe-3">
+        <a nz-dropdown [nzDropdownMenu]="menu" class="d-flex align-items-center text-black">
+          Hello, {{ username }}
+          <span class="ms-2" nz-icon nzType="down"></span>
+        </a>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu nzSelectable>
+            <li nz-menu-item>Thiết lập tài khoản</li>
+            <li nz-menu-item nzDanger>Đăng xuất</li>
+          </ul>
+        </nz-dropdown-menu>
+      </div>
     </nz-header>
     <nz-content>
       <div class="inner-content h-100 pt-1">
