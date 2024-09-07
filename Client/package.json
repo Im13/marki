@@ -22,7 +22,7 @@
     "bootstrap": "^5.3.1",
     "cuid": "^3.0.0",
     "font-awesome": "^4.7.0",
-    "ngx-bootstrap": "^9.0.0",
+    "ng-zorro-antd": "^18.1.1",
     "ngx-toastr": "^15.2.2",
     "rxjs": "~7.5.0",
     "swiper": "^8.4.6",
@@ -30,7 +30,7 @@
     "zone.js": "~0.14.10"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^14.0.4",
+    "@angular-devkit/build-angular": "^18.2.3",
     "@angular/cli": "~14.0.4",
     "@angular/compiler-cli": "^18.2.3",
     "@types/jasmine": "~4.0.0",
