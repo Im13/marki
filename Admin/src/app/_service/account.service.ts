@@ -9,7 +9,6 @@ import { PresenceService } from './presence.service';
   providedIn: 'root'
 })
 export class AccountService {
-
   baseUrl = environment.apiUrl;
   private currentUserSource = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSource.asObservable();

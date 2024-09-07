@@ -10,7 +10,7 @@
       </li>
       <li nz-submenu nzTitle="Bán hàng" nzIcon="shopping-cart">
         <ul>
-          <li nz-menu-item>Bán hàng</li>
+          <li nz-menu-item routerLink="/orders/add">Bán hàng</li>
           <li nz-menu-item>Trả hàng</li>
         </ul>
       </li>
@@ -55,9 +55,11 @@
     </ul>
   </nz-sider>
   <nz-layout class="right-layout">
-    <nz-header>
-      <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+    <nz-header class="d-flex align-items-center">
+      <span class="trigger h-100 d-flex align-items-center" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
         (click)="isCollapsed = !isCollapsed"></span>
+
+      <span nz-typography class="fw-bold fs-5">{{ routeName }}</span>
     </nz-header>
     <nz-content>
       <div class="inner-content h-100 pt-1">

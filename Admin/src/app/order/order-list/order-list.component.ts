@@ -10,9 +10,10 @@ export class OrderListComponent implements OnInit {
 
   constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   addOrder() {
-    this.router.navigate(['/add'])
+    this.router.navigate(['/orders/add'])
   }
 }
