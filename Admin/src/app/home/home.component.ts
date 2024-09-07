@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs';
 import { User } from '../shared/_models/user';
+import { AccountService } from '../_service/account.service';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private titleService: Title
+    private titleService: Title,
+    private accountService: AccountService
   ) {}
 
   ngOnInit(): void {
@@ -70,5 +72,10 @@ export class HomeComponent implements OnInit {
         this.routeName = title;
       }
     });
+  }
+
+  logout() {
+    this.accountService.logout();
+    this.router.navigateByUrl('/login');
   }
 }
