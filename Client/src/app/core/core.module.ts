@@ -10,29 +10,30 @@ import { BasketModule } from '../basket/basket.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './header/login/login.component';
 import { AccountInfoComponent } from './header/account-info/account-info.component';
-
-
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        RouterModule,
-        ToastrModule.forRoot({
-            positionClass: 'toast-bottom-right',
-            preventDuplicates: true
-        }),
-        BasketModule,
-        ReactiveFormsModule,
-        HeaderComponent,
-        TestErrorComponent,
-        NotFoundComponent,
-        ServerErrorComponent,
-        LoginComponent,
-        AccountInfoComponent
-    ],
-    exports: [
-        HeaderComponent,
-        ReactiveFormsModule
-    ]
+  imports: [
+    CommonModule,
+    RouterModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
+    BasketModule,
+    ReactiveFormsModule,
+    HeaderComponent,
+    TestErrorComponent,
+    NotFoundComponent,
+    ServerErrorComponent,
+    LoginComponent,
+    AccountInfoComponent,
+    NzLayoutModule,
+  ],
+  exports: [
+    HeaderComponent,
+    ReactiveFormsModule,
+    NzLayoutModule
+  ],
 })
-export class CoreModule { }
+export class CoreModule {}

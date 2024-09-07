@@ -30,7 +30,8 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/font-awesome/css/font-awesome.min.css",
               "node_modules/ngx-toastr/toastr.css",
-              "node_modules/swiper/swiper-bundle.css"
+              "node_modules/swiper/swiper-bundle.css",
+              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
@@ -79,10 +80,10 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "Client:build:production"
+              "buildTarget": "Client:build:production"
             },
             "development": {
-              "browserTarget": "Client:build:development"
+              "buildTarget": "Client:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -90,7 +91,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Client:build"
+            "buildTarget": "Client:build"
           }
         },
         "test": {
