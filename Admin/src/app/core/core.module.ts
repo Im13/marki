@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './header/header.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { ThousandSeparatorPipe } from './pipes/thousand-separator.pipe';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
@@ -25,16 +23,12 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
-import { HasRoleDirective } from './_directives/has-role.directive';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @NgModule({
   declarations: [
-    HeaderComponent,
-    SidebarComponent,
-    ThousandSeparatorPipe,
-    HasRoleDirective
+    ThousandSeparatorPipe
   ],
   imports: [
     CommonModule,
@@ -67,8 +61,6 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     NzIconModule
   ],
   exports: [
-    HeaderComponent,
-    SidebarComponent,
     ThousandSeparatorPipe,
     NzPopoverModule,
     NzUploadModule,

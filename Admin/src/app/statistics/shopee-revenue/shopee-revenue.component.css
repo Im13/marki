@@ -1,17 +1,8 @@
-.table-content {
-    height: 96%;
+nz-header, nz-layout, nz-content {
+  background-color: transparent;
 }
 
-.table-footer {
-    height: 4%;
-    background-color: #ffffff;
-}
-
-thead {
-    position: sticky; 
-    top: 0;
-}
-
-.data {
-    font-size: .95rem;
+nz-footer {
+  height: 50px;
+  background-color: #FFFFFF;
 }

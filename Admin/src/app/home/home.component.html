@@ -1,4 +1,4 @@
-<nz-layout class="layout">
+<nz-layout class="layout h-100">
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
     <div class="logo fw-bold d-flex align-items-center justify-content-center">
       Marki
@@ -6,36 +6,51 @@
     <ul nz-menu nzTheme="dark" nzMode="inline">
       <li nz-menu-item>
         <span nz-icon nzType="pie-chart"></span>
-        <span>Tổng quan</span>
+        <span routerLink="/">Tổng quan</span>
+      </li>
+      <li nz-submenu nzTitle="Bán hàng" nzIcon="shopping-cart">
+        <ul>
+          <li nz-menu-item>Bán hàng</li>
+          <li nz-menu-item>Trả hàng</li>
+        </ul>
       </li>
       <li nz-submenu nzTitle="Đơn hàng" nzIcon="file-text">
         <ul>
-          <li nz-menu-item>Đơn hàng</li>
-          <li nz-menu-item>Đơn Shopee</li>
+          <li nz-menu-item routerLink="/orders">Đơn hàng</li>
+          <li nz-menu-item routerLink="/orders/shopee">Đơn Shopee</li>
         </ul>
       </li>
       <li nz-submenu nzTitle="Sản phẩm" nzIcon="skin">
         <ul>
-          <li nz-menu-item>Danh sách sản phẩm</li>
+          <li *appHasRole="['Admin']" nz-menu-item routerLink="/product">Danh sách sản phẩm</li>
           <li nz-menu-item>Khuyến mãi</li>
           <li nz-menu-item>Kiểm hàng</li>
         </ul>
       </li>
-      <li nz-menu-item>
-        <span nz-icon nzType="user"></span>
+      <li nz-menu-item routerLink="/customers">
+        <span nz-icon nzType="team"></span>
         <span>Khách hàng</span>
       </li>
       <li nz-menu-item>
-        <span nz-icon nzType="appstore-o"></span>
-        <span>nav 6</span>
+        <span nz-icon nzType="deployment-unit"></span>
+        <span>Nhà cung cấp</span>
       </li>
       <li nz-menu-item>
-        <span nz-icon nzType="team"></span>
-        <span>nav 7</span>
+        <span nz-icon nzType="calculator"></span>
+        <span>Thu chi</span>
       </li>
       <li nz-menu-item>
-        <span nz-icon nzType="shop"></span>
-        <span>nav 8</span>
+        <span nz-icon nzType="dollar-circle"></span>
+        <span>Lịch sử giao dịch</span>
+      </li>
+      <li nz-submenu nzTitle="Thống kê" nzIcon="bar-chart">
+        <ul>
+          <li *appHasRole="['Admin']" nz-menu-item routerLink="/statistics/shopee-revenue">Doanh thu Shopee</li>
+        </ul>
+      </li>
+      <li nz-menu-item>
+        <span nz-icon nzType="setting"></span>
+        <span>Cấu hình</span>
       </li>
     </ul>
   </nz-sider>
@@ -45,115 +60,9 @@
         (click)="isCollapsed = !isCollapsed"></span>
     </nz-header>
     <nz-content>
-      <div class="inner-content">
-        ...
-        <br />
-        Really
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        long
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        ...
-        <br />
-        content
+      <div class="inner-content h-100 pt-1">
+        <router-outlet></router-outlet>
       </div>
     </nz-content>
   </nz-layout>
 </nz-layout>
-
-<!-- <app-header></app-header>
-
-<div class="article d-flex">
-    <div class="sidebar h-100">
-        <app-sidebar></app-sidebar>
-    </div>
-
-    <div class="content">
-        <router-outlet></router-outlet>
-    </div>
-</div> -->

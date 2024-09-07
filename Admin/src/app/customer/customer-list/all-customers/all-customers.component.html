@@ -1,7 +1,7 @@
 <nz-layout class="border h-100">
     <nz-content class="h-100 border-bottom" #content>
       <nz-table nzBordered #rowSelectionTable nzShowPagination="false"
-        [nzFrontPagination]="false" [nzScroll]="{ x: '1200px', y: '750px' }" [nzData]="customers"
+        [nzFrontPagination]="false" [nzScroll]="{ x: '1200px', y: '768px' }" [nzData]="customers"
         (nzCurrentPageDataChange)="onCurrentPageDataChange($event)" [nzLoading]="loading" nzSize="small">
         <thead>
           <tr>
@@ -31,17 +31,16 @@
         </tbody>
       </nz-table>
     </nz-content>
-  
+
     <nz-footer class="d-flex align-items-center justify-content-between px-2">
       <div class="customer-info">
       </div>
       <div class="d-flex align-items-center justify-content-end">
         <nz-pagination [(nzPageIndex)]="current" [nzTotal]="totalItems" [nzSize]="'small'" nzShowSizeChanger
-          (nzPageIndexChange)="onPageChange($event)" 
+          (nzPageIndexChange)="onPageChange($event)"
           [nzPageSize]="customerParams.pageSize"
           (nzPageSizeChange)="onPageSizeChange($event)">
         </nz-pagination>
       </div>
     </nz-footer>
   </nz-layout>
-  

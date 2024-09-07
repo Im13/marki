@@ -1,17 +1,17 @@
-<div class="order-container px-2">
-  <div class="control-bar d-flex flex-row py-1">
-    <button class="btn btn-sm fa fa-plus btn-outline-primary rounded-0 me-2"></button>
-
-    <button class="btn btn-sm btn-outline-secondary rounded-0" (click)="fileUpload.click()">
-      <span class="fa fa-upload me-1"></span>
-      <span>Nhập excel đơn Shopee</span>
+<nz-layout class="h-100">
+  <nz-header class="d-flex align-items-center px-2">
+    <button nz-button nzType="default" nzSize="default" nz-tooltip nzTooltipTitle="Nhập excel đơn Shopee"
+      nzTooltipPlacement="bottom" class="me-2 d-flex align-items-center" (click)="fileUpload.click()">
+      <span nz-icon nzType="upload"></span>
+      Nhập excel đơn Shopee
     </button>
 
     <input type="file" accept=".xlsx" class="file-input" (change)="onFileSelected($event)" #fileUpload>
-  </div>
+  </nz-header>
 
-  <div class="data mt-3" *ngIf="shopeeOrders.length > 0">
-    <table class="table table-bordered">
+  <nz-content class="px-2">
+    <nz-table nzBordered #rowSelectionTable nzShowPagination="false" [nzFrontPagination]="false"
+      [nzScroll]="{ x: '1200px', y: '768px' }" [nzData]="shopeeOrders" [nzLoading]="loading" nzSize="small">
       <thead>
         <tr>
           <th scope="col">Mã đơn hàng</th>
@@ -25,9 +25,9 @@
           <th scope="col">Trạng thái</th>
         </tr>
       </thead>
-      <tbody class="table-group-divider">
+      <tbody>
         <tr *ngFor="let order of shopeeOrders">
-          <th scope="row">{{ order.orderId }}</th>
+          <td class="fw-bold">{{ order.orderId }}</td>
           <td>{{ order.shipmentCode }}</td>
           <td>{{ order.customerUsername }}</td>
           <td>{{ order.products.length }}</td>
@@ -37,21 +37,16 @@
           <td>{{ order.orderStatus }}</td>
         </tr>
       </tbody>
-    </table>
+    </nz-table>
+  </nz-content>
 
-    <div class="d-flex justify-content-center">
-      <pagination
-        [boundaryLinks]="true"
-        [totalItems]="totalCount"
-        [itemsPerPage]="orderParams.pageSize"
-        [maxSize]="10"
-        (pageChanged)="onPageChanged($event)"
-        previousText="&lsaquo;"
-        nextText="&rsaquo;"
-        firstText="&laquo;"
-        lastText="&raquo;"
-      >
-      </pagination>
+  <nz-footer class="d-flex align-items-center justify-content-between px-2">
+    <div class="order-info"></div>
+    <div class="d-flex align-items-center justify-content-end">
+      <nz-pagination [(nzPageIndex)]="orderParams.pageIndex" [nzTotal]="totalCount" [nzSize]="'small'" nzShowSizeChanger
+        (nzPageIndexChange)="onPageChange($event)" [nzPageSize]="orderParams.pageSize"
+        (nzPageSizeChange)="onPageSizeChange($event)">
+      </nz-pagination>
     </div>
-  </div>
-</div>
+  </nz-footer>
+</nz-layout>

@@ -1,53 +1,48 @@
-<div class="shopee-revenue-container border border-warning h-100 m-0 px-2 d-flex flex-column">
-    <div class="control-bar d-flex row m-0">
-        <div class="col-3 p-0 d-flex flex-row">
-            <div class="d-flex align-items-center justify-content-start px-2 w-25 border">Thời gian</div>
-            <div class="w-50">
-                <input type="text" placeholder="Hôm nay" class="form-control form-control-sm rounded-0"
-                    bsDatepicker
-                    [bsValue]="today"
-                    [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', adaptivePosition: true }"
-                    (bsValueChange)="onDateChange($event)">
-            </div>
-        </div>
+<nz-layout class="h-100">
+  <nz-header class="d-flex align-items-center px-2">
+    <div class="col-3 p-0 d-flex flex-row">
+      <div class="d-flex align-items-center justify-content-start px-2 w-25">Thời gian</div>
+      <div class="w-50 d-flex align-items-center">
+        <input type="text" placeholder="Hôm nay" class="form-control form-control-sm rounded-0" bsDatepicker
+          [bsValue]="today" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', adaptivePosition: true }"
+          (bsValueChange)="onDateChange($event)">
+      </div>
     </div>
+  </nz-header>
 
-    <div class="data mt-3 border border-danger h-100 d-flex flex-column justify-content-between overflow-y-auto">
-        <div class="table-content border border-warning overflow-y-auto">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">Mã đơn hàng</th>
-                        <th scope="col">Trạng thái</th>
-                        <th scope="col">Sản phẩm</th>
-                        <th scope="col">SKU</th>
-                        <th scope="col">Số lượng</th>
-                        <th scope="col">Doanh thu</th>
-                        <th scope="col">Giá nhập</th>
-                        <th scope="col">Lợi nhuận</th>
-                    </tr>
-                </thead>
-                <tbody class="table-group-divider">
-                    <tr *ngFor="let order of shopeeOrderProducts">
-                        <th scope="row">{{ order.orderId }}</th>
-                        <td>{{ order.orderStatus }}</td>
-                        <td>{{ order.productName }}</td>
-                        <td>{{ order.productSKU }}</td>
-                        <td>{{ order.productQuantity }}</td>
-                        <td>{{ order.revenue | thousandSeparator }}</td>
-                        <td>{{ order.importPrice | thousandSeparator }}</td>
-                        <td>{{ order.orderProfit | thousandSeparator }}</td>
-                    </tr>
-                </tbody>
-            </table>
+  <nz-content class="px-2">
+    <nz-table nzBordered #rowSelectionTable nzShowPagination="false" [nzFrontPagination]="false"
+      [nzScroll]="{ x: '1200px', y: '768px' }" [nzData]="shopeeOrderProducts" nzSize="small">
+      <thead>
+        <tr>
+          <th nzWidth="200px">Mã đơn hàng</th>
+          <th nzWidth="150px">Trạng thái</th>
+          <th nzWidth="550px">Sản phẩm</th>
+          <th>SKU</th>
+          <th>Số lượng</th>
+          <th>Doanh thu</th>
+          <th>Giá nhập</th>
+          <th>Lợi nhuận</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of shopeeOrderProducts">
+          <td>{{ order.orderId }}</td>
+          <td>{{ order.orderStatus }}</td>
+          <td>{{ order.productName }}</td>
+          <td>{{ order.productSKU }}</td>
+          <td>{{ order.productQuantity }}</td>
+          <td>{{ order.revenue | thousandSeparator }}</td>
+          <td>{{ order.importPrice | thousandSeparator }}</td>
+          <td>{{ order.orderProfit | thousandSeparator }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </nz-content>
 
-            <div class="empty-table mt-3 border d-flex justify-content-center" *ngIf="shopeeOrderProducts.length <= 0">
-                <span>Không có đơn hàng</span>
-            </div>
-        </div>
-
-        <div class="table-footer border d-flex align-items-center px-2">
-            <div>Doanh thu: {{ totalRevenue | number}}</div>
-        </div>
+  <nz-footer class="d-flex align-items-center justify-content-between px-2">
+    <div class="order-info">
+      Doanh thu: <b>{{ totalRevenue | thousandSeparator}}</b>
     </div>
-</div>
+  </nz-footer>
+</nz-layout>

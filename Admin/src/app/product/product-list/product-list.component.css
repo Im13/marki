@@ -1,21 +1,12 @@
-.table-edit-button:hover {
-    cursor: pointer;
-}
-
-.product-picture {
-    width: 35px;
-    height: 35px;
-}
-
-.product-list-container {
-    height: 100%;
-}
-
-
-.list-products {
-    height: 94%;
-}
-
 td:hover {
   cursor: pointer;
+}
+
+nz-header, nz-layout, nz-content {
+  background-color: transparent;
+}
+
+nz-footer {
+  height: 50px;
+  background-color: #FFFFFF;
 }

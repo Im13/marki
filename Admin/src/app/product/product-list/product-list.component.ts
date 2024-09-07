@@ -153,4 +153,14 @@ export class ProductListComponent implements OnInit {
       }
     });
   }
+
+  onPageChange(pageNumber: number) {
+    this.productParams.pageIndex = pageNumber;
+    this.getProducts();
+  }
+
+  onPageSizeChange(pageSize: number) {
+    this.productParams.pageSize = pageSize;
+    this.getProducts();
+  }
 }

@@ -15,9 +15,10 @@ export class ShopeeOrdersComponent implements OnInit, OnDestroy {
   shopeeOrders: ShopeeOrder[] = [];
   orderParams = new ShopeeOrderParams();
   totalCount = 0;
+  loading = false;
 
   private orderSubscription: Subscription;
-  
+
   constructor(private orderService: OrderService, private toastrService: ToastrService) {}
 
   ngOnInit(): void {
@@ -40,11 +41,13 @@ export class ShopeeOrdersComponent implements OnInit, OnDestroy {
   }
 
   onFileSelected(event) {
+    this.loading = true;
     var orders: ShopeeOrder[];
     const file: File = event.target.files[0];
 
     if(file) {
       orders = this.orderService.readExcelFile(file);
+      this.loading = false;
     }
   }
 
@@ -56,17 +59,29 @@ export class ShopeeOrdersComponent implements OnInit, OnDestroy {
   }
 
   getOrders() {
+    this.loading = true;
     this.orderService.getShopeeOrdersPagination(this.orderParams).subscribe({
       next: response => {
         this.shopeeOrders = response.data;
         this.orderParams.pageIndex = response.pageIndex;
         this.orderParams.pageSize = response.pageSize;
         this.totalCount = response.count;
+        this.loading = false;
       },
       error: err => {
+        this.loading = false;
         console.log(err);
       }
     });
   }
 
+  onPageChange(pageNumber: number) {
+    this.orderParams.pageIndex = pageNumber;
+    this.getOrders();
+  }
+
+  onPageSizeChange(pageSize: number) {
+    this.orderParams.pageSize = pageSize;
+    this.getOrders();
+  }
 }
