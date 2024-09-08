@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './header/login/login.component';
 import { AccountInfoComponent } from './header/account-info/account-info.component';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
 
 @NgModule({
   imports: [
@@ -29,11 +30,13 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
     LoginComponent,
     AccountInfoComponent,
     NzLayoutModule,
+    NzMenuModule
   ],
   exports: [
     HeaderComponent,
     ReactiveFormsModule,
-    NzLayoutModule
+    NzLayoutModule,
+    NzMenuModule
   ],
 })
 export class CoreModule {}

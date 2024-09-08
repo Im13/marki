@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.3",
-    "@angular/cli": "~14.0.4",
+    "@angular/cli": "^14.2.13",
     "@angular/compiler-cli": "^18.2.3",
     "@types/jasmine": "~4.0.0",
     "jasmine-core": "~4.1.0",
@@ -41,5 +41,13 @@
     "karma-jasmine": "~5.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "typescript": "~5.4.5"
+  },
+  "overrides": {
+    "ngx-bootstrap": {
+      "@angular/common": "$@angular/common",
+      "@angular/core": "$@angular/core",
+      "@angular/animations": "$@angular/animations",
+      "@angular/forms": "$@angular/forms"
+    }
   }
 }
