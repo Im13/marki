@@ -25,8 +25,8 @@ registerLocaleData(en);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    CoreModule,
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
+    CoreModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }

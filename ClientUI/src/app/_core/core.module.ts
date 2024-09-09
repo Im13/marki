@@ -8,9 +8,11 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzCarouselModule } from 'ng-zorro-antd/carousel';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { NzBackTopModule } from 'ng-zorro-antd/back-top';
 
 @NgModule({
   declarations: [
@@ -18,16 +20,17 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   ],
   imports: [
     CommonModule,
-    NzLayoutModule,
     NzBreadCrumbModule,
     NzMenuModule,
     NzIconModule,
     NzGridModule,
     NzDropDownModule,
     NzCollapseModule,
-    BrowserAnimationsModule,
     CollapseModule.forRoot(),
-    NzInputModule
+    NzInputModule,
+    NzCarouselModule,
+    NzTypographyModule,
+    NzBackTopModule
   ],
   exports: [
     NzLayoutModule,
@@ -38,9 +41,11 @@ import { NzInputModule } from 'ng-zorro-antd/input';
     NzGridModule,
     NzDropDownModule,
     NzCollapseModule,
-    BrowserAnimationsModule,
     CollapseModule,
-    NzInputModule
+    NzInputModule,
+    NzCarouselModule,
+    NzTypographyModule,
+    NzBackTopModule
   ]
 })
 export class CoreModule { }
