@@ -1,0 +1,81 @@
+<div class="container-fluid">
+  <p class="fs-5 mt-2">ĐĂNG KÝ NHẬN TIN</p>
+  <div>
+    <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton" [nzPrefix]="emailPrefix">
+      <input type="text" nz-input placeholder="Email" class="ps-2" />
+    </nz-input-group>
+    <ng-template #suffixButton>
+      <button nz-button nzType="default" nzSize="large" nzSearch class="bg-dark text-white d-flex align-items-center">
+        <span nz-icon nzType="send" nzTheme="outline"></span>
+        <span>ĐĂNG KÝ</span>
+      </button>
+    </ng-template>
+    <ng-template #emailPrefix>
+      <span nz-icon nzType="mail" nzTheme="outline"></span>
+    </ng-template>
+  </div>
+
+  <div>
+    <span nz-icon nzType="facebook" nzTheme="outline" class="fs-3 mx-1 my-3"></span>
+    <span nz-icon nzType="instagram" nzTheme="outline" class="fs-3 mx-1 my-3"></span>
+  </div>
+
+  <hr class="m-0 fs-2">
+
+  <div class="mt-2 text-start">
+    <p class="m-1 fs-5 fw-bold">GIỚI THIỆU</p>
+    <p class="m-0">MARKI - Thương Hiệu Thời Trang Nữ Mang Phong Cách Tối Giản Và Thanh Lịch</p>
+    <p class="m-0 mt-2 d-flex align-items-center">
+      <span class="me-2" nz-icon nzType="phone" nzTheme="outline"></span>
+      <span>0388884593</span>
+    </p>
+    <p class="m-0 d-flex align-items-center">
+      <span class="me-2" nz-icon nzType="mail" nzTheme="outline"></span>
+      <span>contact&#64;marki.vn</span>
+    </p>
+    <p class="m-0 d-flex align-items-center">
+      <span class="me-2" nz-icon nzType="clock-circle" nzTheme="outline"></span>
+      <span>Giờ mở cửa: 14:00 - 18:30</span>
+    </p>
+    <p class="m-0 d-flex align-items-center">
+      <span class="me-2" nz-icon nzType="customer-service" nzTheme="outline"></span>
+      <span>Nhân viên tư vấn phản hồi tin nhắn đến 24:00</span>
+    </p>
+  </div>
+
+  <div class="mt-3 text-start">
+    <p class="m-1 fs-5 fw-bold">CHÍNH SÁCH</p>
+
+    <div class="d-flex align-items-center">
+      <span nz-icon nzType="caret-right" nzTheme="outline" class="me-2"></span>
+      <span>Hướng dẫn đặt hàng</span>
+    </div>
+    <div class="d-flex align-items-center">
+      <span nz-icon nzType="caret-right" nzTheme="outline" class="me-2"></span>
+      <span>Thông tin chuyển khoản</span>
+    </div>
+    <div class="d-flex align-items-center">
+      <span nz-icon nzType="caret-right" nzTheme="outline" class="me-2"></span>
+      <span>Chính sách đổi hàng và bảo hành</span>
+    </div>
+    <div class="d-flex align-items-center">
+      <span nz-icon nzType="caret-right" nzTheme="outline" class="me-2"></span>
+      <span>Chính sách bảo mật</span>
+    </div>
+  </div>
+
+  <div class="mt-3 text-start">
+    <p class="m-1 fs-5 fw-bold">ĐỊA CHỈ CỬA HÀNG</p>
+
+    <div class="d-flex align-items-center my-1">
+      <span nz-icon nzType="environment" nzTheme="outline" class="me-2 fw-bold"></span>
+      <span class="fw-bold">HÀ NỘI</span>
+    </div>
+
+    <p>Nhà A9 ngõ 14 Nguyễn Khuyến, Văn Miếu, Đống Đa, Hà Nội.</p>
+  </div>
+
+  <div class="py-3">
+    <span class="fw-semibold fw-5">BẢN QUYỀN THUỘC VỀ MARKI</span>
+  </div>
+</div>

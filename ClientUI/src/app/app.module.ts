@@ -12,12 +12,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './_core/core.module';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { FooterComponent } from './_core/footer/footer.component';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

@@ -15,6 +15,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzBackTopModule } from 'ng-zorro-antd/back-top';
 import { SwiperModule } from 'swiper/angular';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     NzTypographyModule,
     NzBackTopModule,
     SwiperModule,
-    NzButtonModule
+    NzButtonModule,
+    NzDividerModule
   ],
   exports: [
     NzLayoutModule,
@@ -51,7 +53,8 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     NzTypographyModule,
     NzBackTopModule,
     SwiperModule,
-    NzButtonModule
+    NzButtonModule,
+    NzDividerModule
   ]
 })
 export class CoreModule { }
