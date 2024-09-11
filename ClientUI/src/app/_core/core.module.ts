@@ -13,6 +13,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzBackTopModule } from 'ng-zorro-antd/back-top';
+import { SwiperModule } from 'swiper/angular';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { NzBackTopModule } from 'ng-zorro-antd/back-top';
     NzInputModule,
     NzCarouselModule,
     NzTypographyModule,
-    NzBackTopModule
+    NzBackTopModule,
+    SwiperModule,
+    NzButtonModule
   ],
   exports: [
     NzLayoutModule,
@@ -45,7 +49,9 @@ import { NzBackTopModule } from 'ng-zorro-antd/back-top';
     NzInputModule,
     NzCarouselModule,
     NzTypographyModule,
-    NzBackTopModule
+    NzBackTopModule,
+    SwiperModule,
+    NzButtonModule
   ]
 })
 export class CoreModule { }

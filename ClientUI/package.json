@@ -22,6 +22,7 @@
     "ng-zorro-antd": "^16.2.2",
     "ngx-bootstrap": "^11.0.2",
     "rxjs": "~7.8.0",
+    "swiper": "^8.4.6",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
   },

@@ -1,0 +1,40 @@
+<div class="container-fluid bg-light">
+  <div class="border-start border-dark border-4 ps-2 mb-3 d-flex align-items-center justify-content-between">
+    <span class="fw-bold fs-5">{{ sectionName }}</span>
+
+    <button nz-button class="bg-dark text-light rounded-1">
+      Xem tất cả >>
+    </button>
+  </div>
+
+  <div class="product-swiper">
+    <swiper [config]="swiperConfig" class="w-100 h-100 border border-danger">
+      <ng-template swiperSlide>
+        <div class="slide-item h-100 border border-danger">
+          <div class="h-75 border border-success">
+            anh here
+          </div>
+
+          <div class="h-25">
+            <div class="h-50">
+              <p nz-typography nzEllipsis nzEllipsisRows="2" class="m-0 lh-sm fw-semibold py-1">
+                day la ten san pham day la ten san pham day la ten san pham
+              </p>
+            </div>
+
+            <div class="h-50 d-flex align-items-center">
+              <span class="fw-bold">100.000đ</span>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template swiperSlide class="slide-item border border-danger">Slide 2</ng-template>
+      <ng-template swiperSlide class="slide-item border border-danger">Slide 3</ng-template>
+      <ng-template swiperSlide class="slide-item border border-danger">Slide 4</ng-template>
+      <ng-template swiperSlide class="slide-item border border-danger">Slide 5</ng-template>
+      <ng-template swiperSlide class="slide-item border border-danger">Slide 6</ng-template>
+    </swiper>
+  </div>
+
+
+</div>
