@@ -16,6 +16,7 @@ import { NzBackTopModule } from 'ng-zorro-antd/back-top';
 import { SwiperModule } from 'swiper/angular';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
     NzBackTopModule,
     SwiperModule,
     NzButtonModule,
-    NzDividerModule
+    NzDividerModule,
+    NzBadgeModule
   ],
   exports: [
     NzLayoutModule,
@@ -54,7 +56,8 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
     NzBackTopModule,
     SwiperModule,
     NzButtonModule,
-    NzDividerModule
+    NzDividerModule,
+    NzBadgeModule
   ]
 })
 export class CoreModule { }
