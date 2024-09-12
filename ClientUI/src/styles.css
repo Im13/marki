@@ -3,3 +3,9 @@
 @import 'swiper/css';
 @import 'swiper/css/navigation';
 @import 'swiper/css/pagination';
+
+:root {
+  --swiper-navigation-color: black;
+  --swiper-pagination-color: black;
+  --swiper-navigation-size: 25px;
+}
