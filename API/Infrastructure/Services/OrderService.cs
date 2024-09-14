@@ -109,7 +109,7 @@ namespace Infrastructure.Services
             order.DateCreated = order.DateCreated.ToLocalTime();
             
             //Define orderStatus 
-            var status = await _unitOfWork.Repository<OfflineOrderStatus>().GetByIdAsync(0);
+            var status = await _unitOfWork.Repository<OfflineOrderStatus>().GetByIdAsync(1);
             order.OrderStatus = status;
 
             _unitOfWork.Repository<OfflineOrder>().Add(order);

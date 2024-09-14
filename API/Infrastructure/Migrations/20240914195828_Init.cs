@@ -12,6 +12,23 @@ namespace Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Customers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
+                    EmailAddress = table.Column<string>(type: "TEXT", nullable: true),
+                    DOB = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DeliveryMethods",
                 columns: table => new
                 {
@@ -25,6 +42,19 @@ namespace Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DeliveryMethods", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderStatus",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Status = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderStatus", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -138,6 +168,7 @@ namespace Infrastructure.Migrations
                     Description = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: false),
                     ProductSKU = table.Column<string>(type: "TEXT", nullable: true),
                     ImportPrice = table.Column<double>(type: "REAL", nullable: false),
+                    Slug = table.Column<string>(type: "TEXT", nullable: true),
                     IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
                     ProductTypeId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
@@ -260,7 +291,7 @@ namespace Infrastructure.Migrations
                     Barcode = table.Column<string>(type: "TEXT", nullable: true),
                     ImageUrl = table.Column<string>(type: "TEXT", nullable: true),
                     Weight = table.Column<float>(type: "REAL", nullable: false),
-                    ProductId = table.Column<int>(type: "INTEGER", nullable: true)
+                    ProductId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -269,7 +300,8 @@ namespace Infrastructure.Migrations
                         name: "FK_ProductSKUs_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -324,6 +356,7 @@ namespace Infrastructure.Migrations
                     Url = table.Column<string>(type: "TEXT", nullable: true),
                     IsMain = table.Column<bool>(type: "INTEGER", nullable: false),
                     PublicId = table.Column<string>(type: "TEXT", nullable: true),
+                    ProductId = table.Column<int>(type: "INTEGER", nullable: false),
                     ProductSKUsId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
@@ -334,6 +367,71 @@ namespace Infrastructure.Migrations
                         column: x => x.ProductSKUsId,
                         principalTable: "ProductSKUs",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Photos_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OfflineOrders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ShippingFee = table.Column<double>(type: "REAL", nullable: false),
+                    OrderDiscount = table.Column<double>(type: "REAL", nullable: false),
+                    BankTransferedAmount = table.Column<double>(type: "REAL", nullable: false),
+                    ExtraFee = table.Column<double>(type: "REAL", nullable: false),
+                    Total = table.Column<double>(type: "REAL", nullable: false),
+                    OrderNote = table.Column<string>(type: "TEXT", nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    OrderCareStaffId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CustomerCareStaffId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CustomerId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ReceiverName = table.Column<string>(type: "TEXT", nullable: true),
+                    ReceiverPhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
+                    Address = table.Column<string>(type: "TEXT", nullable: true),
+                    DistrictId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ProvinceId = table.Column<int>(type: "INTEGER", nullable: false),
+                    WardId = table.Column<int>(type: "INTEGER", nullable: false),
+                    OrderStatusId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OfflineOrders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OfflineOrders_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OfflineOrders_Districts_DistrictId",
+                        column: x => x.DistrictId,
+                        principalTable: "Districts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OfflineOrders_OrderStatus_OrderStatusId",
+                        column: x => x.OrderStatusId,
+                        principalTable: "OrderStatus",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OfflineOrders_Provinces_ProvinceId",
+                        column: x => x.ProvinceId,
+                        principalTable: "Provinces",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OfflineOrders_Wards_WardId",
+                        column: x => x.WardId,
+                        principalTable: "Wards",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -361,10 +459,70 @@ namespace Infrastructure.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "OfflineOrderSKUs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ProductSkuId = table.Column<int>(type: "INTEGER", nullable: true),
+                    Quantity = table.Column<int>(type: "INTEGER", nullable: false),
+                    OfflineOrderId = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OfflineOrderSKUs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OfflineOrderSKUs_OfflineOrders_OfflineOrderId",
+                        column: x => x.OfflineOrderId,
+                        principalTable: "OfflineOrders",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_OfflineOrderSKUs_ProductSKUs_ProductSkuId",
+                        column: x => x.ProductSkuId,
+                        principalTable: "ProductSKUs",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Districts_ProvinceId",
                 table: "Districts",
                 column: "ProvinceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OfflineOrders_CustomerId",
+                table: "OfflineOrders",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OfflineOrders_DistrictId",
+                table: "OfflineOrders",
+                column: "DistrictId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OfflineOrders_OrderStatusId",
+                table: "OfflineOrders",
+                column: "OrderStatusId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OfflineOrders_ProvinceId",
+                table: "OfflineOrders",
+                column: "ProvinceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OfflineOrders_WardId",
+                table: "OfflineOrders",
+                column: "WardId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OfflineOrderSKUs_OfflineOrderId",
+                table: "OfflineOrderSKUs",
+                column: "OfflineOrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OfflineOrderSKUs_ProductSkuId",
+                table: "OfflineOrderSKUs",
+                column: "ProductSkuId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderItems_OrderId",
@@ -375,6 +533,11 @@ namespace Infrastructure.Migrations
                 name: "IX_Orders_DeliveryMethodId",
                 table: "Orders",
                 column: "DeliveryMethodId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Photos_ProductId",
+                table: "Photos",
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Photos_ProductSKUsId",
@@ -426,6 +589,9 @@ namespace Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "OfflineOrderSKUs");
+
+            migrationBuilder.DropTable(
                 name: "OrderItems");
 
             migrationBuilder.DropTable(
@@ -438,7 +604,7 @@ namespace Infrastructure.Migrations
                 name: "ShopeeProducts");
 
             migrationBuilder.DropTable(
-                name: "Wards");
+                name: "OfflineOrders");
 
             migrationBuilder.DropTable(
                 name: "Orders");
@@ -453,7 +619,13 @@ namespace Infrastructure.Migrations
                 name: "ShopeeOrders");
 
             migrationBuilder.DropTable(
-                name: "Districts");
+                name: "Customers");
+
+            migrationBuilder.DropTable(
+                name: "OrderStatus");
+
+            migrationBuilder.DropTable(
+                name: "Wards");
 
             migrationBuilder.DropTable(
                 name: "DeliveryMethods");
@@ -462,10 +634,13 @@ namespace Infrastructure.Migrations
                 name: "ProductOptions");
 
             migrationBuilder.DropTable(
-                name: "Provinces");
+                name: "Districts");
 
             migrationBuilder.DropTable(
                 name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "Provinces");
 
             migrationBuilder.DropTable(
                 name: "ProductTypes");

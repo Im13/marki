@@ -1,0 +1,27 @@
+[
+    {
+        "Name": "Thanh Huong",
+        "PhoneNumber": "0982881123",
+        "EmailAddress": "thanhhuong@gmail.com",
+        "IsDeleted": false
+    },
+    {
+        "Name": "Dung Ngô",
+        "PhoneNumber": "0399329901",
+        "EmailAddress": "",
+        "IsDeleted": false
+    },
+    {
+        "Name": "Tiên Nguyễn",
+        "PhoneNumber": "0938821823",
+        "EmailAddress": "",
+        "IsDeleted": false
+    },
+    {
+        "Name": "justsouknow.17",
+        "PhoneNumber": "0962504029",
+        "EmailAddress": "",
+        "IsDeleted": false
+    }
+    
+]

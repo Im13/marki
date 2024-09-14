@@ -1,0 +1,23 @@
+[
+    {
+        "Status": "Mới"
+    },
+    {
+        "Status": "Chờ hàng"
+    },
+    {
+        "Status": "Ưu tiên xuất đơn"
+    },
+    {
+        "Status": "Đã xác nhận"
+    },
+    {
+        "Status": "Đã gửi hàng"
+    },
+    {
+        "Status": "Đơn đã huỷ"
+    },
+    {
+        "Status": "Đơn đã xoá"
+    }
+]
