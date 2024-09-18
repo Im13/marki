@@ -40,7 +40,7 @@
         <div class="supplier p-2 border rounded">
           <div class="mb-3">
             <label for="productType" class="form-label m-0 mb-1">Danh mục <span class="help-block">*</span></label>
-            
+
             <nz-select nzPlaceHolder="Chọn danh mục" nzAllowClear nzShowSearch nzServerSearch
               formControlName="productTypeId">
               <ng-container *ngFor="let type of productTypes">
@@ -96,6 +96,16 @@
               </tr>
             </tbody>
           </nz-table>
+        </div>
+
+        <div class="clearfix border mt-3 p-2">
+          <nz-upload nzAction="https://localhost:5001/api/products/add-photo" nzListType="picture-card" [(nzFileList)]="fileList"
+            [nzShowButton]="fileList.length < 8" [nzPreview]="handlePreview">
+            <div>
+              <span nz-icon nzType="plus"></span>
+              <div style="margin-top: 8px">Upload</div>
+            </div>
+          </nz-upload>
         </div>
       </div>
 

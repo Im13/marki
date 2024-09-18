@@ -113,14 +113,14 @@ namespace API.Controllers.Admin
 
             if (result.Error != null) return BadRequest(result.Error.Message);
 
-            var photoDTO = new PhotoDTO
+            var photoDTO = new Photo
             {
                 Url = result.SecureUrl.AbsoluteUri,
                 PublicId = result.PublicId,
                 IsMain = false
             };
 
-            return Ok(_mapper.Map<PhotoDTO>(photoDTO));
+            return Ok(_mapper.Map<Photo,PhotoDTO>(photoDTO));
         }
 
         [HttpGet("sku/{id}")]

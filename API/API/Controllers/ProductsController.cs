@@ -1,11 +1,9 @@
 using API.DTOs;
 using API.Errors;
-using API.Helpers;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specification;
-using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -16,15 +14,20 @@ namespace API.Controllers
         private readonly IGenericRepository<ProductType> _productTypeRepo;
         private readonly IMapper _mapper;
         private readonly IProductService _productService;
+        private readonly IPhotoService _photoService;
+        
+
         public ProductsController(IGenericRepository<Product> productRepo,
         IGenericRepository<ProductType> productTypeRepo,
         IMapper mapper,
-        IProductService productService)
+        IProductService productService,
+        IPhotoService photoService)
         {
             _productTypeRepo = productTypeRepo;
             _mapper = mapper;
             _productRepo = productRepo;
             _productService = productService;
+            _photoService = photoService;
         }
 
         [HttpGet("{id}")]
@@ -46,6 +49,25 @@ namespace API.Controllers
         {
             var types = await _productTypeRepo.ListAllAsync();
             return Ok(types);
+        }
+
+        [HttpPost("add-photo")]
+        public async Task<ActionResult<PhotoDTO>> AddPhoto(IFormFile file)
+        {
+            var result = await _photoService.AddPhotoAsync(file);
+
+            if (result.Error != null)
+            {
+                return BadRequest(result.Error.Message);
+            }
+
+            var photo = new Photo
+            {
+                Url = result.SecureUrl.AbsoluteUri,
+                PublicId = result.PublicId
+            };
+
+            return _mapper.Map<Photo,PhotoDTO>(photo);
         }
     }
 }
