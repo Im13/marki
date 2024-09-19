@@ -74,7 +74,8 @@ export class AddProductModalComponent implements OnInit {
         productSKU: '',
         productTypeId: null,
         productSkus: [],
-        imageUrl: ''
+        imageUrl: '',
+        photos: []
       };
     } else {
       this.isEdit = true;
@@ -348,6 +349,7 @@ export class AddProductModalComponent implements OnInit {
     this.product.productSKU = this.addForm.value.productSKU;
     this.product.productTypeId = this.addForm.value.productTypeId;
     this.product.productSkus = this.productSKUs;
+    this.product.photos = this.fileList.map(file => file.response);
   }
 
   onCreateVariants() {
