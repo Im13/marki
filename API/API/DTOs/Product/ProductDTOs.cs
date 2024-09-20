@@ -8,5 +8,6 @@ namespace API.DTOs.Product
         public List<ProductOptionSKUDTO> ProductOptionSKUs { get; set; }
         public List<ProductOptionDTO> ProductOptions { get; set; }
         public List<ProductSKUDTO> ProductSkus { get; set; }
+        public List<PhotoDTO> Photos { get; set; }
     }
 }

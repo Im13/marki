@@ -19,10 +19,9 @@ const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = () =>
-      {
-        resolve(reader.result);
-      }
+    reader.onload = () => {
+      resolve(reader.result);
+    }
     reader.onerror = (error) => reject(error);
   });
 
@@ -58,7 +57,7 @@ export class AddProductModalComponent implements OnInit {
     private productService: ProductService,
     private toastrService: ToastrService,
     private convertVieService: ConvertVieService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (this.isEdit == null) this.isEdit = false;
@@ -316,7 +315,7 @@ export class AddProductModalComponent implements OnInit {
   onSubmit() {
     this.bindDataToProductObject();
 
-    if(this.addForm.valid) {
+    if (this.addForm.valid) {
       if (!this.isEdit) {
         this.productService.addProduct(this.product).subscribe({
           next: () => {
@@ -370,5 +369,19 @@ export class AddProductModalComponent implements OnInit {
       event.previousIndex,
       event.currentIndex
     );
+  }
+
+  handleChange(info: { file: NzUploadFile }): void {
+    switch (info.file.status) {
+      case 'uploading':
+        console.log('uploading...');
+        break;
+      case 'done':
+        console.log('done');
+        break;
+      case 'error':
+        console.log('Network error');
+        break;
+    }
   }
 }

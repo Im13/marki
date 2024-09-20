@@ -100,10 +100,10 @@
 
         <div class="clearfix border mt-3 p-2">
           <nz-upload nzAction="https://localhost:5001/api/products/add-photo" nzListType="picture-card"
-            [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 8" [nzPreview]="handlePreview">
+            [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 8" [nzPreview]="handlePreview" (nzChange)="handleChange($event)">
             <div>
-              <span nz-icon nzType="plus"></span>
-              <div style="margin-top: 8px">Upload</div>
+              <span nz-icon nzType="picture"></span>
+              <div style="margin-top: 8px">Thêm hình ảnh</div>
             </div>
           </nz-upload>
 
