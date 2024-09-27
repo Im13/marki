@@ -99,8 +99,20 @@
         </div>
 
         <div class="clearfix border mt-3 p-2">
+          <p class="mb-1">Ảnh bìa:</p>
           <nz-upload nzAction="https://localhost:5001/api/products/add-photo" nzListType="picture-card"
-            [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 8" [nzPreview]="handlePreview" (nzChange)="handleChange($event)">
+            [(nzFileList)]="mainPhoto" [nzShowButton]="mainPhoto.length < 1" [nzPreview]="handlePreview"
+            (nzChange)="handleUploadProductChange($event)">
+            <div>
+              <span nz-icon nzType="picture"></span>
+              <div style="margin-top: 8px">Thêm hình ảnh</div>
+            </div>
+          </nz-upload>
+
+          <p class="mb-1">Ảnh sản phẩm (Tối đa 8 ảnh):</p>
+          <nz-upload nzAction="https://localhost:5001/api/products/add-photo" nzListType="picture-card"
+            [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 8" [nzPreview]="handlePreview"
+            (nzChange)="handleUploadProductChange($event)">
             <div>
               <span nz-icon nzType="picture"></span>
               <div style="margin-top: 8px">Thêm hình ảnh</div>

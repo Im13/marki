@@ -14,6 +14,7 @@ import { ProductSKUValues } from 'src/app/shared/_models/productSKUValues';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { Photo } from 'src/app/shared/_models/photo';
 import { ProductType } from 'src/app/shared/_models/productTypes';
+import { Observable, Observer } from 'rxjs';
 
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
@@ -49,6 +50,7 @@ export class AddProductModalComponent implements OnInit {
 
   fileList: NzUploadFile[] = [
   ];
+  mainPhoto: NzUploadFile[] = [];
   previewImage: string | undefined = '';
   previewVisible = false;
 
@@ -371,7 +373,7 @@ export class AddProductModalComponent implements OnInit {
     );
   }
 
-  handleChange(info: { file: NzUploadFile }): void {
+  handleUploadProductChange(info: { file: NzUploadFile }): void {
     switch (info.file.status) {
       case 'uploading':
         console.log('uploading...');
