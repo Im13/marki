@@ -111,7 +111,7 @@
 
           <p class="mb-1">Ảnh sản phẩm (Tối đa 8 ảnh):</p>
           <nz-upload nzAction="https://localhost:5001/api/products/add-photo" nzListType="picture-card"
-            [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 8" [nzPreview]="handlePreview"
+            [(nzFileList)]="photoList" [nzShowButton]="photoList.length < 8" [nzPreview]="handlePreview"
             (nzChange)="handleUploadProductChange($event)">
             <div>
               <span nz-icon nzType="picture"></span>
@@ -185,8 +185,8 @@
                       [src]="sku.photos[0].url" />
 
                     <ng-template #uploadImageTemplate class="clearfix">
-                      <nz-upload nzListType="picture-card" [(nzFileList)]="fileList"
-                        [nzShowButton]="fileList.length < 1" [nzPreview]="handlePreview" [nzFileType]="
+                      <nz-upload nzListType="picture-card" [(nzFileList)]="skuPhotoList"
+                        [nzShowButton]="skuPhotoList.length < 1" [nzPreview]="handlePreview" [nzFileType]="
                           'image/png,image/jpeg,image/gif,image/bmp'
                         " [nzCustomRequest]="handleUpload">
                         <div>

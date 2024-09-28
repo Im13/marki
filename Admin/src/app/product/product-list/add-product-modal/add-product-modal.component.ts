@@ -14,7 +14,6 @@ import { ProductSKUValues } from 'src/app/shared/_models/productSKUValues';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { Photo } from 'src/app/shared/_models/photo';
 import { ProductType } from 'src/app/shared/_models/productTypes';
-import { Observable, Observer } from 'rxjs';
 
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
@@ -48,8 +47,8 @@ export class AddProductModalComponent implements OnInit {
   selectedProductTypeId: number;
   isProductTypeLoading = false;
 
-  fileList: NzUploadFile[] = [
-  ];
+  skuPhotoList: NzUploadFile[] = [];
+  photoList: NzUploadFile[] = [];
   mainPhoto: NzUploadFile[] = [];
   previewImage: string | undefined = '';
   previewVisible = false;
@@ -83,6 +82,24 @@ export class AddProductModalComponent implements OnInit {
     } else {
       this.isEdit = true;
       this.selectedProductTypeId = this.product.productTypeId;
+
+      this.photoList = this.product.photos.filter(p => p.isMain == false).map(p => {
+        return {
+          uid: p.id.toString(),
+          name: p.publicId,
+          status: 'done',
+          url: p.url,
+        } as NzUploadFile
+      });
+
+      this.mainPhoto = this.product.photos.filter(p => p.isMain == true).map(p => {
+        return {
+          uid: p.id.toString(),
+          name: p.publicId,
+          status: 'done',
+          url: p.url,
+        } as NzUploadFile
+      })
 
       this.product.productOptions.forEach((option) => {
         const productOption = {
@@ -377,21 +394,14 @@ export class AddProductModalComponent implements OnInit {
   }
 
   handleUploadProductChange(info: { file: NzUploadFile }): void {
-    switch (info.file.status) {
-      case 'uploading':
-        console.log('uploading...');
-        break;
-      case 'done':
-        console.log('done');
-        break;
-      case 'error':
-        console.log('Network error');
-        break;
+    if (info.file.status === 'done') {
+      console.log('File: ');
+      console.log(info.file);
     }
   }
 
   groupProductImages() {
-    this.productImages = this.fileList.map(
+    this.productImages = this.photoList.map(
       file => {
         if(file.response) {
           return {

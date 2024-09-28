@@ -38,6 +38,7 @@ namespace Infrastructure.Data
                 .ThenInclude(pov => pov.ProductOption)
                 .Include(p => p.ProductSKUs).ThenInclude(ps => ps.Photos)
                 .Include(p => p.ProductOptions).ThenInclude(po => po.ProductOptionValues)
+                .Include(p => p.Photos)
                 .ToListAsync();
 
             return products;
