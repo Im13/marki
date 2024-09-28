@@ -11,7 +11,7 @@ import { ProductSKUs } from 'src/app/shared/_models/productSKUs';
 import { ConvertVieService } from 'src/app/core/services/convert-vie.service';
 import { ProductOptionValue } from 'src/app/shared/_models/productOptionValues';
 import { ProductSKUValues } from 'src/app/shared/_models/productSKUValues';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { Photo } from 'src/app/shared/_models/photo';
 import { ProductType } from 'src/app/shared/_models/productTypes';
 import { Observable, Observer } from 'rxjs';
@@ -53,6 +53,8 @@ export class AddProductModalComponent implements OnInit {
   mainPhoto: NzUploadFile[] = [];
   previewImage: string | undefined = '';
   previewVisible = false;
+
+  productImages: Photo[] = [];
 
   constructor(
     private modal: NzModalRef,
@@ -315,6 +317,7 @@ export class AddProductModalComponent implements OnInit {
   }
 
   onSubmit() {
+    this.groupProductImages();
     this.bindDataToProductObject();
 
     if (this.addForm.valid) {
@@ -350,7 +353,7 @@ export class AddProductModalComponent implements OnInit {
     this.product.productSKU = this.addForm.value.productSKU;
     this.product.productTypeId = this.addForm.value.productTypeId;
     this.product.productSkus = this.productSKUs;
-    this.product.photos = this.fileList.map(file => file.response);
+    this.product.photos = this.productImages;
   }
 
   onCreateVariants() {
@@ -385,5 +388,27 @@ export class AddProductModalComponent implements OnInit {
         console.log('Network error');
         break;
     }
+  }
+
+  groupProductImages() {
+    this.productImages = this.fileList.map(
+      file => {
+        if(file.response) {
+          return {
+            ...file.response,
+            isMain: false
+          } as Photo;
+        }
+
+        return undefined;
+      }
+    ).filter(photo => photo != undefined) as Photo[];
+
+    const mainImage = {
+      ...this.mainPhoto[0].response,
+      isMain: true
+    } as Photo;
+
+    this.productImages.push(mainImage);
   }
 }
