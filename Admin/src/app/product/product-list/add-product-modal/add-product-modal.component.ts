@@ -89,6 +89,7 @@ export class AddProductModalComponent implements OnInit {
           name: p.publicId,
           status: 'done',
           url: p.url,
+          response: p
         } as NzUploadFile
       });
 
@@ -98,6 +99,12 @@ export class AddProductModalComponent implements OnInit {
           name: p.publicId,
           status: 'done',
           url: p.url,
+          response: {
+            id: p.id,
+            isMain: true,
+            publicId: p.publicId,
+            url: p.url
+          }
         } as NzUploadFile
       })
 
@@ -393,10 +400,9 @@ export class AddProductModalComponent implements OnInit {
     );
   }
 
-  handleUploadProductChange(info: { file: NzUploadFile }): void {
+  handleUploadProductChange(info: { file: NzUploadFile }, isMainPhoto: boolean): void {
     if (info.file.status === 'done') {
-      console.log('File: ');
-      console.log(info.file);
+      console.log(info)
     }
   }
 
@@ -408,6 +414,8 @@ export class AddProductModalComponent implements OnInit {
             ...file.response,
             isMain: false
           } as Photo;
+        } else {
+
         }
 
         return undefined;

@@ -39,21 +39,21 @@ namespace Infrastructure.Services
 
             _unitOfWork.Repository<Product>().Update(product);
             
-            if(product.ProductSKUs.Count > 0)
-            {
-                photoToFind = await _unitOfWork.Repository<Photo>().GetByIdAsync(product.ProductSKUs.First().Photos.First().Id);
+            // if(product.ProductSKUs.Count > 0)
+            // {
+            //     photoToFind = await _unitOfWork.Repository<Photo>().GetByIdAsync(product.ProductSKUs.First().Photos.First().Id);
 
-                if(photoToFind == null) {
-                    photoToFind = new Photo() 
-                    {
-                        IsMain = product.ProductSKUs.First().Photos.First().IsMain,
-                        PublicId = product.ProductSKUs.First().Photos.First().PublicId,
-                        Url = product.ProductSKUs.First().Photos.First().Url
-                    };
+            //     if(photoToFind == null) {
+            //         photoToFind = new Photo() 
+            //         {
+            //             IsMain = product.ProductSKUs.First().Photos.First().IsMain,
+            //             PublicId = product.ProductSKUs.First().Photos.First().PublicId,
+            //             Url = product.ProductSKUs.First().Photos.First().Url
+            //         };
 
-                    _unitOfWork.Repository<Photo>().Add(photoToFind);
-                }
-            }
+            //         _unitOfWork.Repository<Photo>().Add(photoToFind);
+            //     }
+            // }
 
             foreach(var sku in product.ProductSKUs)
             {
