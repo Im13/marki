@@ -1,6 +1,7 @@
 using Core;
 using Core.Entities;
 using Core.Interfaces;
+using Core.Specification;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,8 +38,21 @@ namespace Infrastructure.Services
         {
             Photo photoToFind = new Photo();
 
+            //Get photos with productId
+            var spec = new PhotosWithProductFilterSpecification(product.Id);
+            var photos = await _unitOfWork.Repository<Photo>().ListAsync(spec);
+
+            var photosToDelete = photos.Except(product.Photos).ToList();
+
+            foreach(var photo in photosToDelete) {
+                _unitOfWork.Repository<Photo>().Delete(photo);
+
+                //Need delete in Cloudinary
+            }
+
             _unitOfWork.Repository<Product>().Update(product);
             
+            // UPDATE IMAGE FOR SKUS
             // if(product.ProductSKUs.Count > 0)
             // {
             //     photoToFind = await _unitOfWork.Repository<Photo>().GetByIdAsync(product.ProductSKUs.First().Photos.First().Id);
@@ -55,17 +69,17 @@ namespace Infrastructure.Services
             //     }
             // }
 
-            foreach(var sku in product.ProductSKUs)
-            {
-                foreach(var skuValue in sku.ProductSKUValues)
-                {
-                    _unitOfWork.Repository<ProductSKUValues>().Update(skuValue);
-                }
+            // foreach(var sku in product.ProductSKUs)
+            // {
+            //     foreach(var skuValue in sku.ProductSKUValues)
+            //     {
+            //         _unitOfWork.Repository<ProductSKUValues>().Update(skuValue);
+            //     }
 
-                sku.Photos.Add(photoToFind);
+            //     sku.Photos.Add(photoToFind);
                 
-                _unitOfWork.Repository<ProductSKUs>().Update(sku);
-            }
+            //     _unitOfWork.Repository<ProductSKUs>().Update(sku);
+            // }
 
             var result = await _unitOfWork.Complete();
 
