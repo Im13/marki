@@ -11,10 +11,12 @@ namespace Infrastructure.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private StoreContext _context;
-        public ProductService(IUnitOfWork unitOfWork, StoreContext context)
+        private readonly IPhotoService _photoService;
+        public ProductService(IUnitOfWork unitOfWork, StoreContext context, IPhotoService photoService)
         {
             _context = context;
             _unitOfWork = unitOfWork;
+            _photoService = photoService;
         }
 
         public async Task<Product> GetProductAsync(int id)
@@ -48,6 +50,12 @@ namespace Infrastructure.Services
                 _unitOfWork.Repository<Photo>().Delete(photo);
 
                 //Need delete in Cloudinary
+                var deleteResult = await _photoService.DeletePhotoAsync(photo.PublicId);
+
+                if (deleteResult.Error != null)
+                {
+                    return null;
+                }
             }
 
             _unitOfWork.Repository<Product>().Update(product);
