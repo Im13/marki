@@ -242,7 +242,7 @@
     </div>
   </div>
   <div *nzModalFooter>
-    <button [disabled]="!addForm.valid" nz-button nzType="primary" type="submit" (click)="onSubmit()">
+    <button [disabled]="!addForm.valid" nz-button nzType="primary" type="submit" (click)="onSubmit()" [nzLoading]="isSubmitting">
       Lưu
     </button>
   </div>

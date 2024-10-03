@@ -35,6 +35,7 @@ export class AddProductModalComponent implements OnInit {
 
   addForm: FormGroup;
   isEdit?: boolean;
+  isSubmitting: boolean = false;
   productOptions: ProductOptions[] = [];
   productOptionId: number = 0;
   currentOptionValueText = '';
@@ -341,6 +342,7 @@ export class AddProductModalComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isSubmitting = true;
     this.groupProductImages();
     this.bindDataToProductObject();
 
@@ -353,6 +355,7 @@ export class AddProductModalComponent implements OnInit {
           },
           error: (err) => {
             this.toastrService.error(err);
+            this.isSubmitting = false;
           },
         });
       } else {
@@ -362,8 +365,8 @@ export class AddProductModalComponent implements OnInit {
             this.destroyModal();
           },
           error: (err) => {
-            console.log(err);
             this.toastrService.error(err);
+            this.isSubmitting = false;
           },
         });
       }

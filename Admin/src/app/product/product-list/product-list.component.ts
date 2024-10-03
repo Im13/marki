@@ -137,10 +137,11 @@ export class ProductListComponent implements OnInit {
         this.products.forEach(product => {
           if(!product.totalQuantity) product.totalQuantity = 0;
 
-          if(product.productSkus.length > 0) {
-            if(product.productSkus[0].photos.length > 0)
-              product.imageUrl = product.productSkus[0].photos[0].url;
+          if(product.photos.length > 0) {
+            product.imageUrl = product.photos.find(p => p.isMain == true).url;
+          }
 
+          if(product.productSkus.length > 0) {
             product.productSkus.forEach(sku => {
               product.totalQuantity += sku.quantity;
             })
