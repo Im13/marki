@@ -44,6 +44,15 @@ namespace Infrastructure.Data
             return products;
         }
 
+        public async Task<List<Product>> GetProductForClientWithSpec(ISpecification<Product> spec)
+        {
+            var products = await SpecificationEvaluator<Product>.GetQuery(_context.Set<Product>().AsQueryable(), spec)
+                .Include(p => p.Photos)
+                .ToListAsync();
+
+            return products;
+        }
+
         public async Task<List<ProductSKUs>> GetProductSKUsWithSpec(ISpecification<ProductSKUs> spec)
         {
             var productSkus = await SpecificationEvaluator<ProductSKUs>.GetQuery(_context.Set<ProductSKUs>().AsQueryable(), spec)

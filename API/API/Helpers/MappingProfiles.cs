@@ -1,5 +1,6 @@
 using API.DTOs;
 using API.DTOs.AdminOrder;
+using API.DTOs.ClientProduct;
 using API.DTOs.Product;
 using API.DTOs.Shopee;
 using AutoMapper;
@@ -51,6 +52,8 @@ namespace API.Helpers
 
             CreateMap<ProductDTOs, Product>();
             CreateMap<Product, ProductDTOs>();
+            CreateMap<ProductForClientDTO, Product>();
+            CreateMap<Product, ProductForClientDTO>();
             CreateMap<Photo, PhotoDTO>();
             CreateMap<PhotoDTO, Photo>();
             CreateMap<ProductOptionDTO, ProductOptions>();
@@ -60,6 +63,8 @@ namespace API.Helpers
             CreateMap<ProductOptionValues, ProductOptionValueDTO>();
             CreateMap<ProductSKUDTO, ProductSKUs>();
             CreateMap<ProductSKUs, ProductSKUDTO>();
+            CreateMap<ProductSKUForClientDTO, ProductSKUDTO>();
+            CreateMap<ProductSKUDTO, ProductSKUForClientDTO>();
             CreateMap<ProductSKUValuesDTO, ProductSKUValues>();
             CreateMap<ProductSKUValues, ProductSKUValuesDTO>()
                 .ForMember(d => d.OptionValue, o => o.MapFrom(s => s.ProductOptionValue.ValueName))

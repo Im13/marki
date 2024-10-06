@@ -9,6 +9,7 @@ namespace Core.Interfaces
         Task<IReadOnlyList<Product>> GetProductsAsync();
         Task<IReadOnlyList<ProductType>> GetProductTypesAsync();
         Task<List<Product>> GetProductsWithSpec(ISpecification<Product> spec);
+        Task<List<Product>> GetProductForClientWithSpec(ISpecification<Product> spec);
         Task<List<ProductSKUs>> GetProductSKUsWithSpec(ISpecification<ProductSKUs> spec);
     }
 }

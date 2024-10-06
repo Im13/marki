@@ -1,5 +1,7 @@
 using API.DTOs;
+using API.DTOs.Product;
 using API.Errors;
+using API.Helpers;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
@@ -10,24 +12,26 @@ namespace API.Controllers
 {
     public class ProductsController : BaseApiController
     {
-        private readonly IGenericRepository<Product> _productRepo;
+        private readonly IGenericRepository<Product> _genericProductRepo;
         private readonly IGenericRepository<ProductType> _productTypeRepo;
         private readonly IMapper _mapper;
         private readonly IProductService _productService;
         private readonly IPhotoService _photoService;
-        
+        private readonly IProductRepository _productRepo;
 
-        public ProductsController(IGenericRepository<Product> productRepo,
+        public ProductsController(IGenericRepository<Product> genericProductRepo,
         IGenericRepository<ProductType> productTypeRepo,
         IMapper mapper,
         IProductService productService,
+        IProductRepository productRepo,
         IPhotoService photoService)
         {
             _productTypeRepo = productTypeRepo;
             _mapper = mapper;
-            _productRepo = productRepo;
+            _genericProductRepo = genericProductRepo;
             _productService = productService;
             _photoService = photoService;
+            _productRepo = productRepo;
         }
 
         [HttpGet("{id}")]
@@ -37,7 +41,7 @@ namespace API.Controllers
         {
             var spec = new ProductsWithTypesSpecification(id);
 
-            var product = await _productRepo.GetEntityWithSpec(spec);
+            var product = await _genericProductRepo.GetEntityWithSpec(spec);
 
             if(product == null) return NotFound(new ApiResponse(404));
 
@@ -69,6 +73,22 @@ namespace API.Controllers
             };
 
             return _mapper.Map<Photo,PhotoDTO>(photo);
+        }
+
+        [HttpGet("new-arrivals")]
+        public async Task<ActionResult<ProductDTOs>> GetNewArrivals([FromQuery]ProductSpecParams productParams)
+        {
+            var spec = new ProductsWithTypesSpecification(productParams);
+
+            var countSpec = new ProductWithFiltersForCountSpecification(productParams);
+
+            var totalItems = await _genericProductRepo.CountAsync(countSpec);
+
+            var products = await _productRepo.GetProductForClientWithSpec(spec);
+
+            var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductForClientDTO>>(products);
+
+            return Ok(new Pagination<ProductForClientDTO>(productParams.PageIndex, productParams.PageSize, totalItems, data));
         }
     }
 }
