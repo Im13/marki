@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.development';
 import { ProductParams } from '../_shared/_models/productParams';
 import { Pagination } from '../_shared/_models/pagination';
 import { Product } from '../_shared/_models/product';
@@ -20,6 +20,6 @@ export class HomeService {
     params = params.append('pageSize', productParams.pageSize);
     params = params.append('pageIndex', productParams.pageIndex);
 
-    return this.http.get<Pagination<Product[]>>(this.baseApiUrl + 'product/new-arrivals', { params });
+    return this.http.get<Pagination<Product[]>>(this.baseApiUrl + 'products/new-arrivals', { params });
   }
 }
