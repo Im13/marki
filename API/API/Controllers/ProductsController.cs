@@ -90,5 +90,11 @@ namespace API.Controllers
 
             return Ok(new Pagination<ProductForClientDTO>(productParams.PageIndex, productParams.PageSize, totalItems, data));
         }
+
+        [HttpGet("type/{id}")]
+        public async Task<ActionResult<ProductDTOs>> GetProductByTypeId(int id)
+        {
+            
+        }
     }
 }
