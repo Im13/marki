@@ -8,17 +8,17 @@
   </div>
 
   <div class="product-swiper">
-    <swiper [config]="swiperConfig" class="w-100 h-100 border border-danger">
-      <ng-template swiperSlide>
-        <div class="slide-item h-100 border border-danger">
-          <div class="h-75 border border-success">
-            anh here
+    <swiper [config]="swiperConfig" class="w-100 h-100">
+      <ng-template *ngFor="let product of products" swiperSlide>
+        <div class="slide-item h-100 border">
+          <div class="h-75">
+            <img nz-image [src]="product.photos[0].url" class="object-fit-cover w-100 h-100">
           </div>
 
           <div class="h-25">
             <div class="h-50">
-              <p nz-typography nzEllipsis nzEllipsisRows="2" class="m-0 lh-sm fw-semibold py-1">
-                day la ten san pham day la ten san pham day la ten san pham
+              <p nz-typography nzEllipsis nzEllipsisRows="2" class="m-0 lh-sm fw-semibold p-1">
+                {{ product.name }}
               </p>
             </div>
 
@@ -28,11 +28,6 @@
           </div>
         </div>
       </ng-template>
-      <ng-template swiperSlide class="slide-item border border-danger">Slide 2</ng-template>
-      <ng-template swiperSlide class="slide-item border border-danger">Slide 3</ng-template>
-      <ng-template swiperSlide class="slide-item border border-danger">Slide 4</ng-template>
-      <ng-template swiperSlide class="slide-item border border-danger">Slide 5</ng-template>
-      <ng-template swiperSlide class="slide-item border border-danger">Slide 6</ng-template>
     </swiper>
   </div>
 

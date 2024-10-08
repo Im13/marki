@@ -75,7 +75,7 @@ namespace API.Controllers
             return _mapper.Map<Photo,PhotoDTO>(photo);
         }
 
-        [HttpGet("new-arrivals")]
+        [HttpGet]
         public async Task<ActionResult<ProductDTOs>> GetNewArrivals([FromQuery]ProductSpecParams productParams)
         {
             var spec = new ProductsWithTypesSpecification(productParams);
@@ -89,12 +89,6 @@ namespace API.Controllers
             var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductForClientDTO>>(products);
 
             return Ok(new Pagination<ProductForClientDTO>(productParams.PageIndex, productParams.PageSize, totalItems, data));
-        }
-
-        [HttpGet("type/{id}")]
-        public async Task<ActionResult<ProductDTOs>> GetProductByTypeId(int id)
-        {
-            
         }
     }
 }

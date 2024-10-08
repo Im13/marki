@@ -20,6 +20,17 @@ export class HomeService {
     params = params.append('pageSize', productParams.pageSize);
     params = params.append('pageIndex', productParams.pageIndex);
 
-    return this.http.get<Pagination<Product[]>>(this.baseApiUrl + 'products/new-arrivals', { params });
+    return this.http.get<Pagination<Product[]>>(this.baseApiUrl + 'products', { params });
+  }
+
+  getByType(productParams: ProductParams) {
+    let params = new HttpParams();
+
+    params = params.append('search', productParams.search);
+    params = params.append('pageSize', productParams.pageSize);
+    params = params.append('pageIndex', productParams.pageIndex);
+    params = params.append('typeId', productParams.typeId);
+
+    return this.http.get<Pagination<Product[]>>(this.baseApiUrl + 'products', { params });
   }
 }
