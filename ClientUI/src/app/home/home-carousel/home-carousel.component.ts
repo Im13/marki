@@ -17,7 +17,7 @@ export class HomeCarouselComponent implements AfterViewInit {
     this.config = {
       slidesPerView: 1,
       navigation: true,
-      pagination: { clickable: true },
+      pagination: false,
       scrollbar: { draggable: true },
       autoplay: {
         delay: 2000
