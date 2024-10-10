@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { NewArrivalsComponent } from './new-arrivals.component';
 import { NewArrivalsRoutingModule } from './new-arrivals-routing.module';
 import { CoreModule } from '../_core/core.module';
+import { NewArrivalProductsComponent } from './new-arrival-products/new-arrival-products.component';
 
 
 
 @NgModule({
   declarations: [
-    NewArrivalsComponent
+    NewArrivalsComponent,
+    NewArrivalProductsComponent
   ],
   imports: [
     CommonModule,

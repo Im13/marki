@@ -17,10 +17,13 @@ import { SwiperModule } from 'swiper/angular';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { BreadcrumbComponent } from 'xng-breadcrumb';
+import { CommonBreadcrumbComponent } from './common-breadcrumb/common-breadcrumb.component';
 
 @NgModule({
   declarations: [
-    HeaderComponent
+    HeaderComponent,
+    CommonBreadcrumbComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +41,8 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
     SwiperModule,
     NzButtonModule,
     NzDividerModule,
-    NzBadgeModule
+    NzBadgeModule,
+    BreadcrumbComponent
   ],
   exports: [
     NzLayoutModule,
@@ -57,7 +61,9 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
     SwiperModule,
     NzButtonModule,
     NzDividerModule,
-    NzBadgeModule
+    NzBadgeModule,
+    BreadcrumbComponent,
+    CommonBreadcrumbComponent
   ]
 })
 export class CoreModule { }
