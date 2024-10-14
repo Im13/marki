@@ -1,3 +1,51 @@
-<div class="d-flex align-items-center justify-content-end px=3">
-  d
+<!-- SORT MENU -->
+<div class="d-flex align-items-center justify-content-end px-2">
+  <button nz-button nz-dropdown [nzDropdownMenu]="sortMenu" nzPlacement="bottomRight">
+    <span nz-icon nzType="align-right" nzTheme="outline"></span>
+  </button>
+  <nz-dropdown-menu #sortMenu="nzDropdownMenu">
+    <ul nz-menu>
+      <li nz-menu-item class="fw-bold">Sắp xếp theo</li>
+      <li nz-menu-item>
+        <div class="d-flex align-items-center">
+          <span nz-icon nzType="arrow-down" nzTheme="outline"></span>
+          <span class="ms-1">
+            Giá từ cao xuống thấp
+          </span>
+        </div>
+      </li>
+
+      <li nz-menu-item>
+        <div class="d-flex align-items-center">
+          <span nz-icon nzType="arrow-up" nzTheme="outline"></span>
+          <span class="ms-1">
+            Giá từ thấp lên cao
+          </span>
+        </div>
+      </li>
+
+      <li nz-menu-item>
+        <div class="d-flex align-items-center">
+          <span nz-icon nzType="sort-ascending" nzTheme="outline"></span>
+          <span class="ms-1">
+            Tên sản phẩm: A - Z
+          </span>
+        </div>
+      </li>
+
+      <li nz-menu-item>
+        <div class="d-flex align-items-center">
+          <span nz-icon nzType="sort-descending" nzTheme="outline"></span>
+          <span class="ms-1">
+            Tên sản phẩm: Z - A
+          </span>
+        </div>
+      </li>
+    </ul>
+  </nz-dropdown-menu>
+</div>
+
+<!-- PRODUCTS -->
+<div class="mt-2">
+d
 </div>
