@@ -76,7 +76,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ProductDTOs>> GetNewArrivals([FromQuery]ProductSpecParams productParams)
+        public async Task<ActionResult<ProductDTOs>> GetProducts([FromQuery]ProductSpecParams productParams)
         {
             var spec = new ProductsWithTypesSpecification(productParams);
 

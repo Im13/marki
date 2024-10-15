@@ -11,6 +11,8 @@ import SwiperCore, {
 } from 'swiper';
 import { HomeService } from '../home.service';
 import { ProductParams } from 'src/app/_shared/_models/productParams';
+import { getCollectionNameById } from 'src/app/_shared/_consts/collectionsMapConst';
+import { Router } from '@angular/router';
 
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
@@ -25,8 +27,9 @@ export class HomeProductCarouselComponent implements OnInit {
   @Input('typeId') typeId: number;
   swiperConfig: SwiperOptions = {};
   products: Product[] = [];
+  collecionName: string = '';
 
-  constructor(private homeService: HomeService) {}
+  constructor(private homeService: HomeService, private router: Router) {}
 
   ngOnInit(): void {
     this.swiperConfig = {
@@ -56,6 +59,14 @@ export class HomeProductCarouselComponent implements OnInit {
           console.log(err);
         }
       })
+    }
+  }
+
+  navigateToCollection() {
+    this.collecionName = getCollectionNameById(this.typeId);
+
+    if(this.collecionName != null) {
+      this.router.navigate(['/collections', this.collecionName]);
     }
   }
 }
