@@ -14,13 +14,13 @@ export class AllProductsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private allProductService: AllProductsService) {}
 
   ngOnInit(): void {
-    console.log('ge')
     // Lấy giá trị slug từ URL
     this.productSlug = this.route.snapshot.paramMap.get('slug');
 
     // Sử dụng slug để tìm sản phẩm
     this.allProductService.getProductBySlug(this.productSlug).subscribe({
       next: response => {
+        console.log(response)
         this.product = response;
       },
       error: err => {

@@ -167,7 +167,7 @@ namespace Infrastructure.Services
 
         public async Task<Product> GetBySlug(string slug)
         {
-            return await _context.Products.FirstOrDefaultAsync(p => p.Slug == slug);
+            return await _context.Products.Include(p => p.Photos).Include(p => p.ProductSKUs).FirstOrDefaultAsync(p => p.Slug == slug);
         }
     }
 }

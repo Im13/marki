@@ -12,6 +12,6 @@ export class AllProductsService {
 
   // Truy vấn sản phẩm dựa trên slug
   getProductBySlug(slug: string) {
-    return this.http.get(this.baseApiUrl + 'api/products/slug/' + slug);
+    return this.http.get(this.baseApiUrl + 'products/slug/' + slug);
   }
 }

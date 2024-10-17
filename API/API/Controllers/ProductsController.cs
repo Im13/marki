@@ -100,7 +100,7 @@ namespace API.Controllers
 
             if(product == null) return NotFound("Cannot find product");
 
-            return Ok(product);
+            return Ok(_mapper.Map<Product,ProductForClientDTO>(product));
         }
     }
 }
