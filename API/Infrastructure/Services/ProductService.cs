@@ -164,5 +164,10 @@ namespace Infrastructure.Services
 
             return productSku;
         }
+
+        public async Task<Product> GetBySlug(string slug)
+        {
+            return await _context.Products.FirstOrDefaultAsync(p => p.Slug == slug);
+        }
     }
 }

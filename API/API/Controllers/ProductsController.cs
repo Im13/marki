@@ -90,5 +90,17 @@ namespace API.Controllers
 
             return Ok(new Pagination<ProductForClientDTO>(productParams.PageIndex, productParams.PageSize, totalItems, data));
         }
+
+        [HttpGet("slug/{slug}")]
+        public async Task<ActionResult<ProductDTOs>> GetBySlug(string slug)
+        {
+            if(string.IsNullOrEmpty(slug)) return BadRequest();
+
+            var product = await _productService.GetBySlug(slug);
+
+            if(product == null) return NotFound("Cannot find product");
+
+            return Ok(product);
+        }
     }
 }
