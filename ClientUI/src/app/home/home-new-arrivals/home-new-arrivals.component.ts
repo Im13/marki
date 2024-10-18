@@ -28,8 +28,10 @@ export class HomeNewArrivalsComponent implements OnInit {
   }
 
   onViewMoreClick() {
-    console.log('d');
     this.router.navigate(['/new-arrivals']);
   }
 
+  redirectToProduct(slug: string) {
+    this.router.navigate([`products/${slug}`])
+  }
 }

@@ -69,4 +69,8 @@ export class HomeProductCarouselComponent implements OnInit {
       this.router.navigate(['/collections', this.collecionName]);
     }
   }
+
+  redirectToProduct(slug: string) {
+    this.router.navigate([`products/${slug}`])
+  }
 }
