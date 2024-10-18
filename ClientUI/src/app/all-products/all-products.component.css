@@ -1,0 +1,14 @@
+/* .product-container {
+    position: absolute;
+} */
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    height: 65px;
+    background-color: #ffffff;
+}
+
+.product-image {
+    height: 500px;
+}
