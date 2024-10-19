@@ -6,13 +6,15 @@ import { AllProductsRoutingModule } from './all-products-routing.module';
 import { ProductsFooterComponent } from './products-footer/products-footer.component';
 import { ProductImagesComponent } from './product-images/product-images.component';
 import { ProductInfoComponent } from './product-info/product-info.component';
+import { ProductDescriptionComponent } from './product-description/product-description.component';
 
 @NgModule({
   declarations: [
     AllProductsComponent,
     ProductsFooterComponent,
     ProductImagesComponent,
-    ProductInfoComponent
+    ProductInfoComponent,
+    ProductDescriptionComponent
   ],
   imports: [
     CommonModule,

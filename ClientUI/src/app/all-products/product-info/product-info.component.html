@@ -1,1 +1,5 @@
-<p>product-info works!</p>
+<div *ngIf="product" class="px-2 py-3">
+    <p class="fs-6 fw-semibold lh-sm">{{ product.name }}</p>
+    <p class="lh-sm m-1">SKU: {{ product.productSku }}</p>
+    <p class="fs-6 fw-semibold lh-sm m-1">100.000 đ</p>
+</div>

@@ -1,3 +1,7 @@
-<div class="border border-danger h-100">
-    <p>product-images works!</p>
+<div class="product-image-container">
+    <swiper [config]="config" class="h-100" #swiperSlideShow>
+        <ng-template swiperSlide *ngFor="let photo of photos">
+            <img nz-image [src]="photo.url" class="object-fit-cover w-100 h-100">
+        </ng-template>
+      </swiper>
 </div>

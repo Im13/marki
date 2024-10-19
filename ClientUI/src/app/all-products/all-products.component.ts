@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AllProductsService } from './all-products.service';
+import { Product } from '../_shared/_models/product';
+import { Photo } from '../_shared/_models/photo';
 
 @Component({
   selector: 'app-all-products',
@@ -9,7 +11,8 @@ import { AllProductsService } from './all-products.service';
 })
 export class AllProductsComponent implements OnInit {
   productSlug: string;
-  product: any;
+  product: Product;
+  productPhotos: Photo[] = [];
 
   constructor(private route: ActivatedRoute, private allProductService: AllProductsService) {}
 
@@ -22,6 +25,7 @@ export class AllProductsComponent implements OnInit {
       next: response => {
         console.log(response)
         this.product = response;
+        this.productPhotos = this.product.photos;
       },
       error: err => {
         if(err.status == 404) {
