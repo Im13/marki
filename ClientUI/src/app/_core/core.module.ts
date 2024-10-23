@@ -19,11 +19,13 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { BreadcrumbComponent } from 'xng-breadcrumb';
 import { CommonBreadcrumbComponent } from './common-breadcrumb/common-breadcrumb.component';
+import { DescriptionComponent } from './description/description.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    CommonBreadcrumbComponent
+    CommonBreadcrumbComponent,
+    DescriptionComponent
   ],
   imports: [
     CommonModule,
@@ -63,7 +65,8 @@ import { CommonBreadcrumbComponent } from './common-breadcrumb/common-breadcrumb
     NzDividerModule,
     NzBadgeModule,
     BreadcrumbComponent,
-    CommonBreadcrumbComponent
+    CommonBreadcrumbComponent,
+    DescriptionComponent
   ]
 })
 export class CoreModule { }

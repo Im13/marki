@@ -13,6 +13,7 @@ export class AllProductsComponent implements OnInit {
   productSlug: string;
   product: Product;
   productPhotos: Photo[] = [];
+  productDescription: string = '';
 
   constructor(private route: ActivatedRoute, private allProductService: AllProductsService) {}
 
@@ -26,6 +27,7 @@ export class AllProductsComponent implements OnInit {
         console.log(response)
         this.product = response;
         this.productPhotos = this.product.photos;
+        this.productDescription = this.product.description;
       },
       error: err => {
         if(err.status == 404) {

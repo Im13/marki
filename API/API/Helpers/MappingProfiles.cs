@@ -63,8 +63,8 @@ namespace API.Helpers
             CreateMap<ProductOptionValues, ProductOptionValueDTO>();
             CreateMap<ProductSKUDTO, ProductSKUs>();
             CreateMap<ProductSKUs, ProductSKUDTO>();
-            CreateMap<ProductSKUForClientDTO, ProductSKUDTO>();
-            CreateMap<ProductSKUDTO, ProductSKUForClientDTO>();
+            CreateMap<ProductSKUForClientDTO, ProductSKUs>();
+            CreateMap<ProductSKUs, ProductSKUForClientDTO>();
             CreateMap<ProductSKUValuesDTO, ProductSKUValues>();
             CreateMap<ProductSKUValues, ProductSKUValuesDTO>()
                 .ForMember(d => d.OptionValue, o => o.MapFrom(s => s.ProductOptionValue.ValueName))

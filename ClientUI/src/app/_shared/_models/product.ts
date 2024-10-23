@@ -3,7 +3,7 @@ import { ProductSKU } from "./productSKU";
 
 export interface Product {
     id: number;
-    productSku: string;
+    productSKU: string;
     slug: string;
     name: string;
     description: string;

@@ -1,0 +1,4 @@
+:host ::ng-deep .ant-collapse-icon-position-right>.ant-collapse-item>.ant-collapse-header {
+    padding-right: 16px;
+    font-weight: bold;
+}

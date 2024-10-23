@@ -23,7 +23,7 @@ namespace Infrastructure.Services
         {
             var product = await _unitOfWork.Repository<Product>().GetByIdAsync(id);
             _unitOfWork.ClearTracker();
-            
+
             return product;
         }
 
@@ -46,7 +46,8 @@ namespace Infrastructure.Services
 
             var photosToDelete = photos.Except(product.Photos).ToList();
 
-            foreach(var photo in photosToDelete) {
+            foreach (var photo in photosToDelete)
+            {
                 _unitOfWork.Repository<Photo>().Delete(photo);
 
                 //Need delete in Cloudinary
@@ -59,7 +60,7 @@ namespace Infrastructure.Services
             }
 
             _unitOfWork.Repository<Product>().Update(product);
-            
+
             // UPDATE IMAGE FOR SKUS
             // if(product.ProductSKUs.Count > 0)
             // {
@@ -85,7 +86,7 @@ namespace Infrastructure.Services
             //     }
 
             //     sku.Photos.Add(photoToFind);
-                
+
             //     _unitOfWork.Repository<ProductSKUs>().Update(sku);
             // }
 
@@ -134,19 +135,19 @@ namespace Infrastructure.Services
 
         public async Task<bool> DeleteProducts(List<Product> products)
         {
-            if(products.Count == 0) return false;
+            if (products.Count == 0) return false;
 
-            foreach(var product in products)
+            foreach (var product in products)
             {
-                if(product.Id == 0) return false;
-                
+                if (product.Id == 0) return false;
+
                 product.IsDeleted = true;
                 _unitOfWork.Repository<Product>().Update(product);
             }
 
             var result = await _unitOfWork.Complete();
 
-            if(result <= 0) return false;
+            if (result <= 0) return false;
 
             return true;
         }
@@ -160,14 +161,19 @@ namespace Infrastructure.Services
                 .ThenInclude(pov => pov.ProductOption)
                 .SingleOrDefaultAsync(p => p.Id == skuId);
 
-            if(productSku == null || productSku.Product == null || productSku.Product.IsDeleted == true) return null;
+            if (productSku == null || productSku.Product == null || productSku.Product.IsDeleted == true) return null;
 
             return productSku;
         }
 
         public async Task<Product> GetBySlug(string slug)
         {
-            return await _context.Products.Include(p => p.Photos).Include(p => p.ProductSKUs).FirstOrDefaultAsync(p => p.Slug == slug);
+            return await _context.Products
+                .Include(p => p.Photos)
+                .Include(p => p.ProductSKUs)
+                .Include(p => p.ProductOptions)
+                .ThenInclude(o => o.ProductOptionValues)
+                .FirstOrDefaultAsync(p => p.Slug == slug);
         }
     }
 }
