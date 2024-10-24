@@ -1,4 +1,5 @@
 import { Photo } from "./photo";
+import { ProductOption } from "./productOption";
 import { ProductSKU } from "./productSKU";
 
 export interface Product {
@@ -10,4 +11,5 @@ export interface Product {
     photos: Photo[];
     productTypeId: number;
     productSkus: ProductSKU[];
+    productOptions: ProductOption[];
 }

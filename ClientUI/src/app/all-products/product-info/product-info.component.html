@@ -1,5 +1,17 @@
 <div *ngIf="product" class="px-2 py-3">
-    <p class="fs-6 fw-semibold lh-sm">{{ product.name }}</p>
-    <p class="lh-sm m-1">SKU: {{ product.productSKU }}</p>
-    <p class="fs-6 fw-semibold lh-sm m-1">100.000 đ</p>
+  <p class="fs-6 fw-semibold lh-sm">{{ product.name }}</p>
+  <p class="lh-sm m-1">SKU: {{ product.productSKU }}</p>
+  <p class="fs-6 fw-semibold lh-sm m-1">100.000 đ</p>
+
+  <div *ngFor="let option of product.productOptions" class="mt-2">
+    <div>{{ option.optionName }}:</div>
+    <button *ngFor="let value of option.productOptionValues"
+      nz-button
+      nzType="default"
+      class="me-1"
+      (click)="onSelectOption(option.id, value.id)"
+      [class.selected]="selectedOptions[option.id] === value.id">
+        {{ value.valueName }}
+    </button>
+  </div>
 </div>
