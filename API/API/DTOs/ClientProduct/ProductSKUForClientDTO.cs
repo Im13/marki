@@ -9,5 +9,6 @@ namespace API.DTOs.ClientProduct
         public string Barcode { get; set; }
         public int Weight { get; set; }
         public int Quantity { get; set; }
+        public List<ProductSKUValuesDTO> ProductSKUValues { get; set; }
     }
 }

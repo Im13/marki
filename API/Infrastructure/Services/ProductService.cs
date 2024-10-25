@@ -171,6 +171,8 @@ namespace Infrastructure.Services
             return await _context.Products
                 .Include(p => p.Photos)
                 .Include(p => p.ProductSKUs)
+                .ThenInclude(p => p.ProductSKUValues)
+                .ThenInclude(p => p.ProductOptionValue)
                 .Include(p => p.ProductOptions)
                 .ThenInclude(o => o.ProductOptionValues)
                 .FirstOrDefaultAsync(p => p.Slug == slug);
