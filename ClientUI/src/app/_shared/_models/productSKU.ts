@@ -8,5 +8,5 @@ export interface ProductSKU {
   barcode: string;
   weight: number;
   quantity: number;
-  productSKUValues: ProductSkuValue;
+  productSKUValues: ProductSkuValue[];
 }
