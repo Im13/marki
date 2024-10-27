@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AllProductsService } from './all-products.service';
 import { Product } from '../_shared/_models/product';
 import { Photo } from '../_shared/_models/photo';
+import { ProductSKU } from '../_shared/_models/productSKU';
 
 @Component({
   selector: 'app-all-products',
@@ -39,4 +40,11 @@ export class AllProductsComponent implements OnInit {
     });
   }
 
+  optionSelected(event: ProductSKU) {
+    console.log('Catch: ', event)
+  }
+
+  quantitySelected(event: number) {
+    console.log('Catch quantity: ', event)
+  }
 }

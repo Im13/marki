@@ -18,11 +18,11 @@ import { ProductSKU } from 'src/app/_shared/_models/productSKU';
 export class ProductInfoComponent implements OnInit {
   @Input() product: Product;
   @Output() selectOptions = new EventEmitter<ProductSKU>();
+  @Output() selectQuantity = new EventEmitter<number>();
   selectedOptions: { [key: string]: any } = {};
+  quantity: number = 1;
 
-  ngOnInit(): void {
-    console.log(this.product);
-  }
+  ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['product']) {
@@ -31,7 +31,6 @@ export class ProductInfoComponent implements OnInit {
         if (option.productOptionValues.length > 0) {
           this.selectedOptions[option.id] = option.productOptionValues[0].id;
 
-          console.log(this.selectedOptions)
           this.getSkuIdByProductOptions();
         }
       });
@@ -40,22 +39,37 @@ export class ProductInfoComponent implements OnInit {
 
   onSelectOption(optionId: number, valueId: number): void {
     this.selectedOptions[optionId] = valueId;
-    console.log(this.selectedOptions);
+    this.getSkuIdByProductOptions();
   }
 
   getSkuIdByProductOptions() {
     const targetValues = Object.values(this.selectedOptions);
 
-    const result = this.product.productSkus.find(productSKU => {
-      const skuValues = productSKU.productSKUValues.map(value => value.id);
+    const result = this.product.productSkus.find((productSKU) => {
+      const skuValues = productSKU.productSKUValues.map(
+        (value) => value.productOptionValue.id
+      );
 
-      return targetValues.every(id => skuValues.includes(id));
+      return targetValues.every((id) => skuValues.includes(id));
     });
 
     if (result) {
       this.selectOptions.emit(result);
+      this.selectQuantity.emit(this.quantity);
     } else {
       console.error('Không tìm thấy đối tượng nào thỏa mãn điều kiện.');
     }
+  }
+
+  decreaseQuantity() {
+    if (this.quantity > 1) {
+      this.quantity--;
+      this.selectQuantity.emit(this.quantity);
+    }
+  }
+
+  increaseQuantity() {
+    this.quantity++;
+    this.selectQuantity.emit(this.quantity);
   }
 }
