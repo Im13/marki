@@ -14,9 +14,5 @@ namespace API.DTOs
         public int Quantity { get; set; }
         [Required]
         public string PictureUrl { get; set; }
-        [Required]
-        public string Brand { get; set; }
-        [Required]
-        public string Type { get; set; }
     }
 }

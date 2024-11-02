@@ -4,6 +4,7 @@ import { AllProductsService } from './all-products.service';
 import { Product } from '../_shared/_models/product';
 import { Photo } from '../_shared/_models/photo';
 import { ProductSKU } from '../_shared/_models/productSKU';
+import { BasketService } from '../basket/basket.service';
 
 @Component({
   selector: 'app-all-products',
@@ -16,7 +17,7 @@ export class AllProductsComponent implements OnInit {
   productPhotos: Photo[] = [];
   productDescription: string = '';
 
-  constructor(private route: ActivatedRoute, private allProductService: AllProductsService) {}
+  constructor(private route: ActivatedRoute, private allProductService: AllProductsService, private basketService: BasketService) {}
 
   ngOnInit(): void {
     // Lấy giá trị slug từ URL
@@ -46,5 +47,10 @@ export class AllProductsComponent implements OnInit {
 
   quantitySelected(event: number) {
     console.log('Catch quantity: ', event)
+  }
+
+  addToCart() {
+    console.log('ATC clicked!');
+    this.basketService.addItemToBasket(this.product);
   }
 }

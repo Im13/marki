@@ -5,11 +5,18 @@
     <span nz-icon nzType="menu" nzTheme="outline"></span>
   </div>
   <div class="logo h-100 d-flex align-items-center justify-content-center" nz-col nzSpan="14"><a
-      class="text-decoration-none fs-3 text-black" routerLink="/">MARKI</a></div>
+      class="text-decoration-none fs-3 text-black"  (click)="redirectToHomePage()">MARKI</a></div>
   <div nz-col nzSpan="5" class="d-flex align-items-center justify-content-end h-100 pe-3">
-    <nz-badge [nzCount]="5" class="fs-5 me-3" [nzStyle]="{ backgroundColor: '#000' }">
+    <nz-badge *ngIf="basketService.basketSource$ | async as basket; else nullBasket" [nzCount]="getCount(basket.items)"
+      class="fs-5 me-3" [nzStyle]="{ backgroundColor: '#000' }">
       <span nz-icon nzType="shopping-cart" nzTheme="outline"></span>
     </nz-badge>
+    <ng-template #nullBasket>
+      <nz-badge [nzCount]="0" class="fs-5 me-3" [nzStyle]="{ backgroundColor: '#000' }">
+        <span nz-icon nzType="shopping-cart" nzTheme="outline"></span>
+      </nz-badge>
+    </ng-template>
+
     <span class="fs-5" nz-icon nzType="user" nzTheme="outline" (click)="collapseLoginRegisterForm()"
       [attr.aria-expanded]="!isLoginCollapsed" aria-controls="collapseBasic"></span>
   </div>

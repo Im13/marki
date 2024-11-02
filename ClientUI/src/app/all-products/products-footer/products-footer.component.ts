@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-products-footer',
@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./products-footer.component.css']
 })
 export class ProductsFooterComponent {
+  @Output() atcClicked = new EventEmitter();
+  constructor() {}
 
+  addToCartClicked() {
+    this.atcClicked.emit();
+  }
 }
