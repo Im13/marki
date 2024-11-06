@@ -16,6 +16,8 @@ export class AllProductsComponent implements OnInit {
   product: Product;
   productPhotos: Photo[] = [];
   productDescription: string = '';
+  selectedProductSKU: ProductSKU;
+  selectedQuantity: number;
 
   constructor(private route: ActivatedRoute, private allProductService: AllProductsService, private basketService: BasketService) {}
 
@@ -42,15 +44,17 @@ export class AllProductsComponent implements OnInit {
   }
 
   optionSelected(event: ProductSKU) {
+    this.selectedProductSKU = event;
     console.log('Catch: ', event)
   }
 
   quantitySelected(event: number) {
+    this.selectedQuantity = event;
     console.log('Catch quantity: ', event)
   }
 
   addToCart() {
     console.log('ATC clicked!');
-    this.basketService.addItemToBasket(this.product);
+    this.basketService.addItemToBasket(this.selectedProductSKU, this.product, this.selectedQuantity);
   }
 }

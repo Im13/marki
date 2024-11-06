@@ -18,7 +18,7 @@ export class BasketComponent {
   }
 
   incrementQuantity(item: BasketItem) {
-    this.basketService.addItemToBasket(item);
+    // this.basketService.addItemToBasket(item);
   }
 
   removeItem(id: number, quantity: number) {

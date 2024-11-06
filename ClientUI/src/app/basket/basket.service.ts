@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment.development';
 import { Basket, BasketItem, BasketTotals } from '../_shared/_models/basket';
 import { HttpClient } from '@angular/common/http';
 import { Product } from '../_shared/_models/product';
+import { ProductSKU } from '../_shared/_models/productSKU';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,7 @@ export class BasketService {
   getBasket(id: string) {
     return this.http.get<Basket>(this.baseUrl + 'basket?id=' + id).subscribe({
       next: basket => {
+        console.log('Basket: ', basket)
         this.basketSource.next(basket);
         this.calculateTotals();
       }
@@ -27,6 +29,7 @@ export class BasketService {
   }
 
   setBasket(basket: Basket) {
+    console.log('Before push: ',basket);
     return this.http.post<Basket>(this.baseUrl + 'basket', basket).subscribe({
       next: basket => {
         this.basketSource.next(basket);
@@ -39,11 +42,14 @@ export class BasketService {
     return this.basketSource.value;
   }
 
-  addItemToBasket(item: Product | BasketItem, quantity = 1) {
-    if(this.isProduct(item)) item = this.mapProductItemToBasketItem(item);
+  addItemToBasket(item: ProductSKU | BasketItem, product: Product, quantity: number) {
+    if(this.isProductSKU(item)) item = this.mapProductItemToBasketItem(item, product.name, product.photos[0].url);
+
+    console.log('Items: ', item)
     
     const basket = this.getCurrentBasketValue() ?? this.createBasket();
     basket.items = this.addOrUpdateItem(basket.items, item, quantity);
+    console.log('Basket 2:', basket)
     this.setBasket(basket);
   }
 
@@ -94,13 +100,15 @@ export class BasketService {
     return basket;
   }
 
-  private mapProductItemToBasketItem(item: Product) : BasketItem {
+  private mapProductItemToBasketItem(item: ProductSKU, productName: string, imageUrl: string) : BasketItem {
     return {
       id: item.id,
-      productName: item.name,
-      price: item.productSkus[0].price,
+      productName: productName,
+      price: item.price,
       quantity: 0,
-      pictureUrl: item.photos.find(p => p.isMain).url
+      pictureUrl: imageUrl,
+      sku: item.sku,
+      productSKUValues: item.productSKUValues
     }
   }
 
@@ -116,7 +124,7 @@ export class BasketService {
     this.basketTotalSource.next({shipping, subtotal, total});
   }
 
-  private isProduct(item: Product | BasketItem): item is Product {
-    return (item as Product) !== undefined;
+  private isProductSKU(item: ProductSKU | BasketItem): item is ProductSKU {
+    return (item as ProductSKU) !== undefined;
   }
 }

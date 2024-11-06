@@ -14,5 +14,9 @@ namespace API.DTOs
         public int Quantity { get; set; }
         [Required]
         public string PictureUrl { get; set; }
+        [Required]
+        public string SKU { get; set; }
+        [Required]
+        public List<ProductSKUValuesDTO> ProductSKUValues { get; set; }
     }
 }

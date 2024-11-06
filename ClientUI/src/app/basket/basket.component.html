@@ -31,7 +31,9 @@
                         <div nz-col nzSpan="17" class="d-flex flex-column ps-2 pb-2 pt-1 h-100">
                             <div>{{ item.productName }}</div>
 
-                            <div>Sample SKU</div>
+                            <div>
+                                <span *ngFor="let value of item.productSKUValues">{{ value.productOptionValue.valueName }} </span>
+                            </div>
                             <div class="mt-auto" nz-row>
                                 <div nz-col nzSpan="9" class="border border-dark d-flex justify-content-between py-1">
                                     <span class="mx-2 fw-bold" style="cursor: pointer" (click)="removeItem(item.id, 1)">-</span>
