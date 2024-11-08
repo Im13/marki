@@ -11,9 +11,9 @@
 </div>
 
 <div *ngIf="basketService.basketSource$ | async as basket" class="row w-100 m-0 p-0 px-md-3 px-lg-4 px-xl-0">
-    <div class="cart col-12 col-md-8 p-3">
-        <div class="cart-header d-flex align-items-center justify-content-between">
-            <h5 class="cart-header-tittle m-0">Giỏ hàng:</h5>
+    <div class="col-12 col-md-8 p-3">
+        <div class="d-flex align-items-center justify-content-between">
+            <h5 class="m-0">Giỏ hàng:</h5>
             <span *ngIf="basketService.basketSource$ | async as basket">
                 <u>{{ getCount(basket.items) }} sản phẩm</u>
             </span>
@@ -58,14 +58,14 @@
         </div>
     </div>
 
-    <div class="order-total col-12 col-md-4 p-3 py-md-0 pe-md-0 rounded mt-3 mt-md-0"
+    <div class="col-12 col-md-4 p-3 py-md-0 pe-md-0 rounded mt-3 mt-md-0"
         *ngIf="basketService.basketTotalSource$ | async as total">
         <div class="border p-3">
-            <div class="order-total-header">
+            <div>
                 <h5>Thông tin đơn hàng</h5>
             </div>
             <hr class="my-3" />
-            <div class="order-total-details">
+            <div>
                 <div class="d-flex align-items-center justify-content-between">
                     <h6>Tạm tính:</h6>
                     <h6>{{ total.subtotal | number }}đ</h6>
@@ -84,7 +84,7 @@
                 </div>
             </div>
             <hr class="my-3" />
-            <div class="order-note">
+            <div>
                 <h6>Ghi chú đơn hàng</h6>
                 <div class="form-group pt-2">
                     <textarea class="form-control" rows="4" placeholder="Ghi chú"></textarea>
@@ -97,7 +97,7 @@
                 <button type="button" class="btn btn-dark rounded-0 w-100 mt-4 mb-2" routerLink="/checkout">
                     THANH TOÁN NGAY
                 </button>
-                <div class="back-to-home d-flex align-items-center justify-content-center mt-0 pt-0">
+                <div class="d-flex align-items-center justify-content-center mt-0 pt-0">
                     <i class="fa fa-arrow-left"></i>
                     <button type="button" class="btn" routerLink="/products">
                         Tiếp tục mua hàng

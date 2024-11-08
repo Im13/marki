@@ -1,0 +1,228 @@
+<div *ngIf="(basketService.basketTotalSource$ | async) as basketTotal">
+    <nz-collapse nzExpandIconPosition="left">
+        <nz-collapse-panel nzHeader="Hiển thị thông tin đơn hàng" [nzExtra]="extraTpl"
+            *ngIf="isDisplayingOrder && (basketService.basketSource$ | async) as basket">
+            <div *ngFor="let item of processedBasketItems" nz-row class="mb-3">
+                <div nz-col nzSpan="4">
+                    <nz-badge [nzCount]="item.quantity"
+                        [nzStyle]="{ backgroundColor: '#fff', color: '#999', boxShadow: '0 0 0 1px #d9d9d9 inset' }">
+                        <img class="w-100" [src]="item.pictureUrl" />
+                    </nz-badge>
+                </div>
+
+                <div nz-col nzSpan="16" class="ps-3 d-flex flex-column justify-content-center">
+                    <span class="fw-semibold py-1">{{ item.productName }}</span>
+                    <span nz-typography nzType="secondary">{{ item.formattedSKUValues }}</span>
+                </div>
+
+                <div nz-col nzSpan="4" class="d-flex align-items-center">
+                    <span class="fw-medium">{{ item.quantity * item.price | number }}đ</span>
+                </div>
+            </div>
+
+            <div class="border-bottom border-top py-3">
+                <div class="d-flex justify-content-between">
+                    <span class="pre-cal-title">Tạm tính:</span>
+                    <span class="pre-cal-title">{{ basketTotal.subtotal | number}}đ</span>
+                </div>
+                <div class="d-flex justify-content-between mt-2">
+                    <span class="pre-cal-title">Phí vận chuyển:</span>
+                    <span class="pre-cal-title">{{ basketTotal.shipping | number}}đ</span>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center py-2">
+                <span>Tổng cộng</span>
+                <span class="fs-6 fw-medium">{{ basketTotal.total | number }}đ</span>
+            </div>
+        </nz-collapse-panel>
+    </nz-collapse>
+    <ng-template #extraTpl>
+        <span class="fw-medium fs-6">{{ basketTotal.total | number }}đ</span>
+    </ng-template>
+    <div class="row flex-md-row-reverse">
+        <div class="col-12 col-md-7 p-md-0 border-end">
+            <form class="shipping-details p-3 px-md-3 pe-lg-3 pt-md-2 p-md-0" (ngSubmit)="onSubmit()"
+                [formGroup]="checkoutFrm">
+                <h6 class="my-2">Thông tin giao hàng</h6>
+                <span>Bạn đã có tài khoản? <a href="#" class="text-decoration-none">Đăng nhập</a></span>
+
+                <nz-form-item>
+                    <nz-form-control class="w-100 mt-2 mb-1">
+                        <input nz-input placeholder="Họ và tên" formControlName="fullName" class="w-100 py-2" />
+                        <span *ngIf="!checkoutFrm.get('fullName').valid && checkoutFrm.get('fullName').touched"
+                            class="invalid-text text-danger">Vui lòng nhập họ tên</span>
+                    </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item>
+                    <nz-form-control class="w-100 my-1">
+                        <input nz-input placeholder="Số điện thoại" formControlName="phone" class="w-100 py-2" />
+                        <span *ngIf="!checkoutFrm.get('phone').valid && checkoutFrm.get('phone').touched"
+                            class="invalid-text text-danger">Vui lòng nhập số điện thoại</span>
+                    </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item>
+                    <nz-form-control class="w-100 my-1">
+                        <input nz-input placeholder="Địa chỉ" formControlName="street" class="w-100 py-2" />
+                        <span *ngIf="!checkoutFrm.get('street').valid && checkoutFrm.get('street').touched"
+                            class="invalid-text text-danger">Vui lòng nhập địa chỉ</span>
+                    </nz-form-control>
+                </nz-form-item>
+
+                <!-- <div class="form-group pt-1">
+                    <input type="text" class="form-control my-2" placeholder="Họ và tên" formControlName="fullName">
+                    <span *ngIf="!checkoutFrm.get('fullName').valid && checkoutFrm.get('fullName').touched"
+                        class="invalid-text">Vui lòng nhập họ tên</span>
+                </div> -->
+
+                <!-- <div class="form-group">
+                    <input type="text" class="form-control my-2" placeholder="Số điện thoại" formControlName="phone">
+                    <span *ngIf="!checkoutFrm.get('phone').valid && checkoutFrm.get('phone').touched"
+                        class="invalid-text">Vui lòng nhập số điện thoại</span>
+                </div> -->
+
+                <!-- <div class="form-group">
+                    <input type="text" class="form-control my-2" placeholder="Địa chỉ" formControlName="street">
+                    <span *ngIf="!checkoutFrm.get('street').valid && checkoutFrm.get('street').touched"
+                        class="invalid-text">Vui lòng nhập địa chỉ</span>
+                </div> -->
+
+                <div nz-row class="my-1 border">
+                    <div nz-col nzSpan="18">
+                        <nz-select nzShowSearch formControlName="province" nzSize="large" nzBorderless (ngModelChange)="onProvinceChange($event)"
+                            nzPlaceHolder="Chọn tỉnh / thành" class="w-100 h-100">
+                            <nz-option *ngFor="let province of provinces"
+                            [nzLabel]="province.name"
+                            [nzValue]="province.id"></nz-option>
+                        </nz-select>
+                    </div>
+                    <div nz-col nzSpan="6"
+                        class="d-flex align-items-center justify-content-center bg-body-tertiary border-start">
+                        Tỉnh/Thành</div>
+                </div>
+                <span *ngIf="checkoutFrm.get('province').touched && checkoutFrm.get('province').value == 0"
+                    class="invalid-text text-danger">Vui lòng chọn tỉnh / thành</span>
+
+                <div nz-row class="my-2 border">
+                    <div nz-col nzSpan="18">
+                        <nz-select formControlName="district" nzSize="large" nzBorderless (ngModelChange)="onDistrictChange($event)"
+                            nzPlaceHolder="Chọn quận / huyện" class="w-100 h-100">
+                            <nz-option *ngFor="let district of districts"
+                            [nzLabel]="district.name"
+                            [nzValue]="district.id"></nz-option>
+                        </nz-select>
+                    </div>
+                    <div nz-col nzSpan="6"
+                        class="d-flex align-items-center justify-content-center bg-body-tertiary border-start">
+                        Quận/Huyện</div>
+                </div>
+                <span *ngIf="checkoutFrm.get('district').touched && checkoutFrm.get('district').value == 0"
+                    class="invalid-text text-danger">Vui lòng chọn quận / huyện</span>
+
+                <div nz-row class="my-2 border">
+                    <div nz-col nzSpan="18">
+                        <nz-select formControlName="ward" nzSize="large" nzBorderless
+                            nzPlaceHolder="Chọn phường / xã" class="w-100 h-100">
+                            <nz-option *ngFor="let ward of wards"
+                            [nzLabel]="ward.name"
+                            [nzValue]="ward.id"></nz-option>
+                        </nz-select>
+                    </div>
+                    <div nz-col nzSpan="6"
+                        class="d-flex align-items-center justify-content-center bg-body-tertiary border-start">
+                        Phường/Xã</div>
+                </div>
+                <span *ngIf="checkoutFrm.get('ward').touched && checkoutFrm.get('ward').value == 0"
+                    class="invalid-text text-danger">Vui lòng chọn phường / xã</span>
+
+                <!-- <div class="my-1">
+                    <div class="input-group">
+                        <select class="form-select" formControlName="district"
+                            (ngModelChange)="onDistrictChange($event)" id="districts">
+                            <option selected value="0">Chọn quận / huyện</option>
+                            <option *ngFor="let district of districts" [ngValue]="district.id">
+                                {{ district.name }}
+                            </option>
+                        </select>
+                        <label class="input-group-text d-flex align-items-center justify-content-center"
+                            style="width: 25%;" for="inputGroupSelect01">Quận/Huyện</label>
+                    </div>
+
+                    <div>
+                        <span *ngIf="checkoutFrm.get('district').touched && checkoutFrm.get('district').value == 0"
+                            class="invalid-text">Vui lòng chọn quận / huyện</span>
+                    </div>
+                </div>
+
+                <div class="my-2">
+                    <div class="input-group">
+                        <select class="form-select" formControlName="ward" id="wards">
+                            <option selected value="0">Chọn phường / xã</option>
+                            <option *ngFor="let ward of wards" [ngValue]="ward.id">
+                                {{ ward.name }}
+                            </option>
+                        </select>
+                        <label class="input-group-text d-flex align-items-center justify-content-center"
+                            style="width: 25%;" for="inputGroupSelect01">Phường/Xã</label>
+                    </div>
+
+                    <div>
+                        <span *ngIf="checkoutFrm.get('ward').touched && checkoutFrm.get('ward').value == 0"
+                            class="invalid-text">Vui lòng chọn phường / xã</span>
+                    </div>
+                </div> -->
+
+                <h6 class="mt-4 mb-3">Phương thức giao hàng</h6>
+                <div class="border rounded form-group">
+                    <div class="d-flex align-items-center border-bottom flex-row">
+                        <input class="p-0 mx-3" type="radio" name="deliveryMethod" id="deliveryMethod"
+                            checked>
+                        <label class="w-100 d-flex flex-row py-3" for="deliveryMethod" nz-row>
+                            <div class="d-flex align-items-center" nz-col nzSpan="19">Phí ship đơn hàng</div>
+                            <div class="text-end pe-2" nz-col nzSpan="5">{{ basketTotal.shipping }}</div>
+                        </label>
+                    </div>
+                </div>
+
+                <h6 class="mt-4 mb-3">Phương thức thanh toán</h6>
+                <div class="border rounded form-group">
+                    <div class="d-flex align-items-center border-bottom flex-row">
+                        <input class="p-0 mx-3" type="radio" name="deliveryRadio" id="codRadio"
+                            checked>
+                        <label class="w-100 d-flex flex-row py-3" for="codRadio" nz-row>
+                            <img class="w-100" src="../../assets/icons/delivery.png" nz-col nzSpan="3">
+                            <div class="w-100 ps-3 d-flex align-items-center" nz-col nzSpan="21">Thanh toán khi giao hàng (COD)</div>
+                        </label>
+                    </div>
+
+                    <div class="d-flex align-items-center border-bottom flex-row">
+                        <input class="m-0 p-0 mx-3" type="radio" name="deliveryRadio" id="bankRadio">
+                        <label class="w-100 d-flex flex-row py-3" for="bankRadio" nz-row>
+                            <img class="w-100" src="../../assets/icons/give-money.png" nz-col nzSpan="3">
+                            <div class="w-100 ps-3 d-flex align-items-center" nz-col nzSpan="21">Chuyển khoản ngân hàng</div>
+                        </label>
+                    </div>
+
+                    <div class="d-flex align-items-center flex-row">
+                        <input class="form-check-input m-0 p-0 mx-3" type="radio" name="deliveryRadio" id="vnpayRadio"
+                            disabled>
+                        <label class="w-100 d-flex flex-row py-3" for="vnpayRadio" nz-row>
+                            <img class="w-100" src="../../assets/icons/vnpay.png" nz-col nzSpan="3">
+                            <div class="w-100 ps-3 d-flex align-items-center" nz-col nzSpan="21">Thanh toán VNPAY</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="py-3">
+                    <button type="submit" class="btn btn-dark w-100 p-2" [disabled]="!checkoutFrm.valid">Hoàn tất đơn
+                        hàng</button>
+                    <div class="back-to-cart mt-3 d-flex justify-content-center">
+                        <a href="#" class="text-decoration-none">Giỏ hàng</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

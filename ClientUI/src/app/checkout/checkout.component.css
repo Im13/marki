@@ -1,0 +1,16 @@
+::ng-deep .ant-collapse-header {
+    display: flex;
+    align-items: center !important;
+}
+
+::ng-deep .ant-collapse-header>div {
+    display: flex;
+}
+
+/* ::ng-deep nz-select-top-control, .ant-select, .ant-select-selection-search-input {
+    height: 100% !important;
+} */
+
+::ng-deep nz-select-top-control {
+    font-size: .9rem;
+}

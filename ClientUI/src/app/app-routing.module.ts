@@ -6,7 +6,8 @@ const routes: Routes = [
   { path: 'new-arrivals', loadChildren: () => import('./new-arrivals/new-arrivals.module').then(m => m.NewArrivalsModule), data: { breadcrumb: 'New arrivals'}},
   { path: 'products', loadChildren: () => import('./all-products/all-products.module').then(m => m.AllProductsModule), data: { breadcrumb: 'Products'}},
   { path: 'collections', loadChildren: () => import('./collections/collections.module').then(m => m.CollectionsModule), data: { breadcrumb: 'Collection'}},
-  { path: 'basket', loadChildren: () => import('./basket/basket.module').then(m => m.BasketModule), data: { breadcrumb: 'Basket'}}
+  { path: 'basket', loadChildren: () => import('./basket/basket.module').then(m => m.BasketModule), data: { breadcrumb: 'Basket'}},
+  { path: 'checkout', loadChildren: () => import('./checkout/checkout.module').then(m => m.CheckoutModule), data: { breadcrumb: 'Checkout'}}
 ];
 
 @NgModule({

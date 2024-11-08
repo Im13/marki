@@ -20,6 +20,8 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { BreadcrumbComponent } from 'xng-breadcrumb';
 import { CommonBreadcrumbComponent } from './common-breadcrumb/common-breadcrumb.component';
 import { DescriptionComponent } from './description/description.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NzSelectModule }  from 'ng-zorro-antd/select';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { DescriptionComponent } from './description/description.component';
     NzButtonModule,
     NzDividerModule,
     NzBadgeModule,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    ReactiveFormsModule,
+    NzSelectModule
   ],
   exports: [
     NzLayoutModule,
@@ -66,7 +70,9 @@ import { DescriptionComponent } from './description/description.component';
     NzBadgeModule,
     BreadcrumbComponent,
     CommonBreadcrumbComponent,
-    DescriptionComponent
+    DescriptionComponent,
+    ReactiveFormsModule,
+    NzSelectModule
   ]
 })
 export class CoreModule { }
