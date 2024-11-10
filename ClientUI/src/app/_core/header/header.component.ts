@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BasketItem } from 'src/app/_shared/_models/basket';
 import { BasketService } from 'src/app/basket/basket.service';
@@ -8,31 +8,40 @@ import { BasketService } from 'src/app/basket/basket.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
   host: {
-    '(document:click)' : 'onClick($event)',
+    '(document:click)': 'onClick($event)',
   }
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   isMenuCollapsed = true;
   isLoginCollapsed = true;
+  isCartCollapsed = true;
+  basketItems: BasketItem[] = [];
 
-  constructor(private _eref: ElementRef, public basketService: BasketService, private router: Router) {}
+  constructor(private _eref: ElementRef, private router: Router, public basketService: BasketService) { }
+
+  ngOnInit(): void {
+    
+  }
 
   // Remove menu items when click outside
   onClick(event: any) {
-    if(!this._eref.nativeElement.contains(event.target)) {
+    if (!this._eref.nativeElement.contains(event.target)) {
       this.isMenuCollapsed = true;
       this.isLoginCollapsed = true;
+      this.isCartCollapsed = true;
     }
   }
 
   collapseLoginRegisterForm() {
-    this.isLoginCollapsed = !this.isLoginCollapsed;
     this.isMenuCollapsed = true;
+    this.isCartCollapsed = true;
+    this.isLoginCollapsed = !this.isLoginCollapsed;
   }
 
   collapseMenuForm() {
     this.isMenuCollapsed = !this.isMenuCollapsed;
     this.isLoginCollapsed = true;
+    this.isCartCollapsed = true;
   }
 
   getCount(items: BasketItem[]) {
@@ -41,5 +50,15 @@ export class HeaderComponent {
 
   redirectToHomePage() {
     this.router.navigate(['/']);
+  }
+
+  collapseCartForm() {
+    this.isMenuCollapsed = true;
+    this.isLoginCollapsed = true;
+    this.isCartCollapsed = !this.isCartCollapsed;
+  }
+
+  onNavigate() {
+    this.isCartCollapsed = true;
   }
 }

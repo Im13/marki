@@ -1,0 +1,55 @@
+<div class="d-flex flex-column py-2">
+    <span class="fs-5 text-center mb-2">GIỎ HÀNG</span>
+
+    <div class="d-flex flex-column" *ngIf="basketItems.length < 1; else basket_items">
+        <span nz-icon nzType="shopping" nzTheme="outline" class="fs-1 my-2"></span>
+        <span class="text-center mb-1">Hiện chưa có sản phẩm</span>
+    </div>
+
+    <ng-template #basket_items>
+        <div *ngFor="let item of processedBasketItems" nz-row class="mb-3 px-4">
+            <div nz-col nzSpan="4">
+                <nz-badge [nzCount]="item.quantity"
+                    [nzStyle]="{ backgroundColor: '#fff', color: '#999', boxShadow: '0 0 0 1px #d9d9d9 inset' }">
+                    <img class="w-100" [src]="item.pictureUrl" />
+                </nz-badge>
+            </div>
+
+            <div nz-col nzSpan="16" class="ps-3 d-flex flex-column justify-content-center">
+                <span class="fw-semibold py-1">{{ item.productName }}</span>
+                <span nz-typography nzType="secondary">{{ item.formattedSKUValues }}</span>
+            </div>
+
+            <div nz-col nzSpan="4" class="d-flex align-items-center">
+                <span class="fw-medium">{{ item.quantity * item.price | number }}đ</span>
+            </div>
+        </div>
+    </ng-template>
+    
+    <div class="border-top mx-4">
+        <div class="d-flex justify-content-between my-1">
+            <span>Tạm tính: </span>
+            <span class="fw-semibold">{{ basketTotal?.subtotal | number}}<span class="text-decoration-underline">đ</span></span>
+        </div>
+
+        <div class="d-flex justify-content-between my-1">
+            <span>Giảm giá: </span>
+            <span class="fw-semibold">0<span class="text-decoration-underline">đ</span></span>
+        </div>
+
+        <div class="d-flex justify-content-between my-1">
+            <span>Tổng tiền: </span>
+            <span class="fw-semibold text-danger">{{ basketTotal?.subtotal | number }}<span class="text-decoration-underline">đ</span></span>
+        </div>
+
+        <div class="d-flex justify-content-between my-2" nz-row>
+            <div nz-col nzSpan="12" class="pe-1">
+                <button class="btn btn-secondary btn-cart-edit rounded-0 text-dark w-100 fw-semibold" (click)="onEditCart()">Chỉnh sửa giỏ hàng</button>
+            </div>
+
+            <div nz-col nzSpan="12" class="ps-1">
+                <button class="btn btn-dark btn-checkout rounded-0 w-100 fw-semibold" (click)="onCheckout()">Thanh toán</button>
+            </div>
+        </div>
+    </div>
+</div>

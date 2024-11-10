@@ -22,12 +22,14 @@ import { CommonBreadcrumbComponent } from './common-breadcrumb/common-breadcrumb
 import { DescriptionComponent } from './description/description.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzSelectModule }  from 'ng-zorro-antd/select';
+import { CartDropdownComponent } from './cart-dropdown/cart-dropdown.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     CommonBreadcrumbComponent,
-    DescriptionComponent
+    DescriptionComponent,
+    CartDropdownComponent
   ],
   imports: [
     CommonModule,

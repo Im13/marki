@@ -39,6 +39,7 @@ export class BasketService {
   }
 
   getCurrentBasketValue() {
+    console.log(this.basketSource)
     return this.basketSource.value;
   }
 

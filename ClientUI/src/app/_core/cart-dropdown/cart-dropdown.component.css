@@ -1,0 +1,11 @@
+* {
+    line-height: 2rem;
+}
+
+.btn-cart-edit {
+    background-color: #fff;
+}
+
+.btn-cart-edit, .btn-checkout {
+    font-size: .8rem;
+}
