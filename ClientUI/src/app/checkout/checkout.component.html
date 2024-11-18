@@ -71,24 +71,6 @@
                     </nz-form-control>
                 </nz-form-item>
 
-                <!-- <div class="form-group pt-1">
-                    <input type="text" class="form-control my-2" placeholder="Họ và tên" formControlName="fullName">
-                    <span *ngIf="!checkoutFrm.get('fullName').valid && checkoutFrm.get('fullName').touched"
-                        class="invalid-text">Vui lòng nhập họ tên</span>
-                </div> -->
-
-                <!-- <div class="form-group">
-                    <input type="text" class="form-control my-2" placeholder="Số điện thoại" formControlName="phone">
-                    <span *ngIf="!checkoutFrm.get('phone').valid && checkoutFrm.get('phone').touched"
-                        class="invalid-text">Vui lòng nhập số điện thoại</span>
-                </div> -->
-
-                <!-- <div class="form-group">
-                    <input type="text" class="form-control my-2" placeholder="Địa chỉ" formControlName="street">
-                    <span *ngIf="!checkoutFrm.get('street').valid && checkoutFrm.get('street').touched"
-                        class="invalid-text">Vui lòng nhập địa chỉ</span>
-                </div> -->
-
                 <div nz-row class="my-1 border">
                     <div nz-col nzSpan="18">
                         <nz-select nzShowSearch formControlName="province" nzSize="large" nzBorderless (ngModelChange)="onProvinceChange($event)"
@@ -216,7 +198,7 @@
                 </div>
 
                 <div class="py-3">
-                    <button type="submit" class="btn btn-dark w-100 p-2" [disabled]="!checkoutFrm.valid">Hoàn tất đơn
+                    <button type="submit" class="btn btn-dark w-100 p-2 rounded-0" [disabled]="!checkoutFrm.valid">Hoàn tất đơn
                         hàng</button>
                     <div class="back-to-cart mt-3 d-flex justify-content-center">
                         <a href="#" class="text-decoration-none">Giỏ hàng</a>

@@ -1,7 +1,7 @@
 <div class="d-flex flex-column py-2">
     <span class="fs-5 text-center mb-2">GIỎ HÀNG</span>
 
-    <div class="d-flex flex-column" *ngIf="basketItems.length < 1; else basket_items">
+    <div class="d-flex flex-column" *ngIf="basketItems?.length < 1; else basket_items">
         <span nz-icon nzType="shopping" nzTheme="outline" class="fs-1 my-2"></span>
         <span class="text-center mb-1">Hiện chưa có sản phẩm</span>
     </div>
@@ -25,11 +25,12 @@
             </div>
         </div>
     </ng-template>
-    
-    <div class="border-top mx-4">
+
+    <div class="border-top mx-4" *ngIf="(basketService.basketTotalSource$ | async) || defaultTotal as total">
         <div class="d-flex justify-content-between my-1">
             <span>Tạm tính: </span>
-            <span class="fw-semibold">{{ basketTotal?.subtotal | number}}<span class="text-decoration-underline">đ</span></span>
+            <span class="fw-semibold">{{ total.subtotal | number}}<span
+                    class="text-decoration-underline">đ</span></span>
         </div>
 
         <div class="d-flex justify-content-between my-1">
@@ -39,16 +40,19 @@
 
         <div class="d-flex justify-content-between my-1">
             <span>Tổng tiền: </span>
-            <span class="fw-semibold text-danger">{{ basketTotal?.subtotal | number }}<span class="text-decoration-underline">đ</span></span>
+            <span class="fw-semibold text-danger">{{ total.subtotal | number }}<span
+                    class="text-decoration-underline">đ</span></span>
         </div>
 
         <div class="d-flex justify-content-between my-2" nz-row>
             <div nz-col nzSpan="12" class="pe-1">
-                <button class="btn btn-secondary btn-cart-edit rounded-0 text-dark w-100 fw-semibold" (click)="onEditCart()">Chỉnh sửa giỏ hàng</button>
+                <button class="btn btn-secondary btn-cart-edit rounded-0 text-dark w-100 fw-semibold"
+                    (click)="onEditCart()">Chỉnh sửa giỏ hàng</button>
             </div>
 
             <div nz-col nzSpan="12" class="ps-1">
-                <button class="btn btn-dark btn-checkout rounded-0 w-100 fw-semibold" (click)="onCheckout()">Thanh toán</button>
+                <button class="btn btn-dark btn-checkout rounded-0 w-100 fw-semibold" (click)="onCheckout()">Thanh
+                    toán</button>
             </div>
         </div>
     </div>

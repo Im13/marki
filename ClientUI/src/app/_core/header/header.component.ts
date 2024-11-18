@@ -49,6 +49,7 @@ export class HeaderComponent implements OnInit {
   }
 
   redirectToHomePage() {
+    this.collaseAll();
     this.router.navigate(['/']);
   }
 
@@ -59,6 +60,12 @@ export class HeaderComponent implements OnInit {
   }
 
   onNavigate() {
+    this.isCartCollapsed = true;
+  }
+
+  collaseAll() {
+    this.isMenuCollapsed = true;
+    this.isLoginCollapsed = true;
     this.isCartCollapsed = true;
   }
 }

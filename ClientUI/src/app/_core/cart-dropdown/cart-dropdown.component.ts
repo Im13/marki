@@ -14,30 +14,33 @@ export class CartDropdownComponent implements OnInit {
   @Input('basketItems') basketItems: BasketItem[];
   processedBasketItems: any[] = [];
   basketTotal: BasketTotals;
+  defaultTotal = { subtotal: 0, discount: 0, total: 0 };
 
   constructor(private router: Router, public basketService: BasketService){
-    console.log('A', this.basketItems)
   }
 
   ngOnInit(): void {
-    this.basketService.basketSource$.pipe(
-      filter(val => val !== null)  // Lọc bỏ các giá trị null
-    ).subscribe({
+    this.basketService.basketSource$.subscribe({
       next: val => {
-        this.basketItems = val.items;
+        this.basketItems = val?.items;
+        console.log('Val', val)
 
-        this.processedBasketItems = this.basketItems.map(item => ({
-          ...item,
-          formattedSKUValues: item.productSKUValues.map(skuValue => skuValue.productOptionValue.valueName).join(' / ')
-        }));
+        if(val !== null) {
+          this.processedBasketItems = this.basketItems.map(item => ({
+            ...item,
+            formattedSKUValues: item.productSKUValues.map(skuValue => skuValue.productOptionValue.valueName).join(' / ')
+          }));
+        }
+
       }
     });
 
-    this.basketService.basketTotalSource$.pipe(
-      filter(val => val !== null)  // Lọc bỏ các giá trị null
-    ).subscribe({
+    this.basketService.basketTotalSource$.subscribe({
       next: val => {
-        this.basketTotal = val;
+        if(val !== null)
+          this.basketTotal = val;
+
+        console.log(this.basketTotal)
       }
     });
   }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { BasketService } from './basket.service';
 import { BasketItem } from '../_shared/_models/basket';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-basket',
@@ -8,7 +9,7 @@ import { BasketItem } from '../_shared/_models/basket';
   styleUrls: ['./basket.component.css']
 })
 export class BasketComponent {
-  constructor(public basketService: BasketService) { }
+  constructor(public basketService: BasketService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -18,10 +19,14 @@ export class BasketComponent {
   }
 
   incrementQuantity(item: BasketItem) {
-    // this.basketService.addItemToBasket(item);
+    // this.basketService.addItemToBasket(item, item.productName, 1);
   }
 
   removeItem(id: number, quantity: number) {
     this.basketService.removeItemFromBasket(id, quantity);
+  }
+
+  redirectToCheckout() {
+    this.router.navigate(['/checkout']);
   }
 }

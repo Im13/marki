@@ -44,6 +44,7 @@ export class BasketService {
   }
 
   addItemToBasket(item: ProductSKU | BasketItem, product: Product, quantity: number) {
+    //Change photo url to sku photo url
     if(this.isProductSKU(item)) item = this.mapProductItemToBasketItem(item, product.name, product.photos[0].url);
 
     console.log('Items: ', item)

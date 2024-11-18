@@ -35,3 +35,7 @@ nz-footer {
     text-align: center;
     font-size: 20px;
 }
+
+::ng-deep .ant-layout-content {
+    z-index: 1 !important;
+}
