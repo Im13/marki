@@ -9,6 +9,8 @@ export interface BasketItem {
     pictureUrl: string;
     sku: string;
     productSKUValues: ProductSkuValue[];
+    optionValueCombination: string;
+    productId: number;
 }
 
 export interface Basket {

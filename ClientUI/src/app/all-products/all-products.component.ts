@@ -45,12 +45,10 @@ export class AllProductsComponent implements OnInit {
 
   optionSelected(event: ProductSKU) {
     this.selectedProductSKU = event;
-    console.log('Catch: ', event)
   }
 
   quantitySelected(event: number) {
     this.selectedQuantity = event;
-    console.log('Catch quantity: ', event)
   }
 
   addToCart() {

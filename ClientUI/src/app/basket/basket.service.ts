@@ -21,7 +21,6 @@ export class BasketService {
   getBasket(id: string) {
     return this.http.get<Basket>(this.baseUrl + 'basket?id=' + id).subscribe({
       next: basket => {
-        console.log('Basket: ', basket)
         this.basketSource.next(basket);
         this.calculateTotals();
       }
@@ -29,7 +28,6 @@ export class BasketService {
   }
 
   setBasket(basket: Basket) {
-    console.log('Before push: ',basket);
     return this.http.post<Basket>(this.baseUrl + 'basket', basket).subscribe({
       next: basket => {
         this.basketSource.next(basket);
@@ -39,13 +37,12 @@ export class BasketService {
   }
 
   getCurrentBasketValue() {
-    console.log(this.basketSource)
     return this.basketSource.value;
   }
 
   addItemToBasket(item: ProductSKU | BasketItem, product: Product, quantity: number) {
     //Change photo url to sku photo url
-    if(this.isProductSKU(item)) item = this.mapProductItemToBasketItem(item, product.name, product.photos[0].url);
+    if(this.isProductSKU(item)) item = this.mapProductItemToBasketItem(item, product, product.photos[0].url);
 
     console.log('Items: ', item)
     
@@ -90,6 +87,7 @@ export class BasketService {
     if(item) item.quantity += quantity;
     else {
       itemToAdd.quantity = quantity;
+      console.log('Item to add: ' + itemToAdd)
       items.push(itemToAdd);
     }
 
@@ -102,15 +100,17 @@ export class BasketService {
     return basket;
   }
 
-  private mapProductItemToBasketItem(item: ProductSKU, productName: string, imageUrl: string) : BasketItem {
+  private mapProductItemToBasketItem(item: ProductSKU, product: Product, imageUrl: string) : BasketItem {
     return {
       id: item.id,
-      productName: productName,
+      productId: product.id,
+      productName: product.name,
       price: item.price,
       quantity: 0,
       pictureUrl: imageUrl,
       sku: item.sku,
-      productSKUValues: item.productSKUValues
+      productSKUValues: item.productSKUValues,
+      optionValueCombination: item.productSKUValues.map(o => `${o.optionName}: ${o.optionValue}`).join('; ')
     }
   }
 

@@ -30,9 +30,9 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkoutFrm = new FormGroup({
-      fullName: new FormControl('', Validators.required),
-      phone: new FormControl('', Validators.required),
-      street: new FormControl('', Validators.required),
+      fullName: new FormControl('full name', Validators.required),
+      phone: new FormControl('098888888', Validators.required),
+      street: new FormControl('test street', Validators.required),
       province: new FormControl(0, [Validators.required, this.forbiddenSelect.bind(this)]),
       district: new FormControl(0, [Validators.required, this.forbiddenSelect.bind(this)]),
       ward: new FormControl(0, [Validators.required, this.forbiddenSelect.bind(this)])
