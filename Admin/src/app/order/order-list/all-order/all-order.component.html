@@ -13,7 +13,7 @@
           <th nzWidth="120px">Khách hàng</th>
           <th nzWidth="120px">SĐT</th>
           <th nzWidth="300px">Địa chỉ</th>
-          <th nzWidth="200px">Tạo lúc</th>
+          <!-- <th nzWidth="200px">Tạo lúc</th> -->
           <th nzWidth="150px">Tổng tiền</th>
           <th nzRight nzWidth="200px">Trạng thái</th>
         </tr>
@@ -32,7 +32,7 @@
           <td (click)="onEditOrder(order)">{{ order.customer.name }}</td>
           <td (click)="onEditOrder(order)">{{ order.customer.phoneNumber }}</td>
           <td (click)="onEditOrder(order)">{{ order.address }}</td>
-          <td (click)="onEditOrder(order)">{{ order.dateCreated | date:'hh:mm dd/MM/YYYY' }}</td>
+          <!-- <td (click)="onEditOrder(order)">{{ order.dateCreated | date:'hh:mm dd/MM/YYYY' }}</td> -->
           <td (click)="onEditOrder(order)">{{ order.total | thousandSeparator }}</td>
           <td nzRight>
             <div class="order-status-dropdown w-100">

@@ -21,13 +21,13 @@ export class AllOrderComponent implements OnInit {
   totalItems = 0;
 
   orderStatuses: OrderStatus[] = [
-    { id: 0, status: 'Mới'},
-    { id: 1, status: 'Chờ hàng'},
-    { id: 2, status: 'Ưu tiên xuất đơn'},
-    { id: 3, status: 'Đã xác nhận'},
-    { id: 4, status: 'Gửi hàng đi'},
-    { id: 5, status: 'Huỷ đơn'},
-    { id: 6, status: 'Xoá đơn'}
+    { id: 1, status: 'Mới'},
+    { id: 2, status: 'Chờ hàng'},
+    { id: 3, status: 'Ưu tiên xuất đơn'},
+    { id: 4, status: 'Đã xác nhận'},
+    { id: 5, status: 'Gửi hàng đi'},
+    { id: 6, status: 'Huỷ đơn'},
+    { id: 7, status: 'Xoá đơn'}
   ];
 
   //Order selected
