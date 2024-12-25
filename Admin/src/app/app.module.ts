@@ -16,6 +16,7 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import en from '@angular/common/locales/en';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { HasRoleDirective } from './core/_directives/has-role.directive';
 
 registerLocaleData(en);
 
@@ -23,7 +24,8 @@ registerLocaleData(en);
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    HasRoleDirective
   ],
   imports: [
     BrowserModule,

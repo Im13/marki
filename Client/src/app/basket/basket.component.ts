@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { BasketService } from './basket.service';
 import { BasketItem } from '../shared/models/basket';
+import { NgIf, NgFor, AsyncPipe, DecimalPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-basket',
-  templateUrl: './basket.component.html',
-  styleUrls: ['./basket.component.css']
+    selector: 'app-basket',
+    templateUrl: './basket.component.html',
+    styleUrls: ['./basket.component.css'],
+    standalone: true,
+    imports: [NgIf, RouterLink, NgFor, AsyncPipe, DecimalPipe]
 })
 export class BasketComponent implements OnInit {
 

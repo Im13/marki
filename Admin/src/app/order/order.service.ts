@@ -104,7 +104,7 @@ export class OrderService {
       productPropertySKU: orderTableRow[columnDict[OrderConstants.OrderConstants.PRODUCT_PROPERTY_SKU]],
       productSKU: orderTableRow[columnDict[OrderConstants.OrderConstants.SKU]],
       quantity: orderTableRow[columnDict[OrderConstants.OrderConstants.QUANTITY]],
-      returnedQuantity: orderTableRow[columnDict[OrderConstants.OrderConstants.RETURNED_QUANTITY]].toString(),
+      returnedQuantity: orderTableRow[columnDict[OrderConstants.OrderConstants.RETURNED_QUANTITY]]?.toString(),
       salePrice: orderTableRow[columnDict[OrderConstants.OrderConstants.SALE_PRICE]],
       shopDiscount: orderTableRow[columnDict[OrderConstants.OrderConstants.SHOP_DISCOUNT]],
       shopeeSale: orderTableRow[columnDict[OrderConstants.OrderConstants.SHOPEE_SALE]],
@@ -158,7 +158,6 @@ export class OrderService {
   }
 
   createOrder(order: Order) {
-    console.log(order);
     return this.http.post(this.baseApiUrl + 'order/create', order);
   }
 

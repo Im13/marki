@@ -1,0 +1,27 @@
+<div *ngIf="product" class="px-2 py-3">
+  <p class="fs-6 fw-semibold lh-sm">{{ product.name }}</p>
+  <p class="lh-sm m-1">SKU: {{ product.productSKU }}</p>
+  <p class="fs-6 fw-semibold lh-sm m-1">100.000 đ</p>
+
+  <div *ngFor="let option of product.productOptions" class="mt-2">
+    <div class="mb-1 fw-semibold">{{ option.optionName }}:</div>
+    <button *ngFor="let value of option.productOptionValues"
+      nz-button
+      nzType="default"
+      class="me-1"
+      (click)="onSelectOption(option.id, value.id)"
+      [ngClass]="{ 'selected': selectedOptions[option.id] === value.id }"
+      [class.selected]="selectedOptions[option.id] === value.id">
+        {{ value.valueName }}
+    </button>
+  </div>
+
+  <div class="mt-3">
+    <div class="mb-1 fw-semibold">Số lượng:</div>
+    <nz-button-group class="border">
+      <button nz-button nzType="text" (click)="decreaseQuantity()"><span nz-icon nzType="minus" nzTheme="outline"></span></button>
+      <button nz-button nzType="text"><span class="fw-semibold">{{ quantity }}</span></button>
+      <button nz-button nzType="text" (click)="increaseQuantity()"><span nz-icon nzType="plus" nzTheme="outline"></span></button>
+    </nz-button-group>
+  </div>
+</div>

@@ -6,6 +6,29 @@
   opacity: 0;
 }
 
+::ng-deep .ant-upload.ant-upload-select-picture-card, ::ng-deep .ant-upload-list-picture-card-container {
+  width: 80px;
+  height: 80px;
+}
+
+::ng-deep .ant-upload.ant-upload-select-picture-card {
+  padding: 5px;
+  font-size: 0px;
+}
+
+::ng-deep .ant-upload-picture-card-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+::ng-deep .ant-upload, ::ng-deep .ant-upload-list, ::ng-deep .ant-upload-list-item {
+  font-size: 11px;
+}
+
+::ng-deep .ant-upload-list-item-uploading.ant-upload-list-item {
+  font-size: 0px;
+}
+
 .editable-cell {
   position: relative;
   padding: 5px 12px;

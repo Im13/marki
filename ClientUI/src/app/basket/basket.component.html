@@ -1,0 +1,109 @@
+<div class="px-3 py-2">
+    <app-common-breadcrumb></app-common-breadcrumb>
+</div>
+
+<div *ngIf="(basketService.basketSource$ | async) === null" class="text-center px-2">
+    <p>
+        Giỏ hàng của bạn đang trống. Mời bạn mua thêm sản phẩm
+        <u class="text-dark" routerLink="/" style="cursor: pointer">tại đây</u>
+        .
+    </p>
+</div>
+
+<div *ngIf="basketService.basketSource$ | async as basket" class="row w-100 m-0 p-0 px-md-3 px-lg-4 px-xl-0">
+    <div class="col-12 col-md-8 p-3">
+        <div class="d-flex align-items-center justify-content-between">
+            <h5 class="m-0">Giỏ hàng:</h5>
+            <span *ngIf="basketService.basketSource$ | async as basket">
+                <u>{{ getCount(basket.items) }} sản phẩm</u>
+            </span>
+        </div>
+
+        <div *ngFor="let item of basket.items" class="item">
+            <hr class="my-3" />
+
+            <div nz-row class="border border-dark">
+                <div nz-col nzSpan="6">
+                    <img class="w-100" [src]="item.pictureUrl" />
+                </div>
+                <div nz-col nz-row nzSpan="18">
+                    <div nz-row class="h-100">
+                        <div nz-col nzSpan="17" class="d-flex flex-column ps-2 pb-2 pt-1 h-100">
+                            <div>{{ item.productName }}</div>
+
+                            <div>
+                                <span *ngFor="let value of item.productSKUValues">{{ value.productOptionValue.valueName }} </span>
+                            </div>
+                            <div class="mt-auto" nz-row>
+                                <div nz-col nzSpan="9" class="border border-dark d-flex justify-content-between py-1">
+                                    <span class="mx-2 fw-bold" style="cursor: pointer" (click)="removeItem(item.id, 1)">-</span>
+                                    <span>{{ item.quantity }}</span>
+                                    <span class="mx-2 fw-bold" style="cursor: pointer" (click)="incrementQuantity(item)">+</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div nz-col nzSpan="7" class="d-flex flex-column pb-2">
+                            <div class="d-flex justify-content-end align-items-center">
+                                <span nz-icon class="fs-4" nzType="close-square" nzTheme="fill" (click)="removeItem(item.id, item.quantity)"></span>
+                            </div>
+
+                            <div class="mt-auto d-flex justify-content-center">
+                                <span class="fw-semibold">{{ item.price * item.quantity| number }}đ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-4 p-3 py-md-0 pe-md-0 rounded mt-3 mt-md-0"
+        *ngIf="basketService.basketTotalSource$ | async as total">
+        <div class="border p-3">
+            <div>
+                <h5>Thông tin đơn hàng</h5>
+            </div>
+            <hr class="my-3" />
+            <div>
+                <div class="d-flex align-items-center justify-content-between">
+                    <h6>Tạm tính:</h6>
+                    <h6>{{ total.subtotal | number }}đ</h6>
+                </div>
+                <div class="d-flex align-items-center justify-content-between mt-1">
+                    <h6>Phí vận chuyển:</h6>
+                    <h6 class="text-danger">{{ total.shipping | number }}đ</h6>
+                </div>
+                <div class="d-flex align-items-center justify-content-between mt-1">
+                    <h6>Giảm giá:</h6>
+                    <h6 class="text-danger">0đ</h6>
+                </div>
+                <div class="d-flex align-items-center justify-content-between mt-1">
+                    <h6>Tổng tiền:</h6>
+                    <h6 class="text-danger">{{ total.total | number }}đ</h6>
+                </div>
+            </div>
+            <hr class="my-3" />
+            <div>
+                <h6>Ghi chú đơn hàng</h6>
+                <div class="form-group pt-2">
+                    <textarea class="form-control" rows="4" placeholder="Ghi chú"></textarea>
+                </div>
+
+                <div class="form-group pt-3">
+                    <input class="form-control" type="text" placeholder="Nhập mã khuyến mãi (nếu có)" />
+                </div>
+
+                <button type="button" class="btn btn-dark rounded-0 w-100 mt-4 mb-2" (click)="redirectToCheckout()">
+                    THANH TOÁN NGAY
+                </button>
+                <div class="d-flex align-items-center justify-content-center mt-0 pt-0">
+                    <i class="fa fa-arrow-left"></i>
+                    <button type="button" class="btn" routerLink="/products">
+                        Tiếp tục mua hàng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

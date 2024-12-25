@@ -9,3 +9,12 @@ input[type="file"] {
 .data {
     font-size: .95rem;
 }
+
+nz-header, nz-layout, nz-content {
+  background-color: transparent;
+}
+
+nz-footer {
+  height: 50px;
+  background-color: #FFFFFF;
+}

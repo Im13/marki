@@ -1,95 +1,73 @@
-<div class="product-list-container px-2">
-  <div class="control-bar d-flex flex-row py-1">
-    <button
-      class="btn btn-sm fa fa-plus btn-outline-primary rounded-0 me-2"
-      (click)="displayCreateModal()"
-      [popover]="'Thêm mới sản phẩm'"
-      triggers="mouseenter:mouseleave"
-    ></button>
-
-    <button class="btn btn-sm btn-outline-secondary rounded-0 me-2">
-      <span class="fa fa-download me-1"></span>
-      <span>Xuất excel</span>
+<nz-layout class="h-100">
+  <nz-header class="d-flex align-items-center px-2">
+    <button nz-button nzType="primary" nzSize="default" (click)="displayCreateModal()" nz-tooltip
+      nzTooltipTitle="Thêm mới sản phẩm" nzTooltipPlacement="bottom" class="me-2">
+      <span nz-icon nzType="plus"></span>
     </button>
 
-    <button
-      class="btn btn-sm btn-outline-danger rounded-0 me-2"
-      (click)="deleteSelectedProducts()"
-      [disabled]="setOfCheckedId.size === 0"
-    >
-      <span class="fa fa-trash me-1"></span>
-      <span>Xoá sản phẩm</span>
+    <button nz-button nzType="default" nzSize="default" nz-tooltip nzTooltipTitle="Xuất excel"
+      nzTooltipPlacement="bottom" class="me-2 d-flex align-items-center">
+      <span nz-icon nzType="download"></span>
+      Xuất excel
     </button>
 
-    <span class="d-flex align-items-center text-secondary"
-      >({{ setOfCheckedId.size }} sản phẩm đã chọn)</span
-    >
-  </div>
+    <button nz-button nzType="default" nzSize="default" (click)="deleteSelectedProducts()" nz-tooltip
+      nzTooltipTitle="Xoá sản phẩm" nzTooltipPlacement="bottom" class="me-2 d-flex align-items-center"
+      [disabled]="setOfCheckedId.size === 0" nzDanger>
+      <span nz-icon nzType="delete"></span>
+      Xoá sản phẩm
+    </button>
 
-  <div
-    class="data list-products mt-3"
-    *ngIf="products.length > 0"
-  >
-    <nz-table
-      #rowSelectionTable
-      [nzFrontPagination]="false"
-      [nzLoading]="loading"
-      [nzData]="products"
-      [nzTotal]="totalCount"
-      [nzPageSize]="productParams.pageSize"
-      [nzPageIndex]="productParams.pageIndex"
-      [nzScroll]="{ y: '720px' }"
-      (nzQueryParams)="onQueryParamsChange($event)"
-      (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
-    >
+    <span class="d-flex align-items-center text-secondary">({{ setOfCheckedId.size }} sản phẩm đã chọn)</span>
+  </nz-header>
+
+  <nz-content class="px-2">
+    <nz-table nzBordered #rowSelectionTable nzShowPagination="false" [nzFrontPagination]="false"
+      [nzScroll]="{ x: '1200px', y: '735px' }" [nzData]="products"
+      (nzCurrentPageDataChange)="onCurrentPageDataChange($event)" [nzLoading]="loading" nzSize="small">
       <thead>
         <tr>
-          <th
-            [(nzChecked)]="checked"
-            [nzWidth]="'40px'"
-            [nzIndeterminate]="indeterminate"
-            (nzCheckedChange)="onAllChecked($event)"
-          ></th>
-          <th>Tên sản phẩm</th>
-          <th>SKU sản phẩm</th>
-          <th>Hình ảnh</th>
-          <th>Giá bán</th>
-          <th>Tồn kho</th>
-          <th>Tổng tiền còn lại</th>
+          <th [nzChecked]="checked" [nzIndeterminate]="indeterminate" nzLabel="Select all"
+            (nzCheckedChange)="onAllChecked($event)" nzWidth="40px" nzLeft></th>
+          <th rowSpan="1" nzWidth="40px" nzLeft>Id</th>
+          <th nzWidth="350px">Tên sản phẩm</th>
+          <th nzWidth="140px">SKU sản phẩm</th>
+          <th nzWidth="120px">Hình ảnh</th>
+          <th nzWidth="120px">Giá bán</th>
+          <th nzWidth="60px">Tồn kho</th>
+          <th nzWidth="200px">Tổng tiền còn lại</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of rowSelectionTable.data">
-          <td
-            [nzChecked]="setOfCheckedId.has(data.id)"
-            (nzCheckedChange)="onItemChecked(data.id, $event)"
-          ></td>
-          <td (click)="displayEditModal(data)">{{ data.name }}</td>
-          <td (click)="displayEditModal(data)">{{ data.productSKU }}</td>
-          <td (click)="displayEditModal(data)">
-            <img
-              *ngIf="!data.imageUrl"
-              nz-popover
-              width="40px"
-              height="40px"
-              src="../../../../assets/images/no_image.jpg"
-            />
+        <tr *ngFor="let product of products">
+          <td [nzChecked]="setOfCheckedId.has(product.id)" (nzCheckedChange)="onItemChecked(product.id, $event)" nzLeft>
+          </td>
+          <td nzLeft (click)="displayEditModal(product)">{{ product.id }}</td>
+          <td (click)="displayEditModal(product)"> {{ product.name }} </td>
+          <td (click)="displayEditModal(product)"> {{ product.productSKU }} </td>
+          <td (click)="displayEditModal(product)">
+            <img *ngIf="!product.imageUrl" nz-popover width="40px" height="40px"
+              src="../../../../assets/images/no_image.jpg" />
 
-            <img
-                *ngIf="data.imageUrl"
-                nz-popover
-                width="40px"
-                height="40px"
-                [src]="data.imageUrl"
-              />
+            <img *ngIf="product.imageUrl" nz-popover width="40px" height="40px" [src]="product.imageUrl" />
           </td>
-          <td (click)="displayEditModal(data)">
-            {{ data.importPrice | thousandSeparator }}đ
+          <td (click)="displayEditModal(product)">
+            {{ product.importPrice | thousandSeparator }}đ
           </td>
-          <td (click)="displayEditModal(data)">{{ data.totalQuantity }}</td>
-          <td (click)="displayEditModal(data)">{{ data.totalQuantity * data.importPrice | thousandSeparator }}</td>
+          <td (click)="displayEditModal(product)"> {{ product.totalQuantity }} </td>
+          <td (click)="displayEditModal(product)"> {{ product.totalQuantity * product.importPrice | thousandSeparator }} </td>
         </tr>
       </tbody>
     </nz-table>
-  </div>
-</div>
+  </nz-content>
+
+  <nz-footer class="d-flex align-items-center justify-content-between px-2">
+    <div class="order-info"></div>
+    <div class="d-flex align-items-center justify-content-end">
+      <nz-pagination [(nzPageIndex)]="productParams.pageIndex" [nzTotal]="totalCount" [nzSize]="'small'" nzShowSizeChanger
+        (nzPageIndexChange)="onPageChange($event)" [nzPageSize]="productParams.pageSize"
+        (nzPageSizeChange)="onPageSizeChange($event)">
+      </nz-pagination>
+    </div>
+  </nz-footer>
+</nz-layout>

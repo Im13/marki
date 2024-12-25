@@ -1,0 +1,52 @@
+<!-- Header for mobile display -->
+<div class="d-flex flex-row justify-content-between align-items-center h-100 d-block d-sm-none" nz-row>
+  <div nz-col nzSpan="5" class="d-flex align-items-center h-100 fs-4 ps-3" (click)="collapseMenuForm()"
+    [attr.aria-expanded]="!isMenuCollapsed" aria-controls="collapseBasic">
+    <span nz-icon nzType="menu" nzTheme="outline"></span>
+  </div>
+
+  <div class="logo h-100 d-flex align-items-center justify-content-center" nz-col nzSpan="14"><a
+      class="text-decoration-none fs-3 text-black"  (click)="redirectToHomePage()">MARKI</a></div>
+
+  <div nz-col nzSpan="5" class="d-flex align-items-center justify-content-end h-100 pe-3"
+  [attr.aria-expanded]="!isCartCollapsed" aria-controls="collapseBasic">
+    <nz-badge *ngIf="basketService.basketSource$ | async as basket; else nullBasket" [nzCount]="getCount(basket.items)"
+      class="fs-5 me-3" [nzStyle]="{ backgroundColor: '#000' }" (click)="collapseCartForm()">
+      <span nz-icon nzType="shopping-cart" nzTheme="outline"></span>
+    </nz-badge>
+    <ng-template #nullBasket>
+      <nz-badge [nzCount]="0" class="fs-5 me-3" [nzStyle]="{ backgroundColor: '#000' }" (click)="collapseCartForm()">
+        <span nz-icon nzType="shopping-cart" nzTheme="outline"></span>
+      </nz-badge>
+    </ng-template>
+
+    <span class="fs-5" nz-icon nzType="user" nzTheme="outline" (click)="collapseLoginRegisterForm()"
+      [attr.aria-expanded]="!isLoginCollapsed"></span>
+  </div>
+
+  <!-- Menu items -->
+  <div [collapse]="isMenuCollapsed" [isAnimated]="true" class="w-100">
+    <div class="bg-white d-flex justify-content-center border-top border-bottom">Hàng mới về</div>
+    <div class="bg-white d-flex justify-content-center border-bottom">Áo</div>
+    <div class="bg-white d-flex justify-content-center border-bottom">Quần</div>
+    <div class="bg-white d-flex justify-content-center border-bottom">Váy / Chân váy</div>
+  </div>
+
+  <!-- Login / Register -->
+  <div id="collapseLoginRegister" [isAnimated]="true" [collapse]="isLoginCollapsed"
+    class="w-100 border-bottom border-top bg-light py-3 px-3">
+    <p class="fs-6 d-flex justify-content-center m-0">ĐĂNG NHẬP TÀI KHOẢN</p>
+    <p class="d-flex justify-content-center m-0">Nhập email và mật khẩu của bạn</p>
+    <input type="text" class="form-control form-control-sm mt-2 rounded-0" id="exampleFormControlInput1"
+      placeholder="Nhập email hoặc số điện thoại">
+    <input type="text" class="form-control form-control-sm mt-1 rounded-0" id="exampleFormControlInput1"
+      placeholder="Mật khẩu">
+    <button type="button" class="w-100 btn text-bg-dark rounded-0">Đăng nhập</button>
+    <p class="m-0">Khách hàng mới? <a href="#" class="text-reset fw-bold">Tạo tài khoản</a></p>
+    <p class="m-0">Quên mật khẩu? <a href="#" class="text-reset fw-bold">Khôi phục mật khẩu</a></p>
+  </div>
+
+  <div [collapse]="isCartCollapsed" class="bg-light w-100">
+    <app-cart-dropdown (onNavigate)="onNavigate()" [basketItems]="basketItems"></app-cart-dropdown>
+  </div>
+</div>

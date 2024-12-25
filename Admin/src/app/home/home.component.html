@@ -1,11 +1,86 @@
-<app-header></app-header>
-
-<div class="article d-flex">
-    <div class="sidebar h-100">
-        <app-sidebar></app-sidebar>
+<nz-layout class="layout h-100">
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+    <div class="logo fw-bold d-flex align-items-center justify-content-center">
+      MARKI
     </div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [nzTooltipTitle]="isCollapsed ? 'Tổng quan' : ''"
+        [nzSelected]="this.isSelected('/dashboard')" routerLink="/">
+        <span nz-icon nzType="pie-chart"></span>
+        <span>Tổng quan</span>
+      </li>
+      <li nz-submenu nzTitle="Bán hàng" nzIcon="shopping-cart">
+        <ul>
+          <li nz-menu-item routerLink="/orders/add" [nzSelected]="this.isSelected('/orders/add')">Bán hàng</li>
+          <li nz-menu-item>Trả hàng</li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Đơn hàng" nzIcon="file-text">
+        <ul>
+          <li nz-menu-item routerLink="/orders" [nzSelected]="this.isSelected('/orders')">Đơn hàng</li>
+          <li nz-menu-item routerLink="/orders/shopee" [nzSelected]="this.isSelected('/orders/shopee')">Đơn Shopee</li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Sản phẩm" nzIcon="skin">
+        <ul>
+          <li *appHasRole="['Admin']" nz-menu-item routerLink="/product">Danh sách sản phẩm</li>
+          <li nz-menu-item>Khuyến mãi</li>
+          <li nz-menu-item>Kiểm hàng</li>
+        </ul>
+      </li>
+      <li nz-menu-item routerLink="/customers">
+        <span nz-icon nzType="team"></span>
+        <span>Khách hàng</span>
+      </li>
+      <li nz-menu-item>
+        <span nz-icon nzType="deployment-unit"></span>
+        <span>Nhà cung cấp</span>
+      </li>
+      <li nz-menu-item>
+        <span nz-icon nzType="calculator"></span>
+        <span>Thu chi</span>
+      </li>
+      <li nz-menu-item>
+        <span nz-icon nzType="dollar-circle"></span>
+        <span>Lịch sử giao dịch</span>
+      </li>
+      <li nz-submenu nzTitle="Thống kê" nzIcon="bar-chart">
+        <ul>
+          <li *appHasRole="['Admin']" nz-menu-item routerLink="/statistics/shopee-revenue">Doanh thu Shopee</li>
+        </ul>
+      </li>
+      <li nz-menu-item>
+        <span nz-icon nzType="setting"></span>
+        <span>Cấu hình</span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout class="right-layout">
+    <nz-header class="d-flex align-items-center">
+      <div class="d-flex align-items-center w-50">
+        <span class="trigger h-100 d-flex align-items-center" nz-icon
+          [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed"></span>
 
-    <div class="content border border-danger">
+        <span nz-typography class="fw-bold fs-5">{{ routeName }}</span>
+      </div>
+
+      <div class="w-50 d-flex align-items-center justify-content-end pe-3">
+        <a nz-dropdown [nzDropdownMenu]="menu" class="d-flex align-items-center text-black">
+          Hello, {{ username }}
+          <span class="ms-2" nz-icon nzType="down"></span>
+        </a>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu nzSelectable>
+            <li nz-menu-item>Thiết lập tài khoản</li>
+            <li nz-menu-item nzDanger (click)="logout()">Đăng xuất</li>
+          </ul>
+        </nz-dropdown-menu>
+      </div>
+    </nz-header>
+    <nz-content>
+      <div class="inner-content h-100 pt-1">
         <router-outlet></router-outlet>
-    </div>
-</div>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

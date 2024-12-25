@@ -6,6 +6,7 @@ import { StatisticsRoutingModule } from './statistics-routing.module';
 import { RouterModule } from '@angular/router';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { CoreModule } from '../core/core.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { CoreModule } from '../core/core.module';
     RouterModule,
     StatisticsRoutingModule,
     BsDatepickerModule.forRoot(),
-    CoreModule
+    CoreModule,
+    SharedModule
   ]
 })
 export class StatisticsModule { }

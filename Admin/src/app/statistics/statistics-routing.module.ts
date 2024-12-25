@@ -5,7 +5,7 @@ import { ShopeeRevenueComponent } from './shopee-revenue/shopee-revenue.componen
 
 const routes: Routes = [
   { path: '', component: StatisticsComponent },
-  { path: 'shopee-revenue', component: ShopeeRevenueComponent }
+  { path: 'shopee-revenue', component: ShopeeRevenueComponent, data: { title: 'Doanh thu Shopee' } }
 ]
 
 @NgModule({

@@ -1,0 +1,206 @@
+[
+    {
+        "Name": "Thanh Huong",
+        "PhoneNumber": "0982881123",
+        "EmailAddress": "thanhhuong@gmail.com",
+        "IsDeleted": false
+    },
+    {
+        "Name": "Dung Ngô",
+        "PhoneNumber": "0399329901",
+        "EmailAddress": "",
+        "IsDeleted": false
+    },
+    {
+        "Name": "Tiên Nguyễn",
+        "PhoneNumber": "0938821823",
+        "EmailAddress": "",
+        "IsDeleted": false
+    },
+    {
+        "Name": "justsouknow.17",
+        "PhoneNumber": "0962504029",
+        "EmailAddress": "",
+        "IsDeleted": false
+    },
+    {
+        "Name": "Minh Trần",
+        "PhoneNumber": "0912345678",
+        "EmailAddress": "minhtran@gmail.com",
+        "IsDeleted": false
+    },
+    {
+        "Name": "Linh Nguyễn",
+        "PhoneNumber": "0967890123",
+        "EmailAddress": "linhnguyen@yahoo.com",
+        "IsDeleted": false
+    },
+    {
+        "Name": "Huy Phạm",
+        "PhoneNumber": "0971234567",
+        "EmailAddress": "huypham@outlook.com",
+        "IsDeleted": false
+    },
+    {
+        "Name": "Phương Đỗ",
+        "PhoneNumber": "0934567890",
+        "EmailAddress": "",
+        "IsDeleted": false
+    },
+    {
+        "Name": "Tuấn Vũ",
+        "PhoneNumber": "0923456789",
+        "EmailAddress": "tuanvu@hotmail.com",
+        "IsDeleted": false
+    },
+    {
+        "Name": "Anh Đặng",
+        "PhoneNumber": "0909876543",
+        "EmailAddress": "",
+        "IsDeleted": true
+    },
+    {
+        "Name": "Vy Hoàng",
+        "PhoneNumber": "0945678901",
+        "EmailAddress": "vyhoang@gmail.com",
+        "IsDeleted": false
+    },
+    {
+        "Name": "Hằng Nguyễn",
+        "PhoneNumber": "0910987654",
+        "EmailAddress": "",
+        "IsDeleted": false
+    },
+    {
+        "Name": "Nam Trần",
+        "PhoneNumber": "0938765432",
+        "EmailAddress": "namtran@yahoo.com",
+        "IsDeleted": true
+    },
+    {
+        "Name": "Quỳnh Lê",
+        "PhoneNumber": "0975432109",
+        "EmailAddress": "quynhle@outlook.com",
+        "IsDeleted": false
+    },
+    {
+        "Name": "Hà Phạm",
+        "PhoneNumber": "0961234567",
+        "EmailAddress": "",
+        "IsDeleted": false
+    },
+    {
+        "Name": "Tùng Võ",
+        "PhoneNumber": "0987654321",
+        "EmailAddress": "tungvo@gmail.com",
+        "IsDeleted": true
+    },
+    {
+        "Name": "Nga Phạm",
+        "PhoneNumber": "0901234567",
+        "EmailAddress": "ngapham@yahoo.com",
+        "IsDeleted": false
+    },
+    {
+        "Name": "Khoa Nguyễn",
+        "PhoneNumber": "0920987654",
+        "EmailAddress": "",
+        "IsDeleted": false
+    },
+    {
+        "Name": "Lan Đỗ",
+        "PhoneNumber": "0931239876",
+        "EmailAddress": "landdo@outlook.com",
+        "IsDeleted": true
+    },
+    {
+        "Name": "Tuấn Anh",
+        "PhoneNumber": "0987650987",
+        "EmailAddress": "tuananh@gmail.com",
+        "IsDeleted": false
+    },
+    {
+        "Name": "Hoàng Thủy",
+        "PhoneNumber": "0912349876",
+        "EmailAddress": "",
+        "IsDeleted": false
+    },
+    {
+        "Name": "Thảo Nguyễn",
+        "PhoneNumber": "0934321234",
+        "EmailAddress": "thaonguyen@yahoo.com",
+        "IsDeleted": false
+    },
+    {
+        "Name": "Minh Châu",
+        "PhoneNumber": "0967896543",
+        "EmailAddress": "minhchau@outlook.com",
+        "IsDeleted": true
+    },
+    {
+        "Name": "Bảo Đặng",
+        "PhoneNumber": "0943210987",
+        "EmailAddress": "",
+        "IsDeleted": false
+    },
+    {
+        "Name": "Nhung Lê",
+        "PhoneNumber": "0906543210",
+        "EmailAddress": "nhungle@gmail.com",
+        "IsDeleted": false
+    },
+    {
+        "Name": "Bích Nguyễn",
+        "PhoneNumber": "0976543210",
+        "EmailAddress": "",
+        "IsDeleted": false
+    },
+    {
+        "Name": "Hoài Phương",
+        "PhoneNumber": "0949876543",
+        "EmailAddress": "hoaiphuong@yahoo.com",
+        "IsDeleted": true
+    },
+    {
+        "Name": "Long Bùi",
+        "PhoneNumber": "0981239876",
+        "EmailAddress": "longbui@outlook.com",
+        "IsDeleted": false
+    },
+    {
+        "Name": "Kim Thoa",
+        "PhoneNumber": "0917896543",
+        "EmailAddress": "",
+        "IsDeleted": false
+    },
+    {
+        "Name": "Sơn Trần",
+        "PhoneNumber": "0938760123",
+        "EmailAddress": "sontran@gmail.com",
+        "IsDeleted": true
+    },
+    {
+        "Name": "Thu Lê",
+        "PhoneNumber": "0924321234",
+        "EmailAddress": "thule@yahoo.com",
+        "IsDeleted": false
+    },
+    {
+        "Name": "Khang Nguyễn",
+        "PhoneNumber": "0904329876",
+        "EmailAddress": "khangnguyen@outlook.com",
+        "IsDeleted": false
+    },
+    {
+        "Name": "Trúc Đỗ",
+        "PhoneNumber": "0965432109",
+        "EmailAddress": "",
+        "IsDeleted": true
+    },
+    {
+        "Name": "Lâm Võ",
+        "PhoneNumber": "0981234567",
+        "EmailAddress": "lamvo@gmail.com",
+        "IsDeleted": false
+    }    
+]

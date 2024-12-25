@@ -11,7 +11,7 @@ import { ProductSKUs } from 'src/app/shared/_models/productSKUs';
 import { ConvertVieService } from 'src/app/core/services/convert-vie.service';
 import { ProductOptionValue } from 'src/app/shared/_models/productOptionValues';
 import { ProductSKUValues } from 'src/app/shared/_models/productSKUValues';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { Photo } from 'src/app/shared/_models/photo';
 import { ProductType } from 'src/app/shared/_models/productTypes';
 
@@ -19,10 +19,9 @@ const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = () =>
-      {
-        resolve(reader.result);
-      }
+    reader.onload = () => {
+      resolve(reader.result);
+    }
     reader.onerror = (error) => reject(error);
   });
 
@@ -36,6 +35,7 @@ export class AddProductModalComponent implements OnInit {
 
   addForm: FormGroup;
   isEdit?: boolean;
+  isSubmitting: boolean = false;
   productOptions: ProductOptions[] = [];
   productOptionId: number = 0;
   currentOptionValueText = '';
@@ -48,17 +48,20 @@ export class AddProductModalComponent implements OnInit {
   selectedProductTypeId: number;
   isProductTypeLoading = false;
 
-  fileList: NzUploadFile[] = [
-  ];
+  skuPhotoList: NzUploadFile[] = [];
+  photoList: NzUploadFile[] = [];
+  mainPhoto: NzUploadFile[] = [];
   previewImage: string | undefined = '';
   previewVisible = false;
+
+  productImages: Photo[] = [];
 
   constructor(
     private modal: NzModalRef,
     private productService: ProductService,
     private toastrService: ToastrService,
     private convertVieService: ConvertVieService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (this.isEdit == null) this.isEdit = false;
@@ -74,11 +77,37 @@ export class AddProductModalComponent implements OnInit {
         productSKU: '',
         productTypeId: null,
         productSkus: [],
-        imageUrl: ''
+        imageUrl: '',
+        photos: []
       };
     } else {
       this.isEdit = true;
       this.selectedProductTypeId = this.product.productTypeId;
+
+      this.photoList = this.product.photos.filter(p => p.isMain == false).map(p => {
+        return {
+          uid: p.id.toString(),
+          name: p.publicId,
+          status: 'done',
+          url: p.url,
+          response: p
+        } as NzUploadFile
+      });
+
+      this.mainPhoto = this.product.photos.filter(p => p.isMain == true).map(p => {
+        return {
+          uid: p.id.toString(),
+          name: p.publicId,
+          status: 'done',
+          url: p.url,
+          response: {
+            id: p.id,
+            isMain: true,
+            publicId: p.publicId,
+            url: p.url
+          }
+        } as NzUploadFile
+      })
 
       this.product.productOptions.forEach((option) => {
         const productOption = {
@@ -313,9 +342,11 @@ export class AddProductModalComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isSubmitting = true;
+    this.groupProductImages();
     this.bindDataToProductObject();
 
-    if(this.addForm.valid) {
+    if (this.addForm.valid) {
       if (!this.isEdit) {
         this.productService.addProduct(this.product).subscribe({
           next: () => {
@@ -324,6 +355,7 @@ export class AddProductModalComponent implements OnInit {
           },
           error: (err) => {
             this.toastrService.error(err);
+            this.isSubmitting = false;
           },
         });
       } else {
@@ -333,8 +365,8 @@ export class AddProductModalComponent implements OnInit {
             this.destroyModal();
           },
           error: (err) => {
-            console.log(err);
             this.toastrService.error(err);
+            this.isSubmitting = false;
           },
         });
       }
@@ -348,6 +380,7 @@ export class AddProductModalComponent implements OnInit {
     this.product.productSKU = this.addForm.value.productSKU;
     this.product.productTypeId = this.addForm.value.productTypeId;
     this.product.productSkus = this.productSKUs;
+    this.product.photos = this.productImages;
   }
 
   onCreateVariants() {
@@ -368,5 +401,35 @@ export class AddProductModalComponent implements OnInit {
       event.previousIndex,
       event.currentIndex
     );
+  }
+
+  handleUploadProductChange(info: { file: NzUploadFile }, isMainPhoto: boolean): void {
+    if (info.file.status === 'done') {
+      console.log(info)
+    }
+  }
+
+  groupProductImages() {
+    this.productImages = this.photoList.map(
+      file => {
+        if(file.response) {
+          return {
+            ...file.response,
+            isMain: false
+          } as Photo;
+        } else {
+
+        }
+
+        return undefined;
+      }
+    ).filter(photo => photo != undefined) as Photo[];
+
+    const mainImage = {
+      ...this.mainPhoto[0].response,
+      isMain: true
+    } as Photo;
+
+    this.productImages.push(mainImage);
   }
 }

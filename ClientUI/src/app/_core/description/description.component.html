@@ -1,0 +1,24 @@
+<nz-collapse nzExpandIconPosition="right">
+    <nz-collapse-panel nzHeader="Mô tả" nzActive="true" nzShowArrow="false" [nzExtra]="extraTpl" class="pe-0">
+        <p style="margin: 0;">
+            {{ description }}
+        </p>
+    </nz-collapse-panel>
+
+    <nz-collapse-panel nzHeader="Chính sách giao hàng" nzActive="false" nzShowArrow="false"[nzExtra]="extraTpl">
+        <p style="margin: 0;">
+            Đang cập nhật ...
+        </p>
+    </nz-collapse-panel>
+
+    <nz-collapse-panel nzHeader="Chính sách đổi hàng" nzActive="false" nzShowArrow="false"[nzExtra]="extraTpl">
+        <p style="margin: 0;">
+            Đang cập nhật ...
+        </p>
+    </nz-collapse-panel>
+</nz-collapse>
+
+<ng-template #extraTpl>
+    <!-- You can use stopPropagation if you don't want the panel to toggle -->
+    <span nz-icon nzType="plus" (click)="$event.stopPropagation()"></span>
+</ng-template>

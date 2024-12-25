@@ -30,7 +30,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("INTEGER");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
@@ -106,13 +108,13 @@ namespace Infrastructure.Migrations
                     b.Property<int>("CustomerCareStaffId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("CustomerId")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("DistrictId")
+                    b.Property<int>("DistrictId")
                         .HasColumnType("INTEGER");
 
                     b.Property<double>("ExtraFee")
@@ -127,10 +129,10 @@ namespace Infrastructure.Migrations
                     b.Property<string>("OrderNote")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("OrderStatusId")
+                    b.Property<int>("OrderStatusId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ProvinceId")
+                    b.Property<int>("ProvinceId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ReceiverName")
@@ -145,7 +147,7 @@ namespace Infrastructure.Migrations
                     b.Property<double>("Total")
                         .HasColumnType("REAL");
 
-                    b.Property<int?>("WardId")
+                    b.Property<int>("WardId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -239,6 +241,9 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("OptionValueCombination")
+                        .HasColumnType("TEXT");
+
                     b.Property<int?>("OrderId")
                         .HasColumnType("INTEGER");
 
@@ -264,6 +269,9 @@ namespace Infrastructure.Migrations
                     b.Property<bool>("IsMain")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("ProductId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int?>("ProductSKUsId")
                         .HasColumnType("INTEGER");
 
@@ -274,6 +282,8 @@ namespace Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
 
                     b.HasIndex("ProductSKUsId");
 
@@ -309,6 +319,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<int>("ProductTypeId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Slug")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -658,23 +671,33 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Core.Entities.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerId");
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Core.Entities.District", "District")
                         .WithMany()
-                        .HasForeignKey("DistrictId");
+                        .HasForeignKey("DistrictId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Core.Entities.OrderAggregate.OfflineOrderStatus", "OrderStatus")
                         .WithMany()
-                        .HasForeignKey("OrderStatusId");
+                        .HasForeignKey("OrderStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Core.Entities.Province", "Province")
                         .WithMany()
-                        .HasForeignKey("ProvinceId");
+                        .HasForeignKey("ProvinceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Core.Entities.Ward", "Ward")
                         .WithMany()
-                        .HasForeignKey("WardId");
+                        .HasForeignKey("WardId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Customer");
 
@@ -777,9 +800,17 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Core.Entities.Photo", b =>
                 {
+                    b.HasOne("Core.Entities.Product", "Product")
+                        .WithMany("Photos")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Core.ProductSKUs", null)
                         .WithMany("Photos")
                         .HasForeignKey("ProductSKUsId");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Core.Entities.Product", b =>
@@ -863,6 +894,8 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Core.Entities.Product", b =>
                 {
+                    b.Navigation("Photos");
+
                     b.Navigation("ProductOptions");
 
                     b.Navigation("ProductSKUs");

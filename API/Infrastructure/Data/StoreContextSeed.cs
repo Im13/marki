@@ -1,6 +1,7 @@
 using System.Text.Json;
 using Core.Entities;
 using Core.Entities.OrderAggregate;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data
 {
@@ -29,25 +30,46 @@ namespace Infrastructure.Data
                 context.DeliveryMethods.AddRange(methods);
             }
 
-            if(!context.Provinces.Any())
+            if (!context.Provinces.Any())
             {
                 var provinceData = File.ReadAllText("../Infrastructure/Data/SeedData/province.json");
-                var provinces = JsonSerializer.Deserialize<List<Province>>(provinceData);;
+                var provinces = JsonSerializer.Deserialize<List<Province>>(provinceData); ;
                 context.Provinces.AddRange(provinces);
             }
 
-            if(!context.Districts.Any())
+            if (!context.Districts.Any())
             {
                 var districtData = File.ReadAllText("../Infrastructure/Data/SeedData/district.json");
-                var districts = JsonSerializer.Deserialize<List<District>>(districtData);;
+                var districts = JsonSerializer.Deserialize<List<District>>(districtData); ;
                 context.Districts.AddRange(districts);
             }
 
-            if(!context.Wards.Any())
+            if (!context.Wards.Any())
             {
                 var wardData = File.ReadAllText("../Infrastructure/Data/SeedData/ward.json");
-                var wards = JsonSerializer.Deserialize<List<Ward>>(wardData);;
+                var wards = JsonSerializer.Deserialize<List<Ward>>(wardData); ;
                 context.Wards.AddRange(wards);
+            }
+
+            if(!context.Customers.Any())
+            {
+                var customersData = File.ReadAllText("../Infrastructure/Data/SeedData/customers.json");
+                var customers = JsonSerializer.Deserialize<List<Customer>>(customersData);;
+                context.Customers.AddRange(customers);
+            }
+
+            if (!context.OrderStatus.Any())
+            {
+                var orderStatusData = File.ReadAllText("../Infrastructure/Data/SeedData/orderStatuses.json");
+                var statuses = JsonSerializer.Deserialize<List<OfflineOrderStatus>>(orderStatusData); ;
+                context.OrderStatus.AddRange(statuses);
+            }
+
+            if(!context.OfflineOrders.Any())
+            {
+                var offlineOrdersData = File.ReadAllText("../Infrastructure/Data/SeedData/orders.json");
+                var offlineOrders = JsonSerializer.Deserialize<List<OfflineOrder>>(offlineOrdersData);
+                context.OfflineOrders.AddRange(offlineOrders);
             }
 
             if (context.ChangeTracker.HasChanges()) await context.SaveChangesAsync();

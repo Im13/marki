@@ -1,3 +1,5 @@
+using API.DTOs.Product;
+
 namespace API.DTOs
 {
     public class ProductSKUValuesDTO
@@ -6,5 +8,6 @@ namespace API.DTOs
         public string OptionName { get; set; }
         public string OptionValue { get; set; }
         public int ValueTempId { get; set; }
+        public ProductOptionValueDTO ProductOptionValue { get; set; }
     }
 }

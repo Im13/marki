@@ -12,15 +12,18 @@ namespace Infrastructure.Services
     {
         private readonly IBasketRepository _basketRepo;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IProductRepository _productRepo;
         private StoreContext _context;
         public OrderService(
             IUnitOfWork unitOfWork,
             IBasketRepository basketRepo,
+            IProductRepository productRepo,
             StoreContext context)
         {
             _unitOfWork = unitOfWork;
             _basketRepo = basketRepo;
             _context = context;
+            _productRepo = productRepo;
         }
 
         public async Task<Order> CreateOrderAsync(string buyerEmail, int deliveryMethodId, string basketId, Address shippingAddress)
@@ -33,11 +36,11 @@ namespace Infrastructure.Services
 
             foreach (var item in basket.Items)
             {
-                var productItem = await _unitOfWork.Repository<Product>().GetByIdAsync(item.Id);
+                var productItem = await _productRepo.GetProductByIdAsync(item.ProductId);
 
                 //Need fix with sku price
                 var itemOrdered = new ProductIemOrdered(productItem.Id, productItem.Name, productItem.ProductSKUs.First().ImageUrl);
-                var orderItem = new OrderItem(itemOrdered, productItem.ProductSKUs.First().Price, item.Quantity);
+                var orderItem = new OrderItem(itemOrdered, productItem.ProductSKUs.First().Price, item.Quantity, item.OptionValueCombination);
                 items.Add(orderItem);
             }
 
@@ -109,7 +112,7 @@ namespace Infrastructure.Services
             order.DateCreated = order.DateCreated.ToLocalTime();
             
             //Define orderStatus 
-            var status = await _unitOfWork.Repository<OfflineOrderStatus>().GetByIdAsync(0);
+            var status = await _unitOfWork.Repository<OfflineOrderStatus>().GetByIdAsync(1);
             order.OrderStatus = status;
 
             _unitOfWork.Repository<OfflineOrder>().Add(order);

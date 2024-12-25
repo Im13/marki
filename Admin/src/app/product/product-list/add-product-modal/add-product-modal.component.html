@@ -40,7 +40,7 @@
         <div class="supplier p-2 border rounded">
           <div class="mb-3">
             <label for="productType" class="form-label m-0 mb-1">Danh mục <span class="help-block">*</span></label>
-            
+
             <nz-select nzPlaceHolder="Chọn danh mục" nzAllowClear nzShowSearch nzServerSearch
               formControlName="productTypeId">
               <ng-container *ngFor="let type of productTypes">
@@ -96,6 +96,35 @@
               </tr>
             </tbody>
           </nz-table>
+        </div>
+
+        <div class="clearfix border mt-3 p-2">
+          <p class="mb-1">Ảnh bìa:</p>
+          <nz-upload nzAction="https://localhost:5001/api/products/add-photo" nzListType="picture-card"
+            [(nzFileList)]="mainPhoto" [nzShowButton]="mainPhoto.length < 1" [nzPreview]="handlePreview"
+            (nzChange)="handleUploadProductChange($event, true)">
+            <div>
+              <span nz-icon nzType="picture"></span>
+              <div style="margin-top: 8px">Thêm hình ảnh</div>
+            </div>
+          </nz-upload>
+
+          <p class="mb-1">Ảnh sản phẩm (Tối đa 8 ảnh):</p>
+          <nz-upload nzAction="https://localhost:5001/api/products/add-photo" nzListType="picture-card"
+            [(nzFileList)]="photoList" [nzShowButton]="photoList.length < 8" [nzPreview]="handlePreview"
+            (nzChange)="handleUploadProductChange($event, false)">
+            <div>
+              <span nz-icon nzType="picture"></span>
+              <div style="margin-top: 8px">Thêm hình ảnh</div>
+            </div>
+          </nz-upload>
+
+          <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null"
+            (nzOnCancel)="previewVisible = false">
+            <ng-template #modalContent>
+              <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+            </ng-template>
+          </nz-modal>
         </div>
       </div>
 
@@ -156,8 +185,8 @@
                       [src]="sku.photos[0].url" />
 
                     <ng-template #uploadImageTemplate class="clearfix">
-                      <nz-upload nzListType="picture-card" [(nzFileList)]="fileList"
-                        [nzShowButton]="fileList.length < 1" [nzPreview]="handlePreview" [nzFileType]="
+                      <nz-upload nzListType="picture-card" [(nzFileList)]="skuPhotoList"
+                        [nzShowButton]="skuPhotoList.length < 1" [nzPreview]="handlePreview" [nzFileType]="
                           'image/png,image/jpeg,image/gif,image/bmp'
                         " [nzCustomRequest]="handleUpload">
                         <div>
@@ -213,7 +242,7 @@
     </div>
   </div>
   <div *nzModalFooter>
-    <button [disabled]="!addForm.valid" nz-button nzType="primary" type="submit" (click)="onSubmit()">
+    <button [disabled]="!addForm.valid" nz-button nzType="primary" type="submit" (click)="onSubmit()" [nzLoading]="isSubmitting">
       Lưu
     </button>
   </div>

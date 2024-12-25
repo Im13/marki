@@ -1,0 +1,9 @@
+<div class="product-container h-100">
+    <app-product-images [photos]="productPhotos"></app-product-images>
+
+    <app-product-info [product]="product" (selectOptions)="optionSelected($event)" (selectQuantity)="quantitySelected($event)"></app-product-info>
+
+    <app-product-description [description]="productDescription"></app-product-description>
+</div>
+
+<app-products-footer (atcClicked)="addToCart()" class="footer border w-100 d-flex align-items-center"></app-products-footer>

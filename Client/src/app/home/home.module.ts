@@ -8,20 +8,18 @@ import { CategorySectionComponent } from './article/category-section/category-se
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [
-    HomeComponent,
-    ArticleComponent,
-    FooterComponent,
-    CategorySectionComponent
-  ],
-  imports: [
-    CommonModule,
-    SwiperModule,
-    RouterModule
-  ],
-  exports: [
-    HomeComponent,
-    FooterComponent
-  ]
+    imports: [
+        CommonModule,
+        SwiperModule,
+        RouterModule,
+        HomeComponent,
+        ArticleComponent,
+        FooterComponent,
+        CategorySectionComponent
+    ],
+    exports: [
+        HomeComponent,
+        FooterComponent
+    ]
 })
 export class ShopModule { }

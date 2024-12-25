@@ -1,6 +1,7 @@
 using Core;
 using Core.Entities;
 using Core.Interfaces;
+using Core.Specification;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,17 +11,19 @@ namespace Infrastructure.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private StoreContext _context;
-        public ProductService(IUnitOfWork unitOfWork, StoreContext context)
+        private readonly IPhotoService _photoService;
+        public ProductService(IUnitOfWork unitOfWork, StoreContext context, IPhotoService photoService)
         {
             _context = context;
             _unitOfWork = unitOfWork;
+            _photoService = photoService;
         }
 
         public async Task<Product> GetProductAsync(int id)
         {
             var product = await _unitOfWork.Repository<Product>().GetByIdAsync(id);
             _unitOfWork.ClearTracker();
-            
+
             return product;
         }
 
@@ -37,35 +40,55 @@ namespace Infrastructure.Services
         {
             Photo photoToFind = new Photo();
 
-            _unitOfWork.Repository<Product>().Update(product);
-            
-            if(product.ProductSKUs.Count > 0)
+            //Get photos with productId
+            var spec = new PhotosWithProductFilterSpecification(product.Id);
+            var photos = await _unitOfWork.Repository<Photo>().ListAsync(spec);
+
+            var photosToDelete = photos.Except(product.Photos).ToList();
+
+            foreach (var photo in photosToDelete)
             {
-                photoToFind = await _unitOfWork.Repository<Photo>().GetByIdAsync(product.ProductSKUs.First().Photos.First().Id);
+                _unitOfWork.Repository<Photo>().Delete(photo);
 
-                if(photoToFind == null) {
-                    photoToFind = new Photo() 
-                    {
-                        IsMain = product.ProductSKUs.First().Photos.First().IsMain,
-                        PublicId = product.ProductSKUs.First().Photos.First().PublicId,
-                        Url = product.ProductSKUs.First().Photos.First().Url
-                    };
+                //Need delete in Cloudinary
+                var deleteResult = await _photoService.DeletePhotoAsync(photo.PublicId);
 
-                    _unitOfWork.Repository<Photo>().Add(photoToFind);
-                }
-            }
-
-            foreach(var sku in product.ProductSKUs)
-            {
-                foreach(var skuValue in sku.ProductSKUValues)
+                if (deleteResult.Error != null)
                 {
-                    _unitOfWork.Repository<ProductSKUValues>().Update(skuValue);
+                    return null;
                 }
-
-                sku.Photos.Add(photoToFind);
-                
-                _unitOfWork.Repository<ProductSKUs>().Update(sku);
             }
+
+            _unitOfWork.Repository<Product>().Update(product);
+
+            // UPDATE IMAGE FOR SKUS
+            // if(product.ProductSKUs.Count > 0)
+            // {
+            //     photoToFind = await _unitOfWork.Repository<Photo>().GetByIdAsync(product.ProductSKUs.First().Photos.First().Id);
+
+            //     if(photoToFind == null) {
+            //         photoToFind = new Photo() 
+            //         {
+            //             IsMain = product.ProductSKUs.First().Photos.First().IsMain,
+            //             PublicId = product.ProductSKUs.First().Photos.First().PublicId,
+            //             Url = product.ProductSKUs.First().Photos.First().Url
+            //         };
+
+            //         _unitOfWork.Repository<Photo>().Add(photoToFind);
+            //     }
+            // }
+
+            // foreach(var sku in product.ProductSKUs)
+            // {
+            //     foreach(var skuValue in sku.ProductSKUValues)
+            //     {
+            //         _unitOfWork.Repository<ProductSKUValues>().Update(skuValue);
+            //     }
+
+            //     sku.Photos.Add(photoToFind);
+
+            //     _unitOfWork.Repository<ProductSKUs>().Update(sku);
+            // }
 
             var result = await _unitOfWork.Complete();
 
@@ -112,19 +135,19 @@ namespace Infrastructure.Services
 
         public async Task<bool> DeleteProducts(List<Product> products)
         {
-            if(products.Count == 0) return false;
+            if (products.Count == 0) return false;
 
-            foreach(var product in products)
+            foreach (var product in products)
             {
-                if(product.Id == 0) return false;
-                
+                if (product.Id == 0) return false;
+
                 product.IsDeleted = true;
                 _unitOfWork.Repository<Product>().Update(product);
             }
 
             var result = await _unitOfWork.Complete();
 
-            if(result <= 0) return false;
+            if (result <= 0) return false;
 
             return true;
         }
@@ -138,9 +161,21 @@ namespace Infrastructure.Services
                 .ThenInclude(pov => pov.ProductOption)
                 .SingleOrDefaultAsync(p => p.Id == skuId);
 
-            if(productSku == null || productSku.Product == null || productSku.Product.IsDeleted == true) return null;
+            if (productSku == null || productSku.Product == null || productSku.Product.IsDeleted == true) return null;
 
             return productSku;
+        }
+
+        public async Task<Product> GetBySlug(string slug)
+        {
+            return await _context.Products
+                .Include(p => p.Photos)
+                .Include(p => p.ProductSKUs)
+                .ThenInclude(p => p.ProductSKUValues)
+                .ThenInclude(p => p.ProductOptionValue)
+                .Include(p => p.ProductOptions)
+                .ThenInclude(o => o.ProductOptionValues)
+                .FirstOrDefaultAsync(p => p.Slug == slug);
         }
     }
 }

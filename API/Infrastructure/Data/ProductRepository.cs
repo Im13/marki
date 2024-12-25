@@ -16,7 +16,7 @@ namespace Infrastructure.Data
 
         public async Task<Product> GetProductByIdAsync(int id)
         {
-            return await _context.Products.Include(p => p.ProductType).FirstOrDefaultAsync(p => p.Id == id);
+            return await _context.Products.Include(p => p.ProductSKUs).FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task<IReadOnlyList<Product>> GetProductsAsync()
@@ -38,6 +38,16 @@ namespace Infrastructure.Data
                 .ThenInclude(pov => pov.ProductOption)
                 .Include(p => p.ProductSKUs).ThenInclude(ps => ps.Photos)
                 .Include(p => p.ProductOptions).ThenInclude(po => po.ProductOptionValues)
+                .Include(p => p.Photos)
+                .ToListAsync();
+
+            return products;
+        }
+
+        public async Task<List<Product>> GetProductForClientWithSpec(ISpecification<Product> spec)
+        {
+            var products = await SpecificationEvaluator<Product>.GetQuery(_context.Set<Product>().AsQueryable(), spec)
+                .Include(p => p.Photos)
                 .ToListAsync();
 
             return products;

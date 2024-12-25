@@ -1,30 +1,37 @@
 using API.DTOs;
+using API.DTOs.Product;
 using API.Errors;
 using API.Helpers;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specification;
-using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     public class ProductsController : BaseApiController
     {
-        private readonly IGenericRepository<Product> _productRepo;
+        private readonly IGenericRepository<Product> _genericProductRepo;
         private readonly IGenericRepository<ProductType> _productTypeRepo;
         private readonly IMapper _mapper;
         private readonly IProductService _productService;
-        public ProductsController(IGenericRepository<Product> productRepo,
+        private readonly IPhotoService _photoService;
+        private readonly IProductRepository _productRepo;
+
+        public ProductsController(IGenericRepository<Product> genericProductRepo,
         IGenericRepository<ProductType> productTypeRepo,
         IMapper mapper,
-        IProductService productService)
+        IProductService productService,
+        IProductRepository productRepo,
+        IPhotoService photoService)
         {
             _productTypeRepo = productTypeRepo;
             _mapper = mapper;
-            _productRepo = productRepo;
+            _genericProductRepo = genericProductRepo;
             _productService = productService;
+            _photoService = photoService;
+            _productRepo = productRepo;
         }
 
         [HttpGet("{id}")]
@@ -34,7 +41,7 @@ namespace API.Controllers
         {
             var spec = new ProductsWithTypesSpecification(id);
 
-            var product = await _productRepo.GetEntityWithSpec(spec);
+            var product = await _genericProductRepo.GetEntityWithSpec(spec);
 
             if(product == null) return NotFound(new ApiResponse(404));
 
@@ -46,6 +53,54 @@ namespace API.Controllers
         {
             var types = await _productTypeRepo.ListAllAsync();
             return Ok(types);
+        }
+
+        [HttpPost("add-photo")]
+        public async Task<ActionResult<PhotoDTO>> AddPhoto(IFormFile file)
+        {
+            if(file == null) return BadRequest("No file detected!");
+            var result = await _photoService.AddPhotoAsync(file);
+
+            if (result.Error != null)
+            {
+                return BadRequest(result.Error.Message);
+            }
+
+            var photo = new Photo
+            {
+                Url = result.SecureUrl.AbsoluteUri,
+                PublicId = result.PublicId
+            };
+
+            return _mapper.Map<Photo,PhotoDTO>(photo);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<ProductDTOs>> GetProducts([FromQuery]ProductSpecParams productParams)
+        {
+            var spec = new ProductsWithTypesSpecification(productParams);
+
+            var countSpec = new ProductWithFiltersForCountSpecification(productParams);
+
+            var totalItems = await _genericProductRepo.CountAsync(countSpec);
+
+            var products = await _productRepo.GetProductForClientWithSpec(spec);
+
+            var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductForClientDTO>>(products);
+
+            return Ok(new Pagination<ProductForClientDTO>(productParams.PageIndex, productParams.PageSize, totalItems, data));
+        }
+
+        [HttpGet("slug/{slug}")]
+        public async Task<ActionResult<ProductDTOs>> GetBySlug(string slug)
+        {
+            if(string.IsNullOrEmpty(slug)) return BadRequest();
+
+            var product = await _productService.GetBySlug(slug);
+
+            if(product == null) return NotFound("Cannot find product");
+
+            return Ok(_mapper.Map<Product,ProductForClientDTO>(product));
         }
     }
 }

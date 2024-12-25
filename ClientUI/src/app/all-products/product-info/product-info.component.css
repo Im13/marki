@@ -1,0 +1,4 @@
+:host ::ng-deep button.selected {
+  border: 1px black solid;
+  color: black;
+}

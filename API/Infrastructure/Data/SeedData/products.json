@@ -7,7 +7,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-chan-vay-kaki-cap-chun-sau-co-gian-kem-belt-cv365"
     },
     {
         "Name": "QUẦN ỐNG SUÔNG NỮ DẬP LY THUN LỤA MÁT Q381",
@@ -17,7 +18,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "quan-ong-suong-nu-dap-ly-thun-lua-mat-q381"
     },
     {
         "Name": "(VIDEO) CHÂN VÁY XẾP LY MẶT TRƯỚC KÈM BELT CV352",
@@ -27,7 +29,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "chan-vay-xep-ly-mat-truoc-kem-belt-cv352"
     },
     {
         "Name": "ÁO SƠ MI CỘC TAY PHỐI TÚI BASIC THÔ LỤA HÀN A358",
@@ -37,7 +40,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "ao-so-mi-coc-tay-phoi-tui-basic-tho-lua-han-a358"
     },
     {
         "Name": "ÁO SƠ MI THÔ BOIL THÊU REN SM341",
@@ -47,7 +51,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "ao-so-mi-tho-boil-theu-ren-sm341"
     },
     {
         "Name": "MARKI/ CHÂN VÁY XẾP LY GIỮA DÁNG A DÀI KÈM BELT CV385",
@@ -57,7 +62,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "chan-vay-xep-ly-giua-dang-a-dai-kem-belt-cv385"
     },
     {
         "Name": "ÁO THUN TĂM NỮ BASIC DÁNG ÔM 7 MÀU A333",
@@ -67,7 +73,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "ao-thun-tam-nu-basic-dang-om-7-mau-a333"
     },
     {
         "Name": "MARKI / ÁO LEN MỊN CỔ POLO CỘC TAY",
@@ -77,7 +84,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "ao-len-min-co-polo-coc-tay"
     },
     {
         "Name": "QUẦN CULOTTES ỐNG SUÔNG DÁNG LỬNG KÈM BELT Q353",
@@ -87,7 +95,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "quan-culottes-ong-suong-dang-lung-kem-belt-q353"
     },
     {
         "Name": "MARKI / CHÂN VÁY THÔ CẠP CHUN SAU CO GIÃN CV348",
@@ -97,7 +106,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-chan-vay-tho-cap-chun-sau-co-gian-cv348"
     },
     {
         "Name": "MARKI / CHÂN VÁY JEANS MỀM DÁNG A CV351",
@@ -107,7 +117,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-chan-vay-jeans-mem-dang-a-cv351"
     },
     {
         "Name": "CHÂN VÁY MIDI DÁNG A CẠP CHUN SAU CO GIÃN CV354",
@@ -117,7 +128,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "chan-vay-midi-dang-a-cap-chun-sau-co-gian-cv354"
     },
     {
         "Name": "ÁO SƠ MI LỤA PHỐI NẮP TÚI DÀI TAY A396",
@@ -127,7 +139,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "ao-so-mi-lua-phoi-nap-tui-dai-tay-a396"
     },
     {
         "Name": "ÁO GILE VEST CỔ V A394",
@@ -137,7 +150,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "ao-gile-vest-co-v-a394"
     },
     {
         "Name": "ÁO GILE VEST CỔ TRÒN A393",
@@ -147,7 +161,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "ao-gile-vest-co-tron-a393"
     },
     {
         "Name": "CHÂN VÁY XẾP LY ĐỐI XỨNG MẶT TRƯỚC CV392",
@@ -157,7 +172,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "chan-vay-xep-ly-doi-xung-mat-truoc-cv392"
     },
     {
         "Name": "CHÂN VÁY XẾP LY ĐÔI DÁNG A DÀI KÈM BELT CV391",
@@ -167,7 +183,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "chan-vay-xep-ly-doi-dang-a-dai-kem-belt-cv391"
     },
     {
         "Name": "ÁO POLO KẺ NGANG CỘC TAY CỘC TAY A390",
@@ -177,7 +194,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "ao-polo-ke-ngang-coc-tay-a390"
     },
     {
         "Name": "ÁO PHÔNG BASIC IN CHỮ STRONGER LEMON A389",
@@ -187,7 +205,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "ao-phong-basic-in-chu-stronger-lemon-a389"
     },
     {
         "Name": "ÁO PHÔNG BASIC IN CHỮ GRATEFUL A388",
@@ -197,7 +216,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "ao-phong-basic-in-chu-grateful-a388"
     },
     {
         "Name": "ÁO POLO CỘC TAY PHỐI VIỀN A395",
@@ -207,7 +227,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "ao-polo-coc-tay-phoi-vien-a395"
     },
     {
         "Name": "MARKI/ ÁO POLO BASIC KHOÁ KÉO CỘC TAY A397",
@@ -217,7 +238,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-ao-polo-basic-khoa-keo-coc-tay-a397"
     },
     {
         "Name": "MARKI / QUẦN CULOTTES ỐNG RỘNG DÁNG DÀI KÈM BELT Q398",
@@ -227,7 +249,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-quan-culottes-ong-rong-dang-dai-kem-belt-q398"
     },
     {
         "Name": "MARKI/ ÁO POLO TAY HẾN BASIC A399",
@@ -237,7 +260,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-ao-polo-tay-hen-basic-a399"
     },
     {
         "Name": "MARKI/ ÁO SƠ MI TƠ PHỐI CỔ REN THÊU HOA SM400",
@@ -247,7 +271,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-ao-so-mi-to-phoi-co-ren-theu-hoa-sm400"
     },
     {
         "Name": "MARKI / ÁO SƠ MI OVERSIZE DÀI TAY SM401",
@@ -257,7 +282,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-ao-so-mi-oversize-dai-tay-sm401"
     },
     {
         "Name": "MARKI/ QUẦN CULOTTES DÁNG DÀI ỐNG RỘNG KÈM BELT Q402",
@@ -267,7 +293,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-quan-culottes-dang-dai-ong-rong-kem-belt-q402"
     },
     {
         "Name": "MARKI/ QUẦN CULOTTES DÁNG DÀI ỐNG SUÔNG RỘNG KÈM BELT Q403",
@@ -277,7 +304,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-quan-culottes-dang-dai-ong-suong-kem-belt-q403"
     },
     {
         "Name": "MARKI/ QUẦN CULOTTES DÁNG DÀI ỐNG SUÔNG KÈM BELT Q404",
@@ -287,7 +315,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-quan-culottes-dang-dai-ong-suong-kem-belt-q404"
     },
     {
         "Name": "MARKI/ ÁO SƠ MI OVERSIZED KẺ SỌC XANH TRẮNG DÀI TAY SM405",
@@ -297,7 +326,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-ao-so-mi-oversized-ke-soc-xanh-trang-sm405"
     },
     {
         "Name": "MARKI/ ÁO SƠ MI THÔ MỀM PHỐI TÚI CỘC TAY SM406",
@@ -307,7 +337,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-ao-so-mi-tho-mem-phoi-tui-coc-tay-sm406"
     },
     {
         "Name": "MARKI/ SƠ MI TƠ CỔ TRÒN PHỐI REN SM408",
@@ -317,7 +348,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-so-mi-to-co-tron-phoi-ren-sm408"
     },
     {
         "Name": "MARKI/ ÁO SÁT NÁCH CỔ TRÒN XẾP LY A409",
@@ -327,7 +359,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-ao-sat-nach-co-tron-xep-ly-a409"
     },
     {
         "Name": "MARKI/ ÁO QUÂY 2 DÂY CHUN NGỰC A410",
@@ -337,7 +370,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-ao-quay-2-day-chun-nguc-a410"
     },
     {
         "Name": "MARKI/ ÁO SƠ MI TƠ CỔ SEN TAY BỒNG SM411",
@@ -347,7 +381,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-ao-so-mi-to-co-sen-tay-bong-sm411"
     },
     {
         "Name": "MARKI/ CHÂN VÁY DENIM XẾP LY MẶT TRƯỚC DÁNG A DÀI CV412",
@@ -357,7 +392,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-chan-vay-denim-xep-ly-mat-truoc-dang-a-dai-cv412"
     },
     {
         "Name": "MARKI/ CHÂN VÁY DENIM DÁNG A CẠP CHUN SAU CO GIÃN CV414",
@@ -367,7 +403,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-chan-vay-denim-dang-a-cap-chun-sau-co-gian-cv414"
     },
     {
         "Name": "MARKI/ ÁO THUN TĂM KẺ NGANG CỔ POLO DÁNG LỬNG A415",
@@ -377,7 +414,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-ao-thun-tam-ke-ngang-co-polo-dang-lung-a415"
     },
     {
         "Name": "MARKI / ÁO POLO THUN TĂM KẺ NGANG A416",
@@ -387,7 +425,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-ao-polo-thun-tam-ke-ngang-a416"
     },
     {
         "Name": "MARKI/ ÁO THUN TRỄ VAI NHÚN EO CỘC TAY A417",
@@ -397,7 +436,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-ao-thun-tre-vai-nhun-eo-coc-tay-a417"
     },
     {
         "Name": "MARKI/ CHÂN VÁY THÔ GIÓ CẠP CHUN CO GIÃN CV418",
@@ -407,7 +447,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-chan-vay-tho-gio-cap-chun-co-gian-cv418"
     },
     {
         "Name": "MARKI/ ÁO LEN MONGTOGHI CỔ POLO KẺ SỌC NGANG A419",
@@ -417,7 +458,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-ao-len-mongtoghi-co-polo-ke-ngang-a419"
     },
     {
         "Name": "MARKI / ÁO LEN MONGTOGHI CỔ POLO KẺ NGANG CỘC TAY A420",
@@ -427,7 +469,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-ao-len-mongtoghi-co-polo-ke-ngang-coc-tay-a420"
     },
     {
         "Name": "MARKI / ÁO POLO CỘC TAY PHỐI VIỀN KẺ ĐÔI A421",
@@ -437,7 +480,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-ao-polo-coc-tay-phoi-vien-ke-doi-a421"
     },
     {
         "Name": "MARKI / ÁO 2 DÂY THUN LẠNH DÁNG NGẮN A422",
@@ -447,7 +491,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-ao-2-day-thun-lanh-dang-ngan-a422"
     },
     {
         "Name": "MARKI/ ÁO SƠ MI TƠ PHỐI TÚI BASIC A423",
@@ -457,7 +502,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-ao-so-mi-to-phoi-tui-basic-a423"
     },
     {
         "Name": "MARKI/ ÁO BLAZER CỔ TRÒN CÚC NGỌC CỘC TAY A424",
@@ -467,7 +513,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-ao-blazer-co-tron-cuc-ngoc-coc-tay-a424"
     },
     {
         "Name": "MARKI / CHÂN VÁY THÔ CẠP CHUN SAU (KÈM BELT) CV425",
@@ -477,7 +524,8 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-chan-vay-tho-cap-chun-sau-kem-belt-cv425"
     },
     {
         "Name": "MARKI/ ÁO THUN XẾP NẾP CỔ 3P CỘC TAY A426",
@@ -487,6 +535,7 @@
         "ProductTypeId": 1,
         "IsDeleted": false,
         "ProductOptions": [],
-        "ProductSKUs": []
+        "ProductSKUs": [],
+        "Slug": "marki-ao-thun-xep-nep-co-3p-coc-tay-a426"
     }
 ]
