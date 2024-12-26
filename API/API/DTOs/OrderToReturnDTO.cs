@@ -13,7 +13,7 @@ namespace API.DTOs
         public decimal ShippingPrice { get; set; }
         public IReadOnlyList<OrderItemDTO> OrderItems { get; set; }
         public decimal Subtotal { get; set; }
-        public decimal Total { get; set; }
+        // public decimal Total { get; set; }
         public string Status { get; set; }
     }
 }

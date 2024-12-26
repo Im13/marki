@@ -32,5 +32,13 @@ namespace Infrastructure.Data
 
             return orders;
         }
+
+        public async Task<List<Order>> GetWebsiteOrdersWithSpec(ISpecification<Order> spec)
+        {
+            var orders = await SpecificationEvaluator<Order>.GetQuery(_context.Set<Order>().AsQueryable(), spec)
+                .ToListAsync();
+
+            return orders;
+        }
     }
 }

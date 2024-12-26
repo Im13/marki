@@ -175,6 +175,16 @@ export class OrderService {
     return this.http.get<Pagination<Order[]>>(this.baseApiUrl + 'order', { params });
   }
 
+  getWebsiteOrders(productParams: OrderParams) {
+    let params = new HttpParams();
+
+    params = params.append('search', productParams.search);
+    params = params.append('pageSize', productParams.pageSize);
+    params = params.append('pageIndex', productParams.pageIndex);
+
+    return this.http.get<Pagination<Order[]>>(this.baseApiUrl + 'orders/all-orders', { params });
+  }
+
   getProvinces() {
     return this.http.get<Province[]>(this.baseApiUrl + 'address/provinces');
   }

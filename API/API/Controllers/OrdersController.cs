@@ -2,9 +2,11 @@ using System.Security.Claims;
 using API.DTOs;
 using API.Errors;
 using API.Extensions;
+using API.Helpers;
 using AutoMapper;
 using Core.Entities.OrderAggregate;
 using Core.Interfaces;
+using Core.Specification.OfflineOrderSpec;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,11 +15,15 @@ namespace API.Controllers
     public class OrdersController : BaseApiController
     {
         private readonly IOrderService _orderService;
+        private readonly IOrderRepository _orderRepository;
         private readonly IMapper _mapper;
-        public OrdersController(IOrderService orderService, IMapper mapper)
+        private readonly IGenericRepository<Order> _orderRepo;
+        public OrdersController(IOrderService orderService, IMapper mapper, IGenericRepository<Order> orderRepo, IOrderRepository orderRepository)
         {
             _mapper = mapper;
             _orderService = orderService;
+            _orderRepo = orderRepo;
+            _orderRepository = orderRepository;
         }
 
         [HttpPost]
@@ -61,6 +67,24 @@ namespace API.Controllers
         public async Task<ActionResult<IReadOnlyList<DeliveryMethod>>> GetDeliveryMethods()
         {
             return Ok(await _orderService.GetDeliveryMethodsAsync());
+        }
+
+        // [Authorize]
+        [HttpGet("all-orders")]
+        public async Task<ActionResult<Pagination<OrderToReturnDTO>>> GetOrders([FromQuery] OrderSpecParams orderParams)
+        {
+            var spec = new WebsiteOrderSpecification(orderParams);
+
+            var countSpec = new WebsiteOrdersWithFiltersForCountSpecification(orderParams);
+
+            var totalItems = await _orderRepo.CountAsync(countSpec);
+
+            var orders = await _orderRepository.GetWebsiteOrdersWithSpec(spec);
+
+            var data = _mapper.Map<IReadOnlyList<Order>, IReadOnlyList<OrderToReturnDTO>>(orders);
+
+            return Ok(new Pagination<OrderToReturnDTO>(orderParams.PageIndex, orderParams.PageSize, totalItems, data));
+
         }
     }
 }
