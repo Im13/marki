@@ -17,6 +17,7 @@ import { District } from '../shared/_models/address/district';
 import { Ward } from '../shared/_models/address/ward';
 import { UpdateStatusDTO } from '../shared/_models/order/updateStatusDTO';
 import { OrderWithStatusParams } from '../shared/_models/order/orderWithStatusParams';
+import { WebsiteOrder } from '../shared/_models/website-order';
 
 @Injectable({
   providedIn: 'root'
@@ -182,7 +183,7 @@ export class OrderService {
     params = params.append('pageSize', productParams.pageSize);
     params = params.append('pageIndex', productParams.pageIndex);
 
-    return this.http.get<Pagination<Order[]>>(this.baseApiUrl + 'orders/all-orders', { params });
+    return this.http.get<Pagination<WebsiteOrder[]>>(this.baseApiUrl + 'orders/all-orders', { params });
   }
 
   getProvinces() {

@@ -8,8 +8,6 @@
             <th [nzChecked]="checked" [nzIndeterminate]="indeterminate" nzLabel="Select all"
               (nzCheckedChange)="onAllChecked($event)" nzWidth="40px" nzLeft></th>
             <th rowSpan="1" nzWidth="60px" nzLeft>Id</th>
-            <th nzWidth="80px">VC</th>
-            <th nzWidth="140px">Thẻ</th>
             <th nzWidth="120px">Khách hàng</th>
             <th nzWidth="120px">SĐT</th>
             <th nzWidth="300px">Địa chỉ</th>
@@ -23,31 +21,26 @@
             <td [nzChecked]="setOfCheckedId.has(order.id)" (nzCheckedChange)="onItemChecked(order.id, $event)" nzLeft>
             </td>
             <td nzLeft>{{ order.id }}</td>
-            <td>
-              <nz-tag [nzColor]="'#016D75'" nz-tooltip nzTooltipTitle="Click để copy mã vận chuyển">VTP</nz-tag>
-            </td>
-            <td>
-              <!-- <nz-tag [nzColor]="'gold'">Chưa đối soát</nz-tag> -->
-            </td>
-            <td (click)="onEditOrder(order)">{{ order.customer.name }}</td>
-            <td (click)="onEditOrder(order)">{{ order.customer.phoneNumber }}</td>
-            <td (click)="onEditOrder(order)">{{ order.address }}</td>
+            <td (click)="onEditOrder(order)">{{ order.shipToAddress.fullname }}</td>
+            <td (click)="onEditOrder(order)">{{ order.shipToAddress.phoneNumber }}</td>
+            <td (click)="onEditOrder(order)">{{ order.shipToAddress.street }}</td>
             <!-- <td (click)="onEditOrder(order)">{{ order.dateCreated | date:'hh:mm dd/MM/YYYY' }}</td> -->
-            <td (click)="onEditOrder(order)">{{ order.total | thousandSeparator }}</td>
+            <td (click)="onEditOrder(order)">{{ order.subtotal | thousandSeparator }}</td>
             <td nzRight>
-              <div class="order-status-dropdown w-100">
+              <!-- <div class="order-status-dropdown w-100">
                 <nz-select class="w-100" nzAllowClear [(ngModel)]="order.orderStatus.id"
                   (ngModelChange)="changeStatus($event, order.id)">
                   <nz-option *ngFor="let status of orderStatuses" [nzLabel]="status.status"
                     [nzValue]="status.id"></nz-option>
                 </nz-select>
-              </div>
+              </div> -->
+              {{ order.status }}
             </td>
           </tr>
         </tbody>
       </nz-table>
     </nz-content>
-  
+
     <nz-footer class="d-flex align-items-center justify-content-between px-2">
       <div class="order-info">
         <span>COD: <b>1.356.889.221</b></span>
@@ -62,4 +55,3 @@
       </div>
     </nz-footer>
   </nz-layout>
-  

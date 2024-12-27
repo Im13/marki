@@ -4,6 +4,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { Order } from 'src/app/shared/_models/order';
 import { OrderStatus } from 'src/app/shared/_models/orderStatus';
 import { OrderParams } from 'src/app/shared/_models/order/orderParams';
+import { WebsiteOrder } from 'src/app/shared/_models/website-order';
 
 @Component({
   selector: 'app-all-site-orders',
@@ -13,7 +14,7 @@ import { OrderParams } from 'src/app/shared/_models/order/orderParams';
 export class AllSiteOrdersComponent {
   @Input() orderStatus: number;
   orderParams = new OrderParams();
-  orders: readonly Order[] = [];
+  orders: readonly WebsiteOrder[] = [];
   totalItems = 0;
 
   orderStatuses: OrderStatus[] = [
@@ -43,6 +44,11 @@ export class AllSiteOrdersComponent {
     this.orderService.getWebsiteOrders(this.orderParams).subscribe({
       next: response => {
         console.log(response)
+        this.orders = response.data;
+        this.orderParams.pageIndex = response.pageIndex;
+        this.orderParams.pageSize = response.pageSize;
+        this.totalItems = response.count;
+        this.loading = false;
       },
       error: err => {
         console.log(err);
@@ -55,8 +61,8 @@ export class AllSiteOrdersComponent {
 
   }
 
-  onCurrentPageDataChange(listOfCurrentPageData: readonly Order[]): void {
-    this.orders = listOfCurrentPageData;
+  onCurrentPageDataChange(listOfCurrentPageData: readonly WebsiteOrder[]): void {
+    // this.orders = listOfCurrentPageData;
     this.refreshCheckedStatus();
   }
 
@@ -87,7 +93,7 @@ export class AllSiteOrdersComponent {
     this.getOrders();
   }
 
-  onEditOrder(order: Order) {
+  onEditOrder(order: WebsiteOrder) {
 
   }
 

@@ -9,7 +9,23 @@ export interface OrderItem {
     productId: number;
 }
 
+export interface ShipToAddress {
+  cityOrProvinceId: number;
+  districtId: number;
+  fullname: string;
+  phoneNumber: string;
+  street: string;
+  wardId: number;
+}
+
 export interface WebsiteOrder {
     id: number;
-    items: OrderItem[];
+    buyerEmail: string;
+    deliveryMethod: number;
+    orderDate: Date;
+    shippingPrice: number;
+    status: string;
+    subtotal: number;
+    orderItems: OrderItem[];
+    shipToAddress: ShipToAddress;
 }

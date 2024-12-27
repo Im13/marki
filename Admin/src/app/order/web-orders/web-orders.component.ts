@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { AllSiteOrdersComponent } from './all-site-orders/all-site-orders.component';
 
 @Component({
   selector: 'app-web-orders',
@@ -6,6 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./web-orders.component.css']
 })
 export class WebOrdersComponent {
+  @ViewChild(AllSiteOrdersComponent) allSiteOrderComp:AllSiteOrdersComponent;
 
   addOrder(){}
+
+  reloadOrder() {
+    this.allSiteOrderComp.getOrders();
+  }
 }
