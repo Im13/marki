@@ -51,7 +51,7 @@ namespace Infrastructure.Services
             var subTotal = items.Sum(item => item.Price * item.Quantity);
 
             // Create order
-            var order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, subTotal);
+            var order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, subTotal, OrderSources.Website);
 
             _unitOfWork.Repository<Order>().Add(order);
 

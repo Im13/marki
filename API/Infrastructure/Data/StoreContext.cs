@@ -41,6 +41,7 @@ namespace Infrastructure.Data
 
             modelBuilder.Entity<Product>().Property(p => p.IsDeleted).HasDefaultValue(false);
             modelBuilder.Entity<Customer>().Property(c => c.IsDeleted).HasDefaultValue(false);
+            modelBuilder.Entity<Order>().Property(o => o.Source).HasConversion<string>();
 
             if(Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite")
             {
