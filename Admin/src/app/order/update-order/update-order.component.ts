@@ -29,7 +29,6 @@ export class UpdateOrderComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private orderService: OrderService, private toastrService: ToastrService, private modal: NzModalRef){}
 
   ngOnInit(): void {
-    console.log(this.order);
     this.orderStatus = this.order.orderStatus;
 
     this.order.offlineOrderSKUs.forEach(item => {

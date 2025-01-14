@@ -20,6 +20,7 @@ import { AllOrderComponent } from './order-list/all-order/all-order.component';
 import { UpdateOrderComponent } from './update-order/update-order.component';
 import { WebOrdersComponent } from './web-orders/web-orders.component';
 import { AllSiteOrdersComponent } from './web-orders/all-site-orders/all-site-orders.component';
+import { EditOrderModalComponent } from './web-orders/edit-order-modal/edit-order-modal.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { AllSiteOrdersComponent } from './web-orders/all-site-orders/all-site-or
     AllOrderComponent,
     UpdateOrderComponent,
     WebOrdersComponent,
-    AllSiteOrdersComponent
+    AllSiteOrdersComponent,
+    EditOrderModalComponent
   ],
   imports: [
     CommonModule,

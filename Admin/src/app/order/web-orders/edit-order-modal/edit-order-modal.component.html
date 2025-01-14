@@ -1,0 +1,39 @@
+<form [formGroup]="editOrderForm" class="h-100">
+  <div nz-row>
+    <div class="px-2" nz-col nzSpan="15">
+      <div class="product-section bg-white p-3">
+        <!-- <app-product-skus [listSkus]="listSkus" (selectProductSkus)="handleSelectEvent($event)"></app-product-skus> -->
+      </div>
+
+      <div class="checkout mt-2">
+        <!-- <app-checkout formGroupName="checkout" [totalSKUsPrice]="totalSKUsPrice"></app-checkout> -->
+      </div>
+    </div>
+
+    <div nz-col nzSpan="9" class="px-2">
+      <div class="bg-white p-3 rounded">
+        <app-information formGroupName="information"></app-information>
+      </div>
+
+      <div class="bg-white p-3 rounded mt-2">
+        <app-customer-info formGroupName="customerInfo"></app-customer-info>
+      </div>
+
+      <div class="bg-white p-3 rounded mt-2">
+        <!-- <app-receiver formGroupName="receiverInfo" [provinces]="provinces"></app-receiver> -->
+      </div>
+
+      <div class="bg-white p-3 rounded mt-2">
+        <app-delivery formGroupName="deliveryService"></app-delivery>
+      </div>
+    </div>
+  </div>
+
+  <div *nzModalFooter class=" d-flex flex-row-reverse">
+    <!-- <button [disabled]="!updateOrderForm.valid" nz-button nzType="primary" type="submit" class="d-flex align-items-center" (click)="submitForm()"> -->
+    <button nz-button nzType="primary" type="submit" class="d-flex align-items-center">
+      <span nz-icon nzType="save"></span>
+        <span>Lưu</span>
+    </button>
+  </div>
+</form>

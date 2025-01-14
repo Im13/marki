@@ -5,11 +5,13 @@ import { Order } from 'src/app/shared/_models/order';
 import { OrderStatus } from 'src/app/shared/_models/orderStatus';
 import { OrderParams } from 'src/app/shared/_models/order/orderParams';
 import { WebsiteOrder } from 'src/app/shared/_models/website-order';
+import { UpdateOrderComponent } from '../../update-order/update-order.component';
+import { EditOrderModalComponent } from '../edit-order-modal/edit-order-modal.component';
 
 @Component({
   selector: 'app-all-site-orders',
   templateUrl: './all-site-orders.component.html',
-  styleUrls: ['./all-site-orders.component.css']
+  styleUrls: ['./all-site-orders.component.css'],
 })
 export class AllSiteOrdersComponent {
   @Input() orderStatus: number;
@@ -24,7 +26,7 @@ export class AllSiteOrdersComponent {
     { id: 4, status: 'Đã xác nhận' },
     { id: 5, status: 'Gửi hàng đi' },
     { id: 6, status: 'Huỷ đơn' },
-    { id: 7, status: 'Xoá đơn' }
+    { id: 7, status: 'Xoá đơn' },
   ];
 
   //Order selected
@@ -34,7 +36,10 @@ export class AllSiteOrdersComponent {
   indeterminate = false;
   setOfCheckedId = new Set<number>();
 
-  constructor(private orderService: OrderService, private modalServices: NzModalService) { }
+  constructor(
+    private orderService: OrderService,
+    private modalServices: NzModalService
+  ) {}
 
   ngOnInit() {
     this.getOrders();
@@ -42,26 +47,24 @@ export class AllSiteOrdersComponent {
 
   getOrders() {
     this.orderService.getWebsiteOrders(this.orderParams).subscribe({
-      next: response => {
-        console.log(response)
+      next: (response) => {
         this.orders = response.data;
         this.orderParams.pageIndex = response.pageIndex;
         this.orderParams.pageSize = response.pageSize;
         this.totalItems = response.count;
         this.loading = false;
       },
-      error: err => {
-        console.log(err);
+      error: (err) => {
         this.loading = false;
-      }
+      },
     });
   }
 
-  updateCheckedSet(id: number, checked: boolean): void {
+  updateCheckedSet(id: number, checked: boolean): void {}
 
-  }
-
-  onCurrentPageDataChange(listOfCurrentPageData: readonly WebsiteOrder[]): void {
+  onCurrentPageDataChange(
+    listOfCurrentPageData: readonly WebsiteOrder[]
+  ): void {
     // this.orders = listOfCurrentPageData;
     this.refreshCheckedStatus();
   }
@@ -69,7 +72,9 @@ export class AllSiteOrdersComponent {
   refreshCheckedStatus(): void {
     // const listOfEnabledData = this.listOfCurrentPageData.filter(({ disabled }) => !disabled);
     this.checked = this.orders.every(({ id }) => this.setOfCheckedId.has(id));
-    this.indeterminate = this.orders.some(({ id }) => this.setOfCheckedId.has(id)) && !this.checked;
+    this.indeterminate =
+      this.orders.some(({ id }) => this.setOfCheckedId.has(id)) &&
+      !this.checked;
   }
 
   onItemChecked(id: number, checked: boolean): void {
@@ -78,8 +83,7 @@ export class AllSiteOrdersComponent {
   }
 
   onAllChecked(checked: boolean): void {
-    this.orders
-      .forEach(({ id }) => this.updateCheckedSet(id, checked));
+    this.orders.forEach(({ id }) => this.updateCheckedSet(id, checked));
     this.refreshCheckedStatus();
   }
 
@@ -94,14 +98,17 @@ export class AllSiteOrdersComponent {
   }
 
   onEditOrder(order: WebsiteOrder) {
-
+    const modal = this.modalServices.create<EditOrderModalComponent, WebsiteOrder>({
+      nzTitle: '#' + order.id.toString(),
+      nzContent: EditOrderModalComponent,
+      nzCentered: true,
+      nzWidth: '160vh',
+      nzData: order,
+      nzBodyStyle: { overflowY: 'scroll', height: '85vh' },
+    });
   }
 
-  changeStatus(statusId: number, orderId: number) {
+  changeStatus(statusId: number, orderId: number) {}
 
-  }
-
-  getOrderByStatus(statusId: number) {
-
-  }
+  getOrderByStatus(statusId: number) {}
 }
