@@ -84,7 +84,15 @@ namespace API.Controllers
             var data = _mapper.Map<IReadOnlyList<Order>, IReadOnlyList<OrderToReturnDTO>>(orders);
 
             return Ok(new Pagination<OrderToReturnDTO>(orderParams.PageIndex, orderParams.PageSize, totalItems, data));
+        }
 
+        // [Authorize]
+        [HttpGet("website/{id}")]
+        public async Task<ActionResult<OrderToReturnDTO>> GetById(int id)
+        {
+            var order = await _orderRepository.GetWebsiteOrderById(id);
+
+            return _mapper.Map<Order, OrderToReturnDTO>(order);
         }
     }
 }

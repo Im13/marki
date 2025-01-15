@@ -186,6 +186,10 @@ export class OrderService {
     return this.http.get<Pagination<WebsiteOrder[]>>(this.baseApiUrl + 'orders/all-orders', { params });
   }
 
+  getWebsiteOrderById(id: number) {
+    return this.http.get<WebsiteOrder>(this.baseApiUrl + 'orders/website/' + id);
+  }
+
   getProvinces() {
     return this.http.get<Province[]>(this.baseApiUrl + 'address/provinces');
   }

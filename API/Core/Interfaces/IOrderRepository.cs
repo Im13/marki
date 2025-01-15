@@ -7,5 +7,6 @@ namespace Core.Interfaces
     {
         Task<List<OfflineOrder>> GetOrdersWithSpec(ISpecification<OfflineOrder> spec);
         Task<List<Order>> GetWebsiteOrdersWithSpec(ISpecification<Order> spec);
+        Task<Order> GetWebsiteOrderById(int id);
     }
 }

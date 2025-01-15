@@ -2,6 +2,7 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 import { WebsiteOrder } from 'src/app/shared/_models/website-order';
+import { OrderService } from '../../order.service';
 
 @Component({
   selector: 'app-edit-order-modal',
@@ -9,16 +10,24 @@ import { WebsiteOrder } from 'src/app/shared/_models/website-order';
   styleUrls: ['./edit-order-modal.component.css'],
 })
 export class EditOrderModalComponent implements OnInit {
-  @Input() order?: WebsiteOrder = inject(NZ_MODAL_DATA);
+  // @Input() order?: WebsiteOrder = inject(NZ_MODAL_DATA);
+  order: WebsiteOrder;
   editOrderForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private orderService: OrderService) {}
 
   ngOnInit(): void {
+    this.orderService.getWebsiteOrderById(11).subscribe({
+      next: data => {
+        this.order = data;
+      },
+      error: err => console.log(err)
+    })
+
     this.editOrderForm = this.formBuilder.group({
       checkout: this.formBuilder.group({
         freeshipChecked: this.formBuilder.control(false),
-        shippingFee: this.formBuilder.control(this.order.shippingPrice, [
+        shippingFee: this.formBuilder.control(this.order?.shippingPrice, [
           Validators.required,
         ]),
         orderDiscount: this.formBuilder.control('this.order.orderDiscount', [
@@ -43,7 +52,7 @@ export class EditOrderModalComponent implements OnInit {
         ),
       }),
       customerInfo: this.formBuilder.group({
-        customerName: this.formBuilder.control('this.order.customer.name', [
+        customerName: this.formBuilder.control(this.order?.shipToAddress.fullname, [
           Validators.required,
         ]),
         customerPhoneNumber: this.formBuilder.control(
@@ -51,7 +60,7 @@ export class EditOrderModalComponent implements OnInit {
           [Validators.required]
         ),
         customerEmailAddress: this.formBuilder.control(
-          this.order.buyerEmail
+          this.order?.buyerEmail
         ),
         customerDOB: this.formBuilder.control(new Date()),
       }),
