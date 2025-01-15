@@ -17,13 +17,7 @@ export class EditOrderModalComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private orderService: OrderService) {}
 
   ngOnInit(): void {
-    this.orderService.getWebsiteOrderById(11).subscribe({
-      next: data => {
-        this.order = data;
-      },
-      error: err => console.log(err)
-    })
-
+    // Init form
     this.editOrderForm = this.formBuilder.group({
       checkout: this.formBuilder.group({
         freeshipChecked: this.formBuilder.control(false),
@@ -56,7 +50,7 @@ export class EditOrderModalComponent implements OnInit {
           Validators.required,
         ]),
         customerPhoneNumber: this.formBuilder.control(
-          'this.order.customer.phoneNumber',
+          this.order?.shipToAddress.phoneNumber,
           [Validators.required]
         ),
         customerEmailAddress: this.formBuilder.control(
@@ -91,5 +85,41 @@ export class EditOrderModalComponent implements OnInit {
         shipmentCost: this.formBuilder.control({ value: '', disabled: true }),
       }),
     });
+
+    this.orderService.getWebsiteOrderById(11).subscribe({
+      next: data => {
+        this.order = data;
+        console.log(this.order);
+
+        // Update form data
+        this.editOrderForm.patchValue({
+          checkout: {
+            shippingFee: this.order.shippingPrice,
+            orderDiscount: '',
+            bankTransferedAmount: '',
+            extraFee: '',
+            orderNote: '',
+          },
+          information: {
+            orderCareStaff: 'this.order.orderCareStaffId',
+            customerCareStaff: 'this.order.customerCareStaffId',
+          },
+          customerInfo: {
+            customerName: this.order.shipToAddress.fullname,
+            customerPhoneNumber: this.order.shipToAddress.phoneNumber,
+            customerEmailAddress: this.order.buyerEmail,
+          },
+          receiverInfo: {
+            receiverName: this.order.shipToAddress.fullname,
+            receiverPhoneNumber: this.order.shipToAddress.phoneNumber,
+            receiverAddress: this.order.shipToAddress.street,
+            provinceId: this.order.shipToAddress.cityOrProvinceId,
+            districtId: this.order.shipToAddress.districtId,
+            wardId: this.order.shipToAddress.wardId,
+          }
+        })
+      },
+      error: err => console.log(err)
+    })
   }
 }
