@@ -1,7 +1,7 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
-import { WebsiteOrder } from 'src/app/shared/_models/website-order';
+import { OrderItem, WebsiteOrder } from 'src/app/shared/_models/website-order';
 import { OrderService } from '../../order.service';
 
 @Component({
@@ -10,9 +10,10 @@ import { OrderService } from '../../order.service';
   styleUrls: ['./edit-order-modal.component.css'],
 })
 export class EditOrderModalComponent implements OnInit {
-  // @Input() order?: WebsiteOrder = inject(NZ_MODAL_DATA);
-  order: WebsiteOrder;
+  @Input() order?: WebsiteOrder = inject(NZ_MODAL_DATA);
+  // order: WebsiteOrder;
   editOrderForm: FormGroup;
+  listItems: OrderItem[];
 
   constructor(private formBuilder: FormBuilder, private orderService: OrderService) {}
 
@@ -86,7 +87,7 @@ export class EditOrderModalComponent implements OnInit {
       }),
     });
 
-    this.orderService.getWebsiteOrderById(11).subscribe({
+    this.orderService.getWebsiteOrderById(this.order.id).subscribe({
       next: data => {
         this.order = data;
         console.log(this.order);
@@ -118,6 +119,10 @@ export class EditOrderModalComponent implements OnInit {
             wardId: this.order.shipToAddress.wardId,
           }
         })
+
+        //Update list itesms
+        this.listItems = this.order.orderItems;
+        console.log('itesm: ' + this.listItems.length)
       },
       error: err => console.log(err)
     })

@@ -10,7 +10,6 @@ import { CoreModule } from '../core/core.module';
 import { AddOrderComponent } from './add-order/add-order.component';
 import { OrderInformationComponent } from './add-order/order-information/order-information.component';
 import { ProductModule } from '../product/product.module';
-import { ProductSkusComponent } from './add-order/order-information/product-skus/product-skus.component';
 import { CheckoutComponent } from './add-order/order-information/checkout/checkout.component';
 import { InformationComponent } from './add-order/order-information/information/information.component';
 import { CustomerInfoComponent } from './add-order/order-information/customer-info/customer-info.component';
@@ -22,6 +21,8 @@ import { WebOrdersComponent } from './web-orders/web-orders.component';
 import { AllSiteOrdersComponent } from './web-orders/all-site-orders/all-site-orders.component';
 import { EditOrderModalComponent } from './web-orders/edit-order-modal/edit-order-modal.component';
 import { ProductItemsComponent } from './add-order/order-information/product-items/product-items.component';
+import { ListProductSkuComponent } from './web-orders/list-product-sku/product-skus.component';
+import { ProductSkusComponent } from './add-order/order-information/product-skus/product-skus.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { ProductItemsComponent } from './add-order/order-information/product-ite
     OrderListComponent,
     AddOrderComponent,
     OrderInformationComponent,
-    ProductSkusComponent,
+    ListProductSkuComponent,
     CheckoutComponent,
     InformationComponent,
     CustomerInfoComponent,
@@ -40,7 +41,8 @@ import { ProductItemsComponent } from './add-order/order-information/product-ite
     WebOrdersComponent,
     AllSiteOrdersComponent,
     EditOrderModalComponent,
-    ProductItemsComponent
+    ProductItemsComponent,
+    ProductSkusComponent
   ],
   imports: [
     CommonModule,
