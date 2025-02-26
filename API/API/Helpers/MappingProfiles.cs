@@ -32,6 +32,8 @@ namespace API.Helpers
             //     .ForMember(d => d.PictureUrl, o => o.MapFrom<OrderItemUrlResolver>());
             CreateMap<Order, OrderToReturnDTO>();
             CreateMap<OrderItem, OrderItemDTO>();
+            CreateMap<ItemOrderedDTO, ProductIemOrdered>();
+            CreateMap<ProductIemOrdered, ItemOrderedDTO>();
 
             //Offline order
             CreateMap<OfflineOrder, OfflineOrderDTO>()

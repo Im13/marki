@@ -119,43 +119,6 @@
                 <span *ngIf="checkoutFrm.get('ward').touched && checkoutFrm.get('ward').value == 0"
                     class="invalid-text text-danger">Vui lòng chọn phường / xã</span>
 
-                <!-- <div class="my-1">
-                    <div class="input-group">
-                        <select class="form-select" formControlName="district"
-                            (ngModelChange)="onDistrictChange($event)" id="districts">
-                            <option selected value="0">Chọn quận / huyện</option>
-                            <option *ngFor="let district of districts" [ngValue]="district.id">
-                                {{ district.name }}
-                            </option>
-                        </select>
-                        <label class="input-group-text d-flex align-items-center justify-content-center"
-                            style="width: 25%;" for="inputGroupSelect01">Quận/Huyện</label>
-                    </div>
-
-                    <div>
-                        <span *ngIf="checkoutFrm.get('district').touched && checkoutFrm.get('district').value == 0"
-                            class="invalid-text">Vui lòng chọn quận / huyện</span>
-                    </div>
-                </div>
-
-                <div class="my-2">
-                    <div class="input-group">
-                        <select class="form-select" formControlName="ward" id="wards">
-                            <option selected value="0">Chọn phường / xã</option>
-                            <option *ngFor="let ward of wards" [ngValue]="ward.id">
-                                {{ ward.name }}
-                            </option>
-                        </select>
-                        <label class="input-group-text d-flex align-items-center justify-content-center"
-                            style="width: 25%;" for="inputGroupSelect01">Phường/Xã</label>
-                    </div>
-
-                    <div>
-                        <span *ngIf="checkoutFrm.get('ward').touched && checkoutFrm.get('ward').value == 0"
-                            class="invalid-text">Vui lòng chọn phường / xã</span>
-                    </div>
-                </div> -->
-
                 <h6 class="mt-4 mb-3">Phương thức giao hàng</h6>
                 <div class="border rounded form-group">
                     <div class="d-flex align-items-center border-bottom flex-row">
@@ -163,7 +126,7 @@
                             checked>
                         <label class="w-100 d-flex flex-row py-3" for="deliveryMethod" nz-row>
                             <div class="d-flex align-items-center" nz-col nzSpan="19">Phí ship đơn hàng</div>
-                            <div class="text-end pe-2" nz-col nzSpan="5">{{ basketTotal.shipping }}</div>
+                            <div class="text-end pe-2" nz-col nzSpan="5">{{ basketTotal.shipping | number }}</div>
                         </label>
                     </div>
                 </div>

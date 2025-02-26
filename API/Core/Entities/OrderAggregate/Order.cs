@@ -6,7 +6,18 @@ namespace Core.Entities.OrderAggregate
         {
         }
 
-        public Order(IReadOnlyList<OrderItem> orderItems, string buyerEmail, Address shipToAddress, DeliveryMethod deliveryMethod, decimal subTotal, OrderSources source)
+        public Order(IReadOnlyList<OrderItem> orderItems, 
+            string buyerEmail, 
+            Address shipToAddress, 
+            DeliveryMethod deliveryMethod, 
+            decimal subTotal, 
+            OrderSources source,
+            decimal shippingFee,
+            decimal orderDiscount,
+            decimal bankTransferedAmount,
+            decimal extraFee,
+            decimal total,
+            string orderNote)
         {
             BuyerEmail = buyerEmail;
             ShipToAddress = shipToAddress;
@@ -14,6 +25,12 @@ namespace Core.Entities.OrderAggregate
             OrderItems = orderItems;
             Subtotal = subTotal;
             Source = source;
+            ShippingFee = shippingFee;
+            OrderDiscount = orderDiscount;
+            BankTransferedAmount = bankTransferedAmount;
+            ExtraFee = extraFee;
+            Total = total;
+            OrderNote = orderNote;
         }
 
         public string BuyerEmail { get; set; }
@@ -21,9 +38,15 @@ namespace Core.Entities.OrderAggregate
         public Address ShipToAddress { get; set; }
         public DeliveryMethod DeliveryMethod { get; set; }
         public IReadOnlyList<OrderItem> OrderItems { get; set; }
-        public decimal Subtotal { get; set; }
         public OrderStatus Status { get; set; } = OrderStatus.New;
         public OrderSources Source { get; set; }
+        public decimal Subtotal { get; set; }
+        public decimal ShippingFee { get; set; }
+        public decimal OrderDiscount { get; set; }
+        public decimal BankTransferedAmount { get; set; }
+        public decimal ExtraFee { get; set; }
+        public decimal Total { get; set; }
+        public string OrderNote { get; set; }
         
         //Using with Stripe
         public string PaymentIntentId { get; set; }

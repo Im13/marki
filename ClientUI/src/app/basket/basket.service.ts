@@ -40,6 +40,10 @@ export class BasketService {
     return this.basketSource.value;
   }
 
+  getBasketTotalValue() {
+    return this.basketTotalSource.value;
+  }
+
   addItemToBasket(item: ProductSKU | BasketItem, product: Product, quantity: number) {
     //Change photo url to sku photo url
     if(this.isProductSKU(item)) item = this.mapProductItemToBasketItem(item, product, product.photos[0].url);

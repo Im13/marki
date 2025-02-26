@@ -3,6 +3,7 @@ using System;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20250225132909_UpdateOrderItems")]
+    partial class UpdateOrderItems
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.12");
@@ -209,32 +212,17 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("BankTransferedAmount")
-                        .HasColumnType("REAL");
-
                     b.Property<string>("BuyerEmail")
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("DeliveryMethodId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("ExtraFee")
-                        .HasColumnType("REAL");
-
                     b.Property<DateTime>("OrderDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<double>("OrderDiscount")
-                        .HasColumnType("REAL");
-
-                    b.Property<string>("OrderNote")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PaymentIntentId")
                         .HasColumnType("TEXT");
-
-                    b.Property<double>("ShippingFee")
-                        .HasColumnType("REAL");
 
                     b.Property<string>("Source")
                         .IsRequired()
@@ -245,9 +233,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<double>("Subtotal")
-                        .HasColumnType("REAL");
-
-                    b.Property<double>("Total")
                         .HasColumnType("REAL");
 
                     b.HasKey("Id");

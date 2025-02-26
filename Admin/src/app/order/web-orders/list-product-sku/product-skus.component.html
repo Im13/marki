@@ -51,11 +51,11 @@
         >
           <div nz-col nzSpan="2" class="d-flex justify-content-center">
             <img
-              *ngIf="item.pictureUrl; else noImageBlock"
+              *ngIf="item.itemOrdered.pictureUrl; else noImageBlock"
               nz-image
               width="60px"
               height="60px"
-              [src]="item.pictureUrl"
+              [src]="item.itemOrdered.pictureUrl"
             />
 
             <ng-template #noImageBlock>
@@ -75,7 +75,7 @@
           >
             <div class="product-name fw-semibold d-flex justify-content-between mb-2">
               <span class="product-name-name">
-                {{ item.productName }}
+                {{ item.itemOrdered.productName }}
               </span>
 
               <button nz-button nzType="default" nzSize="small" nzDanger><span nz-icon nzType="close" nzTheme="outline" (click)="onRemoveSKU(item)"></span></button>
@@ -85,7 +85,7 @@
                 <span class="me-1">
                   {{ item.optionValueCombination }}</span>
                 <span class="product-weight" nz-typography
-                  ><strong>Need improve weight</strong></span
+                  ><strong>250g</strong></span
                 >
               </div>
               <div class="product-price m-0" nz-typography>

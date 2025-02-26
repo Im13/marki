@@ -53,13 +53,6 @@ export class CheckoutComponent implements OnInit {
         console.log(err);
       }
     });
-
-    // this.basketService.basketSource$.
-    // this.checkoutService.getProvinces().subscribe({
-    //   next: provinces => {
-    //     this.provinces = provinces;
-    //   }
-    // });
   }
 
   forbiddenSelect(control: FormControl): {[s: string] : boolean} {
@@ -101,13 +94,20 @@ export class CheckoutComponent implements OnInit {
       wardId: this.checkoutFrm.value.ward,
       phoneNumber: this.checkoutFrm.value.phone
     };
+    var basketTotal = this.basketService.getBasketTotalValue();
 
     if(!deliveryMethodId || !shipToAddress) return null;
 
     return {
       basketId: basket.id,
       deliveryMethodId: deliveryMethodId,
-      shipToAddress: shipToAddress
+      shipToAddress: shipToAddress,
+      shippingFee: basketTotal.shipping,
+      orderDiscount: 0,
+      bankTransferedAmount: 0,
+      extraFee: 0,
+      total: basketTotal.total,
+      orderNote: ''
     };
   }
 

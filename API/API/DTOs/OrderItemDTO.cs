@@ -8,5 +8,13 @@ namespace API.DTOs
         public decimal Price { get; set; }
         public int Quantity { get; set; }
         public string OptionValueCombination { get; set; }
+        public ItemOrderedDTO ItemOrdered { get; set; }
+    }
+
+    public class ItemOrderedDTO 
+    {
+        public int ProductItemId { get; set; }
+        public string ProductName { get; set; }
+        public string PictureUrl { get; set; }
     }
 }

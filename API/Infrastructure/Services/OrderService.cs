@@ -26,7 +26,7 @@ namespace Infrastructure.Services
             _productRepo = productRepo;
         }
 
-        public async Task<Order> CreateOrderAsync(string buyerEmail, int deliveryMethodId, string basketId, Address shippingAddress)
+        public async Task<Order> CreateOrderAsync(string buyerEmail, int deliveryMethodId, string basketId, Address shippingAddress, decimal shippingFee, decimal orderDiscount, decimal bankTransferedAmount, decimal extraFee, decimal total, string orderNote)
         {
             // Get basket from the repo
             var basket = await _basketRepo.GetBasketAsync(basketId);
@@ -39,7 +39,7 @@ namespace Infrastructure.Services
                 var productItem = await _productRepo.GetProductByIdAsync(item.ProductId);
 
                 //Need fix with sku price
-                var itemOrdered = new ProductIemOrdered(productItem.Id, productItem.Name, productItem.ProductSKUs.First().ImageUrl);
+                var itemOrdered = new ProductIemOrdered(productItem.Id, productItem.Name, item.PictureUrl);
                 var orderItem = new OrderItem(itemOrdered, productItem.ProductSKUs.First().Price, item.Quantity, item.OptionValueCombination);
                 items.Add(orderItem);
             }
@@ -51,7 +51,7 @@ namespace Infrastructure.Services
             var subTotal = items.Sum(item => item.Price * item.Quantity);
 
             // Create order
-            var order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, subTotal, OrderSources.Website);
+            var order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, subTotal, OrderSources.Website, shippingFee, orderDiscount, bankTransferedAmount, extraFee, total, orderNote);
 
             _unitOfWork.Repository<Order>().Add(order);
 
