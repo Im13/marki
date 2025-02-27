@@ -1,4 +1,4 @@
-<form [formGroup]="editOrderForm" class="h-100">
+<form [formGroup]="editOrderForm" class="h-100 pt-2 px-2">
   <div nz-row>
     <div class="px-2" nz-col nzSpan="15">
       <div class="product-section bg-white p-3">
@@ -6,7 +6,7 @@
       </div>
 
       <div class="checkout mt-2">
-        <app-checkout formGroupName="checkout" [totalSKUsPrice]="totalSKUsPrice"></app-checkout>
+        <app-checkout formGroupName="checkout" [totalSKUsPrice]="subTotal"></app-checkout>
       </div>
     </div>
 

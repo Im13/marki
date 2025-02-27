@@ -15,7 +15,7 @@ export class EditOrderModalComponent implements OnInit {
   editOrderForm: FormGroup;
   listItems: OrderItem[];
   provinces: Province[] = [];
-  totalSKUsPrice = 0;
+  subTotal = 0;
 
   constructor(private formBuilder: FormBuilder, private orderService: OrderService) { }
 
@@ -91,6 +91,8 @@ export class EditOrderModalComponent implements OnInit {
 
         //Update list itesms
         this.listItems = this.order.orderItems;
+
+        this.subTotal = this.order.subtotal;
       },
       error: err => console.log(err)
     });

@@ -104,7 +104,7 @@ export class AllSiteOrdersComponent {
       nzCentered: true,
       nzWidth: '160vh',
       nzData: order,
-      nzBodyStyle: { overflowY: 'scroll', height: '85vh' },
+      nzBodyStyle: { overflowY: 'scroll', height: '86vh', padding: '0px' },
     });
   }
 
