@@ -17,7 +17,8 @@ namespace Core.Entities.OrderAggregate
             decimal bankTransferedAmount,
             decimal extraFee,
             decimal total,
-            string orderNote)
+            string orderNote,
+            OfflineOrderStatus orderStatus)
         {
             BuyerEmail = buyerEmail;
             ShipToAddress = shipToAddress;
@@ -31,6 +32,7 @@ namespace Core.Entities.OrderAggregate
             ExtraFee = extraFee;
             Total = total;
             OrderNote = orderNote;
+            OrderStatus = orderStatus;
         }
 
         public string BuyerEmail { get; set; }
@@ -38,7 +40,8 @@ namespace Core.Entities.OrderAggregate
         public Address ShipToAddress { get; set; }
         public DeliveryMethod DeliveryMethod { get; set; }
         public IReadOnlyList<OrderItem> OrderItems { get; set; }
-        public OrderStatus Status { get; set; } = OrderStatus.New;
+        // public OrderStatus Status { get; set; } = OrderStatus.New;
+        public OfflineOrderStatus OrderStatus { get; set; }
         public OrderSources Source { get; set; }
         public decimal Subtotal { get; set; }
         public decimal ShippingFee { get; set; }

@@ -50,8 +50,11 @@ namespace Infrastructure.Services
             // Calc subtotal
             var subTotal = items.Sum(item => item.Price * item.Quantity);
 
+            //Define orderStatus 
+            var status = await _unitOfWork.Repository<OfflineOrderStatus>().GetByIdAsync(1);
+
             // Create order
-            var order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, subTotal, OrderSources.Website, shippingFee, orderDiscount, bankTransferedAmount, extraFee, total, orderNote);
+            var order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, subTotal, OrderSources.Website, shippingFee, orderDiscount, bankTransferedAmount, extraFee, total, orderNote, status);
 
             _unitOfWork.Repository<Order>().Add(order);
 

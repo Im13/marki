@@ -1,3 +1,5 @@
+import { OrderStatus } from "./orderStatus";
+
 export interface OrderItem {
   id: number;
   productName: string;
@@ -35,4 +37,5 @@ export interface WebsiteOrder {
   subtotal: number;
   orderItems: OrderItem[];
   shipToAddress: ShipToAddress;
+  orderStatus: OrderStatus;
 }

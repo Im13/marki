@@ -1,4 +1,4 @@
-
+using API.DTOs.AdminOrder;
 using Core.Entities.OrderAggregate;
 
 namespace API.DTOs
@@ -19,5 +19,6 @@ namespace API.DTOs
         public IReadOnlyList<OrderItemDTO> OrderItems { get; set; }
         public decimal Subtotal { get; set; }
         public string Status { get; set; }
+        public OrderStatusDTO OrderStatus { get; set; }
     }
 }

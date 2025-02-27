@@ -1,4 +1,4 @@
-<form [formGroup]="editOrderForm" class="h-100 pt-2 px-2">
+<form [formGroup]="editOrderForm" class="h-100 pt-3 px-2">
   <div nz-row>
     <div class="px-2" nz-col nzSpan="15">
       <div class="product-section bg-white p-3">
@@ -31,9 +31,23 @@
 
   <div *nzModalFooter class=" d-flex flex-row-reverse">
     <!-- <button [disabled]="!updateOrderForm.valid" nz-button nzType="primary" type="submit" class="d-flex align-items-center" (click)="submitForm()"> -->
-    <button nz-button nzType="primary" type="submit" class="d-flex align-items-center">
+    <button nz-button nzType="primary" type="submit" class="d-flex align-items-center" nz-dropdown [nzDropdownMenu]="actionButtons" (click)="submitForm()">
       <span nz-icon nzType="save"></span>
         <span>Lưu</span>
     </button>
+
+    <nz-dropdown-menu #actionButtons="nzDropdownMenu">
+      <ul nz-menu nzSelectable>
+        <li nz-menu-item>Tạo trùng lặp</li>
+        <li nz-menu-item>Chờ hàng</li>
+        <li nz-menu-item>Ưu tiên xuất đơn</li>
+        <li nz-menu-item>Xác nhận đơn hàng</li>
+        <li nz-menu-item>Đang đóng hàng</li>
+        <li nz-menu-item>Chờ chuyển hàng</li>
+        <li nz-menu-item>Gửi hàng đi</li>
+        <li nz-menu-item>Huỷ đơn</li>
+        <li nz-menu-item>Xoá đơn</li>
+      </ul>
+    </nz-dropdown-menu>
   </div>
 </form>

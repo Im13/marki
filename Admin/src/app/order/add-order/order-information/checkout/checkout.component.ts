@@ -59,7 +59,6 @@ export class CheckoutComponent implements OnInit {
     this.orderDiscount = +this.checkoutForm.value.orderDiscount;
     this.bankTransferedAmount = +this.checkoutForm.value.bankTransferedAmount;
     this.extraFee = +this.checkoutForm.value.extraFee;
-    console.log(this.totalSKUsPrice);
     this.calculateOrderTotal();
   }
 

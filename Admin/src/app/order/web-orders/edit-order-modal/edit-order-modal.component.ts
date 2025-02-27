@@ -106,4 +106,8 @@ export class EditOrderModalComponent implements OnInit {
       }
     });
   }
+
+  submitForm() {
+    console.log('submit!');
+  }
 }
