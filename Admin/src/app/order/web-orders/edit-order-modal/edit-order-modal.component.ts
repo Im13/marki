@@ -4,6 +4,7 @@ import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 import { OrderItem, WebsiteOrder } from 'src/app/shared/_models/website-order';
 import { OrderService } from '../../order.service';
 import { Province } from 'src/app/shared/_models/address/province';
+import { OrderStatus } from 'src/app/shared/_models/orderStatus';
 
 @Component({
   selector: 'app-edit-order-modal',
@@ -16,6 +17,16 @@ export class EditOrderModalComponent implements OnInit {
   listItems: OrderItem[];
   provinces: Province[] = [];
   subTotal = 0;
+
+  orderStatuses: OrderStatus[] = [
+    { id: 1, status: 'Mới' },
+    { id: 2, status: 'Chờ hàng' },
+    { id: 3, status: 'Ưu tiên xuất đơn' },
+    { id: 4, status: 'Đã xác nhận' },
+    { id: 5, status: 'Gửi hàng đi' },
+    { id: 6, status: 'Huỷ đơn' },
+    { id: 7, status: 'Xoá đơn' },
+  ];
 
   constructor(private formBuilder: FormBuilder, private orderService: OrderService) { }
 

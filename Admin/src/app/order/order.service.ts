@@ -206,6 +206,10 @@ export class OrderService {
     return this.http.put<Order>(this.baseApiUrl + 'order/update-status', updateStatusDTO);
   }
 
+  updateWebsiteOrderStatus(updateStatusDTO: UpdateStatusDTO) {
+    return this.http.put<Order>(this.baseApiUrl + 'orders/update-status', updateStatusDTO);
+  }
+
   getOrdersWithStatus(productParams: OrderWithStatusParams) {
     let params = new HttpParams();
 

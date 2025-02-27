@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { OrderService } from '../../order.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { Order } from 'src/app/shared/_models/order';
 import { OrderStatus } from 'src/app/shared/_models/orderStatus';
 import { OrderParams } from 'src/app/shared/_models/order/orderParams';
 import { WebsiteOrder } from 'src/app/shared/_models/website-order';
-import { UpdateOrderComponent } from '../../update-order/update-order.component';
 import { EditOrderModalComponent } from '../edit-order-modal/edit-order-modal.component';
+import { UpdateStatusDTO } from 'src/app/shared/_models/order/updateStatusDTO';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-all-site-orders',
@@ -38,7 +38,8 @@ export class AllSiteOrdersComponent {
 
   constructor(
     private orderService: OrderService,
-    private modalServices: NzModalService
+    private modalServices: NzModalService,
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit() {
@@ -109,7 +110,22 @@ export class AllSiteOrdersComponent {
     });
   }
 
-  changeStatus(statusId: number, orderId: number) {}
+  changeStatus(statusId: number, orderId: number) {
+    var updateStatusDTO: UpdateStatusDTO = {
+      orderId: orderId,
+      statusId: statusId
+    };
+
+    this.orderService.updateWebsiteOrderStatus(updateStatusDTO).subscribe({
+      next: (order) => {
+        console.log(order);
+        // this.toastrService.success('Cập nhật trạng thái đơn hàng thành công');
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
 
   getOrderByStatus(statusId: number) {}
 }
