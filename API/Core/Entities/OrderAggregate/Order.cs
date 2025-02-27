@@ -6,7 +6,7 @@ namespace Core.Entities.OrderAggregate
         {
         }
 
-        public Order(IReadOnlyList<OrderItem> orderItems, 
+        public Order(List<OrderItem> orderItems, 
             string buyerEmail, 
             Address shipToAddress, 
             DeliveryMethod deliveryMethod, 
@@ -39,7 +39,7 @@ namespace Core.Entities.OrderAggregate
         public DateTime OrderDate { get; set; } = DateTime.UtcNow;
         public Address ShipToAddress { get; set; }
         public DeliveryMethod DeliveryMethod { get; set; }
-        public IReadOnlyList<OrderItem> OrderItems { get; set; }
+        public List<OrderItem> OrderItems { get; set; }
         // public OrderStatus Status { get; set; } = OrderStatus.New;
         public OfflineOrderStatus OrderStatus { get; set; }
         public OrderSources Source { get; set; }

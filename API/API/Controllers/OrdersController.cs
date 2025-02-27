@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using API.DTOs;
+using API.DTOs.AdminOrder;
 using API.Errors;
 using API.Extensions;
 using API.Helpers;
@@ -36,6 +37,40 @@ namespace API.Controllers
             if(order == null) return BadRequest(new ApiResponse(400, "Problem creating order")); 
 
             return Ok(order);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateOrder(OrderToReturnDTO orderDTO)
+        {
+            if(orderDTO == null) return BadRequest();
+
+            //Find order by id
+            var order = await _orderRepository.GetWebsiteOrderById(orderDTO.Id);
+            if(order == null) return BadRequest("Order not exists");
+
+            var orderToUpdate = _mapper.Map<OrderToReturnDTO,Order>(orderDTO);
+            var items = _mapper.Map<List<OrderItemDTO>,List<OrderItem>>(orderDTO.OrderItems);
+
+            var orderUpdateResult = await _orderService.UpdateOrder(orderToUpdate, items);
+
+            if (orderUpdateResult == null) return BadRequest("Error update order");
+
+            return Ok();
+        }
+
+        [HttpPut("update-status")]
+        public async Task<ActionResult> UpdateOrderStatus(UpdateStatusDTO updateStatusDTO)
+        {
+            var order = await _orderService.GetWebsiteOrderWithStatusAsync(updateStatusDTO.OrderId);
+            if(order == null) return BadRequest();
+
+            if(order.OrderStatus.Id == updateStatusDTO.StatusId) return BadRequest();
+
+            var statusUpdateResult = await _orderService.UpdateWebsiteOrderStatus(order, updateStatusDTO.StatusId);
+
+            if(statusUpdateResult == null) return BadRequest();
+
+            return Ok(statusUpdateResult);
         }
 
         [Authorize]

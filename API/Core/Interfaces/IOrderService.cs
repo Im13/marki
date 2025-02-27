@@ -10,9 +10,12 @@ namespace Core.Interfaces
         Task<IReadOnlyList<DeliveryMethod>> GetDeliveryMethodsAsync();
         Task<OfflineOrder> CreateOfflineOrder(OfflineOrder order, int provinceId, int wardId, int districtId);
         Task<OfflineOrder> UpdateOfflineOrder(OfflineOrder order, List<OfflineOrderSKUs> currentListSkus);
+        Task<Order> UpdateOrder(Order order, List<OrderItem> items);
         Task<OfflineOrder> GetOrderAsync(int id);
         Task<OfflineOrder> UpdateStatus(OfflineOrder order, int statusId);
+        Task<Order> UpdateWebsiteOrderStatus(Order order, int statusId);
         Task<OfflineOrder> GetOrderWithStatusAsync(int orderId);
+        Task<Order> GetWebsiteOrderWithStatusAsync(int orderId);
         Task<List<OfflineOrder>> GetOrdersByStatusIdAsync(int statusId);
     }
 }

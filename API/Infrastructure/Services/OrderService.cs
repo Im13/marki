@@ -164,6 +164,44 @@ namespace Infrastructure.Services
             return order;
         }
 
+        public async Task<Order> UpdateOrder(Order order, List<OrderItem> items)
+        {
+            if (order.Id < 0) return null;
+
+            var currentOrder = await _context.Orders.Include(o => o.OrderItems).Where(o => o.Id == order.Id).SingleOrDefaultAsync();
+            _unitOfWork.ClearTracker();
+
+            var orderStatus = await _context.OrderStatus.Where(s => s.Id == order.OrderStatus.Id).SingleOrDefaultAsync();
+            order.OrderStatus = orderStatus;
+
+            //Update Items
+            //Delete all childs, need improment later
+            // foreach(var sku in currentOrder.OfflineOrderSKUs)
+            // {
+            //     _context.OfflineOrderSKUs.Remove(sku);
+            // }
+
+            // if (order.OfflineOrderSKUs.Count > 0)
+            // {
+            //     foreach (var skuItems in order.OfflineOrderSKUs)
+            //     {
+            //         //Remove this when edit nullable productskuid
+            //         int productSkuId = (int)skuItems.ProductSkuId;
+
+            //         // var checkOrder = currentListSkus.SingleOrDefault()
+            //         skuItems.ProductSKU = await _unitOfWork.Repository<ProductSKUs>().GetByIdAsync(productSkuId);
+            //     }
+            // }
+
+            _unitOfWork.Repository<Order>().Update(order);
+
+            var saveOrderResult = await _unitOfWork.Complete();
+
+            if (saveOrderResult <= 0) return null;
+
+            return order;
+        }
+
         public async Task<OfflineOrder> GetOrderAsync(int id)
         {
             var order = await _unitOfWork.Repository<OfflineOrder>().GetByIdAsync(id);
@@ -187,9 +225,31 @@ namespace Infrastructure.Services
             return order;
         }
 
+        public async Task<Order> UpdateWebsiteOrderStatus(Order order, int statusId)
+        {
+            var orderStatus = await _unitOfWork.Repository<OfflineOrderStatus>().GetByIdAsync(statusId);
+
+            if(orderStatus == null) return null;
+
+            order.OrderStatus = orderStatus;
+
+            var result = await _unitOfWork.Complete();
+
+            if(result <= 0) return null;
+
+            return order;
+        }
+
         public async Task<OfflineOrder> GetOrderWithStatusAsync(int orderId) 
         {
             var order = await _context.OfflineOrders.Include(o => o.OrderStatus).Where(o => o.Id == orderId).SingleOrDefaultAsync();
+
+            return order;
+        }
+
+        public async Task<Order> GetWebsiteOrderWithStatusAsync(int orderId) 
+        {
+            var order = await _context.Orders.Include(o => o.OrderStatus).Where(o => o.Id == orderId).SingleOrDefaultAsync();
 
             return order;
         }

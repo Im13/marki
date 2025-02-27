@@ -16,7 +16,7 @@ namespace API.DTOs
         public decimal ExtraFee { get; set; }
         public decimal Total { get; set; }
         public string OrderNote { get; set; }
-        public IReadOnlyList<OrderItemDTO> OrderItems { get; set; }
+        public List<OrderItemDTO> OrderItems { get; set; }
         public decimal Subtotal { get; set; }
         public string Status { get; set; }
         public OfflineOrderStatusDTO OrderStatus { get; set; }
