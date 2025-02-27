@@ -43,7 +43,11 @@ namespace Infrastructure.Data
 
         public async Task<Order> GetWebsiteOrderById(int id)
         {
-            return await _context.Orders.Include(o => o.OrderItems).ThenInclude(x => x.ItemOrdered).FirstOrDefaultAsync(o => o.Id == id);
+            return await _context.Orders
+                .Include(o => o.OrderItems)
+                .ThenInclude(x => x.ItemOrdered)
+                .Include(x => x.OrderStatus)
+                .FirstOrDefaultAsync(o => o.Id == id);
         }
     }
 }

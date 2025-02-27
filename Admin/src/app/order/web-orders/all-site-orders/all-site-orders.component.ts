@@ -53,6 +53,7 @@ export class AllSiteOrdersComponent {
         this.orderParams.pageSize = response.pageSize;
         this.totalItems = response.count;
         this.loading = false;
+        console.log(this.orders);
       },
       error: (err) => {
         this.loading = false;

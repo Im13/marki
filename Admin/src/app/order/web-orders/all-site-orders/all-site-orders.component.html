@@ -27,14 +27,14 @@
             <!-- <td (click)="onEditOrder(order)">{{ order.dateCreated | date:'hh:mm dd/MM/YYYY' }}</td> -->
             <td (click)="onEditOrder(order)">{{ order.subtotal | thousandSeparator }}</td>
             <td nzRight>
-              <!-- <div class="order-status-dropdown w-100">
+              <div class="order-status-dropdown w-100">
                 <nz-select class="w-100" nzAllowClear [(ngModel)]="order.orderStatus.id"
                   (ngModelChange)="changeStatus($event, order.id)">
                   <nz-option *ngFor="let status of orderStatuses" [nzLabel]="status.status"
                     [nzValue]="status.id"></nz-option>
                 </nz-select>
-              </div> -->
-              {{ order.status }}
+              </div>
+              <!-- {{ order.status }}? -->
             </td>
           </tr>
         </tbody>

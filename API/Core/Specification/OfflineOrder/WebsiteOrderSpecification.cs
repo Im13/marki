@@ -11,6 +11,7 @@ namespace Core.Entities.OrderAggregate
         )
         {
             AddInclude(x => x.OrderItems);
+            AddInclude(x => x.OrderStatus);
             AddOrderByDescending(x => x.Id);
             ApplyPaging(orderParams.PageSize * (orderParams.PageIndex - 1), orderParams.PageSize);
         }
