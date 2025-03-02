@@ -2,7 +2,7 @@
   <div nz-row>
     <div class="px-2" nz-col nzSpan="15">
       <div class="product-section bg-white p-3">
-        <app-list-product-sku [listItems]="listItems"></app-list-product-sku>
+        <app-list-product-sku [listItems]="listItems" (selectListItems)="handleSelectItemEvent($event)"></app-list-product-sku>
       </div>
 
       <div class="checkout mt-2">

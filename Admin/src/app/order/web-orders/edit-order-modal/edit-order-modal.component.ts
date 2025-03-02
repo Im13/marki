@@ -133,6 +133,8 @@ export class EditOrderModalComponent implements OnInit {
     this.order.extraFee = +this.editOrderForm.controls['checkout'].value.extraFee;
     // this.order.total = this.editOrderForm + this.order.shippingFee + this.order.extraFee - this.order.orderDiscount;
     this.order.orderNote = this.editOrderForm.controls['checkout'].value.orderNote;
+    this.order.orderItems = this.listItems;
+    this.order.subtotal = this.subTotal;
 
     // this.order.orderDate = this.editOrderForm.controls['information'].value.orderCreatedDate;
     // this.order.orderCareStaffId = this.updateOrderForm.controls['information'].value.orderCareStaff;
@@ -159,6 +161,15 @@ export class EditOrderModalComponent implements OnInit {
       error: err => {
         console.log(err);
       }
+    });
+  }
+
+  handleSelectItemEvent(items: OrderItem[]) {
+    this.listItems = items;
+    this.subTotal = 0;
+
+    this.listItems.forEach(item => {
+      this.subTotal += item.price * item.quantity;
     });
   }
 }
