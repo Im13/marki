@@ -40,7 +40,7 @@ namespace API.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateOrder(OrderToReturnDTO orderDTO)
+        public async Task<ActionResult> UpdateOrder(UpdateOrderDTO orderDTO)
         {
             if(orderDTO == null) return BadRequest();
 
@@ -48,7 +48,7 @@ namespace API.Controllers
             var order = await _orderRepository.GetWebsiteOrderById(orderDTO.Id);
             if(order == null) return BadRequest("Order not exists");
 
-            var orderToUpdate = _mapper.Map<OrderToReturnDTO,Order>(orderDTO);
+            var orderToUpdate = _mapper.Map<UpdateOrderDTO,Order>(orderDTO);
             var items = _mapper.Map<List<OrderItemDTO>,List<OrderItem>>(orderDTO.OrderItems);
 
             var orderUpdateResult = await _orderService.UpdateOrder(orderToUpdate, items);

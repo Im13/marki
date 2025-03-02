@@ -166,6 +166,12 @@ export class OrderService {
     return this.http.put(this.baseApiUrl + 'order', order);
   }
 
+  updateWebsiteOrder(order: WebsiteOrder) {
+    //link here
+    console.log(order);
+    return this.http.put(this.baseApiUrl + 'orders', order);
+  }
+
   getOrders(productParams: OrderParams) {
     let params = new HttpParams();
 

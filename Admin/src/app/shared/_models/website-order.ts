@@ -38,4 +38,9 @@ export interface WebsiteOrder {
   orderItems: OrderItem[];
   shipToAddress: ShipToAddress;
   orderStatus: OrderStatus;
+  bankTransferedAmount: number;
+  orderDiscount: number;
+  extraFee: number;
+  total: number;
+  orderNote: string;
 }

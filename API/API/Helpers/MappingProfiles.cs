@@ -31,9 +31,16 @@ namespace API.Helpers
             //     .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.ItemOrdered.PictureUrl))
             //     .ForMember(d => d.PictureUrl, o => o.MapFrom<OrderItemUrlResolver>());
             CreateMap<Order, OrderToReturnDTO>();
+            CreateMap<OrderToReturnDTO, Order>();
             CreateMap<OrderItem, OrderItemDTO>();
+            CreateMap<OrderItemDTO, OrderItem>();
             CreateMap<ItemOrderedDTO, ProductIemOrdered>();
             CreateMap<ProductIemOrdered, ItemOrderedDTO>();
+
+            CreateMap<ShipToAddressDTO, Address>();
+            CreateMap<Address, ShipToAddressDTO>();
+            CreateMap<UpdateOrderDTO, Order>();
+            CreateMap<Order, UpdateOrderDTO>();
 
             //Offline order
             CreateMap<OfflineOrder, OfflineOrderDTO>()
@@ -41,6 +48,11 @@ namespace API.Helpers
                 .ForMember(d => d.ProvinceId, o => o.MapFrom(s => s.Province.Id))
                 .ForMember(d => d.WardId, o => o.MapFrom(s => s.Ward.Id));
             CreateMap<OfflineOrderDTO, OfflineOrder>();
+
+            //Website order - Need merge later
+            CreateMap<Order, OfflineOrderDTO>();
+            CreateMap<OfflineOrderDTO, Order>();
+
             CreateMap<Customer, CustomerDTO>();
             CreateMap<CustomerDTO, Customer>();
             CreateMap<OfflineOrderSKUDTOs, OfflineOrderSKUs>();

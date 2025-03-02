@@ -1,6 +1,6 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
+import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
 import { OrderItem, WebsiteOrder } from 'src/app/shared/_models/website-order';
 import { OrderService } from '../../order.service';
 import { Province } from 'src/app/shared/_models/address/province';
@@ -28,7 +28,7 @@ export class EditOrderModalComponent implements OnInit {
     { id: 7, status: 'Xoá đơn' },
   ];
 
-  constructor(private formBuilder: FormBuilder, private orderService: OrderService) { }
+  constructor(private formBuilder: FormBuilder, private orderService: OrderService, private modal: NzModalRef) { }
 
   ngOnInit(): void {
     // Init form
@@ -76,10 +76,10 @@ export class EditOrderModalComponent implements OnInit {
         this.editOrderForm.patchValue({
           checkout: {
             shippingFee: this.order.shippingFee,
-            orderDiscount: '',
-            bankTransferedAmount: '',
-            extraFee: '',
-            orderNote: '',
+            orderDiscount: this.order.orderDiscount,
+            bankTransferedAmount: this.order.bankTransferedAmount,
+            extraFee: this.order.extraFee,
+            orderNote: this.order.orderNote,
           },
           information: {
             orderCareStaff: 'this.order.orderCareStaffId',
@@ -119,6 +119,46 @@ export class EditOrderModalComponent implements OnInit {
   }
 
   submitForm() {
-    console.log('submit!');
+    this.order.buyerEmail = this.editOrderForm.controls['customerInfo'].value.customerEmailAddress;
+    this.order.shipToAddress.cityOrProvinceId = this.editOrderForm.controls['receiverInfo'].value.provinceId;
+    this.order.shipToAddress.districtId = this.editOrderForm.controls['receiverInfo'].value.districtId;
+    this.order.shipToAddress.wardId = this.editOrderForm.controls['receiverInfo'].value.wardId;
+    this.order.shipToAddress.fullname = this.editOrderForm.controls['receiverInfo'].value.receiverName;
+    this.order.shipToAddress.phoneNumber = this.editOrderForm.controls['receiverInfo'].value.receiverPhoneNumber;
+    this.order.shipToAddress.street = this.editOrderForm.controls['receiverInfo'].value.receiverAddress;
+
+    this.order.shippingFee = +this.editOrderForm.controls['checkout'].value.shippingFee;
+    this.order.orderDiscount = +this.editOrderForm.controls['checkout'].value.orderDiscount;
+    this.order.bankTransferedAmount = +this.editOrderForm.controls['checkout'].value.bankTransferedAmount;
+    this.order.extraFee = +this.editOrderForm.controls['checkout'].value.extraFee;
+    // this.order.total = this.editOrderForm + this.order.shippingFee + this.order.extraFee - this.order.orderDiscount;
+    this.order.orderNote = this.editOrderForm.controls['checkout'].value.orderNote;
+
+    // this.order.orderDate = this.editOrderForm.controls['information'].value.orderCreatedDate;
+    // this.order.orderCareStaffId = this.updateOrderForm.controls['information'].value.orderCareStaff;
+    // this.order.orderCareStaffId = 1;
+    // this.order.customerCareStaffId = this.updateOrderForm.controls['information'].value.customerCareStaff;
+    // this.order.customerCareStaffId = 1;
+
+    // this.customer.name = this.editOrderForm.controls['customerInfo'].value.customerName;
+    // this.customer.phoneNumber = this.editOrderForm.controls['customerInfo'].value.customerPhoneNumber;
+    // this.customer.emailAddress = this.editOrderForm.controls['customerInfo'].value.customerEmailAddress;
+    // this.customer.dob = this.editOrderForm.controls['customerInfo'].value.customerDOB;
+    // this.order.customer = this.customer;
+    // this.order.orderStatus = this.orderStatus;
+
+    // this.order.offlineOrderSKUs = this.groupSkuItems();
+    
+    console.log(this.order);
+
+    this.orderService.updateWebsiteOrder(this.order).subscribe({
+      next: () => {
+        // this.toastrService.success('Cập nhật đơn hàng thành công')
+        this.modal.destroy();
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
   }
 }
