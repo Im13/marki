@@ -36,11 +36,17 @@ export interface WebsiteOrder {
   status: string;
   subtotal: number;
   orderItems: OrderItem[];
-  shipToAddress: ShipToAddress;
+  // shipToAddress: ShipToAddress;
   orderStatus: OrderStatus;
   bankTransferedAmount: number;
   orderDiscount: number;
   extraFee: number;
   total: number;
   orderNote: string;
+  cityOrProvinceId: number;
+  districtId: number;
+  fullname: string;
+  phoneNumber: string;
+  street: string;
+  wardId: number;
 }

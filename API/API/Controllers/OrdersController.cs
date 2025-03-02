@@ -45,13 +45,13 @@ namespace API.Controllers
             if(orderDTO == null) return BadRequest();
 
             //Find order by id
-            var order = await _orderRepository.GetWebsiteOrderById(orderDTO.Id);
+            Order order = await _orderRepository.GetWebsiteOrderById(orderDTO.Id);
             if(order == null) return BadRequest("Order not exists");
 
-            var orderToUpdate = _mapper.Map<UpdateOrderDTO,Order>(orderDTO);
-            var items = _mapper.Map<List<OrderItemDTO>,List<OrderItem>>(orderDTO.OrderItems);
+            Order orderToUpdate = _mapper.Map<UpdateOrderDTO,Order>(orderDTO);
+            List<OrderItem> items = _mapper.Map<List<OrderItemDTO>,List<OrderItem>>(orderDTO.OrderItems);
 
-            var orderUpdateResult = await _orderService.UpdateOrder(orderToUpdate, items);
+            Order orderUpdateResult = await _orderService.UpdateOrder(orderToUpdate, items);
 
             if (orderUpdateResult == null) return BadRequest("Error update order");
 

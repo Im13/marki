@@ -55,7 +55,13 @@ namespace Infrastructure.Services
             var status = await _unitOfWork.Repository<OfflineOrderStatus>().GetByIdAsync(1);
 
             // Create order
-            var order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, subTotal, OrderSources.Website, shippingFee, orderDiscount, bankTransferedAmount, extraFee, total, orderNote, status);
+            var order = new Order(items, buyerEmail, deliveryMethod, subTotal, OrderSources.Website, shippingFee, orderDiscount, bankTransferedAmount, extraFee, total, orderNote, status);
+            order.Fullname = shippingAddress.Fullname;
+            order.CityOrProvinceId = shippingAddress.CityOrProvinceId;
+            order.DistrictId = shippingAddress.DistrictId;
+            order.WardId = shippingAddress.WardId;
+            order.Street = shippingAddress.Street;
+            order.PhoneNumber = shippingAddress.PhoneNumber;
 
             _unitOfWork.Repository<Order>().Add(order);
 
@@ -172,29 +178,34 @@ namespace Infrastructure.Services
             var currentOrder = await _context.Orders.Include(o => o.OrderItems).Where(o => o.Id == order.Id).SingleOrDefaultAsync();
             if (currentOrder == null) return null;
 
-            _unitOfWork.ClearTracker();
-
             // Update other order properties if needed
-            order.BuyerEmail = order.BuyerEmail;
-            order.ShipToAddress = order.ShipToAddress;
-            order.DeliveryMethod = order.DeliveryMethod;
-            order.Subtotal = order.Subtotal;
-            order.ShippingFee = order.ShippingFee;
-            order.OrderDiscount = order.OrderDiscount;
-            order.BankTransferedAmount = order.BankTransferedAmount;
-            order.ExtraFee = order.ExtraFee;
-            order.Total = order.Total;
-            order.OrderNote = order.OrderNote;
+            currentOrder.BuyerEmail = order.BuyerEmail;
+            currentOrder.DeliveryMethod = order.DeliveryMethod;
+            currentOrder.Subtotal = order.Subtotal;
+            currentOrder.ShippingFee = order.ShippingFee;
+            currentOrder.OrderDiscount = order.OrderDiscount;
+            currentOrder.BankTransferedAmount = order.BankTransferedAmount;
+            currentOrder.ExtraFee = order.ExtraFee;
+            currentOrder.Total = order.Total;
+            currentOrder.OrderNote = order.OrderNote;
+            currentOrder.Fullname = order.Fullname;
+            currentOrder.CityOrProvinceId = order.CityOrProvinceId;
+            currentOrder.DistrictId = order.DistrictId;
+            currentOrder.WardId = order.WardId;
+            currentOrder.Street = order.Street;
+            currentOrder.PhoneNumber = order.PhoneNumber;
 
-            order.OrderItems.RemoveAll(oi => !items.Any(ui => ui.Id == oi.Id));
+            // Danh sách OrderItems mới từ client
+            var updatedItems = order.OrderItems;
+
+            currentOrder.OrderItems.RemoveAll(oi => !updatedItems.Any(ui => ui.Id == oi.Id));
 
             foreach (var item in items)
             {
-                var existingItem = order.OrderItems.FirstOrDefault(oi => oi.Id == item.Id);
+                var existingItem = currentOrder.OrderItems.FirstOrDefault(oi => oi.Id == item.Id);
 
                 if (existingItem != null)
                 {
-                    // Cập nhật OrderItem nếu đã tồn tại
                     existingItem.ProductName = item.ProductName;
                     existingItem.Price = item.Price;
                     existingItem.Quantity = item.Quantity;
@@ -202,8 +213,7 @@ namespace Infrastructure.Services
                 }
                 else
                 {
-                    // Thêm OrderItem mới nếu chưa có
-                    order.OrderItems.Add(new OrderItem
+                    currentOrder.OrderItems.Add(new OrderItem
                     {
                         ProductName = item.ProductName,
                         Price = item.Price,
@@ -214,7 +224,7 @@ namespace Infrastructure.Services
                 }
             }
 
-            _unitOfWork.Repository<Order>().Update(order);
+            _unitOfWork.Repository<Order>().Update(currentOrder);
 
             var saveOrderResult = await _unitOfWork.Complete();
 

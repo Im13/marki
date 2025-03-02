@@ -12,5 +12,12 @@ namespace API.DTOs
         public decimal Total { get; set; }
         public string OrderNote { get; set; }
         public decimal Subtotal { get; set; }
+
+        public string Fullname { get; set; }
+        public int CityOrProvinceId { get; set; }
+        public int DistrictId { get; set; }
+        public int WardId { get; set; }
+        public string Street { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }

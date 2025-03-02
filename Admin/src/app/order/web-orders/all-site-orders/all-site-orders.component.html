@@ -21,9 +21,9 @@
             <td [nzChecked]="setOfCheckedId.has(order.id)" (nzCheckedChange)="onItemChecked(order.id, $event)" nzLeft>
             </td>
             <td nzLeft>{{ order.id }}</td>
-            <td (click)="onEditOrder(order)">{{ order.shipToAddress.fullname }}</td>
-            <td (click)="onEditOrder(order)">{{ order.shipToAddress.phoneNumber }}</td>
-            <td (click)="onEditOrder(order)">{{ order.shipToAddress.street }}</td>
+            <td (click)="onEditOrder(order)">{{ order.fullname }}</td>
+            <td (click)="onEditOrder(order)">{{ order.phoneNumber }}</td>
+            <td (click)="onEditOrder(order)">{{ order.street }}</td>
             <!-- <td (click)="onEditOrder(order)">{{ order.dateCreated | date:'hh:mm dd/MM/YYYY' }}</td> -->
             <td (click)="onEditOrder(order)">{{ order.subtotal | thousandSeparator }}</td>
             <td nzRight>

@@ -8,7 +8,6 @@ namespace Core.Entities.OrderAggregate
 
         public Order(List<OrderItem> orderItems, 
             string buyerEmail, 
-            Address shipToAddress, 
             DeliveryMethod deliveryMethod, 
             decimal subTotal, 
             OrderSources source,
@@ -21,7 +20,7 @@ namespace Core.Entities.OrderAggregate
             OfflineOrderStatus orderStatus)
         {
             BuyerEmail = buyerEmail;
-            ShipToAddress = shipToAddress;
+            // ShipToAddress = shipToAddress;
             DeliveryMethod = deliveryMethod;
             OrderItems = orderItems;
             Subtotal = subTotal;
@@ -37,7 +36,7 @@ namespace Core.Entities.OrderAggregate
 
         public string BuyerEmail { get; set; }
         public DateTime OrderDate { get; set; } = DateTime.UtcNow;
-        public Address ShipToAddress { get; set; }
+        // public Address ShipToAddress { get; set; }
         public DeliveryMethod DeliveryMethod { get; set; }
         public List<OrderItem> OrderItems { get; set; }
         // public OrderStatus Status { get; set; } = OrderStatus.New;
@@ -51,7 +50,14 @@ namespace Core.Entities.OrderAggregate
         public decimal Total { get; set; }
         public string OrderNote { get; set; }
         
-        //Using with Stripe
+        public string Fullname { get; set; }
+        public int CityOrProvinceId { get; set; }
+        public int DistrictId { get; set; }
+        public int WardId { get; set; }
+        public string Street { get; set; }
+        public string PhoneNumber { get; set; }
+
+         //Using with Stripe
         public string PaymentIntentId { get; set; }
 
         //When using automapper, it will map this method to property called Total

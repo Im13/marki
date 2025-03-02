@@ -47,18 +47,18 @@ export class EditOrderModalComponent implements OnInit {
         customerCareStaff: this.formBuilder.control('this.order.customerCareStaffId'),
       }),
       customerInfo: this.formBuilder.group({
-        customerName: this.formBuilder.control(this.order?.shipToAddress.fullname, [ Validators.required ]),
-        customerPhoneNumber: this.formBuilder.control(this.order?.shipToAddress.phoneNumber, [ Validators.required ]),
+        customerName: this.formBuilder.control(this.order?.fullname, [ Validators.required ]),
+        customerPhoneNumber: this.formBuilder.control(this.order?.phoneNumber, [ Validators.required ]),
         customerEmailAddress: this.formBuilder.control(this.order?.buyerEmail),
         customerDOB: this.formBuilder.control(new Date()),
       }),
       receiverInfo: this.formBuilder.group({
-        receiverName: this.formBuilder.control(this.order.shipToAddress.fullname, [ Validators.required ]),
-        receiverPhoneNumber: this.formBuilder.control(this.order.shipToAddress.phoneNumber, [ Validators.required ]),
-        receiverAddress: this.formBuilder.control(this.order.shipToAddress.street, [ Validators.required ]),
-        provinceId: this.formBuilder.control(this.order.shipToAddress.cityOrProvinceId, [ Validators.required ]),
-        districtId: this.formBuilder.control(this.order.shipToAddress.districtId, [ Validators.required ]),
-        wardId: this.formBuilder.control(this.order.shipToAddress.wardId, [ Validators.required ]),
+        receiverName: this.formBuilder.control(this.order.fullname, [ Validators.required ]),
+        receiverPhoneNumber: this.formBuilder.control(this.order.phoneNumber, [ Validators.required ]),
+        receiverAddress: this.formBuilder.control(this.order.street, [ Validators.required ]),
+        provinceId: this.formBuilder.control(this.order.cityOrProvinceId, [ Validators.required ]),
+        districtId: this.formBuilder.control(this.order.districtId, [ Validators.required ]),
+        wardId: this.formBuilder.control(this.order.wardId, [ Validators.required ]),
       }),
       deliveryService: this.formBuilder.group({
         deliveryCompanyId: this.formBuilder.control(''),
@@ -86,17 +86,17 @@ export class EditOrderModalComponent implements OnInit {
             customerCareStaff: 'this.order.customerCareStaffId',
           },
           customerInfo: {
-            customerName: this.order.shipToAddress.fullname,
-            customerPhoneNumber: this.order.shipToAddress.phoneNumber,
+            customerName: this.order.fullname,
+            customerPhoneNumber: this.order.phoneNumber,
             customerEmailAddress: this.order.buyerEmail,
           },
           receiverInfo: {
-            receiverName: this.order.shipToAddress.fullname,
-            receiverPhoneNumber: this.order.shipToAddress.phoneNumber,
-            receiverAddress: this.order.shipToAddress.street,
-            provinceId: this.order.shipToAddress.cityOrProvinceId,
-            districtId: this.order.shipToAddress.districtId,
-            wardId: this.order.shipToAddress.wardId,
+            receiverName: this.order.fullname,
+            receiverPhoneNumber: this.order.phoneNumber,
+            receiverAddress: this.order.street,
+            provinceId: this.order.cityOrProvinceId,
+            districtId: this.order.districtId,
+            wardId: this.order.wardId,
           }
         })
 
@@ -120,12 +120,12 @@ export class EditOrderModalComponent implements OnInit {
 
   submitForm() {
     this.order.buyerEmail = this.editOrderForm.controls['customerInfo'].value.customerEmailAddress;
-    this.order.shipToAddress.cityOrProvinceId = this.editOrderForm.controls['receiverInfo'].value.provinceId;
-    this.order.shipToAddress.districtId = this.editOrderForm.controls['receiverInfo'].value.districtId;
-    this.order.shipToAddress.wardId = this.editOrderForm.controls['receiverInfo'].value.wardId;
-    this.order.shipToAddress.fullname = this.editOrderForm.controls['receiverInfo'].value.receiverName;
-    this.order.shipToAddress.phoneNumber = this.editOrderForm.controls['receiverInfo'].value.receiverPhoneNumber;
-    this.order.shipToAddress.street = this.editOrderForm.controls['receiverInfo'].value.receiverAddress;
+    this.order.cityOrProvinceId = this.editOrderForm.controls['receiverInfo'].value.provinceId;
+    this.order.districtId = this.editOrderForm.controls['receiverInfo'].value.districtId;
+    this.order.wardId = this.editOrderForm.controls['receiverInfo'].value.wardId;
+    this.order.fullname = this.editOrderForm.controls['receiverInfo'].value.receiverName;
+    this.order.phoneNumber = this.editOrderForm.controls['receiverInfo'].value.receiverPhoneNumber;
+    this.order.street = this.editOrderForm.controls['receiverInfo'].value.receiverAddress;
 
     this.order.shippingFee = +this.editOrderForm.controls['checkout'].value.shippingFee;
     this.order.orderDiscount = +this.editOrderForm.controls['checkout'].value.orderDiscount;
@@ -148,7 +148,7 @@ export class EditOrderModalComponent implements OnInit {
     // this.order.orderStatus = this.orderStatus;
 
     // this.order.offlineOrderSKUs = this.groupSkuItems();
-    
+
     console.log(this.order);
 
     this.orderService.updateWebsiteOrder(this.order).subscribe({
