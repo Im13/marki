@@ -131,25 +131,10 @@ export class EditOrderModalComponent implements OnInit {
     this.order.orderDiscount = +this.editOrderForm.controls['checkout'].value.orderDiscount;
     this.order.bankTransferedAmount = +this.editOrderForm.controls['checkout'].value.bankTransferedAmount;
     this.order.extraFee = +this.editOrderForm.controls['checkout'].value.extraFee;
-    // this.order.total = this.editOrderForm + this.order.shippingFee + this.order.extraFee - this.order.orderDiscount;
+    this.order.total = this.subTotal + this.order.shippingFee + this.order.extraFee - this.order.orderDiscount;
     this.order.orderNote = this.editOrderForm.controls['checkout'].value.orderNote;
     this.order.orderItems = this.listItems;
     this.order.subtotal = this.subTotal;
-
-    // this.order.orderDate = this.editOrderForm.controls['information'].value.orderCreatedDate;
-    // this.order.orderCareStaffId = this.updateOrderForm.controls['information'].value.orderCareStaff;
-    // this.order.orderCareStaffId = 1;
-    // this.order.customerCareStaffId = this.updateOrderForm.controls['information'].value.customerCareStaff;
-    // this.order.customerCareStaffId = 1;
-
-    // this.customer.name = this.editOrderForm.controls['customerInfo'].value.customerName;
-    // this.customer.phoneNumber = this.editOrderForm.controls['customerInfo'].value.customerPhoneNumber;
-    // this.customer.emailAddress = this.editOrderForm.controls['customerInfo'].value.customerEmailAddress;
-    // this.customer.dob = this.editOrderForm.controls['customerInfo'].value.customerDOB;
-    // this.order.customer = this.customer;
-    // this.order.orderStatus = this.orderStatus;
-
-    // this.order.offlineOrderSKUs = this.groupSkuItems();
 
     console.log(this.order);
 
