@@ -5,6 +5,7 @@ import { OrderItem, WebsiteOrder } from 'src/app/shared/_models/website-order';
 import { OrderService } from '../../order.service';
 import { Province } from 'src/app/shared/_models/address/province';
 import { OrderStatus } from 'src/app/shared/_models/orderStatus';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-order-modal',
@@ -28,7 +29,7 @@ export class EditOrderModalComponent implements OnInit {
     { id: 7, status: 'Xoá đơn' },
   ];
 
-  constructor(private formBuilder: FormBuilder, private orderService: OrderService, private modal: NzModalRef) { }
+  constructor(private formBuilder: FormBuilder, private orderService: OrderService, private modal: NzModalRef, private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     // Init form
@@ -70,7 +71,6 @@ export class EditOrderModalComponent implements OnInit {
     this.orderService.getWebsiteOrderById(this.order.id).subscribe({
       next: data => {
         this.order = data;
-        console.log(this.order);
 
         // Update form data
         this.editOrderForm.patchValue({
@@ -136,11 +136,9 @@ export class EditOrderModalComponent implements OnInit {
     this.order.orderItems = this.listItems;
     this.order.subtotal = this.subTotal;
 
-    console.log(this.order);
-
     this.orderService.updateWebsiteOrder(this.order).subscribe({
       next: () => {
-        // this.toastrService.success('Cập nhật đơn hàng thành công')
+        this.toastrService.success('Cập nhật đơn hàng thành công')
         this.modal.destroy();
       },
       error: err => {

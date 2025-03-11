@@ -32,7 +32,6 @@ export class ListProductSkuComponent {
 
     this.productService.getProductSKUDetails(this.productParams).subscribe({
       next: skus => {
-        console.log(skus);
         this.listFilterSkus = skus;
       }
     });
@@ -56,7 +55,7 @@ export class ListProductSkuComponent {
       }
     });
 
-    console.log(this.listItems);
+    this.selectListItems.emit(this.listItems);
   }
 
   onRemoveSKU(item: OrderItem) {

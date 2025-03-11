@@ -54,7 +54,6 @@ export class AllSiteOrdersComponent {
         this.orderParams.pageSize = response.pageSize;
         this.totalItems = response.count;
         this.loading = false;
-        console.log(this.orders);
       },
       error: (err) => {
         this.loading = false;
@@ -119,7 +118,7 @@ export class AllSiteOrdersComponent {
     this.orderService.updateWebsiteOrderStatus(updateStatusDTO).subscribe({
       next: (order) => {
         console.log(order);
-        // this.toastrService.success('Cập nhật trạng thái đơn hàng thành công');
+        this.toastrService.success('Cập nhật trạng thái đơn hàng thành công');
       },
       error: (err) => {
         console.log(err);
