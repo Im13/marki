@@ -1,3 +1,4 @@
+import { Photo } from "./photo";
 import { ProductSKUValues } from "./productSKUValues";
 
 export interface ProductSKUDetails {

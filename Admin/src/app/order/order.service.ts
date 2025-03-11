@@ -167,8 +167,6 @@ export class OrderService {
   }
 
   updateWebsiteOrder(order: WebsiteOrder) {
-    //link here
-    console.log(order);
     return this.http.put(this.baseApiUrl + 'orders', order);
   }
 

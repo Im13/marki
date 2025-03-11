@@ -32,29 +32,31 @@ export class ListProductSkuComponent {
 
     this.productService.getProductSKUDetails(this.productParams).subscribe({
       next: skus => {
+        console.log(skus);
         this.listFilterSkus = skus;
       }
     });
   }
 
   selectProduct(data: ProductSKUDetails) {
-    console.log(data);
+    //When select SKU, it means we will create new OrderItem, so id = -1
+    this.listItems.push({
+      id: null,
+      productName: data.productName,
+      price: data.price,
+      quantity: 1,
+      pictureUrl: data.imageUrl,
+      sku: data.sku,
+      optionValueCombination: data.productSKUValues.map(option => `${option.optionName}: ${option.optionValue}`).join("; "),
+      productId: data.id,
+      itemOrdered: { 
+        productItemId: 0,
+        productName: data.productName,
+        pictureUrl: data.imageUrl
+      }
+    });
 
-    // this.listItems.push({
-    //   id: 0,
-    //   productName: data.productName,
-    //   price: data.price,
-    //   quantity: 1,
-    //   pictureUrl: data.imageUrl,
-    //   sku: data.sku,
-    //   // optionValueCombination: data.optionValueCombination,
-    //   // productId: data.productId,
-    //   itemOrdered: {
-    //     productItemId: 0,
-    //     productName: data.productName,
-    //     pictureUrl: data.imageUrl
-    //   }
-    // });
+    console.log(this.listItems);
   }
 
   onRemoveSKU(item: OrderItem) {
