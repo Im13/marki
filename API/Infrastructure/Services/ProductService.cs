@@ -118,6 +118,13 @@ namespace Infrastructure.Services
 
             foreach (var sku in prod.ProductSKUs)
             {
+                var mainPhoto = prod.Photos.FirstOrDefault(p => p.IsMain == true);
+
+                if(string.IsNullOrEmpty(sku.ImageUrl))
+                {
+                    sku.ImageUrl = mainPhoto.Url;
+                }
+
                 foreach (var value in sku.ProductSKUValues)
                 {
                     value.ProductOptionValue = listOptionValue.FirstOrDefault(ov => ov.ValueTempId == value.ValueTempId);

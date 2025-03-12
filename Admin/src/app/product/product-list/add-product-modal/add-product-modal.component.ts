@@ -381,6 +381,12 @@ export class AddProductModalComponent implements OnInit {
     this.product.productTypeId = this.addForm.value.productTypeId;
     this.product.productSkus = this.productSKUs;
     this.product.photos = this.productImages;
+
+    // this.product.productSkus.forEach(sku => {
+    //   if(sku.photos.length == 0) {
+    //     sku.photos.push(this.productImages.find(p => p.isMain == true));
+    //   }
+    // });
   }
 
   onCreateVariants() {

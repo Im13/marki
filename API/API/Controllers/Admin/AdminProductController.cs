@@ -2,12 +2,10 @@ using API.DTOs;
 using API.DTOs.Product;
 using API.Helpers;
 using AutoMapper;
-using CloudinaryDotNet.Actions;
 using Core;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specification;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.Admin
