@@ -1,0 +1,95 @@
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { FormGroup, FormGroupDirective } from '@angular/forms';
+
+@Component({
+  selector: 'app-checkout-info',
+  templateUrl: './checkout-info.component.html',
+  styleUrls: ['./checkout-info.component.css'],
+})
+export class CheckoutInfoComponent {
+  @Input() totalSKUsPrice!: number;
+  @ViewChild('discount') discount: ElementRef;
+
+  checkoutForm!: FormGroup;
+  orderTotal: number;
+  shippingFee = 0;
+  orderDiscount = 0;
+  bankTransferedAmount = 0;
+  extraFee = 0;
+  freeshipChecked = false;
+
+  //After caculated variables
+  afterDiscount = 0;
+  total = 0;
+
+  constructor(private rootFormGroup: FormGroupDirective) {}
+
+  ngOnInit(): void {
+    this.orderTotal = this.totalSKUsPrice;
+    this.checkoutForm = this.rootFormGroup.control.get('checkout') as FormGroup;
+
+    if (
+      this.checkoutForm.value.orderDiscount !== '' &&
+      this.checkoutForm.value.bankTransferedAmount !== '' &&
+      this.checkoutForm.value.extraFee !== '' &&
+      this.checkoutForm.value.shippingFee !== ''
+    ) {
+      this.orderDiscount = +this.checkoutForm.value.orderDiscount;
+      this.bankTransferedAmount = +this.checkoutForm.value.bankTransferedAmount;
+      this.extraFee = +this.checkoutForm.value.extraFee;
+      this.shippingFee = +this.checkoutForm.value.shippingFee;
+    }
+  }
+
+  ngOnChanges(): void {
+    this.onFeesChange();
+    this.calculateOrderTotal();
+  }
+
+  onFeesChange() {
+    if(this.checkoutForm) {
+      this.shippingFee = +this.checkoutForm.value?.shippingFee;
+      this.orderDiscount = +this.checkoutForm.value?.orderDiscount;
+      this.bankTransferedAmount = +this.checkoutForm.value?.bankTransferedAmount;
+      this.extraFee = +this.checkoutForm.value?.extraFee;
+      this.calculateOrderTotal();
+    }
+  }
+
+  calculateOrderTotal() {
+    this.orderTotal = this.totalSKUsPrice + this.shippingFee + this.extraFee;
+    this.afterDiscount = this.orderTotal - this.orderDiscount;
+    this.total = this.afterDiscount - this.bankTransferedAmount;
+  }
+
+  // This will be called everytime form's freeshipChecked perform check
+  onFreeshipChecked() {
+    if (this.checkoutForm.value.freeshipChecked === true) {
+      this.checkoutForm.patchValue({
+        shippingFee: 0,
+      });
+
+      this.shippingFee = this.checkoutForm.value.shippingFee;
+    }
+
+    this.calculateOrderTotal();
+  }
+
+  onShippingFeesChange() {
+    var currentShippingFee = this.checkoutForm.value.shippingFee;
+
+    // When freeshipChecked changed to false, onFreeshipChecked method will be automatically called
+    this.checkoutForm.patchValue({
+      freeshipChecked: false,
+      shippingFee: currentShippingFee,
+    });
+
+    this.onFeesChange();
+  }
+
+  handleKeydown(event: any) {
+    if (event.key == 'Enter') {
+      this.discount.nativeElement.focus();
+    }
+  }
+}
