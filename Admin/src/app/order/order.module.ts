@@ -23,6 +23,7 @@ import { EditOrderModalComponent } from './web-orders/edit-order-modal/edit-orde
 import { ProductItemsComponent } from './add-order/order-information/product-items/product-items.component';
 import { ListProductSkuComponent } from './web-orders/list-product-sku/product-skus.component';
 import { ProductSkusComponent } from './add-order/order-information/product-skus/product-skus.component';
+import { CheckoutInfoComponent } from './web-orders/checkout-info/checkout-info.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ProductSkusComponent } from './add-order/order-information/product-skus
     AllSiteOrdersComponent,
     EditOrderModalComponent,
     ProductItemsComponent,
-    ProductSkusComponent
+    ProductSkusComponent,
+    CheckoutInfoComponent
   ],
   imports: [
     CommonModule,

@@ -18,6 +18,7 @@ export class EditOrderModalComponent implements OnInit {
   listItems: OrderItem[];
   provinces: Province[] = [];
   subTotal = 0;
+  total = 0;
 
   orderStatuses: OrderStatus[] = [
     { id: 1, status: 'Mới' },
@@ -71,6 +72,7 @@ export class EditOrderModalComponent implements OnInit {
     this.orderService.getWebsiteOrderById(this.order.id).subscribe({
       next: data => {
         this.order = data;
+        console.log(this.order);
 
         // Update form data
         this.editOrderForm.patchValue({
@@ -104,6 +106,7 @@ export class EditOrderModalComponent implements OnInit {
         this.listItems = this.order.orderItems;
 
         this.subTotal = this.order.subtotal;
+        // this.total = this.order.total;
       },
       error: err => console.log(err)
     });
@@ -131,7 +134,7 @@ export class EditOrderModalComponent implements OnInit {
     this.order.orderDiscount = +this.editOrderForm.controls['checkout'].value.orderDiscount;
     this.order.bankTransferedAmount = +this.editOrderForm.controls['checkout'].value.bankTransferedAmount;
     this.order.extraFee = +this.editOrderForm.controls['checkout'].value.extraFee;
-    this.order.total = this.subTotal + this.order.shippingFee + this.order.extraFee - this.order.orderDiscount;
+    this.order.total = this.subTotal + this.order.shippingFee + this.order.extraFee - this.order.orderDiscount - this.order.bankTransferedAmount;
     this.order.orderNote = this.editOrderForm.controls['checkout'].value.orderNote;
     this.order.orderItems = this.listItems;
     this.order.subtotal = this.subTotal;
