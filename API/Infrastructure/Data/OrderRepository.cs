@@ -47,6 +47,7 @@ namespace Infrastructure.Data
                 .Include(o => o.OrderItems)
                 .ThenInclude(x => x.ItemOrdered)
                 .Include(x => x.OrderStatus)
+                .Include(x => x.Customer)
                 .FirstOrDefaultAsync(o => o.Id == id);
         }
     }

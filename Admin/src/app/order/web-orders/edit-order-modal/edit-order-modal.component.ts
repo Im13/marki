@@ -88,9 +88,10 @@ export class EditOrderModalComponent implements OnInit {
             customerCareStaff: 'this.order.customerCareStaffId',
           },
           customerInfo: {
-            customerName: this.order.fullname,
-            customerPhoneNumber: this.order.phoneNumber,
-            customerEmailAddress: this.order.buyerEmail,
+            customerName: this.order.customer.name,
+            customerPhoneNumber: this.order.customer.phoneNumber,
+            customerEmailAddress: this.order.customer.emailAddress,
+            customerDOB: this.order.customer.dob
           },
           receiverInfo: {
             receiverName: this.order.fullname,
@@ -122,7 +123,11 @@ export class EditOrderModalComponent implements OnInit {
   }
 
   submitForm() {
-    this.order.buyerEmail = this.editOrderForm.controls['customerInfo'].value.customerEmailAddress;
+    this.order.customer.emailAddress = this.editOrderForm.controls['customerInfo'].value.customerEmailAddress;
+    this.order.customer.dob = this.editOrderForm.controls['customerInfo'].value.customerDOB;
+    this.order.customer.name = this.editOrderForm.controls['customerInfo'].value.customerName;
+    this.order.customer.phoneNumber = this.editOrderForm.controls['customerInfo'].value.customerPhoneNumber;
+
     this.order.cityOrProvinceId = this.editOrderForm.controls['receiverInfo'].value.provinceId;
     this.order.districtId = this.editOrderForm.controls['receiverInfo'].value.districtId;
     this.order.wardId = this.editOrderForm.controls['receiverInfo'].value.wardId;

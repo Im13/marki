@@ -1,3 +1,4 @@
+import { Customer } from "./customer";
 import { OrderStatus } from "./orderStatus";
 
 export interface OrderItem {
@@ -49,4 +50,5 @@ export interface WebsiteOrder {
   phoneNumber: string;
   street: string;
   wardId: number;
+  customer: Customer;
 }

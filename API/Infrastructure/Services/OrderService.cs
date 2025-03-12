@@ -1,4 +1,3 @@
-using System.Security.Cryptography;
 using Core;
 using Core.Entities;
 using Core.Entities.OrderAggregate;
@@ -187,6 +186,16 @@ namespace Infrastructure.Services
             var currentOrder = await _context.Orders.Include(o => o.OrderItems).Where(o => o.Id == order.Id).SingleOrDefaultAsync();
             if (currentOrder == null) return null;
 
+            //Get Customer
+            var customer = await _context.Customers.Where(c => c.Id == order.Customer.Id).SingleOrDefaultAsync();
+
+            if(customer == null) return null;
+
+            customer.Name = order.Customer.Name;
+            customer.PhoneNumber = order.Customer.PhoneNumber;
+            customer.EmailAddress = order.Customer.EmailAddress;
+            customer.DOB = order.Customer.DOB;
+
             // Update other order properties if needed
             currentOrder.BuyerEmail = order.BuyerEmail;
             currentOrder.DeliveryMethod = order.DeliveryMethod;
@@ -203,6 +212,7 @@ namespace Infrastructure.Services
             currentOrder.WardId = order.WardId;
             currentOrder.Street = order.Street;
             currentOrder.PhoneNumber = order.PhoneNumber;
+            currentOrder.Customer = customer;
 
             // Danh sách OrderItems mới từ client
             var updatedItems = order.OrderItems;
