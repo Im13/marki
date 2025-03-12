@@ -49,13 +49,13 @@ namespace Core.Entities.OrderAggregate
         public decimal ExtraFee { get; set; }
         public decimal Total { get; set; }
         public string OrderNote { get; set; }
-        
         public string Fullname { get; set; }
         public int CityOrProvinceId { get; set; }
         public int DistrictId { get; set; }
         public int WardId { get; set; }
         public string Street { get; set; }
         public string PhoneNumber { get; set; }
+        public Customer Customer { get; set; }
 
          //Using with Stripe
         public string PaymentIntentId { get; set; }

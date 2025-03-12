@@ -54,6 +54,14 @@ namespace Infrastructure.Services
             //Define orderStatus 
             var status = await _unitOfWork.Repository<OfflineOrderStatus>().GetByIdAsync(1);
 
+            //CreateCustomer
+            var customer = new Customer {
+                Name = shippingAddress.Fullname,
+                PhoneNumber = shippingAddress.PhoneNumber,
+                EmailAddress = buyerEmail,
+                IsDeleted = false
+            };
+
             // Create order
             var order = new Order(items, buyerEmail, deliveryMethod, subTotal, OrderSources.Website, shippingFee, orderDiscount, bankTransferedAmount, extraFee, total, orderNote, status);
             order.Fullname = shippingAddress.Fullname;
@@ -62,6 +70,7 @@ namespace Infrastructure.Services
             order.WardId = shippingAddress.WardId;
             order.Street = shippingAddress.Street;
             order.PhoneNumber = shippingAddress.PhoneNumber;
+            order.Customer = customer;
 
             _unitOfWork.Repository<Order>().Add(order);
 
