@@ -99,13 +99,17 @@ export class AllSiteOrdersComponent {
   }
 
   onEditOrder(order: WebsiteOrder) {
-    const modal = this.modalServices.create<EditOrderModalComponent, WebsiteOrder>({
+    const modalRef = this.modalServices.create<EditOrderModalComponent, WebsiteOrder>({
       nzTitle: '#' + order.id.toString(),
       nzContent: EditOrderModalComponent,
       nzCentered: true,
       nzWidth: '160vh',
       nzData: order,
       nzBodyStyle: { overflowY: 'scroll', height: '86vh', padding: '0px' },
+    });
+
+    modalRef.afterClose.subscribe(() => {
+      this.getOrders();
     });
   }
 
