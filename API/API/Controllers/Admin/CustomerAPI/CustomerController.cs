@@ -6,7 +6,6 @@ using Core.Entities;
 using Core.Interfaces;
 using Core.Specification.CustomerSpec;
 using Core.Specification.CustomerSpecification;
-using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API

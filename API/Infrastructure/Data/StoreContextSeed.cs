@@ -1,7 +1,6 @@
 using System.Text.Json;
 using Core.Entities;
 using Core.Entities.OrderAggregate;
-using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data
 {

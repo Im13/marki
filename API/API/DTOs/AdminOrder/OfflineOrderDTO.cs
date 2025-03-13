@@ -1,5 +1,3 @@
-using API.DTOs.Product;
-
 namespace API.DTOs.AdminOrder
 {
     public class OfflineOrderDTO
