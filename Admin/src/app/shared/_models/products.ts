@@ -14,4 +14,5 @@ export interface Product {
   productOptions: ProductOptions[];
   productSkus: ProductSKUs[];
   photos: Photo[];
+  slug: string;
 }

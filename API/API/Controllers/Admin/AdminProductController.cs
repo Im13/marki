@@ -41,6 +41,10 @@ namespace API.Controllers.Admin
 
             if (productWithSKUExists != null) return BadRequest("Product with this SKU has exists!");
 
+            var productWithSlug = await _productService.GetBySlug(productDTOs.Slug);
+            
+            if(productWithSlug != null) return BadRequest("Product with this name has exists!");
+
             var createdProduct = await _productService.CreateProduct(product, options);
 
             return Ok(createdProduct);

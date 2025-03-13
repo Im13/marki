@@ -78,7 +78,8 @@ export class AddProductModalComponent implements OnInit {
         productTypeId: null,
         productSkus: [],
         imageUrl: '',
-        photos: []
+        photos: [],
+        slug: ''
       };
     } else {
       this.isEdit = true;
@@ -348,6 +349,10 @@ export class AddProductModalComponent implements OnInit {
 
     if (this.addForm.valid) {
       if (!this.isEdit) {
+        if(this.product.slug == '') {
+          this.product.slug = this.convertToSlug(this.product.name);
+        }
+
         this.productService.addProduct(this.product).subscribe({
           next: () => {
             this.toastrService.success('Thêm sản phẩm thành công!');
@@ -372,6 +377,18 @@ export class AddProductModalComponent implements OnInit {
       }
     }
   }
+
+  convertToSlug(productName: string): string {
+    return productName
+      .toLowerCase() // Chuyển về chữ thường
+      .normalize("NFD") // Chuẩn hóa Unicode để tách dấu
+      .replace(/[\u0300-\u036f]/g, "") // Xóa dấu
+      .replace(/đ/g, "d") // Chuyển đ -> d
+      .replace(/[^a-z0-9\s-]/g, "") // Xóa ký tự đặc biệt
+      .trim() // Xóa khoảng trắng thừa
+      .replace(/\s+/g, "-"); // Thay khoảng trắng bằng dấu "-"
+  }
+  
 
   bindDataToProductObject() {
     this.product.name = this.addForm.value.productName;

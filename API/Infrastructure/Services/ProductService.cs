@@ -100,6 +100,7 @@ namespace Infrastructure.Services
         public async Task<Product> CreateProduct(Product prod, List<ProductOptions> options)
         {
             var listOptionValue = new List<ProductOptionValues>();
+
             prod.ProductType = await _unitOfWork.Repository<ProductType>().GetByIdAsync(prod.ProductTypeId);
 
             _unitOfWork.Repository<Product>().Add(prod);
