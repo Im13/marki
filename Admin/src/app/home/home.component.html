@@ -37,6 +37,12 @@
         <span nz-icon nzType="deployment-unit"></span>
         <span>Nhà cung cấp</span>
       </li>
+      <li nz-submenu nzTitle="Website" nzIcon="skin">
+        <ul>
+          <li *appHasRole="['Admin']" nz-menu-item routerLink="/product">Giao diện</li>
+          <li nz-menu-item>Nội dung</li>
+        </ul>
+      </li>
       <li nz-menu-item>
         <span nz-icon nzType="calculator"></span>
         <span>Thu chi</span>
