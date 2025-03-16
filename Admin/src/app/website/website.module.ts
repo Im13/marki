@@ -5,11 +5,13 @@ import { SharedModule } from '../shared/shared.module';
 import { WebsiteRoutingModule } from './website-routing.module';
 import { BannerComponent } from './banner/banner.component';
 import { CoreModule } from '../core/core.module';
+import { AllBannerComponent } from './banner/all-banner/all-banner.component';
 
 @NgModule({
   declarations: [
     WebsiteComponent,
-    BannerComponent
+    BannerComponent,
+    AllBannerComponent
   ],
   imports: [
     CommonModule,
