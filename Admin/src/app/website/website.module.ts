@@ -6,12 +6,14 @@ import { WebsiteRoutingModule } from './website-routing.module';
 import { BannerComponent } from './banner/banner.component';
 import { CoreModule } from '../core/core.module';
 import { AllBannerComponent } from './banner/all-banner/all-banner.component';
+import { AddBannerModalComponent } from './banner/add-banner-modal/add-banner-modal.component';
 
 @NgModule({
   declarations: [
     WebsiteComponent,
     BannerComponent,
-    AllBannerComponent
+    AllBannerComponent,
+    AddBannerModalComponent
   ],
   imports: [
     CommonModule,

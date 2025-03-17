@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specification;
@@ -8,10 +9,12 @@ namespace Infrastructure.Data
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
         private readonly StoreContext _context;
+        private readonly DbSet<T> _dbSet;
 
         public GenericRepository(StoreContext context)
         {
             _context = context;
+            _dbSet = context.Set<T>();
         }
 
         public async Task<T> GetByIdAsync(int id)
@@ -37,6 +40,11 @@ namespace Infrastructure.Data
         public async Task<int> CountAsync(ISpecification<T> spec)
         {
             return await ApplySpecification(spec).CountAsync();
+        }
+
+        public async Task<T> GetFirstOrDefaultAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _dbSet.FirstOrDefaultAsync(predicate);
         }
 
         private IQueryable<T> ApplySpecification(ISpecification<T> spec)
