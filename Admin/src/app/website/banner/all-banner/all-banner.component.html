@@ -7,11 +7,12 @@
         <tr>
           <th [nzChecked]="checked" [nzIndeterminate]="indeterminate" nzLabel="Select all"
             (nzCheckedChange)="onAllChecked($event)" nzWidth="40px" nzLeft></th>
-          <th rowSpan="1" nzWidth="60px" nzLeft>Thứ tự</th>
+          <th rowSpan="1" nzWidth="40px" nzLeft>Thứ tự</th>
           <th nzWidth="140px">Ảnh desktop</th>
           <th nzWidth="140px">Link</th>
           <th nzWidth="140px">Ảnh mobile</th>
           <th nzWidth="140px">Link</th>
+          <th nzWidth="120px">Link điều hướng</th>
           <th nzWidth="120px">Alt Text</th>
           <th nzWidth="200px">Trạng thái</th>
         </tr>
@@ -25,6 +26,7 @@
           <td (click)="onEditCustomer(customer)"></td>
           <td (click)="onEditCustomer(customer)"></td>
           <td (click)="onEditCustomer(customer)">{{ customer.dob | date : 'dd/MM/yyyy' }}</td>
+          <td (click)="onEditCustomer(customer)">{{ customer.name }}</td>
           <td (click)="onEditCustomer(customer)">{{ customer.name }}</td>
           <td (click)="onEditCustomer(customer)">{{ customer.phoneNumber }}</td>
         </tr>
