@@ -1,7 +1,7 @@
 <nz-layout class="border h-100">
   <nz-content class="h-100 border-bottom" #content>
     <nz-table nzBordered #rowSelectionTable nzShowPagination="false"
-      [nzFrontPagination]="false" [nzScroll]="{ x: '1200px', y: '768px' }" [nzData]="customers"
+      [nzFrontPagination]="false" [nzScroll]="{ x: '1200px', y: '768px' }" [nzData]="slides"
       (nzCurrentPageDataChange)="onCurrentPageDataChange($event)" [nzLoading]="loading" nzSize="small">
       <thead>
         <tr>
@@ -18,24 +18,25 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let customer of customers">
-          <td [nzChecked]="setOfCheckedId.has(customer.id)" (nzCheckedChange)="onItemChecked(customer.id, $event)" nzLeft>
+        <tr *ngFor="let slide of slides">
+          <td [nzChecked]="setOfCheckedId.has(slide.id)" (nzCheckedChange)="onItemChecked(slide.id, $event)" nzLeft>
           </td>
-          <td nzLeft>{{ customer.id }}</td>
-          <td (click)="onEditCustomer(customer)">{{ customer.name }}</td>
-          <td (click)="onEditCustomer(customer)"></td>
-          <td (click)="onEditCustomer(customer)"></td>
-          <td (click)="onEditCustomer(customer)">{{ customer.dob | date : 'dd/MM/yyyy' }}</td>
-          <td (click)="onEditCustomer(customer)">{{ customer.name }}</td>
-          <td (click)="onEditCustomer(customer)">{{ customer.name }}</td>
-          <td (click)="onEditCustomer(customer)">{{ customer.phoneNumber }}</td>
+          <td nzLeft>{{ slide.orderNo }}</td>
+          <td (click)="onEditSlide(slide)">
+            <img [src]="slide.desktopImageUrl" [alt]="slide.altText" class="w-50" />
+          </td>
+          <td (click)="onEditSlide(slide)">{{ shortenUrl(slide.desktopImageUrl, 25) }}</td>
+          <td (click)="onEditSlide(slide)">
+            <img [src]="slide.mobileImageUrl" [alt]="slide.altText" class="w-50" />
+          </td>
+          <td (click)="onEditSlide(slide)">{{ shortenUrl(slide.mobileImageUrl, 25) }}</td>
+          <td (click)="onEditSlide(slide)">{{ slide.link }}</td>
+          <td (click)="onEditSlide(slide)">{{ slide.altText }}</td>
+          <td (click)="onEditSlide(slide)">
+            <nz-switch [(ngModel)]="slide.status" (click)="switchStatus(slide)" [nzControl]="true" [nzLoading]="loading"></nz-switch>
+          </td>
         </tr>
       </tbody>
     </nz-table>
   </nz-content>
-
-  <nz-footer class="d-flex align-items-center justify-content-between px-2">
-    <div class="customer-info">
-    </div>
-  </nz-footer>
 </nz-layout>

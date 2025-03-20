@@ -1,7 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { CustomerService } from 'src/app/customer/customer.service';
-import { Customer } from 'src/app/shared/_models/customer';
 import { CustomerParams } from 'src/app/shared/_models/customer/customerParams';
+import { SlideImage } from 'src/app/shared/_models/slideImages';
+import { WebsiteService } from '../../website.service';
+import { ToastrService } from 'ngx-toastr';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { AddBannerModalComponent } from '../add-banner-modal/add-banner-modal.component';
 
 @Component({
   selector: 'app-all-banner',
@@ -12,7 +15,7 @@ export class AllBannerComponent {
   @Output() checkId = new EventEmitter<Set<number>>();
 
   loading = true;
-  customers: readonly Customer[] = [];
+  slides: readonly SlideImage[] = [];
   customerParams = new CustomerParams();
   totalItems = 0;
 
@@ -22,10 +25,10 @@ export class AllBannerComponent {
   indeterminate = false;
   setOfCheckedId = new Set<number>();
 
-  constructor(private customerService: CustomerService) {}
+  constructor(private webServices: WebsiteService, private toastrService: ToastrService, private modalServices: NzModalService) {}
 
   ngOnInit(): void {
-    this.getCustomers();
+    this.getSlides();
   }
 
   updateCheckedSet(id: number, checked: boolean): void {
@@ -36,17 +39,17 @@ export class AllBannerComponent {
     }
   }
 
-  onCurrentPageDataChange(listOfCurrentPageData: readonly Customer[]): void {
-    this.customers = listOfCurrentPageData;
+  onCurrentPageDataChange(listOfCurrentPageData: readonly SlideImage[]): void {
+    this.slides = listOfCurrentPageData;
     this.refreshCheckedStatus();
   }
 
   refreshCheckedStatus(): void {
-    this.checked = this.customers.every(({ id }) =>
+    this.checked = this.slides.every(({ id }) =>
       this.setOfCheckedId.has(id)
     );
     this.indeterminate =
-      this.customers.some(({ id }) => this.setOfCheckedId.has(id)) &&
+      this.slides.some(({ id }) => this.setOfCheckedId.has(id)) &&
       !this.checked;
   }
 
@@ -57,42 +60,58 @@ export class AllBannerComponent {
   }
 
   onAllChecked(checked: boolean): void {
-    this.customers.forEach(({ id }) => this.updateCheckedSet(id, checked));
+    this.slides.forEach(({ id }) => this.updateCheckedSet(id, checked));
     this.checkId.emit(this.setOfCheckedId);
     this.refreshCheckedStatus();
   }
 
-  onEditCustomer(customer: Customer) {
-    // const modal = this.modalServices.create<UpdateOrderComponent, Order>({
-    //   nzTitle: '#' + order.id.toString(),
-    //   nzContent: UpdateOrderComponent,
-    //   nzCentered: true,
-    //   nzWidth: '160vh',
-    //   nzData: order,
-    //   nzBodyStyle: {overflowY : 'scroll', height: '85vh'}
-    // });
+  onEditSlide(slide: SlideImage) {
+    const modal = this.modalServices.create<AddBannerModalComponent, SlideImage>({
+      nzTitle: 'Thiết lập sản phẩm',
+      nzContent: AddBannerModalComponent,
+      nzCentered: true,
+      nzWidth: '70vh',
+      nzData: slide
+    });
+
+    modal.afterClose.subscribe(() => this.getSlides());
   }
 
   onPageChange(pageNumber: number) {
-    this.customerParams.pageIndex = pageNumber;
-    this.getCustomers();
+    this.getSlides();
   }
 
   onPageSizeChange(pageSize: number) {
-    this.customerParams.pageSize = pageSize;
-    this.getCustomers();
+    this.getSlides();
   }
 
-  getCustomers() {
+  getSlides() {
     this.loading = true;
 
-    this.customerService.getCustomers(this.customerParams).subscribe({
+    this.webServices.getSlides().subscribe({
       next: (response) => {
-        this.customers = response.data;
-        this.customerParams.pageIndex = response.pageIndex;
-        this.customerParams.pageSize = response.pageSize;
-        this.totalItems = response.count;
+        this.slides = response;
         this.loading = false;
+      },
+        error: (err) => {
+          console.log(err);
+          this.loading = false;
+        }
+    });
+  }
+
+  shortenUrl(url: string, length: number): string {
+    if (!url) return '';
+    return url.length > length ? url.substring(0, length) + '...' : url;
+  }
+
+  switchStatus(slide: SlideImage) {
+    slide.status = !slide.status;
+
+    this.webServices.updateSlide(slide).subscribe({
+      next: () => {
+        this.loading = false;
+        this.toastrService.success('Cập nhật trạng thái thành công');
       },
       error: (err) => {
         console.log(err);
@@ -100,4 +119,5 @@ export class AllBannerComponent {
       },
     });
   }
+
 }

@@ -11,7 +11,7 @@ import { ProductSKUs } from 'src/app/shared/_models/productSKUs';
 import { ConvertVieService } from 'src/app/core/services/convert-vie.service';
 import { ProductOptionValue } from 'src/app/shared/_models/productOptionValues';
 import { ProductSKUValues } from 'src/app/shared/_models/productSKUValues';
-import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
+import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { Photo } from 'src/app/shared/_models/photo';
 import { ProductType } from 'src/app/shared/_models/productTypes';
 
@@ -388,7 +388,7 @@ export class AddProductModalComponent implements OnInit {
       .trim() // Xóa khoảng trắng thừa
       .replace(/\s+/g, "-"); // Thay khoảng trắng bằng dấu "-"
   }
-  
+
 
   bindDataToProductObject() {
     this.product.name = this.addForm.value.productName;

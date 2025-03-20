@@ -9,7 +9,6 @@ import { AddBannerModalComponent } from './add-banner-modal/add-banner-modal.com
 })
 export class BannerComponent {
   constructor(private modalServices: NzModalService) {
-    this.addBanner();
   }
 
   addBanner() {
