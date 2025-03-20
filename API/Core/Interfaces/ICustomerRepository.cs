@@ -1,6 +1,3 @@
-using Core.Entities;
-using Core.Specification;
-
 namespace Core.Interfaces
 {
     public interface ICustomerRepository

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { SlideImage } from 'src/app/shared/_models/slideImages';
+import { WebsiteServiceService } from '../../website-service.service';
 
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
@@ -29,7 +30,7 @@ export class AddBannerModalComponent implements OnInit {
   previewImage: string | undefined = '';
   previewVisible = false;
 
-  constructor() {}
+  constructor(private websiteSettingServices: WebsiteServiceService) {}
 
   ngOnInit(): void {
     this.addBannerFrm = new FormGroup({
@@ -58,14 +59,24 @@ export class AddBannerModalComponent implements OnInit {
     this.isSubmitting = true;
 
     this.banner = {
-      id: null,
-      orderNo: null,
+      id: 0,
+      orderNo: 0,
       desktopImageUrl: this.desktopImage[0].response?.url,
       link: this.addBannerFrm.value.link,
       mobileImageUrl: this.mobileImage[0].response?.url,
       altText: this.addBannerFrm.value.altText,
       status: this.addBannerFrm.value.status
     };
-    console.log(this.banner);
+
+    this.websiteSettingServices.addBanner(this.banner).subscribe(
+      (response) => {
+        console.log(response);
+        this.isSubmitting = false;
+      },
+      (error) => {    
+        console.log(error);
+        this.isSubmitting = false;
+      } 
+    );
   }
 }

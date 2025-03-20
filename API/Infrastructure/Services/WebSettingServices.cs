@@ -17,9 +17,9 @@ namespace Infrastructure.Services
         {
             if(slideImage.Id != 0) return null;
 
-            var slide = await _unitOfWork.Repository<SlideImage>().GetFirstOrDefaultAsync(s => s.OrderNo == slideImage.OrderNo);
+            var newOrderNo = await _unitOfWork.SlideImageRepository.GetNextOrderNoAsync();
 
-            if(slide != null) return null;
+            slideImage.OrderNo = newOrderNo;
 
             _unitOfWork.Repository<SlideImage>().Add(slideImage);
 
@@ -29,6 +29,7 @@ namespace Infrastructure.Services
 
             return slideImage;
         }
+
 
         public async Task<SlideImage> UpdateSlide(SlideImage slideImage)
         {
