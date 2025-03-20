@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { SlideImage } from 'src/app/shared/_models/slideImages';
 
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
@@ -20,7 +21,11 @@ const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
 export class AddBannerModalComponent implements OnInit {
   addBannerFrm: FormGroup;
   isEdit = false;
+  isSubmitting: boolean = false;
+  banner: SlideImage;
+
   desktopImage: NzUploadFile[] = [];
+  mobileImage: NzUploadFile[] = [];
   previewImage: string | undefined = '';
   previewVisible = false;
 
@@ -28,9 +33,7 @@ export class AddBannerModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.addBannerFrm = new FormGroup({
-      desktopImageUrl: new FormControl('', [Validators.required]),
-      link: new FormControl(''),
-      mobileImageUrl: new FormControl('', [Validators.required]),
+      link: new FormControl('', [Validators.required]),
       altText: new FormControl(''),
       status: new FormControl(true),
     });
@@ -46,7 +49,23 @@ export class AddBannerModalComponent implements OnInit {
 
   handleUploadProductChange(info: { file: NzUploadFile }, isMainPhoto: boolean): void {
     if (info.file.status === 'done') {
-      console.log(info)
+      console.log(info);
+      console.log(this.desktopImage);
     }
+  }
+
+  onSubmit() {
+    this.isSubmitting = true;
+
+    this.banner = {
+      id: null,
+      orderNo: null,
+      desktopImageUrl: this.desktopImage[0].response?.url,
+      link: this.addBannerFrm.value.link,
+      mobileImageUrl: this.mobileImage[0].response?.url,
+      altText: this.addBannerFrm.value.altText,
+      status: this.addBannerFrm.value.status
+    };
+    console.log(this.banner);
   }
 }

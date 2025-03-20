@@ -21,19 +21,40 @@
 
       <div class="row my-2">
         <div class="col-6">Ảnh Mobile:</div>
-        <div class="col-6">xxx</div>
+        <div class="col-6">
+          <nz-upload nzAction="https://localhost:5001/api/products/add-photo" nzListType="picture-card"
+            [(nzFileList)]="mobileImage" [nzShowButton]="mobileImage.length < 1" [nzPreview]="handlePreview"
+            (nzChange)="handleUploadProductChange($event, true)">
+            <div>
+              <span nz-icon nzType="picture"></span>
+              <div style="margin-top: 8px">Thêm hình ảnh</div>
+            </div>
+          </nz-upload>
+        </div>
       </div>
 
       <div class="row my-2">
         <div class="col-6">Link điều hướng:</div>
-        <div class="col-6">xxx</div>
+        <div class="col-6">
+          <input type="text" class="form-control form-control-sm rounded-0" id="link" placeholder="Link điều hướng"
+              formControlName="link" />
+        </div>
       </div>
 
       <div class="row my-2">
         <div class="col-6">Alt text:</div>
-        <div class="col-6">xxx</div>
+        <div class="col-6">
+          <input type="text" class="form-control form-control-sm rounded-0" id="altText" placeholder="Alt text"
+              formControlName="altText" />
+        </div>
       </div>
     </div>
+  </div>
+
+  <div *nzModalFooter>
+    <button [disabled]="!addBannerFrm.valid" nz-button nzType="primary" type="submit" (click)="onSubmit()" [nzLoading]="isSubmitting">
+      Lưu
+    </button>
   </div>
 </form>
 <!-- <form [formGroup]="addForm">
