@@ -7,6 +7,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { AddProductModalComponent } from './add-product-modal/add-product-modal.component';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { ToastrService } from 'ngx-toastr';
+import { SearchService } from 'src/app/core/services/search.service';
 
 @Component({
   selector: 'app-product-list',
@@ -16,6 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
+  allProducts: Product[] = [];
   listOfCurrentPageProducts: readonly Product[] = [];
   setOfCheckedId = new Set<number>();
 
@@ -30,11 +32,28 @@ export class ProductListComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private modalServices: NzModalService,
-    private toastrService: ToastrService) {
+    private toastrService: ToastrService,
+    private searchService: SearchService) {
   }
 
   ngOnInit(): void {
     this.getProducts();
+
+    // Lắng nghe sự thay đổi từ search box
+    this.searchService.searchQuery$.subscribe(query => {
+      this.filterOrders(query);
+    });
+  }
+
+  filterOrders(query: string) {
+    if (!query) {
+      this.products = this.allProducts; // Hiển thị toàn bộ nếu không có tìm kiếm
+    } else {
+      this.products = this.allProducts.filter(product =>
+        product.name.toLowerCase().includes(query.toLowerCase()) ||
+        product.productSKU.toLowerCase().includes(query.toLowerCase())
+      );
+    }
   }
 
   refreshCheckedStatus(): void {
@@ -129,6 +148,7 @@ export class ProductListComponent implements OnInit {
     this.productService.getProducts(this.productParams).subscribe({
       next: response => {
         this.products = response.data;
+        this.allProducts = this.products;
         this.productParams.pageIndex = response.pageIndex;
         this.productParams.pageSize = response.pageSize;
         this.totalCount = response.count;

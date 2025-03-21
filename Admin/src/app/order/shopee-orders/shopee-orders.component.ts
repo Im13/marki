@@ -4,6 +4,7 @@ import { ShopeeOrder } from 'src/app/shared/_models/shopeeOrder';
 import { ShopeeOrderParams } from 'src/app/shared/_models/shopeeOrderParams';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { SearchService } from 'src/app/core/services/search.service';
 
 @Component({
   selector: 'app-shopee-orders',
@@ -13,16 +14,24 @@ import { ToastrService } from 'ngx-toastr';
 export class ShopeeOrdersComponent implements OnInit, OnDestroy {
   fileName = '';
   shopeeOrders: ShopeeOrder[] = [];
+  allOrders: ShopeeOrder[] = [];
   orderParams = new ShopeeOrderParams();
   totalCount = 0;
   loading = false;
 
   private orderSubscription: Subscription;
 
-  constructor(private orderService: OrderService, private toastrService: ToastrService) {}
+  constructor(private orderService: OrderService,
+    private toastrService: ToastrService,
+    private searchService: SearchService) {}
 
   ngOnInit(): void {
     this.getOrders();
+
+    // Lắng nghe sự thay đổi từ search box
+    this.searchService.searchQuery$.subscribe(query => {
+      this.filterOrders(query);
+    });
 
     this.orderSubscription = this.orderService.addedOrders.subscribe(
       (shopeeOrders: ShopeeOrder[]) => {
@@ -38,6 +47,19 @@ export class ShopeeOrdersComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.orderSubscription.unsubscribe();
+  }
+
+  filterOrders(query: string) {
+    if (!query) {
+      this.shopeeOrders = this.allOrders; // Hiển thị toàn bộ nếu không có tìm kiếm
+    } else {
+      this.shopeeOrders = this.allOrders.filter(order =>
+        order.customerUsername.toLowerCase().includes(query.toLowerCase()) ||
+        order.orderId.toString().includes(query) ||
+        order.phoneNumber.includes(query) ||
+        order.shipmentCode.toLowerCase().includes(query.toLowerCase()) 
+      );
+    }
   }
 
   onFileSelected(event) {
@@ -63,6 +85,7 @@ export class ShopeeOrdersComponent implements OnInit, OnDestroy {
     this.orderService.getShopeeOrdersPagination(this.orderParams).subscribe({
       next: response => {
         this.shopeeOrders = response.data;
+        this.allOrders = response.data;
         this.orderParams.pageIndex = response.pageIndex;
         this.orderParams.pageSize = response.pageSize;
         this.totalCount = response.count;

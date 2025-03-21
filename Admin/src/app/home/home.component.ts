@@ -81,11 +81,4 @@ export class HomeComponent implements OnInit {
     this.accountService.logout();
     this.router.navigateByUrl('/login');
   }
-
-  onSearch(query: string) {
-    // this.searchService.search(query, 'orders').subscribe(results => {
-    //   this.results = results;
-    // });
-    console.log(query);
-  }
 }

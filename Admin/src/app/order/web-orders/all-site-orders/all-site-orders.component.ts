@@ -7,6 +7,7 @@ import { WebsiteOrder } from 'src/app/shared/_models/website-order';
 import { EditOrderModalComponent } from '../edit-order-modal/edit-order-modal.component';
 import { UpdateStatusDTO } from 'src/app/shared/_models/order/updateStatusDTO';
 import { ToastrService } from 'ngx-toastr';
+import { SearchService } from 'src/app/core/services/search.service';
 
 @Component({
   selector: 'app-all-site-orders',
@@ -17,6 +18,7 @@ export class AllSiteOrdersComponent {
   @Input() orderStatus: number;
   orderParams = new OrderParams();
   orders: readonly WebsiteOrder[] = [];
+  allOrders: readonly WebsiteOrder[] = [];
   totalItems = 0;
 
   orderStatuses: OrderStatus[] = [
@@ -39,17 +41,35 @@ export class AllSiteOrdersComponent {
   constructor(
     private orderService: OrderService,
     private modalServices: NzModalService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private searchService: SearchService
   ) {}
 
   ngOnInit() {
     this.getOrders();
+
+    this.searchService.searchQuery$.subscribe(query => {
+      this.filterOrders(query);
+    });
+  }
+
+  filterOrders(query: string) {
+    if (!query) {
+      this.orders = this.allOrders; // Hiển thị toàn bộ nếu không có tìm kiếm
+    } else {
+      this.orders = this.allOrders.filter(order =>
+        order.fullname?.toLowerCase().includes(query.toLowerCase()) ||
+        order.phoneNumber?.includes(query) ||
+        order.buyerEmail?.toLowerCase().includes(query.toLowerCase())
+      );
+    }
   }
 
   getOrders() {
     this.orderService.getWebsiteOrders(this.orderParams).subscribe({
       next: (response) => {
         this.orders = response.data;
+        this.allOrders = this.orders;
         this.orderParams.pageIndex = response.pageIndex;
         this.orderParams.pageSize = response.pageSize;
         this.totalItems = response.count;

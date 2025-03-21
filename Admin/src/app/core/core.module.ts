@@ -25,6 +25,11 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
 
 @NgModule({
   declarations: [
@@ -58,7 +63,12 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     NzDropDownModule,
     NzStatisticModule,
     NzBreadCrumbModule,
-    NzIconModule
+    NzIconModule,
+    NzInputModule,
+    NzModalModule,
+    NzButtonModule,
+    NzTableModule,
+    NzSwitchModule
   ],
   exports: [
     ThousandSeparatorPipe,
@@ -88,7 +98,12 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     CommonModule,
     NzStatisticModule,
     NzBreadCrumbModule,
-    NzIconModule
+    NzIconModule,
+    NzInputModule,
+    NzModalModule,
+    NzButtonModule,
+    NzTableModule,
+    NzSwitchModule
   ]
 })
 export class CoreModule { }

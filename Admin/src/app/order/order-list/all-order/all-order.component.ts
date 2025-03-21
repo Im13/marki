@@ -7,6 +7,7 @@ import { UpdateOrderComponent } from '../../update-order/update-order.component'
 import { OrderStatus } from 'src/app/shared/_models/orderStatus';
 import { UpdateStatusDTO } from 'src/app/shared/_models/order/updateStatusDTO';
 import { OrderWithStatusParams } from 'src/app/shared/_models/order/orderWithStatusParams';
+import { SearchService } from 'src/app/core/services/search.service';
 
 @Component({
   selector: 'app-all-order',
@@ -19,6 +20,7 @@ export class AllOrderComponent implements OnInit {
   orderParams = new OrderParams();
   orders: readonly Order[] = [];
   totalItems = 0;
+  allOrders: readonly Order[] = [];
 
   orderStatuses: OrderStatus[] = [
     { id: 1, status: 'Mới'},
@@ -37,13 +39,34 @@ export class AllOrderComponent implements OnInit {
   indeterminate = false;
   setOfCheckedId = new Set<number>();
 
-  constructor(private orderService: OrderService, private modalServices: NzModalService) {}
+  constructor(private orderService: OrderService, private modalServices: NzModalService, private searchService: SearchService) {}
 
   ngOnInit() {
     if(this.orderStatus == -1) {
       this.getOrders();
     } else {
       this.getOrderByStatus(this.orderStatus);
+    }
+
+    // Lắng nghe sự thay đổi từ search box
+    this.searchService.searchQuery$.subscribe(query => {
+      this.filterOrders(query);
+    });
+  }
+
+  filterOrders(query: string) {
+    if (!query) {
+      this.orders = this.allOrders; // Hiển thị toàn bộ nếu không có tìm kiếm
+    } else {
+      this.orders = this.allOrders.filter(order =>
+        order.customer.name.toLowerCase().includes(query.toLowerCase()) ||
+        order.id.toString().includes(query) ||
+        order.customer.phoneNumber.includes(query) ||
+        order.customer.emailAddress.toLowerCase().includes(query.toLowerCase()) ||
+        order.receiverName.toLowerCase().includes(query.toLowerCase()) ||
+        order.receiverPhoneNumber.includes(query) ||
+        order.address.toLowerCase().includes(query.toLowerCase())
+      );
     }
   }
 
@@ -86,6 +109,7 @@ export class AllOrderComponent implements OnInit {
     this.orderService.getOrders(this.orderParams).subscribe({
       next: response => {
         this.orders = response.data;
+        this.allOrders = this.orders;
         this.orderParams.pageIndex = response.pageIndex;
         this.orderParams.pageSize = response.pageSize;
         this.totalItems = response.count;

@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Customer } from 'src/app/shared/_models/customer';
 import { CustomerService } from '../../customer.service';
 import { CustomerParams } from 'src/app/shared/_models/customer/customerParams';
+import { SearchService } from 'src/app/core/services/search.service';
 
 @Component({
   selector: 'app-all-customers',
@@ -13,6 +14,7 @@ export class AllCustomersComponent implements OnInit {
 
   loading = true;
   customers: readonly Customer[] = [];
+  allCustomers: readonly Customer[] = [];
   customerParams = new CustomerParams();
   totalItems = 0;
 
@@ -21,11 +23,28 @@ export class AllCustomersComponent implements OnInit {
   checked = false;
   indeterminate = false;
   setOfCheckedId = new Set<number>();
-  
-  constructor(private customerService: CustomerService) {}
+
+  constructor(private customerService: CustomerService, private searchService: SearchService) {}
 
   ngOnInit(): void {
     this.getCustomers();
+
+    // Lắng nghe sự thay đổi từ search box
+    this.searchService.searchQuery$.subscribe(query => {
+      this.filterOrders(query);
+    });
+  }
+
+  filterOrders(query: string) {
+    if (!query) {
+      this.customers = this.allCustomers; // Hiển thị toàn bộ nếu không có tìm kiếm
+    } else {
+      this.customers = this.allCustomers.filter(customer =>
+        customer.name.toLowerCase().includes(query.toLowerCase()) ||
+        customer.phoneNumber.includes(query) ||
+        customer.emailAddress.toLowerCase().includes(query.toLowerCase())
+      );
+    }
   }
 
   updateCheckedSet(id: number, checked: boolean): void {
@@ -82,10 +101,11 @@ export class AllCustomersComponent implements OnInit {
 
   getCustomers() {
     this.loading = true;
-    
+
     this.customerService.getCustomers(this.customerParams).subscribe({
       next: response => {
         this.customers = response.data;
+        this.allCustomers = this.customers;
         this.customerParams.pageIndex = response.pageIndex;
         this.customerParams.pageSize = response.pageSize;
         this.totalItems = response.count;

@@ -13,7 +13,7 @@ export class SearchBoxComponent implements OnInit {
   results: any[] = [];
   currentModule: string = 'orders';
   @Output() searchEvent = new EventEmitter<string>();
-  
+
   constructor(private searchService: SearchService) {}
 
   ngOnInit(): void {
@@ -21,16 +21,13 @@ export class SearchBoxComponent implements OnInit {
       .pipe(
         debounceTime(300), // Chờ 300ms sau khi gõ xong
         distinctUntilChanged(), // Chỉ trigger nếu giá trị thay đổi
-        switchMap(query => this.searchService.search(query, this.currentModule))
       )
-      .subscribe(results => {
-        this.results = results;
-      });
+      .subscribe(value => this.searchService.setSearchQuery(value));
   }
 
-  // Hàm đổi module khi người dùng chọn danh mục khác
-  changeModule(module: string) {
-    this.currentModule = module;
-    this.results = []; // Reset kết quả khi đổi module
-  }
+  // // Hàm đổi module khi người dùng chọn danh mục khác
+  // changeModule(module: string) {
+  //   this.currentModule = module;
+  //   this.results = []; // Reset kết quả khi đổi module
+  // }
 }
