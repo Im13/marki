@@ -63,7 +63,12 @@ namespace Infrastructure.Services
 
         public async Task<IReadOnlyList<SlideImage>> GetSlides()
         {
-            return await _unitOfWork.Repository<SlideImage>().ListAsync(new SlideImageOrderedByOrderNoSpec());
+            return await _unitOfWork.Repository<SlideImage>().ListAsync(new SlideImageSpecification());
+        }
+
+        public async Task<IReadOnlyList<SlideImage>> GetActiveSlides()
+        {
+            return await _unitOfWork.Repository<SlideImage>().ListAsync(SlideImageSpecification.WithActiveStatus());
         }
     }
 }

@@ -52,5 +52,13 @@ namespace API.Controllers.Admin.Website
 
             return Ok(_mapper.Map<IReadOnlyList<SlideImage>, IReadOnlyList<SlideImageDTO>>(slides));
         }
+
+        [HttpGet("get-active-slides")]
+        public async Task<ActionResult<IReadOnlyList<SlideImageDTO>>> GetActiveSlides()
+        {
+            var slides = await _webSettingServices.GetActiveSlides();
+
+            return Ok(_mapper.Map<IReadOnlyList<SlideImage>, IReadOnlyList<SlideImageDTO>>(slides));
+        }
     }
 }

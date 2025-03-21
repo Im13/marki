@@ -7,5 +7,6 @@ namespace Core.Interfaces
         Task<SlideImage> CreateSlide(SlideImage slideImage);
         Task<SlideImage> UpdateSlide(SlideImage slideImage);
         Task<IReadOnlyList<SlideImage>> GetSlides();
+        Task<IReadOnlyList<SlideImage>> GetActiveSlides();
     }
 }
