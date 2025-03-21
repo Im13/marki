@@ -10,9 +10,13 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { SearchBoxComponent } from './_components/search-box/search-box.component';
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    SearchBoxComponent
+  ],
   imports: [
     CommonModule,
     PaginationModule.forRoot(),
@@ -24,7 +28,8 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
     NzIconModule,
     DragDropModule,
     NzTableModule,
-    NzSwitchModule
+    NzSwitchModule,
+    CoreModule
   ],
   exports: [
     PaginationModule,
@@ -36,7 +41,8 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
     NzIconModule,
     DragDropModule,
     NzTableModule,
-    NzSwitchModule
+    NzSwitchModule,
+    SearchBoxComponent
   ]
 })
 export class SharedModule { }

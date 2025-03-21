@@ -4,6 +4,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs';
 import { User } from '../shared/_models/user';
 import { AccountService } from '../_service/account.service';
+import { SearchService } from '../core/services/search.service';
 
 @Component({
   selector: 'app-home',
@@ -14,12 +15,14 @@ export class HomeComponent implements OnInit {
   isCollapsed = false;
   routeName = '';
   username = '';
+  results: any[] = [];
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private titleService: Title,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private searchService: SearchService
   ) {}
 
   ngOnInit(): void {
@@ -77,5 +80,12 @@ export class HomeComponent implements OnInit {
   logout() {
     this.accountService.logout();
     this.router.navigateByUrl('/login');
+  }
+
+  onSearch(query: string) {
+    // this.searchService.search(query, 'orders').subscribe(results => {
+    //   this.results = results;
+    // });
+    console.log(query);
   }
 }

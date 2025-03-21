@@ -17,6 +17,7 @@ import en from '@angular/common/locales/en';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { HasRoleDirective } from './core/_directives/has-role.directive';
+import { SharedModule } from './shared/shared.module';
 
 registerLocaleData(en);
 
@@ -32,6 +33,7 @@ registerLocaleData(en);
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule,
+    SharedModule,
     OrderModule,
     HttpClientModule,
     NgxSpinnerModule,

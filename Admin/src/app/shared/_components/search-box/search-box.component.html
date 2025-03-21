@@ -1,0 +1,14 @@
+<input type="text" [formControl]="searchControl" placeholder="Tìm kiếm..." />
+
+<nz-input-group [nzSuffix]="suffixIconSearch">
+    <input type="text" nz-input placeholder="input search text" />
+</nz-input-group>
+<ng-template #suffixIconSearch>
+    <!-- <nz-icon nzType="search" /> -->
+</ng-template>
+
+<ul *ngIf="results.length > 0">
+    <li *ngFor="let result of results">
+        {{ result.name || result.id || result.sku }}
+    </li>
+</ul>
