@@ -1,32 +1,28 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import SwiperCore, { Autoplay, SwiperOptions } from 'swiper';
-import { SwiperComponent } from 'swiper/angular';
-
-SwiperCore.use([Autoplay]);
+import { Component, OnInit } from '@angular/core';
+import { HomeService } from '../home.service';
+import { SlideImage } from 'src/app/_shared/_models/slideImages';
 
 @Component({
   selector: 'app-home-carousel',
   templateUrl: './home-carousel.component.html',
   styleUrls: ['./home-carousel.component.css']
 })
-export class HomeCarouselComponent implements AfterViewInit {
-  @ViewChild('swiperSlideShow') swiperSlideShow!: SwiperComponent;
-  config: SwiperOptions;
+export class HomeCarouselComponent implements OnInit {
+  slides: SlideImage[] = [];
+  effect = 'scrollx';
+  array = [1, 2, 3, 4];
 
-  constructor() {
-    this.config = {
-      slidesPerView: 1,
-      navigation: true,
-      pagination: false,
-      scrollbar: { draggable: true },
-      autoplay: {
-        delay: 2000
+  constructor(private homeServices: HomeService) { }
+
+  ngOnInit(): void {
+    this.homeServices.getSlides().subscribe({
+      next: (slides: SlideImage[]) => {
+        console.log(slides)
+        this.slides = slides;
       },
-      speed: 300
-    }
-  }
-
-  ngAfterViewInit(): void {
-    this.swiperSlideShow.swiperRef.autoplay.start();
+      error: (error: any) => {
+        console.log(error);
+      }
+    });
   }
 }

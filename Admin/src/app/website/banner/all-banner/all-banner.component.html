@@ -32,7 +32,7 @@
           <td (click)="onEditSlide(slide)">{{ shortenUrl(slide.mobileImageUrl, 25) }}</td>
           <td (click)="onEditSlide(slide)">{{ slide.link }}</td>
           <td (click)="onEditSlide(slide)">{{ slide.altText }}</td>
-          <td (click)="onEditSlide(slide)">
+          <td>
             <nz-switch [(ngModel)]="slide.status" (click)="switchStatus(slide)" [nzControl]="true" [nzLoading]="loading"></nz-switch>
           </td>
         </tr>

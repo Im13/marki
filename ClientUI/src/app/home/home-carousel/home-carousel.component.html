@@ -1,10 +1,12 @@
 <div class="border h-100">
-  <swiper [config]="config" class="border border-danger h-100" #swiperSlideShow>
-    <ng-template swiperSlide>Slide 1</ng-template>
-    <ng-template swiperSlide>Slide 2</ng-template>
-    <ng-template swiperSlide>Slide 3</ng-template>
-    <ng-template swiperSlide>Slide 4</ng-template>
-    <ng-template swiperSlide>Slide 5</ng-template>
-    <ng-template swiperSlide>Slide 6</ng-template>
-  </swiper>
+  <nz-carousel [nzEffect]="effect" nzAutoPlay>
+    <div *ngFor="let slide of slides" nz-carousel-content>
+      <picture>
+        <source srcset="{{ slide.mobileImageUrl }}" media="(max-width: 767px)">
+        <source srcset="{{ slide.desktopImageUrl }}" media="(min-width: 768px)">
+        <img [src]="slide.desktopImageUrl" class="w-100 h-100" style="object-fit: cover;" alt="Responsive Image">
+      </picture>
+      <!-- <img [src]="slide.mobileImageUrl" alt="slide" class="w-100 h-100" style="object-fit: cover;"/> -->
+    </div>
+  </nz-carousel>
 </div>

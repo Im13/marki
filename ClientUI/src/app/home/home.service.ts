@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment.development';
 import { ProductParams } from '../_shared/_models/productParams';
 import { Pagination } from '../_shared/_models/pagination';
 import { Product } from '../_shared/_models/product';
+import { SlideImage } from '../_shared/_models/slideImages';
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +33,9 @@ export class HomeService {
     params = params.append('typeId', productParams.typeId);
 
     return this.http.get<Pagination<Product[]>>(this.baseApiUrl + 'products', { params });
+  }
+
+  getSlides() {
+    return this.http.get<SlideImage[]>(this.baseApiUrl + 'websettings/get-active-slides');
   }
 }
