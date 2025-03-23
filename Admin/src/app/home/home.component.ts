@@ -17,13 +17,20 @@ export class HomeComponent implements OnInit {
   username = '';
   results: any[] = [];
 
+  // Routes which will show search box
+  allowedRoutes = ['/product', '/customers', '/orders'];
+  showSearchBox = false;
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private titleService: Title,
     private accountService: AccountService,
-    private searchService: SearchService
-  ) {}
+  ) {
+    this.router.events.subscribe(() => {
+      this.showSearchBox = this.allowedRoutes.some(route => this.router.url.startsWith(route));
+    });
+  }
 
   ngOnInit(): void {
     const user : User = JSON.parse(localStorage.getItem('user'));
