@@ -33,6 +33,7 @@ namespace Infrastructure.Data
         public DbSet<OfflineOrderSKUs> OfflineOrderSKUs { get; set; }
         public DbSet<OfflineOrderStatus> OrderStatus { get; set; }
         public DbSet<SlideImage> SlideImages { get; set; }
+        public DbSet<RevenueSummary> RevenueSummaries { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
