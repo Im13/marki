@@ -1,26 +1,29 @@
+using API.DTOs.Revenue;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.Admin
 {
     public class DashboardController : BaseApiController
     {
-        public DashboardController()
+        private readonly IRevenueSummaryService _revenueSummaryService;
+        public DashboardController(IRevenueSummaryService revenueSummaryService)
         {
-            // Constructor logic here
+            _revenueSummaryService = revenueSummaryService;
         }
 
-        [HttpGet]
-        public IActionResult GetDashboardData()
+        [HttpGet("daily/{date}")]
+        public async Task<ActionResult<RevenueSummaryDto>> GetDailyRevenue(DateTime date)
         {
-            // Placeholder for GET method logic
-            return Ok(new { Message = "Dashboard data placeholder" });
+            var revenue = await _revenueSummaryService.GetDailyRevenueAsync(date);
+            return Ok(revenue);
         }
 
-        [HttpPost]
-        public IActionResult UpdateDashboardData([FromBody] object data)
+
+        [HttpGet("range")]
+        public async Task<ActionResult<DashboardRevenueResponseDTO>> GetRevenueInRange([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
         {
-            // Placeholder for POST method logic
-            return Ok(new { Message = "Dashboard data updated" });
+            var result = await _revenueSummaryService.GetDashboardRevenueDataAsync(startDate, endDate);
+            return Ok(result);
         }
     }
 }

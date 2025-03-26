@@ -5,64 +5,40 @@ using Core.Specification;
 
 public class RevenueSummaryService : IRevenueSummaryService
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly IGenericRepository<RevenueSummary> _revenueSummaryRepository;
+    private readonly IRevenueSummaryRepository _revenueRepository;
 
-
-    public RevenueSummaryService(
-        IGenericRepository<RevenueSummary> revenueSummaryRepository,
-        IUnitOfWork unitOfWork)
+    public RevenueSummaryService(IRevenueSummaryRepository revenueRepository)
     {
-        _unitOfWork = unitOfWork;
-        _revenueSummaryRepository = revenueSummaryRepository;
+        _revenueRepository = revenueRepository;
     }
 
-    public async Task UpdateRevenueSummaryFromOrder(Order order)
+    public async Task<RevenueSummary> GetDailyRevenueAsync(DateTime date)
     {
-        var date = order.OrderDate.Date;
-        var spec = new RevenueSummarySpecification(date);
-        var summary = await _revenueSummaryRepository.GetEntityWithSpec(spec);
-
-        // if (summary == null)
-        // {
-        //     summary = new RevenueSummary
-        //     {
-        //         Date = date,
-        //         PaymentSource = order.PaymentSource,
-        //         DailyRevenue = order.TotalAmount,
-        //         OrderCount = 1
-        //     };
-        //     _revenueSummaryRepository.Add(summary);
-        // }
-        // else
-        // {
-        //     summary.DailyRevenue += order.TotalAmount;
-        //     summary.OrderCount++;
-        //     _revenueSummaryRepository.Update(summary);
-        // }
-
-        await _unitOfWork.Complete();
+        return await _revenueRepository.GetByDateAsync(date);
     }
 
-    // public async Task<Dictionary<DateTime, decimal>> GetDailyRevenue(DateTime startDate, DateTime endDate)
-    // {
-    //     var summaries = await _revenueSummaryRepository.GetQuery()
-    //         .Where(x => x.Date >= startDate && x.Date <= endDate)
-    //         .GroupBy(x => x.Date)
-    //         .Select(g => new
-    //         {
-    //             Date = g.Key,
-    //             Revenue = g.Sum(x => x.DailyRevenue)
-    //         })
-    //         .ToListAsync();
+    public async Task<DashboardRevenueResponse> GetDashboardRevenueDataAsync(DateTime startDate, DateTime endDate)
+    {
+        var revenues = await _revenueRepository.GetByDateRangeAsync(startDate, endDate);
+        
+        return new DashboardRevenueResponse
+        {
+            TotalRevenue = revenues.Sum(r => r.TotalRevenue),
+            TotalOrders = revenues.Sum(r => r.TotalOrders),
+            RevenueBySource = new Dictionary<string, decimal>
+            {
+                { "Shopee", revenues.Sum(r => r.ShopeeRevenue) },
+                { "Facebook", revenues.Sum(r => r.FacebookRevenue) },
+                { "Instagram", revenues.Sum(r => r.InstagramRevenue) },
+                { "Offline", revenues.Sum(r => r.OfflineRevenue) },
+                { "Website", revenues.Sum(r => r.WebsiteRevenue) }
+            },
+            DailyRevenues = revenues.ToList()
+        };
+    }
 
-    //     return summaries.ToDictionary(x => x.Date, x => x.Revenue);
-    // }
-
-    // public Task<Dictionary<string, decimal>> GetRevenueBySource(DateTime startDate, DateTime endDate)
-    // {
-    //     throw new NotImplementedException();
-    // }
-
-    // Implement các method khác
+    public async Task<IReadOnlyList<RevenueSummary>> GetRevenueInRangeAsync(DateTime startDate, DateTime endDate)
+    {
+        return await _revenueRepository.GetByDateRangeAsync(startDate, endDate);
+    }
 }

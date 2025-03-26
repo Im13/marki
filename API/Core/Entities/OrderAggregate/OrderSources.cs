@@ -13,6 +13,8 @@ namespace Core.Entities.OrderAggregate
         [EnumMember(Value = "Facebook")]
         Facebook,
         [EnumMember(Value = "Tiktok")]
-        Tiktok
+        Tiktok,
+        [EnumMember(Value = "Shopee")]
+        Shopee
     }
 }

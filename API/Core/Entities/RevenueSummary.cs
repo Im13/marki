@@ -9,6 +9,7 @@ namespace Core.Entities
         public decimal FacebookRevenue { get; set; }
         public decimal InstagramRevenue { get; set; }
         public decimal WebsiteRevenue { get; set; }
+        public decimal OfflineRevenue { get; set; }
     }
 }
 

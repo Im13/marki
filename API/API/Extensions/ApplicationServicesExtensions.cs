@@ -26,21 +26,23 @@ namespace API.Extensions
                 return ConnectionMultiplexer.Connect(options);
             });
             services.AddScoped<IBasketRepository, BasketRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IRevenueSummaryRepository, RevenueSummaryRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<ISlideImageRepository, SlideImageRepository>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IPhotoService, PhotoService>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAddressService, AddressService>();
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<IOrderRepository, OrderRepository>();
-            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IRevenueSummaryService, RevenueSummaryService>();
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IWebSettingServices, WebSettingServices>();
-            services.AddScoped<ISlideImageRepository, SlideImageRepository>();
             services.AddScoped<ITokenService, TokenService>();
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IShopeeOrderService, ShopeeOrderService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             services.Configure<ApiBehaviorOptions>(options =>
             {

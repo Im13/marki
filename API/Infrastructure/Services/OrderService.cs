@@ -13,17 +13,21 @@ namespace Infrastructure.Services
         private readonly IBasketRepository _basketRepo;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IProductRepository _productRepo;
+        private readonly RevenueSummaryRepository _revenueRepo;
+
         private StoreContext _context;
         public OrderService(
             IUnitOfWork unitOfWork,
             IBasketRepository basketRepo,
             IProductRepository productRepo,
+            RevenueSummaryRepository revenueRepo,
             StoreContext context)
         {
             _unitOfWork = unitOfWork;
             _basketRepo = basketRepo;
             _context = context;
             _productRepo = productRepo;
+            _revenueRepo = revenueRepo;
         }
 
         public async Task<Order> CreateOrderAsync(string buyerEmail, int deliveryMethodId, string basketId, Address shippingAddress, decimal shippingFee, decimal orderDiscount, decimal bankTransferedAmount, decimal extraFee, decimal total, string orderNote)
@@ -77,6 +81,9 @@ namespace Infrastructure.Services
             var result = await _unitOfWork.Complete();
 
             if (result <= 0) return null;
+
+            // Cập nhật doanh thu
+            await _revenueRepo.UpdateRevenueAsync(order);
 
             // Delete basket
             await _basketRepo.DeleteBasketAsync(basketId);
