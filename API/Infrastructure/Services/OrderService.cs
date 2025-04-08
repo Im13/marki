@@ -13,14 +13,13 @@ namespace Infrastructure.Services
         private readonly IBasketRepository _basketRepo;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IProductRepository _productRepo;
-        private readonly RevenueSummaryRepository _revenueRepo;
-
-        private StoreContext _context;
+        private readonly IRevenueSummaryRepository _revenueRepo;
+        private readonly StoreContext _context;
         public OrderService(
             IUnitOfWork unitOfWork,
             IBasketRepository basketRepo,
             IProductRepository productRepo,
-            RevenueSummaryRepository revenueRepo,
+            IRevenueSummaryRepository revenueRepo,
             StoreContext context)
         {
             _unitOfWork = unitOfWork;

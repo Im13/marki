@@ -26,15 +26,15 @@ namespace API.Extensions
                 return ConnectionMultiplexer.Connect(options);
             });
             services.AddScoped<IBasketRepository, BasketRepository>();
-            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IRevenueSummaryRepository, RevenueSummaryRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<ISlideImageRepository, SlideImageRepository>();
-            services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<IAddressService, AddressService>();
-            services.AddScoped<IRevenueSummaryService, RevenueSummaryService>();
+            // services.AddScoped<IRevenueSummaryService, RevenueSummaryService>();
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IWebSettingServices, WebSettingServices>();
             services.AddScoped<ITokenService, TokenService>();
