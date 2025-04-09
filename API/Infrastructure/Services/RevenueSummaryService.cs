@@ -1,7 +1,5 @@
 using Core.Entities;
-using Core.Entities.OrderAggregate;
 using Core.Interfaces;
-using Core.Specification;
 
 public class RevenueSummaryService : IRevenueSummaryService
 {
@@ -37,8 +35,19 @@ public class RevenueSummaryService : IRevenueSummaryService
         };
     }
 
-    public async Task<IReadOnlyList<RevenueSummary>> GetRevenueInRangeAsync(DateTime startDate, DateTime endDate)
+    public async Task<RevenueSummary> GetRevenueInRangeAsync(DateTime startDate, DateTime endDate)
     {
-        return await _revenueRepository.GetByDateRangeAsync(startDate, endDate);
+        var revenues =  await _revenueRepository.GetByDateRangeAsync(startDate, endDate);
+
+        return new RevenueSummary
+        {
+            TotalRevenue = revenues.Sum(r => r.TotalRevenue),
+            TotalOrders = revenues.Sum(r => r.TotalOrders),
+            ShopeeRevenue = revenues.Sum(r => r.ShopeeRevenue),
+            FacebookRevenue = revenues.Sum(r => r.FacebookRevenue),
+            InstagramRevenue = revenues.Sum(r => r.InstagramRevenue),
+            WebsiteRevenue = revenues.Sum(r => r.WebsiteRevenue),
+            OfflineRevenue = revenues.Sum(r => r.OfflineRevenue)
+        };
     }
 }

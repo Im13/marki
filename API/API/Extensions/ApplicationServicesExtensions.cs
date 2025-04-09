@@ -34,7 +34,7 @@ namespace API.Extensions
             services.AddScoped<ISlideImageRepository, SlideImageRepository>();
             services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<IAddressService, AddressService>();
-            // services.AddScoped<IRevenueSummaryService, RevenueSummaryService>();
+            services.AddScoped<IRevenueSummaryService, RevenueSummaryService>();
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IWebSettingServices, WebSettingServices>();
             services.AddScoped<ITokenService, TokenService>();

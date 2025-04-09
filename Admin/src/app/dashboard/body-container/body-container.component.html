@@ -11,7 +11,7 @@
           <div nz-col nzSpan="12">
             <div>Tổng doanh thu</div>
             <div class="mt-2">
-              <h4 class="txt-success">20.399.991 đ</h4>
+              <h4 class="txt-success">{{ revenueSummary.totalRevenue | thousandSeparator}} đ</h4>
             </div>
 
             <div class="d-flex align-items-center">
@@ -23,7 +23,7 @@
           <div nz-col nzSpan="12">
             <div>Tổng số đơn</div>
             <div class="mt-2">
-              <h4 class="txt-danger">17</h4>
+              <h4 class="txt-danger">{{ revenueSummary.totalOrders | thousandSeparator}}</h4>
             </div>
 
             <div class="d-flex align-items-center">
@@ -44,24 +44,24 @@
           <div nz-col nzSpan="12">
             <div>Tổng tiền</div>
             <div class="mt-2">
-              <h4 class="txt-danger">1.213.000 đ</h4>
+              <h4 class="txt-danger">0 đ</h4>
             </div>
 
             <div class="d-flex align-items-center">
               <span nz-icon nzType="arrow-up" nzTheme="outline" class="me-1 text-danger"></span>
-              <span class="txt-danger">1,4%</span>
+              <span class="txt-danger">0%</span>
             </div>
           </div>
 
           <div nz-col nzSpan="12">
             <div>Tổng số đơn</div>
             <div class="mt-2">
-              <h4 class="txt-danger">5</h4>
+              <h4 class="txt-danger">0</h4>
             </div>
 
             <div class="d-flex align-items-center">
               <span nz-icon nzType="arrow-down" nzTheme="outline" class="me-1 txt-danger"></span>
-              <span class="txt-danger">1,18%</span>
+              <span class="txt-danger">0%</span>
             </div>
           </div>
         </div>

@@ -2,6 +2,7 @@ using API.DTOs;
 using API.DTOs.AdminOrder;
 using API.DTOs.ClientProduct;
 using API.DTOs.Product;
+using API.DTOs.Revenue;
 using API.DTOs.Shopee;
 using AutoMapper;
 using Core;
@@ -85,6 +86,8 @@ namespace API.Helpers
             CreateMap<ProductSKUForClientDTO, ProductSKUs>();
             CreateMap<ProductSKUs, ProductSKUForClientDTO>();
             CreateMap<ProductSKUValuesDTO, ProductSKUValues>();
+            CreateMap<RevenueSummary, RevenueSummaryDto>();
+            CreateMap<RevenueSummaryDto, RevenueSummary>();
             CreateMap<ProductSKUValues, ProductSKUValuesDTO>()
                 .ForMember(d => d.OptionValue, o => o.MapFrom(s => s.ProductOptionValue.ValueName))
                 .ForMember(d => d.OptionName, o => o.MapFrom(s => s.ProductOptionValue.ProductOption.OptionName));

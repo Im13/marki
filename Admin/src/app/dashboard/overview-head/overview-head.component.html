@@ -3,14 +3,25 @@
     <div class="overview-head-date h-100 d-flex align-items-center" nz-col nzSpan="14">
       <span nz-typography class="me-2"><strong>Khoảng thời gian</strong></span>
 
-      <div class="col-xs-12 col-12 col-md-4 form-group">
+      <!-- <div class="col-xs-12 col-12 col-md-4 form-group">
         <input type="text"
           placeholder="Hôm nay"
           class="form-control form-control-sm rounded-0"
           bsDaterangepicker
           [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', adaptivePosition: true, containerClass: 'theme-default' }"
           (bsValueChange)="onDateChange($event)">
-      </div>
+      </div> -->
+
+      <nz-space>
+        <nz-range-picker
+          *nzSpaceItem
+          nzMode="date"
+          [nzPlaceHolder]="['Ngày bắt đầu', 'Ngày kết thúc']"
+          [nzRanges]="ranges"
+          [(ngModel)]="selectedRange"
+          (ngModelChange)="onChange($event)">
+        </nz-range-picker>
+      </nz-space>
     </div>
 
     <div class="overview-head-date h-100 d-flex align-items-center justify-content-end" nz-col nzSpan="10">

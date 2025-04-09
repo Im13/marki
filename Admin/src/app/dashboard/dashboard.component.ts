@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RevenueSummary } from '../shared/_models/dashboard';
+import { DashboardService } from './dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,10 +8,36 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  revenueSummary: RevenueSummary = {
+    date: '',
+    facebookRevenue: 0,
+    instagramRevenue: 0,
+    offlineRevenue: 0,
+    shopeeRevenue: 0,
+    totalOrders: 0,
+    totalRevenue: 0,
+    websiteRevenue: 0
+  };
 
-  constructor() {}
+  constructor(private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
+    const today = new Date();
+
+    this.dashboardService.getDailyRevenue(today).subscribe({
+      next: (response) => {
+        if(response) {
+          this.revenueSummary = response;
+        }
+        console.log(this.revenueSummary);
+      },
+      error: (error) => {
+        console.error('Error fetching daily revenue:', error);
+      }
+    });
   }
 
+  dateRangeSelected(event: RevenueSummary) {
+    this.revenueSummary = event;
+  }
 }
