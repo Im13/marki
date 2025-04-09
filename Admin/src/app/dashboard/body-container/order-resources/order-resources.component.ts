@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { RevenueSummary } from 'src/app/shared/_models/dashboard';
 
 @Component({
   selector: 'app-order-resources',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./order-resources.component.css']
 })
 export class OrderResourcesComponent {
-  listTempData = [1, 2, 3];
+  listTempData = [1, 2, 3, 4];
+  @Input() revenueSummary: RevenueSummary = null;
 }

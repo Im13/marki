@@ -8,11 +8,6 @@
         <th>Nguồn đơn</th>
         <th>Doanh thu</th>
         <th>Lợi nhuận</th>
-        <th>Doanh số</th>
-        <th>Chiết khấu</th>
-        <th>Đơn chốt</th>
-        <th>SL hàng chốt</th>
-        <th>GTTB</th>
       </tr>
     </thead>
     <tbody>
@@ -23,13 +18,8 @@
             Instagram
           </div>
         </td>
-        <td>12.095.000đ</td>
-        <td>6.703.997đ</td>
-        <td>14.025.000đ</td>
-        <td>1.930.000đ</td>
-        <td>31</td>
-        <td>45</td>
-        <td>390.161đ</td>
+        <td>{{ revenueSummary.instagramRevenue }}</td>
+        <td>{{ revenueSummary.instagramRevenue * 0.2 }}</td>
       </tr>
       <tr>
         <td>
@@ -38,13 +28,28 @@
             Facebook
           </div>
         </td>
-        <td>4.540.000đ</td>
-        <td>2.173.999đ</td>
-        <td>5.600.000đ</td>
-        <td>1.060.000đ</td>
-        <td>10</td>
-        <td>21</td>
-        <td>454.000đ</td>
+        <td>{{ revenueSummary.facebookRevenue | thousandSeparator }}</td>
+        <td>{{ revenueSummary.facebookRevenue * 0.2 | thousandSeparator }}</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="d-flex align-items-center">
+            <span nz-icon nzType="global" nzTheme="outline" class="me-2"></span>
+            Website
+          </div>
+        </td>
+        <td>{{ revenueSummary.websiteRevenue | thousandSeparator }}</td>
+        <td>{{ revenueSummary.websiteRevenue * 0.2 | thousandSeparator }}</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="d-flex align-items-center">
+            <span nz-icon nzType="fund-projection-screen" nzTheme="outline" class="me-2"></span>
+            Sàn TMĐT
+          </div>
+        </td>
+        <td>{{ revenueSummary.shopeeRevenue | thousandSeparator }}</td>
+        <td>{{ revenueSummary.shopeeRevenue * 0.2 | thousandSeparator }}</td>
       </tr>
       <tr>
         <td>
@@ -53,13 +58,8 @@
             Trực tiếp
           </div>
         </td>
-        <td>4.540.000đ</td>
-        <td>2.173.999đ</td>
-        <td>5.600.000đ</td>
-        <td>1.060.000đ</td>
-        <td>10</td>
-        <td>21</td>
-        <td>454.000đ</td>
+        <td>{{ revenueSummary.offlineRevenue | thousandSeparator }}</td>
+        <td>{{ revenueSummary.offlineRevenue * 0.2 | thousandSeparator }}</td>
       </tr>
     </tbody>
   </nz-table>

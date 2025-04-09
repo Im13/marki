@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DashboardService } from '../dashboard.service';
-import { RevenueSummary } from 'src/app/shared/_models/dashboard';
 
 @Component({
   selector: 'app-body-container',
