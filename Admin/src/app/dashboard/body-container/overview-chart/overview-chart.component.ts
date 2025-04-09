@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js/auto';
+import { DashboardService } from '../../dashboard.service';
+import { RevenueSummary } from 'src/app/shared/_models/dashboard';
 
 @Component({
   selector: 'app-overview-chart',
@@ -8,36 +10,55 @@ import { Chart } from 'chart.js/auto';
 })
 export class OverviewChartComponent implements OnInit {
   chart: any;
+  revenues: RevenueSummary[] = [];
+
+  constructor(private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
-    this.createChart();
+    this.dashboardService.getRevenueForLast14Days().subscribe({
+      next: (response) => {
+        if (response) {
+          this.revenues = response;
+          console.log(this.revenues);
+
+          // Định dạng ngày tháng dưới dạng DD-MM-YYYY
+          const labels = this.revenues.map((revenue) =>
+            new Date(revenue.date).toLocaleDateString('vi-VN', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+            })
+          );
+          
+          const salesData = this.revenues.map((revenue) => revenue.totalRevenue);
+          const profitData = this.revenues.map((revenue) => revenue.totalRevenue * 0.2);
+          // Assuming profit is 20% of total revenue
+
+          this.createChart(labels, salesData, profitData);
+        }
+      },
+      error: (error) => {
+        console.error('Error fetching revenue for last 14 days:', error);
+      },
+    });
   }
 
-  createChart() {
+  createChart(labes: string[], salesData: number[], profitData: number[]) {
     this.chart = new Chart('MyChart', {
       type: 'line', //this denotes tha type of chart
 
       data: {
         // values on X-Axis
-        labels: [
-          '2022-05-10',
-          '2022-05-11',
-          '2022-05-12',
-          '2022-05-13',
-          '2022-05-14',
-          '2022-05-15',
-          '2022-05-16',
-          '2022-05-17',
-        ],
+        labels: labes,
         datasets: [
           {
             label: 'Sales',
-            data: ['467', '576', '572', '79', '92', '574', '573', '576'],
+            data: salesData,
             backgroundColor: 'blue',
           },
           {
             label: 'Profit',
-            data: ['542', '542', '536', '327', '17', '0.00', '538', '541'],
+            data: profitData,
             backgroundColor: 'limegreen',
           },
         ],

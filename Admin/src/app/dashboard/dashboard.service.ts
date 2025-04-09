@@ -21,4 +21,8 @@ export class DashboardService {
     const formattedEndDate = endDate.toISOString().split('T')[0];
     return this.http.get<RevenueSummary>(this.baseApiUrl + `dashboard/range?startDate=${formattedStartDate}&endDate=${formattedEndDate}`);
   }
+
+  getRevenueForLast14Days() {
+    return this.http.get<RevenueSummary[]>(this.baseApiUrl + 'dashboard/last-14-days');
+  }
 }

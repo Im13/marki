@@ -15,29 +15,41 @@ public class RevenueSummaryService : IRevenueSummaryService
         return await _revenueRepository.GetByDateAsync(date);
     }
 
-    public async Task<DashboardRevenueResponse> GetDashboardRevenueDataAsync(DateTime startDate, DateTime endDate)
+    public async Task<IReadOnlyList<RevenueSummary>> GetDashboardRevenueDataAsync(DateTime startDate, DateTime endDate)
     {
         var revenues = await _revenueRepository.GetByDateRangeAsync(startDate, endDate);
-        
-        return new DashboardRevenueResponse
+
+        // Tạo danh sách tất cả các ngày trong khoảng thời gian
+        var allDates = Enumerable.Range(0, (endDate - startDate).Days + 1)
+            .Select(offset => startDate.AddDays(offset))
+            .ToList();
+
+        // Tạo danh sách kết quả, đảm bảo mỗi ngày đều có dữ liệu
+        var completeRevenues = allDates.Select(date =>
         {
-            TotalRevenue = revenues.Sum(r => r.TotalRevenue),
-            TotalOrders = revenues.Sum(r => r.TotalOrders),
-            RevenueBySource = new Dictionary<string, decimal>
+            // Tìm RevenueSummary cho ngày hiện tại
+            var revenueForDate = revenues.FirstOrDefault(r => r.Date.Date == date.Date);
+
+            // Nếu không có dữ liệu, tạo đối tượng mặc định
+            return revenueForDate ?? new RevenueSummary
             {
-                { "Shopee", revenues.Sum(r => r.ShopeeRevenue) },
-                { "Facebook", revenues.Sum(r => r.FacebookRevenue) },
-                { "Instagram", revenues.Sum(r => r.InstagramRevenue) },
-                { "Offline", revenues.Sum(r => r.OfflineRevenue) },
-                { "Website", revenues.Sum(r => r.WebsiteRevenue) }
-            },
-            DailyRevenues = revenues.ToList()
-        };
+                Date = date,
+                TotalRevenue = 0,
+                TotalOrders = 0,
+                ShopeeRevenue = 0,
+                FacebookRevenue = 0,
+                InstagramRevenue = 0,
+                WebsiteRevenue = 0,
+                OfflineRevenue = 0
+            };
+        }).ToList();
+
+        return completeRevenues;
     }
 
     public async Task<RevenueSummary> GetRevenueInRangeAsync(DateTime startDate, DateTime endDate)
     {
-        var revenues =  await _revenueRepository.GetByDateRangeAsync(startDate, endDate);
+        var revenues = await _revenueRepository.GetByDateRangeAsync(startDate, endDate);
 
         return new RevenueSummary
         {

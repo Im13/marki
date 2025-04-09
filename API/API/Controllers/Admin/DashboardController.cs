@@ -31,5 +31,16 @@ namespace API.Controllers.Admin
             var revenueDto = _mapper.Map<RevenueSummary, RevenueSummaryDto>(revenue);
             return Ok(revenueDto);
         }
+
+        [HttpGet("last-14-days")]
+        public async Task<ActionResult<List<RevenueSummaryDto>>> GetLast14DaysRevenue()
+        {
+            var endDate = DateTime.UtcNow.Date;
+            var startDate = endDate.AddDays(-14);
+            var revenueData = await _revenueSummaryService.GetDashboardRevenueDataAsync(startDate, endDate);
+            var revenueDto = _mapper.Map<IReadOnlyList<RevenueSummary>, IReadOnlyList<RevenueSummaryDto>>(revenueData);
+            
+            return Ok(revenueDto);
+        }
     }
 }
