@@ -251,9 +251,21 @@ namespace Infrastructure.Services
 
             _unitOfWork.Repository<Order>().Update(currentOrder);
 
-            var saveOrderResult = await _unitOfWork.Complete();
+            var result = await _unitOfWork.Complete();
 
-            if (saveOrderResult <= 0) return null;
+            if (result <= 0)
+            {
+                throw new Exception("Failed to update order.");
+            }
+
+            await _revenueRepo.UpdateDailyRevenueAsync(currentOrder);
+
+            var revenueResult = await _unitOfWork.Complete();
+
+            if (revenueResult <= 0)
+            {
+                throw new Exception("Failed to update revenue.");
+            }
 
             return order;
         }
