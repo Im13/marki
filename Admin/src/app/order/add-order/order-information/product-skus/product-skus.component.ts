@@ -20,6 +20,7 @@ export class ProductSkusComponent {
   productParams = new ProductParams();
   listFilterSkus: ProductSKUDetails[] = [];
   options = ['Sản phẩm', 'Combo'];
+  searchText = '';
 
   constructor(private productService: ProductService) {}
 

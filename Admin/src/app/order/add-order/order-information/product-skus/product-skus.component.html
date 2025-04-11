@@ -3,14 +3,11 @@
 <div class="product-search mt-3">
   <div nz-row>
     <div nz-col class="d-flex align-items-center w-100" nzSpan="5">
-      <nz-segmented
-        [nzOptions]="options"
-        (nzValueChange)="handleIndexChange($event)"
-      ></nz-segmented>
+      <nz-segmented [nzOptions]="options" (nzValueChange)="handleIndexChange($event)"></nz-segmented>
     </div>
 
     <div nz-col class="d-flex align-items-center" nzSpan="19">
-      <nz-select
+      <!-- <nz-select
         nzShowSearch
         nzServerSearch
         nzPlaceHolder="Nhập mã, tên sản phẩm hoặc barcode"
@@ -26,15 +23,42 @@
           [nzLabel]="p.productName"
           [nzValue]="p"
         ></nz-option>
-      </nz-select>
+      </nz-select> -->
+
+      <!-- Search Input -->
+      <nz-input-group nzSearch>
+        <input type="text" nz-input placeholder="Tìm kiếm sản phẩm..." [(ngModel)]="searchText" (ngModelChange)="search($event)">
+      </nz-input-group>
+
+      <!-- Product List -->
+      <nz-list>
+        <div nz-list-item *ngFor="let sku of listFilterSkus">
+          <div class="product-header">
+            <h4>{{ sku.productName }}</h4>
+            <strong>{{ sku.price | currency:'VND':'symbol':'1.0-0' }}</strong>
+          </div>
+
+          <div class="product-detail">
+            <nz-tag [nzColor]="'#f50'">{{ sku.productSKU }}</nz-tag>
+            <span>{{ sku.sku }}</span>
+          </div>
+
+          <div class="stock-info">
+            <span [style.color]="sku.quantity < 0 ? 'red' : 'inherit'">
+              Kho hiện tại: CTB: {{ sku.quantity }}
+            </span>
+            <span>Tồn: {{ sku.quantity }}</span>
+            <span>Sắp về: {{ sku.quantity }}</span>
+            <nz-tag [nzColor]="'volcano'">Bán nhiều</nz-tag>
+          </div>
+        </div>
+      </nz-list>
     </div>
   </div>
 
   <div class="selected-product-list mt-3 p-2">
-    <nz-empty
-      *ngIf="listSkus.length <= 0; else listSelectedProductsBlock"
-      nzNotFoundContent="Giỏ hàng trống"
-    ></nz-empty>
+    <nz-empty *ngIf="listSkus.length <= 0; else listSelectedProductsBlock"
+      nzNotFoundContent="Giỏ hàng trống"></nz-empty>
 
     <ng-template #listSelectedProductsBlock>
       <div class="product-control d-flex align-items-center" nz-row>
@@ -44,50 +68,30 @@
       </div>
 
       <div class="list-products mt-2 p-1">
-        <div
-          *ngFor="let sku of listSkus"
-          class="product py-2 bg-white mb-2 px-1"
-          nz-row
-        >
+        <div *ngFor="let sku of listSkus" class="product py-2 bg-white mb-2 px-1" nz-row>
           <div nz-col nzSpan="2" class="d-flex justify-content-center">
-            <img
-              *ngIf="sku.imageUrl !== ''; else noImageBlock"
-              nz-image
-              width="60px"
-              height="60px"
-              [src]="sku.imageUrl"
-            />
+            <img *ngIf="sku.imageUrl !== ''; else noImageBlock" nz-image width="60px" height="60px"
+              [src]="sku.imageUrl" />
 
             <ng-template #noImageBlock>
-              <img
-                nz-image
-                width="60px"
-                height="60px"
-                src="../../../../assets/images/no_image.jpg"
-              />
+              <img nz-image width="60px" height="60px" src="../../../../assets/images/no_image.jpg" />
             </ng-template>
           </div>
 
-          <div
-            nz-col
-            nzSpan="22"
-            class="ps-2 p-1 d-flex flex-column justify-content-between"
-          >
+          <div nz-col nzSpan="22" class="ps-2 p-1 d-flex flex-column justify-content-between">
             <div class="product-name fw-semibold d-flex justify-content-between mb-2">
               <span class="product-name-name">
                 {{ sku.productName }}
               </span>
 
-              <button nz-button nzType="default" nzSize="small" nzDanger><span nz-icon nzType="close" nzTheme="outline" (click)="onRemoveSKU(sku)"></span></button>
+              <button nz-button nzType="default" nzSize="small" nzDanger><span nz-icon nzType="close" nzTheme="outline"
+                  (click)="onRemoveSKU(sku)"></span></button>
             </div>
             <div class="product-info d-flex justify-content-between mb-1">
               <div class="product-sku-name">
-                <span class="me-1" *ngFor="let value of sku.productSKUValues"
-                  >{{ value.optionName }}: {{ value.optionValue }}</span
-                >
-                <span class="product-weight" nz-typography
-                  ><strong>{{ sku.weight }}g</strong></span
-                >
+                <span class="me-1" *ngFor="let value of sku.productSKUValues">{{ value.optionName }}: {{
+                  value.optionValue }}</span>
+                <span class="product-weight" nz-typography><strong>{{ sku.weight }}g</strong></span>
               </div>
               <div class="product-price m-0" nz-typography>
                 <strong>{{ sku.price | thousandSeparator }} x 1</strong>

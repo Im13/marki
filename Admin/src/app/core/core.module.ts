@@ -30,6 +30,8 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
+import { NzListModule } from 'ng-zorro-antd/list';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,9 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
     NzModalModule,
     NzButtonModule,
     NzTableModule,
-    NzSwitchModule
+    NzSwitchModule,
+    NzAutocompleteModule,
+    NzListModule
   ],
   exports: [
     ThousandSeparatorPipe,
@@ -103,7 +107,9 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
     NzModalModule,
     NzButtonModule,
     NzTableModule,
-    NzSwitchModule
+    NzSwitchModule,
+    NzAutocompleteModule,
+    NzListModule
   ]
 })
 export class CoreModule { }
