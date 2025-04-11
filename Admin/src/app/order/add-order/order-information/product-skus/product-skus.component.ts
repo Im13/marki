@@ -13,7 +13,6 @@ import { ProductSKUDetails } from 'src/app/shared/_models/productSKUDetails';
 export class ProductSkusComponent {
   @Input() listSkus!: ProductSKUDetails[];
   @Output() selectProductSkus = new EventEmitter<ProductSKUDetails[]>();
-  @ViewChild(NzSelectComponent, { static: true }) selectNode: NzSelectComponent;
 
   selectedProduct: Product = null;
   nzFilterOption = (): boolean => true;
@@ -25,13 +24,16 @@ export class ProductSkusComponent {
   constructor(private productService: ProductService) {}
 
   selectProduct(data: any) {
-    this.listSkus.push(data);
+    this.listSkus.push(data.nzValue);
     this.selectProductSkus.emit(this.listSkus);
-    this.selectNode.writeValue(undefined);
+    this.listFilterSkus = [];
+    setTimeout(() => {
+      this.searchText = '';
+    });
   }
 
-  search(value: string): void {
-    this.productParams.search = value;
+  search(value: any): void {
+    this.productParams.search = value.data;
 
     this.productService.getProductSKUDetails(this.productParams).subscribe({
       next: skus => {
