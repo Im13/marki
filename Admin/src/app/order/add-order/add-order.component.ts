@@ -75,6 +75,11 @@ export class AddOrderComponent implements OnInit {
   }
 
   submitForm() {
+    this.customer.emailAddress = this.addOrderForm.controls['customerInfo'].value.customerEmailAddress;
+    this.customer.dob = this.addOrderForm.controls['customerInfo'].value.customerDOB;
+    this.customer.name = this.addOrderForm.controls['customerInfo'].value.customerName;
+    this.customer.phoneNumber = this.addOrderForm.controls['customerInfo'].value.customerPhoneNumber;
+
     this.order.address = this.addOrderForm.controls['receiverInfo'].value.receiverAddress;
     this.order.provinceId = this.addOrderForm.controls['receiverInfo'].value.provinceId;
     this.order.districtId = this.addOrderForm.controls['receiverInfo'].value.districtId;
@@ -95,10 +100,7 @@ export class AddOrderComponent implements OnInit {
     // this.order.customerCareStaffId = this.addOrderForm.controls['information'].value.customerCareStaff;
     this.order.customerCareStaffId = 1;
 
-    this.customer.name = this.addOrderForm.controls['customerInfo'].value.customerName;
-    this.customer.phoneNumber = this.addOrderForm.controls['customerInfo'].value.customerPhoneNumber;
-    this.customer.emailAddress = this.addOrderForm.controls['customerInfo'].value.customerEmailAddress;
-    this.customer.dob = this.addOrderForm.controls['customerInfo'].value.customerDOB;
+
     this.order.customer = this.customer;
 
     this.order.offlineOrderSKUs = this.groupSkuItems();

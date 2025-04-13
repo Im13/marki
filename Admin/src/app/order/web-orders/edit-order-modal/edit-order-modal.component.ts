@@ -128,12 +128,12 @@ export class EditOrderModalComponent implements OnInit {
     this.order.customer.name = this.editOrderForm.controls['customerInfo'].value.customerName;
     this.order.customer.phoneNumber = this.editOrderForm.controls['customerInfo'].value.customerPhoneNumber;
 
+    this.order.street = this.editOrderForm.controls['receiverInfo'].value.receiverAddress;
     this.order.cityOrProvinceId = this.editOrderForm.controls['receiverInfo'].value.provinceId;
     this.order.districtId = this.editOrderForm.controls['receiverInfo'].value.districtId;
     this.order.wardId = this.editOrderForm.controls['receiverInfo'].value.wardId;
     this.order.fullname = this.editOrderForm.controls['receiverInfo'].value.receiverName;
     this.order.phoneNumber = this.editOrderForm.controls['receiverInfo'].value.receiverPhoneNumber;
-    this.order.street = this.editOrderForm.controls['receiverInfo'].value.receiverAddress;
 
     this.order.shippingFee = +this.editOrderForm.controls['checkout'].value.shippingFee;
     this.order.orderDiscount = +this.editOrderForm.controls['checkout'].value.orderDiscount;
@@ -141,6 +141,7 @@ export class EditOrderModalComponent implements OnInit {
     this.order.extraFee = +this.editOrderForm.controls['checkout'].value.extraFee;
     this.order.total = this.subTotal + this.order.shippingFee + this.order.extraFee - this.order.orderDiscount - this.order.bankTransferedAmount;
     this.order.orderNote = this.editOrderForm.controls['checkout'].value.orderNote;
+    
     this.order.orderItems = this.listItems;
     this.order.subtotal = this.subTotal;
 
