@@ -38,6 +38,18 @@ namespace API.Controllers
             return Ok(order);
         }
 
+        [HttpPost]
+        public async Task<ActionResult<Order>> CreateOrderFromAdmin(OrderDTO orderDTO)
+        {
+            var email = HttpContext.User.RetrieveEmailFromPrincipal();
+            var address = _mapper.Map<AddressDTO,Address>(orderDTO.ShipToAddress);
+            var order = await _orderService.CreateOrderAsync(email, orderDTO.DeliveryMethodId, orderDTO.BasketId, address, orderDTO.ShippingFee, orderDTO.OrderDiscount, orderDTO.BankTransferedAmount, orderDTO.ExtraFee, orderDTO.Total, orderDTO.OrderNote);
+            
+            if(order == null) return BadRequest(new ApiResponse(400, "Problem creating order")); 
+
+            return Ok(order);
+        }
+
         [HttpPut]
         public async Task<ActionResult> UpdateOrder(UpdateOrderDTO orderDTO)
         {

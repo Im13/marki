@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CheckoutComponent } from './order-information/checkout/checkout.component';
 import { Province } from 'src/app/shared/_models/address/province';
 import { DatePipe } from '@angular/common';
+import { WebsiteOrder } from 'src/app/shared/_models/website-order';
 
 @Component({
   selector: 'app-add-order',
@@ -21,7 +22,7 @@ export class AddOrderComponent implements OnInit {
 
   listSkus: ProductSKUDetails[] = [];
   totalSKUsPrice = 0;
-  order: Order = new Order();
+  order: WebsiteOrder = new WebsiteOrder();
   customer: Customer = new Customer();
   skuItems: OrderSKUItems[] = [];
   provinces: Province[] = [];
@@ -80,12 +81,12 @@ export class AddOrderComponent implements OnInit {
     this.customer.name = this.addOrderForm.controls['customerInfo'].value.customerName;
     this.customer.phoneNumber = this.addOrderForm.controls['customerInfo'].value.customerPhoneNumber;
 
-    this.order.address = this.addOrderForm.controls['receiverInfo'].value.receiverAddress;
-    this.order.provinceId = this.addOrderForm.controls['receiverInfo'].value.provinceId;
+    this.order.street = this.addOrderForm.controls['receiverInfo'].value.receiverAddress;
+    this.order.cityOrProvinceId = this.addOrderForm.controls['receiverInfo'].value.provinceId;
     this.order.districtId = this.addOrderForm.controls['receiverInfo'].value.districtId;
     this.order.wardId = this.addOrderForm.controls['receiverInfo'].value.wardId;
-    this.order.receiverName = this.addOrderForm.controls['receiverInfo'].value.receiverName;
-    this.order.receiverPhoneNumber = this.addOrderForm.controls['receiverInfo'].value.receiverPhoneNumber;
+    // this.order.name = this.addOrderForm.controls['receiverInfo'].value.receiverName;
+    // this.order.receiverPhoneNumber = this.addOrderForm.controls['receiverInfo'].value.receiverPhoneNumber;
 
     this.order.shippingFee = this.addOrderForm.controls['checkout'].value.shippingFee;
     this.order.orderDiscount = this.addOrderForm.controls['checkout'].value.orderDiscount;
@@ -94,38 +95,38 @@ export class AddOrderComponent implements OnInit {
     this.order.total = this.totalSKUsPrice + this.order.shippingFee + this.order.extraFee - this.order.orderDiscount;
     this.order.orderNote = this.addOrderForm.controls['checkout'].value.orderNote;
 
-    this.order.dateCreated = this.addOrderForm.controls['information'].value.orderCreatedDate;
+    this.order.orderDate = this.addOrderForm.controls['information'].value.orderCreatedDate;
     // this.order.orderCareStaffId = this.addOrderForm.controls['information'].value.orderCareStaff;
-    this.order.orderCareStaffId = 1;
+    // this.order.orderCareStaffId = 1;
     // this.order.customerCareStaffId = this.addOrderForm.controls['information'].value.customerCareStaff;
-    this.order.customerCareStaffId = 1;
+    // this.order.customerCareStaffId = 1;
 
 
     this.order.customer = this.customer;
 
-    this.order.offlineOrderSKUs = this.groupSkuItems();
+    // this.order.offlineOrderSKUs = this.groupSkuItems();
 
-    this.orderService.createOrder(this.order).subscribe({
-      next: () => {
-        this.toastrService.success('Tạo mới đơn hàng thành công')
-        this.addOrderForm.reset();
-        this.addOrderForm.controls['checkout'].patchValue({
-          shippingFee: 0,
-          orderDiscount: 0,
-          bankTransferedAmount: 0,
-          extraFee: 0
-        });
-        this.addOrderForm.controls['information'].patchValue({
-          orderCreatedDate: new Date()
-        })
-        this.totalSKUsPrice = 0;
-        this.skuItems = [];
-        this.listSkus = [];
-      },
-      error: err => {
-        console.log(err);
-      }
-    });
+    // this.orderService.createOrder(this.order).subscribe({
+    //   next: () => {
+    //     this.toastrService.success('Tạo mới đơn hàng thành công')
+    //     this.addOrderForm.reset();
+    //     this.addOrderForm.controls['checkout'].patchValue({
+    //       shippingFee: 0,
+    //       orderDiscount: 0,
+    //       bankTransferedAmount: 0,
+    //       extraFee: 0
+    //     });
+    //     this.addOrderForm.controls['information'].patchValue({
+    //       orderCreatedDate: new Date()
+    //     })
+    //     this.totalSKUsPrice = 0;
+    //     this.skuItems = [];
+    //     this.listSkus = [];
+    //   },
+    //   error: err => {
+    //     console.log(err);
+    //   }
+    // });
   }
 
   groupSkuItems(): OrderSKUItems[] {
