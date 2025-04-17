@@ -28,7 +28,7 @@ export interface ShipToAddress {
   wardId: number;
 }
 
-export interface WebsiteOrder {
+export class WebsiteOrder {
   id: number;
   buyerEmail: string;
   deliveryMethod: number;
