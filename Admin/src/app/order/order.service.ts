@@ -18,6 +18,9 @@ import { Ward } from '../shared/_models/address/ward';
 import { UpdateStatusDTO } from '../shared/_models/order/updateStatusDTO';
 import { OrderWithStatusParams } from '../shared/_models/order/orderWithStatusParams';
 import { WebsiteOrder } from '../shared/_models/website-order';
+import { ProductSKU } from '../shared/_models/order/productSKU';
+import { Product } from '../shared/_models/products';
+import { BasketItem } from '../shared/_models/order/basketItem';
 
 @Injectable({
   providedIn: 'root'
@@ -223,5 +226,19 @@ export class OrderService {
     params = params.append('statusId', productParams.statusId);
 
     return this.http.get<Pagination<Order[]>>(this.baseApiUrl + 'order/status', { params });
+  }
+
+  private mapProductItemToBasketItem(item: ProductSKU, product: Product, imageUrl: string) : BasketItem {
+    return {
+      id: item.id,
+      productId: product.id,
+      productName: product.name,
+      price: item.price,
+      quantity: 0,
+      pictureUrl: imageUrl,
+      sku: item.sku,
+      productSKUValues: item.productSKUValues,
+      optionValueCombination: item.productSKUValues.map(o => `${o.optionName}: ${o.optionValue}`).join('; ')
+    }
   }
 }

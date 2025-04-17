@@ -52,7 +52,6 @@ export class AllProductsComponent implements OnInit {
   }
 
   addToCart() {
-    console.log('ATC clicked!');
     this.basketService.addItemToBasket(this.selectedProductSKU, this.product, this.selectedQuantity);
   }
 }
