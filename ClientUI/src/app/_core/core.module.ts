@@ -17,19 +17,19 @@ import { SwiperModule } from 'swiper/angular';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
-import { BreadcrumbComponent } from 'xng-breadcrumb';
-import { CommonBreadcrumbComponent } from './common-breadcrumb/common-breadcrumb.component';
 import { DescriptionComponent } from './description/description.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzSelectModule }  from 'ng-zorro-antd/select';
 import { CartDropdownComponent } from './cart-dropdown/cart-dropdown.component';
+import { BreadcrumbModule } from 'xng-breadcrumb';
+import { CommonBreadcrumbComponent } from './common-breadcrumb/common-breadcrumb.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    CommonBreadcrumbComponent,
     DescriptionComponent,
-    CartDropdownComponent
+    CartDropdownComponent,
+    CommonBreadcrumbComponent
   ],
   imports: [
     CommonModule,
@@ -48,9 +48,9 @@ import { CartDropdownComponent } from './cart-dropdown/cart-dropdown.component';
     NzButtonModule,
     NzDividerModule,
     NzBadgeModule,
-    BreadcrumbComponent,
     ReactiveFormsModule,
-    NzSelectModule
+    NzSelectModule,
+    BreadcrumbModule
   ],
   exports: [
     NzLayoutModule,
@@ -70,11 +70,10 @@ import { CartDropdownComponent } from './cart-dropdown/cart-dropdown.component';
     NzButtonModule,
     NzDividerModule,
     NzBadgeModule,
-    BreadcrumbComponent,
-    CommonBreadcrumbComponent,
     DescriptionComponent,
     ReactiveFormsModule,
-    NzSelectModule
+    NzSelectModule,
+    CommonBreadcrumbComponent
   ]
 })
 export class CoreModule { }
