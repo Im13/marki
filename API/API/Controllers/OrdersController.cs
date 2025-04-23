@@ -38,7 +38,7 @@ namespace API.Controllers
             return Ok(order);
         }
 
-        [HttpPost]
+        [HttpPost("create-from-admin")]
         public async Task<ActionResult<Order>> CreateOrderFromAdmin(OrderDTO orderDTO)
         {
             var email = HttpContext.User.RetrieveEmailFromPrincipal();
