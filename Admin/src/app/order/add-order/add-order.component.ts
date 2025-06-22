@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Customer } from 'src/app/shared/_models/customer';
-import { Order } from 'src/app/shared/_models/order';
 import { ProductSKUDetails } from 'src/app/shared/_models/productSKUDetails';
 import { OrderService } from '../order.service';
 import { OrderSKUItems } from 'src/app/shared/_models/orderSKUItems';
@@ -76,10 +75,9 @@ export class AddOrderComponent implements OnInit {
   }
 
   submitForm() {
-    this.customer.emailAddress = this.addOrderForm.controls['customerInfo'].value.customerEmailAddress;
-    this.customer.dob = this.addOrderForm.controls['customerInfo'].value.customerDOB;
-    this.customer.name = this.addOrderForm.controls['customerInfo'].value.customerName;
-    this.customer.phoneNumber = this.addOrderForm.controls['customerInfo'].value.customerPhoneNumber;
+    this.order.buyerEmail = this.addOrderForm.controls['customerInfo'].value.customerEmailAddress;
+    this.order.fullname = this.addOrderForm.controls['customerInfo'].value.customerName;
+    this.order.phoneNumber = this.addOrderForm.controls['customerInfo'].value.customerPhoneNumber;
 
     this.order.street = this.addOrderForm.controls['receiverInfo'].value.receiverAddress;
     this.order.cityOrProvinceId = this.addOrderForm.controls['receiverInfo'].value.provinceId;
@@ -101,12 +99,12 @@ export class AddOrderComponent implements OnInit {
     // this.order.customerCareStaffId = this.addOrderForm.controls['information'].value.customerCareStaff;
     // this.order.customerCareStaffId = 1;
 
-
-    this.order.customer = this.customer;
+    // this.order.customer = this.customer;
 
     // this.order.offlineOrderSKUs = this.groupSkuItems();
+    console.log(this.order);
 
-    // this.orderService.createOrder(this.order).subscribe({
+    // this.orderService.createOrderFromAdmin(this.order).subscribe({
     //   next: () => {
     //     this.toastrService.success('Tạo mới đơn hàng thành công')
     //     this.addOrderForm.reset();

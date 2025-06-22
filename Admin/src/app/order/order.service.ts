@@ -165,6 +165,10 @@ export class OrderService {
     return this.http.post(this.baseApiUrl + 'order/create', order);
   }
 
+  createOrderFromAdmin(order: WebsiteOrder) {
+    return this.http.post(this.baseApiUrl + 'order/create-from-admin', order);
+  }
+
   updateOrder(order: Order) {
     return this.http.put(this.baseApiUrl + 'order', order);
   }

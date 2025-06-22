@@ -37,6 +37,9 @@ namespace API.Helpers
             CreateMap<OrderItemDTO, OrderItem>();
             CreateMap<ItemOrderedDTO, ProductIemOrdered>();
             CreateMap<ProductIemOrdered, ItemOrderedDTO>();
+            CreateMap<CreateOrderDTO,Order>()
+                .ForMember(d => d.DeliveryMethod, o => o.Ignore());
+            CreateMap<Order, CreateOrderDTO>();
 
             CreateMap<ShipToAddressDTO, Address>();
             CreateMap<Address, ShipToAddressDTO>();

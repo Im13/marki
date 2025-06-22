@@ -19,36 +19,35 @@ export interface ProductItemOrdered {
   pictureUrl: string;
 }
 
-export interface ShipToAddress {
+export interface Address {
+  fullname: string;
   cityOrProvinceId: number;
   districtId: number;
-  fullname: string;
-  phoneNumber: string;
-  street: string;
   wardId: number;
+  street: string;
+  phoneNumber: string;
 }
 
 export class WebsiteOrder {
   id: number;
   buyerEmail: string;
-  deliveryMethod: number;
   orderDate: Date;
+  // shipToAddress: Address;
   shippingFee: number;
-  status: string;
-  subtotal: number;
-  orderItems: OrderItem[];
-  // shipToAddress: ShipToAddress;
-  orderStatus: OrderStatus;
-  bankTransferedAmount: number;
   orderDiscount: number;
+  bankTransferedAmount: number;
   extraFee: number;
+  status: string;
   total: number;
   orderNote: string;
+  subtotal: number;
+  fullname: string;
   cityOrProvinceId: number;
   districtId: number;
-  fullname: string;
-  phoneNumber: string;
-  street: string;
   wardId: number;
-  customer: Customer;
+  street: string;
+  phoneNumber: string;
+  orderItems: OrderItem[];
+  orderStatus: OrderStatus;
+  // customer: Customer;
 }

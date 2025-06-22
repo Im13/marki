@@ -72,7 +72,6 @@ export class EditOrderModalComponent implements OnInit {
     this.orderService.getWebsiteOrderById(this.order.id).subscribe({
       next: data => {
         this.order = data;
-        console.log(this.order);
 
         // Update form data
         this.editOrderForm.patchValue({
@@ -87,12 +86,12 @@ export class EditOrderModalComponent implements OnInit {
             orderCareStaff: 'this.order.orderCareStaffId',
             customerCareStaff: 'this.order.customerCareStaffId',
           },
-          customerInfo: {
-            customerName: this.order.customer.name,
-            customerPhoneNumber: this.order.customer.phoneNumber,
-            customerEmailAddress: this.order.customer.emailAddress,
-            customerDOB: this.order.customer.dob
-          },
+          // customerInfo: {
+          //   customerName: this.order.customer.name,
+          //   customerPhoneNumber: this.order.customer.phoneNumber,
+          //   customerEmailAddress: this.order.customer.emailAddress,
+          //   customerDOB: this.order.customer.dob
+          // },
           receiverInfo: {
             receiverName: this.order.fullname,
             receiverPhoneNumber: this.order.phoneNumber,
@@ -123,10 +122,10 @@ export class EditOrderModalComponent implements OnInit {
   }
 
   submitForm() {
-    this.order.customer.emailAddress = this.editOrderForm.controls['customerInfo'].value.customerEmailAddress;
-    this.order.customer.dob = this.editOrderForm.controls['customerInfo'].value.customerDOB;
-    this.order.customer.name = this.editOrderForm.controls['customerInfo'].value.customerName;
-    this.order.customer.phoneNumber = this.editOrderForm.controls['customerInfo'].value.customerPhoneNumber;
+    // this.order.customer.emailAddress = this.editOrderForm.controls['customerInfo'].value.customerEmailAddress;
+    // this.order.customer.dob = this.editOrderForm.controls['customerInfo'].value.customerDOB;
+    // this.order.customer.name = this.editOrderForm.controls['customerInfo'].value.customerName;
+    // this.order.customer.phoneNumber = this.editOrderForm.controls['customerInfo'].value.customerPhoneNumber;
 
     this.order.street = this.editOrderForm.controls['receiverInfo'].value.receiverAddress;
     this.order.cityOrProvinceId = this.editOrderForm.controls['receiverInfo'].value.provinceId;

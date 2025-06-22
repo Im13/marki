@@ -31,6 +31,8 @@ namespace API.Controllers
         {
             var email = HttpContext.User.RetrieveEmailFromPrincipal();
             var address = _mapper.Map<AddressDTO,Address>(orderDTO.ShipToAddress);
+
+            //Sai khi truyền email vào createOrderAsync, phải lấy email từ dto
             var order = await _orderService.CreateOrderAsync(email, orderDTO.DeliveryMethodId, orderDTO.BasketId, address, orderDTO.ShippingFee, orderDTO.OrderDiscount, orderDTO.BankTransferedAmount, orderDTO.ExtraFee, orderDTO.Total, orderDTO.OrderNote);
             
             if(order == null) return BadRequest(new ApiResponse(400, "Problem creating order")); 
@@ -39,15 +41,15 @@ namespace API.Controllers
         }
 
         [HttpPost("create-from-admin")]
-        public async Task<ActionResult<Order>> CreateOrderFromAdmin(OrderDTO orderDTO)
+        public async Task<ActionResult<Order>> CreateOrderFromAdmin(CreateOrderDTO orderDTO)
         {
-            var email = HttpContext.User.RetrieveEmailFromPrincipal();
-            var address = _mapper.Map<AddressDTO,Address>(orderDTO.ShipToAddress);
-            var order = await _orderService.CreateOrderAsync(email, orderDTO.DeliveryMethodId, orderDTO.BasketId, address, orderDTO.ShippingFee, orderDTO.OrderDiscount, orderDTO.BankTransferedAmount, orderDTO.ExtraFee, orderDTO.Total, orderDTO.OrderNote);
+            var order = _mapper.Map<CreateOrderDTO,Order>(orderDTO);
+            
+            var createdOrder = await _orderService.CreateOrderFromAdminAsync(order);
             
             if(order == null) return BadRequest(new ApiResponse(400, "Problem creating order")); 
 
-            return Ok(order);
+            return Ok(createdOrder);
         }
 
         [HttpPut]

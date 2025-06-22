@@ -91,9 +91,44 @@ namespace Infrastructure.Services
             return order;
         }
 
+        public async Task<Order> CreateOrderFromAdminAsync(Order order) {
+            if (order.Id != 0) return null;
+
+            _unitOfWork.Repository<Order>().Add(order);
+
+            // Get delivery, but we will remove this because delivery method is used only to check paid order.
+            var deliveryMethod = await _unitOfWork.Repository<DeliveryMethod>().GetByIdAsync(0);
+
+            order.DeliveryMethod = deliveryMethod;
+            order.OrderStatus = await _unitOfWork.Repository<OfflineOrderStatus>().GetByIdAsync(1);
+            order.OrderDate = DateTime.UtcNow;
+            order.Source = OrderSources.Offline;
+            order.Customer = new Customer
+            {
+                Name = order.Fullname,
+                PhoneNumber = order.PhoneNumber,
+                EmailAddress = order.BuyerEmail,
+                IsDeleted = false
+            };
+            
+            // Save to db
+            var result = await _unitOfWork.Complete();
+            if (result <= 0) return null;
+
+            // Cập nhật doanh thu
+            await _revenueRepo.UpdateRevenueAsync(order);
+
+            return null;
+        }
+
         public async Task<IReadOnlyList<DeliveryMethod>> GetDeliveryMethodsAsync()
         {
             return await _unitOfWork.Repository<DeliveryMethod>().ListAllAsync();
+        }
+
+        public async Task<DeliveryMethod> GetDeliveryMethodByIdAsync(int id)
+        {
+            return await _unitOfWork.Repository<DeliveryMethod>().GetByIdAsync(id);
         }
 
         public async Task<Order> GetOrderByIdAsync(int id, string buyerEmail)
