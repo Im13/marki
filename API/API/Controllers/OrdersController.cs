@@ -26,6 +26,8 @@ namespace API.Controllers
             _orderRepository = orderRepository;
         }
 
+        //Create order for user, user can create order with credentials in future update.
+        //Cannot merge this with admin create order because of basket.
         [HttpPost]
         public async Task<ActionResult<Order>> CreateOrder(OrderDTO orderDTO)
         {
@@ -40,7 +42,8 @@ namespace API.Controllers
             return Ok(order);
         }
 
-        [HttpPost("create-from-admin")]
+        // [Authorize(Roles = "Admin")]
+        [HttpPost("admin/create")]
         public async Task<ActionResult<Order>> CreateOrderFromAdmin(CreateOrderDTO orderDTO)
         {
             var order = _mapper.Map<CreateOrderDTO,Order>(orderDTO);

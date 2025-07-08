@@ -46,8 +46,10 @@ export class ListProductSkuComponent {
       quantity: 1,
       pictureUrl: data.imageUrl,
       sku: data.sku,
+      skuId: data.id,
+      skuDetail: data,
       optionValueCombination: data.productSKUValues.map(option => `${option.optionName}: ${option.optionValue}`).join("; "),
-      productId: data.id,
+      productId: 0,
       itemOrdered: { 
         productItemId: 0,
         productName: data.productName,

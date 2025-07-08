@@ -1,5 +1,5 @@
-import { Customer } from "./customer";
 import { OrderStatus } from "./orderStatus";
+import { ProductSKUDetails } from "./productSKUDetails";
 
 export interface OrderItem {
   id: number;
@@ -8,9 +8,11 @@ export interface OrderItem {
   quantity: number;
   pictureUrl: string;
   sku: string;
+  skuId: number;
   optionValueCombination: string;
   productId: number;
   itemOrdered: ProductItemOrdered;
+  skuDetail: ProductSKUDetails;
 }
 
 export interface ProductItemOrdered {

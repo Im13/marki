@@ -91,7 +91,8 @@ namespace Infrastructure.Services
             return order;
         }
 
-        public async Task<Order> CreateOrderFromAdminAsync(Order order) {
+        public async Task<Order> CreateOrderFromAdminAsync(Order order)
+        {
             if (order.Id != 0) return null;
 
             _unitOfWork.Repository<Order>().Add(order);

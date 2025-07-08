@@ -8,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CheckoutComponent } from './order-information/checkout/checkout.component';
 import { Province } from 'src/app/shared/_models/address/province';
 import { DatePipe } from '@angular/common';
-import { WebsiteOrder } from 'src/app/shared/_models/website-order';
+import { OrderItem, WebsiteOrder } from 'src/app/shared/_models/website-order';
 
 @Component({
   selector: 'app-add-order',
@@ -101,7 +101,7 @@ export class AddOrderComponent implements OnInit {
 
     // this.order.customer = this.customer;
 
-    // this.order.offlineOrderSKUs = this.groupSkuItems();
+    this.order.orderItems = this.groupSkuItems();
     console.log(this.order);
 
     // this.orderService.createOrderFromAdmin(this.order).subscribe({
@@ -127,14 +127,29 @@ export class AddOrderComponent implements OnInit {
     // });
   }
 
-  groupSkuItems(): OrderSKUItems[] {
-    var skuItems: OrderSKUItems[] = [];
+  groupSkuItems(): OrderItem[] {
+    var skuItems: OrderItem[] = [];
+    // var skuItems: OrderSKUItems[] = [];
 
     return this.listSkus.reduce((skuItems, currentSku) => {
-      if(skuItems == null || skuItems.find(item => item.productSKUId === currentSku.id) === undefined) {
-        skuItems.push({productSKUId: currentSku.id, quantity: 1, skuDetail: null});
+      if(skuItems == null || skuItems.find(item => item.skuId === currentSku.id) === undefined) {
+        var x: OrderItem = {
+          skuId: currentSku.id, 
+          quantity: 1, 
+          skuDetail: null, 
+          productName: currentSku.productName, 
+          price: currentSku.price, 
+          pictureUrl: currentSku.imageUrl, 
+          sku: currentSku.sku, 
+          optionValueCombination: currentSku.productSKUValues.map(x => x.optionValue).join(', '), 
+          productId: 0, 
+          itemOrdered: null, 
+          id: 0
+        }
+
+        skuItems.push(x);
       } else {
-        skuItems.find(x => x.productSKUId === currentSku.id).quantity++;
+        skuItems.find(x => x.skuId === currentSku.id).quantity++;
       }
 
       return skuItems;
