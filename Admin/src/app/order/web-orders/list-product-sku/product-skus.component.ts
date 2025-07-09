@@ -35,6 +35,8 @@ export class ListProductSkuComponent {
         this.listFilterSkus = skus;
       }
     });
+
+    console.log(this.listFilterSkus);
   }
 
   selectProduct(data: ProductSKUDetails) {

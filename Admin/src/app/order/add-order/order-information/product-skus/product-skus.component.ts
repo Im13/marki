@@ -24,6 +24,7 @@ export class ProductSkusComponent {
   constructor(private productService: ProductService) {}
 
   selectProduct(data: any) {
+    console.log(data);
     this.listSkus.push(data.nzValue);
     this.selectProductSkus.emit(this.listSkus);
     this.listFilterSkus = [];
