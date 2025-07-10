@@ -302,12 +302,13 @@ namespace Infrastructure.Services
 
             var revenueResult = await _unitOfWork.Complete();
 
-            if (revenueResult <= 0)
+            // Chỉ throw nếu là lỗi thực sự
+            if (revenueResult < 0)
             {
                 throw new Exception("Failed to update revenue.");
             }
 
-            return order;
+            return currentOrder;
         }
 
         public async Task<OfflineOrder> GetOrderAsync(int id)
