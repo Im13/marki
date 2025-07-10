@@ -24,20 +24,6 @@ namespace API.Controllers.Admin.Order
             _offlineOrderRepo = offlineOrderRepo;
         }
 
-        [HttpPost("create")]
-        public async Task<ActionResult<OfflineOrderDTO>> CreateOrder(OfflineOrderDTO orderDTO)
-        {
-            if(orderDTO == null) return BadRequest(new ApiResponse(400, "Problem creating order"));
-
-            var orderToCreate = _mapper.Map<OfflineOrderDTO,OfflineOrder>(orderDTO);
-
-            var orderCreated = await _orderService.CreateOfflineOrder(orderToCreate, orderDTO.ProvinceId, orderDTO.WardId, orderDTO.DistrictId);
-
-            if (orderCreated == null) return BadRequest("Error create order");
-
-            return Ok(_mapper.Map<OfflineOrder,OfflineOrderDTO>(orderCreated));
-        }
-
         [HttpGet]
         public async Task<ActionResult<Pagination<OfflineOrderDTO>>> GetOrders([FromQuery] OrderSpecParams orderParams)
         {
@@ -71,21 +57,6 @@ namespace API.Controllers.Admin.Order
             if (orderUpdateResult == null) return BadRequest("Error update order");
 
             return Ok();
-        }
-
-        [HttpPut("update-status")]
-        public async Task<ActionResult> UpdateOrderStatus(UpdateStatusDTO updateStatusDTO)
-        {
-            var order = await _orderService.GetOrderWithStatusAsync(updateStatusDTO.OrderId);
-            if(order == null) return BadRequest();
-
-            if(order.OrderStatus.Id == updateStatusDTO.StatusId) return BadRequest();
-
-            var statusUpdateResult = await _orderService.UpdateStatus(order, updateStatusDTO.StatusId);
-
-            if(statusUpdateResult == null) return BadRequest();
-
-            return Ok(statusUpdateResult);
         }
 
         [HttpGet("status")]
