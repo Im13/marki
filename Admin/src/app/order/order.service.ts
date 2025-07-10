@@ -166,7 +166,7 @@ export class OrderService {
   }
 
   createOrderFromAdmin(order: WebsiteOrder) {
-    return this.http.post(this.baseApiUrl + 'order/create-from-admin', order);
+    return this.http.post(this.baseApiUrl + 'orders/admin/create', order);
   }
 
   updateOrder(order: Order) {

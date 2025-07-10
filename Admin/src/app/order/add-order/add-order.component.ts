@@ -90,7 +90,7 @@ export class AddOrderComponent implements OnInit {
     this.order.orderDiscount = this.addOrderForm.controls['checkout'].value.orderDiscount;
     this.order.bankTransferedAmount = this.addOrderForm.controls['checkout'].value.bankTransferedAmount;
     this.order.extraFee = this.addOrderForm.controls['checkout'].value.extraFee;
-    this.order.total = this.totalSKUsPrice + this.order.shippingFee + this.order.extraFee - this.order.orderDiscount;
+    this.order.total = this.totalSKUsPrice + this.order.shippingFee + this.order.extraFee - this.order.orderDiscount - this.order.bankTransferedAmount;
     this.order.orderNote = this.addOrderForm.controls['checkout'].value.orderNote;
 
     this.order.orderDate = this.addOrderForm.controls['information'].value.orderCreatedDate;
@@ -102,29 +102,28 @@ export class AddOrderComponent implements OnInit {
     // this.order.customer = this.customer;
 
     this.order.orderItems = this.groupSkuItems();
-    console.log(this.order);
 
-    // this.orderService.createOrderFromAdmin(this.order).subscribe({
-    //   next: () => {
-    //     this.toastrService.success('Tạo mới đơn hàng thành công')
-    //     this.addOrderForm.reset();
-    //     this.addOrderForm.controls['checkout'].patchValue({
-    //       shippingFee: 0,
-    //       orderDiscount: 0,
-    //       bankTransferedAmount: 0,
-    //       extraFee: 0
-    //     });
-    //     this.addOrderForm.controls['information'].patchValue({
-    //       orderCreatedDate: new Date()
-    //     })
-    //     this.totalSKUsPrice = 0;
-    //     this.skuItems = [];
-    //     this.listSkus = [];
-    //   },
-    //   error: err => {
-    //     console.log(err);
-    //   }
-    // });
+    this.orderService.createOrderFromAdmin(this.order).subscribe({
+      next: () => {
+        this.toastrService.success('Tạo mới đơn hàng thành công')
+        this.addOrderForm.reset();
+        this.addOrderForm.controls['checkout'].patchValue({
+          shippingFee: 0,
+          orderDiscount: 0,
+          bankTransferedAmount: 0,
+          extraFee: 0
+        });
+        this.addOrderForm.controls['information'].patchValue({
+          orderCreatedDate: new Date()
+        })
+        this.totalSKUsPrice = 0;
+        this.skuItems = [];
+        this.listSkus = [];
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
   }
 
   groupSkuItems(): OrderItem[] {
@@ -133,7 +132,7 @@ export class AddOrderComponent implements OnInit {
 
     return this.listSkus.reduce((skuItems, currentSku) => {
       if(skuItems == null || skuItems.find(item => item.skuId === currentSku.id) === undefined) {
-        var x: OrderItem = {
+        var item: OrderItem = {
           skuId: currentSku.id, 
           quantity: 1, 
           skuDetail: null, 
@@ -147,7 +146,7 @@ export class AddOrderComponent implements OnInit {
           id: 0
         }
 
-        skuItems.push(x);
+        skuItems.push(item);
       } else {
         skuItems.find(x => x.skuId === currentSku.id).quantity++;
       }

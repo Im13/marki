@@ -15,6 +15,7 @@ export class ListProductSkuComponent {
   @Output() selectListItems = new EventEmitter<OrderItem[]>();
 
   options = ['Sản phẩm', 'Combo'];
+  listItemsIsReady = false;
   selectedProduct: Product = null;
   nzFilterOption = (): boolean => true;
   listFilterSkus: ProductSKUDetails[] = [];

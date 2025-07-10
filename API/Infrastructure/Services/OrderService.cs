@@ -95,11 +95,13 @@ namespace Infrastructure.Services
         {
             if (order.Id != 0) return null;
 
-            _unitOfWork.Repository<Order>().Add(order);
-
             // Get delivery, but we will remove this because delivery method is used only to check paid order.
             var deliveryMethod = await _unitOfWork.Repository<DeliveryMethod>().GetByIdAsync(0);
 
+            // Calc subtotal
+            var subTotal = order.OrderItems.Sum(item => item.Price * item.Quantity);
+
+            order.Subtotal = subTotal;
             order.DeliveryMethod = deliveryMethod;
             order.OrderStatus = await _unitOfWork.Repository<OfflineOrderStatus>().GetByIdAsync(1);
             order.OrderDate = DateTime.UtcNow;
@@ -111,6 +113,8 @@ namespace Infrastructure.Services
                 EmailAddress = order.BuyerEmail,
                 IsDeleted = false
             };
+
+            _unitOfWork.Repository<Order>().Add(order);
             
             // Save to db
             var result = await _unitOfWork.Complete();
@@ -119,7 +123,7 @@ namespace Infrastructure.Services
             // Cập nhật doanh thu
             await _revenueRepo.UpdateRevenueAsync(order);
 
-            return null;
+            return order;
         }
 
         public async Task<IReadOnlyList<DeliveryMethod>> GetDeliveryMethodsAsync()

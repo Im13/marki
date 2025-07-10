@@ -50,7 +50,7 @@ namespace API.Controllers
             
             var createdOrder = await _orderService.CreateOrderFromAdminAsync(order);
             
-            if(order == null) return BadRequest(new ApiResponse(400, "Problem creating order")); 
+            if(createdOrder == null) return BadRequest(new ApiResponse(400, "Problem creating order")); 
 
             return Ok(createdOrder);
         }
