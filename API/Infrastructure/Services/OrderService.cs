@@ -106,13 +106,25 @@ namespace Infrastructure.Services
             order.OrderStatus = await _unitOfWork.Repository<OfflineOrderStatus>().GetByIdAsync(1);
             order.OrderDate = DateTime.UtcNow;
             order.Source = OrderSources.Offline;
-            order.Customer = new Customer
+
+            var existingCustomer = await _unitOfWork.Repository<Customer>().GetByIdAsync(order.Customer.Id);
+
+            if (existingCustomer == null)
             {
-                Name = order.Fullname,
-                PhoneNumber = order.PhoneNumber,
-                EmailAddress = order.BuyerEmail,
-                IsDeleted = false
-            };
+                // Create new customer if not exists
+                order.Customer = new Customer
+                {
+                    Name = order.Customer.Name,
+                    PhoneNumber = order.Customer.PhoneNumber,
+                    EmailAddress = order.Customer.EmailAddress,
+                    IsDeleted = false
+                };
+            }
+            else
+            {
+                // Use existing customer
+                order.Customer = existingCustomer;
+            }
 
             _unitOfWork.Repository<Order>().Add(order);
             

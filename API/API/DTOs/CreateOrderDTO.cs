@@ -18,6 +18,7 @@ namespace API.DTOs
         public int WardId { get; set; }
         public string Street { get; set; }
         public string PhoneNumber { get; set; }
+        public CustomerDTO Customer { get; set; }
         public List<OrderItemDTO> OrderItems { get; set; }
     }
 }

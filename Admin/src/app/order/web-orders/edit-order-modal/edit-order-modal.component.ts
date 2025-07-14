@@ -49,10 +49,10 @@ export class EditOrderModalComponent implements OnInit {
         customerCareStaff: this.formBuilder.control('this.order.customerCareStaffId'),
       }),
       customerInfo: this.formBuilder.group({
-        customerName: this.formBuilder.control(this.order?.fullname, [ Validators.required ]),
-        customerPhoneNumber: this.formBuilder.control(this.order?.phoneNumber, [ Validators.required ]),
-        customerEmailAddress: this.formBuilder.control(this.order?.buyerEmail),
-        customerDOB: this.formBuilder.control(new Date()),
+        customerName: this.formBuilder.control(this.order.customer?.name, [ Validators.required ]),
+        customerPhoneNumber: this.formBuilder.control(this.order.customer?.phoneNumber, [ Validators.required ]),
+        customerEmailAddress: this.formBuilder.control(this.order.customer?.emailAddress),
+        customerDOB: this.formBuilder.control(this.order.customer?.dob),
       }),
       receiverInfo: this.formBuilder.group({
         receiverName: this.formBuilder.control(this.order.fullname, [ Validators.required ]),
@@ -86,12 +86,12 @@ export class EditOrderModalComponent implements OnInit {
             orderCareStaff: 'this.order.orderCareStaffId',
             customerCareStaff: 'this.order.customerCareStaffId',
           },
-          // customerInfo: {
-          //   customerName: this.order.customer.name,
-          //   customerPhoneNumber: this.order.customer.phoneNumber,
-          //   customerEmailAddress: this.order.customer.emailAddress,
-          //   customerDOB: this.order.customer.dob
-          // },
+          customerInfo: {
+            customerName: this.order.customer.name,
+            customerPhoneNumber: this.order.customer.phoneNumber,
+            customerEmailAddress: this.order.customer.emailAddress,
+            customerDOB: this.order.customer.dob
+          },
           receiverInfo: {
             receiverName: this.order.fullname,
             receiverPhoneNumber: this.order.phoneNumber,
@@ -122,10 +122,10 @@ export class EditOrderModalComponent implements OnInit {
   }
 
   submitForm() {
-    // this.order.customer.emailAddress = this.editOrderForm.controls['customerInfo'].value.customerEmailAddress;
-    // this.order.customer.dob = this.editOrderForm.controls['customerInfo'].value.customerDOB;
-    // this.order.customer.name = this.editOrderForm.controls['customerInfo'].value.customerName;
-    // this.order.customer.phoneNumber = this.editOrderForm.controls['customerInfo'].value.customerPhoneNumber;
+    this.order.customer.emailAddress = this.editOrderForm.controls['customerInfo'].value.customerEmailAddress;
+    this.order.customer.dob = this.editOrderForm.controls['customerInfo'].value.customerDOB;
+    this.order.customer.name = this.editOrderForm.controls['customerInfo'].value.customerName;
+    this.order.customer.phoneNumber = this.editOrderForm.controls['customerInfo'].value.customerPhoneNumber;
 
     this.order.street = this.editOrderForm.controls['receiverInfo'].value.receiverAddress;
     this.order.cityOrProvinceId = this.editOrderForm.controls['receiverInfo'].value.provinceId;

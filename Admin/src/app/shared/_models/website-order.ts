@@ -1,3 +1,4 @@
+import { Customer } from "./customer";
 import { OrderStatus } from "./orderStatus";
 import { ProductSKUDetails } from "./productSKUDetails";
 
@@ -51,5 +52,5 @@ export class WebsiteOrder {
   phoneNumber: string;
   orderItems: OrderItem[];
   orderStatus: OrderStatus;
-  // customer: Customer;
+  customer?: Customer;
 }

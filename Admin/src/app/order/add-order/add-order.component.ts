@@ -22,7 +22,7 @@ export class AddOrderComponent implements OnInit {
   listSkus: ProductSKUDetails[] = [];
   totalSKUsPrice = 0;
   order: WebsiteOrder = new WebsiteOrder();
-  customer: Customer = new Customer();
+  // customer: Customer = new Customer();
   skuItems: OrderSKUItems[] = [];
   provinces: Province[] = [];
 
@@ -76,8 +76,8 @@ export class AddOrderComponent implements OnInit {
 
   submitForm() {
     this.order.buyerEmail = this.addOrderForm.controls['customerInfo'].value.customerEmailAddress;
-    this.order.fullname = this.addOrderForm.controls['customerInfo'].value.customerName;
-    this.order.phoneNumber = this.addOrderForm.controls['customerInfo'].value.customerPhoneNumber;
+    this.order.fullname = this.addOrderForm.controls['receiverInfo'].value.receiverName;
+    this.order.phoneNumber = this.addOrderForm.controls['receiverInfo'].value.receiverPhoneNumber;
 
     this.order.street = this.addOrderForm.controls['receiverInfo'].value.receiverAddress;
     this.order.cityOrProvinceId = this.addOrderForm.controls['receiverInfo'].value.provinceId;
@@ -99,7 +99,20 @@ export class AddOrderComponent implements OnInit {
     // this.order.customerCareStaffId = this.addOrderForm.controls['information'].value.customerCareStaff;
     // this.order.customerCareStaffId = 1;
 
-    // this.order.customer = this.customer;
+    this.order.customer = {
+      id: -2, // Temporary ID, will be set by backend
+      name: this.addOrderForm.controls['customerInfo'].value.customerName ? 
+        this.addOrderForm.controls['customerInfo'].value.customerName : 
+        this.addOrderForm.controls['receiverInfo'].value.receiverName,
+      phoneNumber: this.addOrderForm.controls['customerInfo'].value.customerPhoneNumber ? 
+        this.addOrderForm.controls['customerInfo'].value.customerPhoneNumber : 
+        this.addOrderForm.controls['receiverInfo'].value.receiverPhoneNumber,
+      emailAddress: this.addOrderForm.controls['customerInfo'].value.customerEmailAddress ? 
+        this.addOrderForm.controls['customerInfo'].value.customerEmailAddress : '',
+      dob: this.addOrderForm.controls['customerInfo'].value.customerDOB ? 
+        new Date(this.addOrderForm.controls['customerInfo'].value.customerDOB) : 
+        null
+    };
 
     this.order.orderItems = this.groupSkuItems();
 
