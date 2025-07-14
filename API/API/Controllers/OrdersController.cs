@@ -137,6 +137,22 @@ namespace API.Controllers
             return Ok(new Pagination<OrderToReturnDTO>(orderParams.PageIndex, orderParams.PageSize, totalItems, data));
         }
 
+        [HttpGet("status")]
+        public async Task<ActionResult<Pagination<OrderToReturnDTO>>> GetOrderByStatusId([FromQuery] OrderSpecParams orderParams)
+        {
+            var spec = new WebsiteOrderWithStatusSpecification(orderParams);
+
+            var countSpec = new WebsiteOrderWithStatusForCountSpecification(orderParams);
+
+            var totalItems = await _orderRepo.CountAsync(countSpec);
+
+            var orders = await _orderRepository.GetWebsiteOrdersWithSpec(spec);
+
+            var data = _mapper.Map<IReadOnlyList<Order>, IReadOnlyList<OrderToReturnDTO>>(orders);
+
+            return Ok(new Pagination<OrderToReturnDTO>(orderParams.PageIndex, orderParams.PageSize, totalItems, data));
+        }
+
         // [Authorize]
         [HttpGet("website/{id}")]
         public async Task<ActionResult<OrderToReturnDTO>> GetById(int id)

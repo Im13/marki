@@ -8,6 +8,7 @@ import { UpdateStatusDTO } from 'src/app/shared/_models/order/updateStatusDTO';
 import { ToastrService } from 'ngx-toastr';
 import { SearchService } from 'src/app/core/services/search.service';
 import { WebsiteOrder } from 'src/app/shared/_models/website-order';
+import { OrderWithStatusParams } from 'src/app/shared/_models/order/orderWithStatusParams';
 
 @Component({
   selector: 'app-all-site-orders',
@@ -46,7 +47,11 @@ export class AllSiteOrdersComponent {
   ) {}
 
   ngOnInit() {
-    this.getOrders();
+    if(this.orderStatus == -1) {
+      this.getOrders();
+    } else {
+      this.getOrderByStatus(this.orderStatus);
+    }
 
     this.searchService.searchQuery$.subscribe(query => {
       this.filterOrders(query);
@@ -150,5 +155,21 @@ export class AllSiteOrdersComponent {
     })
   }
 
-  getOrderByStatus(statusId: number) {}
+  getOrderByStatus(statusId: number) {
+    var params = new OrderWithStatusParams(statusId);
+
+    this.orderService.getOrdersWithStatus(params).subscribe({
+      next: response => {
+        this.orders = response.data;
+        this.orderParams.pageIndex = response.pageIndex;
+        this.orderParams.pageSize = response.pageSize;
+        this.totalItems = response.count;
+        this.loading = false;
+      },
+      error: err => {
+        console.log(err);
+        this.loading = false;
+      }
+    });
+  }
 }

@@ -197,6 +197,17 @@ export class OrderService {
     return this.http.get<Pagination<WebsiteOrder[]>>(this.baseApiUrl + 'orders/all-orders', { params });
   }
 
+  getOrdersWithStatus(productParams: OrderWithStatusParams) {
+    let params = new HttpParams();
+
+    params = params.append('search', productParams.search);
+    params = params.append('pageSize', productParams.pageSize);
+    params = params.append('pageIndex', productParams.pageIndex);
+    params = params.append('statusId', productParams.statusId);
+
+    return this.http.get<Pagination<WebsiteOrder[]>>(this.baseApiUrl + 'orders/status', { params });
+  }
+
   getWebsiteOrderById(id: number) {
     return this.http.get<WebsiteOrder>(this.baseApiUrl + 'orders/website/' + id);
   }
@@ -221,32 +232,7 @@ export class OrderService {
     return this.http.put<Order>(this.baseApiUrl + 'orders/update-status', updateStatusDTO);
   }
 
-  getOrdersWithStatus(productParams: OrderWithStatusParams) {
-    let params = new HttpParams();
-
-    params = params.append('search', productParams.search);
-    params = params.append('pageSize', productParams.pageSize);
-    params = params.append('pageIndex', productParams.pageIndex);
-    params = params.append('statusId', productParams.statusId);
-
-    return this.http.get<Pagination<Order[]>>(this.baseApiUrl + 'order/status', { params });
-  }
-
   getStatusCounts(): Observable<{ [key: string]: number }> {
     return this.http.get<{ [key: string]: number }>(`${this.baseApiUrl}orders/admin/status-counts`);
-  }
-
-  private mapProductItemToBasketItem(item: ProductSKU, product: Product, imageUrl: string) : BasketItem {
-    return {
-      id: item.id,
-      productId: product.id,
-      productName: product.name,
-      price: item.price,
-      quantity: 0,
-      pictureUrl: imageUrl,
-      sku: item.sku,
-      productSKUValues: item.productSKUValues,
-      optionValueCombination: item.productSKUValues.map(o => `${o.optionName}: ${o.optionValue}`).join('; ')
-    }
   }
 }

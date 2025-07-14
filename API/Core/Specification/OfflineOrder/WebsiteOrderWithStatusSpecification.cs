@@ -3,10 +3,10 @@ using Core.Specification.OfflineOrderSpec;
 
 namespace Core.Entities.OrderAggregate
 {
-    public class WebsiteOrderSpecification : BaseSpecification<Order>
+    public class WebsiteOrderWithStatusSpecification : BaseSpecification<Order>
     {
-        public WebsiteOrderSpecification(OrderSpecParams orderParams) : base(x =>
-            string.IsNullOrEmpty(orderParams.Search) || x.Id.ToString().Contains(orderParams.Search)
+        public WebsiteOrderWithStatusSpecification(OrderSpecParams orderParams) : base(x =>
+            x.OrderStatus.Id == orderParams.StatusId 
         )
         {
             AddInclude(x => x.OrderItems);

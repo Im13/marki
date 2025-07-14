@@ -11,13 +11,15 @@ import { OrderService } from '../order.service';
 export class WebOrdersComponent implements OnInit {
   @ViewChild(AllSiteOrdersComponent) allSiteOrderComp: AllSiteOrdersComponent;
   orderStatusCounts: { [key: string]: number } = {};
+  totalOrders: number = 0;
 
   constructor(private router: Router, private orderService: OrderService) { }
 
   ngOnInit(): void {
     this.orderService.getStatusCounts().subscribe(counts => {
-      console.log('Order status counts:', counts);
       this.orderStatusCounts = counts;
+
+      this.totalOrders = Object.values(counts).reduce((sum, count) => sum + count, 0);
     });
   }
 
