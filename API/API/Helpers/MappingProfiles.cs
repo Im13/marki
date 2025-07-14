@@ -17,7 +17,7 @@ namespace API.Helpers
         public MappingProfiles()
         {
             CreateMap<Product, ProductToReturnDTO>();
-                // .ForMember(d => d.PictureUrl, o => o.MapFrom<ProductUrlResolver>());
+            // .ForMember(d => d.PictureUrl, o => o.MapFrom<ProductUrlResolver>());
             CreateMap<Core.Entities.Identity.Address, AddressDTO>().ReverseMap();
             CreateMap<CustomerBasketDTO, CustomerBasket>();
             CreateMap<BasketItemDTO, BasketItem>();
@@ -31,13 +31,18 @@ namespace API.Helpers
             //     .ForMember(d => d.ProductName, o => o.MapFrom(s => s.ItemOrdered.ProductName))
             //     .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.ItemOrdered.PictureUrl))
             //     .ForMember(d => d.PictureUrl, o => o.MapFrom<OrderItemUrlResolver>());
-            CreateMap<Order, OrderToReturnDTO>();
+            CreateMap<Order, OrderToReturnDTO>()
+                .ForMember(d => d.OrderSource, o => o.MapFrom(s => new OrderSourceDTO
+                {
+                    Id = (int)s.Source,
+                    Name = GetEnumMemberValue(s.Source)
+                }));
             CreateMap<OrderToReturnDTO, Order>();
             CreateMap<OrderItem, OrderItemDTO>();
             CreateMap<OrderItemDTO, OrderItem>();
             CreateMap<ItemOrderedDTO, ProductIemOrdered>();
             CreateMap<ProductIemOrdered, ItemOrderedDTO>();
-            CreateMap<CreateOrderDTO,Order>()
+            CreateMap<CreateOrderDTO, Order>()
                 .ForMember(d => d.DeliveryMethod, o => o.Ignore());
             CreateMap<Order, CreateOrderDTO>();
 
@@ -68,8 +73,8 @@ namespace API.Helpers
                 .ForMember(d => d.ProductName, o => o.MapFrom(s => s.ProductSKU.Product.Name));
 
             //Customer
-            CreateMap<CustomerDTO,Customer>();
-            CreateMap<Customer,CustomerDTO>();
+            CreateMap<CustomerDTO, Customer>();
+            CreateMap<Customer, CustomerDTO>();
 
             CreateMap<ProductDTOs, Product>();
             CreateMap<Product, ProductDTOs>();
@@ -82,7 +87,7 @@ namespace API.Helpers
             CreateMap<ProductOptionDTO, ProductOptions>();
             CreateMap<ProductOptions, ProductOptionDTO>();
             CreateMap<ProductOptionValueDTO, ProductOptionValues>();
-                // .ForMember(d => d.ValueName, o => o.MapFrom(s => s.Value));
+            // .ForMember(d => d.ValueName, o => o.MapFrom(s => s.Value));
             CreateMap<ProductOptionValues, ProductOptionValueDTO>();
             CreateMap<ProductSKUDTO, ProductSKUs>();
             CreateMap<ProductSKUs, ProductSKUDTO>();
@@ -105,6 +110,14 @@ namespace API.Helpers
             CreateMap<ShopeeOrder, ShopeeOrderDTO>();
             CreateMap<ShopeeProduct, ShopeeOrderProductDTO>()
                 .ForMember(d => d.ProductSKU, o => o.MapFrom(s => s.SKU));
+        }
+
+        private static string GetEnumMemberValue(Enum enumValue)
+        {
+            var type = enumValue.GetType();
+            var memInfo = type.GetMember(enumValue.ToString());
+            var attributes = memInfo[0].GetCustomAttributes(typeof(System.Runtime.Serialization.EnumMemberAttribute), false);
+            return attributes.Length > 0 ? ((System.Runtime.Serialization.EnumMemberAttribute)attributes[0]).Value : enumValue.ToString();
         }
     }
 }

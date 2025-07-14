@@ -5,7 +5,6 @@ import { OrderRoutingModule } from './order-routing.module';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ShopeeOrdersComponent } from './shopee-orders/shopee-orders.component';
 import { SharedModule } from '../shared/shared.module';
-import { OrderListComponent } from './order-list/order-list.component';
 import { CoreModule } from '../core/core.module';
 import { AddOrderComponent } from './add-order/add-order.component';
 import { OrderInformationComponent } from './add-order/order-information/order-information.component';
@@ -15,7 +14,6 @@ import { InformationComponent } from './add-order/order-information/information/
 import { CustomerInfoComponent } from './add-order/order-information/customer-info/customer-info.component';
 import { ReceiverComponent } from './add-order/order-information/receiver/receiver.component';
 import { DeliveryComponent } from './add-order/order-information/delivery/delivery.component';
-import { AllOrderComponent } from './order-list/all-order/all-order.component';
 import { UpdateOrderComponent } from './update-order/update-order.component';
 import { WebOrdersComponent } from './web-orders/web-orders.component';
 import { AllSiteOrdersComponent } from './web-orders/all-site-orders/all-site-orders.component';
@@ -28,7 +26,6 @@ import { CheckoutInfoComponent } from './web-orders/checkout-info/checkout-info.
 @NgModule({
   declarations: [
     ShopeeOrdersComponent,
-    OrderListComponent,
     AddOrderComponent,
     OrderInformationComponent,
     ListProductSkuComponent,
@@ -37,7 +34,6 @@ import { CheckoutInfoComponent } from './web-orders/checkout-info/checkout-info.
     CustomerInfoComponent,
     ReceiverComponent,
     DeliveryComponent,
-    AllOrderComponent,
     UpdateOrderComponent,
     WebOrdersComponent,
     AllSiteOrdersComponent,

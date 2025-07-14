@@ -1,5 +1,4 @@
 using API.DTOs.AdminOrder;
-using Core.Entities.OrderAggregate;
 
 namespace API.DTOs
 {
@@ -28,5 +27,6 @@ namespace API.DTOs
         public string Street { get; set; }
         public string PhoneNumber { get; set; }
         public CustomerDTO Customer { get; set; }
+        public OrderSourceDTO OrderSource { get; set; }
     }
 }

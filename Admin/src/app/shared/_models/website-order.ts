@@ -31,6 +31,11 @@ export interface Address {
   phoneNumber: string;
 }
 
+export interface OrderSource {
+  id: number;
+  name: string;
+}
+
 export class WebsiteOrder {
   id: number;
   buyerEmail: string;
@@ -53,4 +58,5 @@ export class WebsiteOrder {
   orderItems: OrderItem[];
   orderStatus: OrderStatus;
   customer?: Customer;
+  orderSource: OrderSource;
 }

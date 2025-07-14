@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { AllSiteOrdersComponent } from './all-site-orders/all-site-orders.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-web-orders',
@@ -9,7 +10,11 @@ import { AllSiteOrdersComponent } from './all-site-orders/all-site-orders.compon
 export class WebOrdersComponent {
   @ViewChild(AllSiteOrdersComponent) allSiteOrderComp:AllSiteOrdersComponent;
 
-  addOrder(){}
+  constructor(private router: Router) {}
+
+  addOrder(){
+    this.router.navigate(['/orders/add'])
+  }
 
   reloadOrder() {
     this.allSiteOrderComp.getOrders();
