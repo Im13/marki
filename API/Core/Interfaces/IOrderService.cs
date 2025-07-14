@@ -19,5 +19,6 @@ namespace Core.Interfaces
         Task<Order> GetWebsiteOrderWithStatusAsync(int orderId);
         Task<List<OfflineOrder>> GetOrdersByStatusIdAsync(int statusId);
         Task<DeliveryMethod> GetDeliveryMethodByIdAsync(int id);
+        Task<Dictionary<string, int>> GetOrderStatusCountsAsync();
     }
 }

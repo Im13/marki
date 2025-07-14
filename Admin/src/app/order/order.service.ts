@@ -9,7 +9,7 @@ import { ShopeeOrder } from '../shared/_models/shopeeOrder';
 import { ShopeeProduct } from '../shared/_models/shopeeProduct';
 import { ShopeeOrderParams } from '../shared/_models/shopeeOrderParams';
 import { Pagination } from '../shared/_models/pagination';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Order } from '../shared/_models/order';
 import { OrderParams } from '../shared/_models/order/orderParams';
 import { Province } from '../shared/_models/address/province';
@@ -230,6 +230,10 @@ export class OrderService {
     params = params.append('statusId', productParams.statusId);
 
     return this.http.get<Pagination<Order[]>>(this.baseApiUrl + 'order/status', { params });
+  }
+
+  getStatusCounts(): Observable<{ [key: string]: number }> {
+    return this.http.get<{ [key: string]: number }>(`${this.baseApiUrl}orders/admin/status-counts`);
   }
 
   private mapProductItemToBasketItem(item: ProductSKU, product: Product, imageUrl: string) : BasketItem {

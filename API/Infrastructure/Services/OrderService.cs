@@ -57,7 +57,8 @@ namespace Infrastructure.Services
             var status = await _unitOfWork.Repository<OfflineOrderStatus>().GetByIdAsync(1);
 
             //CreateCustomer
-            var customer = new Customer {
+            var customer = new Customer
+            {
                 Name = shippingAddress.Fullname,
                 PhoneNumber = shippingAddress.PhoneNumber,
                 EmailAddress = buyerEmail,
@@ -127,7 +128,7 @@ namespace Infrastructure.Services
             }
 
             _unitOfWork.Repository<Order>().Add(order);
-            
+
             // Save to db
             var result = await _unitOfWork.Complete();
             if (result <= 0) return null;
@@ -247,7 +248,7 @@ namespace Infrastructure.Services
             //Get Customer
             var customer = await _context.Customers.Where(c => c.Id == order.Customer.Id).SingleOrDefaultAsync();
 
-            if(customer == null) return null;
+            if (customer == null) return null;
 
             customer.Name = order.Customer.Name;
             customer.PhoneNumber = order.Customer.PhoneNumber;
@@ -380,6 +381,14 @@ namespace Infrastructure.Services
             var orders = await _context.OfflineOrders.Include(o => o.OrderStatus).Where(o => o.OrderStatus.Id == statusId).ToListAsync();
 
             return orders;
+        }
+
+        public async Task<Dictionary<string, int>> GetOrderStatusCountsAsync()
+        {
+            return await _context.Orders
+                .GroupBy(o => o.OrderStatus.Status)
+                .Select(g => new { Status = g.Key, Count = g.Count() })
+                .ToDictionaryAsync(x => x.Status, x => x.Count);
         }
     }
 }

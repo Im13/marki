@@ -32,12 +32,12 @@ namespace API.Controllers
         public async Task<ActionResult<Order>> CreateOrder(OrderDTO orderDTO)
         {
             var email = HttpContext.User.RetrieveEmailFromPrincipal();
-            var address = _mapper.Map<AddressDTO,Address>(orderDTO.ShipToAddress);
+            var address = _mapper.Map<AddressDTO, Address>(orderDTO.ShipToAddress);
 
             //Sai khi truyền email vào createOrderAsync, phải lấy email từ dto
             var order = await _orderService.CreateOrderAsync(email, orderDTO.DeliveryMethodId, orderDTO.BasketId, address, orderDTO.ShippingFee, orderDTO.OrderDiscount, orderDTO.BankTransferedAmount, orderDTO.ExtraFee, orderDTO.Total, orderDTO.OrderNote);
-            
-            if(order == null) return BadRequest(new ApiResponse(400, "Problem creating order")); 
+
+            if (order == null) return BadRequest(new ApiResponse(400, "Problem creating order"));
 
             return Ok(order);
         }
@@ -46,11 +46,11 @@ namespace API.Controllers
         [HttpPost("admin/create")]
         public async Task<ActionResult<Order>> CreateOrderFromAdmin(CreateOrderDTO orderDTO)
         {
-            var order = _mapper.Map<CreateOrderDTO,Order>(orderDTO);
-            
+            var order = _mapper.Map<CreateOrderDTO, Order>(orderDTO);
+
             var createdOrder = await _orderService.CreateOrderFromAdminAsync(order);
-            
-            if(createdOrder == null) return BadRequest(new ApiResponse(400, "Problem creating order")); 
+
+            if (createdOrder == null) return BadRequest(new ApiResponse(400, "Problem creating order"));
 
             return Ok(createdOrder);
         }
@@ -58,14 +58,14 @@ namespace API.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateOrder(UpdateOrderDTO orderDTO)
         {
-            if(orderDTO == null) return BadRequest();
+            if (orderDTO == null) return BadRequest();
 
             //Find order by id
             Order order = await _orderRepository.GetWebsiteOrderById(orderDTO.Id);
-            if(order == null) return BadRequest("Order not exists");
+            if (order == null) return BadRequest("Order not exists");
 
-            Order orderToUpdate = _mapper.Map<UpdateOrderDTO,Order>(orderDTO);
-            List<OrderItem> items = _mapper.Map<List<OrderItemDTO>,List<OrderItem>>(orderDTO.OrderItems);
+            Order orderToUpdate = _mapper.Map<UpdateOrderDTO, Order>(orderDTO);
+            List<OrderItem> items = _mapper.Map<List<OrderItemDTO>, List<OrderItem>>(orderDTO.OrderItems);
 
             Order orderUpdateResult = await _orderService.UpdateOrder(orderToUpdate, items);
 
@@ -78,13 +78,13 @@ namespace API.Controllers
         public async Task<ActionResult> UpdateOrderStatus(UpdateStatusDTO updateStatusDTO)
         {
             var order = await _orderService.GetWebsiteOrderWithStatusAsync(updateStatusDTO.OrderId);
-            if(order == null) return BadRequest();
+            if (order == null) return BadRequest();
 
-            if(order.OrderStatus.Id == updateStatusDTO.StatusId) return BadRequest();
+            if (order.OrderStatus.Id == updateStatusDTO.StatusId) return BadRequest();
 
             var statusUpdateResult = await _orderService.UpdateWebsiteOrderStatus(order, updateStatusDTO.StatusId);
 
-            if(statusUpdateResult == null) return BadRequest();
+            if (statusUpdateResult == null) return BadRequest();
 
             return Ok(statusUpdateResult);
         }
@@ -108,7 +108,7 @@ namespace API.Controllers
 
             var order = await _orderService.GetOrderByIdAsync(id, email);
 
-            if(order == null) return NotFound(new ApiResponse(404));
+            if (order == null) return NotFound(new ApiResponse(404));
 
             return _mapper.Map<OrderToReturnDTO>(order);
         }
@@ -144,6 +144,13 @@ namespace API.Controllers
             var order = await _orderRepository.GetWebsiteOrderById(id);
 
             return _mapper.Map<Order, OrderToReturnDTO>(order);
+        }
+
+        [HttpGet("admin/status-counts")]
+        public async Task<ActionResult<Dictionary<string, int>>> GetOrderStatusCounts()
+        {
+            var counts = await _orderService.GetOrderStatusCountsAsync();
+            return Ok(counts);
         }
     }
 }

@@ -42,7 +42,7 @@
           </ng-template>
           <ng-template #addOrderTitleTemplate>
             <div class="d-flex align-items-center">
-              Mới <nz-badge nzStandalone [nzCount]="5" [nzOverflowCount]="99999" class="ms-2" [nzStyle]="{ backgroundColor: '#e8f5fb', color: '#1a57a1' }"></nz-badge>
+              Mới <nz-badge nzStandalone [nzCount]="orderStatusCounts['Mới'] || 0" [nzOverflowCount]="99999" class="ms-2" [nzStyle]="{ backgroundColor: '#e8f5fb', color: '#1a57a1' }"></nz-badge>
             </div>
           </ng-template>
         </nz-tab>
@@ -52,7 +52,7 @@
           </ng-template>
           <ng-template #waitOrderTitleTemplate>
             <div class="d-flex align-items-center">
-              Chờ hàng <nz-badge nzStandalone [nzCount]="0" [nzOverflowCount]="99999" class="ms-2" [nzStyle]="{ backgroundColor: '#e8f5fb', color: '#1a57a1' }"></nz-badge>
+              Chờ hàng <nz-badge nzStandalone [nzCount]="orderStatusCounts['Chờ hàng'] || 0" [nzOverflowCount]="99999" class="ms-2" [nzStyle]="{ backgroundColor: '#e8f5fb', color: '#1a57a1' }"></nz-badge>
             </div>
           </ng-template>
         </nz-tab>
@@ -62,7 +62,7 @@
           </ng-template>
           <ng-template #priorityOrderTitleTemplate>
             <div class="d-flex align-items-center">
-              Ưu tiên xuất đơn <nz-badge nzStandalone [nzCount]="0" [nzOverflowCount]="99999" class="ms-2" [nzStyle]="{ backgroundColor: '#e8f5fb', color: '#1a57a1' }"></nz-badge>
+              Ưu tiên xuất đơn <nz-badge nzStandalone [nzCount]="orderStatusCounts['Ưu tiên xuất đơn'] || 0" [nzOverflowCount]="99999" class="ms-2" [nzStyle]="{ backgroundColor: '#e8f5fb', color: '#1a57a1' }"></nz-badge>
             </div>
           </ng-template>
         </nz-tab>
@@ -72,7 +72,7 @@
           </ng-template>
           <ng-template #confirmedOrderTitleTemplate>
             <div class="d-flex align-items-center">
-              Đã xác nhận <nz-badge nzStandalone [nzCount]="9" [nzOverflowCount]="99999" class="ms-2" [nzStyle]="{ backgroundColor: '#e8f5fb', color: '#1a57a1' }"></nz-badge>
+              Đã xác nhận <nz-badge nzStandalone [nzCount]="orderStatusCounts['Đã xác nhận'] || 0" [nzOverflowCount]="99999" class="ms-2" [nzStyle]="{ backgroundColor: '#e8f5fb', color: '#1a57a1' }"></nz-badge>
             </div>
           </ng-template>
         </nz-tab>
@@ -82,7 +82,7 @@
           </ng-template>
           <ng-template #sentOrderTitleTemplate>
             <div class="d-flex align-items-center">
-              Đã gửi hàng <nz-badge nzStandalone [nzCount]="58" [nzOverflowCount]="99999" class="ms-2" [nzStyle]="{ backgroundColor: '#e8f5fb', color: '#1a57a1' }"></nz-badge>
+              Đã gửi hàng <nz-badge nzStandalone [nzCount]="orderStatusCounts['Đã gửi hàng'] || 0" [nzOverflowCount]="99999" class="ms-2" [nzStyle]="{ backgroundColor: '#e8f5fb', color: '#1a57a1' }"></nz-badge>
             </div>
           </ng-template>
         </nz-tab>
@@ -92,7 +92,7 @@
           </ng-template>
           <ng-template #canceledOrderTitleTemplate>
             <div class="d-flex align-items-center">
-              Đơn đã huỷ <nz-badge nzStandalone [nzCount]="5" [nzOverflowCount]="99999" class="ms-2" [nzStyle]="{ backgroundColor: '#e8f5fb', color: '#1a57a1' }"></nz-badge>
+              Đơn đã huỷ <nz-badge nzStandalone [nzCount]="orderStatusCounts['Đơn đã huỷ'] || 0" [nzOverflowCount]="99999" class="ms-2" [nzStyle]="{ backgroundColor: '#e8f5fb', color: '#1a57a1' }"></nz-badge>
             </div>
           </ng-template>
         </nz-tab>
@@ -102,7 +102,7 @@
           </ng-template>
           <ng-template #deletedOrderTitleTemplate>
             <div class="d-flex align-items-center">
-              Đơn đã xoá <nz-badge nzStandalone [nzCount]="194" [nzOverflowCount]="99999" class="ms-2" [nzStyle]="{ backgroundColor: '#e8f5fb', color: '#1a57a1' }"></nz-badge>
+              Đơn đã xoá <nz-badge nzStandalone [nzCount]="orderStatusCounts['Đơn đã xoá'] || 0" [nzOverflowCount]="99999" class="ms-2" [nzStyle]="{ backgroundColor: '#e8f5fb', color: '#1a57a1' }"></nz-badge>
             </div>
           </ng-template>
         </nz-tab>
