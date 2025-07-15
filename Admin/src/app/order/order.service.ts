@@ -16,10 +16,6 @@ import { Province } from '../shared/_models/address/province';
 import { District } from '../shared/_models/address/district';
 import { Ward } from '../shared/_models/address/ward';
 import { UpdateStatusDTO } from '../shared/_models/order/updateStatusDTO';
-import { OrderWithStatusParams } from '../shared/_models/order/orderWithStatusParams';
-import { ProductSKU } from '../shared/_models/order/productSKU';
-import { Product } from '../shared/_models/products';
-import { BasketItem } from '../shared/_models/order/basketItem';
 import { WebsiteOrder } from '../shared/_models/website-order';
 
 @Injectable({

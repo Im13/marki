@@ -28,7 +28,7 @@
       <nz-tabset nzType="card" [nzSize]="'small'" class="h-100">
         <nz-tab [nzTitle]="allOrderTitleTemplate">
           <ng-template nz-tab>
-            <app-all-site-orders class="h-100" [orderStatus]="-1"></app-all-site-orders>
+            <app-all-site-orders class="h-100" [orderStatus]="-1" (updateStatus)="countOrders()"></app-all-site-orders>
           </ng-template>
           <ng-template #allOrderTitleTemplate>
             <div class="d-flex align-items-center">

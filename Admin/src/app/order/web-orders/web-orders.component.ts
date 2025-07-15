@@ -16,6 +16,10 @@ export class WebOrdersComponent implements OnInit {
   constructor(private router: Router, private orderService: OrderService) { }
 
   ngOnInit(): void {
+    this.countOrders();
+  }
+
+  countOrders() {
     this.orderService.getStatusCounts().subscribe(counts => {
       this.orderStatusCounts = counts;
 

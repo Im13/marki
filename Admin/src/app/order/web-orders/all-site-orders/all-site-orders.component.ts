@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { OrderService } from '../../order.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { OrderStatus } from 'src/app/shared/_models/orderStatus';
@@ -17,6 +17,7 @@ import { OrderWithStatusParams } from 'src/app/shared/_models/order/orderWithSta
 })
 export class AllSiteOrdersComponent {
   @Input() orderStatus: number;
+  @Output() updateStatus = new EventEmitter<void>();
   orderParams = new OrderParams();
   orders: readonly WebsiteOrder[] = [];
   allOrders: readonly WebsiteOrder[] = [];
@@ -145,9 +146,9 @@ export class AllSiteOrdersComponent {
     };
 
     this.orderService.updateWebsiteOrderStatus(updateStatusDTO).subscribe({
-      next: (order) => {
-        console.log(order);
+      next: () => {
         this.toastrService.success('Cập nhật trạng thái đơn hàng thành công');
+        this.updateStatus.emit();
       },
       error: (err) => {
         console.log(err);
