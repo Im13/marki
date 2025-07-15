@@ -349,14 +349,25 @@ namespace Infrastructure.Services
 
         public async Task<Order> UpdateWebsiteOrderStatus(Order order, int statusId)
         {
-            var orderStatus = await _unitOfWork.Repository<OfflineOrderStatus>().GetByIdAsync(statusId);
+            var currentStatus = (OrderStatus)order.OrderStatus.Id;
+            var newStatus = (OrderStatus)statusId;
 
+            // Lấy dictionary chuyển đổi trạng thái từ OrderStatusTransition
+            var allowedTransitionsField = typeof(OrderStatusTransition)
+                .GetField("AllowedTransitions", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
+            var allowedTransitions = (Dictionary<OrderStatus, List<OrderStatus>>)allowedTransitionsField.GetValue(null);
+
+            if (!allowedTransitions.TryGetValue(currentStatus, out var allowed) || !allowed.Contains(newStatus))
+            {
+                throw new InvalidOperationException("Không được phép chuyển trạng thái này!");
+            }
+
+            var orderStatus = await _unitOfWork.Repository<OfflineOrderStatus>().GetByIdAsync(statusId);
             if (orderStatus == null) return null;
 
             order.OrderStatus = orderStatus;
 
             var result = await _unitOfWork.Complete();
-
             if (result <= 0) return null;
 
             return order;

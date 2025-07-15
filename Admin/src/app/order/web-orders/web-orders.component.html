@@ -38,7 +38,7 @@
         </nz-tab>
         <nz-tab [nzTitle]="addOrderTitleTemplate">
           <ng-template nz-tab>
-            <app-all-site-orders class="h-100" [orderStatus]="1"></app-all-site-orders>
+            <app-all-site-orders class="h-100" [orderStatus]="1" (updateStatus)="countOrders()"></app-all-site-orders>
           </ng-template>
           <ng-template #addOrderTitleTemplate>
             <div class="d-flex align-items-center">
@@ -48,7 +48,7 @@
         </nz-tab>
         <nz-tab [nzTitle]="waitOrderTitleTemplate">
           <ng-template nz-tab>
-            <app-all-site-orders class="h-100" [orderStatus]="2"></app-all-site-orders>
+            <app-all-site-orders class="h-100" [orderStatus]="2" (updateStatus)="countOrders()"></app-all-site-orders>
           </ng-template>
           <ng-template #waitOrderTitleTemplate>
             <div class="d-flex align-items-center">
@@ -58,7 +58,7 @@
         </nz-tab>
         <nz-tab [nzTitle]="priorityOrderTitleTemplate">
           <ng-template nz-tab>
-            <app-all-site-orders class="h-100" [orderStatus]="3"></app-all-site-orders>
+            <app-all-site-orders class="h-100" [orderStatus]="3" (updateStatus)="countOrders()"></app-all-site-orders>
           </ng-template>
           <ng-template #priorityOrderTitleTemplate>
             <div class="d-flex align-items-center">
@@ -68,7 +68,7 @@
         </nz-tab>
         <nz-tab [nzTitle]="confirmedOrderTitleTemplate">
           <ng-template nz-tab>
-            <app-all-site-orders class="h-100" [orderStatus]="4"></app-all-site-orders>
+            <app-all-site-orders class="h-100" [orderStatus]="4" (updateStatus)="countOrders()"></app-all-site-orders>
           </ng-template>
           <ng-template #confirmedOrderTitleTemplate>
             <div class="d-flex align-items-center">
@@ -78,7 +78,7 @@
         </nz-tab>
         <nz-tab [nzTitle]="sentOrderTitleTemplate">
           <ng-template nz-tab>
-            <app-all-site-orders class="h-100" [orderStatus]="5"></app-all-site-orders>
+            <app-all-site-orders class="h-100" [orderStatus]="5" (updateStatus)="countOrders()"></app-all-site-orders>
           </ng-template>
           <ng-template #sentOrderTitleTemplate>
             <div class="d-flex align-items-center">
@@ -88,7 +88,7 @@
         </nz-tab>
         <nz-tab [nzTitle]="canceledOrderTitleTemplate">
           <ng-template nz-tab>
-            <app-all-site-orders class="h-100" [orderStatus]="6"></app-all-site-orders>
+            <app-all-site-orders class="h-100" [orderStatus]="6" (updateStatus)="countOrders()"></app-all-site-orders>
           </ng-template>
           <ng-template #canceledOrderTitleTemplate>
             <div class="d-flex align-items-center">
@@ -98,7 +98,7 @@
         </nz-tab>
         <nz-tab [nzTitle]="deletedOrderTitleTemplate">
           <ng-template nz-tab>
-            <app-all-site-orders class="h-100" [orderStatus]="7"></app-all-site-orders>
+            <app-all-site-orders class="h-100" [orderStatus]="7" (updateStatus)="countOrders()"></app-all-site-orders>
           </ng-template>
           <ng-template #deletedOrderTitleTemplate>
             <div class="d-flex align-items-center">

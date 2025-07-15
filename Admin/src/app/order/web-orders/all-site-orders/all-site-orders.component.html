@@ -32,8 +32,11 @@
               <div class="order-status-dropdown w-100">
                 <nz-select class="w-100" nzAllowClear [(ngModel)]="order.orderStatus.id"
                   (ngModelChange)="changeStatus($event, order.id)">
-                  <nz-option *ngFor="let status of orderStatuses" [nzLabel]="status.status"
-                    [nzValue]="status.id"></nz-option>
+                  <nz-option 
+                    *ngFor="let status of getAvailableStatuses(order.orderStatus.id)" 
+                    [nzLabel]="status.status"
+                    [nzValue]="status.id">
+                  </nz-option>
                 </nz-select>
               </div>
             </td>

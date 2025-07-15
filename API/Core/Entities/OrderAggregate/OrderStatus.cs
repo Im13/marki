@@ -4,43 +4,17 @@ namespace Core.Entities.OrderAggregate
 {
     public enum OrderStatus
     {
-        [EnumMember(Value = "Mới")]
-        New,
-
-        [EnumMember(Value = "Cần xử lý")]
-        NeedAttention,
-
-        [EnumMember(Value = "Chờ hàng")]
-        Restock,
-
-        [EnumMember(Value = "Đã xác nhận")]
-        Confirmed,
-
-        [EnumMember(Value = "Đang đóng hàng")]
-        Packaging,
-
-        [EnumMember(Value = "Chờ chuyển hàng")]
-        WaitForPickup,
-
-        [EnumMember(Value = "Đã gửi hàng")]
-        Shipped,
-
-        [EnumMember(Value = "Đã nhận")]
-        Delivered,
-
-        [EnumMember(Value = "Đã thu tiền")]
-        CollectedMoney,
-
-        [EnumMember(Value = "Đang hoàn")]
-        Returning,
-
-        [EnumMember(Value = "Đã hoàn")]
-        Returned,
-
-        [EnumMember(Value = "Đã huỷ")]
-        Canceled,
-
-        [EnumMember(Value = "Đã xoá")]
-        Deleted
+        New = 1,
+        WaitingForStock = 2,
+        PriorityShipping = 3,
+        Confirmed = 4,
+        Shipped = 5,
+        Cancelled = 6,
+        Deleted = 7,
+        CustomerRefused = 8,
+        Returning = 9,
+        FullyReturned = 10,
+        Completed = 11,
+        Duplicate = 12
     }
 }

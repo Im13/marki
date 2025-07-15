@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { SearchService } from 'src/app/core/services/search.service';
 import { WebsiteOrder } from 'src/app/shared/_models/website-order';
 import { OrderWithStatusParams } from 'src/app/shared/_models/order/orderWithStatusParams';
+import { ORDER_STATUSES } from 'src/app/shared/_constants/order-status.const';
 
 @Component({
   selector: 'app-all-site-orders',
@@ -23,15 +24,7 @@ export class AllSiteOrdersComponent {
   allOrders: readonly WebsiteOrder[] = [];
   totalItems = 0;
 
-  orderStatuses: OrderStatus[] = [
-    { id: 1, status: 'Mới' },
-    { id: 2, status: 'Chờ hàng' },
-    { id: 3, status: 'Ưu tiên xuất đơn' },
-    { id: 4, status: 'Đã xác nhận' },
-    { id: 5, status: 'Gửi hàng đi' },
-    { id: 6, status: 'Huỷ đơn' },
-    { id: 7, status: 'Xoá đơn' },
-  ];
+  orderStatuses = ORDER_STATUSES;
 
   //Order selected
   current = 1;
@@ -172,5 +165,15 @@ export class AllSiteOrdersComponent {
         this.loading = false;
       }
     });
+  }
+
+  getAvailableStatuses(currentStatusId: number): OrderStatus[] {
+    if (currentStatusId === 6) {
+      return this.orderStatuses.filter(s => s.id >= 6);
+    }
+    if (currentStatusId === 7) {
+      return this.orderStatuses.filter(s => s.id === 7);
+    }
+    return this.orderStatuses;
   }
 }
