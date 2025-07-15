@@ -158,7 +158,7 @@ export class AllSiteOrdersComponent {
   getOrderByStatus(statusId: number) {
     var params = new OrderWithStatusParams(statusId);
 
-    this.orderService.getOrdersWithStatus(params).subscribe({
+    this.orderService.getWebsiteOrders(params).subscribe({
       next: response => {
         this.orders = response.data;
         this.orderParams.pageIndex = response.pageIndex;

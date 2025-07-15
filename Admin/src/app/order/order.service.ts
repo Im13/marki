@@ -169,43 +169,27 @@ export class OrderService {
     return this.http.post(this.baseApiUrl + 'orders/admin/create', order);
   }
 
-  updateOrder(order: Order) {
-    return this.http.put(this.baseApiUrl + 'order', order);
-  }
-
   updateWebsiteOrder(order: WebsiteOrder) {
     return this.http.put(this.baseApiUrl + 'orders', order);
   }
 
-  getOrders(productParams: OrderParams) {
+  getWebsiteOrders(productParams:Partial<OrderParams & { statusId?: number }>) {
     let params = new HttpParams();
 
-    params = params.append('search', productParams.search);
-    params = params.append('pageSize', productParams.pageSize);
-    params = params.append('pageIndex', productParams.pageIndex);
-
-    return this.http.get<Pagination<Order[]>>(this.baseApiUrl + 'order', { params });
-  }
-
-  getWebsiteOrders(productParams: OrderParams) {
-    let params = new HttpParams();
-
-    params = params.append('search', productParams.search);
-    params = params.append('pageSize', productParams.pageSize);
-    params = params.append('pageIndex', productParams.pageIndex);
+    if (productParams.search) {
+      params = params.append('search', productParams.search);
+    }
+    if (productParams.pageSize) {
+      params = params.append('pageSize', productParams.pageSize);
+    }
+    if (productParams.pageIndex) {
+      params = params.append('pageIndex', productParams.pageIndex);
+    }
+    if (productParams.statusId !== undefined && productParams.statusId !== null) {
+      params = params.append('statusId', productParams.statusId);
+    }
 
     return this.http.get<Pagination<WebsiteOrder[]>>(this.baseApiUrl + 'orders/all-orders', { params });
-  }
-
-  getOrdersWithStatus(productParams: OrderWithStatusParams) {
-    let params = new HttpParams();
-
-    params = params.append('search', productParams.search);
-    params = params.append('pageSize', productParams.pageSize);
-    params = params.append('pageIndex', productParams.pageIndex);
-    params = params.append('statusId', productParams.statusId);
-
-    return this.http.get<Pagination<WebsiteOrder[]>>(this.baseApiUrl + 'orders/status', { params });
   }
 
   getWebsiteOrderById(id: number) {

@@ -111,15 +111,15 @@ export class UpdateOrderComponent implements OnInit {
 
     this.order.offlineOrderSKUs = this.groupSkuItems();
 
-    this.orderService.updateOrder(this.order).subscribe({
-      next: () => {
-        this.toastrService.success('Cập nhật đơn hàng thành công')
-        this.modal.destroy();
-      },
-      error: err => {
-        console.log(err);
-      }
-    });
+    // this.orderService.updateOrder(this.order).subscribe({
+    //   next: () => {
+    //     this.toastrService.success('Cập nhật đơn hàng thành công')
+    //     this.modal.destroy();
+    //   },
+    //   error: err => {
+    //     console.log(err);
+    //   }
+    // }); 
   }
 
   handleSelectEvent(productSKUDetails: ProductSKUDetails[]){
