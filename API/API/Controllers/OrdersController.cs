@@ -15,15 +15,17 @@ namespace API.Controllers
     public class OrdersController : BaseApiController
     {
         private readonly IOrderService _orderService;
+        private readonly IExcelExportInterface _exelExportInterface;
         private readonly IOrderRepository _orderRepository;
         private readonly IMapper _mapper;
         private readonly IGenericRepository<Order> _orderRepo;
-        public OrdersController(IOrderService orderService, IMapper mapper, IGenericRepository<Order> orderRepo, IOrderRepository orderRepository)
+        public OrdersController(IOrderService orderService, IExcelExportInterface excelExportInterface, IMapper mapper, IGenericRepository<Order> orderRepo, IOrderRepository orderRepository)
         {
             _mapper = mapper;
             _orderService = orderService;
             _orderRepo = orderRepo;
             _orderRepository = orderRepository;
+            _exelExportInterface = excelExportInterface;
         }
 
         //Create order for user, user can create order with credentials in future update.
@@ -151,6 +153,15 @@ namespace API.Controllers
         {
             var counts = await _orderService.GetOrderStatusCountsAsync();
             return Ok(counts);
+        }
+
+        [HttpPost("export-excel")]
+        public IActionResult ExportOrdersToExcel([FromBody]List<OrderToReturnDTO> inputOrders)
+        {
+            var orders = _mapper.Map<List<OrderToReturnDTO>, List<Order>>(inputOrders);
+            var fileContent = _exelExportInterface.ExportOrdersToExcel(orders);
+            var fileName = $"orders-{DateTime.Now:yyyyMMddHHmmss}.xlsx";
+            return File(fileContent, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
         }
     }
 }

@@ -26,6 +26,10 @@ export class AllCustomersComponent implements OnInit {
 
   constructor(private customerService: CustomerService, private searchService: SearchService) {}
 
+  public get selectedCustomers(): Customer[] {
+      return this.allCustomers.filter(customer => this.setOfCheckedId.has(customer.id));
+    }
+
   ngOnInit(): void {
     this.getCustomers();
 

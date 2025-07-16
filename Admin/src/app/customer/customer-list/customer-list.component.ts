@@ -3,6 +3,7 @@ import { CustomerService } from '../customer.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { AllCustomersComponent } from './all-customers/all-customers.component';
 import { ToastrService } from 'ngx-toastr';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-customer-list',
@@ -13,9 +14,9 @@ export class CustomerListComponent {
   @ViewChild(AllCustomersComponent) allCustomerChildComp: AllCustomersComponent;
   checkedIds = new Set<number>();
 
-  constructor(private customerService: CustomerService, private modalServices: NzModalService, private toastrService: ToastrService){}
+  constructor(private customerService: CustomerService, private modalServices: NzModalService, private toastrService: ToastrService) { }
 
-  addCustomer() {}
+  addCustomer() { }
 
   checkItem(checkedIds: Set<number>) {
     this.checkedIds = checkedIds;
@@ -44,7 +45,17 @@ export class CustomerListComponent {
       },
       nzCancelText: 'No'
     });
+  }
 
-    
+  printCustomers() {
+    const selectedCustomers = this.allCustomerChildComp.selectedCustomers;
+
+    if (!selectedCustomers || selectedCustomers.length === 0) {
+      return;
+    }
+    this.customerService.exportCustomersToExcel(selectedCustomers).subscribe(blob => {
+      console.log(blob);
+      saveAs(blob, 'customers.xlsx');
+    });
   }
 }

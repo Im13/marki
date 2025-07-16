@@ -21,6 +21,7 @@
     "@microsoft/signalr": "^8.0.7",
     "bootstrap": "^5.2.3",
     "chart.js": "^4.4.4",
+    "file-saver": "^2.0.5",
     "font-awesome": "^4.7.0",
     "ng-zorro-antd": "^16.2.2",
     "ngx-bootstrap": "^11.0.2",

@@ -11,16 +11,33 @@
         Tải lại
       </button>
 
-      <button nz-button nzType="default" nzSize="default" (click)="addOrder()" nz-tooltip
+      <button nz-button nzType="default" nzSize="default" (click)="printOrders()" nz-tooltip
         nzTooltipTitle="In đơn" nzTooltipPlacement="bottom" class="me-2 d-flex align-items-center">
         <span nz-icon nzType="printer"></span>
         In đơn
       </button>
 
-      <button nz-button nzType="default" nzSize="default" (click)="addOrder()" nz-tooltip
-        nzTooltipTitle="Xuất excel" nzTooltipPlacement="bottom" class="d-flex align-items-center">
-        <span nz-icon nzType="download"></span>
-        Xuất excel
+      <button *ngIf="checkedIds.size > 0" nz-button nz-dropdown [nzDropdownMenu]="menu" class="ms-2 d-flex align-items-center">
+        Thao tác
+        <span nz-icon nzType="down"></span>
+      </button>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu>
+          <li nz-menu-item (click)="printOrders()">
+            <a>Xuất excel các đơn đã chọn</a>
+          </li>
+          <li nz-menu-item>
+            <a>Phân công</a>
+          </li>
+        </ul>
+      </nz-dropdown-menu>
+
+      <button *ngIf="checkedIds.size > 0" 
+        nz-button nzType="default"
+        nzDanger 
+        nzSize="default" 
+        nz-tooltip nzTooltipPlacement="bottom" class="ms-2 d-flex align-items-center">
+          <span><b>{{ checkedIds.size }}</b> đơn đã chọn</span>
       </button>
     </nz-header>
 
@@ -28,7 +45,7 @@
       <nz-tabset nzType="card" [nzSize]="'small'" class="h-100">
         <nz-tab [nzTitle]="allOrderTitleTemplate">
           <ng-template nz-tab>
-            <app-all-site-orders class="h-100" [orderStatus]="-1" (updateStatus)="countOrders()"></app-all-site-orders>
+            <app-all-site-orders class="h-100" [orderStatus]="-1" (updateStatus)="countOrders()" (checkId)="checkItem($event)"></app-all-site-orders>
           </ng-template>
           <ng-template #allOrderTitleTemplate>
             <div class="d-flex align-items-center">
@@ -38,7 +55,7 @@
         </nz-tab>
         <nz-tab [nzTitle]="addOrderTitleTemplate">
           <ng-template nz-tab>
-            <app-all-site-orders class="h-100" [orderStatus]="1" (updateStatus)="countOrders()"></app-all-site-orders>
+            <app-all-site-orders class="h-100" [orderStatus]="1" (updateStatus)="countOrders()" (checkId)="checkItem($event)"></app-all-site-orders>
           </ng-template>
           <ng-template #addOrderTitleTemplate>
             <div class="d-flex align-items-center">
@@ -48,7 +65,7 @@
         </nz-tab>
         <nz-tab [nzTitle]="waitOrderTitleTemplate">
           <ng-template nz-tab>
-            <app-all-site-orders class="h-100" [orderStatus]="2" (updateStatus)="countOrders()"></app-all-site-orders>
+            <app-all-site-orders class="h-100" [orderStatus]="2" (updateStatus)="countOrders()" (checkId)="checkItem($event)"></app-all-site-orders>
           </ng-template>
           <ng-template #waitOrderTitleTemplate>
             <div class="d-flex align-items-center">
@@ -58,7 +75,7 @@
         </nz-tab>
         <nz-tab [nzTitle]="priorityOrderTitleTemplate">
           <ng-template nz-tab>
-            <app-all-site-orders class="h-100" [orderStatus]="3" (updateStatus)="countOrders()"></app-all-site-orders>
+            <app-all-site-orders class="h-100" [orderStatus]="3" (updateStatus)="countOrders()" (checkId)="checkItem($event)"></app-all-site-orders>
           </ng-template>
           <ng-template #priorityOrderTitleTemplate>
             <div class="d-flex align-items-center">
@@ -68,7 +85,7 @@
         </nz-tab>
         <nz-tab [nzTitle]="confirmedOrderTitleTemplate">
           <ng-template nz-tab>
-            <app-all-site-orders class="h-100" [orderStatus]="4" (updateStatus)="countOrders()"></app-all-site-orders>
+            <app-all-site-orders class="h-100" [orderStatus]="4" (updateStatus)="countOrders()" (checkId)="checkItem($event)"></app-all-site-orders>
           </ng-template>
           <ng-template #confirmedOrderTitleTemplate>
             <div class="d-flex align-items-center">
@@ -78,7 +95,7 @@
         </nz-tab>
         <nz-tab [nzTitle]="sentOrderTitleTemplate">
           <ng-template nz-tab>
-            <app-all-site-orders class="h-100" [orderStatus]="5" (updateStatus)="countOrders()"></app-all-site-orders>
+            <app-all-site-orders class="h-100" [orderStatus]="5" (updateStatus)="countOrders()" (checkId)="checkItem($event)"></app-all-site-orders>
           </ng-template>
           <ng-template #sentOrderTitleTemplate>
             <div class="d-flex align-items-center">
@@ -88,7 +105,7 @@
         </nz-tab>
         <nz-tab [nzTitle]="canceledOrderTitleTemplate">
           <ng-template nz-tab>
-            <app-all-site-orders class="h-100" [orderStatus]="6" (updateStatus)="countOrders()"></app-all-site-orders>
+            <app-all-site-orders class="h-100" [orderStatus]="6" (updateStatus)="countOrders()" (checkId)="checkItem($event)"></app-all-site-orders>
           </ng-template>
           <ng-template #canceledOrderTitleTemplate>
             <div class="d-flex align-items-center">
@@ -98,7 +115,7 @@
         </nz-tab>
         <nz-tab [nzTitle]="deletedOrderTitleTemplate">
           <ng-template nz-tab>
-            <app-all-site-orders class="h-100" [orderStatus]="7" (updateStatus)="countOrders()"></app-all-site-orders>
+            <app-all-site-orders class="h-100" [orderStatus]="7" (updateStatus)="countOrders()" (checkId)="checkItem($event)"></app-all-site-orders>
           </ng-template>
           <ng-template #deletedOrderTitleTemplate>
             <div class="d-flex align-items-center">

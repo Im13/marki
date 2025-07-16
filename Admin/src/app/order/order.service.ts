@@ -215,4 +215,8 @@ export class OrderService {
   getStatusCounts(): Observable<{ [key: string]: number }> {
     return this.http.get<{ [key: string]: number }>(`${this.baseApiUrl}orders/admin/status-counts`);
   }
+
+  exportOrdersToExcel(orders: any[]) {
+    return this.http.post(`${this.baseApiUrl}orders/export-excel`, orders, { responseType: 'blob' });
+  }
 }

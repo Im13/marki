@@ -26,4 +26,10 @@ export class CustomerService {
   deleteCustomers(ids: number[]) {
     return this.http.post(this.baseApiUrl + 'customer/delete-customers', ids);
   }
+
+  exportCustomersToExcel(customers: Customer[]) {
+    return this.http.post(this.baseApiUrl + 'customer/export-excel', customers, {
+      responseType: 'blob'
+    });
+  }
 }

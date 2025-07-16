@@ -14,12 +14,14 @@ namespace API
     {
         private readonly IGenericRepository<Customer> _customerRepo;
         private readonly IMapper _mapper;
+        private readonly IExcelExportInterface _exelExportInterface;
         private readonly ICustomerService _customerService;
-        public CustomerController(IGenericRepository<Customer> customerRepo, IMapper mapper, ICustomerService customerService)
+        public CustomerController(IGenericRepository<Customer> customerRepo, IExcelExportInterface excelExportInterface, IMapper mapper, ICustomerService customerService)
         {
             _customerRepo = customerRepo;
             _mapper = mapper;
             _customerService = customerService;
+            _exelExportInterface = excelExportInterface;
         }
 
         [HttpGet]
@@ -49,6 +51,15 @@ namespace API
             if (!deletedResult) return BadRequest("Failed to delete!");
 
             return Ok();
+        }
+
+        [HttpPost("export-excel")]
+        public IActionResult ExportOrdersToExcel([FromBody]List<CustomerDTO> inputCustomers)
+        {
+            var customers = _mapper.Map<List<CustomerDTO>, List<Customer>>(inputCustomers);
+            var fileContent = _exelExportInterface.ExportCustomersToExcel(customers);
+            var fileName = $"customers-{DateTime.Now:yyyyMMddHHmmss}.xlsx";
+            return File(fileContent, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
         }
     }
 }

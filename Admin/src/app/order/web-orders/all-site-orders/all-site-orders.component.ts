@@ -19,12 +19,17 @@ import { ORDER_STATUSES } from 'src/app/shared/_constants/order-status.const';
 export class AllSiteOrdersComponent {
   @Input() orderStatus: number;
   @Output() updateStatus = new EventEmitter<void>();
+  @Output() checkId = new EventEmitter<Set<number>>();
   orderParams = new OrderParams();
   orders: readonly WebsiteOrder[] = [];
   allOrders: readonly WebsiteOrder[] = [];
   totalItems = 0;
 
   orderStatuses = ORDER_STATUSES;
+
+  public get selectedOrders(): WebsiteOrder[] {
+    return this.orders.filter(order => this.setOfCheckedId.has(order.id));
+  }
 
   //Order selected
   current = 1;
@@ -80,7 +85,13 @@ export class AllSiteOrdersComponent {
     });
   }
 
-  updateCheckedSet(id: number, checked: boolean): void {}
+  updateCheckedSet(id: number, checked: boolean): void {
+    if (checked) {
+      this.setOfCheckedId.add(id);
+    } else {
+      this.setOfCheckedId.delete(id);
+    }
+  }
 
   onCurrentPageDataChange(
     listOfCurrentPageData: readonly WebsiteOrder[]
@@ -99,11 +110,13 @@ export class AllSiteOrdersComponent {
 
   onItemChecked(id: number, checked: boolean): void {
     this.updateCheckedSet(id, checked);
+    this.checkId.emit(this.setOfCheckedId);
     this.refreshCheckedStatus();
   }
 
   onAllChecked(checked: boolean): void {
     this.orders.forEach(({ id }) => this.updateCheckedSet(id, checked));
+    this.checkId.emit(this.setOfCheckedId);
     this.refreshCheckedStatus();
   }
 
