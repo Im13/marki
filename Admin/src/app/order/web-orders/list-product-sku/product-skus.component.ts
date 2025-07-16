@@ -25,7 +25,6 @@ export class ListProductSkuComponent {
 
   //Improve later
   handleIndexChange(e: number): void {
-    console.log(e);
   }
 
   search(value: string): void {
@@ -36,8 +35,6 @@ export class ListProductSkuComponent {
         this.listFilterSkus = skus;
       }
     });
-
-    console.log(this.listFilterSkus);
   }
 
   selectProduct(data: ProductSKUDetails) {

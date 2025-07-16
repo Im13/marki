@@ -6,6 +6,7 @@ import { OrderService } from '../../order.service';
 import { Province } from 'src/app/shared/_models/address/province';
 import { OrderStatus } from 'src/app/shared/_models/orderStatus';
 import { ToastrService } from 'ngx-toastr';
+import { ORDER_STATUSES } from 'src/app/shared/_constants/order-status.const';
 
 @Component({
   selector: 'app-edit-order-modal',
@@ -20,15 +21,7 @@ export class EditOrderModalComponent implements OnInit {
   subTotal = 0;
   total = 0;
 
-  orderStatuses: OrderStatus[] = [
-    { id: 1, status: 'Mới' },
-    { id: 2, status: 'Chờ hàng' },
-    { id: 3, status: 'Ưu tiên xuất đơn' },
-    { id: 4, status: 'Đã xác nhận' },
-    { id: 5, status: 'Gửi hàng đi' },
-    { id: 6, status: 'Huỷ đơn' },
-    { id: 7, status: 'Xoá đơn' },
-  ];
+  orderStatuses = ORDER_STATUSES;
 
   constructor(private formBuilder: FormBuilder, private orderService: OrderService, private modal: NzModalRef, private toastrService: ToastrService) { }
 

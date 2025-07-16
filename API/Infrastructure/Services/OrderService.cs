@@ -242,8 +242,14 @@ namespace Infrastructure.Services
         {
             if (order.Id < 0) return null;
 
-            var currentOrder = await _context.Orders.Include(o => o.OrderItems).Where(o => o.Id == order.Id).SingleOrDefaultAsync();
+            var currentOrder = await _context.Orders
+                .Include(o => o.OrderItems)
+                .Where(o => o.Id == order.Id)
+                .SingleOrDefaultAsync();
             if (currentOrder == null) return null;
+
+            //Decrease old revenue
+            await _revenueRepo.DecreaseRevenueAsync(currentOrder);
 
             //Get Customer
             var customer = await _context.Customers.Where(c => c.Id == order.Customer.Id).SingleOrDefaultAsync();
@@ -369,6 +375,13 @@ namespace Infrastructure.Services
 
             var result = await _unitOfWork.Complete();
             if (result <= 0) return null;
+
+            // Nếu trạng thái mới là Cancelled hoặc Deleted thì giảm doanh thu
+            if (newStatus == OrderStatus.Cancelled || (newStatus == OrderStatus.Deleted && currentStatus != OrderStatus.Cancelled))
+            {
+                await _revenueRepo.DecreaseRevenueAsync(order);
+                await _unitOfWork.Complete();
+            }
 
             return order;
         }
