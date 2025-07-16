@@ -25,18 +25,18 @@ namespace API.Controllers
         [HttpPost("create-orders")]
         public async Task<IActionResult> CreateOrders(List<ShopeeOrderDTO> orders)
         {
-            var shopeeOrders = _mapper.Map<List<ShopeeOrderDTO>,List<ShopeeOrder>>(orders);
+            var shopeeOrders = _mapper.Map<List<ShopeeOrderDTO>, List<ShopeeOrder>>(orders);
 
             var addedOrders = await _shopeeOrderService.CreateOrdersAsync(shopeeOrders);
 
-            if(addedOrders == null) 
+            if (addedOrders == null)
                 return BadRequest(new ApiResponse(400, "Problem creating order"));
 
             return Ok(addedOrders);
         }
 
         [HttpGet("get-orders")]
-        public async Task<IActionResult> GetOrders([FromQuery]ShopeeOrderSpecParams shopeeOrderSpecParams)
+        public async Task<IActionResult> GetOrders([FromQuery] ShopeeOrderSpecParams shopeeOrderSpecParams)
         {
             var spec = new ShopeeOrderSpecification(shopeeOrderSpecParams);
 
@@ -46,13 +46,19 @@ namespace API.Controllers
 
             var shopeOrders = await _shopeeOrderRepo.ListAsync(spec);
 
-            var data = _mapper.Map<IReadOnlyList<ShopeeOrder>,IReadOnlyList<ShopeeOrderDTO>>(shopeOrders);
-            
+            var data = _mapper.Map<IReadOnlyList<ShopeeOrder>, IReadOnlyList<ShopeeOrderDTO>>(shopeOrders);
+
             return Ok(new Pagination<ShopeeOrderDTO>(shopeeOrderSpecParams.PageIndex, shopeeOrderSpecParams.PageSize, totalItems, data));
         }
 
+        [HttpGet("get-orders-from-shopee")]
+        public async Task<IActionResult> GetOrdersFromShopee()
+        {
+            return Ok();
+        }
+
         [HttpGet("statistic/get-orders")]
-        public async Task<List<ShopeeOrderProducts>> GetOrdersStatistic([FromQuery]ShopeeOrderSpecParams shopeeOrderSpecParams)
+        public async Task<List<ShopeeOrderProducts>> GetOrdersStatistic([FromQuery] ShopeeOrderSpecParams shopeeOrderSpecParams)
         {
             var spec = new ShopeeProductsInOrdersSpecification(shopeeOrderSpecParams);
 
