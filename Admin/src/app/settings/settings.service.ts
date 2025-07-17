@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminService {
+export class SettingsService {
   baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }

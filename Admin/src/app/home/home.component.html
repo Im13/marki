@@ -55,9 +55,11 @@
           <li *appHasRole="['Admin']" nz-menu-item routerLink="/statistics/shopee-revenue">Doanh thu Shopee</li>
         </ul>
       </li>
-      <li nz-menu-item>
-        <span nz-icon nzType="setting"></span>
-        <span>Cấu hình</span>
+      <li nz-submenu nzTitle="Cấu hình" nzIcon="setting">
+        <ul>
+          <li nz-menu-item *appHasRole="['Admin']" routerLink="/settings/employee-list">Nhân viên</li>
+          <li nz-menu-item *appHasRole="['Admin']">Quyền truy cập</li>
+        </ul>
       </li>
     </ul>
   </nz-sider>

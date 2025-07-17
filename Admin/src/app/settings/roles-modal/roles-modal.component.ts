@@ -1,8 +1,8 @@
 import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
 import { User } from 'src/app/shared/_models/user';
-import { AdminService } from '../admin.service';
 import { ToastrService } from 'ngx-toastr';
+import { SettingsService } from '../settings.service';
 
 @Component({
   selector: 'app-roles-modal',
@@ -17,7 +17,7 @@ export class RolesModalComponent implements OnInit {
   @Input() data?: any = inject(NZ_MODAL_DATA);
   @Output() updateSelectedRoles = new EventEmitter();
 
-  constructor(private adminService: AdminService, private toastrService: ToastrService, private modal: NzModalRef) {}
+  constructor(private settingsService: SettingsService, private toastrService: ToastrService, private modal: NzModalRef) {}
   
   ngOnInit(): void {
     this.availableRoles = this.data.availableRoles;
@@ -33,7 +33,7 @@ export class RolesModalComponent implements OnInit {
 
   updateRoles() {
     if(!this.arrayEqual(this.selectedRoles!, this.user.roles)) {
-      this.adminService.updateUserRoles(this.user.username, this.selectedRoles!).subscribe({
+      this.settingsService.updateUserRoles(this.user.username, this.selectedRoles!).subscribe({
         next: () => {
           this.toastrService.success('Cập nhật thành công!');
           this.modal.destroy();
