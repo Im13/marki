@@ -7,12 +7,14 @@ import { RouterModule } from '@angular/router';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
+import { MetaAdsDashboardComponent } from './meta-ads-dashboard/meta-ads-dashboard.component';
 
 
 @NgModule({
   declarations: [
     StatisticsComponent,
-    ShopeeRevenueComponent
+    ShopeeRevenueComponent,
+    MetaAdsDashboardComponent
   ],
   imports: [
     CommonModule,
