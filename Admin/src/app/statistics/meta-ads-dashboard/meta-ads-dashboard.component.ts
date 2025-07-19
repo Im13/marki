@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./meta-ads-dashboard.component.css']
 })
 export class MetaAdsDashboardComponent {
-
+  dateRangeSelected() {
+    // this.revenueSummary = event;
+  }
 }
