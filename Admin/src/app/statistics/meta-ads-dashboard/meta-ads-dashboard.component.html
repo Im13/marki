@@ -1,3 +1,112 @@
-<nz-layout>
-    
+<nz-layout class="px-3">
+    <nz-card class="w-100" nzTitle="Campaign Performance Overview" [nzExtra]="dateTemplate">
+        <h5 nz-typography class="d-flex align-items-center mb-3">
+            <span nz-icon nzType="facebook" nzTheme="fill" class="me-2"></span>
+            Facebook
+        </h5>
+        <nz-table #expandTable nzBordered [nzFooter]="facebookSummaryFooter" [nzData]="listOfMapData" nzTableLayout="fixed" [nzShowPagination]="false">
+            <thead>
+                <tr>
+                    <th>Campaign</th>
+                    <th>Đã chi tiêu</th>
+                    <th>Kết quả</th>
+                    <th>Chi phí / Kết quả</th>
+                    <th>CPM</th>
+                    <th>CTR</th>
+                    <th>Tin nhắn</th>
+                    <th>Chi phí tin nhắn</th>
+                    <th>Tần suất</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let data of expandTable.data">
+                    <ng-container *ngFor="let item of mapOfExpandedData[data.key]">
+                        <tr *ngIf="(item.parent && item.parent.expand) || !item.parent">
+                            <td [nzIndentSize]="item.level! * 20" [nzShowExpand]="!!item.children"
+                                [(nzExpand)]="item.expand"
+                                (nzExpandChange)="collapse(mapOfExpandedData[data.key], item, $event)">
+                                {{ item.name }}
+                            </td>
+                            <td>{{ item.age }}</td>
+                            <td>{{ item.age }}</td>
+                            <td>{{ item.age }}</td>
+                            <td>{{ item.age }}</td>
+                            <td>{{ item.age }}</td>
+                            <td>{{ item.age }}</td>
+                            <td>{{ item.age }}</td>
+                            <td>{{ item.address }}</td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+            </tbody>
+        </nz-table>
+
+        <ng-template #facebookSummaryFooter>
+            <span class="d-flex justify-content-end">
+                Tổng cộng: 
+                <b class="ms-2 me-1">9.000.000</b>
+                (đã bao gồm 10% thuế)
+            </span>
+        </ng-template>
+
+        <h5 nz-typography class="mt-5 d-flex align-items-center mb-3">
+            <span nz-icon nzType="instagram" nzTheme="fill" class="me-2"></span>
+            Instagram
+        </h5>
+        <nz-table #expandTable nzBordered [nzFooter]="instagramSummaryFooter" [nzData]="listOfMapData" nzTableLayout="fixed" [nzShowPagination]="false">
+            <thead>
+                <tr>
+                    <th>Campaign</th>
+                    <th>Đã chi tiêu</th>
+                    <th>Kết quả</th>
+                    <th>Chi phí/Kết quả</th>
+                    <th>CPM</th>
+                    <th>CTR</th>
+                    <th>Tần suất</th>
+                    <th>Tần suất</th>
+                    <th>Chi phí trên mỗi kết quả</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let data of expandTable.data">
+                    <ng-container *ngFor="let item of mapOfExpandedData[data.key]">
+                        <tr *ngIf="(item.parent && item.parent.expand) || !item.parent">
+                            <td [nzIndentSize]="item.level! * 20" [nzShowExpand]="!!item.children"
+                                [(nzExpand)]="item.expand"
+                                (nzExpandChange)="collapse(mapOfExpandedData[data.key], item, $event)">
+                                {{ item.name }}
+                            </td>
+                            <td>{{ item.age }}</td>
+                            <td>{{ item.age }}</td>
+                            <td>{{ item.age }}</td>
+                            <td>{{ item.age }}</td>
+                            <td>{{ item.age }}</td>
+                            <td>{{ item.age }}</td>
+                            <td>{{ item.age }}</td>
+                            <td>{{ item.address }}</td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+            </tbody>
+        </nz-table>
+
+        <ng-template #instagramSummaryFooter>
+            <span class="d-flex justify-content-end">
+                Tổng cộng: 
+                <b class="ms-2">2.000.000</b>
+            </span>
+        </ng-template>
+    </nz-card>
+    <ng-template #dateTemplate>
+        <nz-space>
+            <nz-range-picker
+              *nzSpaceItem
+              nzMode="date"
+              [nzPlaceHolder]="['Ngày bắt đầu', 'Ngày kết thúc']"
+              [nzRanges]="ranges"
+              [(ngModel)]="selectedRange"
+              (ngModelChange)="onChange($event)">
+            </nz-range-picker>
+          </nz-space>
+    </ng-template>
 </nz-layout>
