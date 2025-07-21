@@ -23,14 +23,6 @@ namespace API.Helpers
             CreateMap<BasketItemDTO, BasketItem>();
 
             CreateMap<AddressDTO, Address>();
-            // CreateMap<Order, OrderToReturnDTO>()
-            //     .ForMember(d => d.DeliveryMethod, o => o.MapFrom(s => s.DeliveryMethod.ShortName))
-            //     .ForMember(d => d.ShippingPrice, o => o.MapFrom(s => s.DeliveryMethod.Price));
-            // CreateMap<OrderItem, OrderItemDTO>()
-            //     .ForMember(d => d.ProductId, o => o.MapFrom(s => s.ItemOrdered.ProductItemId))
-            //     .ForMember(d => d.ProductName, o => o.MapFrom(s => s.ItemOrdered.ProductName))
-            //     .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.ItemOrdered.PictureUrl))
-            //     .ForMember(d => d.PictureUrl, o => o.MapFrom<OrderItemUrlResolver>());
             CreateMap<Order, OrderToReturnDTO>()
                 .ForMember(d => d.OrderSource, o => o.MapFrom(s => new OrderSourceDTO
                 {
@@ -75,6 +67,12 @@ namespace API.Helpers
             //Customer
             CreateMap<CustomerDTO, Customer>();
             CreateMap<Customer, CustomerDTO>();
+
+            //Facebook Marketing
+            CreateMap<CampaignWithAdsets, CampaignWithAdsetsDTO>();
+            CreateMap<CampaignWithAdsetsDTO, CampaignWithAdsets>();
+            CreateMap<AdsetWithMetrics, AdsetWithMetricsDTO>();
+            CreateMap<AdsetWithMetricsDTO, AdsetWithMetrics>();
 
             CreateMap<ProductDTOs, Product>();
             CreateMap<Product, ProductDTOs>();
