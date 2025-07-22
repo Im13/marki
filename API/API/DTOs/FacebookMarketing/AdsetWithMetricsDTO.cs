@@ -2,19 +2,25 @@ namespace API.DTOs
 {
     public class AdsetWithMetricsDTO
     {
-        public string Id { get; set; }
         public string Name { get; set; }
         public string Status { get; set; }
-
-        // Metrics
-        public string Spend { get; set; }
-        public string Impressions { get; set; }
-        public string Clicks { get; set; }
-        public string CTR { get; set; }
-        public string CPC { get; set; }
-        public string LinkClicks { get; set; }
-        public string Reach { get; set; }
-        public string Frequency { get; set; }
-        public string WebsitePurchaseROAS { get; set; }
+        public string EffectiveStatus { get; set; }
+        public decimal DailyBudget { get; set; }
+        public string FacebookId { get; set; }
+        
+        // Navigation properties
+        public int CampaignId { get; set; }
+        public CampaignWithAdsetsDTO Campaign { get; set; }
+        
+        // Vì 1-1 relationship với Metrics, nên gộp vào
+        public decimal Spend { get; set; }
+        public int Impressions { get; set; }
+        public int Clicks { get; set; }
+        public decimal Ctr { get; set; }
+        public decimal Cpc { get; set; }
+        public int Reach { get; set; }
+        public decimal Frequency { get; set; }
+        public DateTime MetricsDateStart { get; set; }
+        public DateTime MetricsDateStop { get; set; }
     }
 }

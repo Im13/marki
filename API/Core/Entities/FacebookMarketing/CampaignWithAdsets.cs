@@ -1,10 +1,12 @@
 namespace Core.Entities
 {
-    public class CampaignWithAdsets
+    public class CampaignWithAdsets : BaseEntity
     {
-        public string Id { get; set; }
         public string Name { get; set; }
         public string Status { get; set; }
-        public List<AdsetWithMetrics> Adsets { get; set; } = new();
+        public DateTime StartTime { get; set; }
+        public string EffectiveStatus { get; set; }
+        public string FacebookId { get; set; }
+        public ICollection<AdsetWithMetrics> AdSets { get; set; }
     }
 }

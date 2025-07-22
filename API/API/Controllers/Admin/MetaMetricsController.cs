@@ -28,7 +28,8 @@ namespace API.Controllers.Admin
             try
             {
                 var data = await _facebookMarketingService.GetActiveCampaignsWithAdsetsInsightsAsync(sinceDate, untilDate);
-                return _mapper.Map<List<CampaignWithAdsetsDTO>>(data);
+                var mappedData = _mapper.Map<List<CampaignWithAdsetsDTO>>(data);
+                return Ok(mappedData);
             }
             catch (Exception ex)
             {

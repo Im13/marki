@@ -34,19 +34,33 @@ namespace API.Controllers.Admin
                 {
                     var metrics = await GetAdsetInsightsAsync(adset.Id, since, until);
 
-                    // Gán metrics vào adset
-                    adset.Spend = metrics.GetValueOrDefault("spend");
-                    adset.Impressions = metrics.GetValueOrDefault("impressions");
-                    adset.Clicks = metrics.GetValueOrDefault("clicks");
-                    adset.CTR = metrics.GetValueOrDefault("ctr");
-                    adset.CPC = metrics.GetValueOrDefault("cpc");
-                    adset.LinkClicks = metrics.GetValueOrDefault("link_clicks");
-                    adset.Reach = metrics.GetValueOrDefault("reach");
-                    adset.Frequency = metrics.GetValueOrDefault("frequency");
-                    adset.WebsitePurchaseROAS = metrics.GetValueOrDefault("website_purchase_roas");
+                    if (decimal.TryParse(metrics.GetValueOrDefault("spend"), out decimal spend))
+                        adset.Spend = spend;
+
+                    if (int.TryParse(metrics.GetValueOrDefault("impressions"), out int impressions))
+                        adset.Impressions = impressions;
+
+                    if (int.TryParse(metrics.GetValueOrDefault("clicks"), out int clicks))
+                        adset.Clicks = clicks;
+
+                    if (decimal.TryParse(metrics.GetValueOrDefault("ctr"), out decimal ctr))
+                        adset.Ctr = ctr;
+
+                    if (decimal.TryParse(metrics.GetValueOrDefault("cpc"), out decimal cpc))
+                        adset.Cpc = cpc;
+
+                    if (int.TryParse(metrics.GetValueOrDefault("reach"), out int reach))
+                        adset.Reach = reach;
+
+                    if (decimal.TryParse(metrics.GetValueOrDefault("frequency"), out decimal frequency))
+                        adset.Frequency = frequency;
+
+                    adset.MetricsDateStart = since;
+                    adset.MetricsDateStop = until;
+                    adset.CampaignId = campaign.Id;
                 }
 
-                campaign.Adsets = adsets;
+                campaign.AdSets = adsets;
             }
 
             return campaigns;
@@ -68,7 +82,7 @@ namespace API.Controllers.Admin
             return result?.Data ?? new List<CampaignWithAdsets>();
         }
 
-        public async Task<List<AdsetWithMetrics>> GetAdsetsByCampaignIdAsync(string campaignId)
+        public async Task<List<AdsetWithMetrics>> GetAdsetsByCampaignIdAsync(int campaignId)
         {
             var url = $"https://graph.facebook.com/v23.0/{campaignId}/adsets" +
                       $"?fields=id,name,status,effective_status" +
@@ -83,7 +97,7 @@ namespace API.Controllers.Admin
             return result?.Data ?? new List<AdsetWithMetrics>();
         }
 
-        public async Task<Dictionary<string, string>> GetAdsetInsightsAsync(string adsetId, DateTime since, DateTime until)
+        public async Task<Dictionary<string, string>> GetAdsetInsightsAsync(int adsetId, DateTime since, DateTime until)
         {
             string timeRange = $"{{\"since\":\"{since:yyyy-MM-dd}\",\"until\":\"{until:yyyy-MM-dd}\"}}";
 
