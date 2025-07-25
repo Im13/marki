@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { endOfMonth, startOfMonth, subDays, subMonths } from 'date-fns';
+import { CampaignWithAdsets } from 'src/app/shared/_models/meta-ads/CampaignWithAdsets';
+import { StatisticsService } from '../statistics.service';
 
 export interface TreeNodeInterface {
   key: string;
   name: string;
-  age?: number;
+  spent?: number;
   level?: number;
   expand?: boolean;
-  address?: string;
+  frequency?: string;
   children?: TreeNodeInterface[];
   parent?: TreeNodeInterface;
 }
@@ -26,93 +28,90 @@ export class MetaAdsDashboardComponent implements OnInit {
     'Tháng trước': [startOfMonth(subMonths(new Date(), 1)), endOfMonth(subMonths(new Date(), 1))]
   };
   selectedRange = [new Date(), new Date()];
+  mapOfExpandedData: { [key: string]: TreeNodeInterface[] } = {};
+  
+  campaigns: CampaignWithAdsets[] = [
+    {
+      id: "120227937996160083",
+      name: "Set thô boil + CV484 - Mes",
+      status: "ACTIVE",
+      effective_status: "ACTIVE",
+      start_time: "2025-07-05T00:00:00+0700",
+      adSets: [
+        {
+          id: "120227937996150083",
+          name: "Nhóm quảng cáo Lượt tương tác mới",
+          status: "ACTIVE",
+          effective_status: "ACTIVE",
+          daily_budget: "140000",
+          spend: "152221",
+          impressions: "3216",
+          clicks: "325",
+          ctr: "10.105721",
+          cpc: "468.372308",
+          reach: "2580",
+          frequency: "1.246512",
+          date_start: "2025-07-18",
+          date_stop: "2025-07-18"
+        },
+        {
+          id: "120227937996150083",
+          name: "Nhóm quảng cáo Lượt tương tác 1",
+          status: "ACTIVE",
+          effective_status: "ACTIVE",
+          daily_budget: "140000",
+          spend: "152221",
+          impressions: "3216",
+          clicks: "325",
+          ctr: "10.105721",
+          cpc: "468.372308",
+          reach: "2580",
+          frequency: "1.246512",
+          date_start: "2025-07-18",
+          date_stop: "2025-07-18"
+        }
+      ]
+    },
+  ];
+  listOfMapData: TreeNodeInterface[] = [];
+  loading = false;
 
   ngOnInit(): void {
+    this.listOfMapData = this.convertCampaignsToTree(this.campaigns);
     this.listOfMapData.forEach(item => {
       this.mapOfExpandedData[item.key] = this.convertTreeToList(item);
     });
   }
 
+  constructor(private statisticsService: StatisticsService) {
+  }
+
+  fetchCampaigns() {
+    this.loading = true;
+    // Lấy ngày từ selectedRange, format yyyy-MM-dd
+    const since = this.formatDate(this.selectedRange[0]);
+    const until = this.formatDate(this.selectedRange[1]);
+    this.statisticsService.getCampaignsWithAdsets(since, until).subscribe({
+      next: (data) => {
+        this.campaigns = data;
+        this.loading = false;
+      },
+      error: (err) => {
+        this.loading = false;
+        console.log(err);
+      }
+    });
+  }
+
+  formatDate(date: Date): string {
+    return date.toISOString().slice(0, 10);
+  }
+
   onChange(dates: Date[]) {
-    // this.dashboardService.getRevenueInRange(dates[0], dates[1]).subscribe({
-    //   next: (response) => {
-    //     this.dateRangeSelected.emit(response);
-    //   },
-    //   error: (error) => {
-    //     console.error('Error fetching revenue in range:', error);
-    //   }
-    // });
   }
 
   dateRangeSelected() {
-    // this.revenueSummary = event;
   }
-
-  listOfMapData: TreeNodeInterface[] = [
-    {
-      key: `1`,
-      name: 'John Brown sr.',
-      age: 60,
-      address: 'New York No. 1 Lake Park',
-      children: [
-        {
-          key: `1-1`,
-          name: 'John Brown',
-          age: 42,
-          address: 'New York No. 2 Lake Park'
-        },
-        {
-          key: `1-2`,
-          name: 'John Brown jr.',
-          age: 30,
-          address: 'New York No. 3 Lake Park',
-          children: [
-            {
-              key: `1-2-1`,
-              name: 'Jimmy Brown',
-              age: 16,
-              address: 'New York No. 3 Lake Park'
-            }
-          ]
-        },
-        {
-          key: `1-3`,
-          name: 'Jim Green sr.',
-          age: 72,
-          address: 'London No. 1 Lake Park',
-          children: [
-            {
-              key: `1-3-1`,
-              name: 'Jim Green',
-              age: 42,
-              address: 'London No. 2 Lake Park',
-              children: [
-                {
-                  key: `1-3-1-1`,
-                  name: 'Jim Green jr.',
-                  age: 25,
-                  address: 'London No. 3 Lake Park'
-                },
-                {
-                  key: `1-3-1-2`,
-                  name: 'Jimmy Green sr.',
-                  age: 18,
-                  address: 'London No. 4 Lake Park'
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      key: `2`,
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park'
-    }
-  ];
-  mapOfExpandedData: { [key: string]: TreeNodeInterface[] } = {};
 
   collapse(array: TreeNodeInterface[], data: TreeNodeInterface, $event: boolean): void {
     if (!$event) {
@@ -126,6 +125,21 @@ export class MetaAdsDashboardComponent implements OnInit {
         return;
       }
     }
+  }
+
+  convertCampaignsToTree(campaigns: CampaignWithAdsets[]): TreeNodeInterface[] {
+    return campaigns.map((campaign, i) => ({
+      key: (i + 1).toString(),
+      name: campaign.name,
+      spent: campaign.adSets.reduce((sum, ad) => sum + Number(ad.spend || 0), 0),
+      frequency: '', // hoặc tính toán nếu muốn
+      children: campaign.adSets.map((adset, j) => ({
+        key: `${i + 1}-${j + 1}`,
+        name: adset.name,
+        spent: Number(adset.spend),
+        frequency: adset.frequency,
+      }))
+    }));
   }
 
   convertTreeToList(root: TreeNodeInterface): TreeNodeInterface[] {

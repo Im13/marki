@@ -7,13 +7,13 @@
         <nz-table #expandTable nzBordered [nzFooter]="facebookSummaryFooter" [nzData]="listOfMapData" nzTableLayout="fixed" [nzShowPagination]="false">
             <thead>
                 <tr>
-                    <th>Campaign</th>
-                    <th>Đã chi tiêu</th>
-                    <th>Kết quả</th>
-                    <th>Chi phí / Kết quả</th>
-                    <th>CPM</th>
-                    <th>CTR</th>
-                    <th>Tin nhắn</th>
+                    <th width="350px">Campaign</th>
+                    <th width="110px">Đã chi tiêu</th>
+                    <th width="110px">Kết quả</th>
+                    <th width="150px">Chi phí / Kết quả</th>
+                    <th width="100px">CPM</th>
+                    <th width="100px">CTR</th>
+                    <th width="90px">Tin nhắn</th>
                     <th>Chi phí tin nhắn</th>
                     <th>Tần suất</th>
                 </tr>
@@ -27,14 +27,14 @@
                                 (nzExpandChange)="collapse(mapOfExpandedData[data.key], item, $event)">
                                 {{ item.name }}
                             </td>
-                            <td>{{ item.age }}</td>
-                            <td>{{ item.age }}</td>
-                            <td>{{ item.age }}</td>
-                            <td>{{ item.age }}</td>
-                            <td>{{ item.age }}</td>
-                            <td>{{ item.age }}</td>
-                            <td>{{ item.age }}</td>
-                            <td>{{ item.address }}</td>
+                            <td>{{ item.spent }}</td>
+                            <td>{{ item.spent }}</td>
+                            <td>{{ item.spent }}</td>
+                            <td>{{ item.spent }}</td>
+                            <td>{{ item.spent }}</td>
+                            <td>{{ item.spent }}</td>
+                            <td>{{ item.spent }}</td>
+                            <td>{{ item.frequency }}</td>
                         </tr>
                     </ng-container>
                 </ng-container>
@@ -44,7 +44,7 @@
         <ng-template #facebookSummaryFooter>
             <span class="d-flex justify-content-end">
                 Tổng cộng: 
-                <b class="ms-2 me-1">9.000.000</b>
+                <b class="ms-2 me-1 text-success">9.000.000</b>
                 (đã bao gồm 10% thuế)
             </span>
         </ng-template>
@@ -56,15 +56,15 @@
         <nz-table #expandTable nzBordered [nzFooter]="instagramSummaryFooter" [nzData]="listOfMapData" nzTableLayout="fixed" [nzShowPagination]="false">
             <thead>
                 <tr>
-                    <th>Campaign</th>
-                    <th>Đã chi tiêu</th>
-                    <th>Kết quả</th>
-                    <th>Chi phí/Kết quả</th>
-                    <th>CPM</th>
-                    <th>CTR</th>
+                    <th width="350px">Campaign</th>
+                    <th width="110px">Đã chi tiêu</th>
+                    <th width="110px">Kết quả</th>
+                    <th width="150px">Chi phí / Kết quả</th>
+                    <th width="100px">CPM</th>
+                    <th width="100px">CTR</th>
+                    <th width="90px">Tin nhắn</th>
+                    <th>Chi phí tin nhắn</th>
                     <th>Tần suất</th>
-                    <th>Tần suất</th>
-                    <th>Chi phí trên mỗi kết quả</th>
                 </tr>
             </thead>
             <tbody>
@@ -76,14 +76,14 @@
                                 (nzExpandChange)="collapse(mapOfExpandedData[data.key], item, $event)">
                                 {{ item.name }}
                             </td>
-                            <td>{{ item.age }}</td>
-                            <td>{{ item.age }}</td>
-                            <td>{{ item.age }}</td>
-                            <td>{{ item.age }}</td>
-                            <td>{{ item.age }}</td>
-                            <td>{{ item.age }}</td>
-                            <td>{{ item.age }}</td>
-                            <td>{{ item.address }}</td>
+                            <td>{{ item.spent }}</td>
+                            <td>{{ item.spent }}</td>
+                            <td>{{ item.spent }}</td>
+                            <td>{{ item.spent }}</td>
+                            <td>{{ item.spent }}</td>
+                            <td>{{ item.spent }}</td>
+                            <td>{{ item.spent }}</td>
+                            <td>{{ item.frequency }}</td>
                         </tr>
                     </ng-container>
                 </ng-container>
@@ -93,7 +93,8 @@
         <ng-template #instagramSummaryFooter>
             <span class="d-flex justify-content-end">
                 Tổng cộng: 
-                <b class="ms-2">2.000.000</b>
+                <b class="ms-2 me-1 text-success">9.000.000</b>
+                (đã bao gồm 10% thuế)
             </span>
         </ng-template>
     </nz-card>

@@ -9,17 +9,15 @@ namespace API.Controllers.Admin
 {
     public class FacebookMarketingService : IFacebookMarketingService
     {
-        private readonly IUnitOfWork _unitOfWork;
         private readonly HttpClient _httpClient;
         private readonly string _accessToken;
         private readonly string _adAccountId;
 
-        public FacebookMarketingService(IUnitOfWork unitOfWork, HttpClient httpClient, string accessToken, string adAccountId, IOptions<FacebookSettings> config)
+        public FacebookMarketingService(IHttpClientFactory httpClientFactory, IOptions<FacebookSettings> config)
         {
-            _unitOfWork = unitOfWork;
-            _httpClient = httpClient;
-            _accessToken = config.Value.AccessToken ?? accessToken;
-            _adAccountId = config.Value.AdAccountId ?? adAccountId;
+            _httpClient = httpClientFactory.CreateClient();
+            _accessToken = config.Value.AccessToken;
+            _adAccountId = config.Value.AdAccountId;
         }
 
         public async Task<List<CampaignWithAdsets>> GetActiveCampaignsWithAdsetsInsightsAsync(DateTime since, DateTime until)
