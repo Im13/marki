@@ -9,7 +9,7 @@ namespace API.DTOs
         public string FacebookId { get; set; }
         
         // Navigation properties
-        public int CampaignId { get; set; }
+        public string CampaignId { get; set; }
         public CampaignWithAdsetsDTO Campaign { get; set; }
         
         // Vì 1-1 relationship với Metrics, nên gộp vào

@@ -80,7 +80,7 @@ namespace API.Controllers.Admin
             return result?.Data ?? new List<CampaignWithAdsets>();
         }
 
-        public async Task<List<AdsetWithMetrics>> GetAdsetsByCampaignIdAsync(int campaignId)
+        public async Task<List<AdsetWithMetrics>> GetAdsetsByCampaignIdAsync(string campaignId)
         {
             var url = $"https://graph.facebook.com/v23.0/{campaignId}/adsets" +
                       $"?fields=id,name,status,effective_status" +
@@ -95,22 +95,38 @@ namespace API.Controllers.Admin
             return result?.Data ?? new List<AdsetWithMetrics>();
         }
 
-        public async Task<Dictionary<string, string>> GetAdsetInsightsAsync(int adsetId, DateTime since, DateTime until)
+        public async Task<Dictionary<string, string>> GetAdsetInsightsAsync(string adsetId, DateTime since, DateTime until)
         {
-            string timeRange = $"{{\"since\":\"{since:yyyy-MM-dd}\",\"until\":\"{until:yyyy-MM-dd}\"}}";
+            var timeRange = $"{{'since':'{since:yyyy-MM-dd}','until':'{until:yyyy-MM-dd}'}}";
 
             var url = $"https://graph.facebook.com/v23.0/{adsetId}/insights" +
-                      $"?fields=spend,impressions,clicks,ctr,cpc,link_clicks,reach,frequency,website_purchase_roas" +
+                      $"?fields=spend,impressions,clicks,ctr,cpc,reach,frequency,website_purchase_roas" +
                       $"&time_range={Uri.EscapeDataString(timeRange)}" +
                       $"&access_token={_accessToken}";
 
-            var response = await _httpClient.GetAsync(url);
-            response.EnsureSuccessStatusCode();
+            try
+            {
+                // In ra URL để debug (remove trong production)
+                Console.WriteLine($"Request URL: {url}");
 
-            var result = await JsonSerializer.DeserializeAsync<FacebookResponse<Dictionary<string, string>>>(
-                await response.Content.ReadAsStreamAsync());
+                var response = await _httpClient.GetAsync(url);
 
-            return result?.Data?.FirstOrDefault() ?? new Dictionary<string, string>();
+                // Đọc error message nếu có
+                if (!response.IsSuccessStatusCode)
+                {
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    throw new HttpRequestException($"Facebook API error: Status: {response.StatusCode}, Content: {errorContent}");
+                }
+
+                var result = await JsonSerializer.DeserializeAsync<FacebookResponse<Dictionary<string, string>>>(
+                    await response.Content.ReadAsStreamAsync());
+
+                return result?.Data?.FirstOrDefault() ?? new Dictionary<string, string>();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error getting insights for adset {adsetId}: {ex.Message}");
+            }
         }
 
         private class FacebookResponse<T>

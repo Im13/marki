@@ -1,15 +1,26 @@
+using System.Text.Json.Serialization;
+
 namespace Core.Entities
 {
-    public class AdsetWithMetrics : BaseEntity
+    public class AdsetWithMetrics
     {
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
+
+        [JsonPropertyName("name")]
         public string Name { get; set; }
+
+        [JsonPropertyName("status")]
         public string Status { get; set; }
-        public string EffectiveStatus { get; set; }
+
+        [JsonPropertyName("effective_status")]
+        public string Effective_Status { get; set; }
+
+        [JsonPropertyName("daily_budget")]
         public decimal DailyBudget { get; set; }
-        public string FacebookId { get; set; }
-        
+
         // Navigation properties
-        public int CampaignId { get; set; }
+        public string CampaignId { get; set; }
         public CampaignWithAdsets Campaign { get; set; }
         
         // Vì 1-1 relationship với Metrics, nên gộp vào

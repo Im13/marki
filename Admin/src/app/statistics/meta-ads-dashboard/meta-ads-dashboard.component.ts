@@ -6,10 +6,21 @@ import { StatisticsService } from '../statistics.service';
 export interface TreeNodeInterface {
   key: string;
   name: string;
-  spent?: number;
+  daily_budget?: string;
+  spend?: string;
+  impressions?: string;
+  clicks?: string;
+  ctr?: string;
+  cpc?: string;
+  reach?: string;
+  date_start?: string;
+  date_stop?: string;
+  id?: string;
+  status?: string;
+  effective_status?: string;
+  frequency?: string;
   level?: number;
   expand?: boolean;
-  frequency?: string;
   children?: TreeNodeInterface[];
   parent?: TreeNodeInterface;
 }
@@ -29,7 +40,7 @@ export class MetaAdsDashboardComponent implements OnInit {
   };
   selectedRange = [new Date(), new Date()];
   mapOfExpandedData: { [key: string]: TreeNodeInterface[] } = {};
-  
+
   campaigns: CampaignWithAdsets[] = [
     {
       id: "120227937996160083",
@@ -81,6 +92,7 @@ export class MetaAdsDashboardComponent implements OnInit {
     this.listOfMapData.forEach(item => {
       this.mapOfExpandedData[item.key] = this.convertTreeToList(item);
     });
+    // this.fetchCampaigns();
   }
 
   constructor(private statisticsService: StatisticsService) {
@@ -94,6 +106,10 @@ export class MetaAdsDashboardComponent implements OnInit {
     this.statisticsService.getCampaignsWithAdsets(since, until).subscribe({
       next: (data) => {
         this.campaigns = data;
+        this.listOfMapData = this.convertCampaignsToTree(this.campaigns);
+        this.listOfMapData.forEach(item => {
+          this.mapOfExpandedData[item.key] = this.convertTreeToList(item);
+        });
         this.loading = false;
       },
       error: (err) => {
@@ -131,13 +147,41 @@ export class MetaAdsDashboardComponent implements OnInit {
     return campaigns.map((campaign, i) => ({
       key: (i + 1).toString(),
       name: campaign.name,
-      spent: campaign.adSets.reduce((sum, ad) => sum + Number(ad.spend || 0), 0),
-      frequency: '', // hoặc tính toán nếu muốn
+      id: campaign.id,
+      status: campaign.status,
+      effective_status: campaign.effective_status,
+      // Tính tổng hoặc trung bình cho campaign level
+      spend: campaign.adSets.reduce((sum, ad) => sum + Number(ad.spend || 0), 0).toString(),
+      impressions: campaign.adSets.reduce((sum, ad) => sum + Number(ad.impressions || 0), 0).toString(),
+      clicks: campaign.adSets.reduce((sum, ad) => sum + Number(ad.clicks || 0), 0).toString(),
+      // Các trường khác để trống ở cấp campaign
+      daily_budget: '',
+      ctr: '',
+      cpc: '',
+      reach: '',
+      frequency: '',
+      date_start: '',
+      date_stop: '',
+      level: 0,
+      expand: false,
       children: campaign.adSets.map((adset, j) => ({
         key: `${i + 1}-${j + 1}`,
         name: adset.name,
-        spent: Number(adset.spend),
+        id: adset.id,
+        status: adset.status,
+        effective_status: adset.effective_status,
+        daily_budget: adset.daily_budget,
+        spend: adset.spend,
+        impressions: adset.impressions,
+        clicks: adset.clicks,
+        ctr: adset.ctr,
+        cpc: adset.cpc,
+        reach: adset.reach,
         frequency: adset.frequency,
+        date_start: adset.date_start,
+        date_stop: adset.date_stop,
+        level: 1,
+        expand: false
       }))
     }));
   }

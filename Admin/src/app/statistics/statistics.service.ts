@@ -33,6 +33,6 @@ export class StatisticsService {
 
   getCampaignsWithAdsets(since: string, until: string): Observable<CampaignWithAdsets[]> {
     const params = new HttpParams().set('since', since).set('until', until);
-    return this.http.get<CampaignWithAdsets[]>(this.baseApiUrl + 'admin/metametrics/campaigns', { params });
+    return this.http.get<CampaignWithAdsets[]>(this.baseApiUrl + 'metametrics/campaigns', { params });
   }
 }

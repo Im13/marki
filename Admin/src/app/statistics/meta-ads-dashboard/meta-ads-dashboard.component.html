@@ -27,14 +27,14 @@
                                 (nzExpandChange)="collapse(mapOfExpandedData[data.key], item, $event)">
                                 {{ item.name }}
                             </td>
-                            <td>{{ item.spent }}</td>
-                            <td>{{ item.spent }}</td>
-                            <td>{{ item.spent }}</td>
-                            <td>{{ item.spent }}</td>
-                            <td>{{ item.spent }}</td>
-                            <td>{{ item.spent }}</td>
-                            <td>{{ item.spent }}</td>
-                            <td>{{ item.frequency }}</td>
+                            <td>{{ item.spend | thousandSeparator }}</td>
+                            <td>{{ item.impressions | thousandSeparator }}</td>
+                            <td>{{ item.cpc | thousandSeparator }}</td>
+                            <td>{{ item.reach | thousandSeparator }}</td>
+                            <td>{{ item.ctr | thousandSeparator }}</td>
+                            <td>{{ item.spend | thousandSeparator }}</td>
+                            <td>{{ item.spend | thousandSeparator }}</td>
+                            <td>{{ item.frequency | thousandSeparator }}</td>
                         </tr>
                     </ng-container>
                 </ng-container>
@@ -76,14 +76,14 @@
                                 (nzExpandChange)="collapse(mapOfExpandedData[data.key], item, $event)">
                                 {{ item.name }}
                             </td>
-                            <td>{{ item.spent }}</td>
-                            <td>{{ item.spent }}</td>
-                            <td>{{ item.spent }}</td>
-                            <td>{{ item.spent }}</td>
-                            <td>{{ item.spent }}</td>
-                            <td>{{ item.spent }}</td>
-                            <td>{{ item.spent }}</td>
-                            <td>{{ item.frequency }}</td>
+                            <td>{{ item.spend | thousandSeparator }}</td>
+                            <td>{{ item.impressions | thousandSeparator }}</td>
+                            <td>{{ item.cpc | thousandSeparator }}</td>
+                            <td>{{ item.reach | thousandSeparator }}</td>
+                            <td>{{ item.ctr | thousandSeparator }}</td>
+                            <td>{{ item.spend | thousandSeparator }}</td>
+                            <td>{{ item.spend | thousandSeparator }}</td>
+                            <td>{{ item.frequency | thousandSeparator }}</td>
                         </tr>
                     </ng-container>
                 </ng-container>

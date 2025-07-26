@@ -1,12 +1,23 @@
+using System.Text.Json.Serialization;
+
 namespace Core.Entities
 {
-    public class CampaignWithAdsets : BaseEntity
+    public class CampaignWithAdsets
     {
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
+
+        [JsonPropertyName("name")]
         public string Name { get; set; }
+
+        [JsonPropertyName("status")]
         public string Status { get; set; }
-        public DateTime StartTime { get; set; }
+
+        [JsonPropertyName("start_time")]
+        public DateTime? StartTime { get; set; }
+
+        [JsonPropertyName("effective_status")]
         public string EffectiveStatus { get; set; }
-        public string FacebookId { get; set; }
         public ICollection<AdsetWithMetrics> AdSets { get; set; }
     }
 }
