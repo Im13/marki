@@ -22,6 +22,7 @@ namespace Core.Enums
         PRODUCT_CATALOG_SALES,
         REACH,
         STORE_VISITS,
-        VIDEO_VIEWS
+        VIDEO_VIEWS,
+        UNKNOWN
     }
 }

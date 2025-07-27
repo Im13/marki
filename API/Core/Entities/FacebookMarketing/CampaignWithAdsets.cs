@@ -21,7 +21,9 @@ namespace Core.Entities
         public string EffectiveStatus { get; set; }
 
         [JsonPropertyName("objective")]
-        public CampaignObjective Objective { get; set; }
+        public string Objective { get; set; }
+
+        public CampaignObjective CampaignObjective { get; set; }    
         public ICollection<AdsetWithMetrics> AdSets { get; set; }
     }
 }

@@ -4,8 +4,10 @@ using Core.Entities;
 using Core.Interfaces;
 using Infrastructure.Helpers;
 using Microsoft.Extensions.Options;
+using Core.Enums;
+using Core.Extensions;
 
-namespace API.Controllers.Admin
+namespace Infrastructure.Services
 {
     public class FacebookMarketingService : IFacebookMarketingService
     {
@@ -76,6 +78,18 @@ namespace API.Controllers.Admin
 
             var result = await JsonSerializer.DeserializeAsync<FacebookResponse<CampaignWithAdsets>>(
                 await response.Content.ReadAsStreamAsync());
+
+            if (result?.Data != null)
+            {
+                foreach (var campaign in result.Data)
+                {
+                    // Parse objective using extension method
+                    if (!string.IsNullOrEmpty(campaign.Objective))
+                    {
+                        campaign.CampaignObjective = campaign.Objective.ToCampaignObjective();
+                    }
+                }
+            }
 
             return result?.Data ?? new List<CampaignWithAdsets>();
         }

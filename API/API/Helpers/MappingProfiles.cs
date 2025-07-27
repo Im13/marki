@@ -71,7 +71,7 @@ namespace API.Helpers
 
             //Facebook Marketing
             CreateMap<CampaignWithAdsets, CampaignWithAdsetsDTO>()
-                .ForMember(dest => dest.Objective, opt => opt.MapFrom(src => src.Objective.ToShortString()));
+                .ForMember(dest => dest.Objective, opt => opt.MapFrom(src => src.CampaignObjective.ToShortString()));
             CreateMap<CampaignWithAdsetsDTO, CampaignWithAdsets>();
 
             CreateMap<AdsetWithMetrics, AdsetWithMetricsDTO>();
