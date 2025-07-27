@@ -7,6 +7,7 @@ namespace API.DTOs
         public DateTime StartTime { get; set; }
         public string EffectiveStatus { get; set; }
         public string Id { get; set; }
+        public string Objective { get; set; }
         public ICollection<AdsetWithMetricsDTO> AdSets { get; set; }
     }
 }

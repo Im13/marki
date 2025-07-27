@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Core.Enums;
 
 namespace Core.Entities
 {
@@ -18,6 +19,9 @@ namespace Core.Entities
 
         [JsonPropertyName("effective_status")]
         public string EffectiveStatus { get; set; }
+
+        [JsonPropertyName("objective")]
+        public CampaignObjective Objective { get; set; }
         public ICollection<AdsetWithMetrics> AdSets { get; set; }
     }
 }

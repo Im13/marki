@@ -9,6 +9,7 @@ using Core;
 using Core.Entities;
 using Core.Entities.OrderAggregate;
 using Core.Entities.ShopeeOrder;
+using Core.Extensions;
 
 namespace API.Helpers
 {
@@ -69,8 +70,10 @@ namespace API.Helpers
             CreateMap<Customer, CustomerDTO>();
 
             //Facebook Marketing
-            CreateMap<CampaignWithAdsets, CampaignWithAdsetsDTO>();
+            CreateMap<CampaignWithAdsets, CampaignWithAdsetsDTO>()
+                .ForMember(dest => dest.Objective, opt => opt.MapFrom(src => src.Objective.ToShortString()));
             CreateMap<CampaignWithAdsetsDTO, CampaignWithAdsets>();
+
             CreateMap<AdsetWithMetrics, AdsetWithMetricsDTO>();
             CreateMap<AdsetWithMetricsDTO, AdsetWithMetrics>();
 

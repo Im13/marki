@@ -67,7 +67,7 @@ namespace API.Controllers.Admin
         public async Task<List<CampaignWithAdsets>> GetActiveCampaignsAsync()
         {
             var url = $"https://graph.facebook.com/v23.0/act_{_adAccountId}/campaigns" +
-                      $"?fields=id,name,status,effective_status" +
+                      $"?fields=id,name,status,effective_status,objective" +
                       $"&effective_status=['ACTIVE']" +
                       $"&access_token={_accessToken}";
 
