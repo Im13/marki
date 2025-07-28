@@ -23,7 +23,6 @@ namespace Core.Entities
         public string CampaignId { get; set; }
         public CampaignWithAdsets Campaign { get; set; }
         
-        // Vì 1-1 relationship với Metrics, nên gộp vào
         public decimal Spend { get; set; }
         public int Impressions { get; set; }
         public int Clicks { get; set; }
@@ -31,6 +30,9 @@ namespace Core.Entities
         public decimal Cpc { get; set; }
         public int Reach { get; set; }
         public decimal Frequency { get; set; }
+
+        // The number of times your ad achieved an outcome, based on the objective and settings you selected.
+        public string Results { get; set; }
         public DateTime MetricsDateStart { get; set; }
         public DateTime MetricsDateStop { get; set; }
     }

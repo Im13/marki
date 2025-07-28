@@ -65,7 +65,7 @@ export class MetaAdsDashboardComponent implements OnInit {
           id: "120227937996150083",
           name: "Nhóm quảng cáo Lượt tương tác mới",
           status: "ACTIVE",
-          effective_status: "ACTIVE",
+          effective_status: null,
           daily_budget: "140000",
           spend: "152221",
           impressions: "3216",
@@ -146,14 +146,12 @@ export class MetaAdsDashboardComponent implements OnInit {
   loading = false;
 
   ngOnInit(): void {
-    this.initializeCampaignData('meta');
-    this.initializeCampaignData('insta');
+    this.loading = true;
+    setTimeout(() => {
+      this.initializeCampaignData('meta');
+      this.initializeCampaignData('insta');
+    }, 1000);
 
-    // this.listOfMapData = this.convertCampaignsToTree(this.metaCampaigns);
-    // this.listOfMapData.forEach(item => {
-    //   this.mapOfExpandedData[item.key] = this.convertTreeToList(item);
-    // });
-    // this.totalMetaAdsSpend = this.calculateTotalSpend();
     // this.fetchCampaigns();
   }
 
@@ -174,6 +172,8 @@ export class MetaAdsDashboardComponent implements OnInit {
       });
       this.totalInstagramAdsSpend = this.calculateTotalSpend(this.instaCampaigns);
     }
+
+    this.loading = false;
   }
 
   constructor(private statisticsService: StatisticsService) {
@@ -193,22 +193,25 @@ export class MetaAdsDashboardComponent implements OnInit {
       },
       error: (err) => {
         console.log('Meta fetch error:', err);
-      }
-    });
-
-    // Fetch Instagram Campaigns
-    this.statisticsService.getMetaCampaignsWithAdsets(since, until).subscribe({
-      next: (data) => {
-        this.instaCampaigns = data;
-        this.initializeCampaignData('insta');
-      },
-      error: (err) => {
-        console.log('Instagram fetch error:', err);
       },
       complete: () => {
         this.loading = false;
       }
     });
+
+    // Fetch Instagram Campaigns
+    // this.statisticsService.getMetaCampaignsWithAdsets(since, until).subscribe({
+    //   next: (data) => {
+    //     this.instaCampaigns = data;
+    //     this.initializeCampaignData('insta');
+    //   },
+    //   error: (err) => {
+    //     console.log('Instagram fetch error:', err);
+    //   },
+    //   complete: () => {
+    //     this.loading = false;
+    //   }
+    // });
   }
 
   private calculateTotalSpend(campaigns: SocialCampaign[]): number {

@@ -1,23 +1,29 @@
 <nz-layout class="px-3">
-    <nz-card class="w-100" nzTitle="Campaign Performance Overview" [nzExtra]="dateTemplate">
+    <nz-card class="w-100" nzTitle="Campaign Performance Overview" [nzExtra]="dateTemplate" [nzLoading]="loading">
         <h5 nz-typography class="d-flex align-items-center mb-3">
             <span nz-icon nzType="facebook" nzTheme="fill" class="me-2"></span>
             Facebook
         </h5>
         <nz-table #facebookTable nzBordered [nzFooter]="facebookSummaryFooter" [nzData]="metaMapData"
-            nzTableLayout="fixed" [nzShowPagination]="false">
+            [nzShowPagination]="false" [nzLoading]="loading" [nzScroll]="{ x: '1150px', y: '240px' }">
             <thead>
                 <tr>
-                    <th width="350px">Campaign</th>
-                    <th width="150px">Mục tiêu</th>
-                    <th width="110px">Đã chi tiêu</th>
-                    <th width="110px">Kết quả</th>
-                    <th width="150px">Chi phí / Kết quả</th>
-                    <th width="90px">CPM</th>
-                    <th width="90px">CTR</th>
-                    <th width="90px">Tin nhắn</th>
-                    <th>Chi phí tin nhắn</th>
-                    <th>Tần suất</th>
+                    <th nzLeft nzWidth="300px">Campaign</th>
+                    <th nzWidth="120px">Mục tiêu</th>
+                    <th nzWidth="120px">Ngân sách</th>
+                    <th nzWidth="120px">Tin nhắn</th>
+                    <th nzWidth="120px">Chi phí mỗi tin nhắn</th>
+                    <th nzWidth="120px">Lượt hiển thị</th>
+                    <th nzWidth="120px">CPM</th>
+                    <th nzWidth="120px">CTR</th>
+                    <th nzWidth="120px">CPC</th>
+                    <th nzWidth="120px">Tần suất</th>
+                    <th nzWidth="120px">Lượt mua</th>
+                    <th nzWidth="120px">2 lượt nhắn tin qua lại</th>
+                    <th nzWidth="120px">3 lượt nhắn tin qua lại</th>
+                    <th nzWidth="120px">5 lượt nhắn tin qua lại</th>
+                    <th nzWidth="120px">Chi phí trên mỗi lượt mua</th>
+                    <th nzRight nzWidth="120px">Đã chi tiêu</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,19 +32,25 @@
                         <tr *ngIf="(item.parent && item.parent.expand) || !item.parent">
                             <td [nzIndentSize]="item.level! * 20" [nzShowExpand]="!!item.children"
                                 [(nzExpand)]="item.expand"
-                                (nzExpandChange)="collapse(metaExpandedData[data.key], item, $event)" nzEllipsis
+                                (nzExpandChange)="collapse(metaExpandedData[data.key], item, $event)" nzLeft nzEllipsis
                                 nzEllipsisRows="1">
                                 {{ item.name }}
                             </td>
                             <td nzEllipsis nzEllipsisRows="1">{{ item.objective }}</td>
+                            <td>{{ item.spend | thousandSeparator }}</td>
                             <td>{{ item.spend | thousandSeparator }}</td>
                             <td>{{ item.impressions | thousandSeparator }}</td>
                             <td>{{ item.cpc | thousandSeparator }}</td>
                             <td>{{ item.reach | thousandSeparator }}</td>
                             <td>{{ item.ctr | thousandSeparator }}</td>
                             <td>{{ item.spend | thousandSeparator }}</td>
-                            <td>{{ item.spend | thousandSeparator }}</td>
-                            <td>{{ item.frequency | thousandSeparator }}</td>
+                            <td>{{ item.reach | thousandSeparator }}</td>
+                            <td>{{ item.reach | thousandSeparator }}</td>
+                            <td>{{ item.reach | thousandSeparator }}</td>
+                            <td>{{ item.reach | thousandSeparator }}</td>
+                            <td>{{ item.reach | thousandSeparator }}</td>
+                            <td>{{ item.reach | thousandSeparator }}</td>
+                            <td nzRight>{{ item.spend | thousandSeparator }}</td>
                         </tr>
                     </ng-container>
                 </ng-container>
@@ -58,19 +70,25 @@
             Instagram
         </h5>
         <nz-table #instagramTable nzBordered [nzFooter]="instagramSummaryFooter" [nzData]="instaMapData"
-            nzTableLayout="fixed" [nzShowPagination]="false">
+            [nzShowPagination]="false" [nzScroll]="{ x: '1150px', y: '240px' }">
             <thead>
                 <tr>
-                    <th width="350px">Campaign</th>
-                    <th width="150px">Mục tiêu</th>
-                    <th width="110px">Đã chi tiêu</th>
-                    <th width="110px">Kết quả</th>
-                    <th width="150px">Chi phí / Kết quả</th>
-                    <th width="100px">CPM</th>
-                    <th width="100px">CTR</th>
-                    <th width="90px">Tin nhắn</th>
-                    <th>Chi phí tin nhắn</th>
-                    <th>Tần suất</th>
+                    <th nzLeft nzWidth="300px">Campaign</th>
+                    <th nzWidth="120px">Mục tiêu</th>
+                    <th nzWidth="120px">Ngân sách</th>
+                    <th nzWidth="120px">Tin nhắn</th>
+                    <th nzWidth="120px">Chi phí mỗi tin nhắn</th>
+                    <th nzWidth="120px">Lượt hiển thị</th>
+                    <th nzWidth="120px">CPM</th>
+                    <th nzWidth="120px">CTR</th>
+                    <th nzWidth="120px">CPC</th>
+                    <th nzWidth="120px">Tần suất</th>
+                    <th nzWidth="120px">Lượt mua</th>
+                    <th nzWidth="120px">2 lượt nhắn tin qua lại</th>
+                    <th nzWidth="120px">3 lượt nhắn tin qua lại</th>
+                    <th nzWidth="120px">5 lượt nhắn tin qua lại</th>
+                    <th nzWidth="120px">Chi phí trên mỗi lượt mua</th>
+                    <th nzRight nzWidth="120px">Đã chi tiêu</th>
                 </tr>
             </thead>
             <tbody>
@@ -79,18 +97,25 @@
                         <tr *ngIf="(item.parent && item.parent.expand) || !item.parent">
                             <td [nzIndentSize]="item.level! * 20" [nzShowExpand]="!!item.children"
                                 [(nzExpand)]="item.expand"
-                                (nzExpandChange)="collapse(instaExpandedData[data.key], item, $event)">
+                                (nzExpandChange)="collapse(instaExpandedData[data.key], item, $event)" nzLeft nzEllipsis
+                                nzEllipsisRows="1">
                                 {{ item.name }}
                             </td>
                             <td nzEllipsis nzEllipsisRows="1">{{ item.objective }}</td>
+                            <td>{{ item.spend | thousandSeparator }}</td>
                             <td>{{ item.spend | thousandSeparator }}</td>
                             <td>{{ item.impressions | thousandSeparator }}</td>
                             <td>{{ item.cpc | thousandSeparator }}</td>
                             <td>{{ item.reach | thousandSeparator }}</td>
                             <td>{{ item.ctr | thousandSeparator }}</td>
                             <td>{{ item.spend | thousandSeparator }}</td>
-                            <td>{{ item.spend | thousandSeparator }}</td>
-                            <td>{{ item.frequency | thousandSeparator }}</td>
+                            <td>{{ item.reach | thousandSeparator }}</td>
+                            <td>{{ item.reach | thousandSeparator }}</td>
+                            <td>{{ item.reach | thousandSeparator }}</td>
+                            <td>{{ item.reach | thousandSeparator }}</td>
+                            <td>{{ item.reach | thousandSeparator }}</td>
+                            <td>{{ item.reach | thousandSeparator }}</td>
+                            <td nzRight>{{ item.spend | thousandSeparator }}</td>
                         </tr>
                     </ng-container>
                 </ng-container>

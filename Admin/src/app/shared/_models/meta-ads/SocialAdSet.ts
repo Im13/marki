@@ -11,6 +11,7 @@ export interface SocialAdSet {
     cpc?: string;
     reach?: string;
     frequency?: string;
+    results?: string;
     date_start?: string;
     date_stop?: string;
 }

@@ -7,14 +7,25 @@ export class ThousandSeparatorPipe implements PipeTransform {
   transform(value: number | string | null | undefined): string {
     if (value === null || value === undefined || value === '') return '0';
     
-    // Chuyển value về string và loại bỏ dấu phẩy nếu có
+    // Convert value to string and remove commas
     const numberStr = value.toString().replace(/,/g, '');
-    
-    // Kiểm tra xem có phải số hợp lệ không
+
+    // Check if it's a valid number
     const number = Number(numberStr);
     if (isNaN(number)) return '0';
-    
-    // Format số với dấu phẩy ngăn cách hàng nghìn
-    return new Intl.NumberFormat('vi-VN').format(number);
+
+    // Check if the number has a decimal part
+    const hasDecimal = number % 1 !== 0;
+
+    // If it's an integer, format normally
+    if (!hasDecimal) {
+      return new Intl.NumberFormat('vi-VN').format(number);
+    }
+
+    // If it has a decimal part, format with 1-2 decimal places
+    return new Intl.NumberFormat('vi-VN', {
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 2
+    }).format(number);
   }
 }
