@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { endOfMonth, startOfMonth, subDays, subMonths } from 'date-fns';
-import { CampaignWithAdsets } from 'src/app/shared/_models/meta-ads/CampaignWithAdsets';
+import { SocialCampaign } from 'src/app/shared/_models/meta-ads/SocialCampaign';
 import { StatisticsService } from '../statistics.service';
 
 export interface TreeNodeInterface {
   key: string;
   name: string;
+  objective?: string;
   daily_budget?: string;
   spend?: string;
   impressions?: string;
@@ -41,13 +42,24 @@ export class MetaAdsDashboardComponent implements OnInit {
   selectedRange = [new Date(), new Date()];
   mapOfExpandedData: { [key: string]: TreeNodeInterface[] } = {};
 
-  campaigns: CampaignWithAdsets[] = [
+  //Refactor zone
+  metaMapData: TreeNodeInterface[] = [];
+  instaMapData: TreeNodeInterface[] = [];
+
+  metaExpandedData: { [key: string]: TreeNodeInterface[] } = {};
+  instaExpandedData: { [key: string]: TreeNodeInterface[] } = {};
+
+  totalMetaAdsSpend = 0;
+  totalInstagramAdsSpend = 0;
+
+  metaCampaigns: SocialCampaign[] = [
     {
       id: "120227937996160083",
       name: "Set thô boil + CV484 - Mes",
       status: "ACTIVE",
       effective_status: "ACTIVE",
       start_time: "2025-07-05T00:00:00+0700",
+      objective: "OUTCOME_ENGAGEMENT",
       adSets: [
         {
           id: "120227937996150083",
@@ -84,15 +96,84 @@ export class MetaAdsDashboardComponent implements OnInit {
       ]
     },
   ];
-  listOfMapData: TreeNodeInterface[] = [];
+
+  instaCampaigns: SocialCampaign[] = [
+    {
+      id: "120227937996160083",
+      name: "Instagram Campaign",
+      status: "ACTIVE",
+      effective_status: "ACTIVE",
+      start_time: "2025-07-05T00:00:00+0700",
+      objective: "OUTCOME_ENGAGEMENT",
+      adSets: [
+        {
+          id: "120227937996150083",
+          name: "Nhóm quảng cáo Lượt tương tác mới",
+          status: "ACTIVE",
+          effective_status: "ACTIVE",
+          daily_budget: "140000",
+          spend: "352221",
+          impressions: "3216",
+          clicks: "325",
+          ctr: "10.105721",
+          cpc: "468.372308",
+          reach: "2580",
+          frequency: "1.246512",
+          date_start: "2025-07-18",
+          date_stop: "2025-07-18"
+        },
+        {
+          id: "120227937996150083",
+          name: "Nhóm quảng cáo Lượt tương tác 1",
+          status: "ACTIVE",
+          effective_status: "ACTIVE",
+          daily_budget: "140000",
+          spend: "252221",
+          impressions: "3216",
+          clicks: "124",
+          ctr: "5.23",
+          cpc: "468.372308",
+          reach: "2580",
+          frequency: "1.246512",
+          date_start: "2025-07-18",
+          date_stop: "2025-07-18"
+        }
+      ]
+    },
+  ];
+
+  //End refactor zone
   loading = false;
 
   ngOnInit(): void {
-    this.listOfMapData = this.convertCampaignsToTree(this.campaigns);
-    this.listOfMapData.forEach(item => {
-      this.mapOfExpandedData[item.key] = this.convertTreeToList(item);
-    });
+    this.initializeCampaignData('meta');
+    this.initializeCampaignData('insta');
+
+    // this.listOfMapData = this.convertCampaignsToTree(this.metaCampaigns);
+    // this.listOfMapData.forEach(item => {
+    //   this.mapOfExpandedData[item.key] = this.convertTreeToList(item);
+    // });
+    // this.totalMetaAdsSpend = this.calculateTotalSpend();
     // this.fetchCampaigns();
+  }
+
+  private initializeCampaignData(platform: 'meta' | 'insta'): void {
+    const campaigns = platform === 'meta' ? this.metaCampaigns : this.instaCampaigns;
+    const mapData = this.convertCampaignsToTree(campaigns);
+
+    if (platform === 'meta') {
+      this.metaMapData = mapData;
+      this.metaMapData.forEach(item => {
+        this.metaExpandedData[item.key] = this.convertTreeToList(item);
+      });
+      this.totalMetaAdsSpend = this.calculateTotalSpend(this.metaCampaigns);
+    } else {
+      this.instaMapData = mapData;
+      this.instaMapData.forEach(item => {
+        this.instaExpandedData[item.key] = this.convertTreeToList(item);
+      });
+      this.totalInstagramAdsSpend = this.calculateTotalSpend(this.instaCampaigns);
+    }
   }
 
   constructor(private statisticsService: StatisticsService) {
@@ -103,20 +184,39 @@ export class MetaAdsDashboardComponent implements OnInit {
     // Lấy ngày từ selectedRange, format yyyy-MM-dd
     const since = this.formatDate(this.selectedRange[0]);
     const until = this.formatDate(this.selectedRange[1]);
-    this.statisticsService.getCampaignsWithAdsets(since, until).subscribe({
+    
+    // Fetch Meta Campaigns
+    this.statisticsService.getMetaCampaignsWithAdsets(since, until).subscribe({
       next: (data) => {
-        this.campaigns = data;
-        this.listOfMapData = this.convertCampaignsToTree(this.campaigns);
-        this.listOfMapData.forEach(item => {
-          this.mapOfExpandedData[item.key] = this.convertTreeToList(item);
-        });
-        this.loading = false;
+        this.metaCampaigns = data;
+        this.initializeCampaignData('meta');
       },
       error: (err) => {
-        this.loading = false;
-        console.log(err);
+        console.log('Meta fetch error:', err);
       }
     });
+
+    // Fetch Instagram Campaigns
+    this.statisticsService.getMetaCampaignsWithAdsets(since, until).subscribe({
+      next: (data) => {
+        this.instaCampaigns = data;
+        this.initializeCampaignData('insta');
+      },
+      error: (err) => {
+        console.log('Instagram fetch error:', err);
+      },
+      complete: () => {
+        this.loading = false;
+      }
+    });
+  }
+
+  private calculateTotalSpend(campaigns: SocialCampaign[]): number {
+    return campaigns.reduce((total, campaign) => {
+      return total + campaign.adSets.reduce((sum, adset) => {
+        return sum + Number(adset.spend || 0);
+      }, 0);
+    }, 0);
   }
 
   formatDate(date: Date): string {
@@ -143,13 +243,14 @@ export class MetaAdsDashboardComponent implements OnInit {
     }
   }
 
-  convertCampaignsToTree(campaigns: CampaignWithAdsets[]): TreeNodeInterface[] {
+  convertCampaignsToTree(campaigns: SocialCampaign[]): TreeNodeInterface[] {
     return campaigns.map((campaign, i) => ({
       key: (i + 1).toString(),
       name: campaign.name,
       id: campaign.id,
       status: campaign.status,
       effective_status: campaign.effective_status,
+      objective: campaign.objective,
       // Tính tổng hoặc trung bình cho campaign level
       spend: campaign.adSets.reduce((sum, ad) => sum + Number(ad.spend || 0), 0).toString(),
       impressions: campaign.adSets.reduce((sum, ad) => sum + Number(ad.impressions || 0), 0).toString(),

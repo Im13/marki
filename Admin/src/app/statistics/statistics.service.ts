@@ -4,8 +4,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { ShopeeOrderProducts } from '../shared/_models/shopeeOrderProducts';
-import { CampaignWithAdsets } from '../shared/_models/meta-ads/CampaignWithAdsets';
 import { Observable } from 'rxjs';
+import { SocialCampaign } from '../shared/_models/meta-ads/SocialCampaign';
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +31,8 @@ export class StatisticsService {
     return this.http.get<ShopeeOrderProducts[]>(this.baseApiUrl + 'shopee/statistic/get-orders', { params });
   }
 
-  getCampaignsWithAdsets(since: string, until: string): Observable<CampaignWithAdsets[]> {
+  getMetaCampaignsWithAdsets(since: string, until: string): Observable<SocialCampaign[]> {
     const params = new HttpParams().set('since', since).set('until', until);
-    return this.http.get<CampaignWithAdsets[]>(this.baseApiUrl + 'metametrics/campaigns', { params });
+    return this.http.get<SocialCampaign[]>(this.baseApiUrl + 'metametrics/campaigns', { params });
   }
 }

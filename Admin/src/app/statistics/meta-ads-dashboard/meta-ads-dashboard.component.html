@@ -4,29 +4,33 @@
             <span nz-icon nzType="facebook" nzTheme="fill" class="me-2"></span>
             Facebook
         </h5>
-        <nz-table #expandTable nzBordered [nzFooter]="facebookSummaryFooter" [nzData]="listOfMapData" nzTableLayout="fixed" [nzShowPagination]="false">
+        <nz-table #facebookTable nzBordered [nzFooter]="facebookSummaryFooter" [nzData]="metaMapData"
+            nzTableLayout="fixed" [nzShowPagination]="false">
             <thead>
                 <tr>
                     <th width="350px">Campaign</th>
+                    <th width="150px">Mục tiêu</th>
                     <th width="110px">Đã chi tiêu</th>
                     <th width="110px">Kết quả</th>
                     <th width="150px">Chi phí / Kết quả</th>
-                    <th width="100px">CPM</th>
-                    <th width="100px">CTR</th>
+                    <th width="90px">CPM</th>
+                    <th width="90px">CTR</th>
                     <th width="90px">Tin nhắn</th>
                     <th>Chi phí tin nhắn</th>
                     <th>Tần suất</th>
                 </tr>
             </thead>
             <tbody>
-                <ng-container *ngFor="let data of expandTable.data">
-                    <ng-container *ngFor="let item of mapOfExpandedData[data.key]">
+                <ng-container *ngFor="let data of facebookTable.data">
+                    <ng-container *ngFor="let item of metaExpandedData[data.key]">
                         <tr *ngIf="(item.parent && item.parent.expand) || !item.parent">
                             <td [nzIndentSize]="item.level! * 20" [nzShowExpand]="!!item.children"
                                 [(nzExpand)]="item.expand"
-                                (nzExpandChange)="collapse(mapOfExpandedData[data.key], item, $event)">
+                                (nzExpandChange)="collapse(metaExpandedData[data.key], item, $event)" nzEllipsis
+                                nzEllipsisRows="1">
                                 {{ item.name }}
                             </td>
+                            <td nzEllipsis nzEllipsisRows="1">{{ item.objective }}</td>
                             <td>{{ item.spend | thousandSeparator }}</td>
                             <td>{{ item.impressions | thousandSeparator }}</td>
                             <td>{{ item.cpc | thousandSeparator }}</td>
@@ -43,8 +47,8 @@
 
         <ng-template #facebookSummaryFooter>
             <span class="d-flex justify-content-end">
-                Tổng cộng: 
-                <b class="ms-2 me-1 text-success">9.000.000</b>
+                Tổng cộng:
+                <b class="ms-2 me-1 text-success">{{ totalMetaAdsSpend | thousandSeparator }}</b>
                 (đã bao gồm 10% thuế)
             </span>
         </ng-template>
@@ -53,10 +57,12 @@
             <span nz-icon nzType="instagram" nzTheme="fill" class="me-2"></span>
             Instagram
         </h5>
-        <nz-table #expandTable nzBordered [nzFooter]="instagramSummaryFooter" [nzData]="listOfMapData" nzTableLayout="fixed" [nzShowPagination]="false">
+        <nz-table #instagramTable nzBordered [nzFooter]="instagramSummaryFooter" [nzData]="instaMapData"
+            nzTableLayout="fixed" [nzShowPagination]="false">
             <thead>
                 <tr>
                     <th width="350px">Campaign</th>
+                    <th width="150px">Mục tiêu</th>
                     <th width="110px">Đã chi tiêu</th>
                     <th width="110px">Kết quả</th>
                     <th width="150px">Chi phí / Kết quả</th>
@@ -68,14 +74,15 @@
                 </tr>
             </thead>
             <tbody>
-                <ng-container *ngFor="let data of expandTable.data">
-                    <ng-container *ngFor="let item of mapOfExpandedData[data.key]">
+                <ng-container *ngFor="let data of instagramTable.data">
+                    <ng-container *ngFor="let item of instaExpandedData[data.key]">
                         <tr *ngIf="(item.parent && item.parent.expand) || !item.parent">
                             <td [nzIndentSize]="item.level! * 20" [nzShowExpand]="!!item.children"
                                 [(nzExpand)]="item.expand"
-                                (nzExpandChange)="collapse(mapOfExpandedData[data.key], item, $event)">
+                                (nzExpandChange)="collapse(instaExpandedData[data.key], item, $event)">
                                 {{ item.name }}
                             </td>
+                            <td nzEllipsis nzEllipsisRows="1">{{ item.objective }}</td>
                             <td>{{ item.spend | thousandSeparator }}</td>
                             <td>{{ item.impressions | thousandSeparator }}</td>
                             <td>{{ item.cpc | thousandSeparator }}</td>
@@ -92,22 +99,17 @@
 
         <ng-template #instagramSummaryFooter>
             <span class="d-flex justify-content-end">
-                Tổng cộng: 
-                <b class="ms-2 me-1 text-success">9.000.000</b>
+                Tổng cộng:
+                <b class="ms-2 me-1 text-success">{{ totalInstagramAdsSpend | thousandSeparator }}</b>
                 (đã bao gồm 10% thuế)
             </span>
         </ng-template>
     </nz-card>
     <ng-template #dateTemplate>
         <nz-space>
-            <nz-range-picker
-              *nzSpaceItem
-              nzMode="date"
-              [nzPlaceHolder]="['Ngày bắt đầu', 'Ngày kết thúc']"
-              [nzRanges]="ranges"
-              [(ngModel)]="selectedRange"
-              (ngModelChange)="onChange($event)">
+            <nz-range-picker *nzSpaceItem nzMode="date" [nzPlaceHolder]="['Ngày bắt đầu', 'Ngày kết thúc']"
+                [nzRanges]="ranges" [(ngModel)]="selectedRange" (ngModelChange)="onChange($event)">
             </nz-range-picker>
-          </nz-space>
+        </nz-space>
     </ng-template>
 </nz-layout>

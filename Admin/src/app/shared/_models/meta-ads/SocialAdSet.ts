@@ -1,4 +1,4 @@
-export interface AdsetInsight {
+export interface SocialAdSet {
     id: string;
     name: string;
     status: string;

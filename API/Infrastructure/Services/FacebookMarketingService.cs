@@ -4,7 +4,6 @@ using Core.Entities;
 using Core.Interfaces;
 using Infrastructure.Helpers;
 using Microsoft.Extensions.Options;
-using Core.Enums;
 using Core.Extensions;
 
 namespace Infrastructure.Services
