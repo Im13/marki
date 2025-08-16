@@ -1,25 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdminComponent } from './admin.component';
 import { RouterModule } from '@angular/router';
-import { AdminRoutingModule } from './admin-routing.module';
+import { SettingsRoutingModule } from './settings-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { CoreModule } from '../core/core.module';
 import { RolesModalComponent } from './roles-modal/roles-modal.component';
-
-
+import { EmployeeListComponent } from './employee-list/employee-list.component';
 
 @NgModule({
   declarations: [
-    AdminComponent,
-    RolesModalComponent
+    RolesModalComponent,
+    EmployeeListComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
-    AdminRoutingModule,
+    SettingsRoutingModule,
     SharedModule,
     CoreModule
   ]
 })
-export class AdminModule { }
+export class SettingsModule { }

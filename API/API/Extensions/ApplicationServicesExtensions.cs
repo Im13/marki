@@ -1,3 +1,4 @@
+using API.Controllers.Admin;
 using API.Errors;
 using Core.Entities;
 using Core.Interfaces;
@@ -16,6 +17,7 @@ namespace API.Extensions
         {
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+            services.AddHttpClient();
             services.AddDbContext<StoreContext>(opt =>
             {
                 opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
@@ -41,10 +43,12 @@ namespace API.Extensions
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IShopeeOrderService, ShopeeOrderService>();
             services.AddScoped<IExcelExportInterface, ExcelExportService>();
+            services.AddScoped<IFacebookMarketingService, FacebookMarketingService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
+            services.Configure<FacebookSettings>(config.GetSection("FacebookSettings"));
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.InvalidModelStateResponseFactory = actionContext =>

@@ -45,7 +45,6 @@ export class WebOrdersComponent implements OnInit {
     const selectedOrders = this.allSiteOrderComp.selectedOrders;
     
     if (!selectedOrders || selectedOrders.length === 0) {
-      // Có thể show thông báo cho user
       return;
     }
     this.orderService.exportOrdersToExcel(selectedOrders).subscribe(blob => {
