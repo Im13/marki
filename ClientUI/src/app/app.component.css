@@ -11,11 +11,6 @@ nz-content {
     margin-top: 64px;
 }
 
-.inner-content {
-    background: #fff;
-    min-height: 100vh;
-}
-
 nz-footer {
     text-align: center;
 }

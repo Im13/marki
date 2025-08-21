@@ -6,17 +6,29 @@
     <app-home-new-arrivals></app-home-new-arrivals>
 </div>
 
-<div class="row border border-success p-0 m-0 align-items-stretch">
-  <div class="mt-3 px-2 px-lg-0 col-12 col-lg-6 border border-danger">
-    <app-home-product-carousel sectionName="Chân váy" [typeId]="dressId" class="flex-fill"></app-home-product-carousel>
+<div class="row gx-3 mt-3">
+  <div class="col-12 col-lg-6">
+    <app-home-product-carousel sectionName="Chân váy dài" [typeId]="dressId"></app-home-product-carousel>
+  </div>
+
+  <div class="col-12 col-lg-6">
+    <app-home-product-carousel sectionName="Chân váy ngắn" [typeId]="dressId"></app-home-product-carousel>
+  </div>
+
+  <div class="col-12 col-lg-6">
+    <app-home-product-carousel sectionName="Chân váy dáng A" [typeId]="dressId"></app-home-product-carousel>
   </div>
   
-  <div class="mt-4 px-2 mt-3 px-2 px-lg-0 col-12 col-lg-6 border border-danger">
-    <app-home-product-carousel sectionName="Áo" [typeId]="shirtId" class="flex-fill"></app-home-product-carousel>
+  <div class="col-12 col-lg-6">
+    <app-home-product-carousel sectionName="Áo" [typeId]="shirtId"></app-home-product-carousel>
+  </div>
+
+  <div class="col-12 col-lg-6">
+    <app-home-product-carousel sectionName="Áo sơ mi" [typeId]="shirtId"></app-home-product-carousel>
   </div>
   
-  <div class="mt-4 px-2 mt-3 px-2 px-lg-0 col-12 col-lg-6">
-    <app-home-product-carousel sectionName="Quần" [typeId]="pantsId" class="flex-fill"></app-home-product-carousel>
+  <div class="col-12 col-lg-6">
+    <app-home-product-carousel sectionName="Quần" [typeId]="pantsId"></app-home-product-carousel>
   </div>
 </div>
 
