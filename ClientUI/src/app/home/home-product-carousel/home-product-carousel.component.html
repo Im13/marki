@@ -10,7 +10,7 @@
   <div class="product-swiper">
     <swiper [config]="swiperConfig" class="w-100 h-100 pb-4">
       <ng-template *ngFor="let product of products" swiperSlide>
-        <div class="slide-item h-100 border" (click)="redirectToProduct(product.slug)">
+        <div class="slide-item h-100 border tw-cursor-pointer" (click)="redirectToProduct(product.slug)">
           <div class="h-75">
             <img nz-image [src]="product.photos[0].url" class="object-fit-cover w-100 h-100">
           </div>
