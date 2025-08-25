@@ -1,9 +1,10 @@
-<div class="tw-min-h-screen tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-5">
+<div class="tw-min-h-screen lg:tw-min-h-[25vh] tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-5">
     <app-product-images [photos]="productPhotos"></app-product-images>
 
-    <app-product-info [product]="product" (selectOptions)="optionSelected($event)" (selectQuantity)="quantitySelected($event)" class="tw-bg-neutral-50 lg:tw-p-3"></app-product-info>
+    <app-product-info [product]="product" (selectOptions)="optionSelected($event)" (selectQuantity)="quantitySelected($event)" class="tw-bg-neutral-50 lg:tw-p-5"></app-product-info>
 
-    <app-product-description [description]="productDescription"></app-product-description>
 </div>
 
-<app-products-footer (atcClicked)="addToCart()" class="footer w-100 d-flex align-items-center tw-fixed border-top tw-bg-neutral-50 tw-h-[65px] tw-bottom-0"></app-products-footer>
+<app-description [description]="productDescription" class="tw-my-4"></app-description>
+
+<app-products-footer (atcClicked)="addToCart()" class="footer w-100 d-flex align-items-center tw-fixed border-top tw-bg-neutral-50 tw-h-[65px] tw-bottom-0 lg:tw-invisible"></app-products-footer>
