@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { HeaderComponent } from './header/header.component';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
@@ -20,14 +18,16 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { DescriptionComponent } from './description/description.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzSelectModule }  from 'ng-zorro-antd/select';
-import { CartDropdownComponent } from './cart-dropdown/cart-dropdown.component';
 import { BreadcrumbModule } from 'xng-breadcrumb';
 import { CommonBreadcrumbComponent } from './common-breadcrumb/common-breadcrumb.component';
+import { HeaderComponent } from './header/header.component';
+import { CartDropdownComponent } from './cart-dropdown/cart-dropdown.component';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @NgModule({
   declarations: [
-    HeaderComponent,
     DescriptionComponent,
+    HeaderComponent,
     CartDropdownComponent,
     CommonBreadcrumbComponent
   ],
@@ -35,7 +35,6 @@ import { CommonBreadcrumbComponent } from './common-breadcrumb/common-breadcrumb
     CommonModule,
     NzBreadCrumbModule,
     NzMenuModule,
-    NzIconModule,
     NzGridModule,
     NzDropDownModule,
     NzCollapseModule,
@@ -50,14 +49,13 @@ import { CommonBreadcrumbComponent } from './common-breadcrumb/common-breadcrumb
     NzBadgeModule,
     ReactiveFormsModule,
     NzSelectModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    NzIconModule
   ],
   exports: [
     NzLayoutModule,
     NzBreadCrumbModule,
     NzMenuModule,
-    HeaderComponent,
-    NzIconModule,
     NzGridModule,
     NzDropDownModule,
     NzCollapseModule,
@@ -73,7 +71,10 @@ import { CommonBreadcrumbComponent } from './common-breadcrumb/common-breadcrumb
     DescriptionComponent,
     ReactiveFormsModule,
     NzSelectModule,
-    CommonBreadcrumbComponent
+    CommonBreadcrumbComponent,
+    HeaderComponent,
+    CartDropdownComponent,
+    NzIconModule
   ]
 })
 export class CoreModule { }

@@ -1,21 +1,35 @@
-<div class="carousel">
+<div class="carousel tw-h-[75vh] lg:tw-h-[60vh]">
     <app-home-carousel></app-home-carousel>
 </div>
 
-<div class="mt-3">
+<div class="mt-3 mt-lg-5 mb-lg-3">
     <app-home-new-arrivals></app-home-new-arrivals>
 </div>
 
-<div class="mt-3 px-2">
-  <app-home-product-carousel sectionName="Chân váy" [typeId]="dressId"></app-home-product-carousel>
-</div>
+<div class="row gx-3 mt-3">
+  <div class="col-12 col-lg-6">
+    <app-home-product-carousel sectionName="Chân váy dài" [typeId]="dressId"></app-home-product-carousel>
+  </div>
 
-<div class="mt-4 px-2">
-  <app-home-product-carousel sectionName="Áo" [typeId]="shirtId"></app-home-product-carousel>
-</div>
+  <div class="col-12 col-lg-6">
+    <app-home-product-carousel sectionName="Chân váy ngắn" [typeId]="dressId"></app-home-product-carousel>
+  </div>
 
-<div class="mt-4 px-2">
-  <app-home-product-carousel sectionName="Quần" [typeId]="pantsId"></app-home-product-carousel>
+  <div class="col-12 col-lg-6">
+    <app-home-product-carousel sectionName="Chân váy dáng A" [typeId]="dressId"></app-home-product-carousel>
+  </div>
+  
+  <div class="col-12 col-lg-6">
+    <app-home-product-carousel sectionName="Áo" [typeId]="shirtId"></app-home-product-carousel>
+  </div>
+
+  <div class="col-12 col-lg-6">
+    <app-home-product-carousel sectionName="Áo sơ mi" [typeId]="shirtId"></app-home-product-carousel>
+  </div>
+  
+  <div class="col-12 col-lg-6">
+    <app-home-product-carousel sectionName="Quần" [typeId]="pantsId"></app-home-product-carousel>
+  </div>
 </div>
 
 <div class="mt-3">

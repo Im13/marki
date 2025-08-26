@@ -1,9 +1,9 @@
-<div class="container-fluid">
+<div class="container-fluid tw-bg-stone-50 pt-4">
   <p class="d-flex justify-content-center fs-4 fw-bold">NEW ARRIVALS</p>
 
   <div class="row">
-    <div *ngFor="let product of products" class="col-6 px-2 mt-2 product-item">
-      <div class="product-card border h-100" (click)="redirectToProduct(product.slug)">
+    <div *ngFor="let product of products" class="col-6 col-lg-3 px-2 mt-2 mt-lg-4 product-item">
+      <div class="product-card border h-100 tw-cursor-pointer" (click)="redirectToProduct(product.slug)">
         <div class="h-75 border-bottom">
           <img nz-image [src]="product.photos[0].url" class="object-fit-cover w-100 h-100">
         </div>
@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <div class="d-flex justify-content-center py-4">
+    <div class="d-flex justify-content-center py-4 py-lg-5">
       <button type="button" class="w-50 btn btn-white border border-dark fw-semibold" (click)="onViewMoreClick()">Xem
         thêm</button>
     </div>
