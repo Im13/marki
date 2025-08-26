@@ -11,6 +11,6 @@
     height: 100% !important;
 } */
 
-::ng-deep nz-select-top-control {
+/* ::ng-deep nz-select-top-control {
     font-size: .9rem;
-}
+} */
