@@ -38,13 +38,40 @@ namespace Infrastructure.Services
 
         public async Task<Product> UpdateProduct(Product product)
         {
-            Photo photoToFind = new Photo();
+            // Clear existing tracking
+            _unitOfWork.ClearTracker();
 
-            //Get photos with productId
-            var spec = new PhotosWithProductFilterSpecification(product.Id);
-            var photos = await _unitOfWork.Repository<Photo>().ListAsync(spec);
+            // Load existing product with all related entities
+            var existingProduct = await _context.Products
+                .Include(p => p.Photos)
+                .Include(p => p.ProductOptions)
+                    .ThenInclude(po => po.ProductOptionValues)
+                .Include(p => p.ProductSKUs)
+                    .ThenInclude(sku => sku.ProductSKUValues)
+                .FirstOrDefaultAsync(p => p.Id == product.Id);
 
-            var photosToDelete = photos.Except(product.Photos).ToList();
+            if (existingProduct == null) return null;
+
+            // 1. Update basic properties
+            existingProduct.Name = product.Name;
+            existingProduct.Description = product.Description;
+            existingProduct.ProductSKU = product.ProductSKU;
+            existingProduct.ProductTypeId = product.ProductTypeId;
+            existingProduct.Slug = product.Slug;
+            existingProduct.ImportPrice = product.ImportPrice;
+
+            // Photo photoToFind = new Photo();
+
+            // //Get photos with productId
+            // var spec = new PhotosWithProductFilterSpecification(product.Id);
+            // var photos = await _unitOfWork.Repository<Photo>().ListAsync(spec);
+
+            // var photosToDelete = photos.Except(product.Photos).ToList();
+
+            // 1. Handle Photos
+            var photosToDelete = existingProduct.Photos
+                .Where(ep => !product.Photos.Any(p => p.Id == ep.Id))
+                .ToList();
 
             foreach (var photo in photosToDelete)
             {
@@ -59,7 +86,63 @@ namespace Infrastructure.Services
                 }
             }
 
-            _unitOfWork.Repository<Product>().Update(product);
+            // Add new photos
+            foreach (var newPhoto in product.Photos.Where(p => p.Id == 0))
+            {
+                existingProduct.Photos.Add(newPhoto);
+            }
+
+            // 3. Handle ProductOptions
+            // foreach (var existingOption in existingProduct.ProductOptions.ToList())
+            // {
+            //     var updatedOption = product.ProductOptions
+            //         .FirstOrDefault(o => o.Id == existingOption.Id);
+
+            //     if (updatedOption == null)
+            //     {
+            //         existingProduct.ProductOptions.Remove(existingOption);
+            //     }
+            //     else
+            //     {
+            //         existingOption.Name = updatedOption.Name;
+            //         // Add other option properties
+
+            //         // Handle option values
+            //         foreach (var existingValue in existingOption.ProductOptionValues.ToList())
+            //         {
+            //             var updatedValue = updatedOption.ProductOptionValues
+            //                 .FirstOrDefault(v => v.Id == existingValue.Id);
+
+            //             if (updatedValue == null)
+            //             {
+            //                 existingOption.ProductOptionValues.Remove(existingValue);
+            //             }
+            //             else
+            //             {
+            //                 existingValue.Value = updatedValue.Value;
+            //                 // Add other value properties
+            //             }
+            //         }
+
+            //         // Add new values
+            //         foreach (var newValue in updatedOption.ProductOptionValues
+            //             .Where(v => !existingOption.ProductOptionValues
+            //                 .Any(ev => ev.Id == v.Id)))
+            //         {
+            //             existingOption.ProductOptionValues.Add(newValue);
+            //         }
+            //     }
+            // }
+
+            // // Add new options
+            // foreach (var newOption in product.ProductOptions
+            //     .Where(o => !existingProduct.ProductOptions
+            //         .Any(eo => eo.Id == o.Id)))
+            // {
+            //     existingProduct.ProductOptions.Add(newOption);
+            // }
+
+            _unitOfWork.Repository<Product>().Update(existingProduct);
 
             // UPDATE IMAGE FOR SKUS
             // if(product.ProductSKUs.Count > 0)
@@ -121,7 +204,7 @@ namespace Infrastructure.Services
             {
                 var mainPhoto = prod.Photos.FirstOrDefault(p => p.IsMain == true);
 
-                if(string.IsNullOrEmpty(sku.ImageUrl))
+                if (string.IsNullOrEmpty(sku.ImageUrl))
                 {
                     sku.ImageUrl = mainPhoto.Url;
                 }
