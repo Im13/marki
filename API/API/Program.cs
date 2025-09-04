@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 using API.Extensions;
 using API.Middleware;
+using API.SignalR;
 using Core.Entities.Identity;
 using Infrastructure.Data;
 using Infrastructure.Identity;
@@ -38,6 +39,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<OrderNotificationHub>("/notificationHub");
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
