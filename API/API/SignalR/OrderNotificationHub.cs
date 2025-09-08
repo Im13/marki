@@ -26,7 +26,26 @@ public class OrderNotificationHub : Hub
                 }
             }
         }
-        
+
         await base.OnConnectedAsync();
+    }
+
+    public override async Task OnDisconnectedAsync(Exception exception)
+    {
+        var user = Context.User;
+        if (user?.Identity?.IsAuthenticated == true)
+        {
+            var roles = user.FindAll(ClaimTypes.Role).Select(c => c.Value);
+
+            foreach (var role in roles)
+            {
+                if (role == "Admin" || role == "SuperAdmin")
+                {
+                    await Groups.RemoveFromGroupAsync(Context.ConnectionId, role);
+                }
+            }
+        }
+
+        await base.OnDisconnectedAsync(exception);
     }
 }

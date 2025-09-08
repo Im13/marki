@@ -51,11 +51,11 @@ namespace API.Controllers
             return Ok(new Pagination<ShopeeOrderDTO>(shopeeOrderSpecParams.PageIndex, shopeeOrderSpecParams.PageSize, totalItems, data));
         }
 
-        [HttpGet("get-orders-from-shopee")]
-        public async Task<IActionResult> GetOrdersFromShopee()
-        {
-            return Ok();
-        }
+        // [HttpGet("get-orders-from-shopee")]
+        // public async Task<IActionResult> GetOrdersFromShopee()
+        // {
+        //     return Ok();
+        // }
 
         [HttpGet("statistic/get-orders")]
         public async Task<List<ShopeeOrderProducts>> GetOrdersStatistic([FromQuery] ShopeeOrderSpecParams shopeeOrderSpecParams)

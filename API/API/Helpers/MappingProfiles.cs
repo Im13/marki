@@ -19,7 +19,7 @@ namespace API.Helpers
         {
             CreateMap<Product, ProductToReturnDTO>();
             // .ForMember(d => d.PictureUrl, o => o.MapFrom<ProductUrlResolver>());
-            CreateMap<Core.Entities.Identity.Address, AddressDTO>().ReverseMap();
+            CreateMap<Address, AddressDTO>().ReverseMap();
             CreateMap<CustomerBasketDTO, CustomerBasket>();
             CreateMap<BasketItemDTO, BasketItem>();
 
