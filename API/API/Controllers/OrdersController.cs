@@ -3,7 +3,6 @@ using API.DTOs.AdminOrder;
 using API.Errors;
 using API.Extensions;
 using API.Helpers;
-using API.SignalR;
 using AutoMapper;
 using Core.Entities.OrderAggregate;
 using Core.Interfaces;
@@ -21,7 +20,7 @@ namespace API.Controllers
         private readonly IOrderRepository _orderRepository;
         private readonly IMapper _mapper;
         private readonly IGenericRepository<Order> _orderRepo;
-        private readonly IHubContext<OrderNotificationHub> _hubContext;
+        // private readonly IHubContext<OrderNotificationHub> _hubContext;
         public OrdersController(IOrderService orderService, IExcelExportInterface excelExportInterface, IMapper mapper, IGenericRepository<Order> orderRepo, IOrderRepository orderRepository)
         {
             _mapper = mapper;
@@ -33,39 +32,39 @@ namespace API.Controllers
 
         //Create order for user, user can create order with credentials in future update.
         //Cannot merge this with admin create order because of basket.
-        [HttpPost]
-        public async Task<ActionResult<Order>> CreateOrder(OrderDTO orderDTO)
-        {
-            try
-            {
-                var email = HttpContext.User.RetrieveEmailFromPrincipal();
-                var address = _mapper.Map<AddressDTO, Address>(orderDTO.ShipToAddress);
+        // [HttpPost]
+        // public async Task<ActionResult<Order>> CreateOrder(OrderDTO orderDTO)
+        // {
+        //     try
+        //     {
+        //         var email = HttpContext.User.RetrieveEmailFromPrincipal();
+        //         var address = _mapper.Map<AddressDTO, Address>(orderDTO.ShipToAddress);
 
-                //Sai khi truyền email vào createOrderAsync, phải lấy email từ dto
-                var order = await _orderService.CreateOrderAsync(email, orderDTO.DeliveryMethodId, orderDTO.BasketId, address, orderDTO.ShippingFee, orderDTO.OrderDiscount, orderDTO.BankTransferedAmount, orderDTO.ExtraFee, orderDTO.Total, orderDTO.OrderNote);
+        //         //Sai khi truyền email vào createOrderAsync, phải lấy email từ dto
+        //         var order = await _orderService.CreateOrderAsync(email, orderDTO.DeliveryMethodId, orderDTO.BasketId, address, orderDTO.ShippingFee, orderDTO.OrderDiscount, orderDTO.BankTransferedAmount, orderDTO.ExtraFee, orderDTO.Total, orderDTO.OrderNote);
 
-                if (order == null) return BadRequest(new ApiResponse(400, "Failed to create order"));
+        //         if (order == null) return BadRequest(new ApiResponse(400, "Failed to create order"));
 
-                //Send notification to admin when new order created
-                // await _hubContext.Clients.Groups("Admin").SendAsync("NewOrderCreated", new
-                var notification = new
-                {
-                    Type = "NewOrderCreated",
-                    Message = $"New order created. Order Id: {order.Id}",
-                    OrderId = order.Id,
-                    TotalAmout = order.Total,
-                    CreatedAt = order.OrderDate
-                };
+        //         //Send notification to admin when new order created
+        //         // await _hubContext.Clients.Groups("Admin").SendAsync("NewOrderCreated", new
+        //         var notification = new
+        //         {
+        //             Type = "NewOrderCreated",
+        //             Message = $"New order created. Order Id: {order.Id}",
+        //             OrderId = order.Id,
+        //             TotalAmout = order.Total,
+        //             CreatedAt = order.OrderDate
+        //         };
 
-                await _hubContext.Clients.Groups("Admin").SendAsync("NewOrderCreated", notification);
-                await _hubContext.Clients.Groups("SuperAdmin").SendAsync("NewOrderCreated", notification);
+        //         await _hubContext.Clients.Groups("Admin").SendAsync("NewOrderCreated", notification);
+        //         await _hubContext.Clients.Groups("SuperAdmin").SendAsync("NewOrderCreated", notification);
 
-                return Ok(order);
-            } catch (Exception ex)
-            {
-                return BadRequest(new ApiResponse(400, ex.Message));
-            }
-        }
+        //         return Ok(order);
+        //     } catch (Exception ex)
+        //     {
+        //         return BadRequest(new ApiResponse(400, ex.Message));
+        //     }
+        // }
 
         // [Authorize(Roles = "Admin")]
         [HttpPost("admin/create")]

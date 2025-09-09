@@ -34,7 +34,8 @@ namespace Infrastructure.Data
         public DbSet<OfflineOrderStatus> OrderStatus { get; set; }
         public DbSet<SlideImage> SlideImages { get; set; }
         public DbSet<RevenueSummary> RevenueSummaries { get; set; }
-        
+        public DbSet<Notification> Notifications { get; set; }
+        public DbSet<NotificationUser> NotificationUsers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

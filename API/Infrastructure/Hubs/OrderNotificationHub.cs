@@ -1,9 +1,9 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.SignalR;
 
-namespace API.SignalR;
-
-public class OrderNotificationHub : Hub
+namespace Infrastructure.Hubs
+{
+    public class OrderNotificationHub : Hub
 {
     //Send message to specifict role
     public async Task SendOrderNotification(string role, string message)
@@ -49,3 +49,5 @@ public class OrderNotificationHub : Hub
         await base.OnDisconnectedAsync(exception);
     }
 }
+}
+

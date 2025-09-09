@@ -44,6 +44,7 @@ namespace API.Extensions
             services.AddScoped<IShopeeOrderService, ShopeeOrderService>();
             services.AddScoped<IExcelExportInterface, ExcelExportService>();
             services.AddScoped<IFacebookMarketingService, FacebookMarketingService>();
+            services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
