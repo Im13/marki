@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs';
 import { User } from '../shared/_models/user';
 import { AccountService } from '../_service/account.service';
-import { SearchService } from '../core/services/search.service';
+import { SignalRService } from '../core/_services/signalr.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   isCollapsed = false;
   routeName = '';
   username = '';
@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private titleService: Title,
     private accountService: AccountService,
+    private signalRService: SignalRService
   ) {
     this.router.events.subscribe(() => {
       this.showSearchBox = this.allowedRoutes.some(route => this.router.url.startsWith(route));
@@ -37,6 +38,9 @@ export class HomeComponent implements OnInit {
     this.username = user.displayName;
 
     this.updateTitleAndHeader(this.activatedRoute);
+    
+    // Start SignalR connection
+    this.startSignalRConnection();
 
     // Lắng nghe sự thay đổi của route
     this.router.events
@@ -84,7 +88,22 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    // Stop SignalR connection when component is destroyed
+    this.signalRService.stopConnection();
+  }
+
+  private async startSignalRConnection(): Promise<void> {
+    try {
+      await this.signalRService.startConnection();
+      console.log('SignalR connection established');
+    } catch (error) {
+      console.error('Failed to start SignalR connection:', error);
+    }
+  }
+
   logout() {
+    this.signalRService.stopConnection();
     this.accountService.logout();
     this.router.navigateByUrl('/login');
   }

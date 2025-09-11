@@ -18,6 +18,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { HasRoleDirective } from './core/_directives/has-role.directive';
 import { SharedModule } from './shared/shared.module';
+import { NotificationToastComponent } from './shared/components/notification-toast/notification-toast.component';
 
 registerLocaleData(en);
 
@@ -26,7 +27,8 @@ registerLocaleData(en);
     AppComponent,
     LoginComponent,
     HomeComponent,
-    HasRoleDirective
+    HasRoleDirective,
+    NotificationToastComponent
   ],
   imports: [
     BrowserModule,

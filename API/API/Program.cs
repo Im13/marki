@@ -2,6 +2,7 @@ using API.Extensions;
 using API.Middleware;
 using Core.Entities.Identity;
 using Infrastructure.Data;
+using Infrastructure.Hubs;
 using Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +38,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHub<OrderNotificationHub>("/hubs/orderNotification");
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;

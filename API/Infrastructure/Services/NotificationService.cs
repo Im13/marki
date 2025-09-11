@@ -27,7 +27,7 @@ namespace Infrastructure.Services
             var notification = new Notification
             {
                 Title = "New Order",
-                Message = $"Order {orderId} has been placed.",
+                Message = $"Order #{orderId} has been placed.",
                 CreatedAt = DateTime.UtcNow,
                 CreatedByUserId = createdByUserId
             };
@@ -51,8 +51,21 @@ namespace Infrastructure.Services
             }
             await _storeContext.SaveChangesAsync();
 
+            // Tạo notification object chi tiết hơn cho SignalR
+            var notificationData = new
+            {
+                Type = "NewOrderCreated",
+                Id = notification.Id,
+                Title = notification.Title,
+                Message = notification.Message,
+                OrderId = orderId,
+                CreatedAt = notification.CreatedAt,
+                CreatedBy = createdByUserId
+            };
+
+            // Gửi notification đến các groups
             await _hubContext.Clients.Groups("Admin", "SuperAdmin")
-                .SendAsync("ReceiveNotification", notification);
+                .SendAsync("ReceiveNotification", notificationData);
         }
     }
 }

@@ -78,6 +78,9 @@
       </div>
 
       <div class="col-2 d-flex align-items-center justify-content-end pe-3">
+        <!-- Notification Component -->
+        <app-notification-toast class="me-3"></app-notification-toast>
+        
         <a nz-dropdown [nzDropdownMenu]="menu" class="d-flex align-items-center text-black">
           Hello, {{ username }}
           <span class="ms-2" nz-icon nzType="down"></span>
