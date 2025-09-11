@@ -19,7 +19,6 @@ export class OverviewChartComponent implements OnInit {
       next: (response) => {
         if (response) {
           this.revenues = response;
-          console.log(this.revenues);
 
           // Định dạng ngày tháng dưới dạng DD-MM-YYYY
           const labels = this.revenues.map((revenue) =>

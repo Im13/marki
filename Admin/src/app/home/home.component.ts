@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   routeName = '';
   username = '';
   results: any[] = [];
+  user: User = JSON.parse(localStorage.getItem('user'));
 
   // Routes which will show search box
   allowedRoutes = ['/product', '/customers', '/orders'];
@@ -34,13 +35,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const user : User = JSON.parse(localStorage.getItem('user'));
-    this.username = user.displayName;
+    this.username = this.user.displayName;
 
     this.updateTitleAndHeader(this.activatedRoute);
-    
-    // Start SignalR connection
-    this.startSignalRConnection();
+
+    if(this.user)
+      this.signalRService.createHubConnection(this.user);
+    else
+      this.signalRService.stopConnection();
 
     // Lắng nghe sự thay đổi của route
     this.router.events
@@ -91,15 +93,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     // Stop SignalR connection when component is destroyed
     this.signalRService.stopConnection();
-  }
-
-  private async startSignalRConnection(): Promise<void> {
-    try {
-      await this.signalRService.startConnection();
-      console.log('SignalR connection established');
-    } catch (error) {
-      console.error('Failed to start SignalR connection:', error);
-    }
   }
 
   logout() {

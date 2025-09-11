@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder, HubConnectionState } from '@microsoft/signalr';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AccountService } from 'src/app/_service/account.service';
+import { User } from 'src/app/shared/_models/user';
 import { environment } from 'src/environments/environment';
 
 export interface NotificationData {
@@ -18,36 +20,26 @@ export interface NotificationData {
   providedIn: 'root'
 })
 export class SignalRService {
-  private hubConnection: HubConnection;
+  hubUrl = environment.hubUrl;
+  private hubConnection?: HubConnection;
   private notificationSubject = new BehaviorSubject<NotificationData | null>(null);
   public notification$ = this.notificationSubject.asObservable();
 
-  constructor(private accountService: AccountService) {
-    this.buildConnection();
-  }
+  constructor(private toastr: ToastrService) { }
 
-  private buildConnection() {
+  createHubConnection(user: User) {
     this.hubConnection = new HubConnectionBuilder()
-      .withUrl(`${environment.apiUrl}hubs/orderNotification`, {
-        accessTokenFactory: () => {
-          const token = localStorage.getItem('token');
-          return token || '';
-        }
+      .withUrl(this.hubUrl + 'orderNotification', {
+        accessTokenFactory: () => user.token
       })
       .withAutomaticReconnect()
       .build();
-  }
 
-  public async startConnection(): Promise<void> {
-    if (this.hubConnection.state === HubConnectionState.Disconnected) {
-      try {
-        await this.hubConnection.start();
-        console.log('SignalR connection started');
-        this.registerOnServerEvents();
-      } catch (error) {
-        console.error('Error starting SignalR connection:', error);
-      }
-    }
+    this.hubConnection.start().catch(error => console.log(error));
+
+    this.hubConnection.on('ReceiveNotification', (notification: any) => {
+      console.log('order received');
+    });
   }
 
   public async stopConnection(): Promise<void> {

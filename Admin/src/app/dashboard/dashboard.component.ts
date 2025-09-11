@@ -29,7 +29,6 @@ export class DashboardComponent implements OnInit {
         if(response) {
           this.revenueSummary = response;
         }
-        console.log(this.revenueSummary);
       },
       error: (error) => {
         console.error('Error fetching daily revenue:', error);
