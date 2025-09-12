@@ -2,10 +2,10 @@ using Core.Entities;
 using Core.Entities.Identity;
 using Core.Interfaces;
 using Infrastructure.Data;
-using Infrastructure.Extensions;
 using Infrastructure.Hubs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
+using API.Core.Constants;
 
 namespace Infrastructure.Services
 {
@@ -23,7 +23,7 @@ namespace Infrastructure.Services
         }
         public async Task CreateNotificationForAdminsAsync(string createdByUserId, string orderId)
         {
-            // 1. Tạo Notification
+            // 1. Create Notification
             var notification = new Notification
             {
                 Title = "New Order",
@@ -35,37 +35,34 @@ namespace Infrastructure.Services
             _storeContext.Notifications.Add(notification);
             await _storeContext.SaveChangesAsync();
 
-            // Lấy tất cả Admin và SuperAdmin
-            var admins = await _userManager.GetUsersInRolesAsync("Admin");
-            var superAdmins = await _userManager.GetUsersInRoleAsync("SuperAdmin");
+            // 2. Collect target users by roles (deduplicated)
+            var uniqueUserIds = new HashSet<int>();
+            var notificationUsers = new List<NotificationUser>();
 
-            var targetUsers = admins.Concat(superAdmins).ToList();
-
-            foreach (var user in targetUsers)
+            foreach (var role in RoleConstants.ORDER_NOTIFICATION_ROLES)
             {
-                _storeContext.NotificationUsers.Add(new NotificationUser
+                var usersInRole = await _userManager.GetUsersInRoleAsync(role);
+                foreach (var user in usersInRole)
                 {
-                    NotificationId = notification.Id,
-                    UserId = user.Id
-                });
+                    if (uniqueUserIds.Add(user.Id))
+                    {
+                        notificationUsers.Add(new NotificationUser
+                        {
+                            NotificationId = notification.Id,
+                            UserId = user.Id
+                        });
+                    }
+                }
+            }
+
+            if (notificationUsers.Count > 0)
+            {
+                _storeContext.NotificationUsers.AddRange(notificationUsers);
             }
             await _storeContext.SaveChangesAsync();
 
-            // Tạo notification object chi tiết hơn cho SignalR
-            var notificationData = new
-            {
-                Type = "NewOrderCreated",
-                Id = notification.Id,
-                Title = notification.Title,
-                Message = notification.Message,
-                OrderId = orderId,
-                CreatedAt = notification.CreatedAt,
-                CreatedBy = createdByUserId
-            };
-
-            // Gửi notification đến các groups
-            await _hubContext.Clients.Groups("Admin", "SuperAdmin")
-                .SendAsync("ReceiveNotification", notificationData);
+            // Send notification to groups
+            await _hubContext.Clients.Groups(RoleConstants.ORDER_NOTIFICATION_ROLES).SendAsync("ReceiveNotification", notification);
         }
     }
 }

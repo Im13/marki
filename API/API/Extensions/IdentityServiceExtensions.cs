@@ -39,16 +39,29 @@ namespace API.Extensions
                         ValidateAudience = false
                     };
                     
+                    // Enable JWT authentication for SignalR
                     options.Events = new JwtBearerEvents
                     {
                         OnMessageReceived = context =>
                         {
                             var accessToken = context.Request.Query["access_token"];
-
                             var path = context.HttpContext.Request.Path;
-                            if (!string.IsNullOrEmpty(accessToken) && (path.StartsWithSegments("/hubs")))
+                            
+                            if (path.StartsWithSegments("/hubs"))
                             {
-                                context.Token = accessToken;
+                                if (!string.IsNullOrEmpty(accessToken))
+                                {
+                                    context.Token = accessToken;
+                                }
+                                else
+                                {
+                                    // Try to get token from Authorization header
+                                    var authHeader = context.Request.Headers["Authorization"].FirstOrDefault();
+                                    if (!string.IsNullOrEmpty(authHeader) && authHeader.StartsWith("Bearer "))
+                                    {
+                                        context.Token = authHeader.Substring("Bearer ".Length).Trim();
+                                    }
+                                }
                             }
                             return Task.CompletedTask;
                         }

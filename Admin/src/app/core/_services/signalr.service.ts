@@ -33,13 +33,28 @@ export class SignalRService {
         accessTokenFactory: () => user.token
       })
       .withAutomaticReconnect()
-      .build();
+      .build(); 
 
-    this.hubConnection.start().catch(error => console.log(error));
+    // register handlers BEFORE starting to avoid missing early messages
+    this.registerOnServerEvents();
 
-    this.hubConnection.on('ReceiveNotification', (notification: any) => {
-      console.log('order received');
-    });
+    this.hubConnection
+      .start()
+      .then(async () => { 
+        console.log('SignalR hub connected');
+        // proactively join groups based on user roles (server also auto-joins in OnConnected)
+        const joinable = ['Admin', 'SuperAdmin', 'Employee'];
+        const rolesToJoin = (user?.roles || []).filter(r => joinable.includes(r));
+        for (const role of rolesToJoin) {
+          try {
+            await this.joinGroup(role);
+            console.log('Joined group:', role);
+          } catch (e) {
+            console.log('Join group failed', role, e);
+          }
+        }
+      })
+      .catch(error => console.log('SignalR hub start error', error));
   }
 
   public async stopConnection(): Promise<void> {
@@ -59,6 +74,9 @@ export class SignalRService {
       console.log('New order notification:', notification);
       this.notificationSubject.next(notification);
     });
+
+    this.hubConnection.onclose(err => console.log('SignalR connection closed', err));
+    this.hubConnection.onreconnected(id => console.log('SignalR reconnected', id));
   }
 
   public async joinGroup(groupName: string): Promise<void> {
