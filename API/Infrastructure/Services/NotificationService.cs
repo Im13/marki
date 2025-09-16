@@ -7,6 +7,7 @@ using Infrastructure.Data;
 using Infrastructure.Hubs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Services
 {
@@ -74,6 +75,38 @@ namespace Infrastructure.Services
 
             // Send notification to order notification group (single group to avoid duplicates)
             await _hubContext.Clients.Groups("OrderNotifications").SendAsync("NewOrderCreated", notificationDto);
+        }
+
+        public async Task<IReadOnlyList<Core.DTOs.NotificationDTO>> GetMyNotificationsAsync(int userId, int take = 50)
+        {
+            var query = from nu in _storeContext.NotificationUsers.AsNoTracking()
+                        join n in _storeContext.Notifications.AsNoTracking() on nu.NotificationId equals n.Id
+                        where nu.UserId == userId
+                        orderby n.CreatedAt descending
+                        select new Core.DTOs.NotificationDTO
+                        {
+                            Id = n.Id,
+                            Title = n.Title,
+                            Message = n.Message,
+                            CreatedAt = n.CreatedAt,
+                            CreatedByUserId = n.CreatedByUserId,
+                            IsRead = nu.IsRead
+                        };
+
+            return await query.Take(take).ToListAsync();
+        }
+
+        public async Task MarkAsReadAsync(Guid notificationId, int userId)
+        {
+            var nu = await _storeContext.NotificationUsers
+                .FirstOrDefaultAsync(x => x.NotificationId == notificationId && x.UserId == userId);
+            if (nu == null) return;
+
+            if (!nu.IsRead)
+            {
+                nu.IsRead = true;
+                await _storeContext.SaveChangesAsync();
+            }
         }
     }
 }

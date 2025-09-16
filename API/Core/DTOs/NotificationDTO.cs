@@ -7,5 +7,6 @@ namespace Core.DTOs
         public string Message { get; set; }
         public DateTime CreatedAt { get; set; }
         public string CreatedByUserId { get; set; }
+        public bool IsRead { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder, HubConnectionState } from '@microsoft/signalr';
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { User } from 'src/app/shared/_models/user';
 import { environment } from 'src/environments/environment';
 
@@ -23,6 +23,10 @@ export class SignalRService {
   private hubConnection?: HubConnection;
   private notificationSubject = new BehaviorSubject<NotificationData | null>(null);
   public notification$ = this.notificationSubject.asObservable();
+
+  // Maintain a live list of notifications for dashboard
+  private notificationsSubject = new BehaviorSubject<NotificationData[]>([]);
+  public notifications$ = this.notificationsSubject.asObservable();
 
   constructor(private toastr: ToastrService) { }
 
@@ -50,37 +54,17 @@ export class SignalRService {
   }
 
   private registerOnServerEvents(): void {
-    this.hubConnection.on('ReceiveNotification', (notification: NotificationData) => {
-      console.log('Received notification:', notification);
-      this.notificationSubject.next(notification);
-    });
-
     this.hubConnection.on('NewOrderCreated', (notification: NotificationData) => {
-      this.toastr.success(notification.message, notification.title, { timeOut: 10000, closeButton: true, progressBar: true });
+      this.toastr.success(notification.message, notification.title, { timeOut: 5000, closeButton: true, progressBar: true });
       this.notificationSubject.next(notification);
+
+      // Prepend to list and cap length
+      const current = this.notificationsSubject.value;
+      const updated = [notification, ...current].slice(0, 50);
+      this.notificationsSubject.next(updated);
     });
 
     this.hubConnection.onclose(err => console.log('SignalR connection closed', err));
     this.hubConnection.onreconnected(id => console.log('SignalR reconnected', id));
-  }
-
-  public async joinGroup(groupName: string): Promise<void> {
-    if (this.hubConnection.state === HubConnectionState.Connected) {
-      await this.hubConnection.invoke('JoinGroup', groupName);
-    }
-  }
-
-  public async leaveGroup(groupName: string): Promise<void> {
-    if (this.hubConnection.state === HubConnectionState.Connected) {
-      await this.hubConnection.invoke('LeaveGroup', groupName);
-    }
-  }
-
-  public getConnectionState(): HubConnectionState {
-    return this.hubConnection.state;
-  }
-
-  public isConnected(): boolean {
-    return this.hubConnection.state === HubConnectionState.Connected;
   }
 }
