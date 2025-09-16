@@ -56,7 +56,7 @@ export class SignalRService {
     });
 
     this.hubConnection.on('NewOrderCreated', (notification: NotificationData) => {
-      console.log('New order notification:', notification);
+      this.toastr.success(notification.message, notification.title, { timeOut: 10000, closeButton: true, progressBar: true });
       this.notificationSubject.next(notification);
     });
 

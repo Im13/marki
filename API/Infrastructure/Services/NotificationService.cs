@@ -27,8 +27,8 @@ namespace Infrastructure.Services
             // 1. Create Notification
             var notification = new Notification
             {
-                Title = "New Order",
-                Message = $"Order #{orderId} has been placed.",
+                Title = "Đơn hàng mới",
+                Message = $"Đơn hàng #{orderId} đã được đặt.",
                 CreatedAt = DateTime.UtcNow,
                 CreatedByUserId = createdByUserId
             };
@@ -72,11 +72,8 @@ namespace Infrastructure.Services
                 CreatedByUserId = notification.CreatedByUserId
             };
 
-            // Send notification to each role group
-            foreach (var role in RoleConstants.ORDER_NOTIFICATION_ROLES)
-            {
-                await _hubContext.Clients.Groups(role).SendAsync("ReceiveNotification", notificationDto);
-            } 
+            // Send notification to order notification group (single group to avoid duplicates)
+            await _hubContext.Clients.Groups("OrderNotifications").SendAsync("NewOrderCreated", notificationDto);
         }
     }
 }
