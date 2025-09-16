@@ -1,6 +1,6 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.SignalR;
-using API.Core.Constants;
+using Core.Constants;
 
 namespace Infrastructure.Hubs
 {

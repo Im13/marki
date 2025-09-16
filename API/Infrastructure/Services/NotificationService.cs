@@ -1,11 +1,12 @@
 using Core.Entities;
 using Core.Entities.Identity;
 using Core.Interfaces;
+using Core.DTOs;
+using Core.Constants;
 using Infrastructure.Data;
 using Infrastructure.Hubs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
-using API.Core.Constants;
 
 namespace Infrastructure.Services
 {
@@ -61,8 +62,21 @@ namespace Infrastructure.Services
             }
             await _storeContext.SaveChangesAsync();
 
-            // Send notification to groups
-            await _hubContext.Clients.Groups(RoleConstants.ORDER_NOTIFICATION_ROLES).SendAsync("ReceiveNotification", notification);
+            // Create DTO for SignalR
+            var notificationDto = new NotificationDTO
+            {
+                Id = notification.Id,
+                Title = notification.Title,
+                Message = notification.Message,
+                CreatedAt = notification.CreatedAt,
+                CreatedByUserId = notification.CreatedByUserId
+            };
+
+            // Send notification to each role group
+            foreach (var role in RoleConstants.ORDER_NOTIFICATION_ROLES)
+            {
+                await _hubContext.Clients.Groups(role).SendAsync("ReceiveNotification", notificationDto);
+            } 
         }
     }
 }

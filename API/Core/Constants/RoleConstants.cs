@@ -1,4 +1,4 @@
-namespace API.Core.Constants
+namespace Core.Constants
 {
     public static class RoleConstants
     {

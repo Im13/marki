@@ -1,4 +1,4 @@
-using API.Core.Constants;
+using Core.Constants;
 using API.Core.Enums;
 
 namespace Core.Extensions
