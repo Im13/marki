@@ -16,6 +16,7 @@ namespace Infrastructure.Services
         private readonly StoreContext _storeContext;
         private readonly IHubContext<OrderNotificationHub> _hubContext;
         private readonly UserManager<AppUser> _userManager;
+        private static readonly TimeZoneInfo VietnamTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Asia/Ho_Chi_Minh");
 
         public NotificationService(StoreContext storeContext, IHubContext<OrderNotificationHub> hubContext, UserManager<AppUser> userManager)
         {
@@ -30,7 +31,7 @@ namespace Infrastructure.Services
             {
                 Title = "Đơn hàng mới",
                 Message = $"Đơn hàng #{orderId} đã được đặt.",
-                CreatedAt = DateTime.UtcNow,
+                CreatedAt = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, VietnamTimeZone),
                 CreatedByUserId = createdByUserId
             };
 

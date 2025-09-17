@@ -18,6 +18,7 @@ namespace API.Controllers
             _userManager = userManager;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult> GetMy(int take = 50)
         {
@@ -33,9 +34,9 @@ namespace API.Controllers
         [HttpPost("{notificationId}/read")]
         public async Task<ActionResult> MarkAsRead(Guid notificationId)
         {
-            var userIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-            if (string.IsNullOrEmpty(userIdClaim)) return Unauthorized();
-            if (!int.TryParse(userIdClaim, out var userId)) return Unauthorized();
+            var userIdString = _userManager.GetUserId(User);
+            if (string.IsNullOrEmpty(userIdString)) return Unauthorized();
+            if (!int.TryParse(userIdString, out var userId)) return Unauthorized();
 
             await _notificationService.MarkAsReadAsync(notificationId, userId);
             return NoContent();
