@@ -4,7 +4,7 @@ import { ShopeeOrder } from 'src/app/shared/_models/shopeeOrder';
 import { ShopeeOrderParams } from 'src/app/shared/_models/shopeeOrderParams';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { SearchService } from 'src/app/core/services/search.service';
+import { SearchService } from 'src/app/core/_services/search.service';
 
 @Component({
   selector: 'app-shopee-orders',

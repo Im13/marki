@@ -7,7 +7,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { AddProductModalComponent } from './add-product-modal/add-product-modal.component';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { ToastrService } from 'ngx-toastr';
-import { SearchService } from 'src/app/core/services/search.service';
+import { SearchService } from 'src/app/core/_services/search.service';
 
 @Component({
   selector: 'app-product-list',

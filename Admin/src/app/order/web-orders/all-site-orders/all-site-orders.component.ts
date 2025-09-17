@@ -6,7 +6,7 @@ import { OrderParams } from 'src/app/shared/_models/order/orderParams';
 import { EditOrderModalComponent } from '../edit-order-modal/edit-order-modal.component';
 import { UpdateStatusDTO } from 'src/app/shared/_models/order/updateStatusDTO';
 import { ToastrService } from 'ngx-toastr';
-import { SearchService } from 'src/app/core/services/search.service';
+import { SearchService } from 'src/app/core/_services/search.service';
 import { WebsiteOrder } from 'src/app/shared/_models/website-order';
 import { OrderWithStatusParams } from 'src/app/shared/_models/order/orderWithStatusParams';
 import { ORDER_STATUSES } from 'src/app/shared/_constants/order-status.const';

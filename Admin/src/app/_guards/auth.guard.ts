@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { AccountService } from '../_service/account.service';
+import { AccountService } from '../core/_services/account.service';
 import { map } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 

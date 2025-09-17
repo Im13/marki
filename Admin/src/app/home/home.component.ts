@@ -3,7 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs';
 import { User } from '../shared/_models/user';
-import { AccountService } from '../_service/account.service';
+import { AccountService } from '../core/_services/account.service';
 import { SignalRService } from '../core/_services/signalr.service';
 
 @Component({

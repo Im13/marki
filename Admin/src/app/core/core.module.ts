@@ -33,6 +33,8 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptorService } from '../_authenticate/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -113,6 +115,9 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
     NzAutocompleteModule,
     NzListModule,
     NzDrawerModule
+  ],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
   ]
 })
 export class CoreModule { }
