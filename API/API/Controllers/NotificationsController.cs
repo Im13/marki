@@ -1,5 +1,8 @@
+using API.Extensions;
+using Core.Entities.Identity;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -8,20 +11,22 @@ namespace API.Controllers
     public class NotificationsController : BaseApiController
     {
         private readonly INotificationService _notificationService;
-        public NotificationsController(INotificationService notificationService)
+        private readonly UserManager<AppUser> _userManager;
+        public NotificationsController(INotificationService notificationService, UserManager<AppUser> userManager)
         {
             _notificationService = notificationService;
+            _userManager = userManager;
         }
 
         [HttpGet]
         public async Task<ActionResult> GetMy(int take = 50)
         {
-            // Assuming NameIdentifier holds int user id in claims
-            var userIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-            if (string.IsNullOrEmpty(userIdClaim)) return Unauthorized();
-            if (!int.TryParse(userIdClaim, out var userId)) return Unauthorized();
+            var user = await _userManager.FindUserByClaimsPrincipleWithAddress(User);
 
-            var result = await _notificationService.GetMyNotificationsAsync(userId, take);
+            if (user == null) return Unauthorized(new { message = "User not found" });
+
+            var result = await _notificationService.GetMyNotificationsAsync(user.Id, take);
+            
             return Ok(result);
         }
 

@@ -77,13 +77,13 @@ namespace Infrastructure.Services
             await _hubContext.Clients.Groups("OrderNotifications").SendAsync("NewOrderCreated", notificationDto);
         }
 
-        public async Task<IReadOnlyList<Core.DTOs.NotificationDTO>> GetMyNotificationsAsync(int userId, int take = 50)
+        public async Task<IReadOnlyList<NotificationDTO>> GetMyNotificationsAsync(int userId, int take = 50)
         {
             var query = from nu in _storeContext.NotificationUsers.AsNoTracking()
                         join n in _storeContext.Notifications.AsNoTracking() on nu.NotificationId equals n.Id
                         where nu.UserId == userId
                         orderby n.CreatedAt descending
-                        select new Core.DTOs.NotificationDTO
+                        select new NotificationDTO
                         {
                             Id = n.Id,
                             Title = n.Title,
