@@ -1,4 +1,119 @@
-<div class="border border-danger row px-4 py-4">
-    <div class="col-4 border bg-white">d</div>
-    <div class="col-8 border bg-white">d</div>
-</div>
+<div class="row px-5 py-4 align-items-start">
+    <div class="col-4 px-4 bg-white">
+        <div class="bg-white">
+            <div class="row py-3">
+                <div class="col-3 d-flex align-items-center justify-content-center p-0">
+                    <nz-avatar [nzSize]="80" nzIcon="user"
+                        class="d-flex align-items-center justify-content-center"></nz-avatar>
+                </div>
+
+                <div class="col-9 p-0">
+                    <p class="m-0 fw-semibold">BACH NGUYEN</p>
+                    <p class="mt-1 mb-2 text-body-secondary">bach.nguyenluongmsh@gmail.com</p>
+                    <button nz-button nzType="default">Thay đổi ảnh đại diện</button>
+                </div>
+            </div>
+
+            <nz-divider class="m-0 p-0"></nz-divider>
+
+            <div class="row py-2">
+                <p class="fw-semibold m-0 p-0">Ngôn ngữ & Múi giờ</p>
+                <p class="m-0 my-1 p-0">Ngôn ngữ</p>
+                <nz-select ngModel="vietnamese" class="my-2">
+                    <nz-option nzValue="vietnamese" nzLabel="Tiếng Việt"></nz-option>
+                    <nz-option nzValue="english" nzLabel="Tiếng Anh"></nz-option>
+                </nz-select>
+
+                <p class="m-0 p-0">Múi giờ</p>
+                <nz-select ngModel="gmt7" class="my-2">
+                    <nz-option nzValue="gmt7" nzLabel="GMT+7"></nz-option>
+                    <nz-option nzValue="gmt8" nzLabel="GMT+8"></nz-option>
+                </nz-select>
+            </div>
+
+            <div class="row pb-4">
+                <button nz-button nzType="primary" nzDanger class="w-100 p-0 m-0">
+                    Đăng xuất khỏi tất cả thiết bị
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-8 ps-2 pe-0">
+        <div class="bg-white px-4">
+            <div class="row py-3">
+                <div class="col-4">
+                    <p class="m-0 fw-semibold">Thông tin cơ bản</p>
+                    <p class="my-1 text-body-secondary">Các thông tin sử dụng để đăng nhập hệ thống</p>
+                </div>
+
+                <div class="col-8 p-0">
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="mb-1 mt-0">Họ:</p>
+                            <input nz-input placeholder="Surname" [(ngModel)]="surname" type="text" />
+                        </div>
+                        <div class="col-6">
+                            <p class="mb-1 mt-0">Tên:</p>
+                            <input nz-input placeholder="Name" [(ngModel)]="name" type="text" />
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <p class="mb-1 mt-0">Tên đăng nhập:</p>
+                            <input nz-input placeholder="Username" [(ngModel)]="username" type="text" />
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <p class="mb-1 mt-0">Email:</p>
+                            <input nz-input placeholder="Email" [(ngModel)]="email" type="text" />
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <p class="mb-1 mt-0">Số điện thoại:</p>
+                            <input nz-input placeholder="Phone number" [(ngModel)]="phoneNumber" type="text" />
+                        </div>
+                    </div>
+
+                    <button nz-button nzType="default" class="m-0 my-3">
+                        Lưu thay đổi
+                    </button>
+                </div>
+            </div>
+
+            <nz-divider class="m-0 p-0"></nz-divider>
+
+            <div class="row py-3">
+                <div class="col-4">
+                    <p class="m-0 fw-semibold">Liên kết tài khoản</p>
+                    <p class="my-1 text-body-secondary">Liên kết tài khoản tới các mạng xã hội</p>
+                </div>
+
+                <div class="col-8 p-0">
+                    <button nz-button nzType="default" class="m-0 my-3 w-100">
+                        Liên kết tài khoản Facebook
+                    </button>
+                </div>
+            </div>
+
+            <nz-divider class="m-0 p-0"></nz-divider>
+
+            <div class="row py-3">
+                <div class="col-4">
+                    <p class="m-0 fw-semibold">Mật khẩu</p>
+                    <p class="my-1 text-body-secondary">Thay đổi mật khẩu tài khoản</p>
+                </div>
+
+                <div class="col-8 p-0">
+                    <button nz-button nzType="primary" class="m-0 my-3">
+                        Đổi mật khẩu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>

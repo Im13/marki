@@ -35,6 +35,8 @@ import { NzListModule } from 'ng-zorro-antd/list';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from '../_authenticate/auth-interceptor.service';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 @NgModule({
   declarations: [
@@ -76,7 +78,9 @@ import { AuthInterceptorService } from '../_authenticate/auth-interceptor.servic
     NzSwitchModule,
     NzAutocompleteModule,
     NzListModule,
-    NzDrawerModule
+    NzDrawerModule,
+    NzAvatarModule,
+    NzDividerModule
   ],
   exports: [
     ThousandSeparatorPipe,
@@ -114,7 +118,9 @@ import { AuthInterceptorService } from '../_authenticate/auth-interceptor.servic
     NzSwitchModule,
     NzAutocompleteModule,
     NzListModule,
-    NzDrawerModule
+    NzDrawerModule,
+    NzAvatarModule,
+    NzDividerModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
