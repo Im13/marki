@@ -1,6 +1,6 @@
 import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
-import { User } from 'src/app/shared/_models/user';
+import { User } from 'src/app/_shared/_models/user';
 import { ToastrService } from 'ngx-toastr';
 import { SettingsService } from '../settings.service';
 

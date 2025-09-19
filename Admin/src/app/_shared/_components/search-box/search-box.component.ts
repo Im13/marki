@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
-import { SearchService } from 'src/app/core/_services/search.service';
+import { SearchService } from 'src/app/_core/_services/search.service';
 
 @Component({
   selector: 'app-search-box',

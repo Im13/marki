@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder, HubConnectionState } from '@microsoft/signalr';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject } from 'rxjs';
-import { User } from 'src/app/shared/_models/user';
+import { User } from 'src/app/_shared/_models/user';
 import { environment } from 'src/environments/environment';
 
 export interface NotificationData {

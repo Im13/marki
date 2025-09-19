@@ -1,7 +1,7 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
-import { SlideImage } from 'src/app/shared/_models/slideImages';
+import { SlideImage } from 'src/app/_shared/_models/slideImages';
 import { WebsiteService } from '../../website.service';
 import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
 import { ToastrService } from 'ngx-toastr';

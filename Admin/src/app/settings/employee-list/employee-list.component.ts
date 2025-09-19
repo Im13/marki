@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { SettingsService } from '../settings.service';
-import { User } from 'src/app/shared/_models/user';
+import { User } from 'src/app/_shared/_models/user';
 import { RolesModalComponent } from '../roles-modal/roles-modal.component';
+import { EditEmployeeModalComponent } from './edit-employee-modal/edit-employee-modal.component';
 
 @Component({
   selector: 'app-employee-list',
@@ -15,23 +16,32 @@ export class EmployeeListComponent implements OnInit {
     'SuperAdmin',
     'Admin',
     'Customer'
-  ]
-  
-  constructor(private settingsService: SettingsService, private modalService: NzModalService) {}
+  ];
+  loading: boolean = false;
+
+  constructor(private settingsService: SettingsService, private modalServices: NzModalService) { }
 
   ngOnInit(): void {
     this.getUsersWithRoles();
   }
 
   getUsersWithRoles() {
+    this.loading = true;
     this.settingsService.getUsersWithRoles().subscribe({
-      next: users => this.users = users
-    })
+      next: users => {
+        this.users = users;
+        this.loading = false;
+      },
+      error: err => {
+        console.log(err);
+        this.loading = false;
+      }
+    });
   }
 
   showEditRolesModal(user: User) {
-    const modal = this.modalService.create({
-      nzTitle: 'Edit Roles for ' + user.username, 
+    const modal = this.modalServices.create({
+      nzTitle: 'Edit Roles for ' + user.username,
       nzContent: RolesModalComponent,
       nzData: {
         username: user.username,
@@ -39,6 +49,17 @@ export class EmployeeListComponent implements OnInit {
         selectedRoles: [...user.roles],
         user: user
       }
+    });
+
+    modal.afterClose.subscribe(() => this.getUsersWithRoles());
+  }
+
+  addEmployee() {
+    const modal = this.modalServices.create<EditEmployeeModalComponent>({
+      nzTitle: 'Thêm nhân viên',
+      nzContent: EditEmployeeModalComponent,
+      nzCentered: true,
+      nzWidth: '40vh'
     });
 
     modal.afterClose.subscribe(() => this.getUsersWithRoles());

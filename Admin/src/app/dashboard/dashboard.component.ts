@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RevenueSummary } from '../shared/_models/dashboard';
+import { RevenueSummary } from '../_shared/_models/dashboard';
 import { DashboardService } from './dashboard.service';
 
 @Component({

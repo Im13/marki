@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { endOfMonth, startOfMonth, subDays, subMonths } from 'date-fns';
 import { DashboardService } from '../dashboard.service';
-import { RevenueSummary } from 'src/app/shared/_models/dashboard';
+import { RevenueSummary } from 'src/app/_shared/_models/dashboard';
 
 @Component({
   selector: 'app-overview-head',

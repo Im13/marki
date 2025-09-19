@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { endOfMonth, startOfMonth, subDays, subMonths } from 'date-fns';
-import { SocialCampaign } from 'src/app/shared/_models/meta-ads/SocialCampaign';
+import { SocialCampaign } from 'src/app/_shared/_models/meta-ads/SocialCampaign';
 import { StatisticsService } from '../statistics.service';
 
 export interface TreeNodeInterface {

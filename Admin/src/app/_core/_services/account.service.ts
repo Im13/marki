@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { User } from '../../shared/_models/user';
+import { User } from '../../_shared/_models/user';
+import { Account } from 'src/app/_shared/_models/account/account';
 
 @Injectable({
   providedIn: 'root'
@@ -42,5 +43,14 @@ export class AccountService {
 
   getDecodedToken(token: string) {
     return JSON.parse(atob(token.split(".")[1]))
+  }
+
+  createEmployee(employee: Account) {
+    return this.http.post(this.baseUrl + 'account/register-employee', employee);
+  }
+
+  // Not implemented yet
+  editEmployee(employee: Account) {
+    return this.http.put(this.baseUrl + 'account/edit-employee', employee);
   }
 }

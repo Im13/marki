@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { NzSelectComponent } from 'ng-zorro-antd/select';
 import { ProductService } from 'src/app/product/product-service.service';
-import { ProductParams } from 'src/app/shared/_models/productParams';
-import { Product } from 'src/app/shared/_models/products';
-import { ProductSKUDetails } from 'src/app/shared/_models/productSKUDetails';
-import { OrderItem } from 'src/app/shared/_models/website-order';
+import { ProductParams } from 'src/app/_shared/_models/productParams';
+import { Product } from 'src/app/_shared/_models/products';
+import { ProductSKUDetails } from 'src/app/_shared/_models/productSKUDetails';
+import { OrderItem } from 'src/app/_shared/_models/website-order';
 
 @Component({
   selector: 'app-product-items',

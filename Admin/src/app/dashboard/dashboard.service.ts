@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { RevenueSummary } from '../shared/_models/dashboard';
+import { RevenueSummary } from '../_shared/_models/dashboard';
 
 @Injectable({
   providedIn: 'root'

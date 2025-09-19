@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Customer } from 'src/app/shared/_models/customer';
-import { ProductSKUDetails } from 'src/app/shared/_models/productSKUDetails';
+import { Customer } from 'src/app/_shared/_models/customer';
+import { ProductSKUDetails } from 'src/app/_shared/_models/productSKUDetails';
 import { OrderService } from '../order.service';
-import { OrderSKUItems } from 'src/app/shared/_models/orderSKUItems';
+import { OrderSKUItems } from 'src/app/_shared/_models/orderSKUItems';
 import { ToastrService } from 'ngx-toastr';
 import { CheckoutComponent } from './order-information/checkout/checkout.component';
-import { Province } from 'src/app/shared/_models/address/province';
+import { Province } from 'src/app/_shared/_models/address/province';
 import { DatePipe } from '@angular/common';
-import { OrderItem, WebsiteOrder } from 'src/app/shared/_models/website-order';
+import { OrderItem, WebsiteOrder } from 'src/app/_shared/_models/website-order';
 
 @Component({
   selector: 'app-add-order',

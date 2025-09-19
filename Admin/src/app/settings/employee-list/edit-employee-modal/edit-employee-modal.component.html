@@ -1,0 +1,33 @@
+<form [formGroup]="addForm">
+    <div class="modal-body">
+        <div class="d-flex align-items-center justify-content-center">
+            <nz-avatar [nzSize]="80" nzIcon="user" class="d-flex align-items-center justify-content-center"></nz-avatar>
+        </div>
+
+        <div class="mt-3">
+            <label class="mb-1 mt-0">Tên hiển thị:</label>
+            <input nz-input placeholder="Nhập Tên hiển thị" type="text" id="displayName" formControlName="displayName"/>
+        </div>
+
+        <div class="mt-3">
+            <label class="mb-1 mt-0">Email:</label>
+            <input nz-input placeholder="Nhập Email" type="email" id="email" formControlName="email"/>
+        </div>
+
+        <div class="mt-3">
+            <label class="mb-1 mt-0">Mật khẩu (Phải chứa chữ viết hoa và ký tự đặc biệt):</label>
+            <input nz-input placeholder="Nhập Mật khẩu" type="password" id="password" formControlName="password"/>
+        </div>
+
+        <div class="mt-3">
+            <label class="mb-1 mt-0">Xác nhận lại mật khẩu:</label>
+            <input nz-input placeholder="Nhập lại Mật khẩu" type="password" id="confirmPassword" formControlName="confirmPassword"/>
+        </div>
+    </div>
+    <div *nzModalFooter>
+        <button [disabled]="!addForm.valid" nz-button nzType="primary" type="submit" (click)="onSubmit()"
+            [nzLoading]="isSubmitting">
+            Lưu
+        </button>
+    </div>
+</form>

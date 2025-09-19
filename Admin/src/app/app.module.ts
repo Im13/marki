@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CoreModule } from './core/core.module';
+import { CoreModule } from './_core/core.module';
 import { OrderModule } from './order/order.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
@@ -16,8 +16,8 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import en from '@angular/common/locales/en';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import { HasRoleDirective } from './core/_directives/has-role.directive';
-import { SharedModule } from './shared/shared.module';
+import { SharedModule } from './_shared/shared.module';
+import { HasRoleDirective } from './_core/_directives/has-role.directive';
 
 registerLocaleData(en);
 

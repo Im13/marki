@@ -1,15 +1,15 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { OrderService } from '../../order.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { OrderStatus } from 'src/app/shared/_models/orderStatus';
-import { OrderParams } from 'src/app/shared/_models/order/orderParams';
+import { OrderStatus } from 'src/app/_shared/_models/orderStatus';
+import { OrderParams } from 'src/app/_shared/_models/order/orderParams';
 import { EditOrderModalComponent } from '../edit-order-modal/edit-order-modal.component';
-import { UpdateStatusDTO } from 'src/app/shared/_models/order/updateStatusDTO';
+import { UpdateStatusDTO } from 'src/app/_shared/_models/order/updateStatusDTO';
 import { ToastrService } from 'ngx-toastr';
-import { SearchService } from 'src/app/core/_services/search.service';
-import { WebsiteOrder } from 'src/app/shared/_models/website-order';
-import { OrderWithStatusParams } from 'src/app/shared/_models/order/orderWithStatusParams';
-import { ORDER_STATUSES } from 'src/app/shared/_constants/order-status.const';
+import { WebsiteOrder } from 'src/app/_shared/_models/website-order';
+import { OrderWithStatusParams } from 'src/app/_shared/_models/order/orderWithStatusParams';
+import { ORDER_STATUSES } from 'src/app/_shared/_constants/order-status.const';
+import { SearchService } from 'src/app/_core/_services/search.service';
 
 @Component({
   selector: 'app-all-site-orders',

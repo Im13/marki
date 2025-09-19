@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ShopeeOrderParams } from '../shared/_models/shopeeOrderParams';
+import { ShopeeOrderParams } from '../_shared/_models/shopeeOrderParams';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { environment } from 'src/environments/environment';
-import { ShopeeOrderProducts } from '../shared/_models/shopeeOrderProducts';
+import { ShopeeOrderProducts } from '../_shared/_models/shopeeOrderProducts';
 import { Observable } from 'rxjs';
-import { SocialCampaign } from '../shared/_models/meta-ads/SocialCampaign';
+import { SocialCampaign } from '../_shared/_models/meta-ads/SocialCampaign';
 
 @Injectable({
   providedIn: 'root'
