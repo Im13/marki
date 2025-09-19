@@ -23,7 +23,6 @@ export class EmployeeListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsersWithRoles();
-    this.addEmployee();
   }
 
   getUsersWithRoles() {
