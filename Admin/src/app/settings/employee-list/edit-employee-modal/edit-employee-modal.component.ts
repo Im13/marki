@@ -12,8 +12,7 @@ export class EditEmployeeModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.addForm = new FormGroup({
-      surname: new FormControl('', Validators.required),
-      name: new FormControl('', Validators.required),
+      displayName: new FormControl('', Validators.required),
       username: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       phoneNumber: new FormControl('', Validators.required),

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { CustomerParams } from 'src/app/shared/_models/customer/customerParams';
-import { SlideImage } from 'src/app/shared/_models/slideImages';
+import { CustomerParams } from 'src/app/_shared/_models/customer/customerParams';
+import { SlideImage } from 'src/app/_shared/_models/slideImages';
 import { WebsiteService } from '../../website.service';
 import { ToastrService } from 'ngx-toastr';
 import { NzModalService } from 'ng-zorro-antd/modal';

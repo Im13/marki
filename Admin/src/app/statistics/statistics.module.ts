@@ -5,8 +5,8 @@ import { ShopeeRevenueComponent } from './shopee-revenue/shopee-revenue.componen
 import { StatisticsRoutingModule } from './statistics-routing.module';
 import { RouterModule } from '@angular/router';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { CoreModule } from '../core/core.module';
-import { SharedModule } from '../shared/shared.module';
+import { CoreModule } from '../_core/core.module';
+import { SharedModule } from '../_shared/shared.module';
 import { MetaAdsDashboardComponent } from './meta-ads-dashboard/meta-ads-dashboard.component';
 
 

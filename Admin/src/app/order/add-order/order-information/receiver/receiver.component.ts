@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormGroupDirective } from '@angular/forms';
 import { OrderService } from 'src/app/order/order.service';
-import { District } from 'src/app/shared/_models/address/district';
-import { Province } from 'src/app/shared/_models/address/province';
-import { Ward } from 'src/app/shared/_models/address/ward';
+import { District } from 'src/app/_shared/_models/address/district';
+import { Province } from 'src/app/_shared/_models/address/province';
+import { Ward } from 'src/app/_shared/_models/address/ward';
 
 @Component({
   selector: 'app-receiver',

@@ -1,8 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Customer } from 'src/app/shared/_models/customer';
+import { Customer } from 'src/app/_shared/_models/customer';
 import { CustomerService } from '../../customer.service';
-import { CustomerParams } from 'src/app/shared/_models/customer/customerParams';
-import { SearchService } from 'src/app/core/_services/search.service';
+import { CustomerParams } from 'src/app/_shared/_models/customer/customerParams';
+import { SearchService } from 'src/app/_core/_services/search.service';
 
 @Component({
   selector: 'app-all-customers',

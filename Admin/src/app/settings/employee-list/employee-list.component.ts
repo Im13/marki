@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { SettingsService } from '../settings.service';
-import { User } from 'src/app/shared/_models/user';
+import { User } from 'src/app/_shared/_models/user';
 import { RolesModalComponent } from '../roles-modal/roles-modal.component';
 import { EditEmployeeModalComponent } from './edit-employee-modal/edit-employee-modal.component';
 

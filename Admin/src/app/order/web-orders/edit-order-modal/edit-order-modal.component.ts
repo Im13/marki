@@ -1,12 +1,12 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
-import { OrderItem, WebsiteOrder } from 'src/app/shared/_models/website-order';
+import { OrderItem, WebsiteOrder } from 'src/app/_shared/_models/website-order';
 import { OrderService } from '../../order.service';
-import { Province } from 'src/app/shared/_models/address/province';
-import { OrderStatus } from 'src/app/shared/_models/orderStatus';
+import { Province } from 'src/app/_shared/_models/address/province';
+import { OrderStatus } from 'src/app/_shared/_models/orderStatus';
 import { ToastrService } from 'ngx-toastr';
-import { ORDER_STATUSES } from 'src/app/shared/_constants/order-status.const';
+import { ORDER_STATUSES } from 'src/app/_shared/_constants/order-status.const';
 
 @Component({
   selector: 'app-edit-order-modal',

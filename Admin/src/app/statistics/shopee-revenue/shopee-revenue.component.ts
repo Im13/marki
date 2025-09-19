@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ShopeeOrderParams } from 'src/app/shared/_models/shopeeOrderParams';
-import { ShopeeOrderProducts } from 'src/app/shared/_models/shopeeOrderProducts';
+import { ShopeeOrderParams } from 'src/app/_shared/_models/shopeeOrderParams';
+import { ShopeeOrderProducts } from 'src/app/_shared/_models/shopeeOrderProducts';
 import { StatisticsService } from '../statistics.service';
 
 @Component({

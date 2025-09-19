@@ -4,8 +4,7 @@ import { RouterModule } from '@angular/router';
 import { OrderRoutingModule } from './order-routing.module';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ShopeeOrdersComponent } from './shopee-orders/shopee-orders.component';
-import { SharedModule } from '../shared/shared.module';
-import { CoreModule } from '../core/core.module';
+import { SharedModule } from '../_shared/shared.module';
 import { AddOrderComponent } from './add-order/add-order.component';
 import { OrderInformationComponent } from './add-order/order-information/order-information.component';
 import { ProductModule } from '../product/product.module';
@@ -22,6 +21,7 @@ import { ProductItemsComponent } from './add-order/order-information/product-ite
 import { ListProductSkuComponent } from './web-orders/list-product-sku/product-skus.component';
 import { ProductSkusComponent } from './add-order/order-information/product-skus/product-skus.component';
 import { CheckoutInfoComponent } from './web-orders/checkout-info/checkout-info.component';
+import { CoreModule } from '../_core/core.module';
 
 @NgModule({
   declarations: [

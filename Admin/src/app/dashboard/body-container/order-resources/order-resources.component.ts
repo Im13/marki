@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { RevenueSummary } from 'src/app/shared/_models/dashboard';
+import { RevenueSummary } from 'src/app/_shared/_models/dashboard';
 
 @Component({
   selector: 'app-order-resources',

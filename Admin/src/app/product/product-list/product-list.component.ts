@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { ProductParams } from 'src/app/shared/_models/productParams';
+import { ProductParams } from 'src/app/_shared/_models/productParams';
 import { ProductService } from '../product-service.service';
-import { Product } from 'src/app/shared/_models/products';
+import { Product } from 'src/app/_shared/_models/products';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { AddProductModalComponent } from './add-product-modal/add-product-modal.component';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { ToastrService } from 'ngx-toastr';
-import { SearchService } from 'src/app/core/_services/search.service';
+import { SearchService } from 'src/app/_core/_services/search.service';
 
 @Component({
   selector: 'app-product-list',

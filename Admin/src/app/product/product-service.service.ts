@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../shared/_models/products';
+import { Product } from '../_shared/_models/products';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { ProductParams } from '../shared/_models/productParams';
-import { Pagination } from '../shared/_models/pagination';
-import { ProductType } from '../shared/_models/productTypes';
-import { ProductSKUDetails } from '../shared/_models/productSKUDetails';
+import { ProductParams } from '../_shared/_models/productParams';
+import { Pagination } from '../_shared/_models/pagination';
+import { ProductType } from '../_shared/_models/productTypes';
+import { ProductSKUDetails } from '../_shared/_models/productSKUDetails';
 
 @Injectable({
   providedIn: 'root'

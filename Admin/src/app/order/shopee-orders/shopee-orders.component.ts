@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { OrderService } from '../order.service';
-import { ShopeeOrder } from 'src/app/shared/_models/shopeeOrder';
-import { ShopeeOrderParams } from 'src/app/shared/_models/shopeeOrderParams';
+import { ShopeeOrder } from 'src/app/_shared/_models/shopeeOrder';
+import { ShopeeOrderParams } from 'src/app/_shared/_models/shopeeOrderParams';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { SearchService } from 'src/app/core/_services/search.service';
+import { SearchService } from 'src/app/_core/_services/search.service';
 
 @Component({
   selector: 'app-shopee-orders',

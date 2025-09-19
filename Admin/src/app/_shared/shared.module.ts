@@ -5,7 +5,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { SearchBoxComponent } from './_components/search-box/search-box.component';
-import { CoreModule } from '../core/core.module';
+import { CoreModule } from '../_core/core.module';
 
 @NgModule({
   declarations: [

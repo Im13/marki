@@ -2,6 +2,7 @@ using API.DTOs;
 using API.Errors;
 using API.Extensions;
 using AutoMapper;
+using Core.Constants;
 using Core.Entities.Identity;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -30,7 +31,7 @@ namespace API.Controllers
         {
             var user = await _userManager.FindByEmailFromClaimsPrincipal(User);
 
-            return new UserDTO 
+            return new UserDTO
             {
                 DisplayName = user.DisplayName,
                 Email = user.Email,
@@ -50,7 +51,7 @@ namespace API.Controllers
         {
             var user = await _userManager.FindUserByClaimsPrincipleWithAddress(User);
 
-            return _mapper.Map<Address,AddressDTO>(user.Address);
+            return _mapper.Map<Address, AddressDTO>(user.Address);
         }
 
         [Authorize]
@@ -59,11 +60,11 @@ namespace API.Controllers
         {
             var user = await _userManager.FindUserByClaimsPrincipleWithAddress(HttpContext.User);
 
-            user.Address = _mapper.Map<AddressDTO,Address>(address);
+            user.Address = _mapper.Map<AddressDTO, Address>(address);
 
             var result = await _userManager.UpdateAsync(user);
 
-            if(result.Succeeded) return Ok(_mapper.Map<Address,AddressDTO>(user.Address));
+            if (result.Succeeded) return Ok(_mapper.Map<Address, AddressDTO>(user.Address));
 
             return BadRequest("Problem updating the user");
         }
@@ -73,11 +74,11 @@ namespace API.Controllers
         {
             var user = await _userManager.FindByEmailAsync(loginDTO.Email);
 
-            if(user == null) return Unauthorized(new ApiResponse(401));
+            if (user == null) return Unauthorized(new ApiResponse(401));
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginDTO.Password, false);
 
-            if(!result.Succeeded) return Unauthorized(new ApiResponse(401));
+            if (!result.Succeeded) return Unauthorized(new ApiResponse(401));
 
             return new UserDTO
             {
@@ -90,12 +91,24 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<UserDTO>> Register(RegisterDTO registerDTO)
         {
-            if(CheckEmailExistsAsync(registerDTO.Email).Result.Value)
+            return await RegisterUserWithRole(registerDTO, RoleConstants.CUSTOMER);
+        }
+
+        [Authorize(Roles = RoleConstants.SUPER_ADMIN)]
+        [HttpPost("register-employee")]
+        public async Task<ActionResult<UserDTO>> RegisterEmployee(RegisterDTO registerDTO)
+        {
+            return await RegisterUserWithRole(registerDTO, RoleConstants.EMPLOYEE);
+        }
+
+        private async Task<ActionResult<UserDTO>> RegisterUserWithRole(RegisterDTO registerDTO, string role)
+        {
+            if (CheckEmailExistsAsync(registerDTO.Email).Result.Value)
             {
-                return new BadRequestObjectResult(new ApiValidationErrorResponse{Error = new[] {"Email address is in use"}});
+                return new BadRequestObjectResult(new ApiValidationErrorResponse { Error = new[] { "Email address is in use" } });
             }
 
-            var user = new AppUser 
+            var user = new AppUser
             {
                 DisplayName = registerDTO.DisplayName,
                 Email = registerDTO.Email,
@@ -104,11 +117,11 @@ namespace API.Controllers
 
             var result = await _userManager.CreateAsync(user, registerDTO.Password);
 
-            if(!result.Succeeded) return BadRequest(new ApiResponse(400));
+            if (!result.Succeeded) return BadRequest(new ApiResponse(400));
 
-            var roleResult = await _userManager.AddToRoleAsync(user, "Customer");
+            var roleResult = await _userManager.AddToRoleAsync(user, role);
 
-            if(!roleResult.Succeeded) return BadRequest(result.Errors);
+            if (!roleResult.Succeeded) return BadRequest(result.Errors);
 
             return new UserDTO
             {

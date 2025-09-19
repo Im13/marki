@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { SignalRService, NotificationData } from 'src/app/core/_services/signalr.service';
-import { NotificationsService, StoredNotification } from 'src/app/core/_services/notifications.service';
+import { NotificationsService, StoredNotification } from 'src/app/_core/_services/notifications.service';
+import { NotificationData, SignalRService } from 'src/app/_core/_services/signalr.service';
 
 @Component({
   selector: 'app-side-notification',
