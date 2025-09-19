@@ -1,4 +1,10 @@
 <nz-layout class="h-100 p-2">
+  <nz-header class="d-flex align-items-center px-2">
+    <button nz-button nzType="primary" nzSize="default" (click)="addEmployee()" nz-tooltip
+      nzTooltipTitle="Thêm nhân viên mới" nzTooltipPlacement="bottom" class="me-2">
+      <span nz-icon nzType="plus"></span>
+    </button>
+  </nz-header>
   <nz-content>
     <nz-table #basicTable nzSize="small" [nzData]="users" nzShowPagination="false">
       <thead>

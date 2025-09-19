@@ -6,11 +6,13 @@ import { SharedModule } from '../shared/shared.module';
 import { CoreModule } from '../core/core.module';
 import { RolesModalComponent } from './roles-modal/roles-modal.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
+import { EditEmployeeModalComponent } from './employee-list/edit-employee-modal/edit-employee-modal.component';
 
 @NgModule({
   declarations: [
     RolesModalComponent,
-    EmployeeListComponent
+    EmployeeListComponent,
+    EditEmployeeModalComponent
   ],
   imports: [
     CommonModule,
