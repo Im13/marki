@@ -1,3 +1,5 @@
+using Core.Entities.RecommendedData;
+
 namespace Core.Entities
 {
     public class Product : BaseEntity
@@ -13,5 +15,7 @@ namespace Core.Entities
         public ICollection<ProductOptions> ProductOptions { get; set; }
         public ICollection<ProductSKUs> ProductSKUs { get; set; }
         public ICollection<Photo> Photos { get; set; }
+        public ProductFeatures Features { get; set; } = new();
+        public List<UserInteraction> Interactions { get; set; } = new();
     }
 }

@@ -63,3 +63,5 @@ catch (Exception ex)
 }
 
 app.Run();
+
+public partial class Program { }
