@@ -2,6 +2,7 @@ using System.Reflection;
 using Core;
 using Core.Entities;
 using Core.Entities.OrderAggregate;
+using Core.Entities.Recommendation;
 using Core.Entities.ShopeeOrder;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,6 +37,13 @@ namespace Infrastructure.Data
         public DbSet<RevenueSummary> RevenueSummaries { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<NotificationUser> NotificationUsers { get; set; }
+        
+        // Recommendation DbSets
+        public DbSet<UserSession> UserSessions { get; set; }
+        public DbSet<SessionInteraction> SessionInteractions { get; set; }
+        public DbSet<ProductCoOccurrence> ProductCoOccurrences { get; set; }
+        public DbSet<ProductTrending> ProductTrendings { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -47,7 +55,7 @@ namespace Infrastructure.Data
             modelBuilder.Entity<Order>().Property(o => o.Source).HasConversion<string>();
             modelBuilder.Entity<RevenueSummary>().HasIndex(r => r.Date).IsUnique();
 
-            if(Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite")
+            if (Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite")
             {
                 foreach (var entityType in modelBuilder.Model.GetEntityTypes())
                 {

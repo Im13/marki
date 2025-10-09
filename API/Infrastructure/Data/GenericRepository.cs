@@ -8,7 +8,7 @@ namespace Infrastructure.Data
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
-        private readonly StoreContext _context;
+        protected readonly StoreContext _context;
         private readonly DbSet<T> _dbSet;
 
         public GenericRepository(StoreContext context)

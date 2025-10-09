@@ -13,5 +13,11 @@ namespace Core.Entities
         public ICollection<ProductOptions> ProductOptions { get; set; }
         public ICollection<ProductSKUs> ProductSKUs { get; set; }
         public ICollection<Photo> Photos { get; set; }
+
+        // Properties for Content-Based Filtering
+        public string Style { get; set; }        
+        public string Season { get; set; }       
+        public string Material { get; set; }     
+        public bool IsTrending { get; set; }     
     }
 }
