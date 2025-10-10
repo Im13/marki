@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class TrackingService {
-  private apiUrl = `${environment.apiUrl}/recommendations/track`;
+  private apiUrl = `${environment.apiUrl}recommendations/track`;
   private viewStartTime: number | null = null;
   private currentProductId: number | null = null;
 

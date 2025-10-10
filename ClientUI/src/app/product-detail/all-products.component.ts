@@ -1,25 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AllProductsService } from './all-products.service';
 import { Product } from '../_shared/_models/product';
 import { Photo } from '../_shared/_models/photo';
 import { ProductSKU } from '../_shared/_models/productSKU';
 import { BasketService } from '../basket/basket.service';
+import { TrackingService } from '../_core/services/tracking.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-all-products',
   templateUrl: './all-products.component.html',
   styleUrls: ['./all-products.component.css']
 })
-export class AllProductsComponent implements OnInit {
+export class AllProductsComponent implements OnInit, OnDestroy {
   productSlug: string;
   product: Product;
   productPhotos: Photo[] = [];
   productDescription: string = '';
   selectedProductSKU: ProductSKU;
   selectedQuantity: number;
+  private destroy$ = new Subject<void>();
 
-  constructor(private route: ActivatedRoute, private allProductService: AllProductsService, private basketService: BasketService) {}
+  constructor(private route: ActivatedRoute, 
+    private allProductService: AllProductsService, 
+    private basketService: BasketService,
+    private trackingService: TrackingService) {}
 
   ngOnInit(): void {
     // Lấy giá trị slug từ URL
@@ -28,10 +34,11 @@ export class AllProductsComponent implements OnInit {
     // Sử dụng slug để tìm sản phẩm
     this.allProductService.getProductBySlug(this.productSlug).subscribe({
       next: response => {
-        console.log(response)
         this.product = response;
         this.productPhotos = this.product.photos;
         this.productDescription = this.product.description;
+
+        this.trackingService.trackProductView(this.product.id);
       },
       error: err => {
         if(err.status == 404) {
@@ -41,6 +48,11 @@ export class AllProductsComponent implements OnInit {
         }
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   optionSelected(event: ProductSKU) {
@@ -53,5 +65,13 @@ export class AllProductsComponent implements OnInit {
 
   addToCart() {
     this.basketService.addItemToBasket(this.selectedProductSKU, this.product, this.selectedQuantity);
+
+    this.trackingService.trackAddToCart(this.product.id, this.selectedProductSKU.id)
+    .pipe(
+        takeUntil(this.destroy$)
+    ).subscribe({
+        next: () => console.log('Track ATC success'),
+        error: (error) => console.error('Track ATC failed:', error)
+    });
   }
 }

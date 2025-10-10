@@ -48,8 +48,6 @@ export class BasketService {
     //Change photo url to sku photo url
     if(this.isProductSKU(item)) item = this.mapProductItemToBasketItem(item, product, product.photos[0].url);
 
-    console.log('Items: ', item)
-    
     const basket = this.getCurrentBasketValue() ?? this.createBasket();
     basket.items = this.addOrUpdateItem(basket.items, item, quantity);
     console.log('Basket 2:', basket)
