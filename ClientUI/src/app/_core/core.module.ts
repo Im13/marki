@@ -23,13 +23,15 @@ import { CommonBreadcrumbComponent } from './common-breadcrumb/common-breadcrumb
 import { HeaderComponent } from './header/header.component';
 import { CartDropdownComponent } from './cart-dropdown/cart-dropdown.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { RecommendationComponent } from './recommendation/recommendation.component';
 
 @NgModule({
   declarations: [
     DescriptionComponent,
     HeaderComponent,
     CartDropdownComponent,
-    CommonBreadcrumbComponent
+    CommonBreadcrumbComponent,
+    RecommendationComponent
   ],
   imports: [
     CommonModule,
