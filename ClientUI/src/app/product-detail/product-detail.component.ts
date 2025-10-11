@@ -1,19 +1,19 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AllProductsService } from './all-products.service';
 import { Product } from '../_shared/_models/product';
 import { Photo } from '../_shared/_models/photo';
 import { ProductSKU } from '../_shared/_models/productSKU';
 import { BasketService } from '../basket/basket.service';
 import { TrackingService } from '../_core/services/tracking.service';
 import { Subject, takeUntil } from 'rxjs';
+import { ProductDetailService } from './product-detail.service';
 
 @Component({
-  selector: 'app-all-products',
-  templateUrl: './all-products.component.html',
-  styleUrls: ['./all-products.component.css']
+  selector: 'app-product-detail',
+  templateUrl: './product-detail.component.html',
+  styleUrls: ['./product-detail.component.css']
 })
-export class AllProductsComponent implements OnInit, OnDestroy {
+export class ProductDetailComponent implements OnInit, OnDestroy {
   productSlug: string;
   product: Product;
   productPhotos: Photo[] = [];
@@ -23,7 +23,7 @@ export class AllProductsComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   constructor(private route: ActivatedRoute, 
-    private allProductService: AllProductsService, 
+    private productDetailService: ProductDetailService, 
     private basketService: BasketService,
     private trackingService: TrackingService) {}
 
@@ -32,7 +32,7 @@ export class AllProductsComponent implements OnInit, OnDestroy {
     this.productSlug = this.route.snapshot.paramMap.get('slug');
 
     // Sử dụng slug để tìm sản phẩm
-    this.allProductService.getProductBySlug(this.productSlug).subscribe({
+    this.productDetailService.getProductBySlug(this.productSlug).subscribe({
       next: response => {
         this.product = response;
         this.productPhotos = this.product.photos;

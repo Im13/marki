@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AllProductsComponent } from './all-products.component';
+import { ProductDetailComponent } from './product-detail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full'  },
-  { path: ':slug', component: AllProductsComponent }
+  { path: ':slug', component: ProductDetailComponent }
 ];
 
 @NgModule({
@@ -13,4 +13,4 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ]
 })
-export class AllProductsRoutingModule { }
+export class ProductDetailRoutingModule { }
