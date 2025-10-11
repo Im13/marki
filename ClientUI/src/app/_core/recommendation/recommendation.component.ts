@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { RecommendationDto } from 'src/app/_shared/_models/recommendationDTO';
 import { RecommendationService } from '../services/recommendation.service';
@@ -33,8 +33,13 @@ export class RecommendationComponent implements OnInit, OnDestroy {
     private router: Router
   ) { }
 
-  ngOnInit(): void {
-    this.loadRecommendations();
+  ngOnInit(): void { }
+
+  // Add ngOnChanges to handle Input changes
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['productId'] && changes['productId'].currentValue) {
+      this.loadRecommendations();
+    }
   }
 
   ngOnDestroy(): void {

@@ -5,7 +5,7 @@ import { Photo } from '../_shared/_models/photo';
 import { ProductSKU } from '../_shared/_models/productSKU';
 import { BasketService } from '../basket/basket.service';
 import { TrackingService } from '../_core/services/tracking.service';
-import { Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 import { ProductDetailService } from './product-detail.service';
 
 @Component({
@@ -20,6 +20,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   productDescription: string = '';
   selectedProductSKU: ProductSKU;
   selectedQuantity: number;
+
+  productId$ = new BehaviorSubject<number>(null);
   private destroy$ = new Subject<void>();
 
   constructor(private route: ActivatedRoute, 
@@ -37,6 +39,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
         this.product = response;
         this.productPhotos = this.product.photos;
         this.productDescription = this.product.description;
+        this.productId$.next(this.product.id);
 
         this.trackingService.trackProductView(this.product.id);
       },

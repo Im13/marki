@@ -23,7 +23,6 @@ export class CartDropdownComponent implements OnInit {
     this.basketService.basketSource$.subscribe({
       next: val => {
         this.basketItems = val?.items;
-        console.log('Val', val)
 
         if(val !== null) {
           this.processedBasketItems = this.basketItems.map(item => ({
@@ -39,8 +38,6 @@ export class CartDropdownComponent implements OnInit {
       next: val => {
         if(val !== null)
           this.basketTotal = val;
-
-        console.log(this.basketTotal)
       }
     });
   }

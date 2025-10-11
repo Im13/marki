@@ -1,11 +1,17 @@
 <div class="tw-min-h-screen md:tw-min-h-[25vh] tw-flex tw-flex-col lg:tw-flex-row tw-gap-4">
     <app-product-images [photos]="productPhotos" class="tw-w-full lg:tw-w-2/3"></app-product-images>
 
-    <app-product-info [product]="product" (selectOptions)="optionSelected($event)" (selectQuantity)="quantitySelected($event)" class="tw-w-full lg:tw-w-1/3"></app-product-info>
+    <app-product-info [product]="product" (selectOptions)="optionSelected($event)"
+        (selectQuantity)="quantitySelected($event)" class="tw-w-full lg:tw-w-1/3"></app-product-info>
 </div>
 
 <div class="tw-my-8">
     <app-description [description]="productDescription"></app-description>
 </div>
 
-<app-products-footer (atcClicked)="addToCart()" class="footer w-100 d-flex align-items-center tw-fixed border-top tw-bg-neutral-50 tw-h-[65px] tw-bottom-0 md:tw-invisible"></app-products-footer>
+<div class="tw-my-8">
+    <app-recommendation type="similar" [productId]="productId$ | async" [limit]="8" [columns]="4" title="Sản phẩm tương tự"></app-recommendation>
+</div>
+
+<app-products-footer (atcClicked)="addToCart()"
+    class="footer w-100 d-flex align-items-center tw-fixed border-top tw-bg-neutral-50 tw-h-[65px] tw-bottom-0 md:tw-invisible"></app-products-footer>

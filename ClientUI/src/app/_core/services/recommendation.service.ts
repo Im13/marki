@@ -48,7 +48,7 @@ export class RecommendationService {
   getSimilarProducts(productId: number, limit: number = 8): Observable<RecommendationDto[]> {
     const params = new HttpParams().set('limit', limit.toString());
     
-    return this.http.get<RecommendationDto[]>(`${this.apiUrl}similar/${productId}`, {
+    return this.http.get<RecommendationDto[]>(`${this.apiUrl}recommendations/similar/${productId}`, {
       params,
       withCredentials: true
     }).pipe(

@@ -65,9 +65,10 @@ namespace Infrastructure.Services.Recommendations
                 .ToList();
         }
 
-        public Task<List<RecommendationDTO>> GetSimilarProductsAsync(int productId, int limit = 8)
+        public async Task<List<RecommendationDTO>> GetSimilarProductsAsync(int productId, int limit = 8)
         {
-            throw new NotImplementedException();
+            // Simply delegate to content-based recommender
+            return await _contentBased.GetSimilarProductsAsync(productId, limit);
         }
 
         public Task<List<RecommendationDTO>> GetTrendingProductsAsync(int limit = 10)

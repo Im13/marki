@@ -17,7 +17,6 @@ export class HomeCarouselComponent implements OnInit {
   ngOnInit(): void {
     this.homeServices.getSlides().subscribe({
       next: (slides: SlideImage[]) => {
-        console.log(slides)
         this.slides = slides;
       },
       error: (error: any) => {

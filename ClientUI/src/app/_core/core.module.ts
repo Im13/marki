@@ -76,7 +76,8 @@ import { RecommendationComponent } from './recommendation/recommendation.compone
     CommonBreadcrumbComponent,
     HeaderComponent,
     CartDropdownComponent,
-    NzIconModule
+    NzIconModule,
+    RecommendationComponent
   ]
 })
 export class CoreModule { }

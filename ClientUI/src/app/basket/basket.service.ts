@@ -50,7 +50,6 @@ export class BasketService {
 
     const basket = this.getCurrentBasketValue() ?? this.createBasket();
     basket.items = this.addOrUpdateItem(basket.items, item, quantity);
-    console.log('Basket 2:', basket)
     this.setBasket(basket);
   }
 
@@ -89,7 +88,6 @@ export class BasketService {
     if(item) item.quantity += quantity;
     else {
       itemToAdd.quantity = quantity;
-      console.log('Item to add: ' + itemToAdd)
       items.push(itemToAdd);
     }
 
