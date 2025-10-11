@@ -1,4 +1,4 @@
-<div class="recommendations-section">
+<div class="recommendations-section tw-p-3">
   <h2 *ngIf="title" class="section-title">{{ title }}</h2>
 
   <!-- Loading State -->
@@ -14,23 +14,16 @@
   </div>
 
   <!-- Recommendations Grid -->
-  <div *ngIf="!loading && !error && recommendations.length > 0" 
-       class="recommendations-grid" 
-       [ngClass]="getGridClass()">
-    
-    <div *ngFor="let product of recommendations" 
-         class="recommendation-card"
-         (click)="onProductClick(product)">
-      
+  <div *ngIf="!loading && !error && recommendations.length > 0" class="recommendations-grid" [ngClass]="getGridClass()">
+
+    <div *ngFor="let product of recommendations" class="recommendation-card" (click)="onProductClick(product)">
+
       <!-- Product Image -->
       <div class="product-image">
-        <img [src]="product.imageUrl" 
-             [alt]="product.productName"
-             loading="lazy">
-        
+        <img [src]="product.imageUrl" [alt]="product.productName" loading="lazy">
+
         <!-- Stock Badge -->
-        <span *ngIf="showStock && product.totalStock < 10" 
-              class="stock-badge low-stock">
+        <span *ngIf="showStock && product.totalStock < 10" class="stock-badge low-stock">
           Chỉ còn vài sản phẩm
         </span>
       </div>
@@ -39,33 +32,24 @@
       <div class="product-info">
         <h4 class="product-name">{{ product.productName }}</h4>
         <p class="product-price">{{ product.priceDisplay }}</p>
-
-        <!-- Colors -->
-        <div *ngIf="showColors && product.availableColors?.length > 0" 
-             class="color-swatches">
-          <span *ngFor="let color of product.availableColors.slice(0, 5)"
-                class="color-swatch"
-                [style.background-color]="getColorCode(color)"
-                [title]="color">
+        
+        <!-- <div *ngIf="showColors && product.availableColors?.length > 0" class="color-swatches">
+          <span *ngFor="let color of product.availableColors.slice(0, 5)" class="color-swatch"
+            [style.background-color]="getColorCode(color)" [title]="color">
           </span>
-          <span *ngIf="product.availableColors.length > 5" 
-                class="more-colors">
+          <span *ngIf="product.availableColors.length > 5" class="more-colors">
             +{{ product.availableColors.length - 5 }}
           </span>
         </div>
 
-        <!-- Sizes -->
-        <div *ngIf="showSizes && product.availableSizes?.length > 0" 
-             class="size-badges">
-          <span *ngFor="let size of product.availableSizes" 
-                class="size-badge">
+        <div *ngIf="showSizes && product.availableSizes?.length > 0" class="size-badges">
+          <span *ngFor="let size of product.availableSizes" class="size-badge">
             {{ size }}
           </span>
-        </div>
+        </div> -->
 
         <!-- Reason -->
-        <span *ngIf="showReason && product.reasonText" 
-              class="recommendation-reason">
+        <span *ngIf="showReason && product.reasonText" class="recommendation-reason">
           {{ product.reasonText }}
         </span>
       </div>
@@ -73,8 +57,7 @@
   </div>
 
   <!-- Empty State -->
-  <div *ngIf="!loading && !error && recommendations.length === 0" 
-       class="empty-state">
+  <div *ngIf="!loading && !error && recommendations.length === 0" class="empty-state">
     <p>Không có sản phẩm gợi ý</p>
   </div>
 </div>

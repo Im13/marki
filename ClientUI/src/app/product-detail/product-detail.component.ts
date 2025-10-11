@@ -31,31 +31,40 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // Lấy giá trị slug từ URL
-    this.productSlug = this.route.snapshot.paramMap.get('slug');
-
-    // Sử dụng slug để tìm sản phẩm
-    this.productDetailService.getProductBySlug(this.productSlug).subscribe({
-      next: response => {
-        this.product = response;
-        this.productPhotos = this.product.photos;
-        this.productDescription = this.product.description;
-        this.productId$.next(this.product.id);
-
-        this.trackingService.trackProductView(this.product.id);
-      },
-      error: err => {
-        if(err.status == 404) {
-          console.log("Cannot find product");
-        } else if (err.status == 400) {
-          console.log(err);
-        }
-      }
-    });
+    // Subscribe to route params changes
+    this.route.paramMap
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(params => {
+        this.productSlug = params.get('slug');
+        this.loadProduct();
+      });
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  private loadProduct() {
+    this.productDetailService.getProductBySlug(this.productSlug)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: response => {
+          this.product = response;
+          this.productPhotos = this.product.photos;
+          this.productDescription = this.product.description;
+          this.productId$.next(this.product.id);
+
+          this.trackingService.trackProductView(this.product.id);
+        },
+        error: err => {
+          if(err.status == 404) {
+            console.log("Cannot find product");
+          } else if (err.status == 400) {
+            console.log(err);
+          }
+        }
+      });
   }
 
   optionSelected(event: ProductSKU) {
