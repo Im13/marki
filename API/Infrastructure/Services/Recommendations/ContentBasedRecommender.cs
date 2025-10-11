@@ -97,7 +97,7 @@ namespace Infrastructure.Services.Recommendations
 
             var recommendations = candidateProducts
                 .Select(p => (product: p, score: CalculateSimilarity(preferences, p)))
-                .Where(r => r.score > 0.3)
+                .Where(r => r.score >= 0.2)
                 .OrderByDescending(r => r.score)
                 .Take(limit)
                 .Select(r => ToRecommendationDto(r.product, r.score, "similar_style"))
