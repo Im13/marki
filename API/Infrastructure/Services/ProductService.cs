@@ -1,7 +1,6 @@
 using Core;
 using Core.Entities;
 using Core.Interfaces;
-using Core.Specification;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,11 +11,13 @@ namespace Infrastructure.Services
         private readonly IUnitOfWork _unitOfWork;
         private StoreContext _context;
         private readonly IPhotoService _photoService;
-        public ProductService(IUnitOfWork unitOfWork, StoreContext context, IPhotoService photoService)
+        private readonly IProductRepository _productRepository;
+        public ProductService(IUnitOfWork unitOfWork, StoreContext context, IPhotoService photoService, IProductRepository productRepository)
         {
             _context = context;
             _unitOfWork = unitOfWork;
             _photoService = photoService;
+            _productRepository = productRepository;
         }
 
         public async Task<Product> GetProductAsync(int id)
@@ -180,46 +181,9 @@ namespace Infrastructure.Services
             return product;
         }
 
-        public async Task<Product> CreateProduct(Product prod, List<ProductOptions> options)
+        public async Task<Product> CreateProduct(Product prod)
         {
-            var listOptionValue = new List<ProductOptionValues>();
-
-            prod.ProductType = await _unitOfWork.Repository<ProductType>().GetByIdAsync(prod.ProductTypeId);
-
-            _unitOfWork.Repository<Product>().Add(prod);
-
-            var saveOptionResult = await _unitOfWork.Complete();
-
-            if (saveOptionResult <= 0) return null;
-
-            foreach (var option in prod.ProductOptions)
-            {
-                foreach (var value in option.ProductOptionValues)
-                {
-                    listOptionValue.Add(value);
-                }
-            }
-
-            foreach (var sku in prod.ProductSKUs)
-            {
-                var mainPhoto = prod.Photos.FirstOrDefault(p => p.IsMain == true);
-
-                if (string.IsNullOrEmpty(sku.ImageUrl))
-                {
-                    sku.ImageUrl = mainPhoto.Url;
-                }
-
-                foreach (var value in sku.ProductSKUValues)
-                {
-                    value.ProductOptionValue = listOptionValue.FirstOrDefault(ov => ov.ValueTempId == value.ValueTempId);
-                }
-            }
-
-            _unitOfWork.Repository<Product>().Update(prod);
-
-            var result = await _unitOfWork.Complete();
-
-            if (result <= 0) return null;
+            var product = await _productRepository.CreateProductAsync(prod);
 
             return prod;
         }

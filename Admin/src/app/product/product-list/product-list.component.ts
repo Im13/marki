@@ -37,6 +37,7 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.displayCreateModal();
     this.getProducts();
 
     // Lắng nghe sự thay đổi từ search box

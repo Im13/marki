@@ -4,17 +4,7 @@
       <div class="col-6 px-2 border rounded">
         <div class="product-details p-2">
           <div class="mb-3">
-            <label for="productName" class="form-label m-0 mb-1">Tên sản phẩm <span class="help-block">*</span></label>
-            <input type="text" class="form-control form-control-sm rounded-0" id="productName"
-              placeholder="Tên sản phẩm" formControlName="productName" />
-            <span *ngIf="
-                !addForm.get('productName').valid &&
-                addForm.get('productName').touched
-              " class="help-block">Tên sản phẩm không được bỏ trống</span>
-          </div>
-
-          <div class="mb-3">
-            <label for="productSKU" class="form-label m-0 mb-1">SKU sản phẩm <span class="help-block">*</span></label>
+            <label for="productSKU" class="form-label m-0 mb-1 fw-semibold">SKU sản phẩm <span class="help-block">*</span></label>
             <input type="text" class="form-control form-control-sm rounded-0" id="productSKU" placeholder="SKU sản phẩm"
               formControlName="productSKU" />
             <span *ngIf="
@@ -24,22 +14,50 @@
           </div>
 
           <div class="mb-3">
-            <label for="importPrice" class="form-label m-0 mb-1">Giá nhập</label>
+            <label for="productName" class="form-label m-0 mb-1 fw-semibold">Tên sản phẩm <span class="help-block">*</span></label>
+            <input type="text" class="form-control form-control-sm rounded-0" id="productName"
+              placeholder="Tên sản phẩm" formControlName="productName" />
+            <span *ngIf="
+                !addForm.get('productName').valid &&
+                addForm.get('productName').touched
+              " class="help-block">Tên sản phẩm không được bỏ trống</span>
+          </div>
+
+          <div class="mb-3">
+            <label for="importPrice" class="form-label m-0 mb-1 fw-semibold">Giá nhập</label>
             <input type="text" class="form-control form-control-sm rounded-0" id="importPrice" placeholder="Giá nhập"
               formControlName="importPrice" />
           </div>
 
-          <div>
-            <label for="description" class="form-label m-0 mb-1">Mô tả sản phẩm</label>
+          <div class="mb-3">
+            <label for="description" class="form-label m-0 mb-1 fw-semibold">Mô tả sản phẩm</label>
             <textarea class="form-control form-control-sm rounded-0" id="description" placeholder="Mô tả sản phẩm"
               rows="4" formControlName="productDescription"></textarea>
+          </div>
+
+          <div class="mb-3 row">
+            <div class="col-4">
+              <label for="productStyle" class="form-label m-0 mb-1 fw-semibold">Kiểu dáng</label>
+              <input type="text" class="form-control form-control-sm rounded-0" id="productStyle" placeholder="Kiểu dáng"
+                formControlName="productStyle" />
+            </div>
+            <div class="col-4">
+              <label for="productMaterial" class="form-label m-0 mb-1 fw-semibold">Chất liệu</label>
+              <input type="text" class="form-control form-control-sm rounded-0" id="productMaterial" placeholder="Chất liệu"
+                formControlName="productMaterial" />
+            </div>
+            <div class="col-4">
+              <label for="productSeason" class="form-label m-0 mb-1 fw-semibold">Season</label>
+              <input type="text" class="form-control form-control-sm rounded-0" id="productSeason" placeholder="Season"
+                formControlName="productSeason" />
+            </div>
           </div>
         </div>
       </div>
       <div class="col-6 px-2">
         <div class="supplier p-2 border rounded">
           <div class="mb-3">
-            <label for="productType" class="form-label m-0 mb-1">Danh mục <span class="help-block">*</span></label>
+            <label for="productType" class="form-label m-0 mb-1 fw-semibold">Danh mục <span class="help-block">*</span></label>
 
             <nz-select nzPlaceHolder="Chọn danh mục" nzAllowClear nzShowSearch nzServerSearch
               formControlName="productTypeId">
@@ -99,7 +117,7 @@
         </div>
 
         <div class="clearfix border mt-3 p-2">
-          <p class="mb-1">Ảnh bìa:</p>
+          <p class="mb-1 fw-semibold">Ảnh bìa:</p>
           <nz-upload nzAction="https://localhost:5001/api/products/add-photo" nzListType="picture-card"
             [(nzFileList)]="mainPhoto" [nzShowButton]="mainPhoto.length < 1" [nzPreview]="handlePreview"
             (nzChange)="handleUploadProductChange($event, true)">
@@ -109,7 +127,7 @@
             </div>
           </nz-upload>
 
-          <p class="mb-1">Ảnh sản phẩm (Tối đa 8 ảnh):</p>
+          <p class="mb-1 mt-3 fw-semibold">Ảnh sản phẩm (Tối đa 8 ảnh):</p>
           <nz-upload nzAction="https://localhost:5001/api/products/add-photo" nzListType="picture-card"
             [(nzFileList)]="photoList" [nzShowButton]="photoList.length < 8" [nzPreview]="handlePreview"
             (nzChange)="handleUploadProductChange($event, false)">
@@ -242,7 +260,8 @@
     </div>
   </div>
   <div *nzModalFooter>
-    <button [disabled]="!addForm.valid" nz-button nzType="primary" type="submit" (click)="onSubmit()" [nzLoading]="isSubmitting">
+    <button [disabled]="!addForm.valid" nz-button nzType="primary" type="submit" (click)="onSubmit()"
+      [nzLoading]="isSubmitting">
       Lưu
     </button>
   </div>

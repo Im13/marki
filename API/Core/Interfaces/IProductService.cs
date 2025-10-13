@@ -4,7 +4,7 @@ namespace Core.Interfaces
 {
     public interface IProductService
     {
-        Task<Product> CreateProduct(Product prod, List<ProductOptions> options);
+        Task<Product> CreateProduct(Product prod);
         Task<Product> GetProductBySKUAsync(string productSKU);
         Task<Product> UpdateProduct(Product product);
         Task<Product> GetProductAsync(int id);

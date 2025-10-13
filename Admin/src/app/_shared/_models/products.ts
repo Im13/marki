@@ -15,4 +15,7 @@ export interface Product {
   productSkus: ProductSKUs[];
   photos: Photo[];
   slug: string;
+  style?: string;
+  material?: string;
+  season?: string;
 }

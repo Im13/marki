@@ -11,5 +11,6 @@ namespace Core.Interfaces
         Task<List<Product>> GetProductsWithSpec(ISpecification<Product> spec);
         Task<List<Product>> GetProductForClientWithSpec(ISpecification<Product> spec);
         Task<List<ProductSKUs>> GetProductSKUsWithSpec(ISpecification<ProductSKUs> spec);
+        Task<Product> CreateProductAsync(Product product);
     }
 }

@@ -34,18 +34,9 @@ namespace API.Controllers.Admin
         [HttpPost("create")]
         public async Task<ActionResult<ProductToReturnDTO>> CreateProducts(ProductDTOs productDTOs)
         {
-            var options = _mapper.Map<List<ProductOptionDTO>, List<ProductOptions>>(productDTOs.ProductOptions);
             var product = _mapper.Map<ProductDTOs, Product>(productDTOs);
 
-            var productWithSKUExists = await _productService.GetProductBySKUAsync(productDTOs.ProductSKU);
-
-            if (productWithSKUExists != null) return BadRequest("Product with this SKU has exists!");
-
-            var productWithSlug = await _productService.GetBySlug(productDTOs.Slug);
-            
-            if(productWithSlug != null) return BadRequest("Product with this name has exists!");
-
-            var createdProduct = await _productService.CreateProduct(product, options);
+            var createdProduct = await _productService.CreateProduct(product);
 
             return Ok(createdProduct);
         }

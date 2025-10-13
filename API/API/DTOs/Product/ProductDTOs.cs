@@ -10,5 +10,9 @@ namespace API.DTOs.Product
         public List<ProductOptionDTO> ProductOptions { get; set; }
         public List<ProductSKUDTO> ProductSkus { get; set; }
         public List<PhotoDTO> Photos { get; set; }
+        public string Style { get; set; }        
+        public string Season { get; set; }       
+        public string Material { get; set; }     
+        public bool IsTrending { get; set; }     
     }
 }

@@ -135,9 +135,12 @@ export class AddProductModalComponent implements OnInit {
       productTypeId: new FormControl(this.product.productTypeId, [Validators.required]),
       productSKU: new FormControl(this.product.productSKU, [Validators.required]),
       importPrice: new FormControl(this.product.importPrice),
+      productStyle: new FormControl(this.product.style),
+      productMaterial: new FormControl(this.product.material),
+      productSeason: new FormControl(this.product.season),
     });
 
-    // //Fake data
+    // //Fake datas
     // this.productOptions = [
     //   {
     //     optionName: 'Size',
@@ -235,7 +238,7 @@ export class AddProductModalComponent implements OnInit {
       option.valuesToDisplay.forEach((value) => {
         optionValues.push({
           value: value,
-          valueName: option.optionName,
+          valueName: value,
           valueTempId: this.valueTempId,
         });
 
@@ -347,6 +350,8 @@ export class AddProductModalComponent implements OnInit {
     this.groupProductImages();
     this.bindDataToProductObject();
 
+    console.log(this.product);
+
     if (this.addForm.valid) {
       if (!this.isEdit) {
         if(this.product.slug == '') {
@@ -398,6 +403,9 @@ export class AddProductModalComponent implements OnInit {
     this.product.productTypeId = this.addForm.value.productTypeId;
     this.product.productSkus = this.productSKUs;
     this.product.photos = this.productImages;
+    this.product.style = this.addForm.value.productStyle;
+    this.product.material = this.addForm.value.productMaterial;
+    this.product.season = this.addForm.value.productSeason;
 
     // this.product.productSkus.forEach(sku => {
     //   if(sku.photos.length == 0) {
