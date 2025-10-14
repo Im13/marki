@@ -126,6 +126,260 @@ namespace Infrastructure.Data
             }
         }
 
+        public async Task<Product> UpdateProductAsync(int productId, Product updatedProduct)
+        {
+            using var transaction = await _context.Database.BeginTransactionAsync();
+
+            try
+            {
+                // STEP 1: Load existing product with all relationships
+                var existingProduct = await _context.Products
+                    .Include(p => p.ProductOptions)
+                        .ThenInclude(o => o.ProductOptionValues)
+                    .Include(p => p.ProductSKUs)
+                        .ThenInclude(s => s.ProductSKUValues)
+                    .Include(p => p.ProductSKUs)
+                        .ThenInclude(s => s.Photos)
+                    .Include(p => p.Photos)
+                    .FirstOrDefaultAsync(p => p.Id == productId);
+
+                if (existingProduct == null)
+                {
+                    throw new ArgumentException($"Product with ID {productId} not found");
+                }
+
+                _logger.LogInformation("Updating product: ID={ProductId}, Name={ProductName}",
+                    productId, existingProduct.Name);
+
+                // STEP 2: Validate updated data
+                ValidateProduct(updatedProduct);
+
+                // STEP 3: Verify ProductType exists if changed
+                if (updatedProduct.ProductTypeId != existingProduct.ProductTypeId)
+                {
+                    var productType = await _context.ProductTypes.FindAsync(updatedProduct.ProductTypeId);
+                    if (productType == null)
+                    {
+                        throw new ArgumentException($"ProductType with ID {updatedProduct.ProductTypeId} not found");
+                    }
+                }
+
+                // STEP 4: Update basic properties
+                UpdateBasicProperties(existingProduct, updatedProduct);
+
+                // STEP 5: Update ProductOptions (Delete old → Add new)
+                UpdateProductOptions(existingProduct, updatedProduct);
+
+                // STEP 6: Update ProductSKUs (Delete old → Add new)
+                UpdateProductSKUs(existingProduct, updatedProduct);
+
+                // STEP 7: Update Product Photos (Delete old → Add new)
+                UpdateProductPhotos(existingProduct, updatedProduct);
+
+                // STEP 8: Save changes
+                await _context.SaveChangesAsync();
+
+                // STEP 9: Commit transaction
+                await transaction.CommitAsync();
+
+                _logger.LogInformation(
+                    "Product updated successfully: ID={ProductId}, Name={ProductName}",
+                    existingProduct.Id, existingProduct.Name);
+
+                // STEP 10: Reload with fresh data
+                return await _context.Products
+                    .Include(p => p.ProductType)
+                    .Include(p => p.ProductOptions)
+                        .ThenInclude(o => o.ProductOptionValues)
+                    .Include(p => p.ProductSKUs)
+                        .ThenInclude(s => s.ProductSKUValues)
+                            .ThenInclude(sv => sv.ProductOptionValue)
+                    .Include(p => p.ProductSKUs)
+                        .ThenInclude(s => s.Photos)
+                    .Include(p => p.Photos)
+                    .FirstOrDefaultAsync(p => p.Id == productId);
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                _logger.LogError(ex, "Error updating product: ID={ProductId}", productId);
+                throw;
+            }
+        }
+
+        private void UpdateBasicProperties(Product existing, Product updated)
+        {
+            existing.Name = updated.Name;
+            existing.Description = updated.Description;
+            existing.ProductSKU = updated.ProductSKU;
+            existing.ImportPrice = updated.ImportPrice;
+            existing.ProductTypeId = updated.ProductTypeId;
+            existing.Style = updated.Style;
+            existing.Season = updated.Season;
+            existing.Material = updated.Material;
+            existing.IsTrending = updated.IsTrending;
+
+            // Update slug if provided
+            if (!string.IsNullOrWhiteSpace(updated.Slug))
+            {
+                existing.Slug = updated.Slug;
+            }
+        }
+
+        private void UpdateProductOptions(Product existing, Product updated)
+        {
+            // Remove all old options and values (cascade delete will handle ProductOptionValues)
+            if (existing.ProductOptions != null && existing.ProductOptions.Any())
+            {
+                _context.ProductOptions.RemoveRange(existing.ProductOptions);
+            }
+
+            // Add new options
+            if (updated.ProductOptions != null && updated.ProductOptions.Any())
+            {
+                existing.ProductOptions = new List<ProductOptions>();
+
+                foreach (var option in updated.ProductOptions)
+                {
+                    if (option.ProductOptionValues == null || !option.ProductOptionValues.Any())
+                    {
+                        throw new ArgumentException($"Option '{option.OptionName}' must have at least one value");
+                    }
+
+                    var newOption = new ProductOptions
+                    {
+                        OptionName = option.OptionName,
+                        ProductId = existing.Id,
+                        Product = existing,
+                        ProductOptionValues = option.ProductOptionValues.Select(v => new ProductOptionValues
+                        {
+                            ValueName = v.ValueName,
+                            ValueTempId = v.ValueTempId
+                        }).ToList()
+                    };
+
+                    existing.ProductOptions.Add(newOption);
+                }
+            }
+        }
+
+        private void UpdateProductSKUs(Product existing, Product updated)
+        {
+            // Remove all old SKUs (cascade delete will handle ProductSKUValues and Photos)
+            if (existing.ProductSKUs != null && existing.ProductSKUs.Any())
+            {
+                _context.ProductSKUs.RemoveRange(existing.ProductSKUs);
+            }
+
+            // Add new SKUs
+            if (updated.ProductSKUs != null && updated.ProductSKUs.Any())
+            {
+                existing.ProductSKUs = new List<ProductSKUs>();
+
+                // Get main photo from Product for default SKU images
+                var mainProductPhoto = updated.Photos?.FirstOrDefault(p => p.IsMain) 
+                    ?? existing.Photos?.FirstOrDefault(p => p.IsMain);
+
+                // Build lookup for option values by ValueTempId
+                // NOTE: Must use the NEW options we just added (existing.ProductOptions)
+                var optionValuesLookup = existing.ProductOptions?
+                    .SelectMany(opt => opt.ProductOptionValues)
+                    .ToDictionary(v => v.ValueTempId, v => v);
+
+                foreach (var sku in updated.ProductSKUs)
+                {
+                    var newSKU = new ProductSKUs
+                    {
+                        SKU = sku.SKU,
+                        Quantity = sku.Quantity,
+                        Price = sku.Price,
+                        ImportPrice = sku.ImportPrice,
+                        Barcode = sku.Barcode,
+                        Weight = sku.Weight,
+                        ImageUrl = string.IsNullOrEmpty(sku.ImageUrl) && mainProductPhoto != null 
+                            ? mainProductPhoto.Url 
+                            : sku.ImageUrl,
+                        ProductId = existing.Id,
+                        Product = existing
+                    };
+
+                    // Add SKU Photos
+                    if (sku.Photos != null && sku.Photos.Any())
+                    {
+                        newSKU.Photos = sku.Photos.Select(photo => new Photo
+                        {
+                            Url = photo.Url,
+                            IsMain = photo.IsMain
+                        }).ToList();
+                    }
+
+                    // Link SKU values to option values
+                    if (sku.ProductSKUValues != null && optionValuesLookup != null)
+                    {
+                        newSKU.ProductSKUValues = new List<ProductSKUValues>();
+
+                        foreach (var skuValue in sku.ProductSKUValues)
+                        {
+                            if (optionValuesLookup.TryGetValue(skuValue.ValueTempId, out var optionValue))
+                            {
+                                newSKU.ProductSKUValues.Add(new ProductSKUValues
+                                {
+                                    ValueTempId = skuValue.ValueTempId,
+                                    ProductOptionValue = optionValue
+                                });
+                            }
+                            else
+                            {
+                                throw new ArgumentException(
+                                    $"SKU value with ValueTempId {skuValue.ValueTempId} not found in product options");
+                            }
+                        }
+                    }
+
+                    existing.ProductSKUs.Add(newSKU);
+                }
+            }
+        }
+
+        private void UpdateProductPhotos(Product existing, Product updated)
+        {
+            // Remove old product-level photos (not SKU photos)
+            if (existing.Photos != null && existing.Photos.Any())
+            {
+                _context.Photos.RemoveRange(existing.Photos);
+            }
+
+            // Add new product-level photos
+            if (updated.Photos != null && updated.Photos.Any())
+            {
+                existing.Photos = new List<Photo>();
+
+                // Ensure only one main photo
+                var mainPhotos = updated.Photos.Where(p => p.IsMain).ToList();
+                if (mainPhotos.Count > 1)
+                {
+                    mainPhotos.First().IsMain = true;
+                    foreach (var photo in mainPhotos.Skip(1))
+                    {
+                        photo.IsMain = false;
+                    }
+                }
+                else if (!mainPhotos.Any() && updated.Photos.Any())
+                {
+                    updated.Photos.First().IsMain = true;
+                }
+
+                foreach (var photo in updated.Photos)
+                {
+                    existing.Photos.Add(new Photo
+                    {
+                        Url = photo.Url,
+                        IsMain = photo.IsMain
+                    });
+                }
+            }
+        }
+
         private void ValidateProduct(Product product)
         {
             var errors = new List<string>();

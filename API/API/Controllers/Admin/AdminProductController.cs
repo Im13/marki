@@ -17,15 +17,18 @@ namespace API.Controllers.Admin
         private readonly IPhotoService _photoService;
         private readonly IGenericRepository<Product> _genericProductRepo;
         private readonly IProductRepository _productRepo;
+        private readonly ILogger<AdminProductController> _logger;
 
         public AdminProductController(IProductService productService,
             IMapper mapper,
             IGenericRepository<Product> genericProductRepo,
             IProductRepository productRepo,
-            IPhotoService photoService)
+            IPhotoService photoService,
+            ILogger<AdminProductController> logger)
         {
             _productRepo = productRepo;
             _productService = productService;
+            _logger = logger;
             _mapper = mapper;
             _genericProductRepo = genericProductRepo;
             _photoService = photoService;
@@ -57,31 +60,28 @@ namespace API.Controllers.Admin
             return Ok(new Pagination<ProductDTOs>(productParams.PageIndex, productParams.PageSize, totalItems, data));
         }
 
-        [HttpPut("product")]
-        public async Task<ActionResult> UpdateProduct(ProductDTOs productDTO)
+        [HttpPut("product/{id}")]
+        public async Task<ActionResult> UpdateProduct(int id, [FromBody] UpdateProductDTO dto)
         {
-            if (productDTO.Id == null) return BadRequest("Error update product!");
-
-            // Find product by Id
-            var product = await _productService.GetProductAsync((int)productDTO.Id);
-
-            if (product == null) return BadRequest("Product not exists!");
-
-            //Check if product with SKU exists
-            if (product.ProductSKU != productDTO.ProductSKU)
+            try
             {
-                var productWithSKUExists = await _productService.GetProductBySKUAsync(productDTO.ProductSKU);
+                _logger.LogInformation("Updating product: ID={ProductId}", id);
+                var product = _mapper.Map<UpdateProductDTO, Product>(dto);
 
-                if (productWithSKUExists != null) return BadRequest("Product with this SKU has exists!");
+                var result = await _productService.UpdateProductAsync(id, product);
+
+                if (!result.IsSuccess)
+                {
+                    return BadRequest(new { message = result.Error });
+                }
+
+                return Ok(result.Data);
             }
-
-            var mappedProduct = _mapper.Map<ProductDTOs, Product>(productDTO);
-
-            var productUpdatedResult = await _productService.UpdateProduct(mappedProduct);
-
-            if (productUpdatedResult == null) return BadRequest("Error update product.");
-
-            return Ok(productUpdatedResult);
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error updating product: ID={ProductId}", id);
+                return StatusCode(500, new { message = "An error occurred while updating the product" });
+            }
         }
 
         [HttpPost("delete-products")]
@@ -113,7 +113,7 @@ namespace API.Controllers.Admin
                 IsMain = false
             };
 
-            return Ok(_mapper.Map<Photo,PhotoDTO>(photoDTO));
+            return Ok(_mapper.Map<Photo, PhotoDTO>(photoDTO));
         }
 
         [HttpGet("sku/{id}")]

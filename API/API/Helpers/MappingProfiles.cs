@@ -79,6 +79,8 @@ namespace API.Helpers
 
             CreateMap<ProductDTOs, Product>();
             CreateMap<Product, ProductDTOs>();
+            CreateMap<Product, UpdateProductDTO>();
+            CreateMap<UpdateProductDTO, Product>();
             CreateMap<ProductForClientDTO, Product>();
             CreateMap<Product, ProductForClientDTO>();
             CreateMap<Photo, PhotoDTO>();

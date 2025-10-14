@@ -1,8 +1,11 @@
+using System.ComponentModel.DataAnnotations;
 using Core;
+using Core.Common;
 using Core.Entities;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Services
 {
@@ -12,11 +15,15 @@ namespace Infrastructure.Services
         private StoreContext _context;
         private readonly IPhotoService _photoService;
         private readonly IProductRepository _productRepository;
-        public ProductService(IUnitOfWork unitOfWork, StoreContext context, IPhotoService photoService, IProductRepository productRepository)
+        private readonly ILogger<ProductService> _logger;
+
+        public ProductService(IUnitOfWork unitOfWork, StoreContext context, IPhotoService photoService, IProductRepository productRepository, ILogger<ProductService> logger)
         {
             _context = context;
             _unitOfWork = unitOfWork;
             _photoService = photoService;
+            _productRepository = productRepository;
+            _logger = logger;
             _productRepository = productRepository;
         }
 
@@ -35,6 +42,30 @@ namespace Infrastructure.Services
             _unitOfWork.ClearTracker();
 
             return products.SingleOrDefault(p => p.ProductSKU == productSKU);
+        }
+
+        public async Task<Result<Product>> UpdateProductAsync(int productId, Product product)
+        {
+            try
+            {
+                var updatedProduct = await _productRepository.UpdateProductAsync(productId, product);
+                return Result<Product>.Success(updatedProduct);
+            }
+            catch (ValidationException ex)
+            {
+                _logger.LogWarning(ex, "Validation error updating product: ID={ProductId}", productId);
+                return Result<Product>.Failure(ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                _logger.LogWarning(ex, "Product not found: ID={ProductId}", productId);
+                return Result<Product>.Failure(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error updating product: ID={ProductId}", productId);
+                return Result<Product>.Failure("An error occurred while updating the product");
+            }
         }
 
         public async Task<Product> UpdateProduct(Product product)

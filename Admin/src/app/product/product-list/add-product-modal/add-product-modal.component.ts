@@ -350,11 +350,11 @@ export class AddProductModalComponent implements OnInit {
     this.groupProductImages();
     this.bindDataToProductObject();
 
-    console.log(this.product);
+    console.log('Product before submit:', this.product);
 
     if (this.addForm.valid) {
       if (!this.isEdit) {
-        if(this.product.slug == '') {
+        if (this.product.slug == '') {
           this.product.slug = this.convertToSlug(this.product.name);
         }
 
@@ -369,7 +369,13 @@ export class AddProductModalComponent implements OnInit {
           },
         });
       } else {
-        this.productService.editProduct(this.product).subscribe({
+        // Convert ProductOptions before sending
+        this.convertValuesToDisplayToProductOptionValues();
+
+        // Prepare update payload
+        const updatePayload = this.prepareUpdatePayload();
+
+        this.productService.editProduct(this.product.id, updatePayload).subscribe({
           next: () => {
             this.toastrService.success('Sửa sản phẩm thành công!');
             this.destroyModal();
@@ -381,6 +387,42 @@ export class AddProductModalComponent implements OnInit {
         });
       }
     }
+  }
+
+  prepareUpdatePayload() {
+    // Ensure productOptions have proper structure
+    const productOptions = this.productOptions.map(option => ({
+      optionName: option.optionName,
+      productOptionValues: option.productOptionValues || []
+    }));
+
+    // Ensure productSKUs have proper structure
+    const productSKUs = this.productSKUs.map(sku => ({
+      sku: sku.sku,
+      barcode: sku.barcode,
+      quantity: sku.quantity,
+      price: +sku.price,
+      importPrice: +sku.importPrice,
+      weight: +sku.weight,
+      imageUrl: sku.imageUrl || '',
+      productSKUValues: sku.productSKUValues || [],
+      photos: sku.photos || []
+    }));
+
+    return {
+      name: this.addForm.value.productName,
+      description: this.addForm.value.productDescription,
+      productSKU: this.addForm.value.productSKU,
+      importPrice: +this.addForm.value.importPrice,
+      slug: this.product.slug || this.convertToSlug(this.addForm.value.productName),
+      productTypeId: this.addForm.value.productTypeId,
+      style: this.addForm.value.productStyle,
+      season: this.addForm.value.productSeason,
+      material: this.addForm.value.productMaterial,
+      productOptions: productOptions,
+      productSKUs: productSKUs,
+      photos: this.productImages
+    };
   }
 
   convertToSlug(productName: string): string {
@@ -407,6 +449,11 @@ export class AddProductModalComponent implements OnInit {
     this.product.material = this.addForm.value.productMaterial;
     this.product.season = this.addForm.value.productSeason;
 
+    this.convertValuesToDisplayToProductOptionValues();
+    this.product.productOptions = this.productOptions;
+
+    this.product.productSkus = this.productSKUs;
+    this.product.photos = this.productImages;
     // this.product.productSkus.forEach(sku => {
     //   if(sku.photos.length == 0) {
     //     sku.photos.push(this.productImages.find(p => p.isMain == true));
@@ -443,7 +490,7 @@ export class AddProductModalComponent implements OnInit {
   groupProductImages() {
     this.productImages = this.photoList.map(
       file => {
-        if(file.response) {
+        if (file.response) {
           return {
             ...file.response,
             isMain: false

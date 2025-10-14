@@ -20,8 +20,8 @@ export class ProductService {
     return this.http.post(this.baseUrl + 'adminproduct/create', product);
   }
 
-  editProduct(product: Product) {
-    return this.http.put(this.baseUrl + 'adminproduct/product', product);
+  editProduct(productId: number, product: any) {
+    return this.http.put(`${this.baseUrl}adminproduct/product/${productId}`, product);
   }
 
   getProducts(productParams: ProductParams) {
