@@ -72,7 +72,7 @@ namespace Infrastructure.Services
         {
             var product = await _productRepository.CreateProductAsync(prod);
 
-            return prod;
+            return product;
         }
 
         public async Task<bool> DeleteProducts(List<Product> products)

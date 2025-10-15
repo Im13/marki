@@ -522,11 +522,6 @@ namespace Infrastructure.Data
                         {
                             skuValue.ProductOptionValue = optionValue;
                         }
-                        else
-                        {
-                            throw new ArgumentException(
-                                $"SKU value with ValueTempId {skuValue.ValueTempId} not found in product options");
-                        }
                     }
                 }
             }
