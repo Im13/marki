@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, HostListener, Input, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { Product } from 'src/app/_shared/_models/products';
@@ -55,6 +55,9 @@ export class AddProductModalComponent implements OnInit {
   mainPhoto: NzUploadFile[] = [];
   previewImage: string | undefined = '';
   previewVisible = false;
+
+  private currentEditingOption: ProductOptions | null = null;
+  private lastInputValue: string = ''; // ✅ Store value here
 
   productImages: Photo[] = [];
 
@@ -263,14 +266,58 @@ export class AddProductModalComponent implements OnInit {
     this.editId = null;
   }
 
-  handleOptionValueKeydown(event: any, data: ProductOptions) {
-    if (event.key == 'Tab') {
-      event.preventDefault();
+  // ✅ Capture input value BEFORE Tab clears it
+  @HostListener('document:input', ['$event'])
+  handleInput(event: any) {
+    const target = event.target as HTMLElement;
+    if (target.classList.contains('ant-select-selection-search-input')) {
+      this.lastInputValue = (target as HTMLInputElement).value?.trim() || '';
     }
+  }
 
-    if (event.key == 'Enter') {
-      event.preventDefault();
+  // ✅ Use saved value on Tab
+  @HostListener('document:keydown', ['$event'])
+  handleGlobalKeydown(event: KeyboardEvent) {
+    const target = event.target as HTMLElement;
+
+    if (target.classList.contains('ant-select-selection-search-input')) {
+      if (event.key === 'Tab') {
+
+        if (this.lastInputValue && this.currentEditingOption) {
+          event.preventDefault();
+          event.stopPropagation();
+
+          if (!this.currentEditingOption.valuesToDisplay) {
+            this.currentEditingOption.valuesToDisplay = [];
+          }
+
+          if (!this.currentEditingOption.valuesToDisplay.includes(this.lastInputValue)) {
+            this.currentEditingOption.valuesToDisplay.push(this.lastInputValue);
+
+            // ✅ Force Angular change detection
+            this.currentEditingOption.valuesToDisplay = [...this.currentEditingOption.valuesToDisplay];
+          } else {
+          }
+
+          this.lastInputValue = '';
+          (target as HTMLInputElement).value = '';
+        } else {
+          console.log('❌ Missing value or option');
+        }
+      }
     }
+  }
+
+  // ✅ NEW: Track when nz-select is opened/active
+  onOptionOpen(isOpen: boolean, option: ProductOptions) {
+    if (isOpen) {
+      this.currentEditingOption = option;
+    }
+  }
+
+  // ✅ Track which option is being edited
+  onOptionFocus(option: ProductOptions) {
+    this.currentEditingOption = option;
   }
 
   handleOptionKeydown(event: any, data: ProductOptions) {
@@ -594,8 +641,6 @@ export class AddProductModalComponent implements OnInit {
         sku[fieldKey] = value;
       }
     });
-
-    console.log(`✅ Synced ${fieldKey} to ${this.productSKUs.length} SKUs`);
   }
 
   // ✅ NEW METHOD: Handle input blur events
@@ -613,7 +658,6 @@ export class AddProductModalComponent implements OnInit {
           s.photos = JSON.parse(JSON.stringify(photos));
         }
       });
-      console.log(`✅ Synced photos to ${this.productSKUs.length} SKUs`);
     }
   }
 }
