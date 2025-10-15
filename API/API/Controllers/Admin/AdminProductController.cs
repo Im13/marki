@@ -84,6 +84,7 @@ namespace API.Controllers.Admin
             }
         }
 
+        // Replace with SoftDeleteProducts
         [HttpPost("delete-products")]
         public async Task<ActionResult> DeleteProduct(List<ProductDTOs> productDTOs)
         {
