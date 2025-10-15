@@ -10,12 +10,14 @@ import { CoreModule } from '../_core/core.module';
 import { NzImageModule } from 'ng-zorro-antd/image';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
+import { SyncValuesComponent } from './product-list/add-product-modal/sync-values/sync-values.component';
 
 
 @NgModule({
   declarations: [
     ProductListComponent,
-    AddProductModalComponent
+    AddProductModalComponent,
+    SyncValuesComponent
   ],
   imports: [
     CommonModule,

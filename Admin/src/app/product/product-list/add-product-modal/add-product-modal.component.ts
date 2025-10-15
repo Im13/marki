@@ -14,6 +14,7 @@ import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { Photo } from 'src/app/_shared/_models/photo';
 import { ProductType } from 'src/app/_shared/_models/productTypes';
 import { ConvertVieService } from 'src/app/_core/_services/convert-vie.service';
+import { SyncService } from './sync-values/sync.service';
 
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
@@ -47,6 +48,7 @@ export class AddProductModalComponent implements OnInit {
   productTypes: ProductType[];
   selectedProductTypeId: number;
   isProductTypeLoading = false;
+  popupVisible: boolean = false;
 
   skuPhotoList: NzUploadFile[] = [];
   photoList: NzUploadFile[] = [];
@@ -60,7 +62,8 @@ export class AddProductModalComponent implements OnInit {
     private modal: NzModalRef,
     private productService: ProductService,
     private toastrService: ToastrService,
-    private convertVieService: ConvertVieService
+    private convertVieService: ConvertVieService,
+    private syncService: SyncService
   ) { }
 
   ngOnInit(): void {
@@ -564,15 +567,53 @@ export class AddProductModalComponent implements OnInit {
   removeOption(option: ProductOptions): void {
     this.productOptions = this.productOptions.filter(o => {
       if (this.isEdit) {
-        return o.id !== option.id;  
+        return o.id !== option.id;
       }
-      return o.productOptionId !== option.productOptionId;  
+      return o.productOptionId !== option.productOptionId;
     });
 
     if (this.productOptions.length > 0) {
       this.quickAddVariants();
     } else {
       this.productSKUs = [];
+    }
+  }
+
+  // ✅ NEW METHOD: Sync SKU field value to all SKUs
+  syncSKUField(fieldKey: string, value: any): void {
+    if (!this.syncService.shouldSync(fieldKey)) {
+      return; // Don't sync if not enabled
+    }
+
+    // Sync to all SKUs
+    this.productSKUs.forEach(sku => {
+      if (fieldKey === 'photos') {
+        // Special handling for photos (deep copy)
+        sku[fieldKey] = JSON.parse(JSON.stringify(value));
+      } else {
+        sku[fieldKey] = value;
+      }
+    });
+
+    console.log(`✅ Synced ${fieldKey} to ${this.productSKUs.length} SKUs`);
+  }
+
+  // ✅ NEW METHOD: Handle input blur events
+  onSKUFieldBlur(sku: ProductSKUs, fieldKey: string): void {
+    const value = sku[fieldKey];
+    this.syncSKUField(fieldKey, value);
+  }
+
+  // ✅ NEW METHOD: Handle photo change for SKU
+  onSKUPhotoChange(sku: ProductSKUs): void {
+    if (this.syncService.shouldSync('photos')) {
+      const photos = sku.photos;
+      this.productSKUs.forEach(s => {
+        if (s !== sku) {
+          s.photos = JSON.parse(JSON.stringify(photos));
+        }
+      });
+      console.log(`✅ Synced photos to ${this.productSKUs.length} SKUs`);
     }
   }
 }
