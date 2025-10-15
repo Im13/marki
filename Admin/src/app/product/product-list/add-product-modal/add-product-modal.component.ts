@@ -82,6 +82,7 @@ export class AddProductModalComponent implements OnInit {
         slug: ''
       };
     } else {
+      console.log('✅ Before regenerate:', this.product);
       this.isEdit = true;
       this.selectedProductTypeId = this.product.productTypeId;
 
@@ -110,23 +111,11 @@ export class AddProductModalComponent implements OnInit {
         } as NzUploadFile
       })
 
-      this.product.productOptions.forEach((option) => {
-        const productOption = {
-          id: null,
-          optionName: option.optionName,
-          valuesToDisplay: [],
-          productOptionId: option.productOptionId,
-          productOptionValues: option.productOptionValues,
-        };
+      this.regenerateValueTempIds();
 
-        productOption.productOptionValues.forEach((value) => {
-          productOption.valuesToDisplay.push(value.valueName);
-        });
+      console.log('✅ After regenerate - ProductOptions:', this.productOptions);
+      console.log('✅ After regenerate - ProductSKUs:', this.productSKUs);
 
-        this.productOptions.push(productOption);
-      });
-
-      this.productSKUs = this.product.productSkus;
     }
 
     this.addForm = new FormGroup({
@@ -350,10 +339,11 @@ export class AddProductModalComponent implements OnInit {
     this.groupProductImages();
     this.bindDataToProductObject();
 
-    console.log('Product before submit:', this.product);
-
     if (this.addForm.valid) {
       if (!this.isEdit) {
+        // CREATE - Keep as is
+        this.bindDataToProductObject();
+
         if (this.product.slug == '') {
           this.product.slug = this.convertToSlug(this.product.name);
         }
@@ -369,11 +359,9 @@ export class AddProductModalComponent implements OnInit {
           },
         });
       } else {
-        // Convert ProductOptions before sending
-        this.convertValuesToDisplayToProductOptionValues();
-
-        // Prepare update payload
         const updatePayload = this.prepareUpdatePayload();
+
+        console.log('Update payload:', updatePayload);
 
         this.productService.editProduct(this.product.id, updatePayload).subscribe({
           next: () => {
@@ -381,7 +369,7 @@ export class AddProductModalComponent implements OnInit {
             this.destroyModal();
           },
           error: (err) => {
-            this.toastrService.error(err);
+            this.toastrService.error(err.error?.message || err.message || 'Có lỗi xảy ra');
             this.isSubmitting = false;
           },
         });
@@ -390,39 +378,85 @@ export class AddProductModalComponent implements OnInit {
   }
 
   prepareUpdatePayload() {
-    // Ensure productOptions have proper structure
+    // Convert valuesToDisplay to productOptionValues
+    this.convertValuesToDisplayToProductOptionValues();
+
+    // DEBUG: Log để kiểm tra valueTempId
+    console.log('ProductOptions before mapping:', this.productOptions);
+    console.log('ProductSKUs before mapping:', this.productSKUs);
+
+    // Ensure proper structure for ProductOptions
     const productOptions = this.productOptions.map(option => ({
       optionName: option.optionName,
-      productOptionValues: option.productOptionValues || []
+      productOptionValues: (option.productOptionValues || []).map(val => ({
+        valueName: val.valueName || val.value,
+        valueTempId: val.valueTempId || 0  // ← Ensure valueTempId exists
+      }))
     }));
 
-    // Ensure productSKUs have proper structure
-    const productSKUs = this.productSKUs.map(sku => ({
-      sku: sku.sku,
-      barcode: sku.barcode,
-      quantity: sku.quantity,
-      price: +sku.price,
-      importPrice: +sku.importPrice,
-      weight: +sku.weight,
-      imageUrl: sku.imageUrl || '',
-      productSKUValues: sku.productSKUValues || [],
-      photos: sku.photos || []
-    }));
+    // Build lookup map for debugging
+    const valueTempIdMap = new Map<number, string>();
+    productOptions.forEach(opt => {
+      opt.productOptionValues.forEach(val => {
+        valueTempIdMap.set(val.valueTempId, `${opt.optionName}: ${val.valueName}`);
+      });
+    });
 
-    return {
+    console.log('Available valueTempIds:', Array.from(valueTempIdMap.entries()));
+
+    // Ensure proper structure for ProductSKUs
+    const productSKUs = this.productSKUs.map(sku => {
+      const skuValues = (sku.productSKUValues || []).map(val => {
+        const valueTempId = val.valueTempId || 0;
+
+        // DEBUG: Check if valueTempId exists in options
+        if (valueTempId === 0 || !valueTempIdMap.has(valueTempId)) {
+          console.warn(`SKU ${sku.sku} has invalid valueTempId: ${valueTempId}`, val);
+        }
+
+        return {
+          valueTempId: valueTempId
+        };
+      });
+
+      return {
+        sku: sku.sku,
+        barcode: sku.barcode || '',
+        quantity: +sku.quantity || 0,
+        price: +sku.price || 0,
+        importPrice: +sku.importPrice || 0,
+        weight: +sku.weight || 0,
+        imageUrl: sku.imageUrl || '',
+        productSKUValues: skuValues,
+        photos: (sku.photos || []).map(photo => ({
+          url: photo.url,
+          isMain: photo.isMain || false,
+          publicId: photo.publicId || ''
+        }))
+      };
+    });
+
+    const payload = {
       name: this.addForm.value.productName,
-      description: this.addForm.value.productDescription,
+      description: this.addForm.value.productDescription || '',
       productSKU: this.addForm.value.productSKU,
-      importPrice: +this.addForm.value.importPrice,
+      importPrice: +this.addForm.value.importPrice || 0,
       slug: this.product.slug || this.convertToSlug(this.addForm.value.productName),
       productTypeId: this.addForm.value.productTypeId,
-      style: this.addForm.value.productStyle,
-      season: this.addForm.value.productSeason,
-      material: this.addForm.value.productMaterial,
+      style: this.addForm.value.productStyle || '',
+      season: this.addForm.value.productSeason || '',
+      material: this.addForm.value.productMaterial || '',
       productOptions: productOptions,
       productSKUs: productSKUs,
-      photos: this.productImages
+      photos: this.productImages.map(photo => ({
+        url: photo.url,
+        isMain: photo.isMain || false,
+        publicId: photo.publicId || ''
+      }))
     };
+
+    console.log('Final payload:', payload);
+    return payload;
   }
 
   convertToSlug(productName: string): string {
@@ -509,5 +543,100 @@ export class AddProductModalComponent implements OnInit {
     } as Photo;
 
     this.productImages.push(mainImage);
+  }
+
+  private regenerateValueTempIds() {
+    let tempIdCounter = 1;
+
+    // STEP 1: Process ProductOptions and assign new valueTempIds
+    this.productOptions = [];
+
+    if (this.product.productOptions && this.product.productOptions.length > 0) {
+      this.product.productOptions.forEach((option) => {
+        const productOption = {
+          id: option.id,
+          optionName: option.optionName,
+          valuesToDisplay: [],
+          productOptionId: option.productOptionId,
+          productOptionValues: [],
+        };
+
+        if (option.productOptionValues && option.productOptionValues.length > 0) {
+          option.productOptionValues.forEach((value) => {
+            // ✅ Generate new valueTempId
+            const newValueTempId = tempIdCounter++;
+
+            const optionValue = {
+              valueName: value.valueName,
+              valueTempId: newValueTempId,  // ← New ID
+              value: value.valueName
+            };
+
+            productOption.valuesToDisplay.push(value.valueName);
+            productOption.productOptionValues.push(optionValue);
+          });
+        }
+
+        this.productOptions.push(productOption);
+      });
+    }
+
+    // STEP 2: Update valueTempId counter
+    this.valueTempId = tempIdCounter;
+
+    // STEP 3: Build lookup map: optionName + valueName → valueTempId
+    const valueMapping = new Map<string, number>();
+
+    this.productOptions.forEach(option => {
+      option.productOptionValues.forEach(value => {
+        const key = `${option.optionName}::${value.valueName}`;
+        valueMapping.set(key, value.valueTempId);
+      });
+    });
+
+    console.log('✅ Value mapping:', Array.from(valueMapping.entries()));
+
+    // STEP 4: Process ProductSKUs and update their valueTempIds
+    this.productSKUs = [];
+
+    if (this.product.productSkus && this.product.productSkus.length > 0) {
+      this.product.productSkus.forEach(sku => {
+        const newSKU = {
+          id: sku.id,
+          localId: sku.localId,
+          sku: sku.sku,
+          barcode: sku.barcode,
+          quantity: sku.quantity,
+          price: sku.price,
+          importPrice: sku.importPrice,
+          weight: sku.weight,
+          imageUrl: sku.imageUrl,
+          photos: sku.photos || [],
+          productSKUValues: []
+        };
+
+        // Update ProductSKUValues with new valueTempIds
+        if (sku.productSKUValues && sku.productSKUValues.length > 0) {
+          sku.productSKUValues.forEach(skuValue => {
+            // Find matching valueTempId by optionName + optionValue
+            const key = `${skuValue.optionName}::${skuValue.optionValue}`;
+            const newValueTempId = valueMapping.get(key);
+
+            if (newValueTempId) {
+              newSKU.productSKUValues.push({
+                id: skuValue.id,
+                valueTempId: newValueTempId,  // ← Updated!
+                optionName: skuValue.optionName,
+                optionValue: skuValue.optionValue
+              });
+            } else {
+              console.warn(`⚠️ Cannot find valueTempId for: ${key}`);
+            }
+          });
+        }
+
+        this.productSKUs.push(newSKU);
+      });
+    }
   }
 }

@@ -277,7 +277,7 @@ namespace Infrastructure.Data
                 existing.ProductSKUs = new List<ProductSKUs>();
 
                 // Get main photo from Product for default SKU images
-                var mainProductPhoto = updated.Photos?.FirstOrDefault(p => p.IsMain) 
+                var mainProductPhoto = updated.Photos?.FirstOrDefault(p => p.IsMain)
                     ?? existing.Photos?.FirstOrDefault(p => p.IsMain);
 
                 // Build lookup for option values by ValueTempId
@@ -296,8 +296,8 @@ namespace Infrastructure.Data
                         ImportPrice = sku.ImportPrice,
                         Barcode = sku.Barcode,
                         Weight = sku.Weight,
-                        ImageUrl = string.IsNullOrEmpty(sku.ImageUrl) && mainProductPhoto != null 
-                            ? mainProductPhoto.Url 
+                        ImageUrl = string.IsNullOrEmpty(sku.ImageUrl) && mainProductPhoto != null
+                            ? mainProductPhoto.Url
                             : sku.ImageUrl,
                         ProductId = existing.Id,
                         Product = existing
