@@ -381,9 +381,10 @@ export class AddProductModalComponent implements OnInit {
     // Convert valuesToDisplay to productOptionValues
     this.convertValuesToDisplayToProductOptionValues();
 
-    // DEBUG: Log để kiểm tra valueTempId
-    console.log('ProductOptions before mapping:', this.productOptions);
-    console.log('ProductSKUs before mapping:', this.productSKUs);
+    console.log('After convert:', this.productOptions.map(o => ({
+      name: o.optionName,
+      values: o.productOptionValues.map(v => `${v.valueName}:${v.valueTempId}`)
+    })));
 
     // Ensure proper structure for ProductOptions
     const productOptions = this.productOptions.map(option => ({
@@ -394,24 +395,29 @@ export class AddProductModalComponent implements OnInit {
       }))
     }));
 
-    // Build lookup map for debugging
-    const valueTempIdMap = new Map<number, string>();
+    // ✅ Build mapping: "optionName::valueName" → valueTempId
+    const valueTempIdMap = new Map<string, number>();
     productOptions.forEach(opt => {
       opt.productOptionValues.forEach(val => {
-        valueTempIdMap.set(val.valueTempId, `${opt.optionName}: ${val.valueName}`);
+        const key = `${opt.optionName}::${val.valueName}`;
+        valueTempIdMap.set(key, val.valueTempId);
       });
     });
 
-    console.log('Available valueTempIds:', Array.from(valueTempIdMap.entries()));
+    console.log('✅ Mapping:', Array.from(valueTempIdMap.entries()));
 
-    // Ensure proper structure for ProductSKUs
+    // ✅ FIX: Map SKU values using optionName + optionValue
     const productSKUs = this.productSKUs.map(sku => {
       const skuValues = (sku.productSKUValues || []).map(val => {
-        const valueTempId = val.valueTempId || 0;
+        // ✅ Build key from optionName + optionValue
+        const key = `${val.optionName}::${val.optionValue}`;
+        const valueTempId = valueTempIdMap.get(key) || 0;
 
-        // DEBUG: Check if valueTempId exists in options
-        if (valueTempId === 0 || !valueTempIdMap.has(valueTempId)) {
-          console.warn(`SKU ${sku.sku} has invalid valueTempId: ${valueTempId}`, val);
+        // DEBUG
+        if (valueTempId === 0) {
+          console.warn(`❌ SKU ${sku.sku} cannot find: "${key}"`, val);
+        } else {
+          console.log(`✅ SKU ${sku.sku} found: "${key}" → valueTempId=${valueTempId}`);
         }
 
         return {
@@ -548,7 +554,6 @@ export class AddProductModalComponent implements OnInit {
   private regenerateValueTempIds() {
     let tempIdCounter = 1;
 
-    // STEP 1: Process ProductOptions and assign new valueTempIds
     this.productOptions = [];
 
     if (this.product.productOptions && this.product.productOptions.length > 0) {
@@ -563,7 +568,6 @@ export class AddProductModalComponent implements OnInit {
 
         if (option.productOptionValues && option.productOptionValues.length > 0) {
           option.productOptionValues.forEach((value) => {
-            // ✅ Generate new valueTempId
             const newValueTempId = tempIdCounter++;
 
             const optionValue = {
@@ -581,10 +585,8 @@ export class AddProductModalComponent implements OnInit {
       });
     }
 
-    // STEP 2: Update valueTempId counter
     this.valueTempId = tempIdCounter;
 
-    // STEP 3: Build lookup map: optionName + valueName → valueTempId
     const valueMapping = new Map<string, number>();
 
     this.productOptions.forEach(option => {
@@ -594,9 +596,6 @@ export class AddProductModalComponent implements OnInit {
       });
     });
 
-    console.log('✅ Value mapping:', Array.from(valueMapping.entries()));
-
-    // STEP 4: Process ProductSKUs and update their valueTempIds
     this.productSKUs = [];
 
     if (this.product.productSkus && this.product.productSkus.length > 0) {
