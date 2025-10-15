@@ -37,7 +37,6 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.displayCreateModal();
     this.getProducts();
 
     // Lắng nghe sự thay đổi từ search box
@@ -96,7 +95,9 @@ export class ProductListComponent implements OnInit {
 
   deleteSelectedProducts() {
     this.loading = true;
-    const seletedProduct = this.products.filter(data => this.setOfCheckedId.has(data.id));
+    const selectedIds = this.products
+      .filter(data => this.setOfCheckedId.has(data.id))
+      .map(p => p.id);
 
     this.modalServices.confirm({
       nzTitle: 'Bạn muốn xoá các sản phẩm đang chọn?',
@@ -104,7 +105,7 @@ export class ProductListComponent implements OnInit {
       nzOkType: 'primary',
       nzOkDanger: true,
       nzOnOk: () => {
-        this.productService.deleteProducts(seletedProduct).subscribe({
+        this.productService.deleteProducts(selectedIds).subscribe({
           next: () => {
             this.getProducts();
             this.toastrService.success('Remove items success!');

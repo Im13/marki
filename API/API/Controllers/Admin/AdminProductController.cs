@@ -99,6 +99,23 @@ namespace API.Controllers.Admin
             return Ok();
         }
 
+        [HttpDelete("product/{id}")]
+        public async Task<ActionResult> SoftDeleteProduct(int id)
+        {
+            var success = await _productService.SoftDeleteProductAsync(id);
+            if (!success) return NotFound();
+            return NoContent();
+        }
+
+        [HttpDelete("products")]
+        public async Task<ActionResult> SoftDeleteProducts([FromBody] IEnumerable<int> productIds)
+        {
+            if (productIds == null) return BadRequest("No data received!");
+            var success = await _productService.SoftDeleteProductsAsync(productIds);
+            if (!success) return BadRequest("Failed to delete!");
+            return NoContent();
+        }
+
         [HttpPost("image-upload")]
         public async Task<ActionResult<PhotoDTO>> UploadImage(IFormFile file)
         {

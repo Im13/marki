@@ -34,8 +34,8 @@ export class ProductService {
     return this.http.get<Pagination<Product[]>>(this.baseUrl + 'adminproduct/products', { params });
   }
 
-  deleteProducts(products: Product[]) {
-    return this.http.post(this.baseUrl + 'adminproduct/delete-products', products);
+  deleteProducts(productIds: number[]) {
+    return this.http.request('DELETE', this.baseUrl + 'adminproduct/products', { body: productIds });
   }
 
   productImageUpload(file: FormData) {

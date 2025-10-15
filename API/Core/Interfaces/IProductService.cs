@@ -10,6 +10,8 @@ namespace Core.Interfaces
         Task<Result<Product>> UpdateProductAsync(int productId, Product product);
         Task<Product> GetProductAsync(int id);
         Task<bool> DeleteProducts(List<Product> products);
+        Task<bool> SoftDeleteProductAsync(int productId);
+        Task<bool> SoftDeleteProductsAsync(IEnumerable<int> productIds);
         Task<ProductSKUs> GetProductSKU(int skuId);
         Task<Product> GetBySlug(string slug);
     }

@@ -82,7 +82,6 @@ export class AddProductModalComponent implements OnInit {
         slug: ''
       };
     } else {
-      console.log('✅ Before regenerate:', this.product);
       this.isEdit = true;
       this.selectedProductTypeId = this.product.productTypeId;
 
@@ -112,10 +111,6 @@ export class AddProductModalComponent implements OnInit {
       })
 
       this.regenerateValueTempIds();
-
-      console.log('✅ After regenerate - ProductOptions:', this.productOptions);
-      console.log('✅ After regenerate - ProductSKUs:', this.productSKUs);
-
     }
 
     this.addForm = new FormGroup({
@@ -128,52 +123,6 @@ export class AddProductModalComponent implements OnInit {
       productMaterial: new FormControl(this.product.material),
       productSeason: new FormControl(this.product.season),
     });
-
-    // //Fake datas
-    // this.productOptions = [
-    //   {
-    //     optionName: 'Size',
-    //     productOptionId: 0,
-    //     productOptionValues: [
-    //       {
-    //         valueTempId: 1,
-    //         value: 'S',
-    //         valueName: 'Size'
-    //       },
-    //       {
-    //         valueTempId: 2,
-    //         value: 'M',
-    //         valueName: 'Size'
-    //       },
-    //       {
-    //         valueTempId: 3,
-    //         value: 'L',
-    //         valueName: 'Size'
-    //       }
-    //     ]
-    //   },
-    //   {
-    //     optionName: 'Color',
-    //     productOptionId: 1,
-    //     productOptionValues: [
-    //       {
-    //         valueTempId: 4,
-    //         value: 'White',
-    //         valueName: 'Mau sac'
-    //       },
-    //       {
-    //         valueTempId: 5,
-    //         value: 'Red',
-    //         valueName: 'Mau sac'
-    //       },
-    //       {
-    //         valueTempId: 6,
-    //         value: 'Blue',
-    //         valueName: 'Mau sac'
-    //       }
-    //     ]
-    //   }
-    // ];
   }
 
   getProductTypes() {
@@ -341,7 +290,6 @@ export class AddProductModalComponent implements OnInit {
 
     if (this.addForm.valid) {
       if (!this.isEdit) {
-        // CREATE - Keep as is
         this.bindDataToProductObject();
 
         if (this.product.slug == '') {
@@ -361,8 +309,6 @@ export class AddProductModalComponent implements OnInit {
       } else {
         const updatePayload = this.prepareUpdatePayload();
 
-        console.log('Update payload:', updatePayload);
-
         this.productService.editProduct(this.product.id, updatePayload).subscribe({
           next: () => {
             this.toastrService.success('Sửa sản phẩm thành công!');
@@ -378,7 +324,6 @@ export class AddProductModalComponent implements OnInit {
   }
 
   prepareUpdatePayload() {
-    // Convert valuesToDisplay to productOptionValues
     this.convertValuesToDisplayToProductOptionValues();
 
     console.log('After convert:', this.productOptions.map(o => ({
@@ -386,7 +331,6 @@ export class AddProductModalComponent implements OnInit {
       values: o.productOptionValues.map(v => `${v.valueName}:${v.valueTempId}`)
     })));
 
-    // Ensure proper structure for ProductOptions
     const productOptions = this.productOptions.map(option => ({
       optionName: option.optionName,
       productOptionValues: (option.productOptionValues || []).map(val => ({
@@ -395,7 +339,6 @@ export class AddProductModalComponent implements OnInit {
       }))
     }));
 
-    // ✅ Build mapping: "optionName::valueName" → valueTempId
     const valueTempIdMap = new Map<string, number>();
     productOptions.forEach(opt => {
       opt.productOptionValues.forEach(val => {
@@ -404,21 +347,11 @@ export class AddProductModalComponent implements OnInit {
       });
     });
 
-    console.log('✅ Mapping:', Array.from(valueTempIdMap.entries()));
-
-    // ✅ FIX: Map SKU values using optionName + optionValue
     const productSKUs = this.productSKUs.map(sku => {
       const skuValues = (sku.productSKUValues || []).map(val => {
         // ✅ Build key from optionName + optionValue
         const key = `${val.optionName}::${val.optionValue}`;
         const valueTempId = valueTempIdMap.get(key) || 0;
-
-        // DEBUG
-        if (valueTempId === 0) {
-          console.warn(`❌ SKU ${sku.sku} cannot find: "${key}"`, val);
-        } else {
-          console.log(`✅ SKU ${sku.sku} found: "${key}" → valueTempId=${valueTempId}`);
-        }
 
         return {
           valueTempId: valueTempId
@@ -494,11 +427,6 @@ export class AddProductModalComponent implements OnInit {
 
     this.product.productSkus = this.productSKUs;
     this.product.photos = this.productImages;
-    // this.product.productSkus.forEach(sku => {
-    //   if(sku.photos.length == 0) {
-    //     sku.photos.push(this.productImages.find(p => p.isMain == true));
-    //   }
-    // });
   }
 
   onCreateVariants() {
@@ -629,7 +557,7 @@ export class AddProductModalComponent implements OnInit {
                 optionValue: skuValue.optionValue
               });
             } else {
-              console.warn(`⚠️ Cannot find valueTempId for: ${key}`);
+              console.warn(`Cannot find valueTempId for: ${key}`);
             }
           });
         }
