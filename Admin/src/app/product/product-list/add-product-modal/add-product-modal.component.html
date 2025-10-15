@@ -4,7 +4,8 @@
       <div class="col-6 px-2 border rounded">
         <div class="product-details p-2">
           <div class="mb-3">
-            <label for="productSKU" class="form-label m-0 mb-1 fw-semibold">SKU sản phẩm <span class="help-block">*</span></label>
+            <label for="productSKU" class="form-label m-0 mb-1 fw-semibold">SKU sản phẩm <span
+                class="help-block">*</span></label>
             <input type="text" class="form-control form-control-sm rounded-0" id="productSKU" placeholder="SKU sản phẩm"
               formControlName="productSKU" />
             <span *ngIf="
@@ -14,7 +15,8 @@
           </div>
 
           <div class="mb-3">
-            <label for="productName" class="form-label m-0 mb-1 fw-semibold">Tên sản phẩm <span class="help-block">*</span></label>
+            <label for="productName" class="form-label m-0 mb-1 fw-semibold">Tên sản phẩm <span
+                class="help-block">*</span></label>
             <input type="text" class="form-control form-control-sm rounded-0" id="productName"
               placeholder="Tên sản phẩm" formControlName="productName" />
             <span *ngIf="
@@ -26,7 +28,8 @@
           <div class="mb-3">
             <label for="importPrice" class="form-label m-0 mb-1 fw-semibold">Giá nhập</label>
             <input type="text" class="form-control form-control-sm rounded-0" id="importPrice" placeholder="Giá nhập"
-              formControlName="importPrice" />
+              formControlName="importPrice"
+              [mask]="'separator.2'" [thousandSeparator]="'.'" [decimalMarker]="','" [dropSpecialCharacters]="true" />
           </div>
 
           <div class="mb-3">
@@ -38,13 +41,13 @@
           <div class="mb-3 row">
             <div class="col-4">
               <label for="productStyle" class="form-label m-0 mb-1 fw-semibold">Kiểu dáng</label>
-              <input type="text" class="form-control form-control-sm rounded-0" id="productStyle" placeholder="Kiểu dáng"
-                formControlName="productStyle" />
+              <input type="text" class="form-control form-control-sm rounded-0" id="productStyle"
+                placeholder="Kiểu dáng" formControlName="productStyle" />
             </div>
             <div class="col-4">
               <label for="productMaterial" class="form-label m-0 mb-1 fw-semibold">Chất liệu</label>
-              <input type="text" class="form-control form-control-sm rounded-0" id="productMaterial" placeholder="Chất liệu"
-                formControlName="productMaterial" />
+              <input type="text" class="form-control form-control-sm rounded-0" id="productMaterial"
+                placeholder="Chất liệu" formControlName="productMaterial" />
             </div>
             <div class="col-4">
               <label for="productSeason" class="form-label m-0 mb-1 fw-semibold">Season</label>
@@ -57,7 +60,8 @@
       <div class="col-6 px-2">
         <div class="supplier p-2 border rounded">
           <div class="mb-3">
-            <label for="productType" class="form-label m-0 mb-1 fw-semibold">Danh mục <span class="help-block">*</span></label>
+            <label for="productType" class="form-label m-0 mb-1 fw-semibold">Danh mục <span
+                class="help-block">*</span></label>
 
             <nz-select nzPlaceHolder="Chọn danh mục" nzAllowClear nzShowSearch nzServerSearch
               formControlName="productTypeId">
@@ -225,11 +229,13 @@
                 </td>
                 <td class="p-2">
                   <input nz-input [(ngModel)]="sku.importPrice" [ngModelOptions]="{ standalone: true }"
-                    nzPlaceHolder="Please select" nzDropdownClassName="hide-dropdown" class="w-100" />
+                    nzPlaceHolder="Please select" nzDropdownClassName="hide-dropdown" class="w-100"
+                    [mask]="'separator.2'" [thousandSeparator]="'.'" [decimalMarker]="','" [dropSpecialCharacters]="true" />
                 </td>
                 <td class="p-2">
                   <input nz-input [(ngModel)]="sku.price" [ngModelOptions]="{ standalone: true }"
-                    nzPlaceHolder="Please select" nzDropdownClassName="hide-dropdown" class="w-100" />
+                    nzPlaceHolder="Please select" nzDropdownClassName="hide-dropdown" class="w-100"
+                    [mask]="'separator.2'" [thousandSeparator]="'.'" [decimalMarker]="','" [dropSpecialCharacters]="true" />
                 </td>
                 <td class="p-2">
                   <span *ngFor="let option of sku.productSKUValues">

@@ -566,4 +566,11 @@ export class AddProductModalComponent implements OnInit {
       });
     }
   }
+
+  formatterVi = (value?: number | string) =>
+    value === null || value === undefined || value === '' ? '' :
+    new Intl.NumberFormat('vi-VN').format(Number(String(value).replace(/[^\d,-]/g, '')));
+  
+  parserVi = (value: string) =>
+    value ? value.replace(/[.\s]/g, '').replace(',', '.') : '';
 }

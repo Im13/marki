@@ -18,6 +18,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { SharedModule } from './_shared/shared.module';
 import { HasRoleDirective } from './_core/_directives/has-role.directive';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 registerLocaleData(en);
 
@@ -41,11 +42,14 @@ registerLocaleData(en);
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true
-    })
+    }),
+    NgxMaskDirective,
+    NgxMaskPipe
   ],
   providers: [
     DatePipe,
-    { provide: NZ_I18N, useValue: en_US }
+    { provide: NZ_I18N, useValue: en_US },
+    provideNgxMask()
   ],
   bootstrap: [AppComponent]
 })

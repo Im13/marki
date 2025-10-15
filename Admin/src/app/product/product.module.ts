@@ -8,6 +8,8 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
 import { AddProductModalComponent } from './product-list/add-product-modal/add-product-modal.component';
 import { CoreModule } from '../_core/core.module';
 import { NzImageModule } from 'ng-zorro-antd/image';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 
 @NgModule({
@@ -22,8 +24,12 @@ import { NzImageModule } from 'ng-zorro-antd/image';
     SharedModule,
     PopoverModule.forRoot(),
     CoreModule,
-    NzImageModule
+    NzImageModule,
+    NzInputNumberModule,
+    NgxMaskDirective,
+    NgxMaskPipe
   ],
+  providers: [],
   exports: [
     ProductListComponent
   ]
