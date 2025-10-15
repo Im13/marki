@@ -109,11 +109,13 @@
                   <input nz-input type="text" [(ngModel)]="option.optionName" [ngModelOptions]="{ standalone: true }"
                     (keydown)="handleOptionKeydown($event, option)" />
                 </td>
-                <td class="p-2">
+                <td class="p-2 d-flex flex-row justify-content-between align-items-center">
                   <nz-select [(ngModel)]="option.valuesToDisplay" [ngModelOptions]="{ standalone: true }" nzMode="tags"
                     nzPlaceHolder="Please select" nzDropdownClassName="hide-dropdown" class="w-100"
                     [nzMaxTagCount]="1000" (keydown)="handleOptionValueKeydown($event, option)">
                   </nz-select>
+
+                  <span role="button" nz-icon nzType="delete" nzTheme="outline" class="px-2 text-danger fs-6" (click)="removeOption(option)"></span>
                 </td>
               </tr>
             </tbody>

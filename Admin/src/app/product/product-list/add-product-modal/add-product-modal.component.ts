@@ -326,11 +326,6 @@ export class AddProductModalComponent implements OnInit {
   prepareUpdatePayload() {
     this.convertValuesToDisplayToProductOptionValues();
 
-    console.log('After convert:', this.productOptions.map(o => ({
-      name: o.optionName,
-      values: o.productOptionValues.map(v => `${v.valueName}:${v.valueTempId}`)
-    })));
-
     const productOptions = this.productOptions.map(option => ({
       optionName: option.optionName,
       productOptionValues: (option.productOptionValues || []).map(val => ({
@@ -394,7 +389,6 @@ export class AddProductModalComponent implements OnInit {
       }))
     };
 
-    console.log('Final payload:', payload);
     return payload;
   }
 
@@ -567,10 +561,18 @@ export class AddProductModalComponent implements OnInit {
     }
   }
 
-  formatterVi = (value?: number | string) =>
-    value === null || value === undefined || value === '' ? '' :
-    new Intl.NumberFormat('vi-VN').format(Number(String(value).replace(/[^\d,-]/g, '')));
-  
-  parserVi = (value: string) =>
-    value ? value.replace(/[.\s]/g, '').replace(',', '.') : '';
+  removeOption(option: ProductOptions): void {
+    this.productOptions = this.productOptions.filter(o => {
+      if (this.isEdit) {
+        return o.id !== option.id;  
+      }
+      return o.productOptionId !== option.productOptionId;  
+    });
+
+    if (this.productOptions.length > 0) {
+      this.quickAddVariants();
+    } else {
+      this.productSKUs = [];
+    }
+  }
 }
