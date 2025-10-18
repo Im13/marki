@@ -54,6 +54,7 @@ export class HomeProductCarouselComponent implements OnInit {
       this.homeService.getByType(productParams).subscribe({
         next: res => {
           this.products = res.data.slice(0,6);
+          console.log(this.products);
         },
         error: err => {
           console.log(err);

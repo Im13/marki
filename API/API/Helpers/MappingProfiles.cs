@@ -82,7 +82,11 @@ namespace API.Helpers
             CreateMap<Product, UpdateProductDTO>();
             CreateMap<UpdateProductDTO, Product>();
             CreateMap<ProductForClientDTO, Product>();
-            CreateMap<Product, ProductForClientDTO>();
+            CreateMap<Product, ProductForClientDTO>()
+                .ForMember(d => d.PictureUrl, o => o.MapFrom(s => 
+                    s.Photos != null && s.Photos.Any() 
+                        ? (s.Photos.FirstOrDefault(p => p.IsMain) ?? s.Photos.FirstOrDefault()).Url 
+                        : null));
             CreateMap<Photo, PhotoDTO>();
             CreateMap<PhotoDTO, Photo>();
             CreateMap<SlideImage, SlideImageDTO>();

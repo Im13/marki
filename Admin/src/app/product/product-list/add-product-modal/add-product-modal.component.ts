@@ -342,10 +342,6 @@ export class AddProductModalComponent implements OnInit {
       if (!this.isEdit) {
         this.bindDataToProductObject();
 
-        if (this.product.slug == '') {
-          this.product.slug = this.convertToSlug(this.product.name);
-        }
-
         this.productService.addProduct(this.product).subscribe({
           next: () => {
             this.toastrService.success('Thêm sản phẩm thành công!');
@@ -425,7 +421,7 @@ export class AddProductModalComponent implements OnInit {
       description: this.addForm.value.productDescription || '',
       productSKU: this.addForm.value.productSKU,
       importPrice: +this.addForm.value.importPrice || 0,
-      slug: this.product.slug || this.convertToSlug(this.addForm.value.productName),
+      slug: this.product.slug,
       productTypeId: this.addForm.value.productTypeId,
       style: this.addForm.value.productStyle || '',
       season: this.addForm.value.productSeason || '',
@@ -441,18 +437,6 @@ export class AddProductModalComponent implements OnInit {
 
     return payload;
   }
-
-  convertToSlug(productName: string): string {
-    return productName
-      .toLowerCase() // Chuyển về chữ thường
-      .normalize("NFD") // Chuẩn hóa Unicode để tách dấu
-      .replace(/[\u0300-\u036f]/g, "") // Xóa dấu
-      .replace(/đ/g, "d") // Chuyển đ -> d
-      .replace(/[^a-z0-9\s-]/g, "") // Xóa ký tự đặc biệt
-      .trim() // Xóa khoảng trắng thừa
-      .replace(/\s+/g, "-"); // Thay khoảng trắng bằng dấu "-"
-  }
-
 
   bindDataToProductObject() {
     this.product.name = this.addForm.value.productName;

@@ -77,17 +77,20 @@ namespace Infrastructure.Data
                 ValidateProduct(product);
                 _logger.LogInformation("Creating product: {ProductName}", product.Name);
 
-                //Generate slug
+                // Generate slug with ProductSKU for better uniqueness
                 if (string.IsNullOrWhiteSpace(product.Slug))
                 {
-                    product.Slug = await GenerateUniqueSlugAsync(product.Name);
+                    product.Slug = await GenerateUniqueSlugAsync(product.Name, product.ProductSKU);
                 }
-
-                // Load product type
-                var productType = await _context.ProductTypes.FindAsync(product.ProductTypeId);
-                if (productType == null)
+                else
                 {
-                    throw new ArgumentException($"ProductType with ID {product.ProductTypeId} not found");
+                    // If slug is provided manually, still check for uniqueness
+                    var slugExists = await _context.Products.AnyAsync(p => p.Slug == product.Slug);
+                    if (slugExists)
+                    {
+                        _logger.LogWarning("Provided slug '{Slug}' already exists. Generating unique slug.", product.Slug);
+                        product.Slug = await GenerateUniqueSlugAsync(product.Name, product.ProductSKU);
+                    }
                 }
 
                 // Set default values
@@ -425,19 +428,52 @@ namespace Infrastructure.Data
             }
         }
 
-        private async Task<string> GenerateUniqueSlugAsync(string name)
+        private async Task<string> GenerateUniqueSlugAsync(string name, string productSKU = null)
         {
             var baseSlug = GenerateSlug(name);
             var slug = baseSlug;
-            var counter = 1;
 
-            // Ensure slug is unique
-            while (await _context.Products.AnyAsync(p => p.Slug == slug))
+            // Check if slug already exists
+            var exists = await _context.Products.AnyAsync(p => p.Slug == slug);
+
+            if (!exists)
             {
-                slug = $"{baseSlug}-{counter}";
-                counter++;
+                return slug;
             }
 
+            if (!string.IsNullOrWhiteSpace(productSKU))
+            {
+                var skuSlug = GenerateSlug(productSKU);
+                slug = $"{baseSlug}-{skuSlug}";
+
+                exists = await _context.Products.AnyAsync(p => p.Slug == slug);
+                if (!exists)
+                {
+                    _logger.LogInformation("Slug collision detected. Generated unique slug using SKU: {Slug}", slug);
+                    return slug;
+                }
+            }
+
+            var timestamp = DateTime.UtcNow.ToString("yyyyMMddHHmmss");
+            slug = $"{baseSlug}-{timestamp}";
+
+            exists = await _context.Products.AnyAsync(p => p.Slug == slug);
+            if (!exists)
+            {
+                _logger.LogInformation("Slug collision detected. Generated unique slug using timestamp: {Slug}", slug);
+                return slug;
+            }
+
+            var counter = 1;
+            slug = $"{baseSlug}-{counter}";
+
+            while (await _context.Products.AnyAsync(p => p.Slug == slug))
+            {
+                counter++;
+                slug = $"{baseSlug}-{counter}";
+            }
+
+            _logger.LogWarning("Slug collision detected. Generated unique slug using counter: {Slug}", slug);
             return slug;
         }
 
