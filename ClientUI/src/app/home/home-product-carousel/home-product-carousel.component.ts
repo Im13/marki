@@ -13,6 +13,7 @@ import { HomeService } from '../home.service';
 import { ProductParams } from 'src/app/_shared/_models/productParams';
 import { getCollectionNameById } from 'src/app/_shared/_consts/collectionsMapConst';
 import { Router } from '@angular/router';
+import { ProductUtilityService } from 'src/app/_shared/_services/product-utility.service';
 
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
@@ -29,7 +30,11 @@ export class HomeProductCarouselComponent implements OnInit {
   products: Product[] = [];
   collecionName: string = '';
 
-  constructor(private homeService: HomeService, private router: Router) {}
+  constructor(
+    private homeService: HomeService, 
+    private router: Router,
+    private productUtilityService: ProductUtilityService
+  ) {}
 
   ngOnInit(): void {
     this.swiperConfig = {
@@ -54,7 +59,6 @@ export class HomeProductCarouselComponent implements OnInit {
       this.homeService.getByType(productParams).subscribe({
         next: res => {
           this.products = res.data.slice(0,6);
-          console.log(this.products);
         },
         error: err => {
           console.log(err);
@@ -73,5 +77,9 @@ export class HomeProductCarouselComponent implements OnInit {
 
   redirectToProduct(slug: string) {
     this.router.navigate([`products/${slug}`])
+  }
+
+  getMainPhotoUrl(product: Product): string {
+    return this.productUtilityService.getMainPhotoUrl(product);
   }
 }
