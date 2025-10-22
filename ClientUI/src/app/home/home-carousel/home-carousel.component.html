@@ -1,4 +1,4 @@
-<div class="h-100 tw-cursor-pointer">
+<div class="h-100 tw-curso">
   <nz-carousel [nzEffect]="effect" nzAutoPlay>
     <div *ngFor="let slide of slides" nz-carousel-content>
       <picture>
@@ -6,7 +6,6 @@
         <source srcset="{{ slide.desktopImageUrl }}" media="(min-width: 768px)">
         <img [src]="slide.desktopImageUrl" 
              [alt]="slide.altText || 'Banner image'" 
-             (load)="onImageLoad($event)" 
              #bannerImg>
       </picture>
     </div>
