@@ -1,8 +1,8 @@
 [nz-carousel-content] {
     text-align: center;
-    height: 500px; /* Điều chỉnh theo kích thước banner thực tế */
+    height: 100%; /* Fill toàn bộ container */
     line-height: normal;
-    background: #f0f0f0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradient background đẹp */
     color: #fff;
     overflow: hidden;
     display: flex;
@@ -21,25 +21,40 @@
 
 [nz-carousel-content] img {
     display: block;
-    max-width: 100%; /* CHỈ scale DOWN nếu ảnh quá lớn */
-    max-height: 100%; /* CHỈ scale DOWN nếu ảnh quá cao */
-    width: auto !important; /* QUAN TRỌNG: Giữ kích thước gốc */
-    height: auto !important; /* QUAN TRỌNG: Giữ kích thước gốc */
-    object-fit: none !important; /* KHÔNG zoom */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Fill toàn bộ container */
+    object-position: center; /* Căn giữa ảnh */
+    image-rendering: -webkit-optimize-contrast; /* Tối ưu chất lượng ảnh */
+    image-rendering: crisp-edges; /* Giữ độ sắc nét */
 }
 
-/* Responsive height cho mobile */
-@media (max-width: 767px) {
-    [nz-carousel-content] {
-        height: 200px;
-    }
+/* Responsive được xử lý bởi banner-container */
+
+/* Đảm bảo carousel container có chiều cao cố định */
+::ng-deep .ant-carousel {
+    height: 100%;
+    width: 100%;
 }
 
-/* Tablet */
-@media (min-width: 768px) and (max-width: 1024px) {
-    [nz-carousel-content] {
-        height: 300px;
-    }
+::ng-deep .ant-carousel .slick-slider {
+    height: 100%;
+    width: 100%;
+}
+
+::ng-deep .ant-carousel .slick-list {
+    height: 100%;
+    width: 100%;
+}
+
+::ng-deep .ant-carousel .slick-track {
+    height: 100%;
+    width: 100%;
+}
+
+::ng-deep .ant-carousel .slick-slide {
+    height: 100%;
+    width: 100%;
 }
 
 h3 {

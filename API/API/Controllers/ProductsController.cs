@@ -59,7 +59,7 @@ namespace API.Controllers
         public async Task<ActionResult<PhotoDTO>> AddPhoto(IFormFile file)
         {
             if(file == null) return BadRequest("No file detected!");
-            var result = await _photoService.AddPhotoAsync(file);
+            var result = await _photoService.AddBannerPhotoWithResponsiveAsync(file);
 
             if (result.Error != null)
             {

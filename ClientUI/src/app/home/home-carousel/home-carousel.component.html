@@ -1,12 +1,14 @@
-<div class="h-100">
+<div class="h-100 tw-cursor-pointer">
   <nz-carousel [nzEffect]="effect" nzAutoPlay>
     <div *ngFor="let slide of slides" nz-carousel-content>
       <picture>
         <source srcset="{{ slide.mobileImageUrl }}" media="(max-width: 767px)">
         <source srcset="{{ slide.desktopImageUrl }}" media="(min-width: 768px)">
-        <img [src]="slide.desktopImageUrl" (load)="onImageLoad($event)" #bannerImg>
+        <img [src]="slide.desktopImageUrl" 
+             [alt]="slide.altText || 'Banner image'" 
+             (load)="onImageLoad($event)" 
+             #bannerImg>
       </picture>
-      <!-- <img [src]="slide.mobileImageUrl" alt="slide" class="w-100 h-100" style="object-fit: cover;"/> -->
     </div>
   </nz-carousel>
 </div>
