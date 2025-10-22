@@ -24,4 +24,11 @@ export class HomeCarouselComponent implements OnInit {
       }
     });
   }
+
+  onImageLoad(event: any): void {
+    const img = event.target;
+    console.log('Image natural size:', img.naturalWidth, 'x', img.naturalHeight);
+    console.log('Image displayed size:', img.width, 'x', img.height);
+    console.log('Image computed style:', window.getComputedStyle(img));
+  }
 }

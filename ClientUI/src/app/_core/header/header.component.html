@@ -1,11 +1,9 @@
-<!-- Header for mobile display -->
 <div class="d-flex flex-row justify-content-between align-items-center h-100 d-block container-sm" nz-row>
   <div nz-col nzSpan="5" class="d-flex align-items-center h-100 fs-4 ps-3 d-lg-none" (click)="collapseMenuForm()"
     [attr.aria-expanded]="!isMenuCollapsed" aria-controls="collapseBasic">
     <span nz-icon nzType="menu" nzTheme="outline"></span>
   </div>
 
-  <!-- Logo Section -->
   <div class="logo h-100 d-flex align-items-center justify-content-center" nz-col [nzXs]="14"
     [nzSm]="6"><a class="text-decoration-none fs-3 text-black tw-text-3xl" (click)="redirectToHomePage()">MARKI</a>
   </div>
@@ -21,31 +19,22 @@
   </div>
 
   <!-- Header Utilities -->
-  <div class="h-100 d-none d-lg-flex align-items-center justify-content-end py-1" nz-col [nzSm]="6">
-    <div class="d-flex flex-column h-100 mx-1">
-      <div class="d-flex align-items-center justify-content-center tw-h-3/5 py-1">
-        <span nz-icon nzType="environment" nzTheme="outline" class="fs-5"></span>
-      </div>
-      <div class="d-flex align-items-center justify-content-center tw-h-2/5 tw-text-sm tw-font-medium tw-antialiased">
-        Cửa hàng
+  <div class="h-100 d-none d-lg-flex align-items-center justify-content-end" nz-col [nzSm]="6">
+    <div class="d-flex flex-column h-100 mx-1 tw-justify-center tw-cursor-pointer">
+      <div class="d-flex justify-content-center p-1">
+        <span nz-icon nzType="environment" nzTheme="outline" class="fs-4 tw-opacity-80 stroke-thin"></span>
       </div>
     </div>
 
-    <div class="d-flex flex-column h-100 mx-xl-3 mx-lg-2">
-      <div class="d-flex align-items-center justify-content-center tw-h-3/5 py-1">
-        <span nz-icon nzType="user" nzTheme="outline" class="fs-5"></span>
-      </div>
-      <div class="d-flex align-items-center justify-content-center tw-h-2/5 tw-text-sm tw-font-medium tw-antialiased">
-        Đăng nhập
+    <div class="d-flex flex-column h-100 mx-xl-3 mx-lg-2 tw-justify-center tw-cursor-pointer">
+      <div class="d-flex p-1">
+        <span nz-icon nzType="user" nzTheme="outline" class="fs-4 tw-opacity-80 stroke-thin"></span>
       </div>
     </div>
 
-    <div class="d-flex flex-column h-100 mx-1">
-      <div class="d-flex align-items-center justify-content-center tw-h-3/5 py-1">
-        <span nz-icon nzType="shopping-cart" nzTheme="outline" class="fs-5"></span>
-      </div>
-      <div class="d-flex align-items-center justify-content-center tw-h-2/5 tw-text-sm tw-font-medium tw-antialiased">
-        Giỏ hàng
+    <div class="d-flex flex-column h-100 mx-lg-2 tw-justify-center tw-cursor-pointer">
+      <div class="d-flex p-1">
+        <span nz-icon nzType="shopping-cart" nzTheme="outline" class="fs-4 tw-opacity-80 stroke-thin"></span>
       </div>
     </div>
   </div>
@@ -54,11 +43,11 @@
     [attr.aria-expanded]="!isCartCollapsed" aria-controls="collapseBasic">
     <nz-badge *ngIf="basketService.basketSource$ | async as basket; else nullBasket" [nzCount]="getCount(basket.items)"
       class="fs-5 me-3" [nzStyle]="{ backgroundColor: '#000' }" (click)="collapseCartForm()">
-      <span nz-icon nzType="shopping-cart" nzTheme="outline"></span>
+      <span nz-icon nzType="shopping-cart" nzTheme="outline" class="tw-opacity-70 stroke-thin"></span>
     </nz-badge>
     <ng-template #nullBasket>
       <nz-badge [nzCount]="0" class="fs-5 me-3" [nzStyle]="{ backgroundColor: '#000' }" (click)="collapseCartForm()">
-        <span nz-icon nzType="shopping-cart" nzTheme="outline"></span>
+        <span nz-icon nzType="shopping-cart" nzTheme="outline" class="tw-opacity-70 stroke-thin"></span>
       </nz-badge>
     </ng-template>
 
