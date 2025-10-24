@@ -1,26 +1,26 @@
-<div class="d-flex flex-row justify-content-between align-items-center h-100 d-block container-sm" nz-row>
+<div class="tw-h-full tw-flex tw-flex-row">
+  <!-- Collapse menu icon -->
   <div nz-col nzSpan="5" class="d-flex align-items-center h-100 fs-4 ps-3 d-lg-none" (click)="collapseMenuForm()"
     [attr.aria-expanded]="!isMenuCollapsed" aria-controls="collapseBasic">
     <span nz-icon nzType="menu" nzTheme="outline"></span>
   </div>
 
-  <div class="logo h-100 d-flex align-items-center justify-content-center" nz-col [nzXs]="14"
-    [nzSm]="6"><a class="text-decoration-none fs-3 text-black tw-text-3xl" (click)="redirectToHomePage()">MARKI</a>
+  <!-- Logo -->
+  <div class="tw-basis-1/5 tw-flex tw-items-center tw-ps-8">
+    <a class="tw-font-bold tw-text-base tw-antialiased tw-tracking-wide" (click)="redirectToHomePage()">MARKI</a>
   </div>
 
   <!-- Search bar -->
-  <div class="d-none d-lg-block h-100 align-items-center justify-content-center" nz-col [nzSm]="12">
-    <nz-input-group [nzSuffix]="suffixIconSearch" nzSize="large">
-      <input type="text" nz-input placeholder="Bạn đang tìm gì..." />
-    </nz-input-group>
-    <ng-template #suffixIconSearch>
-      <span nz-icon nzType="search"></span>
-    </ng-template>
+  <div class="tw-basis-3/5 tw-flex tw-items-center tw-justify-center">
+    <span class="tw-cursor-pointer tw-px-6 tw-text-sm">All</span>
+    <span class="tw-cursor-pointer tw-px-6 tw-text-sm">Tops</span>
+    <span class="tw-cursor-pointer tw-px-6 tw-text-sm">Bottoms</span>
+    <span class="tw-cursor-pointer tw-px-6 tw-text-sm">Dresses</span>
   </div>
 
   <!-- Header Utilities -->
-  <div class="h-100 d-none d-lg-flex align-items-center justify-content-end" nz-col [nzSm]="6">
-    <div class="d-flex flex-column h-100 mx-1 tw-justify-center tw-cursor-pointer">
+  <div class="tw-basis-1/5 tw-flex tw-items-center tw-justify-end tw-pe-8">
+    <!-- <div class="d-flex flex-column h-100 mx-1 tw-justify-center tw-cursor-pointer">
       <div class="d-flex justify-content-center p-1">
         <span nz-icon nzType="environment" nzTheme="outline" class="fs-4 tw-opacity-80 stroke-thin"></span>
       </div>
@@ -36,7 +36,9 @@
       <div class="d-flex p-1">
         <span nz-icon nzType="shopping-cart" nzTheme="outline" class="fs-4 tw-opacity-80 stroke-thin"></span>
       </div>
-    </div>
+    </div> -->
+
+    Cart (1)
   </div>
 
   <div nz-col nzSpan="5" class="d-flex align-items-center justify-content-end h-100 pe-3 d-lg-none"

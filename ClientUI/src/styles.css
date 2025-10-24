@@ -12,12 +12,23 @@
   --swiper-pagination-color: black;
   --swiper-navigation-size: 25px; 
   --background-color: #fefef4;
-  --primary-color: #fefef4;
-  --secondary-color: #FCF9EA;
+  --primary-color: #faf7f0;
+  --secondary-color: #fefef4;
 }
 
 body {
   -webkit-font-smoothing: antialiased;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+/* Apply IBM Plex Mono to all elements */
+* {
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+/* Ensure proper font rendering */
+html {
+  font-family: 'IBM Plex Mono', monospace;
 }
 
 /* Primary color utilities */
