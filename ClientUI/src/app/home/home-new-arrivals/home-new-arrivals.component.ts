@@ -23,7 +23,7 @@ export class HomeNewArrivalsComponent implements OnInit {
   ngOnInit(): void {
     this.homeService.getNewArrivals(this.productParams).subscribe({
       next: response => {
-        this.products = response.data.slice(1,7);
+        this.products = response.data.slice(1,6);
       },
       error: err => {
         console.log(err);
