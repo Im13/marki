@@ -10,7 +10,7 @@
     <a class="tw-font-bold tw-text-base tw-antialiased tw-tracking-wide" (click)="redirectToHomePage()">MARKI</a>
   </div>
 
-  <!-- Search bar -->
+  <!-- Menu items -->
   <div class="tw-basis-3/5 tw-flex tw-items-center tw-justify-center">
     <span class="tw-cursor-pointer tw-px-6 tw-text-[12px] tw-underline-offset-4 hover:tw-underline">ALL</span>
     <span class="tw-cursor-pointer tw-px-6 tw-text-[12px] tw-underline-offset-4 hover:tw-underline">TOPS</span>
@@ -66,7 +66,7 @@
   </div>
 
   <!-- Login / Register -->
-  <div id="collapseLoginRegister" [isAnimated]="true" [collapse]="isLoginCollapsed"
+  <!-- <div id="collapseLoginRegister" [isAnimated]="true" [collapse]="isLoginCollapsed"
     class="w-100 border-bottom border-top bg-light py-3 px-3">
     <p class="fs-6 d-flex justify-content-center m-0">ĐĂNG NHẬP TÀI KHOẢN</p>
     <p class="d-flex justify-content-center m-0">Nhập email và mật khẩu của bạn</p>
@@ -77,7 +77,7 @@
     <button type="button" class="w-100 btn text-bg-dark rounded-0">Đăng nhập</button>
     <p class="m-0">Khách hàng mới? <a href="#" class="text-reset fw-bold">Tạo tài khoản</a></p>
     <p class="m-0">Quên mật khẩu? <a href="#" class="text-reset fw-bold">Khôi phục mật khẩu</a></p>
-  </div>
+  </div> -->
 
   <div [collapse]="isCartCollapsed" class="bg-light w-100">
     <app-cart-dropdown (onNavigate)="onNavigate()" [basketItems]="basketItems"></app-cart-dropdown>
