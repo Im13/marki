@@ -1,7 +1,3 @@
-nz-footer {
-    text-align: center;
-}
-
 /* // CSS for backtotop button */
 :host ::ng-deep .ant-back-top {
     bottom: 100px;

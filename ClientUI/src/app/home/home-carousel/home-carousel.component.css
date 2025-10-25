@@ -1,14 +1,14 @@
 [nz-carousel-content] {
     text-align: center;
-    height: 100%; /* Fill toàn bộ container */
+    height: 100%;
     line-height: normal;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradient background đẹp */
     color: #fff;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
+    cursor: pointer;
 }
 
 [nz-carousel-content] picture {
@@ -29,7 +29,24 @@
     image-rendering: crisp-edges; /* Giữ độ sắc nét */
 }
 
-/* Responsive được xử lý bởi banner-container */
+/* Responsive Design */
+@media (max-width: 640px) {
+    [nz-carousel-content] {
+        min-height: 200px;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    [nz-carousel-content] {
+        min-height: 300px;
+    }
+}
+
+@media (min-width: 1025px) {
+    [nz-carousel-content] {
+        min-height: 400px;
+    }
+}
 
 /* Đảm bảo carousel container có chiều cao cố định */
 ::ng-deep .ant-carousel {

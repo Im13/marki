@@ -1,5 +1,5 @@
-<div class="h-100 tw-curso">
-  <nz-carousel [nzEffect]="effect" nzAutoPlay>
+<div class="h-100 tw-flex">
+  <!-- <nz-carousel [nzEffect]="effect" nzAutoPlay>
     <div *ngFor="let slide of slides" nz-carousel-content>
       <picture>
         <source srcset="{{ slide.mobileImageUrl }}" media="(max-width: 767px)">
@@ -9,5 +9,32 @@
              #bannerImg>
       </picture>
     </div>
-  </nz-carousel>
+  </nz-carousel> -->
+  <div class="tw-flex-1 bg-app d-flex">
+    <div class="tw-basis-2/5 tw-px-8 tw-pt-10 tw-pb-16 tw-flex tw-flex-col tw-justify-between">
+      <span class="tw-text-[12px] tw-font-bold">DISCOVER OUR NEW COLLECTION</span>
+      <div class="tw-border tw-border-black hover:tw-cursor-pointer tw-w-2/3 tw-flex tw-justify-center tw-py-1 tw-text-[11px] hover:tw-bg-black hover:tw-text-white">Discover more</div>
+    </div>
+
+    <div class="tw-basis-3/5 tw-px-24 tw-py-10 tw-text-[12px]/5">
+      We believe in making sustainable products while being mindful of its impact on every level and committed to
+      sourcing products that are handcrafted, organic, sustainably sourced, and local.
+    </div>
+  </div>
+
+  <div class="tw-flex-1 tw-relative tw-overflow-hidden tw-aspect-[0.74]">
+    <picture>
+      <!-- Mobile: 624x840px -->
+      <source [srcset]="slides[0]?.mobileImageUrl" media="(max-width: 640px)" type="image/webp">
+      <!-- Tablet: 1248x1680px -->
+      <source [srcset]="slides[0]?.tabletImageUrl || slides[0]?.desktopImageUrl" media="(max-width: 1024px)"
+        type="image/webp">
+      <!-- Desktop: 1248x1680px -->
+      <source [srcset]="slides[0]?.desktopImageUrl" media="(min-width: 1025px)" type="image/webp">
+      <!-- Fallback -->
+      <img [src]="slides[0]?.desktopImageUrl" [alt]="slides[0]?.altText || 'Banner image'"
+        class="tw-w-full tw-h-full tw-object-cover tw-transition-transform tw-duration-300 hover:tw-scale-105"
+        loading="lazy">
+    </picture>
+  </div>
 </div>
