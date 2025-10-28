@@ -1,17 +1,17 @@
 <div class="tw-h-full tw-flex tw-flex-row">
   <!-- Collapse menu icon -->
-  <div nz-col nzSpan="5" class="d-flex align-items-center h-100 fs-4 ps-3 d-lg-none" (click)="collapseMenuForm()"
+  <div class="tw-basis-1/3 tw-flex tw-items-center tw-ps-8 tw-h-full lg:tw-hidden" (click)="collapseMenuForm()"
     [attr.aria-expanded]="!isMenuCollapsed" aria-controls="collapseBasic">
     <span nz-icon nzType="menu" nzTheme="outline"></span>
   </div>
 
   <!-- Logo -->
-  <div class="tw-basis-1/5 tw-flex tw-items-center tw-ps-8">
+  <div class="tw-basis-1/3 lg:tw-basis-1/5 tw-flex tw-items-center tw-justify-center lg:tw-justify-start lg:tw-ps-8">
     <a class="tw-font-bold tw-text-base tw-antialiased tw-tracking-wide" (click)="redirectToHomePage()">MARKI</a>
   </div>
 
-  <!-- Menu items -->
-  <div class="tw-basis-3/5 tw-flex tw-items-center tw-justify-center">
+  <!-- Desktop Menu items -->
+  <div class="tw-hidden lg:tw-basis-3/5 lg:tw-flex tw-items-center tw-justify-center">
     <span class="tw-cursor-pointer tw-px-6 tw-text-[12px] tw-underline-offset-4 hover:tw-underline">ALL</span>
     <span class="tw-cursor-pointer tw-px-6 tw-text-[12px] tw-underline-offset-4 hover:tw-underline">TOPS</span>
     <span class="tw-cursor-pointer tw-px-6 tw-text-[12px] tw-underline-offset-4 hover:tw-underline">BOTTOMS</span>
@@ -19,67 +19,26 @@
   </div>
 
   <!-- Header Utilities -->
-  <div class="tw-basis-1/5 tw-flex tw-items-center tw-justify-end tw-pe-8">
-    <!-- <div class="d-flex flex-column h-100 mx-1 tw-justify-center tw-cursor-pointer">
-      <div class="d-flex justify-content-center p-1">
-        <span nz-icon nzType="environment" nzTheme="outline" class="fs-4 tw-opacity-80 stroke-thin"></span>
-      </div>
+  <div class="tw-basis-1/3 lg:tw-basis-1/5 tw-flex tw-items-center tw-justify-end tw-pe-8 lg:tw-pe-8">
+    <span class="tw-text-[13px] lg:tw-flex tw-items-center tw-justify-end w-full lg:tw-text-[12px]">
+      <span class="tw-hidden md:tw-flex tw-me-1">CART</span>
+      <span class="">(1)</span>
+    </span>
+  </div>
+
+  <!-- Mobile Menu items -->
+  <div [collapse]="isMenuCollapsed" [isAnimated]="true" class="tw-w-full lg:tw-hidden">
+    <div class="bg-white d-flex justify-content-center border py-3">
+      <span class="tw-text-[12px]">ALL</span>
     </div>
-
-    <div class="d-flex flex-column h-100 mx-xl-3 mx-lg-2 tw-justify-center tw-cursor-pointer">
-      <div class="d-flex p-1">
-        <span nz-icon nzType="user" nzTheme="outline" class="fs-4 tw-opacity-80 stroke-thin"></span>
-      </div>
+    <div class="bg-white d-flex justify-content-center border-bottom border-start border-end py-3">
+      <span class="tw-text-[12px]">TOPS</span>
     </div>
-
-    <div class="d-flex flex-column h-100 mx-lg-2 tw-justify-center tw-cursor-pointer">
-      <div class="d-flex p-1">
-        <span nz-icon nzType="shopping-cart" nzTheme="outline" class="fs-4 tw-opacity-80 stroke-thin"></span>
-      </div>
-    </div> -->
-
-    <span class="tw-text-[12px]">CART (1)</span>
-  </div>
-
-  <div nz-col nzSpan="5" class="d-flex align-items-center justify-content-end h-100 pe-3 d-lg-none"
-    [attr.aria-expanded]="!isCartCollapsed" aria-controls="collapseBasic">
-    <nz-badge *ngIf="basketService.basketSource$ | async as basket; else nullBasket" [nzCount]="getCount(basket.items)"
-      class="fs-5 me-3" [nzStyle]="{ backgroundColor: '#000' }" (click)="collapseCartForm()">
-      <span nz-icon nzType="shopping-cart" nzTheme="outline" class="tw-opacity-70 stroke-thin"></span>
-    </nz-badge>
-    <ng-template #nullBasket>
-      <nz-badge [nzCount]="0" class="fs-5 me-3" [nzStyle]="{ backgroundColor: '#000' }" (click)="collapseCartForm()">
-        <span nz-icon nzType="shopping-cart" nzTheme="outline" class="tw-opacity-70 stroke-thin"></span>
-      </nz-badge>
-    </ng-template>
-
-    <span class="fs-5" nz-icon nzType="user" nzTheme="outline" (click)="collapseLoginRegisterForm()"
-      [attr.aria-expanded]="!isLoginCollapsed"></span>
-  </div>
-
-  <!-- Menu items -->
-  <div [collapse]="isMenuCollapsed" [isAnimated]="true" class="w-100">
-    <div class="bg-white d-flex justify-content-center border">Hàng mới về</div>
-    <div class="bg-white d-flex justify-content-center border-bottom border-start border-end">Áo</div>
-    <div class="bg-white d-flex justify-content-center border-bottom border-start border-end">Quần</div>
-    <div class="bg-white d-flex justify-content-center border-bottom border-start border-end">Váy / Chân váy</div>
-  </div>
-
-  <!-- Login / Register -->
-  <!-- <div id="collapseLoginRegister" [isAnimated]="true" [collapse]="isLoginCollapsed"
-    class="w-100 border-bottom border-top bg-light py-3 px-3">
-    <p class="fs-6 d-flex justify-content-center m-0">ĐĂNG NHẬP TÀI KHOẢN</p>
-    <p class="d-flex justify-content-center m-0">Nhập email và mật khẩu của bạn</p>
-    <input type="text" class="form-control form-control-sm mt-2 rounded-0" id="exampleFormControlInput1"
-      placeholder="Nhập email hoặc số điện thoại">
-    <input type="text" class="form-control form-control-sm mt-1 rounded-0" id="exampleFormControlInput1"
-      placeholder="Mật khẩu">
-    <button type="button" class="w-100 btn text-bg-dark rounded-0">Đăng nhập</button>
-    <p class="m-0">Khách hàng mới? <a href="#" class="text-reset fw-bold">Tạo tài khoản</a></p>
-    <p class="m-0">Quên mật khẩu? <a href="#" class="text-reset fw-bold">Khôi phục mật khẩu</a></p>
-  </div> -->
-
-  <div [collapse]="isCartCollapsed" class="bg-light w-100">
-    <app-cart-dropdown (onNavigate)="onNavigate()" [basketItems]="basketItems"></app-cart-dropdown>
+    <div class="bg-white d-flex justify-content-center border-bottom border-start border-end py-3">
+      <span class="tw-text-[12px]">BOTTOMS</span>
+    </div>
+    <div class="bg-white d-flex justify-content-center border-bottom border-start border-end py-3">
+      <span class="tw-text-[12px]">DRESSES</span>
+    </div>
   </div>
 </div>
