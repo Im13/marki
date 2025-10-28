@@ -1,30 +1,32 @@
-<div class="tw-flex tw-flex-row tw-justify-center tw-mb-4">
-  <p class="tw-text-[25px] tw-font-bold">NEW ARRIVALS</p>
-</div>
-
-<div class="tw-grid tw-grid-cols-2 md:tw-grid-cols-4 tw-my-5 tw-px-3 tw-gap-x-[10px] tw-gap-y-[10px] md:tw-my-6 md:tw-px-6 lg:tw-my-8 lg:tw-px-48 lg:tw-gap-6">
-  <div *ngFor="let product of products; let i = index"
-    class="tw-h-[300px] md:tw-h-[400px] lg:tw-h-[550px] tw-border-gray-500 tw-border-[0.5px]">
-    <div class="product-card tw-h-full tw-cursor-pointer" (click)="redirectToProduct(product.slug)">
-      <div class="tw-h-4/5 tw-border-b-[0.5px]">
-        <img nz-image [src]="getMainPhotoUrl(product)" class="object-fit-cover w-100 h-100">
-      </div>
-
-      <div class="tw-h-1/5 tw-py-1 lg:tw-py-3">
-        <div class="tw-h-1/2 tw-px-3 tw-flex tw-items-center">
-          <p nz-typography nzEllipsis nzEllipsisRows="1" class="tw-text-sm tw-font-medium">{{ product.name }}</p>
+<div class=" lg:tw-my-[80px]">
+  <div class="tw-flex tw-flex-row tw-justify-center">
+    <p class="tw-text-[25px] tw-font-bold">NEW ARRIVALS</p>
+  </div>
+  
+  <div class="tw-grid tw-grid-cols-2 md:tw-grid-cols-4 tw-my-5 tw-px-3 tw-gap-x-[10px] tw-gap-y-[10px] md:tw-my-6 md:tw-px-6 lg:tw-my-10 lg:tw-px-48 lg:tw-gap-6">
+    <div *ngFor="let product of products; let i = index"
+      class="tw-h-[300px] md:tw-h-[400px] lg:tw-h-[550px] tw-border-gray-500 tw-border-[0.5px]">
+      <div class="product-card tw-h-full tw-cursor-pointer" (click)="redirectToProduct(product.slug)">
+        <div class="tw-h-4/5 tw-border-b-[0.5px]">
+          <img nz-image [src]="getMainPhotoUrl(product)" class="object-fit-cover w-100 h-100">
         </div>
-
-        <div class="tw-h-1/2 tw-flex tw-items-center">
-          <span class="tw-font-bold tw-px-3 tw-text-sm">100.000 đ</span>
+  
+        <div class="tw-h-1/5 tw-py-1 lg:tw-py-3">
+          <div class="tw-h-1/2 tw-px-3 tw-flex tw-items-center">
+            <p nz-typography nzEllipsis nzEllipsisRows="1" class="tw-text-sm tw-font-medium">{{ product.name }}</p>
+          </div>
+  
+          <div class="tw-h-1/2 tw-flex tw-items-center">
+            <span class="tw-font-bold tw-px-3 tw-text-sm">100.000 đ</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-<div class="tw-flex tw-items-center tw-justify-center tw-mt-4">
-  <button type="button" class="view-more-btn tw-bg-black tw-text-white tw-px-4 tw-py-2 tw-rounded-none tw-border-2 tw-border-black tw-transition-all tw-duration-300 tw-ease-in-out" (click)="onViewMoreClick()">
-    Xem thêm
-  </button>
+  
+  <div class="tw-flex tw-items-center tw-justify-center tw-mt-4">
+    <button type="button" class="view-more-btn tw-bg-black tw-text-white tw-px-4 tw-py-2 tw-rounded-none tw-border-2 tw-border-black tw-transition-all tw-duration-300 tw-ease-in-out" (click)="onViewMoreClick()">
+      Xem thêm
+    </button>
+  </div>
 </div>
