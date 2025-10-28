@@ -1,4 +1,8 @@
-/* .product-item {
-    height: 350px;
-} */
+.bg-app {
+    background-color: var(--background-color);
+}
 
+.view-more-btn:hover {
+    background-color: var(--background-color) !important;
+    color: black !important;
+}
