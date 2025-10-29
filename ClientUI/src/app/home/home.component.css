@@ -1,0 +1,17 @@
+/* Home Carousel Container */
+.home-carousel-container {
+    height: calc(100vh - 8vh); /* 100vh minus header height (8vh) */
+    width: 100%;
+}
+
+@media (min-width: 640px) {
+    .home-carousel-container {
+        height: calc(100vh - 6vh); /* 100vh minus header height (6vh) */
+    }
+}
+
+@media (min-width: 768px) {
+    .home-carousel-container {
+        height: calc(100vh - 5.8vh); /* 100vh minus header height (5.8vh) */
+    }
+}

@@ -14,6 +14,137 @@
     font-size: 20px;
 }
 
+/* App Container */
+.app-container {
+    width: 100vw;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Styles */
+.app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 8vh;
+    padding: 0;
+    margin: 0;
+    background-color: var(--background-color);
+    z-index: 3;
+    border-bottom: 1px solid black;
+    box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+    .app-header {
+        height: 6vh;
+    }
+}
+
+@media (min-width: 768px) {
+    .app-header {
+        height: 5.8vh;
+    }
+}
+
+/* Content Styles */
+.app-content {
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+    padding-top: 8vh;
+    background-color: var(--background-color);
+    z-index: 0;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+    .app-content {
+        padding-top: 6vh;
+    }
+}
+
+@media (min-width: 768px) {
+    .app-content {
+        padding-top: 5.8vh;
+    }
+}
+
+.app-content-inner {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+/* Footer Styles */
+.app-footer {
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+    background-color: black;
+    color: white;
+    box-sizing: border-box;
+}
+
+/* Ant Design Overrides */
 ::ng-deep .ant-layout-content {
     z-index: 1 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100vw !important;
+    box-sizing: border-box !important;
+    padding-top: 8vh !important;
+}
+
+@media (min-width: 640px) {
+    ::ng-deep .ant-layout-content {
+        padding-top: 6vh !important;
+    }
+}
+
+@media (min-width: 768px) {
+    ::ng-deep .ant-layout-content {
+        padding-top: 5.8vh !important;
+    }
+}
+
+::ng-deep .ant-layout-footer {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100vw !important;
+    box-sizing: border-box !important;
+}
+
+::ng-deep .ant-layout-header {
+    width: 100vw !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 8vh !important;
+    z-index: 3 !important;
+    background-color: var(--background-color) !important;
+    border-bottom: 1px solid black !important;
+}
+
+@media (min-width: 640px) {
+    ::ng-deep .ant-layout-header {
+        height: 6vh !important;
+    }
+}
+
+@media (min-width: 768px) {
+    ::ng-deep .ant-layout-header {
+        height: 5.8vh !important;
+    }
 }
