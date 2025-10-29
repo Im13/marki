@@ -1,6 +1,7 @@
 <div class="tw-h-full tw-w-full tw-flex tw-flex-col tw-flex-col-reverse md:tw-flex-row tw-border-b tw-border-black">
-  <div class="tw-h-1/5 tw-flex tw-flex-col md:tw-basis-1/2 bg-app">
-    <div class="tw-basis-2/5 tw-px-8 tw-pt-10 tw-pb-16 tw-flex tw-flex-col tw-justify-between">
+  <!-- Desktop: Block 1 & 4 Container -->
+  <div class="tw-hidden md:tw-flex md:tw-flex-row tw-flex-col md:tw-h-full md:tw-basis-1/2 bg-app">
+    <div class="tw-basis-2/5 tw-flex tw-flex-col tw-px-8 tw-pt-10 tw-pb-16 tw-justify-between md:tw-h-full">
       <span class="tw-text-[12px] tw-font-bold">DISCOVER OUR NEW COLLECTION</span>
       <div class="tw-border tw-border-black hover:tw-cursor-pointer tw-w-2/3 tw-flex tw-justify-center tw-py-1 tw-text-[11px] hover:tw-bg-black hover:tw-text-white">Discover more</div>
     </div>
@@ -11,7 +12,26 @@
     </div>
   </div>
 
-  <div class="tw-h-4/5 md:tw-basis-1/2 tw-relative tw-overflow-hidden tw-aspect-[0.74]">
+  <!-- Mobile: Block 4 -->
+  <div class="md:tw-hidden tw-px-8 tw-pb-10 bg-app">
+    <div class="tw-border tw-border-black hover:tw-cursor-pointer tw-w-full tw-flex tw-justify-center tw-py-1 tw-text-[11px] hover:tw-bg-black hover:tw-text-white">Discover more</div>
+  </div>
+
+  <!-- Mobile: Block 2 -->
+  <div class="md:tw-hidden tw-px-8 tw-py-4 tw-text-[12px]/5 bg-app">
+    We believe in making sustainable products while being mindful of its impact on every level and committed to
+    sourcing products that are handcrafted, organic, sustainably sourced, and local.
+  </div>
+
+  <!-- Mobile: Block 1 -->
+  <div class="md:tw-hidden tw-flex tw-flex-col bg-app">
+    <div class="tw-flex tw-flex-col tw-px-8 tw-pt-10 tw-pb-4">
+      <span class="tw-text-[12px] tw-font-bold">DISCOVER OUR NEW COLLECTION</span>
+    </div>
+  </div>
+
+  <!-- Block 3: Image (Both) -->
+  <div class="tw-h-4/5 md:tw-h-full md:tw-basis-1/2 tw-relative tw-overflow-hidden tw-aspect-[0.74]">
     <picture>
       <img [src]="slides[0]?.desktopImageUrl" [alt]="slides[0]?.altText || 'Banner image'"
         class="tw-w-full tw-h-full tw-object-cover tw-transition-transform tw-duration-300 hover:tw-scale-105"
