@@ -8,6 +8,7 @@ import { HomeNewArrivalsComponent } from './home-new-arrivals/home-new-arrivals.
 import { HomeCollectionBannersComponent } from './home-collection-banners/home-collection-banners.component';
 import { HomeProductCarouselComponent } from './home-product-carousel/home-product-carousel.component';
 import { HomeCampaignComponent } from './home-campaign/home-campaign.component';
+import { SeasonalItemsComponent } from './seasonal-items/seasonal-items.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HomeCampaignComponent } from './home-campaign/home-campaign.component';
     HomeNewArrivalsComponent,
     HomeCollectionBannersComponent,
     HomeProductCarouselComponent,
-    HomeCampaignComponent
+    HomeCampaignComponent,
+    SeasonalItemsComponent
   ],
   imports: [
     CommonModule,
