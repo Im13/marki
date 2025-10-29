@@ -9,3 +9,7 @@
 .stroke-thinner {
     stroke-width: 0.8;
 }
+
+.bg-app {
+    background-color: var(--background-color);
+}
