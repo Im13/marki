@@ -7,6 +7,7 @@ import { HomeCarouselComponent } from './home-carousel/home-carousel.component';
 import { HomeNewArrivalsComponent } from './home-new-arrivals/home-new-arrivals.component';
 import { HomeCollectionBannersComponent } from './home-collection-banners/home-collection-banners.component';
 import { HomeProductCarouselComponent } from './home-product-carousel/home-product-carousel.component';
+import { HomeCampaignComponent } from './home-campaign/home-campaign.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { HomeProductCarouselComponent } from './home-product-carousel/home-produ
     HomeCarouselComponent,
     HomeNewArrivalsComponent,
     HomeCollectionBannersComponent,
-    HomeProductCarouselComponent
+    HomeProductCarouselComponent,
+    HomeCampaignComponent
   ],
   imports: [
     CommonModule,
