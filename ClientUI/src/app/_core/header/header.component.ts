@@ -40,7 +40,6 @@ export class HeaderComponent implements OnInit {
 
   collapseMenuForm() {
     this.isMenuCollapsed = !this.isMenuCollapsed;
-    console.log(this.isMenuCollapsed);
   }
 
   getCount(items: BasketItem[]) {

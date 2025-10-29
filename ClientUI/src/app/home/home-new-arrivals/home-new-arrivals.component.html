@@ -17,9 +17,9 @@
       </svg>
     </div>
 
-    <swiper [config]="swiperConfig" class="tw-w-full tw-h-[350px] sm:tw-h-[400px] md:tw-h-[350px] lg:tw-h-[400px]">
+    <swiper [config]="swiperConfig" class="tw-w-full tw-h-[300px] sm:tw-h-[400px] md:tw-h-[350px] lg:tw-h-[400px]">
       <ng-template swiperSlide *ngFor="let product of products; let i = index">
-        <div class="tw-h-[350px] sm:tw-h-[400px] md:tw-h-[350px] lg:tw-h-[400px] tw-border-gray-500 tw-border-[0.5px] tw-mx-1">
+        <div class="tw-h-[300px] sm:tw-h-[400px] md:tw-h-[350px] lg:tw-h-[400px] tw-border-gray-500 tw-border-[0.5px] tw-mx-1">
           <div class="product-card tw-h-full tw-cursor-pointer" (click)="redirectToProduct(product.slug)">
             <div class="tw-h-4/5 tw-border-b-[0.5px]">
               <img nz-image [src]="getMainPhotoUrl(product)" class="object-fit-cover w-100 h-100">
