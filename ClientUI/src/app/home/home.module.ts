@@ -5,8 +5,6 @@ import { CoreModule } from '../_core/core.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeCarouselComponent } from './home-carousel/home-carousel.component';
 import { HomeNewArrivalsComponent } from './home-new-arrivals/home-new-arrivals.component';
-import { HomeCollectionBannersComponent } from './home-collection-banners/home-collection-banners.component';
-import { HomeProductCarouselComponent } from './home-product-carousel/home-product-carousel.component';
 import { HomeCampaignComponent } from './home-campaign/home-campaign.component';
 import { SeasonalItemsComponent } from './seasonal-items/seasonal-items.component';
 
@@ -15,8 +13,6 @@ import { SeasonalItemsComponent } from './seasonal-items/seasonal-items.componen
     HomeComponent,
     HomeCarouselComponent,
     HomeNewArrivalsComponent,
-    HomeCollectionBannersComponent,
-    HomeProductCarouselComponent,
     HomeCampaignComponent,
     SeasonalItemsComponent
   ],
