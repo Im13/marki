@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CollectionsComponent } from './collections.component';
-import { CollectionsRoutingModule } from './collections-routing.module';
+import { ProductListingComponent } from './product-listing.component';
+import { ProductListingRoutingModule } from './product-listing-routing.module';
 import { CoreModule } from '../_core/core.module';
 import { CollectionProductsComponent } from './collection-products/collection-products.component';
 
 @NgModule({
   declarations: [
-    CollectionsComponent,
+    ProductListingComponent,
     CollectionProductsComponent
   ],
   imports: [
     CommonModule,
-    CollectionsRoutingModule,
+    ProductListingRoutingModule,
     CoreModule
   ]
 })
-export class CollectionsModule { }
+export class ProductListingModule { }

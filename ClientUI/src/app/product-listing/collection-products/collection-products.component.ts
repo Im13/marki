@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from 'src/app/_shared/_models/product';
 import { ProductParams } from 'src/app/_shared/_models/productParams';
-import { CollectionsService } from '../collections.service';
+import { CollectionsService } from '../product-listing.service';
 
 @Component({
   selector: 'app-collection-products',

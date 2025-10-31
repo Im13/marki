@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CollectionMapConst } from '../_shared/_consts/collectionsMapConst';
 
 @Component({
-  selector: 'app-collections',
-  templateUrl: './collections.component.html',
-  styleUrls: ['./collections.component.css']
+  selector: 'app-product-listing',
+  templateUrl: './product-listing.component.html',
+  styleUrls: ['./product-listing.component.css']
 })
-export class CollectionsComponent implements OnInit {
+export class ProductListingComponent implements OnInit {
   collectionId: number;
   products: any[];
 
