@@ -4,48 +4,84 @@ import { ProductListingComponent } from './product-listing.component';
 import { CollectionMapConst } from '../_shared/_consts/collectionsMapConst';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/', pathMatch: 'full' },
-  { path: 'new-arrivals', 
+  // All Products
+  { 
+    path: 'all', 
+    component: ProductListingComponent, 
+    data: { 
+      breadcrumb: 'All Products', 
+      pageTitle: 'All Products',
+      queryType: 'all',
+      collectionId: CollectionMapConst['all']
+    }
+  },
+  
+  // New Arrivals
+  { 
+    path: 'new-arrivals', 
     component: ProductListingComponent, 
     data: { 
       breadcrumb: 'New Arrivals', 
       pageTitle: 'New Arrivals',
       queryType: 'new-arrivals',
-      collectionId: CollectionMapConst['ao']}
-    },
-  { path: 'all', 
+      collectionId: null  // New arrivals không cần collectionId
+    }
+  },
+  
+  // Tops
+  { 
+    path: 'tops', 
     component: ProductListingComponent, 
     data: { 
-      breadcrumb: 'All', 
-      pageTitle: 'All',
-      queryType: 'all',
-      collectionId: CollectionMapConst['all']}
-    },
-  { path: 'tops', component: ProductListingComponent, data: { 
-    breadcrumb: 'Tops', 
-    pageTitle: 'Tops',
-    queryType: 'tops',
-    collectionId: CollectionMapConst['tops']}
+      breadcrumb: 'Tops', 
+      pageTitle: 'Tops',
+      queryType: 'category',
+      collectionId: CollectionMapConst['tops']
+    }
   },
-  { path: 'bottoms', component: ProductListingComponent, data: { 
-    breadcrumb: 'Bottoms', 
-    pageTitle: 'Bottoms',
-    queryType: 'bottoms',
-    collectionId: CollectionMapConst['bottoms']}
+  
+  // Bottoms
+  { 
+    path: 'bottoms', 
+    component: ProductListingComponent, 
+    data: { 
+      breadcrumb: 'Bottoms', 
+      pageTitle: 'Bottoms',
+      queryType: 'category',
+      collectionId: CollectionMapConst['bottoms']
+    }
   },
-  { path: 'dresses', component: ProductListingComponent, data: { 
-    breadcrumb: 'Dresses', 
-    pageTitle: 'Dresses',
-    queryType: 'dresses',
-    collectionId: CollectionMapConst['dresses']}
+  
+  // Dresses
+  { 
+    path: 'dresses', 
+    component: ProductListingComponent, 
+    data: { 
+      breadcrumb: 'Dresses', 
+      pageTitle: 'Dresses',
+      queryType: 'category',
+      collectionId: CollectionMapConst['dresses']
+    }
   },
-  { path: '**', redirectTo: '/', pathMatch: 'full' }
+  
+  // Outerwear
+  { 
+    path: 'outerwear', 
+    component: ProductListingComponent, 
+    data: { 
+      breadcrumb: 'Outerwear', 
+      pageTitle: 'Outerwear',
+      queryType: 'category',
+      collectionId: CollectionMapConst['outerwear']
+    }
+  }
 ];
 
 @NgModule({
   declarations: [],
   imports: [
     RouterModule.forChild(routes)
-  ]
+  ],
+  exports: [RouterModule]
 })
 export class ProductListingRoutingModule { }

@@ -7,20 +7,46 @@
 
   <!-- Logo -->
   <div class="tw-basis-1/3 lg:tw-basis-1/5 tw-flex tw-items-center tw-justify-center lg:tw-justify-start lg:tw-ps-8">
-    <a class="tw-font-bold tw-text-base tw-antialiased tw-tracking-wide" (click)="redirectToHomePage()">MARKI</a>
+    <a class="tw-font-bold tw-text-base tw-antialiased tw-tracking-wide tw-cursor-pointer" routerLink="/">MARKI</a>
   </div>
 
   <!-- Desktop Menu items -->
   <div class="tw-hidden lg:tw-basis-3/5 lg:tw-flex tw-items-center tw-justify-center">
-    <span class="tw-cursor-pointer tw-px-6 tw-text-[12px] tw-underline-offset-4 hover:tw-underline">ALL</span>
-    <span class="tw-cursor-pointer tw-px-6 tw-text-[12px] tw-underline-offset-4 hover:tw-underline">TOPS</span>
-    <span class="tw-cursor-pointer tw-px-6 tw-text-[12px] tw-underline-offset-4 hover:tw-underline">BOTTOMS</span>
-    <span class="tw-cursor-pointer tw-px-6 tw-text-[12px] tw-underline-offset-4 hover:tw-underline">DRESSES</span>
+    <span class="tw-cursor-pointer tw-px-6 tw-text-[12px] tw-underline-offset-4 hover:tw-underline" 
+          routerLink="/new-arrivals" 
+          routerLinkActive="tw-underline tw-font-semibold">
+      NEW ARRIVALS
+    </span>
+    <span class="tw-cursor-pointer tw-px-6 tw-text-[12px] tw-underline-offset-4 hover:tw-underline" 
+          routerLink="/all" 
+          routerLinkActive="tw-underline tw-font-semibold">
+      ALL
+    </span>
+    <span class="tw-cursor-pointer tw-px-6 tw-text-[12px] tw-underline-offset-4 hover:tw-underline" 
+          routerLink="/tops" 
+          routerLinkActive="tw-underline tw-font-semibold">
+      TOPS
+    </span>
+    <span class="tw-cursor-pointer tw-px-6 tw-text-[12px] tw-underline-offset-4 hover:tw-underline" 
+          routerLink="/bottoms" 
+          routerLinkActive="tw-underline tw-font-semibold">
+      BOTTOMS
+    </span>
+    <span class="tw-cursor-pointer tw-px-6 tw-text-[12px] tw-underline-offset-4 hover:tw-underline" 
+          routerLink="/dresses" 
+          routerLinkActive="tw-underline tw-font-semibold">
+      DRESSES
+    </span>
+    <span class="tw-cursor-pointer tw-px-6 tw-text-[12px] tw-underline-offset-4 hover:tw-underline" 
+          routerLink="/outerwear" 
+          routerLinkActive="tw-underline tw-font-semibold">
+      OUTERWEAR
+    </span>
   </div>
 
   <!-- Header Utilities -->
   <div class="tw-basis-1/3 lg:tw-basis-1/5 tw-flex tw-items-center tw-justify-end tw-pe-8 lg:tw-pe-8">
-    <span class="tw-text-[13px] lg:tw-flex tw-items-center tw-justify-end w-full lg:tw-text-[12px]">
+    <span class="tw-text-[13px] lg:tw-flex tw-items-center tw-justify-end w-full lg:tw-text-[12px] tw-cursor-pointer" routerLink="/basket">
       <span class="tw-hidden md:tw-flex tw-me-1">CART</span>
       <span class="">(1)</span>
     </span>
@@ -28,18 +54,24 @@
 
   <!-- Mobile Menu items -->
   <div [collapse]="isMenuCollapsed" [isAnimated]="true"
-    class="bg-app tw-w-full tw-h-[92vh] tw-top-[8vh] tw-absolute tw-flex tw-flex-col tw-content-center tw-justify-center tw-left-0 lg:tw-hidden">
+    class="bg-app tw-w-full tw-h-[92vh] tw-top-[8vh] tw-absolute tw-flex tw-flex-col tw-content-center tw-justify-center tw-left-0 lg:tw-hidden tw-gap-4">
     <div class="d-flex justify-content-center tw-font-normal">
-      <span class="tw-text-[15px]">ALL</span>
+      <span class="tw-text-[15px] tw-cursor-pointer" routerLink="/new-arrivals" (click)="collapseMenuForm()">NEW ARRIVALS</span>
     </div>
     <div class="d-flex justify-content-center tw-font-normal">
-      <span class="tw-text-[15px]">TOPS</span>
+      <span class="tw-text-[15px] tw-cursor-pointer" routerLink="/all" (click)="collapseMenuForm()">ALL</span>
     </div>
     <div class="d-flex justify-content-center tw-font-normal">
-      <span class="tw-text-[15px]">BOTTOMS</span>
+      <span class="tw-text-[15px] tw-cursor-pointer" routerLink="/tops" (click)="collapseMenuForm()">TOPS</span>
     </div>
     <div class="d-flex justify-content-center tw-font-normal">
-      <span class="tw-text-[15px]">DRESSES</span>
+      <span class="tw-text-[15px] tw-cursor-pointer" routerLink="/bottoms" (click)="collapseMenuForm()">BOTTOMS</span>
+    </div>
+    <div class="d-flex justify-content-center tw-font-normal">
+      <span class="tw-text-[15px] tw-cursor-pointer" routerLink="/dresses" (click)="collapseMenuForm()">DRESSES</span>
+    </div>
+    <div class="d-flex justify-content-center tw-font-normal">
+      <span class="tw-text-[15px] tw-cursor-pointer" routerLink="/outerwear" (click)="collapseMenuForm()">OUTERWEAR</span>
     </div>
   </div>
 </div>

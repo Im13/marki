@@ -1,13 +1,19 @@
-<div>
+<div class="product-listing-container">
+    <!-- Breadcrumb -->
     <div class="px-3 py-2">
         <app-common-breadcrumb></app-common-breadcrumb>
     </div>
 
-    <div class="col-12 col-md-6 text-bg-warning d-flex justify-content-center align-items-end banner">
-        banner here
+    <!-- Page Header/Banner -->
+    <div class="page-header px-3 py-5 mb-4">
+        <h1 class="display-4">{{ pageTitle }}</h1>
     </div>
 
-    <div class="mt-3">
-        <app-product-listing [collectionId]="collectionId"></app-product-listing>
+    <!-- Product Items Grid -->
+    <div class="mt-3 px-3">
+        <app-product-items 
+            [collectionId]="collectionId"
+            [queryType]="queryType">
+        </app-product-items>
     </div>
 </div>
