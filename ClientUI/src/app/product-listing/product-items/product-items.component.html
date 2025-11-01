@@ -1,5 +1,5 @@
 <!-- SORT MENU -->
-<div class="d-flex align-items-center justify-content-end px-2">
+<!-- <div class="d-flex align-items-center justify-content-end px-2">
   <button nz-button nz-dropdown [nzDropdownMenu]="sortMenu" nzPlacement="bottomRight">
     <span nz-icon nzType="align-right" nzTheme="outline"></span>
   </button>
@@ -43,35 +43,33 @@
       </li>
     </ul>
   </nz-dropdown-menu>
-</div>
+</div> -->
 
 <!-- PRODUCTS -->
-<div class="mt-2 px-2">
-  <div class="row">
-    <div *ngFor="let product of products" class="col-6 px-2 mt-2 product-item">
-      <div class="product-card border h-100">
-        <div class="h-75 border-bottom">
-          <img nz-image [src]="product.photos[0].url" class="object-fit-cover w-100 h-100">
-        </div>
+<div class="tw-grid tw-grid-cols-2 md:tw-grid-cols-4">
+  <div *ngFor="let product of products" class="tw-h-[400px] md:tw-h-[700px]">
+    <div class="tw-h-4/5">
+      <img nz-image [src]="product.photos[0].url" class="object-fit-cover w-100 h-100 md:tw-cursor-pointer" (click)="redirectToProduct(product?.slug)">
+    </div>
 
-        <div class="h-25">
-          <div class="h-50 px-1 pt-1">
-            <p nz-typography nzEllipsis nzEllipsisRows="2">{{ product.name }}</p>
-          </div>
+    <div class="tw-h-1/5 tw-px-1 tw-py-2">
+      <div class="tw-my-1">
+        <p nz-typography nzEllipsis nzEllipsisRows="1" class="tw-text-xs">{{ product.name }}</p>
+      </div>
 
-          <div class="h-50 px-1 pt-2">
-            <span class="fw-bold">100.000 đ</span>
-          </div>
-        </div>
+      <div class="tw-my-1">
+        <span class="tw-text-xs">100.000 đ</span>
       </div>
     </div>
   </div>
+</div>
 
-  <div>
+<!-- <div>
+  <div class="tw-w-full border">
     <div class="d-flex justify-content-center py-4">
       <button type="button" class="w-50 btn btn-white border border-dark fw-semibold">
         Xem thêm
       </button>
     </div>
   </div>
-</div>
+</div> -->

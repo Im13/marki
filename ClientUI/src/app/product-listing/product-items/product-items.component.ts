@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { Product } from 'src/app/_shared/_models/product';
 import { ProductParams } from 'src/app/_shared/_models/productParams';
 import { ProductListingService } from '../product-listing.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-items',
@@ -17,7 +18,7 @@ export class ProductItemsComponent implements OnInit, OnChanges {
   loading = false;
   error: string | null = null;
 
-  constructor(private productListingService: ProductListingService) {}
+  constructor(private productListingService: ProductListingService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadProducts();
@@ -57,13 +58,10 @@ export class ProductItemsComponent implements OnInit, OnChanges {
         break;
     }
 
-    console.log('Loading products with params:', this.productParams);
-
     this.productListingService.getProducts(this.productParams).subscribe({
       next: response => {
         this.products = response.data;
         this.loading = false;
-        console.log('Loaded products:', this.products.length);
       },
       error: err => {
         console.error('Error loading products:', err);
@@ -71,5 +69,9 @@ export class ProductItemsComponent implements OnInit, OnChanges {
         this.loading = false;
       }
     });
+  }
+
+  redirectToProduct(slug: string) {
+    this.router.navigate([`products/${slug}`])
   }
 }

@@ -1,16 +1,16 @@
 <div class="product-listing-container">
     <!-- Breadcrumb -->
-    <div class="px-3 py-2">
+    <div class="tw-py-2">
         <app-common-breadcrumb></app-common-breadcrumb>
     </div>
 
     <!-- Page Header/Banner -->
-    <div class="page-header px-3 py-5 mb-4">
-        <h1 class="display-4">{{ pageTitle }}</h1>
+    <div class="tw-px-7">
+        <span class="tw-font-semibold tw-text-lg">{{ pageTitle }}</span>
     </div>
 
     <!-- Product Items Grid -->
-    <div class="mt-3 px-3">
+    <div class="tw-mt-4">
         <app-product-items 
             [collectionId]="collectionId"
             [queryType]="queryType">
