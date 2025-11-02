@@ -2,7 +2,7 @@
     <!-- Display Images for Mobile and Tablet -->
     <swiper [config]="config" class="h-100 md:tw-hidden" #swiperSlideShow>
         <ng-template swiperSlide *ngFor="let photo of photos">
-            <img nz-image [src]="photo.url" class="object-fit-cover w-100 h-100">
+            <img nz-image [src]="photo.url" class="tw-object-top w-100 h-100">
         </ng-template>
     </swiper>
 
