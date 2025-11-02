@@ -73,11 +73,11 @@ namespace Infrastructure.Data
 
             try
             {
-                // Validate 
+                // STEP 1: Validate 
                 ValidateProduct(product);
                 _logger.LogInformation("Creating product: {ProductName}", product.Name);
 
-                // Generate slug with ProductSKU for better uniqueness
+                // STEP 2: Generate slug with ProductSKU for better uniqueness
                 if (string.IsNullOrWhiteSpace(product.Slug))
                 {
                     product.Slug = await GenerateUniqueSlugAsync(product.Name, product.ProductSKU);
@@ -93,39 +93,42 @@ namespace Infrastructure.Data
                     }
                 }
 
-                // Set default values
+                // STEP 3: Set default values
                 product.IsDeleted = false;
                 product.IsTrending = false;
 
-                // Process ProductOptions
+                // STEP 4: Process ProductOptions
                 ProcessProductOptions(product);
 
-                // STEP 6: Process SKUs
+                // STEP 5: Process SKUs (với validation ProductSKUValues)
                 ProcessProductSKUs(product);
 
-                // STEP 7: Process Photos
+                // STEP 6: Process Photos
                 ProcessPhotos(product);
 
-                // STEP 8: Add to context
+                // STEP 7: Add to context
                 await _context.Products.AddAsync(product);
 
-                // STEP 9: Save changes
+                // STEP 8: Save changes
                 await _context.SaveChangesAsync();
+
+                // STEP 9: Validate ProductSKUValues được tạo đúng
+                await ValidateProductSKUValuesAfterSave(product);
 
                 // STEP 10: Commit transaction
                 await transaction.CommitAsync();
 
                 _logger.LogInformation(
-                    "Product created successfully: ID={ProductId}, Name={ProductName}",
-                    product.Id, product.Name);
+                    "Product created successfully: ID={ProductId}, Name={ProductName}, TotalSKUs={SkuCount}",
+                    product.Id, product.Name, product.ProductSKUs?.Count ?? 0);
 
                 return product;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "An error occurred while creating a product.");
+                _logger.LogError(ex, "An error occurred while creating product: {ProductName}", product.Name);
                 await transaction.RollbackAsync();
-                throw; // Re-throw the exception after logging it
+                throw;
             }
         }
 
@@ -151,89 +154,73 @@ namespace Infrastructure.Data
                     throw new ArgumentException($"Product with ID {productId} not found");
                 }
 
-                _logger.LogInformation("Updating product: ID={ProductId}, Name={ProductName}",
+                _logger.LogInformation("Updating product: ID={ProductId}, Name={ProductName}", 
                     productId, existingProduct.Name);
 
-                // STEP 2: Validate updated data
+                // STEP 2: Validate updated product
                 ValidateProduct(updatedProduct);
 
-                // STEP 3: Verify ProductType exists if changed
-                if (updatedProduct.ProductTypeId != existingProduct.ProductTypeId)
+                // STEP 3: Update basic properties
+                existingProduct.Name = updatedProduct.Name;
+                existingProduct.Description = updatedProduct.Description;
+                existingProduct.ProductTypeId = updatedProduct.ProductTypeId;
+                existingProduct.ProductSKU = updatedProduct.ProductSKU;
+                existingProduct.ImportPrice = updatedProduct.ImportPrice;
+                existingProduct.Style = updatedProduct.Style;
+                existingProduct.Season = updatedProduct.Season;
+                existingProduct.Material = updatedProduct.Material;
+                existingProduct.IsTrending = updatedProduct.IsTrending;
+
+                // STEP 4: Update slug if name changed
+                if (updatedProduct.Name != existingProduct.Name)
                 {
-                    var productType = await _context.ProductTypes.FindAsync(updatedProduct.ProductTypeId);
-                    if (productType == null)
-                    {
-                        throw new ArgumentException($"ProductType with ID {updatedProduct.ProductTypeId} not found");
-                    }
+                    existingProduct.Slug = await GenerateUniqueSlugAsync(
+                        updatedProduct.Name, 
+                        updatedProduct.ProductSKU);
                 }
 
-                // STEP 4: Update basic properties
-                UpdateBasicProperties(existingProduct, updatedProduct);
-
-                // STEP 5: Update ProductOptions (Delete old → Add new)
+                // STEP 5: Update ProductOptions
                 UpdateProductOptions(existingProduct, updatedProduct);
 
-                // STEP 6: Update ProductSKUs (Delete old → Add new)
+                // STEP 6: Update ProductSKUs
                 UpdateProductSKUs(existingProduct, updatedProduct);
 
-                // STEP 7: Update Product Photos (Delete old → Add new)
+                // STEP 7: Update Photos
                 UpdateProductPhotos(existingProduct, updatedProduct);
 
                 // STEP 8: Save changes
                 await _context.SaveChangesAsync();
 
-                // STEP 9: Commit transaction
+                // STEP 9: Validate ProductSKUValues
+                await ValidateProductSKUValuesAfterSave(existingProduct);
+
+                // STEP 10: Commit transaction
                 await transaction.CommitAsync();
 
-                _logger.LogInformation(
-                    "Product updated successfully: ID={ProductId}, Name={ProductName}",
-                    existingProduct.Id, existingProduct.Name);
+                _logger.LogInformation("Product updated successfully: ID={ProductId}", productId);
 
-                // STEP 10: Reload with fresh data
-                return await _context.Products
-                    .Include(p => p.ProductType)
-                    .Include(p => p.ProductOptions)
-                        .ThenInclude(o => o.ProductOptionValues)
-                    .Include(p => p.ProductSKUs)
-                        .ThenInclude(s => s.ProductSKUValues)
-                            .ThenInclude(sv => sv.ProductOptionValue)
-                    .Include(p => p.ProductSKUs)
-                        .ThenInclude(s => s.Photos)
-                    .Include(p => p.Photos)
-                    .FirstOrDefaultAsync(p => p.Id == productId);
+                return existingProduct;
             }
             catch (Exception ex)
             {
-                await transaction.RollbackAsync();
                 _logger.LogError(ex, "Error updating product: ID={ProductId}", productId);
+                await transaction.RollbackAsync();
                 throw;
-            }
-        }
-
-        private void UpdateBasicProperties(Product existing, Product updated)
-        {
-            existing.Name = updated.Name;
-            existing.Description = updated.Description;
-            existing.ProductSKU = updated.ProductSKU;
-            existing.ImportPrice = updated.ImportPrice;
-            existing.ProductTypeId = updated.ProductTypeId;
-            existing.Style = updated.Style;
-            existing.Season = updated.Season;
-            existing.Material = updated.Material;
-            existing.IsTrending = updated.IsTrending;
-
-            // Update slug if provided
-            if (!string.IsNullOrWhiteSpace(updated.Slug))
-            {
-                existing.Slug = updated.Slug;
             }
         }
 
         private void UpdateProductOptions(Product existing, Product updated)
         {
-            // Remove all old options and values (cascade delete will handle ProductOptionValues)
+            // Remove old options and their values
             if (existing.ProductOptions != null && existing.ProductOptions.Any())
             {
+                foreach (var option in existing.ProductOptions.ToList())
+                {
+                    if (option.ProductOptionValues != null)
+                    {
+                        _context.ProductOptionValues.RemoveRange(option.ProductOptionValues);
+                    }
+                }
                 _context.ProductOptions.RemoveRange(existing.ProductOptions);
             }
 
@@ -244,22 +231,26 @@ namespace Infrastructure.Data
 
                 foreach (var option in updated.ProductOptions)
                 {
-                    if (option.ProductOptionValues == null || !option.ProductOptionValues.Any())
-                    {
-                        throw new ArgumentException($"Option '{option.OptionName}' must have at least one value");
-                    }
-
                     var newOption = new ProductOptions
                     {
                         OptionName = option.OptionName,
-                        ProductId = existing.Id,
-                        Product = existing,
-                        ProductOptionValues = option.ProductOptionValues.Select(v => new ProductOptionValues
-                        {
-                            ValueName = v.ValueName,
-                            ValueTempId = v.ValueTempId
-                        }).ToList()
+                        Product = existing
                     };
+
+                    if (option.ProductOptionValues != null && option.ProductOptionValues.Any())
+                    {
+                        newOption.ProductOptionValues = new List<ProductOptionValues>();
+
+                        foreach (var value in option.ProductOptionValues)
+                        {
+                            newOption.ProductOptionValues.Add(new ProductOptionValues
+                            {
+                                ValueName = value.ValueName,
+                                ValueTempId = value.ValueTempId,
+                                ProductOption = newOption
+                            });
+                        }
+                    }
 
                     existing.ProductOptions.Add(newOption);
                 }
@@ -268,9 +259,20 @@ namespace Infrastructure.Data
 
         private void UpdateProductSKUs(Product existing, Product updated)
         {
-            // Remove all old SKUs (cascade delete will handle ProductSKUValues and Photos)
+            // Remove old SKUs and their values/photos
             if (existing.ProductSKUs != null && existing.ProductSKUs.Any())
             {
+                foreach (var sku in existing.ProductSKUs.ToList())
+                {
+                    if (sku.ProductSKUValues != null)
+                    {
+                        _context.ProductSKUValues.RemoveRange(sku.ProductSKUValues);
+                    }
+                    if (sku.Photos != null)
+                    {
+                        _context.Photos.RemoveRange(sku.Photos);
+                    }
+                }
                 _context.ProductSKUs.RemoveRange(existing.ProductSKUs);
             }
 
@@ -279,12 +281,8 @@ namespace Infrastructure.Data
             {
                 existing.ProductSKUs = new List<ProductSKUs>();
 
-                // Get main photo from Product for default SKU images
-                var mainProductPhoto = updated.Photos?.FirstOrDefault(p => p.IsMain)
-                    ?? existing.Photos?.FirstOrDefault(p => p.IsMain);
+                var mainProductPhoto = existing.Photos?.FirstOrDefault(p => p.IsMain);
 
-                // Build lookup for option values by ValueTempId
-                // NOTE: Must use the NEW options we just added (existing.ProductOptions)
                 var optionValuesLookup = existing.ProductOptions?
                     .SelectMany(opt => opt.ProductOptionValues)
                     .ToDictionary(v => v.ValueTempId, v => v);
@@ -405,9 +403,65 @@ namespace Infrastructure.Data
             if (product.ProductSKUs == null || !product.ProductSKUs.Any())
                 errors.Add("At least one SKU is required");
 
+            if (product.ProductOptions != null && product.ProductOptions.Any())
+            {
+                var totalOptionValues = product.ProductOptions.Sum(o => o.ProductOptionValues?.Count ?? 0);
+                
+                if (totalOptionValues > 0)
+                {
+                    var allValidValueTempIds = product.ProductOptions
+                        .Where(o => o.ProductOptionValues != null && o.ProductOptionValues.Any())
+                        .SelectMany(o => o.ProductOptionValues)
+                        .Where(v => v != null && v.ValueTempId > 0)
+                        .Select(v => new { OptionName = v.ProductOption?.OptionName ?? "Unknown", ValueName = v.ValueName, ValueTempId = v.ValueTempId })
+                        .ToList();
+                        
+                    foreach (var sku in product.ProductSKUs ?? Enumerable.Empty<ProductSKUs>())
+                    {
+                        if (sku.ProductSKUValues == null || !sku.ProductSKUValues.Any())
+                        {
+                            errors.Add($"SKU '{sku.SKU}' must have ProductSKUValues linking to ProductOptions");
+                        }
+                        else
+                        {
+                            var expectedCount = product.ProductOptions.Count;
+                            var actualCount = sku.ProductSKUValues.Count;
+
+                            if (actualCount != expectedCount)
+                            {
+                                errors.Add(
+                                    $"SKU '{sku.SKU}' has {actualCount} ProductSKUValues but product has {expectedCount} ProductOptions. " +
+                                    $"Each SKU must have exactly one value for each option.");
+                            }
+
+                            var validValueTempIds = product.ProductOptions
+                                .Where(o => o.ProductOptionValues != null && o.ProductOptionValues.Any())
+                                .SelectMany(o => o.ProductOptionValues)
+                                .Where(v => v != null && v.ValueTempId > 0)
+                                .Select(v => v.ValueTempId)
+                                .ToHashSet();
+
+                            foreach (var skuValue in sku.ProductSKUValues)
+                            {
+                                if (skuValue == null)
+                                {
+                                    errors.Add($"SKU '{sku.SKU}' has null ProductSKUValue.");
+                                    continue;
+                                }
+
+                                if (skuValue.ValueTempId <= 0)
+                                {
+                                    errors.Add(
+                                        $"SKU '{sku.SKU}' has invalid or missing ValueTempId in ProductSKUValues.");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             if (product.ProductSKUs != null)
             {
-                // Validate SKU codes are unique
                 var duplicateSKUs = product.ProductSKUs
                     .GroupBy(s => s.SKU)
                     .Where(g => g.Count() > 1)
@@ -417,14 +471,55 @@ namespace Infrastructure.Data
                 if (duplicateSKUs.Any())
                     errors.Add($"Duplicate SKU codes: {string.Join(", ", duplicateSKUs)}");
 
-                // Validate SKU prices
                 if (product.ProductSKUs.Any(s => s.Price <= 0))
                     errors.Add("All SKU prices must be greater than 0");
             }
 
             if (errors.Any())
             {
-                throw new ValidationException(string.Join("; ", errors));
+                var errorMessage = string.Join("; ", errors);
+                _logger.LogWarning("Product validation failed: {Errors}", errorMessage);
+                throw new ValidationException(errorMessage);
+            }
+        }
+
+        private async Task ValidateProductSKUValuesAfterSave(Product product)
+        {
+            var verifyProduct = await _context.Products
+                .Include(p => p.ProductSKUs)
+                    .ThenInclude(s => s.ProductSKUValues)
+                .Include(p => p.ProductOptions)
+                .FirstOrDefaultAsync(p => p.Id == product.Id);
+
+            if (verifyProduct == null) return;
+
+            var hasOptions = verifyProduct.ProductOptions != null && verifyProduct.ProductOptions.Any();
+            
+            if (!hasOptions) return;
+
+            var errors = new List<string>();
+
+            foreach (var sku in verifyProduct.ProductSKUs ?? Enumerable.Empty<ProductSKUs>())
+            {
+                if (sku.ProductSKUValues == null || !sku.ProductSKUValues.Any())
+                {
+                    errors.Add($"SKU ID {sku.Id} ('{sku.SKU}') has NO ProductSKUValues after save");
+                }
+                else
+                {
+                    _logger.LogInformation(
+                        "SKU ID {SkuId} has {Count} ProductSKUValues", 
+                        sku.Id, 
+                        sku.ProductSKUValues.Count);
+                }
+            }
+
+            if (errors.Any())
+            {
+                var errorMessage = string.Join("; ", errors);
+                _logger.LogError("ProductSKUValues validation failed after save: {Errors}", errorMessage);
+                throw new InvalidOperationException(
+                    $"Product was saved but ProductSKUValues are missing. This indicates a data integrity issue. {errorMessage}");
             }
         }
 
@@ -433,7 +528,6 @@ namespace Infrastructure.Data
             var baseSlug = GenerateSlug(name);
             var slug = baseSlug;
 
-            // Check if slug already exists
             var exists = await _context.Products.AnyAsync(p => p.Slug == slug);
 
             if (!exists)
@@ -479,7 +573,6 @@ namespace Infrastructure.Data
 
         private string GenerateSlug(string name)
         {
-            // Convert to lowercase and replace spaces with hyphens
             var slug = name.ToLower()
                 .Replace(" ", "-")
                 .Replace("á", "a").Replace("à", "a").Replace("ả", "a").Replace("ã", "a").Replace("ạ", "a")
@@ -496,13 +589,10 @@ namespace Infrastructure.Data
                 .Replace("ư", "u").Replace("ứ", "u").Replace("ừ", "u").Replace("ử", "u").Replace("ữ", "u").Replace("ự", "u")
                 .Replace("ý", "y").Replace("ỳ", "y").Replace("ỷ", "y").Replace("ỹ", "y").Replace("ỵ", "y");
 
-            // Remove special characters
             slug = System.Text.RegularExpressions.Regex.Replace(slug, @"[^a-z0-9\-]", "");
 
-            // Remove consecutive hyphens
             slug = System.Text.RegularExpressions.Regex.Replace(slug, @"-+", "-");
 
-            // Trim hyphens from ends
             slug = slug.Trim('-');
 
             return slug;
@@ -515,48 +605,122 @@ namespace Infrastructure.Data
 
             foreach (var option in product.ProductOptions)
             {
-                // Ensure option has values
                 if (option.ProductOptionValues == null || !option.ProductOptionValues.Any())
                 {
                     throw new ArgumentException($"Option '{option.OptionName}' must have at least one value");
                 }
 
-                // Set ProductId (will be set by EF, but explicit is clearer)
                 option.Product = product;
             }
         }
+
         private void ProcessProductSKUs(Product product)
         {
             if (product.ProductSKUs == null || !product.ProductSKUs.Any())
                 return;
 
-            // Get main photo for default SKU images
             var mainPhoto = product.Photos?.FirstOrDefault(p => p.IsMain);
 
-            // Build lookup dictionary for ProductOptionValues by ValueTempId
-            var optionValuesLookup = product.ProductOptions?
+            var optionValuesLookupByTempId = product.ProductOptions?
                 .SelectMany(opt => opt.ProductOptionValues)
                 .ToDictionary(v => v.ValueTempId, v => v);
 
+            var optionValuesLookupByName = product.ProductOptions?
+                .SelectMany(opt => opt.ProductOptionValues
+                    .Select(v => new { OptionName = opt.OptionName, ValueName = v.ValueName, Value = v }))
+                .GroupBy(x => new { x.OptionName, x.ValueName })
+                .ToDictionary(g => g.Key, g => g.First().Value);
+
             foreach (var sku in product.ProductSKUs)
             {
-                // Set product reference
                 sku.Product = product;
 
-                // Set default image if not provided
                 if (string.IsNullOrEmpty(sku.ImageUrl) && mainPhoto != null)
                 {
                     sku.ImageUrl = mainPhoto.Url;
                 }
 
-                // Link SKU values to option values
-                if (sku.ProductSKUValues != null && optionValuesLookup != null)
+                if (sku.ProductSKUValues != null && (optionValuesLookupByTempId != null || optionValuesLookupByName != null))
                 {
                     foreach (var skuValue in sku.ProductSKUValues)
                     {
-                        if (optionValuesLookup.TryGetValue(skuValue.ValueTempId, out var optionValue))
+                        ProductOptionValues optionValue = null;
+                        bool found = false;
+
+                        if (optionValuesLookupByTempId != null && 
+                            skuValue.ValueTempId > 0 &&
+                            optionValuesLookupByTempId.TryGetValue(skuValue.ValueTempId, out optionValue))
+                        {
+                            found = true;
+                            _logger.LogDebug(
+                                "Linked SKU value by ValueTempId: SKU={Sku}, ValueTempId={TempId}, OptionValue={OptionValue}",
+                                sku.SKU, skuValue.ValueTempId, optionValue.ValueName);
+                        }
+                        if (!found && optionValuesLookupByName != null && 
+                                 skuValue.ProductOptionValue != null &&
+                                 skuValue.ProductOptionValue.ProductOption != null)
+                        {
+                            var key = new { 
+                                OptionName = skuValue.ProductOptionValue.ProductOption.OptionName, 
+                                ValueName = skuValue.ProductOptionValue.ValueName 
+                            };
+                            
+                            if (optionValuesLookupByName.TryGetValue(key, out optionValue))
+                            {
+                                found = true;
+                                skuValue.ValueTempId = optionValue.ValueTempId;
+                                _logger.LogInformation(
+                                    "Linked SKU value by OptionName+ValueName: SKU={Sku}, Option={Option}, Value={Value}, NewValueTempId={TempId}",
+                                    sku.SKU, key.OptionName, key.ValueName, optionValue.ValueTempId);
+                            }
+                        }
+
+                        if (!found && product.ProductOptions != null && 
+                            sku.ProductSKUValues != null &&
+                            sku.ProductSKUValues.Count == product.ProductOptions.Count)
+                        {
+                            var skuValueIndex = sku.ProductSKUValues.ToList().IndexOf(skuValue);
+                            
+                            if (skuValueIndex >= 0 && skuValueIndex < product.ProductOptions.Count)
+                            {
+                                var optionsList = product.ProductOptions.ToList();
+                                var optionAtIndex = optionsList[skuValueIndex];
+                                if (optionAtIndex.ProductOptionValues != null && optionAtIndex.ProductOptionValues.Any())
+                                {
+                                    optionValue = optionAtIndex.ProductOptionValues
+                                        .FirstOrDefault(v => v.ValueTempId == skuValue.ValueTempId);
+                                    
+                                    if (optionValue == null && optionAtIndex.ProductOptionValues.Count > 0)
+                                    {
+                                        optionValue = optionAtIndex.ProductOptionValues.First();
+                                        skuValue.ValueTempId = optionValue.ValueTempId;
+                                        found = true;
+                                        _logger.LogWarning(
+                                            "Linked SKU value by position/index: SKU={Sku}, Index={Index}, Option={Option}, Value={Value}, NewValueTempId={TempId}",
+                                            sku.SKU, skuValueIndex, optionAtIndex.OptionName, optionValue.ValueName, optionValue.ValueTempId);
+                                    }
+                                    else if (optionValue != null)
+                                    {
+                                        found = true;
+                                        _logger.LogWarning(
+                                            "Found matching value by position search: SKU={Sku}, Index={Index}, ValueTempId={TempId}, OptionValue={OptionValue}",
+                                            sku.SKU, skuValueIndex, skuValue.ValueTempId, optionValue.ValueName);
+                                    }
+                                }
+                            }
+                        }
+
+                        if (found && optionValue != null)
                         {
                             skuValue.ProductOptionValue = optionValue;
+                        }
+                        else
+                        {
+                            throw new ArgumentException(
+                                $"Cannot link SKU value for SKU '{sku.SKU}' with ValueTempId {skuValue.ValueTempId}. " +
+                                $"Could not find matching ProductOptionValue. " +
+                                $"Available ValueTempIds: {string.Join(", ", optionValuesLookupByTempId?.Keys.OrderBy(x => x) ?? Enumerable.Empty<int>())}. " +
+                                $"SKU has {sku.ProductSKUValues?.Count ?? 0} values, Product has {product.ProductOptions?.Count ?? 0} options.");
                         }
                     }
                 }
@@ -568,11 +732,9 @@ namespace Infrastructure.Data
             if (product.Photos == null || !product.Photos.Any())
                 return;
 
-            // Ensure only one main photo
             var mainPhotos = product.Photos.Where(p => p.IsMain).ToList();
             if (mainPhotos.Count > 1)
             {
-                // Set first as main, rest as non-main
                 mainPhotos.First().IsMain = true;
                 foreach (var photo in mainPhotos.Skip(1))
                 {
@@ -581,7 +743,6 @@ namespace Infrastructure.Data
             }
             else if (!mainPhotos.Any())
             {
-                // Set first photo as main
                 product.Photos.First().IsMain = true;
             }
         }

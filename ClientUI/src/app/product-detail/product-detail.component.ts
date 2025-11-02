@@ -58,7 +58,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
         },
         error: err => {
           if(err.status == 404) {
-            console.log("Cannot find product");
           } else if (err.status == 400) {
             console.log(err);
           }
@@ -75,13 +74,24 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   }
 
   addToCart() {
+    // Kiểm tra xem đã có selectedProductSKU và selectedQuantity chưa
+    if (!this.selectedProductSKU) {
+      console.error('Chưa chọn sản phẩm SKU');
+      return;
+    }
+
+    if (!this.selectedQuantity || this.selectedQuantity <= 0) {
+      console.error('Số lượng không hợp lệ');
+      return;
+    }
+
     this.basketService.addItemToBasket(this.selectedProductSKU, this.product, this.selectedQuantity);
 
     this.trackingService.trackAddToCart(this.product.id, this.selectedProductSKU.id)
     .pipe(
         takeUntil(this.destroy$)
     ).subscribe({
-        next: () => console.log('Track ATC success'),
+        next: () => {},
         error: (error) => console.error('Track ATC failed:', error)
     });
   }

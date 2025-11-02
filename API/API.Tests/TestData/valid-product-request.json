@@ -1,0 +1,161 @@
+{
+  "name": "Test Product - Complete Data",
+  "description": "This is a test product with complete ProductSKUValues data",
+  "productTypeId": 1,
+  "productSKU": "TEST-COMPLETE-001",
+  "importPrice": 50000,
+  "style": "Casual",
+  "season": "All Season",
+  "material": "Cotton",
+  "isTrending": false,
+  "productOptions": [
+    {
+      "optionName": "Size",
+      "productOptionValues": [
+        {
+          "valueName": "S",
+          "valueTempId": 1
+        },
+        {
+          "valueName": "M",
+          "valueTempId": 2
+        },
+        {
+          "valueName": "L",
+          "valueTempId": 3
+        }
+      ]
+    },
+    {
+      "optionName": "Màu sắc",
+      "productOptionValues": [
+        {
+          "valueName": "Đen",
+          "valueTempId": 4
+        },
+        {
+          "valueName": "Trắng",
+          "valueTempId": 5
+        }
+      ]
+    }
+  ],
+  "productSkus": [
+    {
+      "sku": "TEST-COMPLETE-001-S-DEN",
+      "price": 100000,
+      "importPrice": 50000,
+      "quantity": 10,
+      "barcode": "TC001SD",
+      "weight": 200,
+      "imageUrl": "https://example.com/s-den.jpg",
+      "productSKUValues": [
+        {
+          "valueTempId": 1
+        },
+        {
+          "valueTempId": 4
+        }
+      ]
+    },
+    {
+      "sku": "TEST-COMPLETE-001-S-TRANG",
+      "price": 100000,
+      "importPrice": 50000,
+      "quantity": 10,
+      "barcode": "TC001ST",
+      "weight": 200,
+      "imageUrl": "https://example.com/s-trang.jpg",
+      "productSKUValues": [
+        {
+          "valueTempId": 1
+        },
+        {
+          "valueTempId": 5
+        }
+      ]
+    },
+    {
+      "sku": "TEST-COMPLETE-001-M-DEN",
+      "price": 110000,
+      "importPrice": 55000,
+      "quantity": 15,
+      "barcode": "TC001MD",
+      "weight": 220,
+      "imageUrl": "https://example.com/m-den.jpg",
+      "productSKUValues": [
+        {
+          "valueTempId": 2
+        },
+        {
+          "valueTempId": 4
+        }
+      ]
+    },
+    {
+      "sku": "TEST-COMPLETE-001-M-TRANG",
+      "price": 110000,
+      "importPrice": 55000,
+      "quantity": 15,
+      "barcode": "TC001MT",
+      "weight": 220,
+      "imageUrl": "https://example.com/m-trang.jpg",
+      "productSKUValues": [
+        {
+          "valueTempId": 2
+        },
+        {
+          "valueTempId": 5
+        }
+      ]
+    },
+    {
+      "sku": "TEST-COMPLETE-001-L-DEN",
+      "price": 120000,
+      "importPrice": 60000,
+      "quantity": 20,
+      "barcode": "TC001LD",
+      "weight": 240,
+      "imageUrl": "https://example.com/l-den.jpg",
+      "productSKUValues": [
+        {
+          "valueTempId": 3
+        },
+        {
+          "valueTempId": 4
+        }
+      ]
+    },
+    {
+      "sku": "TEST-COMPLETE-001-L-TRANG",
+      "price": 120000,
+      "importPrice": 60000,
+      "quantity": 20,
+      "barcode": "TC001LT",
+      "weight": 240,
+      "imageUrl": "https://example.com/l-trang.jpg",
+      "productSKUValues": [
+        {
+          "valueTempId": 3
+        },
+        {
+          "valueTempId": 5
+        }
+      ]
+    }
+  ],
+  "photos": [
+    {
+      "url": "https://example.com/product-main.jpg",
+      "isMain": true
+    },
+    {
+      "url": "https://example.com/product-detail1.jpg",
+      "isMain": false
+    },
+    {
+      "url": "https://example.com/product-detail2.jpg",
+      "isMain": false
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { Product } from '../_shared/_models/product';
@@ -13,6 +13,14 @@ export class ProductDetailService {
 
   // Truy vấn sản phẩm dựa trên slug
   getProductBySlug(slug: string) {
-    return this.http.get<Product>(this.baseApiUrl + 'products/slug/' + slug);
+    // Thêm query params để yêu cầu backend include đầy đủ relations
+    const params = new HttpParams()
+      .set('includeSkuValues', 'true')
+      .set('includeOptions', 'true');
+    
+    return this.http.get<Product>(
+      this.baseApiUrl + 'products/slug/' + slug,
+      { params }
+    );
   }
 }

@@ -15,6 +15,12 @@
     </button>
   </div>
 
+  <!-- Error Message -->
+  <div *ngIf="showError" class="tw-bg-red-50 tw-border tw-border-red-400 tw-text-red-700 tw-px-4 tw-py-3 tw-rounded tw-relative" role="alert">
+    <strong class="tw-font-bold">Lỗi!</strong>
+    <span class="tw-block sm:tw-inline tw-ml-2">{{ errorMessage }}</span>
+  </div>
+
   <div class="mt-2 tw-flex tw-flex-row tw-gap-3">
     <!-- <div class="mb-1 fw-semibold">Số lượng:</div> -->
     <nz-button-group class="border tw-flex tw-items-center">
@@ -26,12 +32,12 @@
     </nz-button-group>
 
     <button
-      class="tw-hidden tw-flex-1 md:tw-block tw-bg-zinc-900 tw-text-white tw-rounded-sm tw-p-3 tw-basis-60 tw-font-semibold tw-text-xs add-to-cart-btn">
+      class="tw-hidden tw-flex-1 md:tw-block tw-bg-zinc-900 tw-text-white tw-rounded-sm tw-p-3 tw-basis-60 tw-font-semibold tw-text-xs add-to-cart-btn" (click)="onAddToCart()">
       ADD TO CART
     </button>
 
     <button
-      class="tw-border tw-flex-1 tw-border-neutral-950 tw-rounded-sm tw-p-2 tw-basis-60 tw-font-semibold tw-text-xs hover:tw-bg-zinc-900 hover:tw-text-white">
+      class="tw-border tw-flex-1 tw-border-neutral-950 tw-rounded-sm tw-p-2 tw-basis-60 tw-font-semibold tw-text-xs hover:tw-bg-zinc-900 hover:tw-text-white" (click)="onAddToCart()">
       BUY NOW
     </button>
   </div>

@@ -1,0 +1,52 @@
+{
+  "name": "INVALID - Wrong ValueTempId",
+  "description": "This request will FAIL because valueTempId doesn't exist in productOptions",
+  "productTypeId": 1,
+  "productSKU": "TEST-INVALID-003",
+  "importPrice": 50000,
+  "productOptions": [
+    {
+      "optionName": "Size",
+      "productOptionValues": [
+        {
+          "valueName": "S",
+          "valueTempId": 1
+        }
+      ]
+    },
+    {
+      "optionName": "Màu sắc",
+      "productOptionValues": [
+        {
+          "valueName": "Đen",
+          "valueTempId": 2
+        }
+      ]
+    }
+  ],
+  "productSkus": [
+    {
+      "sku": "TEST-INVALID-003-S-DEN",
+      "price": 100000,
+      "importPrice": 50000,
+      "quantity": 10,
+      "barcode": "TI003SD",
+      "weight": 200,
+      "productSKUValues": [
+        {
+          "valueTempId": 1
+        },
+        {
+          "valueTempId": 9999
+          // ❌ INVALID: valueTempId 9999 doesn't exist in productOptions
+        }
+      ]
+    }
+  ],
+  "photos": [
+    {
+      "url": "https://example.com/invalid-product3.jpg",
+      "isMain": true
+    }
+  ]
+}

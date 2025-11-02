@@ -2,7 +2,7 @@
     <app-product-images [photos]="productPhotos" class="tw-w-full lg:tw-w-2/3"></app-product-images>
 
     <app-product-info [product]="product" (selectOptions)="optionSelected($event)"
-        (selectQuantity)="quantitySelected($event)" class="tw-w-full lg:tw-w-1/3"></app-product-info>
+        (selectQuantity)="quantitySelected($event)" (addToCart)="addToCart()" class="tw-w-full lg:tw-w-1/3"></app-product-info>
 </div>
 
 <div class="tw-my-8">
