@@ -112,33 +112,7 @@ namespace Infrastructure.Services
 
             return uploadResults;
         }
-
-        public async Task<ImageUploadResult> AddBannerMobilePhotoAsync(IFormFile file)
-        {
-            var uploadResults = new ImageUploadResult();
-
-            if(file.Length > 0)
-            {
-                using var stream = file.OpenReadStream();
-                var uploadParams = new ImageUploadParams
-                {
-                    File = new FileDescription(file.FileName, stream),
-                    Transformation = new Transformation()
-                        .Width(768)   // Mobile width
-                        .Height(384)  // Mobile height (tỷ lệ 2:1)
-                        .Crop("fill")
-                        .Gravity("center")
-                        .Quality("auto:good") // Chất lượng tốt cho bản free
-                        .FetchFormat("auto"), // Tự động chọn format tối ưu
-                    Folder = "marki/banners/mobile"
-                };
-
-                uploadResults = await _cloudinary.UploadAsync(uploadParams);
-            }
-
-            return uploadResults;
-        }
-
+        
         public async Task<ImageUploadResult> AddOriginalPhotoAsync(IFormFile file)
         {
             var uploadResults = new ImageUploadResult();
@@ -153,6 +127,32 @@ namespace Infrastructure.Services
                         .Quality("auto:best") // Chất lượng cao nhất cho bản free
                         .FetchFormat("auto"), // Tự động chọn format tối ưu
                     Folder = "marki/original"
+                };
+
+                uploadResults = await _cloudinary.UploadAsync(uploadParams);
+            }
+
+            return uploadResults;
+        }
+
+        public async Task<ImageUploadResult> AddBannerMobilePhotoAsync(IFormFile file)
+        {
+            var uploadResults = new ImageUploadResult();
+
+            if (file.Length > 0)
+            {
+                using var stream = file.OpenReadStream();
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(file.FileName, stream),
+                    Transformation = new Transformation()
+                        .Width(768)   // Mobile width
+                        .Height(384)  // Mobile height (tỷ lệ 2:1)
+                        .Crop("fill")
+                        .Gravity("center")
+                        .Quality("auto:good") // Chất lượng tốt cho bản free
+                        .FetchFormat("auto"), // Tự động chọn format tối ưu
+                    Folder = "marki/banners/mobile"
                 };
 
                 uploadResults = await _cloudinary.UploadAsync(uploadParams);

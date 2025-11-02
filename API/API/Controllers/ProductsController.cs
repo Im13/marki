@@ -75,6 +75,26 @@ namespace API.Controllers
             return _mapper.Map<Photo,PhotoDTO>(photo);
         }
 
+        [HttpPost("add-original-photo")]
+        public async Task<ActionResult<PhotoDTO>> AddOriginalPhoto(IFormFile file)
+        {
+            if(file == null) return BadRequest("No file detected!");
+            var result = await _photoService.AddOriginalPhotoAsync(file);
+
+            if (result.Error != null)
+            {
+                return BadRequest(result.Error.Message);
+            }
+
+            var photo = new Photo
+            {
+                Url = result.SecureUrl.AbsoluteUri,
+                PublicId = result.PublicId
+            };
+
+            return _mapper.Map<Photo,PhotoDTO>(photo);
+        }
+
         [HttpGet]
         public async Task<ActionResult<ProductDTOs>> GetProducts([FromQuery]ProductSpecParams productParams)
         {
