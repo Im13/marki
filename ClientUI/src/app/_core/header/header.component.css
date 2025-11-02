@@ -1,14 +1,6 @@
 #collapseLoginRegister > * {
     line-height: 1.5rem;
-}
-
-.stroke-thin {
-    stroke-width: 1;
-}
-
-.stroke-thinner {
-    stroke-width: 0.8;
-}
+} 
 
 .bg-app {
     background-color: var(--background-color);

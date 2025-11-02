@@ -1,7 +1,7 @@
-.btn-atc {
-    background-color: #051B11;
-}
-
 .btn-atc span {
     font-size: .85rem;
+}
+
+.bg-app {
+    background-color: var(--background-color);
 }

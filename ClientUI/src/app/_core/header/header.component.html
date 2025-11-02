@@ -38,7 +38,7 @@
   <div class="tw-basis-1/3 lg:tw-basis-1/5 tw-flex tw-items-center tw-justify-end tw-pe-8 lg:tw-pe-8">
     <span class="tw-text-[13px] lg:tw-flex tw-items-center tw-justify-end w-full lg:tw-text-[12px] tw-cursor-pointer" routerLink="/basket">
       <span class="tw-hidden md:tw-flex tw-me-1">CART</span>
-      <span class="">(1)</span>
+      <span class="">({{ getCount((basketService.basketSource$ | async)?.items || []) }})</span>
     </span>
   </div>
 
