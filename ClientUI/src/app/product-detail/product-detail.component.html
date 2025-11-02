@@ -1,4 +1,4 @@
-<div class="tw-min-h-screen md:tw-min-h-[25vh] tw-flex tw-flex-col lg:tw-flex-row tw-gap-4">
+<div class="tw-min-h-screen md:tw-min-h-[25vh] tw-flex tw-flex-col lg:tw-flex-row">
     <app-product-images [photos]="productPhotos" class="tw-w-full lg:tw-w-2/3"></app-product-images>
 
     <app-product-info [product]="product" (selectOptions)="optionSelected($event)"
@@ -6,11 +6,7 @@
 </div>
 
 <div class="tw-my-8">
-    <app-description [description]="productDescription"></app-description>
-</div>
-
-<div class="tw-my-8">
-    <app-recommendation type="similar" [productId]="productId$ | async" [limit]="8" [columns]="4" title="Sản phẩm tương tự"></app-recommendation>
+    <app-recommendation type="similar" [productId]="productId$ | async" [limit]="8" [columns]="4" title="Same style products"></app-recommendation>
 </div>
 
 <app-products-footer (atcClicked)="addToCart()"

@@ -2,3 +2,18 @@
   border: 1px black solid;
   color: black;
 }
+
+.bg-app {
+  background-color: var(--background-color);
+}
+
+/* Add to cart button hover styles with bg-app color */
+.add-to-cart-btn {
+  transition: all 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: var(--background-color) !important;
+  color: rgb(24, 24, 27) !important; /* zinc-900 */
+  border: 1px solid rgb(24, 24, 27) !important;
+}

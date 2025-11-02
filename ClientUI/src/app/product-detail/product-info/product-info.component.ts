@@ -21,7 +21,8 @@ export class ProductInfoComponent implements OnInit {
   @Output() selectQuantity = new EventEmitter<number>();
   selectedOptions: { [key: string]: any } = {};
   quantity: number = 1;
-
+  productDescription: string = '';
+  
   ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges) {

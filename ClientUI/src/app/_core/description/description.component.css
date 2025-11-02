@@ -2,3 +2,43 @@
     padding-right: 16px;
     font-weight: bold;
 }
+
+.bg-app {
+    background-color: var(--background-color) !important;
+}
+
+/* Apply bg-app to all collapse items when collapse container has bg-app */
+:host ::ng-deep .bg-app.ant-collapse .ant-collapse-item {
+    background-color: var(--background-color) !important;
+}
+
+:host ::ng-deep .bg-app.ant-collapse .ant-collapse-item .ant-collapse-header {
+    background-color: var(--background-color) !important;
+}
+
+:host ::ng-deep .bg-app.ant-collapse .ant-collapse-item .ant-collapse-content {
+    background-color: var(--background-color) !important;
+}
+
+:host ::ng-deep .bg-app.ant-collapse .ant-collapse-item .ant-collapse-content-box {
+    background-color: var(--background-color) !important;
+}
+
+/* Apply bg-app to collapse items when collapse has bg-app class */
+/* This ensures all panels within a bg-app collapse get the background */
+/* Since Ant Design doesn't forward class from nz-collapse-panel, we target via parent */
+:host ::ng-deep .ant-collapse.bg-app .ant-collapse-item {
+    background-color: var(--background-color) !important;
+}
+
+:host ::ng-deep .ant-collapse.bg-app .ant-collapse-item .ant-collapse-header {
+    background-color: var(--background-color) !important;
+}
+
+:host ::ng-deep .ant-collapse.bg-app .ant-collapse-item .ant-collapse-content {
+    background-color: var(--background-color) !important;
+}
+
+:host ::ng-deep .ant-collapse.bg-app .ant-collapse-item .ant-collapse-content-box {
+    background-color: var(--background-color) !important;
+}

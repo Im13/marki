@@ -8,6 +8,10 @@
     color: #333;
   }
 
+  .bg-app {
+    background-color: var(--background-color) !important;
+  }
+
   .loading-state,
   .error-state,
   .empty-state {
@@ -18,7 +22,7 @@
 
   .error-state {
     color: #d32f2f;
-    
+
     .retry-btn {
       margin-top: 10px;
       padding: 8px 16px;
@@ -45,8 +49,13 @@
   }
 
   @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
   }
 }
 
@@ -73,6 +82,7 @@
   }
 
   @media (max-width: 768px) {
+
     &.grid-cols-4,
     &.grid-cols-3 {
       grid-template-columns: repeat(2, 1fr);

@@ -17,7 +17,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   productSlug: string;
   product: Product;
   productPhotos: Photo[] = [];
-  productDescription: string = '';
+  
   selectedProductSKU: ProductSKU;
   selectedQuantity: number;
 
@@ -52,7 +52,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
         next: response => {
           this.product = response;
           this.productPhotos = this.product.photos;
-          this.productDescription = this.product.description;
           this.productId$.next(this.product.id);
 
           this.trackingService.trackProductView(this.product.id);

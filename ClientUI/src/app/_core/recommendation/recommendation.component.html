@@ -16,7 +16,7 @@
   <!-- Recommendations Grid -->
   <div *ngIf="!loading && !error && recommendations.length > 0" class="recommendations-grid" [ngClass]="getGridClass()">
 
-    <div *ngFor="let product of recommendations" class="recommendation-card" (click)="onProductClick(product)">
+    <div *ngFor="let product of recommendations" class="recommendation-card bg-app" (click)="onProductClick(product)">
 
       <!-- Product Image -->
       <div class="product-image">
@@ -29,7 +29,7 @@
       </div>
 
       <!-- Product Info -->
-      <div class="product-info">
+      <div class="product-info bg-app">
         <h4 class="product-name">{{ product.productName }}</h4>
         <p class="product-price">{{ product.priceDisplay }}</p>
         
@@ -57,7 +57,7 @@
   </div>
 
   <!-- Empty State -->
-  <div *ngIf="!loading && !error && recommendations.length === 0" class="empty-state">
+  <div *ngIf="!loading && !error && recommendations.length === 0" class="empty-state bg-app">
     <p>Không có sản phẩm gợi ý</p>
   </div>
 </div>
