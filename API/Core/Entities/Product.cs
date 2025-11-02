@@ -8,6 +8,7 @@ namespace Core.Entities
         public decimal ImportPrice { get; set; }
         public string Slug { get; set; }
         public bool IsDeleted { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public ProductType ProductType { get; set; }
         public int ProductTypeId { get; set; }
         public ICollection<ProductOptions> ProductOptions { get; set; }

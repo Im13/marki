@@ -63,18 +63,6 @@ const routes: Routes = [
       collectionId: CollectionMapConst['dresses']
     }
   },
-  
-  // Outerwear
-  { 
-    path: 'outerwear', 
-    component: ProductListingComponent, 
-    data: { 
-      breadcrumb: 'Outerwear', 
-      pageTitle: 'Outerwear',
-      queryType: 'category',
-      collectionId: CollectionMapConst['outerwear']
-    }
-  }
 ];
 
 @NgModule({

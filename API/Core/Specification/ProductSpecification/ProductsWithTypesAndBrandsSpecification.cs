@@ -7,28 +7,38 @@ namespace Core.Specification
         public ProductsWithTypesSpecification(ProductSpecParams productParams) : base(x => 
             (string.IsNullOrEmpty(productParams.Search) || x.Name.ToLower().Contains(productParams.Search)) &&
             (x.IsDeleted == false) &&
-            (!productParams.TypeId.HasValue || x.ProductTypeId == productParams.TypeId)
+            (productParams.TypeId == null || productParams.TypeId == 0 || x.ProductTypeId == productParams.TypeId) &&
+            (string.IsNullOrEmpty(productParams.Sort) || productParams.Sort.ToLower() != "new-arrivals" || x.CreatedAt >= DateTime.UtcNow.AddDays(-14))
         )
         {
             AddInclude(x => x.ProductType);
-            AddOrderByDescending(x => x.Id);
+            
+            if(!string.IsNullOrEmpty(productParams.Sort))
+            {
+                switch(productParams.Sort.ToLower())
+                {
+                    case "new-arrivals":
+                        AddOrderByDescending(x => x.CreatedAt);
+                        break;
+                    case "priceasc":
+                        // AddOrderBy(p => p.Price);
+                        AddOrderByDescending(x => x.Id);
+                        break;
+                    case "pricedesc":
+                        // AddOrderByDescending(p => p.Price);
+                        AddOrderByDescending(x => x.Id);
+                        break;
+                    default:
+                        AddOrderByDescending(x => x.Id);
+                        break;
+                }
+            }
+            else
+            {
+                AddOrderByDescending(x => x.Id);
+            }
+            
             ApplyPaging(productParams.PageSize * (productParams.PageIndex - 1), productParams.PageSize);
-
-            // if(!string.IsNullOrEmpty(productParams.Sort))
-            // {
-            //     switch(productParams.Sort)
-            //     {
-            //         case "priceAsc":
-            //             AddOrderBy(p => p.Price);
-            //             break;
-            //         case "priceDesc":
-            //             AddOrderByDescending(p => p.Price);
-            //             break;
-            //         default:
-            //             AddOrderBy(n => n.Name);
-            //             break;
-            //     }
-            // }
         }
 
         public ProductsWithTypesSpecification(int id) : base(x => x.Id == id)

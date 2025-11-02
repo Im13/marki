@@ -47,12 +47,12 @@
 
 <!-- PRODUCTS -->
 <div class="tw-grid tw-grid-cols-2 md:tw-grid-cols-4">
-  <div *ngFor="let product of products" class="tw-h-[400px] md:tw-h-[700px]">
-    <div class="tw-h-4/5">
-      <img nz-image [src]="product.photos[0].url" class="object-fit-cover w-100 h-100 md:tw-cursor-pointer" (click)="redirectToProduct(product?.slug)">
+  <div *ngFor="let product of products" class="tw-h-[400px] md:tw-h-[757px]">
+    <div class="tw-h-[88%]">
+      <img nz-image [src]="product.photos[0]?.url" class="object-fit-cover w-100 h-100 md:tw-cursor-pointer" (click)="redirectToProduct(product?.slug)">
     </div>
 
-    <div class="tw-h-1/5 tw-px-1 tw-py-2">
+    <div class="tw-h-[12%] tw-px-3 tw-py-2">
       <div class="tw-my-1">
         <p nz-typography nzEllipsis nzEllipsisRows="1" class="tw-text-xs">{{ product.name }}</p>
       </div>

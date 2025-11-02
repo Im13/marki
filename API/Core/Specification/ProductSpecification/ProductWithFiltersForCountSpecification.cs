@@ -6,7 +6,9 @@ namespace Core.Specification
     {
         public ProductWithFiltersForCountSpecification(ProductSpecParams productParams) : base(x => 
             (string.IsNullOrEmpty(productParams.Search) || x.Name.ToLower().Contains(productParams.Search)) &&
-            (!productParams.TypeId.HasValue || x.ProductTypeId == productParams.TypeId)
+            (x.IsDeleted == false) &&
+            (productParams.TypeId == null || productParams.TypeId == 0 || x.ProductTypeId == productParams.TypeId) &&
+            (string.IsNullOrEmpty(productParams.Sort) || productParams.Sort.ToLower() != "new-arrivals" || x.CreatedAt >= DateTime.UtcNow.AddDays(-14))
         )
         {
         }
