@@ -34,7 +34,10 @@ export class ProductItemsComponent implements OnInit, OnChanges, AfterViewInit, 
   }
 
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+    if (this.observer) {
+      this.observer.disconnect();
+      this.observer = null;
+    }
   }
 
   ngOnInit(): void {
@@ -154,7 +157,7 @@ export class ProductItemsComponent implements OnInit, OnChanges, AfterViewInit, 
         this.products = [...this.products, ...response.data];
         this.totalCount = response.count;
         this.isLoadingMore = false;
-        
+
         // Kiểm tra xem còn sản phẩm để load không
         this.checkIfHasMore();
       },
