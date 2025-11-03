@@ -1,6 +1,6 @@
 export class ProductParams {
     pageIndex = 1;
-    pageSize = 20;
+    pageSize = 40;
     search = '';
     typeId: number;
 
