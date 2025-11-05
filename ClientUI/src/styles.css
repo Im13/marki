@@ -18,7 +18,8 @@
 
 body {
   -webkit-font-smoothing: antialiased;
-  font-family: 'IBM Plex Mono', monospace;
+  /* font-family: 'IBM Plex Mono', monospace; */
+  font-family: "Inter", sans-serif;
   margin: 0;
   padding: 0;
   width: 100%;
@@ -35,14 +36,12 @@ html {
   box-sizing: border-box;
 }
 
-/* Apply IBM Plex Mono to all elements */
 * {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Inter', sans-serif;
 }
 
-/* Ensure proper font rendering */
 html {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Inter', sans-serif;
 }
 
 /* Primary color utilities */
