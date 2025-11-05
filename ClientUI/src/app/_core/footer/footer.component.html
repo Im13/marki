@@ -6,16 +6,16 @@
 
     <div class="lg:tw-basis-2/5 tw-flex tw-items-center">
       <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton" [nzPrefix]="emailPrefix">
-        <input type="text" nz-input placeholder="Email" class="tw-ps-2" />
+        <input type="text" nz-input placeholder="Email" class="tw-ps-2 tw-text-sm" />
       </nz-input-group>
       <ng-template #suffixButton>
-        <button nz-button nzType="default" nzSize="large" nzSearch class="tw-bg-black d-flex tw-items-center">
+        <button nz-button nzType="default" nzSize="large" nzSearch class="tw-bg-black d-flex tw-items-center hover:tw-bg-black hover:tw-text-white hover:tw-border-white">
           <span class="tw-text-white" nz-icon nzType="send" nzTheme="outline"></span>
-          <span class="tw-text-white">ĐĂNG KÝ</span>
+          <span class="tw-text-white tw-text-sm">ĐĂNG KÝ</span>
         </button>
       </ng-template>
       <ng-template #emailPrefix>
-        <span nz-icon nzType="mail" nzTheme="outline"></span>
+        <span nz-icon nzType="mail" nzTheme="outline" class="tw-me-2"></span>
       </ng-template>
     </div>
 
