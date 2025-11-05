@@ -8,25 +8,21 @@
 
     <!-- Display Images for Desktop -->
     <div class="tw-hidden md:tw-flex">
-        <div class="tw-container tw-mx-auto">
+        <div class="tw-container">
             <!-- Các hàng trên: mỗi hàng 2 ảnh -->
-            <div *ngFor="let row of topRows" class="tw-grid tw-grid-cols-2 tw-gap-4 tw-mb-4">
-                <div *ngFor="let photo of row" class="tw-relative tw-overflow-hidden tw-aspect-square">
+            <div *ngFor="let row of topRows" class="tw-h-[800px] tw-grid tw-grid-cols-2 tw-gap-1 tw-mb-1">
+                <div *ngFor="let photo of row" class="tw-h-full tw-w-full tw-relative tw-overflow-hidden tw-aspect-square">
                     <img [src]="photo.url" [alt]="'Photo ' + photo.id"
-                        class="tw-w-full tw-h-full tw-object-cover tw-hover:tw-scale-105 tw-transition-transform tw-duration-300" />
-                    <span *ngIf="photo.isMain"
-                        class="tw-absolute tw-top-2 tw-left-2 tw-bg-blue-500 tw-text-white tw-px-2 tw-py-1 tw-rounded tw-text-xs tw-font-semibold tw-z-10">
-                        Main
-                    </span>
+                        class="tw-w-full tw-h-full tw-object-cover" />
                 </div>
             </div>
 
             <!-- Hàng cuối: 3 hoặc 4 ảnh tùy theo tổng số ảnh chẵn/lẻ -->
-            <div class="tw-grid tw-gap-4" [ngClass]="isEvenTotal ? 'tw-grid-cols-4' : 'tw-grid-cols-3'">
+            <div class="tw-grid tw-gap-1" [ngClass]="isEvenTotal ? 'tw-grid-cols-4' : 'tw-grid-cols-3'">
                 <div *ngFor="let photo of lastRow"
                     class="tw-relative tw-overflow-hidden tw-aspect-square">
                     <img [src]="photo.url" [alt]="'Photo ' + photo.id"
-                        class="tw-w-full tw-h-full tw-object-cover tw-hover:tw-scale-105 tw-transition-transform tw-duration-300" />
+                        class="tw-w-full tw-h-full tw-object-cover" />
                 </div>
             </div>
         </div>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   { 
@@ -8,26 +9,25 @@ const routes: Routes = [
     data: { breadcrumb: 'Home' },
     pathMatch: 'full'
   },
-  
-  // Product Detail
   { 
     path: 'products', 
     loadChildren: () => import('./product-detail/product-detail.module').then(m => m.ProductDetailModule), 
     data: { breadcrumb: 'Products' } 
   },
-  
-  // Basket
   { 
     path: 'basket', 
     loadChildren: () => import('./basket/basket.module').then(m => m.BasketModule), 
     data: { breadcrumb: 'Basket' } 
   },
-  
-  // Checkout
   { 
     path: 'checkout', 
     loadChildren: () => import('./checkout/checkout.module').then(m => m.CheckoutModule), 
     data: { breadcrumb: 'Checkout' } 
+  },
+  { 
+    path: 'search', 
+    component: SearchComponent, 
+    data: { breadcrumb: 'Search' } 
   },
   { 
     path: '', 

@@ -28,7 +28,6 @@ export class ProductItemsComponent implements OnInit, OnChanges, AfterViewInit, 
   private observer: IntersectionObserver | null = null;
 
   constructor(private productListingService: ProductListingService, private router: Router) {
-    // Đặt pageSize = 8 để chỉ lấy 8 sản phẩm mỗi lần
     this.productParams.pageSize = 8;
     this.productParams.pageIndex = 1;
   }
