@@ -5,8 +5,8 @@
 <div *ngIf="(basketService.basketSource$ | async) === null"
     class="tw-px-3 tw-min-h-[60vh] tw-flex tw-items-center tw-justify-center">
     <p class="tw-mt-8">
-        Giỏ hàng của bạn đang trống. Mời bạn mua thêm sản phẩm
-        <u class="text-dark" routerLink="/" style="cursor: pointer">tại đây</u>
+        Your basket is empty. Please add some products
+        <u class="text-dark" routerLink="/all" style="cursor: pointer">here</u>
         .
     </p>
 </div>
@@ -14,9 +14,9 @@
 <div *ngIf="basketService.basketSource$ | async as basket" class="tw-flex tw-flex-col md:tw-flex-row tw-gap-4 tw-mb-4">
     <div class="bg-app tw-px-6 tw-py-4 md:tw-w-2/3">
         <div class="tw-flex tw-items-center tw-justify-between">
-            <h5 class="tw-font-bold tw-text-xl tw-antialiased">Giỏ hàng:</h5>
+            <h5 class="tw-font-bold tw-text-xl tw-antialiased">Cart:</h5>
             <span *ngIf="basketService.basketSource$ | async as basket">
-                <u>{{ getCount(basket.items) }} sản phẩm</u>
+                <u>{{ getCount(basket.items) }} products</u>
             </span>
         </div>
 
@@ -60,44 +60,44 @@
     </div>
 
     <div class="bg-app md:tw-w-1/3 tw-p-4" *ngIf="basketService.basketTotalSource$ | async as total">
-        <div class="tw-text-sm tw-font-semibold">Thông tin đơn hàng</div>
+        <div class="tw-text-sm tw-font-semibold">Order information</div>
         <hr class="my-3" />
         <div class="tw-flex tw-flex-col tw-gap-4">
             <div class="tw-flex tw-items-center tw-justify-between">
-                <span class="tw-text-sm">Tạm tính:</span>
+                <span class="tw-text-sm">Subtotal:</span>
                 <span class="tw-font-semibold">{{ total.subtotal | number }}đ</span>
             </div>
             <div class="tw-flex tw-items-center tw-justify-between">
-                <span class="tw-text-sm">Phí vận chuyển:</span>
+                <span class="tw-text-sm">Shipping fee:</span>
                 <span class="text-danger tw-font-semibold">{{ total.shipping | number }}đ</span>
             </div>
             <div class="tw-flex tw-items-center tw-justify-between">
-                <span class="tw-text-sm">Giảm giá:</span>
+                <span class="tw-text-sm">Discount:</span>
                 <span class="text-danger tw-font-semibold">0đ</span>
             </div>
             <div class="tw-flex tw-items-center tw-justify-between">
-                <span class="tw-text-sm">Tổng tiền:</span>
+                <span class="tw-text-sm">Total:</span>
                 <span class="text-danger tw-font-semibold">{{ total.total | number }}đ</span>
             </div>
         </div>
         <hr class="my-3" />
         <div>
-            <span class="tw-text-sm tw-font-semibold">Ghi chú đơn hàng</span>
+            <span class="tw-text-sm tw-font-semibold">Order note</span>
             <div class="form-group pt-2">
-                <textarea class="form-control bg-app tw-text-sm" rows="4" placeholder="Ghi chú"></textarea>
+                <textarea class="form-control bg-app tw-text-sm" rows="4" placeholder="Order note"></textarea>
             </div>
 
             <div class="form-group pt-3">
-                <input class="form-control bg-app tw-text-sm" type="text" placeholder="Nhập mã khuyến mãi (nếu có)" />
+                <input class="form-control bg-app tw-text-sm" type="text" placeholder="Enter promotion code (if any)" />
             </div>
 
             <button type="button" class="btn btn-dark rounded-0 w-100 mt-4 mb-2" (click)="redirectToCheckout()">
-                THANH TOÁN NGAY
+                PAY NOW
             </button>
             <div class="d-flex align-items-center justify-content-center mt-0 pt-0">
                 <i class="fa fa-arrow-left"></i>
-                <button type="button" class="btn" routerLink="/products">
-                    Tiếp tục mua hàng
+                <button type="button" class="btn" routerLink="/all">
+                    Continue shopping
                 </button>
             </div>
         </div>

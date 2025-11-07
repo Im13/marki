@@ -4,13 +4,13 @@
   <!-- Loading State -->
   <div *ngIf="loading" class="loading-state">
     <div class="spinner"></div>
-    <p>Đang tải gợi ý...</p>
+    <p>Loading recommendations...</p>
   </div>
 
   <!-- Error State -->
   <div *ngIf="error && !loading" class="error-state">
     <p>{{ error }}</p>
-    <button (click)="retry()" class="retry-btn">Thử lại</button>
+    <button (click)="retry()" class="retry-btn">Retry</button>
   </div>
 
   <!-- Recommendations Grid -->
@@ -24,7 +24,7 @@
 
         <!-- Stock Badge -->
         <span *ngIf="showStock && product.totalStock < 10" class="stock-badge low-stock">
-          Chỉ còn vài sản phẩm
+          Only a few products left
         </span>
       </div>
 
@@ -58,6 +58,6 @@
 
   <!-- Empty State -->
   <div *ngIf="!loading && !error && recommendations.length === 0" class="empty-state bg-app">
-    <p>Không có sản phẩm gợi ý</p>
+    <p>No recommendations found</p>
   </div>
 </div>
