@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Core.Entities.Recommendation;
 using Core.Interfaces.Recommendations;
 using Core.Services;

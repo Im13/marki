@@ -12,5 +12,6 @@ namespace API.DTOs.Product
 
         public List<ProductSKUForClientDTO> ProductSkus { get; set; }
         public List<ProductOptionDTO> ProductOptions { get; set; }
+        public string PriceDisplay { get; set; }
     }
 }

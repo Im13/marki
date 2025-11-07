@@ -23,6 +23,15 @@ namespace Core.Extensions
             return (prices.Min(), prices.Max());
         }
 
+        public static string GetPriceDisplay(this Product product)
+        {
+            var (minPrice, maxPrice) = product.GetPriceRange();
+
+            return minPrice == maxPrice
+                ? $"{minPrice:N0}đ"
+                : $"{minPrice:N0}đ - {maxPrice:N0}đ";
+        }
+
         public static decimal GetRepresentativePrice(this Product product)
         {
             if (product.ProductSKUs == null || !product.ProductSKUs.Any())

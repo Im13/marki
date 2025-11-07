@@ -50,6 +50,11 @@ namespace Infrastructure.Data
         public async Task<List<Product>> GetProductForClientWithSpec(ISpecification<Product> spec)
         {
             var products = await SpecificationEvaluator<Product>.GetQuery(_context.Set<Product>().AsQueryable(), spec)
+                .Include(p => p.ProductSKUs)
+                .ThenInclude(sku => sku.Photos)          
+                .Include(p => p.ProductSKUs)
+                .ThenInclude(sku => sku.ProductSKUValues)
+                .ThenInclude(val => val.ProductOptionValue)
                 .Include(p => p.Photos)
                 .ToListAsync();
 
@@ -154,7 +159,7 @@ namespace Infrastructure.Data
                     throw new ArgumentException($"Product with ID {productId} not found");
                 }
 
-                _logger.LogInformation("Updating product: ID={ProductId}, Name={ProductName}", 
+                _logger.LogInformation("Updating product: ID={ProductId}, Name={ProductName}",
                     productId, existingProduct.Name);
 
                 // STEP 2: Validate updated product
@@ -175,7 +180,7 @@ namespace Infrastructure.Data
                 if (updatedProduct.Name != existingProduct.Name)
                 {
                     existingProduct.Slug = await GenerateUniqueSlugAsync(
-                        updatedProduct.Name, 
+                        updatedProduct.Name,
                         updatedProduct.ProductSKU);
                 }
 
@@ -406,7 +411,7 @@ namespace Infrastructure.Data
             if (product.ProductOptions != null && product.ProductOptions.Any())
             {
                 var totalOptionValues = product.ProductOptions.Sum(o => o.ProductOptionValues?.Count ?? 0);
-                
+
                 if (totalOptionValues > 0)
                 {
                     var allValidValueTempIds = product.ProductOptions
@@ -415,7 +420,7 @@ namespace Infrastructure.Data
                         .Where(v => v != null && v.ValueTempId > 0)
                         .Select(v => new { OptionName = v.ProductOption?.OptionName ?? "Unknown", ValueName = v.ValueName, ValueTempId = v.ValueTempId })
                         .ToList();
-                        
+
                     foreach (var sku in product.ProductSKUs ?? Enumerable.Empty<ProductSKUs>())
                     {
                         if (sku.ProductSKUValues == null || !sku.ProductSKUValues.Any())
@@ -494,7 +499,7 @@ namespace Infrastructure.Data
             if (verifyProduct == null) return;
 
             var hasOptions = verifyProduct.ProductOptions != null && verifyProduct.ProductOptions.Any();
-            
+
             if (!hasOptions) return;
 
             var errors = new List<string>();
@@ -508,8 +513,8 @@ namespace Infrastructure.Data
                 else
                 {
                     _logger.LogInformation(
-                        "SKU ID {SkuId} has {Count} ProductSKUValues", 
-                        sku.Id, 
+                        "SKU ID {SkuId} has {Count} ProductSKUValues",
+                        sku.Id,
                         sku.ProductSKUValues.Count);
                 }
             }
@@ -647,7 +652,7 @@ namespace Infrastructure.Data
                         ProductOptionValues optionValue = null;
                         bool found = false;
 
-                        if (optionValuesLookupByTempId != null && 
+                        if (optionValuesLookupByTempId != null &&
                             skuValue.ValueTempId > 0 &&
                             optionValuesLookupByTempId.TryGetValue(skuValue.ValueTempId, out optionValue))
                         {
@@ -656,15 +661,16 @@ namespace Infrastructure.Data
                                 "Linked SKU value by ValueTempId: SKU={Sku}, ValueTempId={TempId}, OptionValue={OptionValue}",
                                 sku.SKU, skuValue.ValueTempId, optionValue.ValueName);
                         }
-                        if (!found && optionValuesLookupByName != null && 
+                        if (!found && optionValuesLookupByName != null &&
                                  skuValue.ProductOptionValue != null &&
                                  skuValue.ProductOptionValue.ProductOption != null)
                         {
-                            var key = new { 
-                                OptionName = skuValue.ProductOptionValue.ProductOption.OptionName, 
-                                ValueName = skuValue.ProductOptionValue.ValueName 
+                            var key = new
+                            {
+                                OptionName = skuValue.ProductOptionValue.ProductOption.OptionName,
+                                ValueName = skuValue.ProductOptionValue.ValueName
                             };
-                            
+
                             if (optionValuesLookupByName.TryGetValue(key, out optionValue))
                             {
                                 found = true;
@@ -675,12 +681,12 @@ namespace Infrastructure.Data
                             }
                         }
 
-                        if (!found && product.ProductOptions != null && 
+                        if (!found && product.ProductOptions != null &&
                             sku.ProductSKUValues != null &&
                             sku.ProductSKUValues.Count == product.ProductOptions.Count)
                         {
                             var skuValueIndex = sku.ProductSKUValues.ToList().IndexOf(skuValue);
-                            
+
                             if (skuValueIndex >= 0 && skuValueIndex < product.ProductOptions.Count)
                             {
                                 var optionsList = product.ProductOptions.ToList();
@@ -689,7 +695,7 @@ namespace Infrastructure.Data
                                 {
                                     optionValue = optionAtIndex.ProductOptionValues
                                         .FirstOrDefault(v => v.ValueTempId == skuValue.ValueTempId);
-                                    
+
                                     if (optionValue == null && optionAtIndex.ProductOptionValues.Count > 0)
                                     {
                                         optionValue = optionAtIndex.ProductOptionValues.First();

@@ -12,4 +12,5 @@ export interface Product {
     productTypeId: number;
     productSkus: ProductSKU[];
     productOptions: ProductOption[];
+    priceDisplay: string;
 }
