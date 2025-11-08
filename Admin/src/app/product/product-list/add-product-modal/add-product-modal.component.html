@@ -125,7 +125,7 @@
 
         <div class="clearfix border mt-3 p-2">
           <p class="mb-1 fw-semibold">Ảnh bìa:</p>
-          <nz-upload nzAction="https://localhost:5001/api/products/add-original-photo" nzListType="picture-card"
+          <nz-upload nzAction="environment.apiUrl + 'api/products/add-original-photo'" nzListType="picture-card"
             [(nzFileList)]="mainPhoto" [nzShowButton]="mainPhoto.length < 1" [nzPreview]="handlePreview"
             (nzChange)="handleUploadProductChange($event, true)">
             <div>
@@ -135,7 +135,7 @@
           </nz-upload>
 
           <p class="mb-1 mt-3 fw-semibold">Ảnh sản phẩm (Tối đa 8 ảnh):</p>
-          <nz-upload nzAction="https://localhost:5001/api/products/add-original-photo" nzListType="picture-card"
+          <nz-upload nzAction="environment.apiUrl + 'api/products/add-original-photo'" nzListType="picture-card"
             [(nzFileList)]="photoList" [nzShowButton]="photoList.length < 8" [nzPreview]="handlePreview"
             (nzChange)="handleUploadProductChange($event, false)">
             <div>
