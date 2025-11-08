@@ -1,0 +1,134 @@
+[
+  {
+    "Id": 1,
+    "Date": "2025-04-08 00:00:00",
+    "TotalRevenue": 350000.0,
+    "TotalOrders": 2,
+    "ShopeeRevenue": 0.0,
+    "FacebookRevenue": 0.0,
+    "InstagramRevenue": 0.0,
+    "WebsiteRevenue": 350000.0,
+    "OfflineRevenue": 0.0
+  },
+  {
+    "Id": 2,
+    "Date": "2025-04-09 00:00:00",
+    "TotalRevenue": 1729000.0,
+    "TotalOrders": 2,
+    "ShopeeRevenue": 0.0,
+    "FacebookRevenue": 0.0,
+    "InstagramRevenue": 0.0,
+    "WebsiteRevenue": 1729000.0,
+    "OfflineRevenue": 0.0
+  },
+  {
+    "Id": 3,
+    "Date": "2025-04-23 00:00:00",
+    "TotalRevenue": 90000.0,
+    "TotalOrders": 1,
+    "ShopeeRevenue": 0.0,
+    "FacebookRevenue": 0.0,
+    "InstagramRevenue": 0.0,
+    "WebsiteRevenue": 90000.0,
+    "OfflineRevenue": 0.0
+  },
+  {
+    "Id": 4,
+    "Date": "2025-07-09 00:00:00",
+    "TotalRevenue": 4006667.0,
+    "TotalOrders": 9,
+    "ShopeeRevenue": 0.0,
+    "FacebookRevenue": 0.0,
+    "InstagramRevenue": 0.0,
+    "WebsiteRevenue": 0.0,
+    "OfflineRevenue": 4006667.0
+  },
+  {
+    "Id": 5,
+    "Date": "2025-07-10 00:00:00",
+    "TotalRevenue": 2900000.0,
+    "TotalOrders": 10,
+    "ShopeeRevenue": 0.0,
+    "FacebookRevenue": 0.0,
+    "InstagramRevenue": 0.0,
+    "WebsiteRevenue": 0.0,
+    "OfflineRevenue": 2900000.0
+  },
+  {
+    "Id": 6,
+    "Date": "2025-07-14 00:00:00",
+    "TotalRevenue": 770000.0,
+    "TotalOrders": 4,
+    "ShopeeRevenue": 0.0,
+    "FacebookRevenue": 0.0,
+    "InstagramRevenue": 0.0,
+    "WebsiteRevenue": 0.0,
+    "OfflineRevenue": 770000.0
+  },
+  {
+    "Id": 7,
+    "Date": "2025-07-16 00:00:00",
+    "TotalRevenue": 0.0,
+    "TotalOrders": 0,
+    "ShopeeRevenue": 0.0,
+    "FacebookRevenue": 0.0,
+    "InstagramRevenue": 0.0,
+    "WebsiteRevenue": 0.0,
+    "OfflineRevenue": 0.0
+  },
+  {
+    "Id": 8,
+    "Date": "2025-09-11 00:00:00",
+    "TotalRevenue": 190000.0,
+    "TotalOrders": 3,
+    "ShopeeRevenue": 0.0,
+    "FacebookRevenue": 0.0,
+    "InstagramRevenue": 0.0,
+    "WebsiteRevenue": 190000.0,
+    "OfflineRevenue": 0.0
+  },
+  {
+    "Id": 9,
+    "Date": "2025-09-12 00:00:00",
+    "TotalRevenue": 270000.0,
+    "TotalOrders": 5,
+    "ShopeeRevenue": 0.0,
+    "FacebookRevenue": 0.0,
+    "InstagramRevenue": 0.0,
+    "WebsiteRevenue": 270000.0,
+    "OfflineRevenue": 0.0
+  },
+  {
+    "Id": 10,
+    "Date": "2025-09-16 00:00:00",
+    "TotalRevenue": 750000.0,
+    "TotalOrders": 15,
+    "ShopeeRevenue": 0.0,
+    "FacebookRevenue": 0.0,
+    "InstagramRevenue": 0.0,
+    "WebsiteRevenue": 750000.0,
+    "OfflineRevenue": 0.0
+  },
+  {
+    "Id": 11,
+    "Date": "2025-09-17 00:00:00",
+    "TotalRevenue": 300000.0,
+    "TotalOrders": 4,
+    "ShopeeRevenue": 0.0,
+    "FacebookRevenue": 0.0,
+    "InstagramRevenue": 0.0,
+    "WebsiteRevenue": 300000.0,
+    "OfflineRevenue": 0.0
+  },
+  {
+    "Id": 12,
+    "Date": "2025-11-02 00:00:00",
+    "TotalRevenue": 4796000.0,
+    "TotalOrders": 1,
+    "ShopeeRevenue": 0.0,
+    "FacebookRevenue": 0.0,
+    "InstagramRevenue": 0.0,
+    "WebsiteRevenue": 4796000.0,
+    "OfflineRevenue": 0.0
+  }
+]

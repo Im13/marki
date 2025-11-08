@@ -1,0 +1,20 @@
+[
+  {
+    "Id": 1,
+    "Fullname": "Bob Muller",
+    "CityOrProvinceId": 1,
+    "DistrictId": 1,
+    "WardId": 1,
+    "Street": "Hong Ha",
+    "AppUserId": 1
+  },
+  {
+    "Id": 2,
+    "Fullname": "Marki Admin",
+    "CityOrProvinceId": 1,
+    "DistrictId": 1,
+    "WardId": 1,
+    "Street": "Hong Ha",
+    "AppUserId": 2
+  }
+]

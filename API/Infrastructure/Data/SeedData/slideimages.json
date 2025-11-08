@@ -1,0 +1,29 @@
+[
+  {
+    "Id": 1,
+    "OrderNo": 1,
+    "DesktopImageUrl": "https://res.cloudinary.com/durcosnu6/image/upload/v1761123323/marki/banners/desktop/j05jij5es4igzbqkj5be.jpg",
+    "MobileImageUrl": "https://res.cloudinary.com/durcosnu6/image/upload/v1742467894/marki/qhfy0tewccxwgogzdtdk.png",
+    "Link": "link-dieu-huong-2",
+    "AltText": "alt",
+    "Status": 1
+  },
+  {
+    "Id": 2,
+    "OrderNo": 2,
+    "DesktopImageUrl": "https://res.cloudinary.com/durcosnu6/image/upload/v1761736885/marki/banners/desktop/cqwdzb132k4ytd0sie8b.jpg",
+    "MobileImageUrl": "https://res.cloudinary.com/durcosnu6/image/upload/v1761736959/marki/banners/desktop/i7xlecgiiolql1d3l50x.jpg",
+    "Link": "link-dieu-huong-1",
+    "AltText": "alt",
+    "Status": 1
+  },
+  {
+    "Id": 3,
+    "OrderNo": 3,
+    "DesktopImageUrl": "https://res.cloudinary.com/durcosnu6/image/upload/v1762529773/marki/banners/desktop/b6gy69s7iwna6at64nxc.jpg",
+    "MobileImageUrl": "https://res.cloudinary.com/durcosnu6/image/upload/v1742489074/marki/iyd1rha1nwnflggo6i8n.webp",
+    "Link": "slide-3",
+    "AltText": "this-is-slide-3",
+    "Status": 0
+  }
+]

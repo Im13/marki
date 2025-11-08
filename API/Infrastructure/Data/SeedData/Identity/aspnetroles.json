@@ -1,0 +1,26 @@
+[
+  {
+    "Id": 1,
+    "Name": "Customer",
+    "NormalizedName": "CUSTOMER",
+    "ConcurrencyStamp": null
+  },
+  {
+    "Id": 2,
+    "Name": "SuperAdmin",
+    "NormalizedName": "SUPERADMIN",
+    "ConcurrencyStamp": null
+  },
+  {
+    "Id": 3,
+    "Name": "Admin",
+    "NormalizedName": "ADMIN",
+    "ConcurrencyStamp": null
+  },
+  {
+    "Id": 4,
+    "Name": "Employee",
+    "NormalizedName": "EMPLOYEE",
+    "ConcurrencyStamp": null
+  }
+]

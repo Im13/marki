@@ -1,0 +1,30 @@
+[
+  {
+    "Id": 1,
+    "Status": "Mới"
+  },
+  {
+    "Id": 2,
+    "Status": "Chờ hàng"
+  },
+  {
+    "Id": 3,
+    "Status": "Ưu tiên xuất đơn"
+  },
+  {
+    "Id": 4,
+    "Status": "Đã xác nhận"
+  },
+  {
+    "Id": 5,
+    "Status": "Đã gửi hàng"
+  },
+  {
+    "Id": 6,
+    "Status": "Đơn đã huỷ"
+  },
+  {
+    "Id": 7,
+    "Status": "Đơn đã xoá"
+  }
+]

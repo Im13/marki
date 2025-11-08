@@ -1,0 +1,20 @@
+[
+  {
+    "Id": 1,
+    "SessionId": "e19d3291-d891-4044-afc9-9b52195de0a8",
+    "CreatedAt": "2025-10-10 17:39:40.6487884",
+    "UpdatedAt": null,
+    "LastActivityAt": "2025-11-07 16:14:20.8023305",
+    "IpAddress": "::1",
+    "UserAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1"
+  },
+  {
+    "Id": 2,
+    "SessionId": "7b34e5a7-c0cb-4d53-a1d7-9b9aaf7c353e",
+    "CreatedAt": "2025-10-11 15:38:08.93473",
+    "UpdatedAt": null,
+    "LastActivityAt": "2025-11-04 02:54:43.075715",
+    "IpAddress": "::1",
+    "UserAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1"
+  }
+]

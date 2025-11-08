@@ -1,0 +1,9 @@
+[
+  {
+    "Id": 1,
+    "ShortName": "GHTK",
+    "DeliveryTime": "Nội thành 1-2 ngày, ngoại thành 3-4 ngày",
+    "Description": "Phương thức vận chuyển mặc định",
+    "Price": 30000
+  }
+]

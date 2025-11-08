@@ -1,0 +1,443 @@
+[
+  {
+    "Id": 1,
+    "Name": "Thành phố Hà Nội",
+    "DivisionType": "thành phố trung ương",
+    "PhoneCode": 24,
+    "CodeName": "thanh_pho_ha_noi"
+  },
+  {
+    "Id": 2,
+    "Name": "Tỉnh Hà Giang",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 219,
+    "CodeName": "tinh_ha_giang"
+  },
+  {
+    "Id": 4,
+    "Name": "Tỉnh Cao Bằng",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 206,
+    "CodeName": "tinh_cao_bang"
+  },
+  {
+    "Id": 6,
+    "Name": "Tỉnh Bắc Kạn",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 209,
+    "CodeName": "tinh_bac_kan"
+  },
+  {
+    "Id": 8,
+    "Name": "Tỉnh Tuyên Quang",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 207,
+    "CodeName": "tinh_tuyen_quang"
+  },
+  {
+    "Id": 10,
+    "Name": "Tỉnh Lào Cai",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 214,
+    "CodeName": "tinh_lao_cai"
+  },
+  {
+    "Id": 11,
+    "Name": "Tỉnh Điện Biên",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 215,
+    "CodeName": "tinh_dien_bien"
+  },
+  {
+    "Id": 12,
+    "Name": "Tỉnh Lai Châu",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 213,
+    "CodeName": "tinh_lai_chau"
+  },
+  {
+    "Id": 14,
+    "Name": "Tỉnh Sơn La",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 212,
+    "CodeName": "tinh_son_la"
+  },
+  {
+    "Id": 15,
+    "Name": "Tỉnh Yên Bái",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 216,
+    "CodeName": "tinh_yen_bai"
+  },
+  {
+    "Id": 17,
+    "Name": "Tỉnh Hoà Bình",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 218,
+    "CodeName": "tinh_hoa_binh"
+  },
+  {
+    "Id": 19,
+    "Name": "Tỉnh Thái Nguyên",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 208,
+    "CodeName": "tinh_thai_nguyen"
+  },
+  {
+    "Id": 20,
+    "Name": "Tỉnh Lạng Sơn",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 205,
+    "CodeName": "tinh_lang_son"
+  },
+  {
+    "Id": 22,
+    "Name": "Tỉnh Quảng Ninh",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 203,
+    "CodeName": "tinh_quang_ninh"
+  },
+  {
+    "Id": 24,
+    "Name": "Tỉnh Bắc Giang",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 204,
+    "CodeName": "tinh_bac_giang"
+  },
+  {
+    "Id": 25,
+    "Name": "Tỉnh Phú Thọ",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 210,
+    "CodeName": "tinh_phu_tho"
+  },
+  {
+    "Id": 26,
+    "Name": "Tỉnh Vĩnh Phúc",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 211,
+    "CodeName": "tinh_vinh_phuc"
+  },
+  {
+    "Id": 27,
+    "Name": "Tỉnh Bắc Ninh",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 222,
+    "CodeName": "tinh_bac_ninh"
+  },
+  {
+    "Id": 30,
+    "Name": "Tỉnh Hải Dương",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 220,
+    "CodeName": "tinh_hai_duong"
+  },
+  {
+    "Id": 31,
+    "Name": "Thành phố Hải Phòng",
+    "DivisionType": "thành phố trung ương",
+    "PhoneCode": 225,
+    "CodeName": "thanh_pho_hai_phong"
+  },
+  {
+    "Id": 33,
+    "Name": "Tỉnh Hưng Yên",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 221,
+    "CodeName": "tinh_hung_yen"
+  },
+  {
+    "Id": 34,
+    "Name": "Tỉnh Thái Bình",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 227,
+    "CodeName": "tinh_thai_binh"
+  },
+  {
+    "Id": 35,
+    "Name": "Tỉnh Hà Nam",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 226,
+    "CodeName": "tinh_ha_nam"
+  },
+  {
+    "Id": 36,
+    "Name": "Tỉnh Nam Định",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 228,
+    "CodeName": "tinh_nam_dinh"
+  },
+  {
+    "Id": 37,
+    "Name": "Tỉnh Ninh Bình",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 229,
+    "CodeName": "tinh_ninh_binh"
+  },
+  {
+    "Id": 38,
+    "Name": "Tỉnh Thanh Hóa",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 237,
+    "CodeName": "tinh_thanh_hoa"
+  },
+  {
+    "Id": 40,
+    "Name": "Tỉnh Nghệ An",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 238,
+    "CodeName": "tinh_nghe_an"
+  },
+  {
+    "Id": 42,
+    "Name": "Tỉnh Hà Tĩnh",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 239,
+    "CodeName": "tinh_ha_tinh"
+  },
+  {
+    "Id": 44,
+    "Name": "Tỉnh Quảng Bình",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 232,
+    "CodeName": "tinh_quang_binh"
+  },
+  {
+    "Id": 45,
+    "Name": "Tỉnh Quảng Trị",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 233,
+    "CodeName": "tinh_quang_tri"
+  },
+  {
+    "Id": 46,
+    "Name": "Tỉnh Thừa Thiên Huế",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 234,
+    "CodeName": "tinh_thua_thien_hue"
+  },
+  {
+    "Id": 48,
+    "Name": "Thành phố Đà Nẵng",
+    "DivisionType": "thành phố trung ương",
+    "PhoneCode": 236,
+    "CodeName": "thanh_pho_da_nang"
+  },
+  {
+    "Id": 49,
+    "Name": "Tỉnh Quảng Nam",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 235,
+    "CodeName": "tinh_quang_nam"
+  },
+  {
+    "Id": 51,
+    "Name": "Tỉnh Quảng Ngãi",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 255,
+    "CodeName": "tinh_quang_ngai"
+  },
+  {
+    "Id": 52,
+    "Name": "Tỉnh Bình Định",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 256,
+    "CodeName": "tinh_binh_dinh"
+  },
+  {
+    "Id": 54,
+    "Name": "Tỉnh Phú Yên",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 257,
+    "CodeName": "tinh_phu_yen"
+  },
+  {
+    "Id": 56,
+    "Name": "Tỉnh Khánh Hòa",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 258,
+    "CodeName": "tinh_khanh_hoa"
+  },
+  {
+    "Id": 58,
+    "Name": "Tỉnh Ninh Thuận",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 259,
+    "CodeName": "tinh_ninh_thuan"
+  },
+  {
+    "Id": 60,
+    "Name": "Tỉnh Bình Thuận",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 252,
+    "CodeName": "tinh_binh_thuan"
+  },
+  {
+    "Id": 62,
+    "Name": "Tỉnh Kon Tum",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 260,
+    "CodeName": "tinh_kon_tum"
+  },
+  {
+    "Id": 64,
+    "Name": "Tỉnh Gia Lai",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 269,
+    "CodeName": "tinh_gia_lai"
+  },
+  {
+    "Id": 66,
+    "Name": "Tỉnh Đắk Lắk",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 262,
+    "CodeName": "tinh_dak_lak"
+  },
+  {
+    "Id": 67,
+    "Name": "Tỉnh Đắk Nông",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 261,
+    "CodeName": "tinh_dak_nong"
+  },
+  {
+    "Id": 68,
+    "Name": "Tỉnh Lâm Đồng",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 263,
+    "CodeName": "tinh_lam_dong"
+  },
+  {
+    "Id": 70,
+    "Name": "Tỉnh Bình Phước",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 271,
+    "CodeName": "tinh_binh_phuoc"
+  },
+  {
+    "Id": 72,
+    "Name": "Tỉnh Tây Ninh",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 276,
+    "CodeName": "tinh_tay_ninh"
+  },
+  {
+    "Id": 74,
+    "Name": "Tỉnh Bình Dương",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 274,
+    "CodeName": "tinh_binh_duong"
+  },
+  {
+    "Id": 75,
+    "Name": "Tỉnh Đồng Nai",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 251,
+    "CodeName": "tinh_dong_nai"
+  },
+  {
+    "Id": 77,
+    "Name": "Tỉnh Bà Rịa - Vũng Tàu",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 254,
+    "CodeName": "tinh_ba_ria_vung_tau"
+  },
+  {
+    "Id": 79,
+    "Name": "Thành phố Hồ Chí Minh",
+    "DivisionType": "thành phố trung ương",
+    "PhoneCode": 28,
+    "CodeName": "thanh_pho_ho_chi_minh"
+  },
+  {
+    "Id": 80,
+    "Name": "Tỉnh Long An",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 272,
+    "CodeName": "tinh_long_an"
+  },
+  {
+    "Id": 82,
+    "Name": "Tỉnh Tiền Giang",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 273,
+    "CodeName": "tinh_tien_giang"
+  },
+  {
+    "Id": 83,
+    "Name": "Tỉnh Bến Tre",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 275,
+    "CodeName": "tinh_ben_tre"
+  },
+  {
+    "Id": 84,
+    "Name": "Tỉnh Trà Vinh",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 294,
+    "CodeName": "tinh_tra_vinh"
+  },
+  {
+    "Id": 86,
+    "Name": "Tỉnh Vĩnh Long",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 270,
+    "CodeName": "tinh_vinh_long"
+  },
+  {
+    "Id": 87,
+    "Name": "Tỉnh Đồng Tháp",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 277,
+    "CodeName": "tinh_dong_thap"
+  },
+  {
+    "Id": 89,
+    "Name": "Tỉnh An Giang",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 296,
+    "CodeName": "tinh_an_giang"
+  },
+  {
+    "Id": 91,
+    "Name": "Tỉnh Kiên Giang",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 297,
+    "CodeName": "tinh_kien_giang"
+  },
+  {
+    "Id": 92,
+    "Name": "Thành phố Cần Thơ",
+    "DivisionType": "thành phố trung ương",
+    "PhoneCode": 292,
+    "CodeName": "thanh_pho_can_tho"
+  },
+  {
+    "Id": 93,
+    "Name": "Tỉnh Hậu Giang",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 293,
+    "CodeName": "tinh_hau_giang"
+  },
+  {
+    "Id": 94,
+    "Name": "Tỉnh Sóc Trăng",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 299,
+    "CodeName": "tinh_soc_trang"
+  },
+  {
+    "Id": 95,
+    "Name": "Tỉnh Bạc Liêu",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 291,
+    "CodeName": "tinh_bac_lieu"
+  },
+  {
+    "Id": 96,
+    "Name": "Tỉnh Cà Mau",
+    "DivisionType": "tỉnh",
+    "PhoneCode": 290,
+    "CodeName": "tinh_ca_mau"
+  }
+]
