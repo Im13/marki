@@ -132,8 +132,23 @@ namespace Infrastructure.Data
             {
                 var productOptionValuesData = File
                     .ReadAllText(path + @"/Data/SeedData/productoptionvalues.json");
-                var productOptionValues = JsonSerializer.Deserialize<List<ProductOptionValues>>(productOptionValuesData, _jsonOptions);
-                context.ProductOptionValues.AddRange(productOptionValues);
+                var productOptionValueSeeds = JsonSerializer.Deserialize<List<ProductOptionValueSeed>>(productOptionValuesData, _jsonOptions);
+
+                if (productOptionValueSeeds != null)
+                {
+                    foreach (var seed in productOptionValueSeeds)
+                    {
+                        var entity = new ProductOptionValues
+                        {
+                            Id = seed.Id,
+                            ValueName = seed.ValueName,
+                            ValueTempId = seed.ValueTempId
+                        };
+
+                        context.ProductOptionValues.Add(entity);
+                        context.Entry(entity).Property<int?>("ProductOptionId").CurrentValue = seed.ProductOptionId;
+                    }
+                }
             }
 
             if (context.ChangeTracker.HasChanges())
@@ -158,8 +173,23 @@ namespace Infrastructure.Data
             {
                 var productSkuValuesData = File
                     .ReadAllText(path + @"/Data/SeedData/productskuvalues.json");
-                var productSkuValues = JsonSerializer.Deserialize<List<ProductSKUValues>>(productSkuValuesData, _jsonOptions);
-                context.ProductSKUValues.AddRange(productSkuValues);
+                var productSkuValueSeeds = JsonSerializer.Deserialize<List<ProductSkuValueSeed>>(productSkuValuesData, _jsonOptions);
+
+                if (productSkuValueSeeds != null)
+                {
+                    foreach (var seed in productSkuValueSeeds)
+                    {
+                        var entity = new ProductSKUValues
+                        {
+                            Id = seed.Id,
+                            ValueTempId = seed.ValueTempId
+                        };
+
+                        context.ProductSKUValues.Add(entity);
+                        context.Entry(entity).Property<int?>("ProductOptionValueId").CurrentValue = seed.ProductOptionValueId;
+                        context.Entry(entity).Property<int?>("ProductSKUsId").CurrentValue = seed.ProductSKUsId;
+                    }
+                }
             }
 
             if (context.ChangeTracker.HasChanges())
@@ -380,6 +410,22 @@ namespace Infrastructure.Data
             {
                 writer.WriteStringValue(value.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ", CultureInfo.InvariantCulture));
             }
+        }
+
+        private class ProductOptionValueSeed
+        {
+            public int Id { get; set; }
+            public string ValueName { get; set; }
+            public int ValueTempId { get; set; }
+            public int? ProductOptionId { get; set; }
+        }
+
+        private class ProductSkuValueSeed
+        {
+            public int Id { get; set; }
+            public int ValueTempId { get; set; }
+            public int? ProductOptionValueId { get; set; }
+            public int? ProductSKUsId { get; set; }
         }
     }
 }
