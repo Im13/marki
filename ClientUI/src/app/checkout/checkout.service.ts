@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { Province } from '../_shared/_models/address/province';
 import { District } from '../_shared/_models/address/district';
 import { Ward } from '../_shared/_models/address/ward';
