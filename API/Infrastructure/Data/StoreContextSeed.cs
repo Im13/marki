@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -7,6 +8,7 @@ using Core.Entities;
 using Core.Entities.OrderAggregate;
 using Core.Entities.Recommendation;
 using Core.Entities.ShopeeOrder;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data
 {
@@ -33,7 +35,7 @@ namespace Infrastructure.Data
                 var typesData = File
                     .ReadAllText(path + @"/Data/SeedData/types.json");
                 var types = JsonSerializer.Deserialize<List<ProductType>>(typesData, _jsonOptions);
-                context.ProductTypes.AddRange(types);
+                await AddRangeWithIdentityInsertAsync(context, context.ProductTypes, types);
             }
 
             if (!context.Products.Any())
@@ -41,7 +43,7 @@ namespace Infrastructure.Data
                 var productsData = File
                     .ReadAllText(path + @"/Data/SeedData/products.json");
                 var products = JsonSerializer.Deserialize<List<Product>>(productsData, _jsonOptions);
-                context.Products.AddRange(products);
+                await AddRangeWithIdentityInsertAsync(context, context.Products, products);
             }
 
             if (!context.DeliveryMethods.Any())
@@ -49,7 +51,7 @@ namespace Infrastructure.Data
                 var deliveryData = File
                     .ReadAllText(path + @"/Data/SeedData/delivery.json");
                 var methods = JsonSerializer.Deserialize<List<DeliveryMethod>>(deliveryData, _jsonOptions);
-                context.DeliveryMethods.AddRange(methods);
+                await AddRangeWithIdentityInsertAsync(context, context.DeliveryMethods, methods);
             }
 
             if (!context.Provinces.Any())
@@ -57,7 +59,7 @@ namespace Infrastructure.Data
                 var provinceData = File
                     .ReadAllText(path + @"/Data/SeedData/province.json");
                 var provinces = JsonSerializer.Deserialize<List<Province>>(provinceData, _jsonOptions);
-                context.Provinces.AddRange(provinces);
+                await AddRangeWithIdentityInsertAsync(context, context.Provinces, provinces);
             }
 
             if (!context.Districts.Any())
@@ -65,7 +67,7 @@ namespace Infrastructure.Data
                 var districtData = File
                     .ReadAllText(path + @"/Data/SeedData/district.json");
                 var districts = JsonSerializer.Deserialize<List<District>>(districtData);
-                context.Districts.AddRange(districts);
+                await AddRangeWithIdentityInsertAsync(context, context.Districts, districts);
             }
 
             if (!context.Wards.Any())
@@ -73,7 +75,7 @@ namespace Infrastructure.Data
                 var wardData = File
                     .ReadAllText(path + @"/Data/SeedData/ward.json");
                 var wards = JsonSerializer.Deserialize<List<Ward>>(wardData, _jsonOptions);
-                context.Wards.AddRange(wards);
+                await AddRangeWithIdentityInsertAsync(context, context.Wards, wards);
             }
 
             if (!context.Customers.Any())
@@ -81,7 +83,7 @@ namespace Infrastructure.Data
                 var customersData = File
                     .ReadAllText(path + @"/Data/SeedData/customers.json");
                 var customers = JsonSerializer.Deserialize<List<Customer>>(customersData, _jsonOptions);
-                context.Customers.AddRange(customers);
+                await AddRangeWithIdentityInsertAsync(context, context.Customers, customers);
             }
 
             if (!context.OrderStatus.Any())
@@ -89,7 +91,7 @@ namespace Infrastructure.Data
                 var orderStatusData = File
                     .ReadAllText(path + @"/Data/SeedData/orderStatuses.json");
                 var statuses = JsonSerializer.Deserialize<List<OfflineOrderStatus>>(orderStatusData, _jsonOptions);
-                context.OrderStatus.AddRange(statuses);
+                await AddRangeWithIdentityInsertAsync(context, context.OrderStatus, statuses);
             }
 
             if (!context.SlideImages.Any())
@@ -97,7 +99,7 @@ namespace Infrastructure.Data
                 var slideImagesData = File
                     .ReadAllText(path + @"/Data/SeedData/slideimages.json");
                 var slideImages = JsonSerializer.Deserialize<List<SlideImage>>(slideImagesData, _jsonOptions);
-                context.SlideImages.AddRange(slideImages);
+                await AddRangeWithIdentityInsertAsync(context, context.SlideImages, slideImages);
             }
 
             if (!context.RevenueSummaries.Any())
@@ -105,7 +107,7 @@ namespace Infrastructure.Data
                 var revenueSummariesData = File
                     .ReadAllText(path + @"/Data/SeedData/revenuesummaries.json");
                 var revenueSummaries = JsonSerializer.Deserialize<List<RevenueSummary>>(revenueSummariesData, _jsonOptions);
-                context.RevenueSummaries.AddRange(revenueSummaries);
+                await AddRangeWithIdentityInsertAsync(context, context.RevenueSummaries, revenueSummaries);
             }
 
             // Save base entities before adding dependent entities
@@ -120,12 +122,7 @@ namespace Infrastructure.Data
                 var productOptionsData = File
                     .ReadAllText(path + @"/Data/SeedData/productoptions.json");
                 var productOptions = JsonSerializer.Deserialize<List<ProductOptions>>(productOptionsData, _jsonOptions);
-                context.ProductOptions.AddRange(productOptions);
-            }
-
-            if (context.ChangeTracker.HasChanges())
-            {
-                await context.SaveChangesAsync();
+                await AddRangeWithIdentityInsertAsync(context, context.ProductOptions, productOptions);
             }
 
             if (!context.ProductOptionValues.Any())
@@ -136,6 +133,7 @@ namespace Infrastructure.Data
 
                 if (productOptionValueSeeds != null)
                 {
+                    var entities = new List<ProductOptionValues>();
                     foreach (var seed in productOptionValueSeeds)
                     {
                         var entity = new ProductOptionValues
@@ -145,15 +143,12 @@ namespace Infrastructure.Data
                             ValueTempId = seed.ValueTempId
                         };
 
-                        context.ProductOptionValues.Add(entity);
+                        entities.Add(entity);
                         context.Entry(entity).Property<int?>("ProductOptionId").CurrentValue = seed.ProductOptionId;
                     }
-                }
-            }
 
-            if (context.ChangeTracker.HasChanges())
-            {
-                await context.SaveChangesAsync();
+                    await AddRangeWithIdentityInsertAsync(context, context.ProductOptionValues, entities);
+                }
             }
 
             if (!context.ProductSKUs.Any())
@@ -161,12 +156,7 @@ namespace Infrastructure.Data
                 var productSkusData = File
                     .ReadAllText(path + @"/Data/SeedData/productskus.json");
                 var productSkus = JsonSerializer.Deserialize<List<ProductSKUs>>(productSkusData, _jsonOptions);
-                context.ProductSKUs.AddRange(productSkus);
-            }
-
-            if (context.ChangeTracker.HasChanges())
-            {
-                await context.SaveChangesAsync();
+                await AddRangeWithIdentityInsertAsync(context, context.ProductSKUs, productSkus);
             }
 
             if (!context.ProductSKUValues.Any())
@@ -177,6 +167,7 @@ namespace Infrastructure.Data
 
                 if (productSkuValueSeeds != null)
                 {
+                    var entities = new List<ProductSKUValues>();
                     foreach (var seed in productSkuValueSeeds)
                     {
                         var entity = new ProductSKUValues
@@ -185,16 +176,13 @@ namespace Infrastructure.Data
                             ValueTempId = seed.ValueTempId
                         };
 
-                        context.ProductSKUValues.Add(entity);
+                        entities.Add(entity);
                         context.Entry(entity).Property<int?>("ProductOptionValueId").CurrentValue = seed.ProductOptionValueId;
                         context.Entry(entity).Property<int?>("ProductSKUsId").CurrentValue = seed.ProductSKUsId;
                     }
-                }
-            }
 
-            if (context.ChangeTracker.HasChanges())
-            {
-                await context.SaveChangesAsync();
+                    await AddRangeWithIdentityInsertAsync(context, context.ProductSKUValues, entities);
+                }
             }
 
             if (!context.Photos.Any())
@@ -202,12 +190,7 @@ namespace Infrastructure.Data
                 var photosData = File
                     .ReadAllText(path + @"/Data/SeedData/photos.json");
                 var photos = JsonSerializer.Deserialize<List<Photo>>(photosData, _jsonOptions);
-                context.Photos.AddRange(photos);
-            }
-
-            if (context.ChangeTracker.HasChanges())
-            {
-                await context.SaveChangesAsync();
+                await AddRangeWithIdentityInsertAsync(context, context.Photos, photos);
             }
 
             // Seed Offline Orders (depends on Customers, Districts, Provinces, Wards, OrderStatus)
@@ -216,12 +199,7 @@ namespace Infrastructure.Data
                 var offlineOrdersData = File
                     .ReadAllText(path + @"/Data/SeedData/offlineorders.json");
                 var offlineOrders = JsonSerializer.Deserialize<List<OfflineOrder>>(offlineOrdersData, _jsonOptions);
-                context.OfflineOrders.AddRange(offlineOrders);
-            }
-
-            if (context.ChangeTracker.HasChanges())
-            {
-                await context.SaveChangesAsync();
+                await AddRangeWithIdentityInsertAsync(context, context.OfflineOrders, offlineOrders);
             }
 
             // Seed OfflineOrderSKUs (depends on OfflineOrders and ProductSKUs)
@@ -230,12 +208,7 @@ namespace Infrastructure.Data
                 var offlineOrderSkusData = File
                     .ReadAllText(path + @"/Data/SeedData/offlineorderskus.json");
                 var offlineOrderSkus = JsonSerializer.Deserialize<List<OfflineOrderSKUs>>(offlineOrderSkusData, _jsonOptions);
-                context.OfflineOrderSKUs.AddRange(offlineOrderSkus);
-            }
-
-            if (context.ChangeTracker.HasChanges())
-            {
-                await context.SaveChangesAsync();
+                await AddRangeWithIdentityInsertAsync(context, context.OfflineOrderSKUs, offlineOrderSkus);
             }
 
             // Seed Shopee Orders (no dependencies for parent)
@@ -244,12 +217,7 @@ namespace Infrastructure.Data
                 var shopeeOrdersData = File
                     .ReadAllText(path + @"/Data/SeedData/shopeeorders.json");
                 var shopeeOrders = JsonSerializer.Deserialize<List<ShopeeOrder>>(shopeeOrdersData, _jsonOptions);
-                context.ShopeeOrders.AddRange(shopeeOrders);
-            }
-
-            if (context.ChangeTracker.HasChanges())
-            {
-                await context.SaveChangesAsync();
+                await AddRangeWithIdentityInsertAsync(context, context.ShopeeOrders, shopeeOrders);
             }
 
             // Seed Shopee Products (depends on ShopeeOrders)
@@ -258,12 +226,7 @@ namespace Infrastructure.Data
                 var shopeeProductsData = File
                     .ReadAllText(path + @"/Data/SeedData/shopeeproducts.json");
                 var shopeeProducts = JsonSerializer.Deserialize<List<ShopeeProduct>>(shopeeProductsData, _jsonOptions);
-                context.ShopeeProducts.AddRange(shopeeProducts);
-            }
-
-            if (context.ChangeTracker.HasChanges())
-            {
-                await context.SaveChangesAsync();
+                await AddRangeWithIdentityInsertAsync(context, context.ShopeeProducts, shopeeProducts);
             }
 
             // Seed Notifications (no dependencies)
@@ -300,12 +263,7 @@ namespace Infrastructure.Data
                 var userSessionsData = File
                     .ReadAllText(path + @"/Data/SeedData/usersessions.json");
                 var userSessions = JsonSerializer.Deserialize<List<UserSession>>(userSessionsData, _jsonOptions);
-                context.UserSessions.AddRange(userSessions);
-            }
-
-            if (context.ChangeTracker.HasChanges())
-            {
-                await context.SaveChangesAsync();
+                await AddRangeWithIdentityInsertAsync(context, context.UserSessions, userSessions);
             }
 
             // Seed SessionInteractions (depends on UserSessions and Products)
@@ -315,11 +273,54 @@ namespace Infrastructure.Data
             {
                 var sessionInteractionsData = File.ReadAllText(sessionInteractionsPath);
                 var sessionInteractions = JsonSerializer.Deserialize<List<SessionInteraction>>(sessionInteractionsData, _jsonOptions);
-                context.SessionInteractions.AddRange(sessionInteractions);
+                await AddRangeWithIdentityInsertAsync(context, context.SessionInteractions, sessionInteractions);
+            }
+        }
+
+        private static bool IsSqlServer(StoreContext context) =>
+            context.Database.ProviderName?.Contains("SqlServer", StringComparison.OrdinalIgnoreCase) == true;
+
+        private static async Task AddRangeWithIdentityInsertAsync<TEntity>(
+            StoreContext context,
+            DbSet<TEntity> dbSet,
+            IEnumerable<TEntity> entities)
+            where TEntity : BaseEntity
+        {
+            if (entities == null || !entities.Any())
+            {
+                return;
             }
 
-            if (context.ChangeTracker.HasChanges())
+            var requiresIdentityInsert = IsSqlServer(context) && entities.Any(e => e.Id > 0);
+            var entityType = context.Model.FindEntityType(typeof(TEntity));
+
+            if (entityType == null)
             {
+                throw new InvalidOperationException($"Unable to determine table mapping for entity type {typeof(TEntity).Name}");
+            }
+
+            var tableName = entityType.GetTableName();
+            var schema = entityType.GetSchema() ?? "dbo";
+
+            if (string.IsNullOrEmpty(tableName))
+            {
+                throw new InvalidOperationException($"Entity type {typeof(TEntity).Name} does not have a mapped table name.");
+            }
+
+            var fullTableName = $"[{schema}].[{tableName}]";
+
+            if (requiresIdentityInsert)
+            {
+                await using var transaction = await context.Database.BeginTransactionAsync();
+                await context.Database.ExecuteSqlRawAsync($"SET IDENTITY_INSERT {fullTableName} ON");
+                dbSet.AddRange(entities);
+                await context.SaveChangesAsync();
+                await context.Database.ExecuteSqlRawAsync($"SET IDENTITY_INSERT {fullTableName} OFF");
+                await transaction.CommitAsync();
+            }
+            else
+            {
+                dbSet.AddRange(entities);
                 await context.SaveChangesAsync();
             }
         }
