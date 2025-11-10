@@ -39,21 +39,35 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseDefaultFiles();
 app.UseStaticFiles();
+
+app.UseRouting();
 
 app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
-
 app.UseAuthorization();
-
-app.UseDefaultFiles();
-app.UseStaticFiles();
 
 app.MapHub<OrderNotificationHub>("hubs/orderNotification");
 
 app.MapControllers();
 app.MapFallbackToController("Index", "Fallback");
+
+// SPA Fallback for Admin (/admin/*)
+app.MapWhen(
+    context => context.Request.Path.StartsWithSegments("/admin"),
+    adminApp =>
+    {
+        adminApp.UseStaticFiles();
+        adminApp.UseRouting();
+        adminApp.UseAuthorization();
+        adminApp.UseEndpoints(endpoints =>
+        {
+            endpoints.MapFallbackToFile("/admin/index.html");
+        });
+    }
+);
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;

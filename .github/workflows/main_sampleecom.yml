@@ -30,11 +30,48 @@ jobs:
       - name: Install Angular CLI
         run: npm install -g @angular/cli@16
       
+      # BUILD CLIENT UI
       - name: Install deps and build Angular Client
         run: |
           cd ClientUI
           npm install
           ng build
+
+      # BUILD ADMIN
+      - name: Install deps and build Angular Admin
+        run: |
+          cd Admin
+          npm install
+          ng build
+
+          # ═══════════════════════════════════════════════════════
+      # VERIFY OUTPUTS
+      # ═══════════════════════════════════════════════════════
+      - name: Verify Build Outputs
+        run: |
+          echo "═══════════════════════════════════════"
+          echo "Checking wwwroot structure..."
+          echo "═══════════════════════════════════════"
+          
+          if (Test-Path "API/API/wwwroot/index.html") {
+            Write-Host "✅ ClientUI: index.html found" -ForegroundColor Green
+          } else {
+            Write-Host "❌ ClientUI: MISSING" -ForegroundColor Red
+            exit 1
+          }
+          
+          if (Test-Path "API/API/wwwroot/admin/index.html") {
+            Write-Host "✅ Admin: index.html found" -ForegroundColor Green
+          } else {
+            Write-Host "❌ Admin: MISSING" -ForegroundColor Red
+            exit 1
+          }
+          
+          Write-Host "`nwwwroot structure:" -ForegroundColor Cyan
+          Get-ChildItem "API/API/wwwroot" -Recurse -File | 
+            Where-Object { $_.Name -match 'index.html|main.*\.js' } | 
+            Select-Object FullName
+        shell: pwsh
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4

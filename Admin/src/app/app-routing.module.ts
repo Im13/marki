@@ -4,6 +4,8 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { AdminGuard } from './_guards/admin.guard';
+import { APP_BASE_HREF } from '@angular/common';
+import { environment } from '../environments/environment';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -22,6 +24,9 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'top'})],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [
+    { provide: APP_BASE_HREF, useValue: environment.adminBaseHref }
+  ]
 })
 export class AppRoutingModule { }
