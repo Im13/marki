@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'api/',  
+  apiUrl: '/api/',
   adminBaseHref: '/admin/',
-  hubUrl: 'hubs/'
+  hubUrl: '/hubs/'
 };
