@@ -1,0 +1,156 @@
+[{
+    "Id": 59,
+    "OptionName": "Size",
+    "ProductId": 66
+  },
+  {
+    "Id": 60,
+    "OptionName": "Màu sắc",
+    "ProductId": 66
+  },
+  {
+    "Id": 69,
+    "OptionName": "Size",
+    "ProductId": 68
+  },
+  {
+    "Id": 70,
+    "OptionName": "Size",
+    "ProductId": 69
+  },
+  {
+    "Id": 71,
+    "OptionName": "Size",
+    "ProductId": 70
+  },
+  {
+    "Id": 72,
+    "OptionName": "Size",
+    "ProductId": 71
+  },
+  {
+    "Id": 73,
+    "OptionName": "Size",
+    "ProductId": 72
+  },
+  {
+    "Id": 74,
+    "OptionName": "Size",
+    "ProductId": 73
+  },
+  {
+    "Id": 75,
+    "OptionName": "Size",
+    "ProductId": 74
+  },
+  {
+    "Id": 76,
+    "OptionName": "Size",
+    "ProductId": 67
+  },
+  {
+    "Id": 77,
+    "OptionName": "Màu sắc",
+    "ProductId": 67
+  },
+  {
+    "Id": 78,
+    "OptionName": "Size",
+    "ProductId": 75
+  },
+  {
+    "Id": 79,
+    "OptionName": "Color",
+    "ProductId": 76
+  },
+  {
+    "Id": 80,
+    "OptionName": "Size",
+    "ProductId": 76
+  },
+  {
+    "Id": 81,
+    "OptionName": "Color",
+    "ProductId": 77
+  },
+  {
+    "Id": 82,
+    "OptionName": "Size",
+    "ProductId": 77
+  },
+  {
+    "Id": 83,
+    "OptionName": "Color",
+    "ProductId": 78
+  },
+  {
+    "Id": 84,
+    "OptionName": "Size",
+    "ProductId": 78
+  },
+  {
+    "Id": 85,
+    "OptionName": "Size",
+    "ProductId": 79
+  },
+  {
+    "Id": 86,
+    "OptionName": "Size",
+    "ProductId": 80
+  },
+  {
+    "Id": 87,
+    "OptionName": "Size",
+    "ProductId": 81
+  },
+  {
+    "Id": 89,
+    "OptionName": "Size",
+    "ProductId": 82
+  },
+  {
+    "Id": 90,
+    "OptionName": "Color",
+    "ProductId": 83
+  },
+  {
+    "Id": 91,
+    "OptionName": "Size",
+    "ProductId": 83
+  },
+  {
+    "Id": 92,
+    "OptionName": "Size",
+    "ProductId": 84
+  },
+  {
+    "Id": 93,
+    "OptionName": "Size",
+    "ProductId": 85
+  },
+  {
+    "Id": 94,
+    "OptionName": "Size",
+    "ProductId": 86
+  },
+  {
+    "Id": 95,
+    "OptionName": "Color",
+    "ProductId": 87
+  },
+  {
+    "Id": 96,
+    "OptionName": "Size",
+    "ProductId": 87
+  },
+  {
+    "Id": 97,
+    "OptionName": "Size",
+    "ProductId": 88
+  },
+  {
+    "Id": 98,
+    "OptionName": "Size",
+    "ProductId": 89
+  }
+]

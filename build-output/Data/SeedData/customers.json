@@ -1,0 +1,762 @@
+[
+  {
+    "Id": 1,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "thanhhuong@gmail.com",
+    "IsDeleted": 0,
+    "Name": "Thanh Huong",
+    "PhoneNumber": "0982881123"
+  },
+  {
+    "Id": 2,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "",
+    "IsDeleted": 0,
+    "Name": "Dung Ngô",
+    "PhoneNumber": "0399329901"
+  },
+  {
+    "Id": 3,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "",
+    "IsDeleted": 0,
+    "Name": "Tiên Nguyễn",
+    "PhoneNumber": "0938821823"
+  },
+  {
+    "Id": 4,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "",
+    "IsDeleted": 0,
+    "Name": "justsouknow.17",
+    "PhoneNumber": "0962504029"
+  },
+  {
+    "Id": 5,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "minhtran@gmail.com",
+    "IsDeleted": 0,
+    "Name": "Minh Trần",
+    "PhoneNumber": "0912345678"
+  },
+  {
+    "Id": 6,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "linhnguyen@yahoo.com",
+    "IsDeleted": 0,
+    "Name": "Linh Nguyễn",
+    "PhoneNumber": "0967890123"
+  },
+  {
+    "Id": 7,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "huypham@outlook.com",
+    "IsDeleted": 0,
+    "Name": "Huy Phạm",
+    "PhoneNumber": "0971234567"
+  },
+  {
+    "Id": 8,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "",
+    "IsDeleted": 0,
+    "Name": "Phương Đỗ",
+    "PhoneNumber": "0934567890"
+  },
+  {
+    "Id": 9,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "tuanvu@hotmail.com",
+    "IsDeleted": 0,
+    "Name": "Tuấn Vũ",
+    "PhoneNumber": "0923456789"
+  },
+  {
+    "Id": 10,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "",
+    "IsDeleted": 1,
+    "Name": "Anh Đặng",
+    "PhoneNumber": "0909876543"
+  },
+  {
+    "Id": 11,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "vyhoang@gmail.com",
+    "IsDeleted": 0,
+    "Name": "Vy Hoàng",
+    "PhoneNumber": "0945678901"
+  },
+  {
+    "Id": 12,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "",
+    "IsDeleted": 0,
+    "Name": "Hằng Nguyễn",
+    "PhoneNumber": "0910987654"
+  },
+  {
+    "Id": 13,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "namtran@yahoo.com",
+    "IsDeleted": 1,
+    "Name": "Nam Trần",
+    "PhoneNumber": "0938765432"
+  },
+  {
+    "Id": 14,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "quynhle@outlook.com",
+    "IsDeleted": 0,
+    "Name": "Quỳnh Lê",
+    "PhoneNumber": "0975432109"
+  },
+  {
+    "Id": 15,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "",
+    "IsDeleted": 0,
+    "Name": "Hà Phạm",
+    "PhoneNumber": "0961234567"
+  },
+  {
+    "Id": 16,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "tungvo@gmail.com",
+    "IsDeleted": 1,
+    "Name": "Tùng Võ",
+    "PhoneNumber": "0987654321"
+  },
+  {
+    "Id": 17,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "ngapham@yahoo.com",
+    "IsDeleted": 0,
+    "Name": "Nga Phạm",
+    "PhoneNumber": "0901234567"
+  },
+  {
+    "Id": 18,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "",
+    "IsDeleted": 0,
+    "Name": "Khoa Nguyễn",
+    "PhoneNumber": "0920987654"
+  },
+  {
+    "Id": 19,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "landdo@outlook.com",
+    "IsDeleted": 1,
+    "Name": "Lan Đỗ",
+    "PhoneNumber": "0931239876"
+  },
+  {
+    "Id": 20,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "tuananh@gmail.com",
+    "IsDeleted": 0,
+    "Name": "Tuấn Anh",
+    "PhoneNumber": "0987650987"
+  },
+  {
+    "Id": 21,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "",
+    "IsDeleted": 0,
+    "Name": "Hoàng Thủy",
+    "PhoneNumber": "0912349876"
+  },
+  {
+    "Id": 22,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "thaonguyen@yahoo.com",
+    "IsDeleted": 0,
+    "Name": "Thảo Nguyễn",
+    "PhoneNumber": "0934321234"
+  },
+  {
+    "Id": 23,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "minhchau@outlook.com",
+    "IsDeleted": 1,
+    "Name": "Minh Châu",
+    "PhoneNumber": "0967896543"
+  },
+  {
+    "Id": 24,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "",
+    "IsDeleted": 0,
+    "Name": "Bảo Đặng",
+    "PhoneNumber": "0943210987"
+  },
+  {
+    "Id": 25,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "nhungle@gmail.com",
+    "IsDeleted": 0,
+    "Name": "Nhung Lê",
+    "PhoneNumber": "0906543210"
+  },
+  {
+    "Id": 26,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "",
+    "IsDeleted": 0,
+    "Name": "Bích Nguyễn",
+    "PhoneNumber": "0976543210"
+  },
+  {
+    "Id": 27,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "hoaiphuong@yahoo.com",
+    "IsDeleted": 1,
+    "Name": "Hoài Phương",
+    "PhoneNumber": "0949876543"
+  },
+  {
+    "Id": 28,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "longbui@outlook.com",
+    "IsDeleted": 0,
+    "Name": "Long Bùi",
+    "PhoneNumber": "0981239876"
+  },
+  {
+    "Id": 29,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "",
+    "IsDeleted": 0,
+    "Name": "Kim Thoa",
+    "PhoneNumber": "0917896543"
+  },
+  {
+    "Id": 30,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "sontran@gmail.com",
+    "IsDeleted": 1,
+    "Name": "Sơn Trần",
+    "PhoneNumber": "0938760123"
+  },
+  {
+    "Id": 31,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "thule@yahoo.com",
+    "IsDeleted": 0,
+    "Name": "Thu Lê",
+    "PhoneNumber": "0924321234"
+  },
+  {
+    "Id": 32,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "khangnguyen@outlook.com",
+    "IsDeleted": 0,
+    "Name": "Khang Nguyễn",
+    "PhoneNumber": "0904329876"
+  },
+  {
+    "Id": 33,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "",
+    "IsDeleted": 1,
+    "Name": "Trúc Đỗ",
+    "PhoneNumber": "0965432109"
+  },
+  {
+    "Id": 34,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "lamvo@gmail.com",
+    "IsDeleted": 0,
+    "Name": "Lâm Võ",
+    "PhoneNumber": "0981234567"
+  },
+  {
+    "Id": 35,
+    "DOB": "2024-12-18 03:19:42.63",
+    "EmailAddress": "huong.trang@gmail.com",
+    "IsDeleted": 0,
+    "Name": "Tran Huong",
+    "PhoneNumber": "0848666765"
+  },
+  {
+    "Id": 36,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "dfdf@cvx.com",
+    "IsDeleted": 0,
+    "Name": "Test customer feature 1",
+    "PhoneNumber": "098888881"
+  },
+  {
+    "Id": 37,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "0988888882"
+  },
+  {
+    "Id": 38,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 39,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 40,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 41,
+    "DOB": "2024-12-18 03:19:42.63",
+    "EmailAddress": "huong.trang@gmail.com",
+    "IsDeleted": 0,
+    "Name": "Tran Huong",
+    "PhoneNumber": "0848666765"
+  },
+  {
+    "Id": 42,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name 1",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 43,
+    "DOB": null,
+    "EmailAddress": "sdfsf@gmail.com",
+    "IsDeleted": 0,
+    "Name": "tenkh",
+    "PhoneNumber": "09999"
+  },
+  {
+    "Id": 44,
+    "DOB": null,
+    "EmailAddress": "sdfsf@gmail.com",
+    "IsDeleted": 0,
+    "Name": "tenkh",
+    "PhoneNumber": "09999"
+  },
+  {
+    "Id": 45,
+    "DOB": null,
+    "EmailAddress": "sádfa@gm",
+    "IsDeleted": 0,
+    "Name": "tenkh",
+    "PhoneNumber": "09999"
+  },
+  {
+    "Id": 46,
+    "DOB": null,
+    "EmailAddress": "fsdfsd@gmail.com",
+    "IsDeleted": 0,
+    "Name": "ten",
+    "PhoneNumber": "09999"
+  },
+  {
+    "Id": 47,
+    "DOB": null,
+    "EmailAddress": "sdfsdf@cvcxvmmmm",
+    "IsDeleted": 0,
+    "Name": "Tao la khach",
+    "PhoneNumber": "09999"
+  },
+  {
+    "Id": 48,
+    "DOB": null,
+    "EmailAddress": "khachhhh@ggg",
+    "IsDeleted": 0,
+    "Name": "tenkh",
+    "PhoneNumber": "099999"
+  },
+  {
+    "Id": 49,
+    "DOB": null,
+    "EmailAddress": "daylaemail@gmail.com",
+    "IsDeleted": 0,
+    "Name": "Khach vip",
+    "PhoneNumber": "09999"
+  },
+  {
+    "Id": 50,
+    "DOB": null,
+    "EmailAddress": "sdfnsldfkj",
+    "IsDeleted": 0,
+    "Name": "sdfjsjfn",
+    "PhoneNumber": "09090909"
+  },
+  {
+    "Id": 51,
+    "DOB": null,
+    "EmailAddress": "cvxvxcv",
+    "IsDeleted": 0,
+    "Name": "cxvxcv",
+    "PhoneNumber": "123123123"
+  },
+  {
+    "Id": 52,
+    "DOB": null,
+    "EmailAddress": "sdfsdf",
+    "IsDeleted": 0,
+    "Name": "sdfsdf",
+    "PhoneNumber": "123132"
+  },
+  {
+    "Id": 53,
+    "DOB": null,
+    "EmailAddress": "xcvxvxv",
+    "IsDeleted": 0,
+    "Name": "them ship",
+    "PhoneNumber": "123123123"
+  },
+  {
+    "Id": 54,
+    "DOB": null,
+    "EmailAddress": "zxczxc",
+    "IsDeleted": 0,
+    "Name": "270000",
+    "PhoneNumber": "12312312"
+  },
+  {
+    "Id": 55,
+    "DOB": null,
+    "EmailAddress": "123123",
+    "IsDeleted": 0,
+    "Name": "200000",
+    "PhoneNumber": "123123"
+  },
+  {
+    "Id": 56,
+    "DOB": null,
+    "EmailAddress": "xcvxcvx",
+    "IsDeleted": 0,
+    "Name": "330",
+    "PhoneNumber": "vxcv"
+  },
+  {
+    "Id": 57,
+    "DOB": null,
+    "EmailAddress": "xcvxcv",
+    "IsDeleted": 0,
+    "Name": "200",
+    "PhoneNumber": "xcvxcv"
+  },
+  {
+    "Id": 58,
+    "DOB": null,
+    "EmailAddress": "xcvxcv",
+    "IsDeleted": 0,
+    "Name": "200",
+    "PhoneNumber": "12312312"
+  },
+  {
+    "Id": 59,
+    "DOB": null,
+    "EmailAddress": "123123",
+    "IsDeleted": 0,
+    "Name": "200",
+    "PhoneNumber": "123123"
+  },
+  {
+    "Id": 60,
+    "DOB": "0001-01-01 00:00:00",
+    "EmailAddress": "xcvxcv",
+    "IsDeleted": 0,
+    "Name": "160",
+    "PhoneNumber": "13123"
+  },
+  {
+    "Id": 61,
+    "DOB": null,
+    "EmailAddress": "sfsdf",
+    "IsDeleted": 0,
+    "Name": "tenkh",
+    "PhoneNumber": "0999"
+  },
+  {
+    "Id": 62,
+    "DOB": null,
+    "EmailAddress": "email@mcmcm",
+    "IsDeleted": 0,
+    "Name": "tennn",
+    "PhoneNumber": "08888"
+  },
+  {
+    "Id": 63,
+    "DOB": null,
+    "EmailAddress": "emailfdf",
+    "IsDeleted": 0,
+    "Name": "tenkh",
+    "PhoneNumber": "0999"
+  },
+  {
+    "Id": 64,
+    "DOB": "2025-07-04 08:31:06.065",
+    "EmailAddress": "email@fđf1",
+    "IsDeleted": 0,
+    "Name": "tenkh12",
+    "PhoneNumber": "09991"
+  },
+  {
+    "Id": 65,
+    "DOB": null,
+    "EmailAddress": "ssdkjfsk@gkfjdk",
+    "IsDeleted": 0,
+    "Name": "ten1",
+    "PhoneNumber": "0988888"
+  },
+  {
+    "Id": 66,
+    "DOB": null,
+    "EmailAddress": "sdfsdf@kfjgk",
+    "IsDeleted": 0,
+    "Name": "ten111",
+    "PhoneNumber": "09999"
+  },
+  {
+    "Id": 67,
+    "DOB": null,
+    "EmailAddress": "vxcvxcvx",
+    "IsDeleted": 0,
+    "Name": "xvxcvx1",
+    "PhoneNumber": "vxcvxc"
+  },
+  {
+    "Id": 68,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 69,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 70,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 71,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 72,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 73,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 74,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 75,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 76,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 77,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 78,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 79,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 80,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 81,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 82,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 83,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 84,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 85,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 86,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 87,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 88,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 89,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 90,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 91,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name 2",
+    "PhoneNumber": "098884444"
+  },
+  {
+    "Id": 92,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 93,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 94,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name 3",
+    "PhoneNumber": "098888888"
+  },
+  {
+    "Id": 95,
+    "DOB": null,
+    "EmailAddress": null,
+    "IsDeleted": 0,
+    "Name": "full name",
+    "PhoneNumber": "098888888"
+  }
+]
