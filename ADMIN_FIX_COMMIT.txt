@@ -1,0 +1,52 @@
+Fix: Admin API routing and login authentication
+
+## Problem
+Admin login was returning HTML instead of JSON:
+- Error: SyntaxError: Unexpected token '<', "<!doctype "... is not valid JSON
+- Admin panel at /admin/ couldn't authenticate users
+- API endpoint /admin/api/account/login was being caught by SPA fallback
+
+## Root Cause
+1. Admin Angular app uses baseHref="/admin/"
+2. Fallback controller was catching ALL /admin/* routes (including /admin/api/*)
+3. API routes had lower priority than SPA fallback
+4. No dedicated admin authentication endpoint
+
+## Solution
+
+### 1. Created Admin AccountController
+- New: API/API/Controllers/Admin/AccountController.cs
+- Route: [Route("admin/api/[controller]")]
+- Handles: /admin/api/account/login
+- Validates user has admin/employee role before allowing login
+- Supports login by username OR email
+
+### 2. Fixed Routing Priority in Program.cs
+- Removed conflicting UseDefaultFiles()
+- Moved MapControllers() before fallback routes
+- Added check to exclude /admin/api/* from SPA fallback
+- Order now: API routes → Admin SPA → Main SPA
+
+### 3. Login Credentials
+Default admin account (from AppIdentityDbContextSeed.cs):
+- Username: marki (or email: admin@marki.vn)
+- Password: Pa$$w0rd
+- Roles: Admin, SuperAdmin
+
+## Testing
+✅ curl -X POST /admin/api/account/login returns JSON (not HTML)
+✅ Admin panel login works
+✅ Non-admin users are rejected with proper message
+✅ Both username and email login work
+
+## Changes
+- NEW: API/API/Controllers/Admin/AccountController.cs
+- MODIFIED: API/API/Program.cs (routing order)
+- DOCUMENTED: ADMIN_LOGIN_GUIDE.md
+
+## Security Notes
+⚠️ Default password "Pa$$w0rd" is for development only
+⚠️ Change passwords before production deployment
+⚠️ Consider implementing account lockout and password policies
+
+Fixes routing conflict between Admin SPA and Admin API endpoints
