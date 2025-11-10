@@ -1,6 +1,5 @@
 using API.DTOs.Recommendation;
 using Core.DTOs.Recommendations;
-using Core.Enums;
 using Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,11 +23,6 @@ namespace API.Controllers.Recommendations
             _logger = logger;
         }
 
-        /// <summary>
-        /// Get personalized recommendations for current user
-        /// </summary>
-        /// <param name="limit">Number of recommendations to return (default: 10)</param>
-        /// <returns>List of recommended products</returns>
         [HttpGet]
         [ProducesResponseType(typeof(List<RecommendationDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -55,9 +49,6 @@ namespace API.Controllers.Recommendations
             }
         }
 
-        /// <summary>
-        /// Get trending products
-        /// </summary>
         [HttpGet("trending")]
         [ProducesResponseType(typeof(List<RecommendationDTO>), StatusCodes.Status200OK)]
         public async Task<ActionResult<List<RecommendationDTO>>> GetTrending(
@@ -76,9 +67,6 @@ namespace API.Controllers.Recommendations
             }
         }
 
-        /// <summary>
-        /// Get similar products based on a specific product
-        /// </summary>
         [HttpGet("similar/{productId}")]
         [ProducesResponseType(typeof(List<RecommendationDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -105,9 +93,6 @@ namespace API.Controllers.Recommendations
             }
         }
 
-        /// <summary>
-        /// Track product view
-        /// </summary>
         [HttpPost("track/view")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -142,9 +127,6 @@ namespace API.Controllers.Recommendations
             }
         }
 
-        /// <summary>
-        /// Track add to cart
-        /// </summary>
         [HttpPost("track/cart")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> TrackCart([FromBody] TrackCartRequest request)
@@ -177,9 +159,6 @@ namespace API.Controllers.Recommendations
             }
         }
 
-        /// <summary>
-        /// Track purchase (called after checkout success)
-        /// </summary>
         [HttpPost("track/purchase")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> TrackPurchase([FromBody] TrackPurchaseRequest request)
@@ -208,9 +187,6 @@ namespace API.Controllers.Recommendations
             }
         }
 
-        /// <summary>
-        /// Track recommendation click (for analytics)
-        /// </summary>
         [HttpPost("track/click")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> TrackClick([FromBody] TrackClickRequest request)
@@ -224,7 +200,6 @@ namespace API.Controllers.Recommendations
 
                 var sessionId = await _sessionService.GetOrCreateSessionIdAsync(HttpContext);
 
-                // Log for analytics (you can store this in a separate table)
                 _logger.LogInformation(
                     "Recommendation clicked: Session={SessionId}, Product={ProductId}, Reason={ReasonCode}",
                     sessionId, request.ProductId, request.ReasonCode);
@@ -275,13 +250,6 @@ namespace API.Controllers.Recommendations
         //     }
         // }
 
-        // ============================================
-        // UTILITY ENDPOINTS
-        // ============================================
-
-        /// <summary>
-        /// Get current session info (for debugging)
-        /// </summary>
         [HttpGet("session")]
         [ProducesResponseType(typeof(SessionInfoDto), StatusCodes.Status200OK)]
         public async Task<ActionResult<SessionInfoDto>> GetSessionInfo()
@@ -313,9 +281,6 @@ namespace API.Controllers.Recommendations
             }
         }
 
-        /// <summary>
-        /// Health check endpoint
-        /// </summary>
         [HttpGet("health")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult Health()

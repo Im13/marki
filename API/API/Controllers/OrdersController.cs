@@ -9,7 +9,6 @@ using Core.Interfaces;
 using Core.Specification.OfflineOrderSpec;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 
 namespace API.Controllers
 {
