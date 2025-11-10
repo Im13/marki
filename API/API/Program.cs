@@ -53,19 +53,8 @@ app.MapHub<OrderNotificationHub>("hubs/orderNotification");
 // Map API controllers first (highest priority)
 app.MapControllers();
 
-// SPA Fallback for Admin routes (but not /admin/api/*)
-app.MapWhen(
-    context => context.Request.Path.StartsWithSegments("/admin") && 
-               !context.Request.Path.StartsWithSegments("/admin/api"),
-    adminApp =>
-    {
-        adminApp.UseRouting();
-        adminApp.UseEndpoints(endpoints =>
-        {
-            endpoints.MapFallbackToFile("/admin/index.html");
-        });
-    }
-);
+// Admin SPA fallback (serves Admin Angular bundle for /admin routes)
+app.MapFallbackToFile("/admin/{*path}", "admin/index.html");
 
 // Main SPA Fallback (for ClientUI)
 app.MapFallbackToController("Index", "Fallback");
