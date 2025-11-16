@@ -39,7 +39,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseDefaultFiles();
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -51,23 +50,14 @@ app.UseAuthorization();
 
 app.MapHub<OrderNotificationHub>("hubs/orderNotification");
 
+// Map API controllers first (highest priority)
 app.MapControllers();
-app.MapFallbackToController("Index", "Fallback");
 
-// SPA Fallback for Admin (/admin/*)
-app.MapWhen(
-    context => context.Request.Path.StartsWithSegments("/admin"),
-    adminApp =>
-    {
-        adminApp.UseStaticFiles();
-        adminApp.UseRouting();
-        adminApp.UseAuthorization();
-        adminApp.UseEndpoints(endpoints =>
-        {
-            endpoints.MapFallbackToFile("/admin/index.html");
-        });
-    }
-);
+// Admin SPA fallback (serves Admin Angular bundle for /admin routes)
+app.MapFallbackToFile("/admin/{*path}", "admin/index.html");
+
+// Main SPA Fallback (for ClientUI)
+app.MapFallbackToController("Index", "Fallback");
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
