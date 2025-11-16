@@ -4,7 +4,7 @@
       <div class="row my-2">
         <div class="col-6">Ảnh Desktop:</div>
         <div class="col-6">
-          <nz-upload nzAction="environment.apiUrl + 'api/products/add-photo'" nzListType="picture-card"
+          <nz-upload [nzAction]="apiUrl + 'products/add-photo'" nzListType="picture-card"
             [(nzFileList)]="desktopImage" [nzShowButton]="desktopImage.length < 1" [nzPreview]="handlePreview"
             (nzChange)="handleUploadProductChange($event, true)">
             <div>
@@ -18,7 +18,7 @@
       <div class="row my-2">
         <div class="col-6">Ảnh Mobile:</div>
         <div class="col-6">
-          <nz-upload nzAction="environment.apiUrl + 'api/products/add-photo'" nzListType="picture-card"
+          <nz-upload [nzAction]="apiUrl + 'products/add-photo'" nzListType="picture-card"
             [(nzFileList)]="mobileImage" [nzShowButton]="mobileImage.length < 1" [nzPreview]="handlePreview"
             (nzChange)="handleUploadProductChange($event, true)">
             <div>

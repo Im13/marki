@@ -5,6 +5,7 @@ import { SlideImage } from 'src/app/_shared/_models/slideImages';
 import { WebsiteService } from '../../website.service';
 import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
@@ -28,6 +29,7 @@ export class AddBannerModalComponent implements OnInit {
   isEdit = false;
   isSubmitting: boolean = false;
   banner: SlideImage;
+  apiUrl = environment.apiUrl;
 
   desktopImage: NzUploadFile[] = [];
   mobileImage: NzUploadFile[] = [];
