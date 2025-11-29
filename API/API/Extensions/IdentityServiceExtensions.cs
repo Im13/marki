@@ -1,9 +1,8 @@
 using System.Text;
 using Core.Entities.Identity;
-using Infrastructure.Identity;
+using Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 namespace API.Extensions
@@ -13,10 +12,7 @@ namespace API.Extensions
         public static IServiceCollection AddIdentityServices(this IServiceCollection services, 
             IConfiguration config)
         {
-            services.AddDbContext<AppIdentityDbContext>(opt => 
-            {
-                opt.UseSqlServer(config.GetConnectionString("IdentityConnection"));
-            });
+            // StoreContext is now registered in AddApplicationServices, so we don't need to register it again here
 
             services.AddIdentityCore<AppUser>(opt => 
             {
@@ -25,7 +21,7 @@ namespace API.Extensions
             .AddRoles<AppRole>()
             .AddRoleManager<RoleManager<AppRole>>()
             .AddSignInManager<SignInManager<AppUser>>()
-            .AddEntityFrameworkStores<AppIdentityDbContext>();
+            .AddEntityFrameworkStores<StoreContext>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>

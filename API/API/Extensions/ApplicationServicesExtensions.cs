@@ -23,8 +23,7 @@ namespace API.Extensions
             services.AddHttpClient();
             services.AddDbContext<StoreContext>(opt =>
             {
-                // opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
-                opt.UseSqlServer(config.GetConnectionString("DefaultConnection"));
+                opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
             });
             services.AddSingleton<IConnectionMultiplexer>(c =>
             {
@@ -99,7 +98,16 @@ namespace API.Extensions
             {
                 opt.AddPolicy("CorsPolicy", policy =>
                 {
-                    policy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:4201", "https://localhost:4200");
+                    var allowedOrigins = config.GetSection("Cors:AllowedOrigins").Get<string[]>();
+                    if (allowedOrigins != null && allowedOrigins.Length > 0)
+                    {
+                        policy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins(allowedOrigins);
+                    }
+                    else
+                    {
+                        // Default for development
+                        policy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:4201", "https://localhost:4200");
+                    }
                 });
             });
 
